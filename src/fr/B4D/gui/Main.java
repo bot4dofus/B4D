@@ -7,13 +7,42 @@ import javax.swing.UIManager;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import java.awt.Toolkit;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import java.awt.Color;
+import javax.swing.border.BevelBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import java.awt.SystemColor;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
 public class Main {
 
-	private JFrame frmBd;
+	final static Color selectedTab = new Color(33,43,53);
+	final static Color unSelectedTab = new Color(52,63,73);
+
+	final static JPanel_Programme programme = new JPanel_Programme();
+	final static JPanel_Personnage personnage = new JPanel_Personnage();
+	final static JPanel_Reglage reglage = new JPanel_Reglage();
+	final static JPanel_Admin admin = new JPanel_Admin();
+	
+	final static int offset_x_Form = 35, offset_y_Form = 108;
+	
+	private JFrame frmBd;										//Fenetre B4D
+	private JPanel panel = new JPanel();						//Panneau actuel
+	private JLabel lblProgrammes = new JLabel("Programmes");	//Bouton programmes
+	private JLabel lblPersonnages = new JLabel("Personnages");	//Bouton personnages
+	private JLabel lblReglages = new JLabel("R\u00E9glages");	//Bouton reglages
+	private JLabel lblAdmin = new JLabel("Admin");				//Bouton admin
 
 	/**
 	 * Launch the application.
@@ -44,51 +73,172 @@ public class Main {
 	 */
 	private void initialize() {
 		frmBd = new JFrame();
-		frmBd.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/icones/Dofus_Rouge.png")));	//Defini l'icone
+		frmBd.setResizable(false);
+		frmBd.setBackground(Color.GRAY);
+		frmBd.getContentPane().setBackground(unSelectedTab);
+		frmBd.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/gui/icones/Dofus_Rouge.png")));	//Defini l'icone
 		frmBd.setTitle("B4D");									//Defini le nom de la fenetre
-		frmBd.setBounds(100, 100, 548, 408);					//Defini les coordonnees
+		frmBd.setBounds(100, 100, programme.width + offset_x_Form, programme.height + offset_y_Form);					//Defini les coordonnees
 		frmBd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Defini l'action lors de l'appui sur la cloix
 		frmBd.getContentPane().setLayout(null);
+
+		programme.setBounds(10, 60, programme.width, programme.height);
+		frmBd.getContentPane().add(programme);
+		personnage.setBounds(10, 60, personnage.width, personnage.height);
+		frmBd.getContentPane().add(personnage);
+		reglage.setBounds(10, 60, reglage.width, reglage.height);
+		frmBd.getContentPane().add(reglage);
+		admin.setBounds(10, 60, admin.width, admin.height);
+		frmBd.getContentPane().add(admin);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent e) {
-				int offset_x_tabbedPane = 5, offset_y_tabbedPane = 30, offset_x_Form = 40, offset_y_Form = 90;
-				
-				JTabbedPane tabbedPane = (JTabbedPane)e.getSource();		//Recupere le tableau de panneau
-				JPanel panel = (JPanel)tabbedPane.getSelectedComponent();	//Recupere le panneau
-								
-				if(panel instanceof JPanel_Programme) {
-					tabbedPane.setSize(((JPanel_Programme)panel).width + offset_x_tabbedPane, ((JPanel_Programme)panel).height + offset_y_tabbedPane);
-					frmBd.setSize(((JPanel_Programme)panel).width + offset_x_Form, ((JPanel_Programme)panel).height + offset_y_Form);
-				}
-				else if(panel instanceof JPanel_Personnage) {
-					tabbedPane.setSize(((JPanel_Personnage)panel).width + offset_x_tabbedPane, ((JPanel_Personnage)panel).height + offset_y_tabbedPane);
-					frmBd.setSize(((JPanel_Personnage)panel).width + offset_x_Form, ((JPanel_Personnage)panel).height + offset_y_Form);
-				}
-				else if(panel instanceof JPanel_Reglage) {
-					tabbedPane.setSize(((JPanel_Reglage)panel).width + offset_x_tabbedPane, ((JPanel_Reglage)panel).height + offset_y_tabbedPane);
-					frmBd.setSize(((JPanel_Reglage)panel).width + offset_x_Form, ((JPanel_Reglage)panel).height + offset_y_Form);
-				}
-				else if(panel instanceof JPanel_Admin) {
-					tabbedPane.setSize(((JPanel_Admin)panel).width + offset_x_tabbedPane, ((JPanel_Admin)panel).height + offset_y_tabbedPane);
-					frmBd.setSize(((JPanel_Admin)panel).width + offset_x_Form, ((JPanel_Admin)panel).height + offset_y_Form);
-				}
+		JLabel lblBd = new JLabel("B4D");
+		lblBd.setOpaque(true);
+		lblBd.setBackground(new Color(222,118,56));
+		lblBd.setForeground(Color.WHITE);
+		lblBd.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		lblBd.setBounds(0, 0, 1000, 30);
+		lblBd.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/gui/icones/Dofus.png"))));
+		frmBd.getContentPane().add(lblBd);
+		
+		/** PROGRAMMES PANEL **/
+		lblProgrammes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				changerPanel(0);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if(!programme.isVisible())
+					lblProgrammes.setBackground(selectedTab);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if(!programme.isVisible())
+					lblProgrammes.setBackground(unSelectedTab);
 			}
 		});
-		tabbedPane.setBounds(10, 7, 515, 350);
-		frmBd.getContentPane().add(tabbedPane);
+		lblProgrammes.setOpaque(true);
+		lblProgrammes.setBackground(selectedTab);
+		lblProgrammes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProgrammes.setForeground(Color.WHITE);
+		lblProgrammes.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblProgrammes.setBounds(10, 30, 130, 30);
+		frmBd.getContentPane().add(lblProgrammes);
+		
+		/** PERSONNAGES PANEL **/
+		lblPersonnages.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				changerPanel(1);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if(!personnage.isVisible())
+					lblPersonnages.setBackground(selectedTab);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if(!personnage.isVisible())
+					lblPersonnages.setBackground(unSelectedTab);
+			}
+		});		
+		lblPersonnages.setOpaque(true);
+		lblPersonnages.setBackground(unSelectedTab);
+		lblPersonnages.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPersonnages.setForeground(Color.WHITE);
+		lblPersonnages.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblPersonnages.setBounds(140, 30, 130, 30);
+		frmBd.getContentPane().add(lblPersonnages);
+		
+		/** REGLAGES PANEL **/
+		lblReglages.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				changerPanel(2);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if(!reglage.isVisible())
+					lblReglages.setBackground(selectedTab);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if(!reglage.isVisible())
+					lblReglages.setBackground(unSelectedTab);
+			}
+		});		
+		lblReglages.setOpaque(true);
+		lblReglages.setBackground(unSelectedTab);
+		lblReglages.setHorizontalAlignment(SwingConstants.CENTER);
+		lblReglages.setForeground(Color.WHITE);
+		lblReglages.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblReglages.setBounds(270, 30, 130, 30);
+		frmBd.getContentPane().add(lblReglages);
+		
+		/** ADMIN PANEL **/
+		lblAdmin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				changerPanel(3);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if(!admin.isVisible())
+					lblAdmin.setBackground(selectedTab);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if(!admin.isVisible())
+					lblAdmin.setBackground(unSelectedTab);
+			}
+		});		
+		lblAdmin.setOpaque(true);
+		lblAdmin.setBackground(unSelectedTab);
+		lblAdmin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAdmin.setForeground(Color.WHITE);
+		lblAdmin.setFont(new Font("Tahoma", Font.PLAIN, 10));
+		lblAdmin.setBounds(400, 30, 130, 30);
+		frmBd.getContentPane().add(lblAdmin);
+		
+		changerPanel(0);
+	}
 
-		JPanel_Programme programme = new JPanel_Programme();
-		tabbedPane.addTab("Programmes", new ImageIcon(Main.class.getResource("/fr/B4D/icones/Dofus_20x20.png")), programme, null);
-
-		JPanel_Personnage personnage = new JPanel_Personnage();
-		tabbedPane.addTab("Personnages", new ImageIcon(Main.class.getResource("/fr/B4D/icones/Personnage_20x20.png")), personnage, null);
-
-		JPanel_Reglage reglage = new JPanel_Reglage();
-		tabbedPane.addTab("Réglages", new ImageIcon(Main.class.getResource("/fr/B4D/icones/Reglages_20x20.png")), reglage, null);
-
-		JPanel_Admin admin = new JPanel_Admin();
-		tabbedPane.addTab("Admin", new ImageIcon(Main.class.getResource("/fr/B4D/icones/Drapeau_20x20.png")), admin, null);
+	  /************/
+	 /* METHODES */
+	/************/
+	
+	private void changerPanel(int index) {
+		lblProgrammes.setBackground(unSelectedTab);
+		lblPersonnages.setBackground(unSelectedTab);
+		lblReglages.setBackground(unSelectedTab);
+		lblAdmin.setBackground(unSelectedTab);		
+		programme.setVisible(false);
+		personnage.setVisible(false);
+		reglage.setVisible(false);
+		admin.setVisible(false);
+		
+		switch(index) {
+		case 0:
+			lblProgrammes.setBackground(selectedTab);
+			frmBd.setSize(programme.width + offset_x_Form, programme.height + offset_y_Form);
+			programme.setVisible(true);
+			break;
+		case 1:
+			lblPersonnages.setBackground(selectedTab);
+			frmBd.setSize(personnage.width + offset_x_Form, personnage.height + offset_y_Form);
+			personnage.setVisible(true);
+			break;
+		case 2:
+			lblReglages.setBackground(selectedTab);
+			frmBd.setSize(reglage.width + offset_x_Form, reglage.height + offset_y_Form);
+			reglage.setVisible(true);
+			break;
+		case 3:
+			lblAdmin.setBackground(selectedTab);
+			frmBd.setSize(admin.width + offset_x_Form, admin.height + offset_y_Form);
+			admin.setVisible(true);
+			break;
+		}
+		
 	}
 }
