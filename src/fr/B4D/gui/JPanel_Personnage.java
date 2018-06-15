@@ -2,9 +2,6 @@ package fr.B4D.gui;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JInternalFrame;
-import javax.swing.JDesktopPane;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -132,9 +129,9 @@ public class JPanel_Personnage extends JPanel {
 		lblModifier.setBounds(0, 60, 120, 20);
 		panel_Potion_Rappel.add(lblModifier);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<String> comboBox = new JComboBox<String>();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		comboBox.setBackground(Color.LIGHT_GRAY);
+		comboBox.setBackground(UIManager.getColor("Button.background"));
 		comboBox.setBounds(5, 80, 110, 20);
 		panel_Potion_Rappel.add(comboBox);
 		

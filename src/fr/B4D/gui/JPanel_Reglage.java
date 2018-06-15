@@ -1,20 +1,14 @@
 package fr.B4D.gui;
 
 import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.LineBorder;
-import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
 import java.awt.Color;
-import java.awt.Component;
-import javax.swing.Box;
-import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.UIManager;
 
 public class JPanel_Reglage extends JPanel {
 	final int width = 520;
@@ -46,7 +40,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JLabel lblXY_3 = new JLabel("X:Y");
 		lblXY_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblXY_3.setForeground(Color.WHITE);
+		lblXY_3.setForeground(Color.DARK_GRAY);
 		lblXY_3.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblXY_3.setBackground(Color.GRAY);
 		lblXY_3.setBounds(0, 20, 120, 20);
@@ -54,7 +48,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JLabel lblLxh = new JLabel("LxH");
 		lblLxh.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLxh.setForeground(Color.WHITE);
+		lblLxh.setForeground(Color.DARK_GRAY);
 		lblLxh.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		lblLxh.setBackground(Color.GRAY);
 		lblLxh.setBounds(0, 40, 120, 20);
@@ -62,7 +56,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JButton button_4 = new JButton("Modifier");
 		button_4.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button_4.setBackground(Color.LIGHT_GRAY);
+		button_4.setBackground(UIManager.getColor("Button.background"));
 		button_4.setBounds(5, 60, 110, 20);
 		panel_Zone_Jeu.add(button_4);
 		
@@ -84,7 +78,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JLabel label_1 = new JLabel("X:Y");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setForeground(Color.WHITE);
+		label_1.setForeground(Color.DARK_GRAY);
 		label_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_1.setBackground(Color.GRAY);
 		label_1.setBounds(0, 20, 125, 20);
@@ -92,7 +86,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JLabel label_2 = new JLabel("LxH");
 		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setForeground(Color.WHITE);
+		label_2.setForeground(Color.DARK_GRAY);
 		label_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_2.setBackground(Color.GRAY);
 		label_2.setBounds(0, 40, 125, 20);
@@ -100,7 +94,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JButton button = new JButton("Modifier");
 		button.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button.setBackground(Color.LIGHT_GRAY);
+		button.setBackground(UIManager.getColor("Button.background"));
 		button.setBounds(5, 60, 115, 20);
 		panel_Zone_Chat.add(button);
 		
@@ -122,7 +116,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JLabel label_4 = new JLabel("X:Y");
 		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setForeground(Color.WHITE);
+		label_4.setForeground(Color.DARK_GRAY);
 		label_4.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_4.setBackground(Color.GRAY);
 		label_4.setBounds(0, 20, 120, 20);
@@ -130,7 +124,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JButton button_1 = new JButton("Modifier");
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button_1.setBackground(Color.LIGHT_GRAY);
+		button_1.setBackground(UIManager.getColor("Button.background"));
 		button_1.setBounds(5, 40, 110, 20);
 		panel_Barre_Chat.add(button_1);
 		
@@ -152,7 +146,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JLabel label_6 = new JLabel("X:Y");
 		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setForeground(Color.WHITE);
+		label_6.setForeground(Color.DARK_GRAY);
 		label_6.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		label_6.setBackground(Color.GRAY);
 		label_6.setBounds(0, 20, 120, 20);
@@ -160,7 +154,7 @@ public class JPanel_Reglage extends JPanel {
 		
 		JButton button_2 = new JButton("Modifier");
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		button_2.setBackground(Color.LIGHT_GRAY);
+		button_2.setBackground(UIManager.getColor("Button.background"));
 		button_2.setBounds(5, 40, 110, 20);
 		panel_Minimap.add(button_2);
 		

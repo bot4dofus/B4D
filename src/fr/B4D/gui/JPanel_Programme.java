@@ -3,6 +3,7 @@ package fr.B4D.gui;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 
 import fr.B4D.enu.Categories;
@@ -14,16 +15,11 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
-import java.awt.Component;
 import java.awt.Color;
-import javax.swing.border.LineBorder;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JPanel_Programme extends JPanel {
 	final int width = 520;
@@ -197,6 +193,10 @@ public class JPanel_Programme extends JPanel {
 		add(label_Pos);
 		
 		JButton button_Commencer = new JButton("Commencer");
+		button_Commencer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		button_Commencer.setBounds(390, 70, 120, 40);
 		button_Commencer.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
 		add(button_Commencer);

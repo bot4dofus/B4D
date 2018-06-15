@@ -4,24 +4,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-import javax.swing.JTabbedPane;
-import javax.swing.JPanel;
 import java.awt.Toolkit;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
 import java.awt.Color;
-import javax.swing.border.BevelBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Image;
 
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
-import java.awt.SystemColor;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 
@@ -38,7 +28,6 @@ public class Main {
 	final static int offset_x_Form = 35, offset_y_Form = 108;
 	
 	private JFrame frmBd;										//Fenetre B4D
-	private JPanel panel = new JPanel();						//Panneau actuel
 	private JLabel lblProgrammes = new JLabel("Programmes");	//Bouton programmes
 	private JLabel lblPersonnages = new JLabel("Personnages");	//Bouton personnages
 	private JLabel lblReglages = new JLabel("R\u00E9glages");	//Bouton reglages
@@ -91,12 +80,12 @@ public class Main {
 		admin.setBounds(10, 60, admin.width, admin.height);
 		frmBd.getContentPane().add(admin);
 		
-		JLabel lblBd = new JLabel("B4D");
+		JLabel lblBd = new JLabel("Bot for Dofus");
 		lblBd.setOpaque(true);
 		lblBd.setBackground(new Color(222,118,56));
 		lblBd.setForeground(Color.WHITE);
-		lblBd.setFont(new Font("Times New Roman", Font.PLAIN, 20));
-		lblBd.setBounds(0, 0, 1000, 30);
+		lblBd.setFont(new Font("Times New Roman", Font.ITALIC, 20));
+		lblBd.setBounds(0, 0, 540, 30);
 		lblBd.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/gui/icones/Dofus.png"))));
 		frmBd.getContentPane().add(lblBd);
 		
