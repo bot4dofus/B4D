@@ -51,6 +51,12 @@ public final class B4DSouris {
 	public static void Clic_Droit(Point position, boolean maj){
 		Clic_Droit(position, maj, 1);
 	}
+	public static void Clic_Droit(Double position, boolean maj, double timeOut){
+		Clic_Droit(B4DConversion.DoubleToPoint(position), maj, timeOut);
+	}
+	public static void Clic_Droit(Double position, boolean maj){
+		Clic_Droit(B4DConversion.DoubleToPoint(position), maj, 1);
+	}
 	
 	  /*****************/
 	 /* CLIQUE GAUCHE */
@@ -73,6 +79,12 @@ public final class B4DSouris {
 	}	
 	public static void Clic_Gauche(Point position, boolean maj){
 		Clic_Gauche(position, maj, 1);
+	}	
+	public static void Clic_Gauche(Double position, boolean maj, double timeOut){
+		Clic_Gauche(B4DConversion.DoubleToPoint(position), maj, timeOut);
+	}
+	public static void Clic_Gauche(Double position, boolean maj){
+		Clic_Gauche(B4DConversion.DoubleToPoint(position), maj, 1);
 	}
 	
 	  /************************/
@@ -98,6 +110,12 @@ public final class B4DSouris {
 	}	
 	public static void Double_Clic_Gauche(Point position, boolean maj){
 		Double_Clic_Gauche(position, maj, 1);
+	}
+	public static void Double_Clic_Gauche(Double position, boolean maj, double timeOut){
+		Double_Clic_Gauche(B4DConversion.DoubleToPoint(position), maj, timeOut);
+	}
+	public static void Double_Clic_Gauche(Double position, boolean maj){
+		Double_Clic_Gauche(B4DConversion.DoubleToPoint(position), maj, 1);
 	}
 	
 	  /************************/
@@ -125,5 +143,11 @@ public final class B4DSouris {
 	}	
 	public static void Triple_Clic_Gauche(Point position, boolean maj){
 		Triple_Clic_Gauche(position, maj, 1);
+	}
+	public static void Triple_Clic_Gauche(Double position, boolean maj, double timeOut){
+		Triple_Clic_Gauche(B4DConversion.DoubleToPoint(position), maj, timeOut);
+	}
+	public static void Triple_Clic_Gauche(Double position, boolean maj){
+		Triple_Clic_Gauche(B4DConversion.DoubleToPoint(position), maj, 1);
 	}
 }
