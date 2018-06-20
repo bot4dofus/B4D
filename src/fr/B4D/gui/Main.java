@@ -25,7 +25,7 @@ public class Main {
 	final static JPanel_Reglage reglage = new JPanel_Reglage();
 	final static JPanel_Admin admin = new JPanel_Admin();
 	
-	final static int offset_x_Form = 35, offset_y_Form = 108;
+	final static int offset_x_Form = 26, offset_y_Form = 105;
 	
 	private JFrame frmBd;										//Fenetre B4D
 	private JLabel lblProgrammes = new JLabel("Programmes");	//Bouton programmes
@@ -67,11 +67,11 @@ public class Main {
 		frmBd.getContentPane().setBackground(unSelectedTab);
 		frmBd.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/gui/icones/Dofus_Rouge.png")));	//Defini l'icone
 		frmBd.setTitle("B4D");									//Defini le nom de la fenetre
-		frmBd.setBounds(100, 100, programme.width + offset_x_Form, programme.height + offset_y_Form);					//Defini les coordonnees
+		frmBd.setBounds(100, 100, 807, 541);					//Defini les coordonnees
 		frmBd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Defini l'action lors de l'appui sur la cloix
 		frmBd.getContentPane().setLayout(null);
 
-		programme.setBounds(10, 60, programme.width, programme.height);
+		programme.setBounds(10, 60, 635, 235);
 		frmBd.getContentPane().add(programme);
 		personnage.setBounds(10, 60, personnage.width, personnage.height);
 		frmBd.getContentPane().add(personnage);
@@ -85,7 +85,7 @@ public class Main {
 		lblBd.setBackground(new Color(222,118,56));
 		lblBd.setForeground(Color.WHITE);
 		lblBd.setFont(new Font("Times New Roman", Font.ITALIC, 20));
-		lblBd.setBounds(0, 0, 540, 30);
+		lblBd.setBounds(0, 0, 655, 30);
 		lblBd.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/gui/icones/Dofus.png"))));
 		frmBd.getContentPane().add(lblBd);
 		
@@ -110,8 +110,8 @@ public class Main {
 		lblProgrammes.setBackground(selectedTab);
 		lblProgrammes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProgrammes.setForeground(Color.WHITE);
-		lblProgrammes.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblProgrammes.setBounds(10, 30, 130, 30);
+		lblProgrammes.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblProgrammes.setBounds(10, 30, 159, 30);
 		frmBd.getContentPane().add(lblProgrammes);
 		
 		/** PERSONNAGES PANEL **/
@@ -135,8 +135,8 @@ public class Main {
 		lblPersonnages.setBackground(unSelectedTab);
 		lblPersonnages.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPersonnages.setForeground(Color.WHITE);
-		lblPersonnages.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblPersonnages.setBounds(140, 30, 130, 30);
+		lblPersonnages.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblPersonnages.setBounds(169, 30, 159, 30);
 		frmBd.getContentPane().add(lblPersonnages);
 		
 		/** REGLAGES PANEL **/
@@ -160,8 +160,8 @@ public class Main {
 		lblReglages.setBackground(unSelectedTab);
 		lblReglages.setHorizontalAlignment(SwingConstants.CENTER);
 		lblReglages.setForeground(Color.WHITE);
-		lblReglages.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblReglages.setBounds(270, 30, 130, 30);
+		lblReglages.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblReglages.setBounds(328, 30, 159, 30);
 		frmBd.getContentPane().add(lblReglages);
 		
 		/** ADMIN PANEL **/
@@ -185,8 +185,8 @@ public class Main {
 		lblAdmin.setBackground(unSelectedTab);
 		lblAdmin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdmin.setForeground(Color.WHITE);
-		lblAdmin.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		lblAdmin.setBounds(400, 30, 130, 30);
+		lblAdmin.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblAdmin.setBounds(487, 30, 158, 30);
 		frmBd.getContentPane().add(lblAdmin);
 		
 		changerPanel(0);
