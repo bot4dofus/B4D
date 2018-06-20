@@ -1,5 +1,6 @@
 package fr.B4D.modules.autre;
 
+import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -14,12 +15,14 @@ public final class B4DClavier {
 	 /* ECRIRE CHAT */
 	/***************/
 	
-	public static void Ecrire_Chat(String texte, double timeOut) {
+	public static void Ecrire_Chat(String texte, double timeOut) throws AWTException {
+		Robot robot = new Robot();
 		B4DSouris.Clic_Gauche(new Double(0.05347166799, 0.98902195608), false, 0.5);
 		Ecrire_Clavier(texte,timeOut);
-		//Enter
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
 	}
-	public static void Ecrire_Chat(String texte) {
+	public static void Ecrire_Chat(String texte) throws AWTException {
 		B4DClavier.Ecrire_Chat(texte, 0.5);
 	}
 
@@ -27,23 +30,19 @@ public final class B4DClavier {
 	 /* ECRIRE CLAVIER */
 	/******************/
 	
-	public static void Ecrire_Clavier(String texte, double timeOut) {
-		try {  
-			Clipboard clipboard = getSystemClipboard();
-			Robot robot = new Robot();
+	public static void Ecrire_Clavier(String texte, double timeOut) throws AWTException {
+		Clipboard clipboard = getSystemClipboard();
+		Robot robot = new Robot();
+		
+		clipboard.setContents(new StringSelection(texte), null);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+	    robot.keyPress(KeyEvent.VK_V);
+	    robot.keyRelease(KeyEvent.VK_CONTROL);
+	    robot.keyRelease(KeyEvent.VK_V);
 			
-			clipboard.setContents(new StringSelection(texte), null);
-			robot.keyPress(KeyEvent.VK_CONTROL);
-	        robot.keyPress(KeyEvent.VK_V);
-	        robot.keyRelease(KeyEvent.VK_CONTROL);
-	        robot.keyRelease(KeyEvent.VK_V);
-			
-		} catch(Exception e){
-			e.printStackTrace();			
-		}
 		B4DAttente.Attendre(timeOut);
 	}
-	public static void Ecrire_Clavier(String texte) {
+	public static void Ecrire_Clavier(String texte) throws AWTException {
 		Ecrire_Clavier(texte, 0.5);
 	}
 	
@@ -51,20 +50,15 @@ public final class B4DClavier {
 	 /* PRESSE PAPIER */
 	/*****************/
 	
-	public static void CopierPressePapier(String texte) {
-		try {  
-			Clipboard clipboard = getSystemClipboard();
-			Robot robot = new Robot();
-			
-			clipboard.setContents(new StringSelection(texte), null);
-			robot.keyPress(KeyEvent.VK_CONTROL);
-	        robot.keyPress(KeyEvent.VK_V);
-	        robot.keyRelease(KeyEvent.VK_CONTROL);
-	        robot.keyRelease(KeyEvent.VK_V);
-			
-		} catch(Exception e){
-			e.printStackTrace();			
-		}
+	public static void CopierPressePapier(String texte) throws AWTException {
+		Clipboard clipboard = getSystemClipboard();
+		Robot robot = new Robot();
+
+		clipboard.setContents(new StringSelection(texte), null);
+		robot.keyPress(KeyEvent.VK_CONTROL);
+	    robot.keyPress(KeyEvent.VK_V);
+	    robot.keyRelease(KeyEvent.VK_CONTROL);
+	    robot.keyRelease(KeyEvent.VK_V);
 	}
 	
 	public static String RecupererPressePapier() {
