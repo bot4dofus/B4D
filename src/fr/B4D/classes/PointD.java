@@ -1,27 +1,13 @@
 package fr.B4D.classes;
 
-public class PointD {
-	private int x;
-	private int y;
-	
-	public PointD(int x, int y){
-		this.x = x;
-		this.y = y;
-	}
+import java.awt.Point;
 
-	public int getX() {
-		return x;
+@SuppressWarnings("serial")
+public class PointD extends Point{
+	public PointD() {
+		super();
 	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public int getY() {
-		return y;
-	}
-
-	public void setY(int y) {
-		this.y = y;
+	public PointD(int x, int y) {
+		super(x,y);
 	}
 }
