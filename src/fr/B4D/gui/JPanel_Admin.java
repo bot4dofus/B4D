@@ -7,6 +7,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.Font;
 
+@SuppressWarnings("serial")
 public class JPanel_Admin extends JPanel {
 	final int width = 635;
 	final int height = 70;

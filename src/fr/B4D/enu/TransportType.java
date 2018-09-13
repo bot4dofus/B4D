@@ -1,6 +1,7 @@
 package fr.B4D.enu;
 
-public enum TypeDeTransport {
+public enum TransportType {
+	Tous,
     Aucun,
     Marche,
     Zaap,

@@ -3,30 +3,29 @@ package fr.B4D.gui;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Point;
 
 import javax.swing.SwingConstants;
 
-import fr.B4D.enu.Categories;
-import fr.B4D.enu.Lieux;
-import fr.B4D.enu.Ressources;
-import fr.B4D.enu.Types;
-import fr.B4D.modules.autre.B4DEcran;
-import net.sourceforge.tess4j.TesseractException;
+import fr.B4D.enu.Category;
+import fr.B4D.enu.Place;
+import fr.B4D.enu.Ressource;
+import fr.B4D.enu.RessourceType;
 
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class JPanel_Programme extends JPanel {
+	
 	final int width = 635;
 	final int height = 235;
 	
@@ -50,7 +49,7 @@ public class JPanel_Programme extends JPanel {
 		lblLieu.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblLieu);
 		
-		JComboBox<Lieux> comboBox_Lieu = new JComboBox<Lieux>();
+		JComboBox<Place> comboBox_Lieu = new JComboBox<Place>();
 		comboBox_Lieu.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 10));
 		comboBox_Lieu.setBounds(10, 35, 150, 25);
 		add(comboBox_Lieu);
@@ -64,7 +63,7 @@ public class JPanel_Programme extends JPanel {
 		lblCatgorie.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblCatgorie);
 		
-		JComboBox<Categories> comboBox_Categorie = new JComboBox<Categories>();
+		JComboBox<Category> comboBox_Categorie = new JComboBox<Category>();
 		comboBox_Categorie.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		comboBox_Categorie.setBounds(10, 90, 150, 25);
 		add(comboBox_Categorie);
@@ -78,7 +77,7 @@ public class JPanel_Programme extends JPanel {
 		lblType.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblType);
 		
-		JComboBox<Types> comboBox_Type = new JComboBox<Types>();
+		JComboBox<RessourceType> comboBox_Type = new JComboBox<RessourceType>();
 		comboBox_Type.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		comboBox_Type.setBounds(10, 145, 150, 25);
 		add(comboBox_Type);
@@ -92,7 +91,7 @@ public class JPanel_Programme extends JPanel {
 		lblRessource.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblRessource);
 		
-		JComboBox<Ressources> comboBox_Ressource = new JComboBox<Ressources>();
+		JComboBox<Ressource> comboBox_Ressource = new JComboBox<Ressource>();
 		comboBox_Ressource.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		comboBox_Ressource.setBounds(10, 200, 150, 25);
 		add(comboBox_Ressource);
@@ -201,7 +200,10 @@ public class JPanel_Programme extends JPanel {
 		button_Commencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					System.out.println(B4DEcran.OCR(new Point(17,920),new Point(696,1007)));
+					//System.out.println(B4DAttente.Attendre_OCR(new Point(17,920), new Point(696,1007), "test", 10.0));
+					//System.out.println(B4DAttente.Attendre_Touche(10.0));
+					//System.out.println(B4DAttente.Attendre_Changement_Pixel(new Point(500,500),10.0));
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

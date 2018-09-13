@@ -1,7 +1,8 @@
 package fr.B4D.enu;
 
-public enum Categories {
+public enum Category {
     Toutes,
+    Aucune,
     Recolte,
     Poubelle,
     Puit,

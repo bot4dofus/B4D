@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import javax.swing.UIManager;
 
+@SuppressWarnings("serial")
 public class JPanel_Reglage extends JPanel {
 	final int width = 635;
 	final int height = 125;

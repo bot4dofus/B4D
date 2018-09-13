@@ -1,7 +1,8 @@
 package fr.B4D.enu;
 
-public enum Types {
+public enum RessourceType {
     Tous,
+    Aucun,
     Poisson,
     Plante,
     Cereale,

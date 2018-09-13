@@ -3,47 +3,47 @@ package fr.B4D.classes;
 @SuppressWarnings("serial")
 public class B4DException extends Exception{
 
-	private Raison raison;
+	private Reason reason;
 
-    public B4DException(Raison raison)
+    public B4DException(Reason reason)
     {
     	super();
-        this.raison = raison;
+        this.reason = reason;
     }
 
 	  /***********/
 	 /* GETTERS */
 	/***********/
     
-    public Raison getRaison()
+    public Reason getReason()
     {
-    	return this.raison;
+    	return this.reason;
     }
-    public void Raison() {
-    	switch(getRaison()) {
+    public void Reason() {
+    	switch(getReason()) {
     		case TimeOut:
     			System.out.println("A waiting function timed out.");
     			break;
-    		case PlacerSouris:
-    			System.out.println("Can't move the mouse.");
+    		case Mouse:
+    			System.out.println("Cannot use the mouse;");
     			break;
-    		case ClicDroit:
-    			System.out.println("Right click impossible.");
+    		case Keyboard:
+    			System.out.println("Cannot use the keyboard.");
     			break;
-    		case ClicGauche:
-    			System.out.println("Left click impossible.");
+    		case Clipboard:
+    			System.out.println("Cannot use the clipBoard.");
     			break;
     		case OCR:
     			System.out.println("OCR impossible.");
     			break;
-    		case Clavier:
-    			System.out.println("Impossible to use the keyboard.");
-    			break;
-    		case PressePapier:
-    			System.out.println("Impossible to use the ClipBoard.");
-    			break;
     		case Pixel:
-    			System.out.println("Impossible to get pixel color.");
+    			System.out.println("Cannot get the pixel color.");
+    			break;
+    		case CannotFind:
+    			System.out.println("Cannot found the object on the map.");
+    			break;
+    		case MacAdress:
+    			System.out.println("Cannot get the mac adress.");
     			break;
     	}
     }
@@ -52,14 +52,14 @@ public class B4DException extends Exception{
 	 /* ENUMERATION */
 	/***************/
     
-    public enum Raison{
+    public enum Reason{
     	TimeOut,
-    	PlacerSouris,
-    	ClicDroit,
-    	ClicGauche,
+    	Mouse,
+    	Keyboard,
+    	Clipboard,
     	OCR,
-    	Clavier,
-    	PressePapier,
     	Pixel,
+    	CannotFind,
+    	MacAdress,
     }
 }

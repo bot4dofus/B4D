@@ -1,4 +1,4 @@
-package fr.B4D.modules.autre;
+package fr.B4D.modules;
 
 import java.awt.AWTException;
 import java.awt.Color;
@@ -13,72 +13,72 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 import fr.B4D.classes.B4DException;
-import fr.B4D.classes.B4DException.Raison;
+import fr.B4D.classes.B4DException.Reason;
 import fr.B4D.classes.Bot;
 import fr.B4D.classes.PointF;
 import net.sourceforge.tess4j.Tesseract;
 
-public final class B4DEcran {
+public final class B4DScreen {
 
 	  /*****************/
 	 /* COULEUR PIXEL */
 	/*****************/
 	
-	public static Color Couleur_Pixel(Point point) throws B4DException {
+	public static Color getPixelColor(Point point) throws B4DException {
 		try {
 			return new Robot().getPixelColor(point.x, point.y);
 		} catch (AWTException e) {
-			throw new B4DException(Raison.Pixel);
+			throw new B4DException(Reason.Pixel);
 		}
 	}
-	public static Color Couleur_Pixel(PointF pointF) throws B4DException {
-		return Couleur_Pixel(B4DConversion.PointFToPoint(pointF));
+	public static Color getPixelColor(PointF pointF) throws B4DException {
+		return getPixelColor(B4DConversion.pointFToPoint(pointF));
 	}
 	
 	  /*******************/
 	 /* RECHERCHE PIXEL */
 	/*******************/
 	
-	public static boolean Rechercher_Pixel(PointF P1, PointF P2, char R, boolean Rsupperior, char G, boolean Gsupperior, char B, boolean Bsupperior, PointF point) throws B4DException {
+	public static boolean searchPixel(PointF P1, PointF P2, Color min, Color max, PointF point) throws B4DException {
 		
-		Point Point1 = B4DConversion.PointFToPoint(P1);
-		Point Point2 = B4DConversion.PointFToPoint(P2);
-		int Largeur = Point2.x - Point1.x, Hauteur = Point2.y - Point1.y;
+		Point Point1 = B4DConversion.pointFToPoint(P1);
+		Point Point2 = B4DConversion.pointFToPoint(P2);
+		int width = Point2.x - Point1.x, height = Point2.y - Point1.y;
 		
 		Color color;
 		
-		for(int j=0;j<Hauteur;j++) {
-			for(int i=0;i<Largeur;i++) {
-				color = Couleur_Pixel(new Point(i, j));
+		for(int j=0;j<height;j++) {
+			for(int i=0;i<width;i++) {
+				color = getPixelColor(new Point(i, j));
 				
-				if((Rsupperior = true) != (color.getRed() > R) && (Gsupperior = true) != (color.getGreen() > G) && (Bsupperior = true) != (color.getBlue() > B)) {
-					point = B4DConversion.PointToPointF(new Point(i+Point1.x, j+Point1.y));
+				if(B4DOperator.isBetween(color, min, max)) {
+					point = B4DConversion.pointToPointF(new Point(i+Point1.x, j+Point1.y));
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-	public static boolean Rechercher_Pixel(PointF P1, PointF P2, char R, boolean Rsupperior, char G, boolean Gsupperior, char B, boolean Bsupperior, ArrayList<PointF> points) throws B4DException {
+	public static boolean searchPixels(PointF P1, PointF P2, Color min, Color max, ArrayList<PointF> points) throws B4DException {
 		
-		Point Point1 = B4DConversion.PointFToPoint(P1);
-		Point Point2 = B4DConversion.PointFToPoint(P2);
-		int Largeur = Point2.x - Point1.x, Hauteur = Point2.y - Point1.y;
+		Point Point1 = B4DConversion.pointFToPoint(P1);
+		Point Point2 = B4DConversion.pointFToPoint(P2);
+		int width = Point2.x - Point1.x, height = Point2.y - Point1.y;
 		
 		Color color;
-		boolean trouve = false;
+		boolean found = false;
 		
-		for(int j=0;j<Hauteur;j++) {
-			for(int i=0;i<Largeur;i++) {
-				color = Couleur_Pixel(new Point(i, j));
+		for(int j=0;j<height;j++) {
+			for(int i=0;i<width;i++) {
+				color = getPixelColor(new Point(i, j));
 				
-				if((Rsupperior = true) != (color.getRed() > R) && (Gsupperior = true) != (color.getGreen() > G) && (Bsupperior = true) != (color.getBlue() > B)) {
-					points.add(B4DConversion.PointToPointF(new Point(i+Point1.x, j+Point1.y)));
-					trouve = true;
+				if(B4DOperator.isBetween(color, min, max)) {
+					points.add(B4DConversion.pointToPointF(new Point(i+Point1.x, j+Point1.y)));
+					found = true;
 				}
 			}
 		}
-		return trouve;
+		return found;
 	}
 	
 	  /*******/
@@ -94,28 +94,28 @@ public final class B4DEcran {
 			tessInst.setDatapath("./tessdata");
 			return tessInst.doOCR(file);
 		} catch (Exception e) {
-			throw new B4DException(Raison.OCR);
+			throw new B4DException(Reason.OCR);
 		}
 	}
 	public static String OCR(Point P1, Point P2) throws B4DException {
 		return OCR(new Rectangle(P1.x,  P1.y, P2.x - P1.x, P2.y - P1.y));
 	}
 	public static String OCR(PointF P1, PointF P2) throws B4DException {
-		return OCR(B4DConversion.PointFToPoint(P1), B4DConversion.PointFToPoint(P2));
+		return OCR(B4DConversion.pointFToPoint(P1), B4DConversion.pointFToPoint(P2));
 	}
-	public static String Analyse_Chat_OCR() throws B4DException {
-		return OCR(Bot.MaConfiguration.zoneDeChat);
+	public static String getChatOCR() throws B4DException {
+		return OCR(Bot.MyConfiguration.chatFrame);
 	}
 	
 	  /*************/
 	 /* SELECTION */
 	/*************/
 
-	public static String Analyse_Selection(Point position) throws B4DException {
+	public static String getSelection(Point point) throws B4DException {
 		Robot robot;
 		try {
 			robot = new Robot();
-			B4DSouris.Clic_Droit(position, false);
+			B4DSouris.Clic_Droit(point, false);
 			robot.keyPress(KeyEvent.VK_CONTROL);
 		    robot.keyPress(KeyEvent.VK_A);
 		    robot.keyRelease(KeyEvent.VK_A);
@@ -123,14 +123,14 @@ public final class B4DEcran {
 		    robot.keyRelease(KeyEvent.VK_C);
 		    robot.keyRelease(KeyEvent.VK_CONTROL);
 		}catch (AWTException e) {
-			throw new B4DException(Raison.Clavier);
+			throw new B4DException(Reason.Keyboard);
 		}
-		return B4DClavier.RecupererPressePapier();
+		return B4DKeyboard.RecupererPressePapier();
 	}
-	public static String Analyse_Selection(PointF position) throws B4DException {
-		return Analyse_Selection(B4DConversion.PointFToPoint(position));
+	public static String getSelection(PointF position) throws B4DException {
+		return getSelection(B4DConversion.pointFToPoint(position));
 	}
-	public static String Analyse_Chat_Clic() throws B4DException {
-		return Analyse_Selection(new Point((int)(Bot.MaConfiguration.zoneDeChat.x + Bot.MaConfiguration.zoneDeChat.width*0.95), (int)(Bot.MaConfiguration.zoneDeChat.y + Bot.MaConfiguration.zoneDeChat.height*0.95)));
+	public static String getChatSelection() throws B4DException {
+		return getSelection(new Point((int)(Bot.MyConfiguration.chatFrame.x + Bot.MyConfiguration.chatFrame.width*0.95), (int)(Bot.MyConfiguration.chatFrame.y + Bot.MyConfiguration.chatFrame.height*0.95)));
 	}
 }

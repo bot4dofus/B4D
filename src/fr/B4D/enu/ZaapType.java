@@ -1,6 +1,7 @@
 package fr.B4D.enu;
 
-public enum CategoriesZaap {
+public enum ZaapType {
+	Tous,
     Aucun,
     Atelier,
     HDV,

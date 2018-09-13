@@ -1,9 +1,9 @@
 package fr.B4D.threads;
 
-public class ThreadAttente extends Thread{
+public class WaitThread extends Thread{
 	private double timeOut;
 		
-	public ThreadAttente(double timeOut) {
+	public WaitThread(double timeOut) {
 		this.timeOut = timeOut;
 	}
 		

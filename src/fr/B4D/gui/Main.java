@@ -1,18 +1,24 @@
 package fr.B4D.gui;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-import java.awt.Toolkit;
+import fr.B4D.classes.transports.B4DGraph;
+import fr.B4D.classes.B4DException;
+import fr.B4D.classes.Bot;
+import fr.B4D.classes.transports.B4DEdge;
+import fr.B4D.enu.TransportType;
+import fr.B4D.modules.B4DOther;
 
+import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
-
+import java.awt.Point;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.awt.event.MouseAdapter;
 
 public class Main {
@@ -20,10 +26,10 @@ public class Main {
 	final static Color selectedTab = new Color(33,43,53);
 	final static Color unSelectedTab = new Color(52,63,73);
 
-	final static JPanel_Programme programme = new JPanel_Programme();
-	final static JPanel_Personnage personnage = new JPanel_Personnage();
-	final static JPanel_Reglage reglage = new JPanel_Reglage();
-	final static JPanel_Admin admin = new JPanel_Admin();
+	final static JPanel_Programme programPanel = new JPanel_Programme();
+	final static JPanel_Personnage personPanel = new JPanel_Personnage();
+	final static JPanel_Reglage settingPanel = new JPanel_Reglage();
+	final static JPanel_Admin adminPanel = new JPanel_Admin();
 	
 	final static int offset_x_Form = 26, offset_y_Form = 105;
 	
@@ -55,6 +61,7 @@ public class Main {
 	 */
 	public Main() {
 		initialize();
+		test();
 	}
 
 	/**
@@ -65,20 +72,20 @@ public class Main {
 		frmBd.setResizable(false);
 		frmBd.setBackground(Color.GRAY);
 		frmBd.getContentPane().setBackground(unSelectedTab);
-		frmBd.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/gui/icones/Dofus_Rouge.png")));	//Defini l'icone
+		frmBd.setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/icones/Dofus_Rouge.png")));	//Defini l'icone
 		frmBd.setTitle("B4D");									//Defini le nom de la fenetre
 		frmBd.setBounds(100, 100, 807, 541);					//Defini les coordonnees
 		frmBd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Defini l'action lors de l'appui sur la cloix
 		frmBd.getContentPane().setLayout(null);
 
-		programme.setBounds(10, 60, 635, 235);
-		frmBd.getContentPane().add(programme);
-		personnage.setBounds(10, 60, personnage.width, personnage.height);
-		frmBd.getContentPane().add(personnage);
-		reglage.setBounds(10, 60, reglage.width, reglage.height);
-		frmBd.getContentPane().add(reglage);
-		admin.setBounds(10, 60, admin.width, admin.height);
-		frmBd.getContentPane().add(admin);
+		programPanel.setBounds(10, 60, 635, 235);
+		frmBd.getContentPane().add(programPanel);
+		personPanel.setBounds(10, 60, personPanel.width, personPanel.height);
+		frmBd.getContentPane().add(personPanel);
+		settingPanel.setBounds(10, 60, settingPanel.width, settingPanel.height);
+		frmBd.getContentPane().add(settingPanel);
+		adminPanel.setBounds(10, 60, adminPanel.width, adminPanel.height);
+		frmBd.getContentPane().add(adminPanel);
 		
 		JLabel lblBd = new JLabel("Bot for Dofus");
 		lblBd.setOpaque(true);
@@ -86,7 +93,7 @@ public class Main {
 		lblBd.setForeground(Color.WHITE);
 		lblBd.setFont(new Font("Times New Roman", Font.ITALIC, 20));
 		lblBd.setBounds(0, 0, 655, 30);
-		lblBd.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/gui/icones/Dofus.png"))));
+		lblBd.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/icones/Dofus.png"))));
 		frmBd.getContentPane().add(lblBd);
 		
 		/** PROGRAMMES PANEL **/
@@ -97,12 +104,12 @@ public class Main {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!programme.isVisible())
+				if(!programPanel.isVisible())
 					lblProgrammes.setBackground(selectedTab);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!programme.isVisible())
+				if(!programPanel.isVisible())
 					lblProgrammes.setBackground(unSelectedTab);
 			}
 		});
@@ -122,12 +129,12 @@ public class Main {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!personnage.isVisible())
+				if(!personPanel.isVisible())
 					lblPersonnages.setBackground(selectedTab);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!personnage.isVisible())
+				if(!personPanel.isVisible())
 					lblPersonnages.setBackground(unSelectedTab);
 			}
 		});		
@@ -147,12 +154,12 @@ public class Main {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!reglage.isVisible())
+				if(!settingPanel.isVisible())
 					lblReglages.setBackground(selectedTab);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!reglage.isVisible())
+				if(!settingPanel.isVisible())
 					lblReglages.setBackground(unSelectedTab);
 			}
 		});		
@@ -172,15 +179,21 @@ public class Main {
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if(!admin.isVisible())
+				if(!adminPanel.isVisible())
 					lblAdmin.setBackground(selectedTab);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if(!admin.isVisible())
+				if(!adminPanel.isVisible())
 					lblAdmin.setBackground(unSelectedTab);
 			}
-		});		
+		});
+		try {
+			if(!B4DOther.getMacAdress().equals(Bot.AdminMacAdresse))
+				lblAdmin.setVisible(false);
+		} catch (B4DException ex) {
+			ex.printStackTrace();
+		}
 		lblAdmin.setOpaque(true);
 		lblAdmin.setBackground(unSelectedTab);
 		lblAdmin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -201,33 +214,49 @@ public class Main {
 		lblPersonnages.setBackground(unSelectedTab);
 		lblReglages.setBackground(unSelectedTab);
 		lblAdmin.setBackground(unSelectedTab);		
-		programme.setVisible(false);
-		personnage.setVisible(false);
-		reglage.setVisible(false);
-		admin.setVisible(false);
+		programPanel.setVisible(false);
+		personPanel.setVisible(false);
+		settingPanel.setVisible(false);
+		adminPanel.setVisible(false);
 		
 		switch(index) {
 		case 0:
 			lblProgrammes.setBackground(selectedTab);
-			frmBd.setSize(programme.width + offset_x_Form, programme.height + offset_y_Form);
-			programme.setVisible(true);
+			frmBd.setSize(programPanel.width + offset_x_Form, programPanel.height + offset_y_Form);
+			programPanel.setVisible(true);
 			break;
 		case 1:
 			lblPersonnages.setBackground(selectedTab);
-			frmBd.setSize(personnage.width + offset_x_Form, personnage.height + offset_y_Form);
-			personnage.setVisible(true);
+			frmBd.setSize(personPanel.width + offset_x_Form, personPanel.height + offset_y_Form);
+			personPanel.setVisible(true);
 			break;
 		case 2:
 			lblReglages.setBackground(selectedTab);
-			frmBd.setSize(reglage.width + offset_x_Form, reglage.height + offset_y_Form);
-			reglage.setVisible(true);
+			frmBd.setSize(settingPanel.width + offset_x_Form, settingPanel.height + offset_y_Form);
+			settingPanel.setVisible(true);
 			break;
 		case 3:
 			lblAdmin.setBackground(selectedTab);
-			frmBd.setSize(admin.width + offset_x_Form, admin.height + offset_y_Form);
-			admin.setVisible(true);
+			frmBd.setSize(adminPanel.width + offset_x_Form, adminPanel.height + offset_y_Form);
+			adminPanel.setVisible(true);
 			break;
-		}
+		}	
+	}
+	
+	private void test() {
 		
+//		B4DGraph graph = new B4DGraph();
+//		graph.addVertex(new Point(1,1));
+//		graph.addVertex(new Point(2,2));
+//		graph.addVertex(new Point(3,3));
+//
+//	    graph.addEdge(new Point(1,1), new Point(3,3), 6, TypeDeTransport.Marche);
+//	    graph.addEdge(new Point(1,1), new Point(2,2), 3, TypeDeTransport.Zaap);
+//	    graph.addEdge(new Point(2,2), new Point(3,3), 2, TypeDeTransport.Zaap);
+//		
+//	    List<B4DEdge> shortestPath = graph.getPath(new Point(1,1), new Point(3,3));
+//	    System.out.println(shortestPath);
+
 	}
 }
+

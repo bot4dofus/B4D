@@ -1,6 +1,7 @@
 package fr.B4D.enu;
 
-public enum Enclos {
+public enum Pen {
+	Tous,
     Aucun,
     Amour,
     Maturite,

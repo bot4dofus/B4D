@@ -1,6 +1,7 @@
 package fr.B4D.enu;
 
-public enum Metiers {
+public enum Profession {
+	Tous,
     Aucun,
     Paysan,
     Mineur,

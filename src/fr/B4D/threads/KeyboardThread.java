@@ -9,7 +9,7 @@ interface User32 extends Library {
     short GetKeyState(int key);
 }
 
-public class ThreadTouche extends Thread{
+public class KeyboardThread extends Thread{
 
 	public void run(){		
 		try {

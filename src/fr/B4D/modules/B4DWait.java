@@ -1,20 +1,24 @@
-package fr.B4D.modules.autre;
+package fr.B4D.modules;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
-import fr.B4D.classes.PointF;
-import fr.B4D.threads.ThreadAttente;
-import fr.B4D.threads.ThreadChangementPixel;
-import fr.B4D.threads.ThreadOCR;
-import fr.B4D.threads.ThreadTouche;
 
-public final class B4DAttente {
+import fr.B4D.classes.Bot;
+import fr.B4D.classes.PointF;
+import fr.B4D.threads.WaitThread;
+import fr.B4D.threads.PixelThread;
+import fr.B4D.threads.ColorThread;
+import fr.B4D.threads.OCRThread;
+import fr.B4D.threads.KeyboardThread;
+
+public final class B4DWait {
 	
 	  /******************/
 	 /* ATTENTE SIMPLE */
 	/******************/
 	
-	public static void Attendre(Double timeOut) {
+	public static void wait(double timeOut) {
 		try {
 			Thread.sleep((long) (timeOut*1000));
 		} catch (InterruptedException e) {
@@ -26,68 +30,102 @@ public final class B4DAttente {
 	 /* ATTENTE SUR OCR */
 	/*******************/
 	
-	public static boolean Attendre_OCR(Rectangle rectangle, String texte, Double timeOut) {
-		Thread attente = new ThreadAttente(timeOut);
-		Thread OCR = new ThreadOCR(rectangle, texte);
-		attente.start();
-		OCR.start();
+	public static boolean waitForOCR(Rectangle rectangle, String text, double timeOut) {
+		Thread waitThread = new WaitThread(timeOut);
+		Thread OCRThread = new OCRThread(rectangle, text);
+		waitThread.start();
+		OCRThread.start();
 		
-		while(attente.isAlive() && OCR.isAlive());
-		if(attente.isAlive()) {
-			attente.interrupt();
+		while(waitThread.isAlive() && OCRThread.isAlive());
+		if(waitThread.isAlive()) {
+			waitThread.interrupt();
 			return true;
 		}else {
-			OCR.interrupt();
+			OCRThread.interrupt();
 			return false;
 		}
 	}
-	public static boolean Attendre_OCR(Point P1, Point P2, String texte, Double timeOut) {
-		return Attendre_OCR(new Rectangle(P1.x,  P1.y, P2.x - P1.x, P2.y - P1.y), texte, timeOut);
+	public static boolean waitForOCR(Point P1, Point P2, String text, double timeOut) {
+		return waitForOCR(new Rectangle(P1.x,  P1.y, P2.x - P1.x, P2.y - P1.y), text, timeOut);
 	}
-	public static boolean Attendre_OCR(PointF P1, PointF P2, String texte, Double timeOut) {
-		return Attendre_OCR(B4DConversion.PointFToPoint(P1), B4DConversion.PointFToPoint(P2), texte, timeOut);
+	public static boolean waitForOCR(PointF P1, PointF P2, String text, double timeOut) {
+		return waitForOCR(B4DConversion.pointFToPoint(P1), B4DConversion.pointFToPoint(P2), text, timeOut);
 	}
 	
 	  /**********************/
 	 /* ATTENTE SUR TOUCHE */
 	/**********************/
 	
-	public static boolean Attendre_Touche(Double timeOut) {
-		Thread attente = new ThreadAttente(timeOut);
-		Thread Touche = new ThreadTouche();
-		attente.start();
-		Touche.start();
+	public static boolean waitForKeyboard(double timeOut) {
+		Thread waitThread = new WaitThread(timeOut);
+		Thread keyboardThread = new KeyboardThread();
+		waitThread.start();
+		keyboardThread.start();
 		
-		while(attente.isAlive() && Touche.isAlive());
-		if(attente.isAlive()) {
-			attente.interrupt();
+		while(waitThread.isAlive() && keyboardThread.isAlive());
+		if(waitThread.isAlive()) {
+			waitThread.interrupt();
 			return true;
 		}else {
-			Touche.interrupt();
+			keyboardThread.interrupt();
 			return false;
 		}
+	}
+	
+	  /*************************************/
+	 /** ATTENTE SUR CHANGEMENT DE PIXEL **/
+	/*************************************/
+	
+	public static boolean waitForChangingPixel(Point point, double timeOut) {
+		Thread waitThread = new WaitThread(timeOut);
+		Thread pixelThread = new PixelThread(point);
+		waitThread.start();
+		pixelThread.start();
+		
+		while(waitThread.isAlive() && pixelThread.isAlive());
+		if(waitThread.isAlive()) {
+			waitThread.interrupt();
+			return true;
+		}else {
+			pixelThread.interrupt();
+			return false;
+		}
+	}
+	public static boolean waitForChangingPixel(PointF point, double timeOut) {
+		return waitForChangingPixel(B4DConversion.pointFToPoint(point), timeOut);
+	}
+	
+	  /**********************************/
+	 /** ATTENTE SUR COULEUR DE PIXEL **/
+	/**********************************/
+	
+	public static boolean waitForColor(Point point, Color min, Color max, double timeOut) {
+		Thread waitThread = new WaitThread(timeOut);
+		Thread colorThread = new ColorThread(point, min, max);
+		waitThread.start();
+		colorThread.start();
+		
+		while(waitThread.isAlive() && colorThread.isAlive());
+		if(waitThread.isAlive()) {
+			waitThread.interrupt();
+			return true;
+		}else {
+			colorThread.interrupt();
+			return false;
+		}
+	}
+	public static boolean waitForColor(PointF point, Color min, Color max, double timeOut) {
+		return waitForColor(B4DConversion.pointFToPoint(point), min, max, timeOut);
 	}
 	
 	  /*********************/
-	 /* ATTENTE SUR PIXEL */
+	 /** ATTENTE SUR MAP **/
 	/*********************/
 	
-	public static boolean Attendre_Changement_Pixel(Point point, Double timeOut) {
-		Thread attente = new ThreadAttente(timeOut);
-		Thread pixel = new ThreadChangementPixel(point);
-		attente.start();
-		pixel.start();
-		
-		while(attente.isAlive() && pixel.isAlive());
-		if(attente.isAlive()) {
-			attente.interrupt();
-			return true;
-		}else {
-			pixel.interrupt();
-			return false;
-		}
+	public static boolean waitForMap(double timeOut) {
+		return waitForChangingPixel(B4DConversion.pointToPointF(Bot.MyConfiguration.minimap), timeOut);
 	}
-	public static boolean Attendre_Changement_Pixel(PointF point, Double timeOut) {
-		return Attendre_Changement_Pixel(B4DConversion.PointFToPoint(point), timeOut);
+	public static boolean waitForMap() {
+		return waitForMap(15);
 	}
 }
