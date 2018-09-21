@@ -220,9 +220,9 @@ public class Main {
 		
 		JPopupMenu popupMenu = new JPopupMenu();
 		
-		JMenuItem itemOpen = new JMenuItem("Ouvrir");
-		itemOpen.setMnemonic(KeyEvent.VK_O);
-		itemOpen.addActionListener(new ActionListener() {
+		JMenuItem itemImport = new JMenuItem("Importer");
+		itemImport.setMnemonic(KeyEvent.VK_O);
+		itemImport.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -237,25 +237,11 @@ public class Main {
 				}
 			}
 		});
-		popupMenu.add(itemOpen);
+		popupMenu.add(itemImport);
 		
-		JMenuItem itemSave = new JMenuItem("Enregistrer");
-		itemSave.setMnemonic(KeyEvent.VK_S);
-		itemSave.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					Bot.ConfigurationSerialization.Save(Bot.MyConfiguration);
-				} catch (ClassNotFoundException | IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		popupMenu.add(itemSave);
-		
-		JMenuItem itemSaveAs = new JMenuItem("Enregistrer Sous");
-		itemSaveAs.setMnemonic(KeyEvent.VK_S);
-		itemSaveAs.addActionListener(new ActionListener() {
+		JMenuItem itemExport = new JMenuItem("Exporter");
+		itemExport.setMnemonic(KeyEvent.VK_S);
+		itemExport.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -265,8 +251,7 @@ public class Main {
 				}
 			}
 		});
-		popupMenu.add(itemSaveAs);
-		
+		popupMenu.add(itemExport);		
 		addPopup(frmBd, popupMenu);
 		
 		changerPanel(0);

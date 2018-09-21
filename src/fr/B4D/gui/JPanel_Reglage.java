@@ -9,6 +9,8 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class JPanel_Reglage extends JPanel {
@@ -56,6 +58,10 @@ public class JPanel_Reglage extends JPanel {
 		panel_Zone_Jeu.add(lblLxh);
 		
 		JButton button_4 = new JButton("Modifier");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		button_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		button_4.setBackground(UIManager.getColor("Button.background"));
 		button_4.setBounds(5, 75, 140, 25);

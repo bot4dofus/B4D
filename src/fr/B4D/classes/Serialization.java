@@ -13,14 +13,14 @@ import com.google.gson.Gson;
 
 public class Serialization {
 
-	File file;
+	File defaultFile;
 	FileNameExtensionFilter filter;
 	
-	  public Serialization(String format, String path) {
+	  public Serialization(String format, String defaultPath) {
 		filter = new FileNameExtensionFilter("Fichiers de configuration B4D", format);
-		this.file = new File(path);
+		defaultFile = new File(defaultPath);
 		try {
-			file.createNewFile();
+			defaultFile.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -34,10 +34,8 @@ public class Serialization {
 		  JFileChooser fileChooser = new JFileChooser();
 		  fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));	  
 		  fileChooser.setFileFilter(filter);
-		  if (fileChooser.showOpenDialog(new Frame()) == JFileChooser.APPROVE_OPTION) {
-		      file = fileChooser.getSelectedFile();
-		      return Deserialize();
-		  }		  
+		  if (fileChooser.showOpenDialog(new Frame()) == JFileChooser.APPROVE_OPTION) 
+		      return Deserialize(fileChooser.getSelectedFile()); 
 		  return null;
 	  }
 	  
@@ -46,8 +44,8 @@ public class Serialization {
 	/************************************/
 	  
 	  public void Save(Configuration object) throws IOException, ClassNotFoundException {
-		  if(file.exists())
-			  Serialize(object);
+		  if(defaultFile.exists())
+			  Serialize(object, defaultFile);
 		  else
 			  SaveAs(object);
 	  }
@@ -57,8 +55,7 @@ public class Serialization {
 		  fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));	  
 		  fileChooser.setFileFilter(filter);
 		  if (fileChooser.showSaveDialog(new Frame()) == JFileChooser.APPROVE_OPTION) {
-		     file = fileChooser.getSelectedFile();
-		     Serialize(object);
+		     Serialize(object, fileChooser.getSelectedFile());
 		  }
 	  }
 	  
@@ -66,7 +63,7 @@ public class Serialization {
 	 /** SERIALISATION & DESERIALISATION **/
 	/*************************************/
 	
-	private void Serialize(Configuration object) throws IOException {
+	private void Serialize(Configuration object, File file) throws IOException {
 		FileOutputStream fileOut = new FileOutputStream(file.getAbsolutePath());
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
 		Gson gson = new Gson();
@@ -75,7 +72,7 @@ public class Serialization {
 		fileOut.close();
 	}
 	
-	private Configuration Deserialize() throws IOException, ClassNotFoundException{
+	private Configuration Deserialize(File file) throws IOException, ClassNotFoundException{
 		FileInputStream fileIn = new FileInputStream(file.getAbsolutePath());
 		ObjectInputStream in = new ObjectInputStream(fileIn);
 		Gson gson = new Gson();

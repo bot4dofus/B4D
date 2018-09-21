@@ -152,6 +152,10 @@ public class JPanel_Personnage extends JPanel {
 		panel_Potion_Rappel.add(lblXY_Rappel);
 		
 		JButton btnModifierRappel = new JButton("Modifier");
+		btnModifierRappel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnModifierRappel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnModifierRappel.setBackground(UIManager.getColor("Button.background"));
 		btnModifierRappel.setBounds(5, 50, 140, 25);
@@ -208,6 +212,10 @@ public class JPanel_Personnage extends JPanel {
 		panel_Potion_Bonta.add(lblXY_Bonta);
 		
 		JButton btnModifierBonta = new JButton("Modifier");
+		btnModifierBonta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnModifierBonta.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnModifierBonta.setBackground(UIManager.getColor("Button.background"));
 		btnModifierBonta.setBounds(5, 50, 140, 25);
@@ -305,18 +313,6 @@ public class JPanel_Personnage extends JPanel {
 		btnModifierSort.setBackground(UIManager.getColor("Button.background"));
 		btnModifierSort.setBounds(5, 50, 140, 25);
 		panel_Sort.add(btnModifierSort);
-		
-		JButton btnTerminer = new JButton("Terminer");
-		btnTerminer.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnTerminer.setBackground(UIManager.getColor("Button.background"));
-		btnTerminer.setBounds(475, 250, 150, 25);
-		add(btnTerminer);
-		
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnAnnuler.setBackground(UIManager.getColor("Button.background"));
-		btnAnnuler.setBounds(475, 275, 150, 25);
-		add(btnAnnuler);
 		
 		ActualiserListe();
 	}
