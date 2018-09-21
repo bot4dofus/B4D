@@ -1,9 +1,11 @@
 package fr.B4D.classes;
 
 import java.awt.Point;
+import java.io.Serializable;
+
 import fr.B4D.classes.transports.Zaap;
 
-public class Person {
+public class Person implements Serializable{
 
 	public String account = "";
 	public String password = "";

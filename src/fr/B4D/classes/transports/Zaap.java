@@ -1,7 +1,9 @@
 package fr.B4D.classes.transports;
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.B4D.classes.B4DException;
@@ -13,8 +15,10 @@ import fr.B4D.modules.B4DWait;
 import fr.B4D.modules.B4DKeyboard;
 import fr.B4D.modules.B4DSouris;
 
-public class Zaap extends Transport{
+public class Zaap extends Transport implements Serializable{
 	
+	private static final long serialVersionUID = -8407002185667801637L;
+
 	private ZaapType zaapType;
 	
 	public final static Zaap Amakna_Foret_Malefique = new Zaap("Amakna (Bord de la foret malefique)", new Point(-1, 13), new PointF(0.4052, 0.4068), ZaapType.Aucun);
@@ -114,9 +118,11 @@ public class Zaap extends Transport{
     
 	  /**************/
 	 /** METHODES **/
-	/**************/
+	/**
+	 * @throws AWTException 
+	 * @throws B4DException ************/
 	
-	public void goTo(Point destination) throws B4DException {
+	public void goTo(Point destination) throws AWTException, B4DException {
 		if (Bot.MyConfiguration.persons.get(0).position.equals(this.getPosition())){
 			B4DSouris.Clic_Gauche(super.getPositionF(), false);
 

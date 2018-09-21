@@ -2,8 +2,10 @@ package fr.B4D.classes;
 
 import java.awt.Point;
 
-@SuppressWarnings("serial")
 public class PointD extends Point{
+
+	private static final long serialVersionUID = -6659200190789389246L;
+	
 	public PointD() {
 		super();
 	}

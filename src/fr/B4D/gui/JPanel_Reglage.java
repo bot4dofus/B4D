@@ -158,15 +158,5 @@ public class JPanel_Reglage extends JPanel {
 		button_2.setBackground(UIManager.getColor("Button.background"));
 		button_2.setBounds(5, 50, 140, 25);
 		panel_Minimap.add(button_2);
-		
-		JButton btnAnnuler = new JButton("Annuler");
-		btnAnnuler.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnAnnuler.setBounds(320, 90, 150, 25);
-		add(btnAnnuler);
-		
-		JButton btnTerminer = new JButton("Terminer");
-		btnTerminer.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnTerminer.setBounds(475, 90, 150, 25);
-		add(btnTerminer);
 	}
 }

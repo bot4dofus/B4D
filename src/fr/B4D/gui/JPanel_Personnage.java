@@ -7,12 +7,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-
-import fr.B4D.classes.B4DException;
 import fr.B4D.classes.Bot;
 import fr.B4D.classes.Person;
 import fr.B4D.classes.transports.Zaap;
-
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -174,7 +171,7 @@ public class JPanel_Personnage extends JPanel {
 		    	if(table.getSelectedRow() != -1) {
 					try {
 						Bot.MyConfiguration.persons.get(table.getSelectedRow()).rappelPotionDestination = Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString());
-					} catch (B4DException ex) {
+					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
 		    	}

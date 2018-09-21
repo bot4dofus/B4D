@@ -54,13 +54,13 @@ public class Programme extends Thread{
 		try {
 			Intro();
 			while (Tour() == true);
-		}catch(B4DException e){
-			e.getReason();
-		}finally {
 			Outro();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
 		}
 	}
-	private void Intro() throws B4DException{
+	private void Intro() throws Exception{
 		
 	}
 	private boolean Tour() {

@@ -24,26 +24,11 @@ public class B4DException extends Exception{
     		case TimeOut:
     			System.out.println("A waiting function timed out.");
     			break;
-    		case Mouse:
-    			System.out.println("Cannot use the mouse;");
-    			break;
-    		case Keyboard:
-    			System.out.println("Cannot use the keyboard.");
-    			break;
-    		case Clipboard:
-    			System.out.println("Cannot use the clipBoard.");
-    			break;
-    		case OCR:
-    			System.out.println("OCR impossible.");
-    			break;
-    		case Pixel:
-    			System.out.println("Cannot get the pixel color.");
-    			break;
     		case CannotFind:
     			System.out.println("Cannot found the object on the map.");
     			break;
-    		case MacAdress:
-    			System.out.println("Cannot get the mac adress.");
+    		case UnknowFile:
+    			System.out.println("The file does not exist.");
     			break;
     	}
     }
@@ -53,13 +38,6 @@ public class B4DException extends Exception{
 	/***************/
     
     public enum Reason{
-    	TimeOut,
-    	Mouse,
-    	Keyboard,
-    	Clipboard,
-    	OCR,
-    	Pixel,
-    	CannotFind,
-    	MacAdress,
+    	TimeOut, CannotFind, UnknowFile,
     }
 }

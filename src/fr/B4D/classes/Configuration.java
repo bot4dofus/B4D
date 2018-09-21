@@ -2,10 +2,13 @@ package fr.B4D.classes;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Configuration {
+public class Configuration implements Serializable{
 
+	private static final long serialVersionUID = -1787414977374798817L;
+	
 	public ArrayList<Person> persons;
 	public Rectangle gameFrame;
 	public Rectangle chatFrame;
