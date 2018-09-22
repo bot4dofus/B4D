@@ -106,6 +106,7 @@ public class JPanel_Programme extends JPanel {
 		add(lblNombreDeTours);
 		
 		textField_Tours = new JTextField();
+		textField_Tours.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_Tours.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
 		textField_Tours.setText("0");
 		textField_Tours.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -132,6 +133,7 @@ public class JPanel_Programme extends JPanel {
 		add(lblNombreDeDpts);
 		
 		textField_Depots = new JTextField();
+		textField_Depots.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_Depots.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
 		textField_Depots.setText("0");
 		textField_Depots.setFont(new Font("Tahoma", Font.PLAIN, 13));

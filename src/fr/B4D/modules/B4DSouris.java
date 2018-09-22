@@ -1,19 +1,36 @@
 package fr.B4D.modules;
 
 import java.awt.AWTException;
+
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
+
 import fr.B4D.classes.PointD;
 import fr.B4D.classes.PointF;
+import fr.B4D.gui.GetPoint;
+import fr.B4D.gui.GetPointImage;
 
 public final class B4DSouris {
 		
+	  /***************/
+	 /** GET POINT **/
+	/***************/
+
+	public static Point getPoint(String text) throws AWTException {
+		GetPoint window = new GetPoint(text);
+		return(window.getPoint());
+	}
+	public static Point getPoint(String text, ImageIcon image) throws AWTException {
+		GetPointImage window = new GetPointImage(text, image);
+		return(window.getPoint());
+	}
+	
 	  /************/
 	 /** PLACER **/
-	/**
-	 * @throws AWTException **********/
+	/************/
 	
 	//Point
 	public static void Placer(Point position, double attente) throws AWTException {

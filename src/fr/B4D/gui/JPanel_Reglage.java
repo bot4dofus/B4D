@@ -1,13 +1,23 @@
 package fr.B4D.gui;
 
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
+import fr.B4D.classes.Bot;
+import fr.B4D.modules.B4DSouris;
+
 import javax.swing.SwingConstants;
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+
 import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -17,6 +27,13 @@ public class JPanel_Reglage extends JPanel {
 	final int width = 635;
 	final int height = 125;
 
+	JLabel lblXY_GameFrame = new JLabel("X:Y");
+	JLabel lblLH_GameFrame = new JLabel("LxH");
+	JLabel lblXY_ChatFrame = new JLabel("X:Y");
+	JLabel lblLH_ChatFrame = new JLabel("LxH");
+	JLabel lblXY_ChatBar = new JLabel("X:Y");
+	JLabel lblXY_Minimap = new JLabel("X:Y");
+	
 	/**
 	 * Create the panel.
 	 */
@@ -41,25 +58,32 @@ public class JPanel_Reglage extends JPanel {
 		lblSortDePorte.setBounds(0, 0, 150, 25);
 		panel_Zone_Jeu.add(lblSortDePorte);
 		
-		JLabel lblXY_3 = new JLabel("X:Y");
-		lblXY_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblXY_3.setForeground(Color.DARK_GRAY);
-		lblXY_3.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblXY_3.setBackground(Color.GRAY);
-		lblXY_3.setBounds(0, 25, 150, 25);
-		panel_Zone_Jeu.add(lblXY_3);
+		lblXY_GameFrame = new JLabel("X:Y");
+		lblXY_GameFrame.setHorizontalAlignment(SwingConstants.CENTER);
+		lblXY_GameFrame.setForeground(Color.DARK_GRAY);
+		lblXY_GameFrame.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblXY_GameFrame.setBackground(Color.GRAY);
+		lblXY_GameFrame.setBounds(0, 25, 150, 25);
+		panel_Zone_Jeu.add(lblXY_GameFrame);
 		
-		JLabel lblLxh = new JLabel("LxH");
-		lblLxh.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLxh.setForeground(Color.DARK_GRAY);
-		lblLxh.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblLxh.setBackground(Color.GRAY);
-		lblLxh.setBounds(0, 50, 150, 25);
-		panel_Zone_Jeu.add(lblLxh);
+		lblLH_GameFrame = new JLabel("LxH");
+		lblLH_GameFrame.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLH_GameFrame.setForeground(Color.DARK_GRAY);
+		lblLH_GameFrame.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblLH_GameFrame.setBackground(Color.GRAY);
+		lblLH_GameFrame.setBounds(0, 50, 150, 25);
+		panel_Zone_Jeu.add(lblLH_GameFrame);
 		
 		JButton button_4 = new JButton("Modifier");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					Point topLeft = B4DSouris.getPoint("Cliquez dans le coin suppérieur gauche", new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/images/ZoneHautGauche.png"))));
+					Point bottomRight = B4DSouris.getPoint("Cliquez dans le coin inférieur droit", new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/images/ZoneBasDroite.png"))));
+					Bot.MyConfiguration.gameFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+				} catch (AWTException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 		button_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -83,23 +107,34 @@ public class JPanel_Reglage extends JPanel {
 		lblZoneDeChat.setBounds(0, 0, 150, 25);
 		panel_Zone_Chat.add(lblZoneDeChat);
 		
-		JLabel label_1 = new JLabel("X:Y");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setForeground(Color.DARK_GRAY);
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_1.setBackground(Color.GRAY);
-		label_1.setBounds(0, 25, 150, 25);
-		panel_Zone_Chat.add(label_1);
-		
-		JLabel label_2 = new JLabel("LxH");
-		label_2.setHorizontalAlignment(SwingConstants.CENTER);
-		label_2.setForeground(Color.DARK_GRAY);
-		label_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_2.setBackground(Color.GRAY);
-		label_2.setBounds(0, 50, 150, 25);
-		panel_Zone_Chat.add(label_2);
+		lblXY_ChatFrame = new JLabel("X:Y");
+		lblXY_ChatFrame.setHorizontalAlignment(SwingConstants.CENTER);
+		lblXY_ChatFrame.setForeground(Color.DARK_GRAY);
+		lblXY_ChatFrame.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblXY_ChatFrame.setBackground(Color.GRAY);
+		lblXY_ChatFrame.setBounds(0, 25, 150, 25);
+		panel_Zone_Chat.add(lblXY_ChatFrame);
+
+		lblLH_ChatFrame = new JLabel("LxH");
+		lblLH_ChatFrame.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLH_ChatFrame.setForeground(Color.DARK_GRAY);
+		lblLH_ChatFrame.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblLH_ChatFrame.setBackground(Color.GRAY);
+		lblLH_ChatFrame.setBounds(0, 50, 150, 25);
+		panel_Zone_Chat.add(lblLH_ChatFrame);
 		
 		JButton button = new JButton("Modifier");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Point topLeft = B4DSouris.getPoint("Cliquez dans le coin suppérieur gauche de la zone de chat", new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/images/ChatHautGauche.png"))));
+					Point bottomRight = B4DSouris.getPoint("Cliquez dans le coin inférieur droit de la zone de chat", new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/images/ChatBasDroite.png"))));
+					Bot.MyConfiguration.chatFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+				} catch (AWTException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		button.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		button.setBackground(UIManager.getColor("Button.background"));
 		button.setBounds(5, 75, 140, 25);
@@ -121,15 +156,24 @@ public class JPanel_Reglage extends JPanel {
 		lblBarreDeChat.setBounds(0, 0, 150, 25);
 		panel_Barre_Chat.add(lblBarreDeChat);
 		
-		JLabel label_4 = new JLabel("X:Y");
-		label_4.setHorizontalAlignment(SwingConstants.CENTER);
-		label_4.setForeground(Color.DARK_GRAY);
-		label_4.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_4.setBackground(Color.GRAY);
-		label_4.setBounds(0, 25, 150, 25);
-		panel_Barre_Chat.add(label_4);
+		lblXY_ChatBar = new JLabel("X:Y");
+		lblXY_ChatBar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblXY_ChatBar.setForeground(Color.DARK_GRAY);
+		lblXY_ChatBar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblXY_ChatBar.setBackground(Color.GRAY);
+		lblXY_ChatBar.setBounds(0, 25, 150, 25);
+		panel_Barre_Chat.add(lblXY_ChatBar);
 		
 		JButton button_1 = new JButton("Modifier");
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Bot.MyConfiguration.chatBar = B4DSouris.getPoint("Cliquez dans la barre de chat", new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/images/ChatBarre.png"))));
+				} catch (AWTException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		button_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		button_1.setBackground(UIManager.getColor("Button.background"));
 		button_1.setBounds(5, 50, 140, 25);
@@ -150,19 +194,58 @@ public class JPanel_Reglage extends JPanel {
 		lblMinimap.setBackground(new Color(46, 139, 87));
 		lblMinimap.setBounds(0, 0, 150, 25);
 		panel_Minimap.add(lblMinimap);
-		
-		JLabel label_6 = new JLabel("X:Y");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setForeground(Color.DARK_GRAY);
-		label_6.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		label_6.setBackground(Color.GRAY);
-		label_6.setBounds(0, 25, 150, 25);
-		panel_Minimap.add(label_6);
+
+		lblXY_Minimap = new JLabel("X:Y");
+		lblXY_Minimap.setHorizontalAlignment(SwingConstants.CENTER);
+		lblXY_Minimap.setForeground(Color.DARK_GRAY);
+		lblXY_Minimap.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblXY_Minimap.setBackground(Color.GRAY);
+		lblXY_Minimap.setBounds(0, 25, 150, 25);
+		panel_Minimap.add(lblXY_Minimap);
 		
 		JButton button_2 = new JButton("Modifier");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Bot.MyConfiguration.minimap = B4DSouris.getPoint("Cliquez sur la minimap", new ImageIcon(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/fr/B4D/images/Minimap.png"))));
+				} catch (AWTException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		button_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		button_2.setBackground(UIManager.getColor("Button.background"));
 		button_2.setBounds(5, 50, 140, 25);
 		panel_Minimap.add(button_2);
+		
+		ActualiserInfos();
+	}
+	
+	public void ActualiserInfos() {
+		if(Bot.MyConfiguration.gameFrame != null) {
+			this.lblXY_GameFrame.setText(Bot.MyConfiguration.gameFrame.x + ":" + Bot.MyConfiguration.gameFrame.y);
+			this.lblLH_GameFrame.setText(Bot.MyConfiguration.gameFrame.width + "x" + Bot.MyConfiguration.gameFrame.height);
+		}else {
+			this.lblXY_GameFrame.setText("X:Y");
+			this.lblLH_GameFrame.setText("LxH");
+		}
+		
+		if(Bot.MyConfiguration.chatFrame != null) {
+			this.lblXY_ChatFrame.setText(Bot.MyConfiguration.chatFrame.x + ":" + Bot.MyConfiguration.chatFrame.y);
+			this.lblLH_ChatFrame.setText(Bot.MyConfiguration.chatFrame.width + "x" + Bot.MyConfiguration.chatFrame.height);
+		}else {
+			this.lblXY_ChatFrame.setText("X:Y");
+			this.lblLH_ChatFrame.setText("LxH");
+		}
+		
+		if(Bot.MyConfiguration.chatBar != null)
+			this.lblXY_ChatBar.setText(Bot.MyConfiguration.chatBar.x + ":" + Bot.MyConfiguration.chatBar.y);
+		else
+			this.lblXY_ChatBar.setText("X:Y");
+		
+		if(Bot.MyConfiguration.minimap != null)
+			this.lblXY_Minimap.setText(Bot.MyConfiguration.minimap.x + ":" + Bot.MyConfiguration.minimap.y);
+		else
+			this.lblXY_Minimap.setText("X:Y");
 	}
 }
