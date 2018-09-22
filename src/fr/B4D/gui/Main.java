@@ -3,22 +3,33 @@ package fr.B4D.gui;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+
 import fr.B4D.classes.transports.B4DGraph;
 import fr.B4D.classes.Bot;
 import fr.B4D.classes.Configuration;
 import fr.B4D.classes.transports.B4DEdge;
 import fr.B4D.enu.TransportType;
 import fr.B4D.modules.B4DOther;
+import fr.B4D.modules.B4DSouris;
 
 import java.awt.Toolkit;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+
+import java.awt.AWTException;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 
 import java.awt.Font;
+import java.awt.Frame;
+import java.awt.MouseInfo;
 import java.awt.Point;
+
 import javax.swing.SwingConstants;
+import javax.swing.JPopupMenu;
+
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.SocketException;
@@ -26,10 +37,12 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
-import javax.swing.JPopupMenu;
 import java.awt.Component;
+import java.awt.event.MouseMotionAdapter;
 
 public class Main {
 
@@ -40,9 +53,9 @@ public class Main {
 	final static JPanel_Personnage personPanel = new JPanel_Personnage();
 	final static JPanel_Reglage settingPanel = new JPanel_Reglage();
 	final static JPanel_Admin adminPanel = new JPanel_Admin();
-	
-	final static int offset_x_Form = 26, offset_y_Form = 105;
-	protected static final String SerialisationConfiguration = null;
+
+	private Point offset;
+	final static int offset_x_Form = 20, offset_y_Form = 70;	
 	
 	private JFrame frmBd;										//Fenetre B4D
 	private JLabel lblProgrammes = new JLabel("Programmes");	//Bouton programmes
@@ -53,22 +66,22 @@ public class Main {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+	public static void main(String[] args) {		
+		//EventQueue.invokeLater(new Runnable() {
+			//public void run() {
+				
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					Main window = new Main();
 					window.frmBd.setVisible(true);
-					
 					for(String arg:args)
 						System.out.println(arg);
 					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}
-		});
+			//}
+		//});
 	}
 
 	/**
@@ -84,6 +97,7 @@ public class Main {
 	 */
 	private void initialize() {
 		frmBd = new JFrame();
+		frmBd.setUndecorated(true);
 		frmBd.setResizable(false);
 		frmBd.setBackground(Color.GRAY);
 		frmBd.getContentPane().setBackground(unSelectedTab);
@@ -102,7 +116,64 @@ public class Main {
 		adminPanel.setBounds(10, 60, adminPanel.width, adminPanel.height);
 		frmBd.getContentPane().add(adminPanel);
 		
+		JLabel lblReduce = new JLabel("-");
+		lblReduce.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmBd.setState(Frame.ICONIFIED);
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblReduce.setForeground(Color.BLACK);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblReduce.setForeground(Color.WHITE);
+			}
+		});
+		lblReduce.setHorizontalAlignment(SwingConstants.CENTER);
+		lblReduce.setForeground(Color.WHITE);
+		lblReduce.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblReduce.setBounds(595, 0, 30, 30);
+		frmBd.getContentPane().add(lblReduce);		
+		
+		JLabel lblClose = new JLabel("x");
+		lblClose.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblClose.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmBd.dispose();
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblClose.setForeground(Color.BLACK);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblClose.setForeground(Color.WHITE);
+			}
+		});
+		lblClose.setHorizontalAlignment(SwingConstants.CENTER);
+		lblClose.setForeground(Color.WHITE);
+		lblClose.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblClose.setBounds(625, 0, 30, 30);
+		frmBd.getContentPane().add(lblClose);
+		
 		JLabel lblBd = new JLabel("Bot for Dofus");
+		lblBd.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				offset = frmBd.getMousePosition();
+			}
+		});
+		lblBd.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				Point point = MouseInfo.getPointerInfo().getLocation();
+				frmBd.setLocation(point.x - (int)offset.getX(), point.y - (int)offset.getY());
+			}
+		});
+		
 		lblBd.setOpaque(true);
 		lblBd.setBackground(new Color(222,118,56));
 		lblBd.setForeground(Color.WHITE);
@@ -220,7 +291,7 @@ public class Main {
 		
 		JPopupMenu popupMenu = new JPopupMenu();
 		
-		JMenuItem itemImport = new JMenuItem("Importer");
+		JMenuItem itemImport = new JMenuItem("Importer", new ImageIcon(Main.class.getResource("/fr/B4D/icones/Import_20x20.png")));		
 		itemImport.setMnemonic(KeyEvent.VK_O);
 		itemImport.addActionListener(new ActionListener() {
 			@Override
@@ -239,7 +310,7 @@ public class Main {
 		});
 		popupMenu.add(itemImport);
 		
-		JMenuItem itemExport = new JMenuItem("Exporter");
+		JMenuItem itemExport = new JMenuItem("Exporter", new ImageIcon(Main.class.getResource("/fr/B4D/icones/Export_20x20.png")));
 		itemExport.setMnemonic(KeyEvent.VK_S);
 		itemExport.addActionListener(new ActionListener() {
 			@Override
