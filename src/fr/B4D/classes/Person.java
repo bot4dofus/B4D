@@ -7,6 +7,8 @@ import fr.B4D.classes.transports.Zaap;
 
 public class Person implements Serializable{
 
+	private static final long serialVersionUID = -3206212064770380443L;
+	
 	public String account = "";
 	public String password = "";
 	public String serveur = "";

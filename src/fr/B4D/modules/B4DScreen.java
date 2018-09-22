@@ -78,10 +78,7 @@ public final class B4DScreen {
 	
 	  /*******/
 	 /* OCR */
-	/**
-	 * @throws AWTException 
-	 * @throws IOException 
-	 * @throws TesseractException *****/
+	/*******/
 
 	public static String OCR(Rectangle rectangle) throws AWTException, IOException, TesseractException {
 		BufferedImage image = new Robot().createScreenCapture(rectangle);
@@ -103,9 +100,7 @@ public final class B4DScreen {
 	
 	  /*************/
 	 /* SELECTION */
-	/**
-	 * @throws IOException 
-	 * @throws UnsupportedFlavorException ***********/
+	/*************/
 
 	public static String getSelection(Point point) throws AWTException, UnsupportedFlavorException, IOException {
 		Robot robot = new Robot();

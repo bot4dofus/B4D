@@ -21,6 +21,10 @@ public class Zaap extends Transport implements Serializable{
 
 	private ZaapType zaapType;
 	
+	  /****************/
+	 /** COLLECTION **/
+	/****************/
+	
 	public final static Zaap Amakna_Foret_Malefique = new Zaap("Amakna (Bord de la foret malefique)", new Point(-1, 13), new PointF(0.4052, 0.4068), ZaapType.Aucun);
     public final static Zaap Amakna_Chateau = new Zaap("Amakna (Chateau d'Amakna)", new Point(3, -5), new PointF(0.5024, 0.3426), ZaapType.Aucun);
     public final static Zaap Amakna_Coin_Bouftous = new Zaap("Amakna (Coin des Bouftous)", new Point(5, 7), new PointF(0.6806, 0.3437), ZaapType.Aucun);

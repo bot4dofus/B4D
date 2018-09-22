@@ -10,6 +10,12 @@ import fr.B4D.enu.RessourceType;
 
 public class Programme extends Thread{
 
+	  /****************/
+	 /** COLLECTION **/
+	/****************/
+	
+	
+	
 	  /*************/
 	 /* ATTRIBUTS */
 	/*************/
