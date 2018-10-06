@@ -3,49 +3,31 @@ package fr.B4D.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.MouseInfo;
-import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class GetPointImage extends Thread{
+public class JFrame_GetPointImage{
 	
-	private JFrame frame;
-	private Point point;
+	public JFrame frame;
+	private MouseListener mouseListener;
 	private ImageIcon image;
 	private String text;
 
 	/**
 	 * Create the application.
 	 */
-	public GetPointImage(String text, ImageIcon image) {
+	public JFrame_GetPointImage(String text, ImageIcon image, MouseListener mouseListener) {
 		this.text = text;
 		this.image = image;
+		this.mouseListener = mouseListener;
 		initialize();
-	}
-	
-	@Override
-	public void run() {
-		frame.setVisible(true);
-		synchronized(frame) {
-            try {
-            	frame.wait();
-    		} catch (InterruptedException e) {
-    			e.printStackTrace();
-            }
-		}
-	}
-	
-	public Point getPoint() {
-		this.start();
-		while(this.isAlive());
-		return point;
 	}
 
 	/**
@@ -53,14 +35,11 @@ public class GetPointImage extends Thread{
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.addMouseListener(mouseListener);
 		frame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				point = MouseInfo.getPointerInfo().getLocation();
-				synchronized(frame) {
-					frame.notify();
-					frame.dispose();
-				}
+				frame.dispose();
 			}
 		});
 		frame.setUndecorated(true);

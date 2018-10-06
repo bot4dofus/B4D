@@ -11,41 +11,25 @@ import javax.swing.SwingConstants;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.Ellipse2D;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
-public class GetPoint extends Thread{
+public class JFrame_GetPoint {
 	
 	public JFrame frame;
-	private Point point;
+	private MouseListener mouseListener;
 	private String text;
 
 	/**
 	 * Create the application.
 	 */
-	public GetPoint(String text) {
+	public JFrame_GetPoint(String text, MouseListener mouseListener) {
 		this.text = text;
+		this.mouseListener = mouseListener;
 		initialize();
-	}
-	
-	@Override
-	public void run() {
-		frame.setVisible(true);
-		synchronized(frame) {
-	        try {
-	           	frame.wait();
-	    	} catch (InterruptedException e) {
-	    		e.printStackTrace();
-	        }
-		}
-	}
-	
-	public Point getPoint() {
-		this.start();
-		while(this.isAlive());
-		return point;
 	}
 
 	/**
@@ -66,14 +50,11 @@ public class GetPoint extends Thread{
 				frame.setLocation(point.x - frame.getWidth()/2, point.y - frame.getHeight()/2);
 			}
 		});
+		frame.addMouseListener(mouseListener);
 		frame.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				synchronized(frame) {
-					point = MouseInfo.getPointerInfo().getLocation();
-					frame.notify();		
-					frame.dispose();
-				}
+				frame.dispose();
 			}
 		});
 		frame.setUndecorated(true);
