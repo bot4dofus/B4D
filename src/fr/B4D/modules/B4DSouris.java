@@ -1,17 +1,18 @@
 package fr.B4D.modules;
 
 import java.awt.AWTException;
-
 import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 
 import fr.B4D.classes.PointD;
 import fr.B4D.classes.PointF;
-import fr.B4D.gui.GetPoint;
-import fr.B4D.gui.GetPointImage;
+import fr.B4D.gui.JFrame_GetPoint;
+import fr.B4D.gui.JFrame_GetPointImage;
 
 public final class B4DSouris {
 		
@@ -19,13 +20,36 @@ public final class B4DSouris {
 	 /** GET POINT **/
 	/***************/
 
-	public static Point getPoint(String text) throws AWTException {
-		GetPoint window = new GetPoint(text);
-		return(window.getPoint());
+	public static void getPoint(String text, MouseAdapter mouseAdapter) {
+		JFrame_GetPoint window = new JFrame_GetPoint(text, mouseAdapter);
+		window.frame.setVisible(true);
 	}
-	public static Point getPoint(String text, ImageIcon image) throws AWTException {
-		GetPointImage window = new GetPointImage(text, image);
-		return(window.getPoint());
+	public static void getPoint(String text, ImageIcon image, MouseAdapter mouseAdapter) {
+		JFrame_GetPointImage window = new JFrame_GetPointImage(text, image, mouseAdapter);
+		window.frame.setVisible(true);
+	}
+	
+	public static void getPoints(String text1, MouseAdapter mouseAdapter1, String text2, MouseAdapter mouseAdapter2) {
+		JFrame_GetPoint window1 = new JFrame_GetPoint(text1, mouseAdapter1);
+		JFrame_GetPoint window2 = new JFrame_GetPoint(text2, mouseAdapter2);
+		window1.frame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				window2.frame.setVisible(true);
+			}
+		});
+		window1.frame.setVisible(true);
+	}
+	public static void getPoints(String text1, ImageIcon image1, MouseAdapter mouseAdapter1, String text2, ImageIcon image2, MouseAdapter mouseAdapter2) {
+		JFrame_GetPointImage window1 = new JFrame_GetPointImage(text1, image1, mouseAdapter1);
+		JFrame_GetPointImage window2 = new JFrame_GetPointImage(text2, image2, mouseAdapter2);
+		window1.frame.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				window2.frame.setVisible(true);
+			}
+		});
+		window1.frame.setVisible(true);
 	}
 	
 	  /************/
