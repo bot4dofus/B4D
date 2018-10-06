@@ -1,12 +1,14 @@
 package fr.B4D.modules;
 
 import java.awt.Point;
+
 import fr.B4D.classes.Bot;
 import fr.B4D.classes.PointD;
 import fr.B4D.classes.PointF;
 
 public final class B4DConversion {
 	
+	private static final double Precision = 10000;
     private static final double CaseWidthF = 0.0346588315;
     private static final double CaseHeightF  = 0.0216600199;
 
@@ -22,12 +24,16 @@ public final class B4DConversion {
 
     /** Ecran > Proportionnel **/
     public static PointF pointToPointF(Point point){
-        return new PointF((point.getX() - Bot.MyConfiguration.gameFrame.getX()) / Bot.MyConfiguration.gameFrame.getWidth(), (point.getY() - Bot.MyConfiguration.gameFrame.getY()) / Bot.MyConfiguration.gameFrame.getHeight());
+    	double X = (point.getX() - Bot.MyConfiguration.gameFrame.getX()) / Bot.MyConfiguration.gameFrame.getWidth();
+    	double Y = (point.getY() - Bot.MyConfiguration.gameFrame.getY()) / Bot.MyConfiguration.gameFrame.getHeight();
+        return new PointF(Math.round(X*Precision)/Precision, Math.round(Y*Precision)/Precision);
     }
 
     /** Dofus > Proportionnel **/
     public static PointF pointDToPointF(PointD point){
-        return new PointF((point.getX() + point.getY()) * CaseWidthF, (-point.getX() + point.getY()) * CaseHeightF);
+    	double X = (point.getX() + point.getY()) * CaseWidthF;
+    	double Y = (-point.getX() + point.getY()) * CaseHeightF;
+        return new PointF(Math.round(X*Precision)/Precision, Math.round(Y*Precision)/Precision);
     }
 
       /**********************/
@@ -36,7 +42,9 @@ public final class B4DConversion {
     
     /** Proportionnel > Ecran **/
     public static Point pointFToPoint(PointF point) {
-        return new Point((int)((point.getX() * Bot.MyConfiguration.gameFrame.getWidth()) + Bot.MyConfiguration.gameFrame.getX()), (int)((point.getY() * Bot.MyConfiguration.gameFrame.getHeight()) + Bot.MyConfiguration.gameFrame.getY()));
+    	double X = (point.getX() * Bot.MyConfiguration.gameFrame.getWidth()) + Bot.MyConfiguration.gameFrame.getX();
+    	double Y = (point.getY() * Bot.MyConfiguration.gameFrame.getHeight()) + Bot.MyConfiguration.gameFrame.getY();
+        return new Point((int)X, (int)Y);
     }
 
     /** Dofus > Ecran **/
@@ -55,6 +63,8 @@ public final class B4DConversion {
 
     /** Proportionnel > Dofus **/
     public static PointD pointFToPointD(PointF point) {
-    	return new PointD((int)((point.getX() / CaseWidthF - point.getY() / CaseHeightF) / 2), (int)((point.getX() / CaseWidthF + point.getY() / CaseHeightF) / 2));
+    	double X = (point.getX() / CaseWidthF - point.getY() / CaseHeightF) / 2;
+    	double Y = (point.getX() / CaseWidthF + point.getY() / CaseHeightF) / 2;
+    	return new PointD((int)X, (int)Y);
     }    
 }

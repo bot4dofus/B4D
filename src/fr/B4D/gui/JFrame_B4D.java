@@ -105,6 +105,11 @@ public class JFrame_B4D extends Thread{
 		lblClose.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				try {
+					Bot.ConfigurationSerialization.Serialize(Bot.MyConfiguration);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 				frame.dispose();
 			}
 			@Override
@@ -261,8 +266,11 @@ public class JFrame_B4D extends Thread{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Configuration configuration = Bot.ConfigurationSerialization.Open();
-					if (configuration != null)
-						Bot.MyConfiguration = configuration;						
+					if (configuration != null) {
+						Bot.MyConfiguration = configuration;
+						personPanel.ActualiserInfos();
+						settingPanel.ActualiserInfos();
+					}
 				} catch (ClassNotFoundException e1) {
 					e1.printStackTrace();						
 				} catch (IOException e1) {

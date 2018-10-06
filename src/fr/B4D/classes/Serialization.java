@@ -11,16 +11,19 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import com.google.gson.Gson;
 
+import fr.B4D.modules.B4DText;
+
 public class Serialization {
 
-	File defaultFile;
-	FileNameExtensionFilter filter;
+	private File file;
+	private FileNameExtensionFilter filter;
 	
-	  public Serialization(String format, String defaultPath) {
-		filter = new FileNameExtensionFilter("Fichiers de configuration B4D", format);
-		defaultFile = new File(defaultPath);
+	  public Serialization(String format, File defaultFile) {
+		this.filter = new FileNameExtensionFilter("Fichiers de configuration B4D", format);
+		this.file = defaultFile;
 		try {
-			defaultFile.createNewFile();
+			if(!this.file.exists())
+				this.file.createNewFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -34,8 +37,11 @@ public class Serialization {
 		  JFileChooser fileChooser = new JFileChooser();
 		  fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));	  
 		  fileChooser.setFileFilter(filter);
-		  if (fileChooser.showOpenDialog(new Frame()) == JFileChooser.APPROVE_OPTION) 
-		      return Deserialize(fileChooser.getSelectedFile()); 
+		  if (fileChooser.showOpenDialog(new Frame()) == JFileChooser.APPROVE_OPTION) {
+			  file = fileChooser.getSelectedFile();
+			  B4DText.write(Bot.initFile, file.getAbsolutePath());
+		      return Deserialize(); 
+		  }
 		  return null;
 	  }
 	  
@@ -44,8 +50,8 @@ public class Serialization {
 	/************************************/
 	  
 	  public void Save(Configuration object) throws IOException, ClassNotFoundException {
-		  if(defaultFile.exists())
-			  Serialize(object, defaultFile);
+		  if(file.exists())
+			  Serialize(object);
 		  else
 			  SaveAs(object);
 	  }
@@ -55,7 +61,8 @@ public class Serialization {
 		  fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));	  
 		  fileChooser.setFileFilter(filter);
 		  if (fileChooser.showSaveDialog(new Frame()) == JFileChooser.APPROVE_OPTION) {
-		     Serialize(object, fileChooser.getSelectedFile());
+			  this.file = fileChooser.getSelectedFile();
+		     Serialize(object);
 		  }
 	  }
 	  
@@ -63,7 +70,7 @@ public class Serialization {
 	 /** SERIALISATION & DESERIALISATION **/
 	/*************************************/
 	
-	private void Serialize(Configuration object, File file) throws IOException {
+	public void Serialize(Configuration object) throws IOException {
 		FileOutputStream fileOut = new FileOutputStream(file.getAbsolutePath());
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
 		Gson gson = new Gson();
@@ -72,7 +79,7 @@ public class Serialization {
 		fileOut.close();
 	}
 	
-	private Configuration Deserialize(File file) throws IOException, ClassNotFoundException{
+	public Configuration Deserialize() throws IOException, ClassNotFoundException{
 		FileInputStream fileIn = new FileInputStream(file.getAbsolutePath());
 		ObjectInputStream in = new ObjectInputStream(fileIn);
 		Gson gson = new Gson();

@@ -7,8 +7,10 @@ import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.Font;
 
-@SuppressWarnings("serial")
 public class JPanel_Admin extends JPanel {
+
+	private static final long serialVersionUID = -7603368625926813641L;
+	
 	final int width = 635;
 	final int height = 70;
 

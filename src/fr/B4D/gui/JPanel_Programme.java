@@ -23,8 +23,9 @@ import javax.swing.border.SoftBevelBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-@SuppressWarnings("serial")
 public class JPanel_Programme extends JPanel {
+
+	private static final long serialVersionUID = -1975429297614634621L;
 	
 	final int width = 635;
 	final int height = 235;

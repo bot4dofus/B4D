@@ -1,33 +1,44 @@
 package fr.B4D.gui;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.MouseInfo;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Arrays;
+import java.util.Vector;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+
 import fr.B4D.classes.Bot;
 import fr.B4D.classes.Person;
 import fr.B4D.classes.transports.Zaap;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.UIManager;
-import java.util.Arrays;
-import java.util.Vector;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
+import fr.B4D.modules.B4DConversion;
+import fr.B4D.modules.B4DSouris;
 
-@SuppressWarnings("serial")
 public class JPanel_Personnage extends JPanel {
+
+	private static final long serialVersionUID = 8907893091716626123L;
+	
 	final int width = 635;
-	final int height = 365;
+	final int height = 310;
 	
 	private Vector<Vector<String>> dataTable;
 	private JTable table;
@@ -36,9 +47,13 @@ public class JPanel_Personnage extends JPanel {
 	private JLabel lblXY_Brakmar;
 	private JLabel lblXY_Sort;
 
-	JComboBox<String> comboBox_Zaaps;
+	private JButton btnModifierRappel = new JButton("Modifier");
+	private JComboBox<String> comboBox_Zaaps;
 	private JLabel lblPosition_Bonta;
+	private JButton btnModifierBonta = new JButton("Modifier");
 	private JLabel lblPosition_Brakmar;
+	private JButton btnModifierBrakmar = new JButton("Modifier");
+	private JButton btnModifierSort = new JButton("Modifier");
 
 	/**
 	 * Create the panel.
@@ -69,13 +84,14 @@ public class JPanel_Personnage extends JPanel {
 						Bot.MyConfiguration.persons.get(evt.getFirstRow()).pseudo = text;
 						break;
 				}
-				ActualiserListe();
+				ActualiserInfos();
 			}
 		});
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent e) {
-				if(!e.getValueIsAdjusting())
+				if(!e.getValueIsAdjusting()) {
 					ActualiserInfos(Bot.MyConfiguration.persons.get(e.getFirstIndex()));
+				}
 			}
 		});
 		
@@ -83,7 +99,7 @@ public class JPanel_Personnage extends JPanel {
 		btnNouveau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Bot.MyConfiguration.persons.add(new Person());
-				ActualiserListe();
+				ActualiserInfos();
 			}
 		});
 		btnNouveau.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -96,7 +112,7 @@ public class JPanel_Personnage extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow() != -1) {
 					Bot.MyConfiguration.persons.remove(table.getSelectedRow());
-					ActualiserListe();
+					ActualiserInfos();
 				}
 			}
 		});
@@ -113,7 +129,7 @@ public class JPanel_Personnage extends JPanel {
 					Bot.MyConfiguration.persons.remove(personnage);
 					Bot.MyConfiguration.persons.add(0,personnage);
 					table.setRowSelectionInterval(0, 0);
-					ActualiserListe();
+					ActualiserInfos();
 				}
 			}
 		});
@@ -150,10 +166,20 @@ public class JPanel_Personnage extends JPanel {
 		lblXY_Rappel.setBackground(Color.GRAY);
 		lblXY_Rappel.setBounds(0, 25, 150, 25);
 		panel_Potion_Rappel.add(lblXY_Rappel);
+		btnModifierRappel.setEnabled(false);
 		
-		JButton btnModifierRappel = new JButton("Modifier");
 		btnModifierRappel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				B4DSouris.getPoint(
+					"Cliquez sur votre potion de rappel",
+					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionRappel.png"))),
+					new MouseAdapter() {
+						public void mousePressed(MouseEvent e) {
+							Person person = Bot.MyConfiguration.persons.get(table.getSelectedRow());
+							person.rappelPotionPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
+							ActualiserInfos(person);
+						}
+					});
 			}
 		});
 		btnModifierRappel.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -210,10 +236,20 @@ public class JPanel_Personnage extends JPanel {
 		lblXY_Bonta.setBackground(Color.GRAY);
 		lblXY_Bonta.setBounds(0, 25, 150, 25);
 		panel_Potion_Bonta.add(lblXY_Bonta);
+		btnModifierBonta.setEnabled(false);
 		
-		JButton btnModifierBonta = new JButton("Modifier");
 		btnModifierBonta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				B4DSouris.getPoint(
+					"Cliquez sur votre potion de bonta",
+					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionBonta.png"))),
+					new MouseAdapter() {
+						public void mousePressed(MouseEvent e) {
+							Person person = Bot.MyConfiguration.persons.get(table.getSelectedRow());
+							person.bontaPotionPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
+							ActualiserInfos(person);
+						}
+					});
 			}
 		});
 		btnModifierBonta.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -260,8 +296,22 @@ public class JPanel_Personnage extends JPanel {
 		lblXY_Brakmar.setBackground(Color.GRAY);
 		lblXY_Brakmar.setBounds(0, 25, 150, 25);
 		panel_Potion_Brakmar.add(lblXY_Brakmar);
+		btnModifierBrakmar.setEnabled(false);
 		
-		JButton btnModifierBrakmar = new JButton("Modifier");
+		btnModifierBrakmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				B4DSouris.getPoint(
+					"Cliquez sur votre potion de brakmar",
+					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionBrakmar.png"))),
+					new MouseAdapter() {
+						public void mousePressed(MouseEvent e) {
+							Person person = Bot.MyConfiguration.persons.get(table.getSelectedRow());
+							person.brakmarPotionPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
+							ActualiserInfos(person);
+						}
+					});
+			}
+		});
 		btnModifierBrakmar.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnModifierBrakmar.setBackground(UIManager.getColor("Button.background"));
 		btnModifierBrakmar.setBounds(5, 50, 140, 25);
@@ -308,20 +358,34 @@ public class JPanel_Personnage extends JPanel {
 		lblXY_Sort.setBounds(0, 25, 150, 25);
 		panel_Sort.add(lblXY_Sort);
 		
-		JButton btnModifierSort = new JButton("Modifier");
+		btnModifierSort.setEnabled(false);
+		btnModifierSort.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				B4DSouris.getPoint(
+					"Cliquez sur votre sort principal",
+					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/Sort.png"))),
+					new MouseAdapter() {
+						public void mousePressed(MouseEvent e) {
+							Person person = Bot.MyConfiguration.persons.get(table.getSelectedRow());
+							person.spellPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
+							ActualiserInfos(person);
+						}
+					});
+			}
+		});
 		btnModifierSort.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnModifierSort.setBackground(UIManager.getColor("Button.background"));
 		btnModifierSort.setBounds(5, 50, 140, 25);
 		panel_Sort.add(btnModifierSort);
 		
-		ActualiserListe();
+		ActualiserInfos();
 	}
 
 	  /**************/
 	 /** METHODES **/
 	/**************/
 	
-	private void ActualiserListe() {
+	public void ActualiserInfos() {
 		
 		this.dataTable.removeAllElements();
 		
@@ -376,5 +440,16 @@ public class JPanel_Personnage extends JPanel {
 		else
 			this.lblPosition_Brakmar.setText("X:Y");
 		
+		if(Bot.MyConfiguration.gameFrame != null) {
+			btnModifierRappel.setEnabled(true);
+			btnModifierBonta.setEnabled(true);
+			btnModifierBrakmar.setEnabled(true);
+			btnModifierSort.setEnabled(true);
+		}else {
+			btnModifierRappel.setEnabled(false);
+			btnModifierBonta.setEnabled(false);
+			btnModifierBrakmar.setEnabled(false);
+			btnModifierSort.setEnabled(false);
+		}
 	}
 }
