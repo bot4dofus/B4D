@@ -20,7 +20,7 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 import fr.B4D.classes.Bot;
-import fr.B4D.modules.B4DSouris;
+import fr.B4D.modules.B4DMouse;
 
 public class JPanel_Reglage extends JPanel {
 
@@ -81,7 +81,7 @@ public class JPanel_Reglage extends JPanel {
 		JButton button_GameFrame = new JButton("Modifier");
 		button_GameFrame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				B4DSouris.getPoints(
+				B4DMouse.getPoints(
 					"Cliquez dans le coin suppérieur gauche",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/ZoneHautGauche.png"))),
 					new MouseAdapter() {
@@ -94,7 +94,7 @@ public class JPanel_Reglage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							bottomRight = MouseInfo.getPointerInfo().getLocation();
-							Bot.MyConfiguration.gameFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+							Bot.configuration.gameFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
 							ActualiserInfos();
 						}
 					});
@@ -140,7 +140,7 @@ public class JPanel_Reglage extends JPanel {
 		JButton button_ChatFrame = new JButton("Modifier");
 		button_ChatFrame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				B4DSouris.getPoints(
+				B4DMouse.getPoints(
 					"Cliquez dans le coin suppérieur gauche de la zone de chat",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/ChatHautGauche.png"))),
 					new MouseAdapter() {
@@ -153,7 +153,7 @@ public class JPanel_Reglage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							bottomRight = MouseInfo.getPointerInfo().getLocation();
-							Bot.MyConfiguration.chatFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+							Bot.configuration.chatFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
 							ActualiserInfos();
 						}
 					});		
@@ -191,12 +191,12 @@ public class JPanel_Reglage extends JPanel {
 		JButton button_ChatBar = new JButton("Modifier");
 		button_ChatBar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 B4DSouris.getPoint(
+				 B4DMouse.getPoint(
 					"Cliquez dans la barre de chat",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/ChatBarre.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Bot.MyConfiguration.chatBar = MouseInfo.getPointerInfo().getLocation();
+							Bot.configuration.chatBar = MouseInfo.getPointerInfo().getLocation();
 							ActualiserInfos();
 						}
 					});
@@ -234,12 +234,12 @@ public class JPanel_Reglage extends JPanel {
 		JButton button_Minimap = new JButton("Modifier");
 		button_Minimap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				B4DSouris.getPoint(
+				B4DMouse.getPoint(
 					"Cliquez sur la minimap",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/Minimap.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Bot.MyConfiguration.minimap = MouseInfo.getPointerInfo().getLocation();
+							Bot.configuration.minimap = MouseInfo.getPointerInfo().getLocation();
 							ActualiserInfos();
 						}
 					});
@@ -258,29 +258,29 @@ public class JPanel_Reglage extends JPanel {
 	/**************/
 	
 	public void ActualiserInfos() {
-		if(Bot.MyConfiguration.gameFrame != null) {
-			this.lblXY_GameFrame.setText(Bot.MyConfiguration.gameFrame.x + ":" + Bot.MyConfiguration.gameFrame.y);
-			this.lblLH_GameFrame.setText(Bot.MyConfiguration.gameFrame.width + "x" + Bot.MyConfiguration.gameFrame.height);
+		if(Bot.configuration.gameFrame != null) {
+			this.lblXY_GameFrame.setText(Bot.configuration.gameFrame.x + ":" + Bot.configuration.gameFrame.y);
+			this.lblLH_GameFrame.setText(Bot.configuration.gameFrame.width + "x" + Bot.configuration.gameFrame.height);
 		}else {
 			this.lblXY_GameFrame.setText("X:Y");
 			this.lblLH_GameFrame.setText("LxH");
 		}
 		
-		if(Bot.MyConfiguration.chatFrame != null) {
-			this.lblXY_ChatFrame.setText(Bot.MyConfiguration.chatFrame.x + ":" + Bot.MyConfiguration.chatFrame.y);
-			this.lblLH_ChatFrame.setText(Bot.MyConfiguration.chatFrame.width + "x" + Bot.MyConfiguration.chatFrame.height);
+		if(Bot.configuration.chatFrame != null) {
+			this.lblXY_ChatFrame.setText(Bot.configuration.chatFrame.x + ":" + Bot.configuration.chatFrame.y);
+			this.lblLH_ChatFrame.setText(Bot.configuration.chatFrame.width + "x" + Bot.configuration.chatFrame.height);
 		}else {
 			this.lblXY_ChatFrame.setText("X:Y");
 			this.lblLH_ChatFrame.setText("LxH");
 		}
 		
-		if(Bot.MyConfiguration.chatBar != null)
-			this.lblXY_ChatBar.setText(Bot.MyConfiguration.chatBar.x + ":" + Bot.MyConfiguration.chatBar.y);
+		if(Bot.configuration.chatBar != null)
+			this.lblXY_ChatBar.setText(Bot.configuration.chatBar.x + ":" + Bot.configuration.chatBar.y);
 		else
 			this.lblXY_ChatBar.setText("X:Y");
 		
-		if(Bot.MyConfiguration.minimap != null)
-			this.lblXY_Minimap.setText(Bot.MyConfiguration.minimap.x + ":" + Bot.MyConfiguration.minimap.y);
+		if(Bot.configuration.minimap != null)
+			this.lblXY_Minimap.setText(Bot.configuration.minimap.x + ":" + Bot.configuration.minimap.y);
 		else
 			this.lblXY_Minimap.setText("X:Y");
 	}

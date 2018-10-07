@@ -15,12 +15,11 @@ public final class B4DKeyboard {
 
 	  /***************/
 	 /* ECRIRE CHAT */
-	/**
-	 * @throws AWTException *************/
+	/***************/
 	
 	public static void writeChat(String texte, double time) throws AWTException {
 		
-		B4DSouris.Clic_Gauche(new PointF(0.05347166799, 0.98902195608), false, 0.5);
+		B4DMouse.leftClick(new PointF(0.05347166799, 0.98902195608), false, 0.5);
 		writeKeyboard(texte,time);
 		
 		Robot robot = new Robot();

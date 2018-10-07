@@ -126,7 +126,7 @@ public final class B4DWait {
 	/*********************/
 	
 	public static boolean waitForMap(double timeOut) {
-		return waitForChangingPixel(B4DConversion.pointToPointF(Bot.MyConfiguration.minimap), timeOut);
+		return waitForChangingPixel(B4DConversion.pointToPointF(Bot.configuration.minimap), timeOut);
 	}
 	public static boolean waitForMap() {
 		return waitForMap(15);

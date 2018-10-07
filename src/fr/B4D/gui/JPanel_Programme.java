@@ -1,27 +1,25 @@
 package fr.B4D.gui;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.SoftBevelBorder;
 
+import fr.B4D.classes.Program;
 import fr.B4D.enu.Category;
 import fr.B4D.enu.Place;
 import fr.B4D.enu.Ressource;
 import fr.B4D.enu.RessourceType;
-
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
-
-import java.awt.Color;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.SoftBevelBorder;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class JPanel_Programme extends JPanel {
 
@@ -51,6 +49,10 @@ public class JPanel_Programme extends JPanel {
 		add(lblLieu);
 		
 		JComboBox<Place> comboBox_Lieu = new JComboBox<Place>();
+		comboBox_Lieu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		comboBox_Lieu.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 10));
 		comboBox_Lieu.setBounds(10, 35, 150, 25);
 		add(comboBox_Lieu);
@@ -202,14 +204,7 @@ public class JPanel_Programme extends JPanel {
 		JButton button_Commencer = new JButton("Commencer");
 		button_Commencer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					//System.out.println(B4DAttente.Attendre_OCR(new Point(17,920), new Point(696,1007), "test", 10.0));
-					//System.out.println(B4DAttente.Attendre_Touche(10.0));
-					//System.out.println(B4DAttente.Attendre_Changement_Pixel(new Point(500,500),10.0));
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				Program.test.start();
 			}
 		});
 		button_Commencer.setBounds(475, 75, 150, 45);

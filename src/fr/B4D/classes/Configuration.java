@@ -8,12 +8,16 @@ import java.util.ArrayList;
 public class Configuration implements Serializable{
 
 	private static final long serialVersionUID = -1787414977374798817L;
-	
+
 	public ArrayList<Person> persons;
 	public Rectangle gameFrame;
 	public Rectangle chatFrame;
 	public Point chatBar;
 	public Point minimap;
+
+	public boolean hdvWhenFull;
+	public boolean bankWhenFull;
+	public boolean stopWhenFull;
 	
 	public Configuration(){
 		this.persons = new ArrayList<Person>();
@@ -23,5 +27,8 @@ public class Configuration implements Serializable{
 		this.chatFrame = null;
 		this.chatBar = null;
 		this.minimap = null;
+		this.hdvWhenFull = false;
+		this.bankWhenFull = false;
+		this.stopWhenFull = true;
 	}
 }

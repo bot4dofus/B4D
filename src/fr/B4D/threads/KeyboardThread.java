@@ -11,28 +11,21 @@ interface User32 extends Library {
 
 public class KeyboardThread extends Thread{
 
-	public void run(){		
-		try {
-			boolean fin = false;
-			char i = 0;			
-			while(!fin) {
-				for(i=1;i<=256;i++) {
-					if(isKeyPressed(i)) {
-						fin = true;
-						break;
-					}
+	public void run(){	
+		boolean fin = false;
+		char i = 0;			
+		while(!fin) {
+			for(i=1;i<=256;i++) {
+				if(isKeyPressed(i)) {
+					fin = true;
+					break;
 				}
 			}
-		} catch (Exception e) {
-			Thread.currentThread().interrupt();
 		}
 	}
 	
 	private static boolean isKeyPressed(int key)
 	{
 		return User32.INSTANCE.GetAsyncKeyState(key) == -32767;
-	}
-	private static boolean isShiftPressed()	{
-		return (User32.INSTANCE.GetKeyState(0x10) & 0x80) == 0x80;
 	}
 }

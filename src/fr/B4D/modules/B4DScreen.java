@@ -95,7 +95,7 @@ public final class B4DScreen {
 		return OCR(B4DConversion.pointFToPoint(P1), B4DConversion.pointFToPoint(P2));
 	}
 	public static String getChatOCR() throws AWTException, IOException, TesseractException  {
-		return OCR(Bot.MyConfiguration.chatFrame);
+		return OCR(Bot.configuration.chatFrame);
 	}
 	
 	  /*************/
@@ -104,7 +104,7 @@ public final class B4DScreen {
 
 	public static String getSelection(Point point) throws AWTException, UnsupportedFlavorException, IOException {
 		Robot robot = new Robot();
-		B4DSouris.Clic_Droit(point, false);
+		B4DMouse.rightClick(point, false);
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_A);
 		robot.keyRelease(KeyEvent.VK_A);
@@ -118,6 +118,6 @@ public final class B4DScreen {
 		return getSelection(B4DConversion.pointFToPoint(position));
 	}
 	public static String getChatSelection() throws AWTException, UnsupportedFlavorException, IOException  {
-		return getSelection(new Point((int)(Bot.MyConfiguration.chatFrame.x + Bot.MyConfiguration.chatFrame.width*0.95), (int)(Bot.MyConfiguration.chatFrame.y + Bot.MyConfiguration.chatFrame.height*0.95)));
+		return getSelection(new Point((int)(Bot.configuration.chatFrame.x + Bot.configuration.chatFrame.width*0.95), (int)(Bot.configuration.chatFrame.y + Bot.configuration.chatFrame.height*0.95)));
 	}
 }

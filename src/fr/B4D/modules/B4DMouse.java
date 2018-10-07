@@ -14,7 +14,7 @@ import fr.B4D.classes.PointF;
 import fr.B4D.gui.JFrame_GetPoint;
 import fr.B4D.gui.JFrame_GetPointImage;
 
-public final class B4DSouris {
+public final class B4DMouse {
 		
 	  /***************/
 	 /** GET POINT **/
@@ -57,27 +57,27 @@ public final class B4DSouris {
 	/************/
 	
 	//Point
-	public static void Placer(Point position, double attente) throws AWTException {
+	public static void Place(Point position, double attente) throws AWTException {
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 		B4DWait.wait(attente);
 	}
-	public static void Placer(Point position) throws AWTException {
-		Placer(position, 0);
+	public static void Place(Point position) throws AWTException {
+		Place(position, 0);
 	}
 	//PointF
-	public static void Placer(PointF position, double attente) throws AWTException {
-		Placer(B4DConversion.pointFToPoint(position), attente);
+	public static void Place(PointF position, double attente) throws AWTException {
+		Place(B4DConversion.pointFToPoint(position), attente);
 	}
-	public static void Placer(PointF position) throws AWTException {
-		Placer(B4DConversion.pointFToPoint(position), 0);
+	public static void Place(PointF position) throws AWTException {
+		Place(B4DConversion.pointFToPoint(position), 0);
 	}
 	//PointD
-	public static void Placer(PointD position, double attente) throws AWTException {
-		Placer(B4DConversion.pointDToPoint(position), attente);
+	public static void Place(PointD position, double attente) throws AWTException {
+		Place(B4DConversion.pointDToPoint(position), attente);
 	}
-	public static void Placer(PointD position) throws AWTException {
-		Placer(B4DConversion.pointDToPoint(position), 0);
+	public static void Place(PointD position) throws AWTException {
+		Place(B4DConversion.pointDToPoint(position), 0);
 	}
 	
 	  /******************/
@@ -85,7 +85,7 @@ public final class B4DSouris {
 	/******************/
 	
 	//Point
-	public static void Clic_Droit(Point position, boolean maj, double timeOut) throws AWTException{
+	public static void rightClick(Point position, boolean maj, double timeOut) throws AWTException{
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 			
@@ -98,27 +98,27 @@ public final class B4DSouris {
 
 		B4DWait.wait(timeOut);		
 	}
-	public static void Clic_Droit(Point position, boolean maj) throws AWTException{
-		Clic_Droit(position, maj, 1);
+	public static void rightClick(Point position, boolean maj) throws AWTException{
+		rightClick(position, maj, 1);
 	}
-	public static void Clic_Droit(PointF position, boolean maj, double timeOut) throws AWTException{
-		Clic_Droit(B4DConversion.pointFToPoint(position), maj, timeOut);
+	public static void rightClick(PointF position, boolean maj, double timeOut) throws AWTException{
+		rightClick(B4DConversion.pointFToPoint(position), maj, timeOut);
 	}
-	public static void Clic_Droit(PointF position, boolean maj) throws AWTException{
-		Clic_Droit(B4DConversion.pointFToPoint(position), maj, 1);
+	public static void rightClick(PointF position, boolean maj) throws AWTException{
+		rightClick(B4DConversion.pointFToPoint(position), maj, 1);
 	}
-	public static void Clic_Droit(PointD position, boolean maj, double timeOut) throws AWTException{
-		Clic_Droit(B4DConversion.pointDToPoint(position), maj, timeOut);
+	public static void rightClick(PointD position, boolean maj, double timeOut) throws AWTException{
+		rightClick(B4DConversion.pointDToPoint(position), maj, timeOut);
 	}
-	public static void Clic_Droit(PointD position, boolean maj) throws AWTException{
-		Clic_Droit(B4DConversion.pointDToPoint(position), maj, 1);
+	public static void rightClick(PointD position, boolean maj) throws AWTException{
+		rightClick(B4DConversion.pointDToPoint(position), maj, 1);
 	}
 	
 	  /*******************/
 	 /** CLIQUE GAUCHE **/
 	/*******************/
 	
-	public static void Clic_Gauche(Point position, boolean maj, double timeOut) throws AWTException {
+	public static void leftClick(Point position, boolean maj, double timeOut) throws AWTException {
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 			
@@ -131,68 +131,68 @@ public final class B4DSouris {
 
 		B4DWait.wait(timeOut);
 	}	
-	public static void Clic_Gauche(Point position, boolean maj) throws AWTException{
-		Clic_Gauche(position, maj, 1);
+	public static void leftClick(Point position, boolean maj) throws AWTException{
+		leftClick(position, maj, 1);
 	}	
-	public static void Clic_Gauche(PointF position, boolean maj, double timeOut) throws AWTException{
-		Clic_Gauche(B4DConversion.pointFToPoint(position), maj, timeOut);
+	public static void leftClick(PointF position, boolean maj, double timeOut) throws AWTException{
+		leftClick(B4DConversion.pointFToPoint(position), maj, timeOut);
 	}
-	public static void Clic_Gauche(PointF position, boolean maj) throws AWTException{
-		Clic_Gauche(B4DConversion.pointFToPoint(position), maj, 1);
+	public static void leftClick(PointF position, boolean maj) throws AWTException{
+		leftClick(B4DConversion.pointFToPoint(position), maj, 1);
 	}
-	public static void Clic_Gauche(PointD position, boolean maj, double timeOut) throws AWTException{
-		Clic_Gauche(B4DConversion.pointDToPoint(position), maj, timeOut);
+	public static void leftClick(PointD position, boolean maj, double timeOut) throws AWTException{
+		leftClick(B4DConversion.pointDToPoint(position), maj, timeOut);
 	}
-	public static void Clic_Gauche(PointD position, boolean maj) throws AWTException{
-		Clic_Gauche(B4DConversion.pointDToPoint(position), maj, 1);
+	public static void leftClick(PointD position, boolean maj) throws AWTException{
+		leftClick(B4DConversion.pointDToPoint(position), maj, 1);
 	}
 	
 	  /**************************/
 	 /** DOUBLE CLIQUE GAUCHE **/
 	/**************************/
 	
-	public static void Double_Clic_Gauche(Point position, boolean maj, double timeOut) throws AWTException {
-		Clic_Gauche(position, maj, 0);
-		Clic_Gauche(position, maj, timeOut);
+	public static void doubleLeftClick(Point position, boolean maj, double timeOut) throws AWTException {
+		leftClick(position, maj, 0);
+		leftClick(position, maj, timeOut);
 	}	
-	public static void Double_Clic_Gauche(Point position, boolean maj) throws AWTException{
-		Double_Clic_Gauche(position, maj, 1);
+	public static void doubleLeftClick(Point position, boolean maj) throws AWTException{
+		doubleLeftClick(position, maj, 1);
 	}
-	public static void Double_Clic_Gauche(PointF position, boolean maj, double timeOut) throws AWTException{
-		Double_Clic_Gauche(B4DConversion.pointFToPoint(position), maj, timeOut);
+	public static void doubleLeftClick(PointF position, boolean maj, double timeOut) throws AWTException{
+		doubleLeftClick(B4DConversion.pointFToPoint(position), maj, timeOut);
 	}
-	public static void Double_Clic_Gauche(PointF position, boolean maj) throws AWTException{
-		Double_Clic_Gauche(B4DConversion.pointFToPoint(position), maj, 1);
+	public static void doubleLeftClick(PointF position, boolean maj) throws AWTException{
+		doubleLeftClick(B4DConversion.pointFToPoint(position), maj, 1);
 	}
-	public static void Double_Clic_Gauche(PointD position, boolean maj, double timeOut) throws AWTException{
-		Double_Clic_Gauche(B4DConversion.pointDToPoint(position), maj, timeOut);
+	public static void doubleLeftClick(PointD position, boolean maj, double timeOut) throws AWTException{
+		doubleLeftClick(B4DConversion.pointDToPoint(position), maj, timeOut);
 	}
-	public static void Double_Clic_Gauche(PointD position, boolean maj) throws AWTException{
-		Double_Clic_Gauche(B4DConversion.pointDToPoint(position), maj, 1);
+	public static void doubleLeftClick(PointD position, boolean maj) throws AWTException{
+		doubleLeftClick(B4DConversion.pointDToPoint(position), maj, 1);
 	}
 	
 	  /**************************/
 	 /** TRIPLE CLIQUE GAUCHE **/
 	/**************************/
 	
-	public static void Triple_Clic_Gauche(Point position, boolean maj, double timeOut) throws AWTException {
-		Clic_Gauche(position, maj, 0);
-		Clic_Gauche(position, maj, 0);
-		Clic_Gauche(position, maj, timeOut);
+	public static void tripleLeftClick(Point position, boolean maj, double timeOut) throws AWTException {
+		leftClick(position, maj, 0);
+		leftClick(position, maj, 0);
+		leftClick(position, maj, timeOut);
 	}	
-	public static void Triple_Clic_Gauche(Point position, boolean maj) throws AWTException{
-		Triple_Clic_Gauche(position, maj, 1);
+	public static void tripleLeftClick(Point position, boolean maj) throws AWTException{
+		tripleLeftClick(position, maj, 1);
 	}
-	public static void Triple_Clic_Gauche(PointF position, boolean maj, double timeOut) throws AWTException{
-		Triple_Clic_Gauche(B4DConversion.pointFToPoint(position), maj, timeOut);
+	public static void tripleLeftClick(PointF position, boolean maj, double timeOut) throws AWTException{
+		tripleLeftClick(B4DConversion.pointFToPoint(position), maj, timeOut);
 	}
-	public static void Triple_Clic_Gauche(PointF position, boolean maj) throws AWTException{
-		Triple_Clic_Gauche(B4DConversion.pointFToPoint(position), maj, 1);
+	public static void tripleLeftClick(PointF position, boolean maj) throws AWTException{
+		tripleLeftClick(B4DConversion.pointFToPoint(position), maj, 1);
 	}
-	public static void Triple_Clic_Gauche(PointD position, boolean maj, double timeOut) throws AWTException{
-		Triple_Clic_Gauche(B4DConversion.pointDToPoint(position), maj, timeOut);
+	public static void tripleLeftClick(PointD position, boolean maj, double timeOut) throws AWTException{
+		tripleLeftClick(B4DConversion.pointDToPoint(position), maj, timeOut);
 	}
-	public static void Triple_Clic_Gauche(PointD position, boolean maj) throws AWTException{
-		Triple_Clic_Gauche(B4DConversion.pointDToPoint(position), maj, 1);
+	public static void tripleLeftClick(PointD position, boolean maj) throws AWTException{
+		tripleLeftClick(B4DConversion.pointDToPoint(position), maj, 1);
 	}
 }

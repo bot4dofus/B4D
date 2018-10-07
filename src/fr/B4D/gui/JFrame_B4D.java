@@ -1,7 +1,6 @@
 package fr.B4D.gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.MouseInfo;
@@ -52,7 +51,6 @@ public class JFrame_B4D extends Thread{
 	 */
 	public JFrame_B4D(){
 		initialize();
-		test();
 	}
 
 	/**
@@ -106,7 +104,7 @@ public class JFrame_B4D extends Thread{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					Bot.ConfigurationSerialization.Serialize(Bot.MyConfiguration);
+					Bot.configurationSerialization.Serialize(Bot.configuration);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
@@ -243,7 +241,7 @@ public class JFrame_B4D extends Thread{
 			}
 		});
 		try {
-			if(!B4DOther.getMacAdress().equals(Bot.AdminMacAdresse))
+			if(!B4DOther.getMacAdress().equals(Bot.adminMacAdresse))
 				lblAdmin.setVisible(false);
 		} catch (SocketException | UnknownHostException e) {
 			e.printStackTrace();
@@ -265,9 +263,9 @@ public class JFrame_B4D extends Thread{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Configuration configuration = Bot.ConfigurationSerialization.Open();
+					Configuration configuration = Bot.configurationSerialization.Open();
 					if (configuration != null) {
-						Bot.MyConfiguration = configuration;
+						Bot.configuration = configuration;
 						personPanel.ActualiserInfos();
 						settingPanel.ActualiserInfos();
 					}
@@ -287,14 +285,29 @@ public class JFrame_B4D extends Thread{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Bot.ConfigurationSerialization.SaveAs(Bot.MyConfiguration);
+					Bot.configurationSerialization.SaveAs(Bot.configuration);
 				} catch (ClassNotFoundException | IOException e1) {
 					e1.printStackTrace();
 				}
 			}
 		});
-		popupMenu.add(itemExport);		
-		addPopup(frame, popupMenu);
+		popupMenu.add(itemExport);
+		
+		frame.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popupMenu.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 		
 		changerPanel(0);
 	}
@@ -335,39 +348,6 @@ public class JFrame_B4D extends Thread{
 			adminPanel.setVisible(true);
 			break;
 		}	
-	}
-	
-	private void test() {
-		
-//		B4DGraph graph = new B4DGraph();
-//		graph.addVertex(new Point(1,1));
-//		graph.addVertex(new Point(2,2));
-//		graph.addVertex(new Point(3,3));
-//
-//	    graph.addEdge(new Point(1,1), new Point(3,3), 6, TypeDeTransport.Marche);
-//	    graph.addEdge(new Point(1,1), new Point(2,2), 3, TypeDeTransport.Zaap);
-//	    graph.addEdge(new Point(2,2), new Point(3,3), 2, TypeDeTransport.Zaap);
-//		
-//	    List<B4DEdge> shortestPath = graph.getPath(new Point(1,1), new Point(3,3));
-//	    System.out.println(shortestPath);
-
-	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
 	}
 }
 
