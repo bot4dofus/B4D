@@ -6,14 +6,13 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import fr.B4D.classes.B4DException;
 import fr.B4D.classes.Bot;
 import fr.B4D.classes.PointF;
-import fr.B4D.classes.B4DException.Reason;
 import fr.B4D.enu.ZaapType;
-import fr.B4D.modules.B4DWait;
+import fr.B4D.exceptions.B4DCannotFind;
 import fr.B4D.modules.B4DKeyboard;
-import fr.B4D.modules.B4DSouris;
+import fr.B4D.modules.B4DMouse;
+import fr.B4D.modules.B4DWait;
 
 public class Zaap extends Transport implements Serializable{
 	
@@ -104,47 +103,37 @@ public class Zaap extends Transport implements Serializable{
         return zaaps;
     }
         
-    public final static Zaap getZaap(Point position) throws B4DException{
-    	for(Zaap zaap:getAll()) {
-        	if(zaap.getPosition().equals(position))
-        		return zaap;
-        }
-        throw new B4DException(Reason.CannotFind);
+    public final static Zaap getZaap(Point position) throws B4DCannotFind{
+    	return getAll().stream().filter(z -> z.getPosition().equals(position)).findFirst().orElseThrow(B4DCannotFind::new);
     }
 	
-	public static Zaap getZaap(String nom) throws B4DException {
-    	for(Zaap zaap:getAll()) {
-        	if(zaap.getNom().equals(nom))
-        		return zaap;
-        }
-        throw new B4DException(Reason.CannotFind);
+	public static Zaap getZaap(String nom) throws B4DCannotFind {
+		return getAll().stream().filter(z -> z.getNom().equals(nom)).findFirst().orElseThrow(B4DCannotFind::new);
 	}
     
 	  /**************/
 	 /** METHODES **/
-	/**
-	 * @throws AWTException 
-	 * @throws B4DException ************/
+	/**************/
 	
-	public void goTo(Point destination) throws AWTException, B4DException {
-		if (Bot.MyConfiguration.persons.get(0).position.equals(this.getPosition())){
-			B4DSouris.Clic_Gauche(super.getPositionF(), false);
+	public void goTo(Point destination) throws AWTException, B4DCannotFind {
+		if (Bot.configuration.persons.get(0).position.equals(this.getPosition())){
+			B4DMouse.leftClick(super.getPositionF(), false);
 
             if (B4DWait.waitForColor(new PointF(0.4472843, 0.7367896), new Color(186, 125, 0), new Color(255, 255, 50), 10)) {
 
                 if (zaapType == ZaapType.Atelier)
-                	B4DSouris.Clic_Gauche(new PointF(0.3253, 0.1626), false, 0.1);
+                	B4DMouse.leftClick(new PointF(0.3253, 0.1626), false, 0.1);
                 else if (zaapType == ZaapType.HDV)
-                	B4DSouris.Clic_Gauche(new PointF(0.3253397, 0.1626), false, 0.1);
+                	B4DMouse.leftClick(new PointF(0.3253397, 0.1626), false, 0.1);
                 else if (zaapType == ZaapType.Divers)
-                	B4DSouris.Clic_Gauche(new PointF(0.6027178, 0.1626), false, 0.1);
+                	B4DMouse.leftClick(new PointF(0.6027178, 0.1626), false, 0.1);
                 
-                B4DSouris.Clic_Gauche(new PointF(0.60623, 0.2013958), false, 0.2);
+                B4DMouse.leftClick(new PointF(0.60623, 0.2013958), false, 0.2);
                 B4DKeyboard.writeKeyboard(getZaap(destination).getNom());
-                B4DSouris.Double_Clic_Gauche(new PointF(0.4736422, 0.2891326), false);
+                B4DMouse.doubleLeftClick(new PointF(0.4736422, 0.2891326), false);
 
                 B4DWait.waitForMap();
-                Bot.MyConfiguration.persons.get(0).position = destination;
+                Bot.configuration.persons.get(0).position = destination;
             }
 		}
 	}

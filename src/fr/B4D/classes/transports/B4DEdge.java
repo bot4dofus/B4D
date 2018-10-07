@@ -5,8 +5,9 @@ import java.awt.Point;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import fr.B4D.enu.TransportType;
 
-@SuppressWarnings("serial")
 public class B4DEdge extends DefaultWeightedEdge {
+
+	private static final long serialVersionUID = -1834995736537050606L;
 	
 	private TransportType transportType;
 	

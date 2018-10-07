@@ -8,8 +8,9 @@ import org.jgrapht.graph.DirectedWeightedPseudograph;
 
 import fr.B4D.enu.TransportType;
 
-@SuppressWarnings("serial")
 public class B4DGraph extends DirectedWeightedPseudograph<Point, B4DEdge>{
+
+	private static final long serialVersionUID = 843741136461285887L;
 
 	  /******************/
 	 /** CONSTRUCTEUR **/
@@ -23,10 +24,14 @@ public class B4DGraph extends DirectedWeightedPseudograph<Point, B4DEdge>{
 	 /** METHODES **/
 	/**************/
 	
-	public void addEdge(Point sourceVertex, Point targetVertex, double weight, TransportType TdT) {
-	    B4DEdge edge = this.addEdge(sourceVertex, targetVertex);
+	public void addB4DEdge(Point sourceVertex, Point targetVertex, double weight, TransportType TdT) {
+	    B4DEdge edge = super.addEdge(sourceVertex, targetVertex);
 	    edge.setTypeDeTransport(TdT);
-	    this.setEdgeWeight(edge, weight);
+	    super.setEdgeWeight(edge, weight);
+	}
+	
+	public void removeB4DEdge(Point sourceVertex, Point targetVertex) {
+		super.removeEdge(sourceVertex, targetVertex);
 	}
 	
 	public List<B4DEdge> getPath(Point source, Point target) {
