@@ -25,7 +25,12 @@ public class Program extends Thread{
 	 /** COLLECTION **/
 	/****************/
 	
-	public final static Program test = new Program(Place.Aucune, Category.Aucune, RessourceType.Aucun, Ressource.Aucune, Test.test, 0, 0);
+	public final static Program test = new Program(Place.Aucune, Category.Aucune, RessourceType.Aucun, Ressource.Aucune, Test.test);
+	public final static Program test2 = new Program(Place.Aucune, Category.Recolte, RessourceType.Plante, Ressource.Treffle, Test.test);
+	public final static Program test3 = new Program(Place.Bonta, Category.Elevage, RessourceType.Tous, Ressource.Toutes, Test.test);
+	public final static Program test4 = new Program(Place.Bonta, Category.Elevage, RessourceType.Tous, Ressource.Aucune, Test.test);
+	public final static Program test5 = new Program(Place.Brakmar, Category.Poubelle, RessourceType.Tous, Ressource.Toutes, Test.test);
+	public final static Program test6 = new Program(Place.Brakmar, Category.Puit, RessourceType.Tous, Ressource.Toutes, Test.test);
 	
 	  /***************/
 	 /** ATTRIBUTS **/
@@ -33,7 +38,7 @@ public class Program extends Thread{
 	
 	private Place place;
 	private Category category;
-	private RessourceType type;
+	private RessourceType ressourceType;
 	private Ressource ressource;
 
 	private ProgramInterface program;
@@ -45,14 +50,14 @@ public class Program extends Thread{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
-	public Program(Place place, Category category, RessourceType type, Ressource ressource, ProgramInterface program, int maxCycles, int maxDeposits) {
+	public Program(Place place, Category category, RessourceType type, Ressource ressource, ProgramInterface program) {
 		this.place = place;
 		this.category = category;
-		this.type = type;
+		this.ressourceType = type;
 		this.ressource = ressource;
 		this.program = program;
-		this.maxCycles = maxCycles;
-		this.maxDeposits = maxDeposits;
+		this.maxCycles = -1;
+		this.maxDeposits = -1;
 	}
 	
 	  /************************/
@@ -62,11 +67,12 @@ public class Program extends Thread{
   public final static ArrayList<Program> getAll(){
   	ArrayList<Program> programs = new ArrayList<Program>();
   	programs.add(test);
+  	programs.add(test2);
+  	programs.add(test3);
+  	programs.add(test4);
+  	programs.add(test5);
+  	programs.add(test6);
     return programs;
-  }
-      
-  public final static Program getProgram(int index){
-	  return getAll().get(index);
   }
 	
 	  /***********************/
@@ -79,14 +85,26 @@ public class Program extends Thread{
 	public Category getCategory() {
 		return category;
 	}
-	public RessourceType getType() {
-		return type;
+	public RessourceType getRessourceType() {
+		return ressourceType;
 	}
 	public Ressource getRessource() {
 		return ressource;
 	}
-	
-	  /**************/
+	  public int getMaxCycles() {
+		return maxCycles;
+	}
+	public void setMaxCycles(int maxCycles) {
+		this.maxCycles = maxCycles;
+	}
+	public int getMaxDeposits() {
+		return maxDeposits;
+	}
+	public void setMaxDeposits(int maxDeposits) {
+		this.maxDeposits = maxDeposits;
+	}
+
+	/**************/
 	 /** METHODES **/
 	/**************/
 	

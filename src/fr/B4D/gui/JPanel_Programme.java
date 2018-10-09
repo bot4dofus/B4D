@@ -4,17 +4,22 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.text.NumberFormat;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import fr.B4D.classes.Bot;
 import fr.B4D.classes.Program;
 import fr.B4D.enu.Category;
 import fr.B4D.enu.Place;
@@ -25,16 +30,35 @@ public class JPanel_Programme extends JPanel {
 
 	private static final long serialVersionUID = -1975429297614634621L;
 	
-	final int width = 635;
-	final int height = 235;
+	public final int width = 635;
+	public final int height = 235;
 	
-	private JTextField textField_Tours;
-	private JTextField textField_Depots;
+	private JComboBox<Place> comboBox_Place;
+	private JComboBox<Category> comboBox_Category;
+	private JComboBox<RessourceType> comboBox_RessourceType;
+	private JComboBox<Ressource> comboBox_Ressource;
+	
+	private JFormattedTextField textField_Turns, textField_Deposits;
+	
+	private JButton button_Start;
 
 	/**
 	 * Create the panel.
 	 */
 	public JPanel_Programme() {
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent e) {
+				Program.getAll().stream().filter(p ->
+					((DefaultComboBoxModel<Place>)comboBox_Place.getModel()).getIndexOf(p.getPlace()) < 0)
+				.forEach(p -> comboBox_Place.addItem(p.getPlace()));
+				
+				if(Bot.configuration.gameFrame != null && Bot.configuration.chatFrame != null && Bot.configuration.chatBar != null && Bot.configuration.minimap != null) {
+					button_Start.setEnabled(true);
+				}else {
+					button_Start.setEnabled(false);
+				}
+			}
+		});
 		setBackground(new Color(33,43,53));
 		setLayout(null);
 		setVisible(true);
@@ -47,15 +71,21 @@ public class JPanel_Programme extends JPanel {
 		lblLieu.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLieu.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblLieu);
+	
 		
-		JComboBox<Place> comboBox_Lieu = new JComboBox<Place>();
-		comboBox_Lieu.addActionListener(new ActionListener() {
+		comboBox_Place = new JComboBox<Place>();
+		comboBox_Place.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				comboBox_Category.removeAllItems();
+				Program.getAll().stream().filter(p ->
+					((DefaultComboBoxModel<Category>)comboBox_Category.getModel()).getIndexOf(p.getCategory()) < 0
+					&& p.getPlace().equals(comboBox_Place.getSelectedItem()))
+				.forEach(p -> comboBox_Category.addItem(p.getCategory()));
 			}
 		});
-		comboBox_Lieu.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 10));
-		comboBox_Lieu.setBounds(10, 35, 150, 25);
-		add(comboBox_Lieu);
+		comboBox_Place.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		comboBox_Place.setBounds(10, 35, 150, 25);
+		add(comboBox_Place);
 		
 		JLabel lblCatgorie = new JLabel("Cat\u00E9gorie :");
 		lblCatgorie.setBackground(new Color(46, 139, 87));
@@ -66,10 +96,20 @@ public class JPanel_Programme extends JPanel {
 		lblCatgorie.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblCatgorie);
 		
-		JComboBox<Category> comboBox_Categorie = new JComboBox<Category>();
-		comboBox_Categorie.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		comboBox_Categorie.setBounds(10, 90, 150, 25);
-		add(comboBox_Categorie);
+		comboBox_Category = new JComboBox<Category>();
+		comboBox_Category.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBox_RessourceType.removeAllItems();
+				Program.getAll().stream().filter(p -> 
+					((DefaultComboBoxModel<RessourceType>)comboBox_RessourceType.getModel()).getIndexOf(p.getRessourceType()) < 0
+					&& p.getPlace().equals(comboBox_Place.getSelectedItem())
+					&& p.getCategory().equals(comboBox_Category.getSelectedItem()))
+				.forEach(p -> comboBox_RessourceType.addItem(p.getRessourceType()));
+			}
+		});
+		comboBox_Category.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		comboBox_Category.setBounds(10, 90, 150, 25);
+		add(comboBox_Category);
 		
 		JLabel lblType = new JLabel("Type :");
 		lblType.setBackground(new Color(46, 139, 87));
@@ -80,10 +120,21 @@ public class JPanel_Programme extends JPanel {
 		lblType.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblType);
 		
-		JComboBox<RessourceType> comboBox_Type = new JComboBox<RessourceType>();
-		comboBox_Type.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		comboBox_Type.setBounds(10, 145, 150, 25);
-		add(comboBox_Type);
+		comboBox_RessourceType = new JComboBox<RessourceType>();
+		comboBox_RessourceType.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBox_Ressource.removeAllItems();
+				Program.getAll().stream().filter(p ->
+						((DefaultComboBoxModel<Ressource>)comboBox_Ressource.getModel()).getIndexOf(p.getRessource()) < 0
+						&& p.getPlace().equals(comboBox_Place.getSelectedItem())
+						&& p.getCategory().equals(comboBox_Category.getSelectedItem()) 
+						&& p.getRessourceType().equals(comboBox_RessourceType.getSelectedItem()))
+				.forEach(p -> comboBox_Ressource.addItem(p.getRessource()));
+			}
+		});
+		comboBox_RessourceType.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		comboBox_RessourceType.setBounds(10, 145, 150, 25);
+		add(comboBox_RessourceType);
 		
 		JLabel lblRessource = new JLabel("Ressource :");
 		lblRessource.setBackground(new Color(46, 139, 87));
@@ -94,7 +145,7 @@ public class JPanel_Programme extends JPanel {
 		lblRessource.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblRessource);
 		
-		JComboBox<Ressource> comboBox_Ressource = new JComboBox<Ressource>();
+		comboBox_Ressource = new JComboBox<Ressource>();
 		comboBox_Ressource.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		comboBox_Ressource.setBounds(10, 200, 150, 25);
 		add(comboBox_Ressource);
@@ -108,14 +159,14 @@ public class JPanel_Programme extends JPanel {
 		lblNombreDeTours.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblNombreDeTours);
 		
-		textField_Tours = new JTextField();
-		textField_Tours.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_Tours.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
-		textField_Tours.setText("0");
-		textField_Tours.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_Tours.setBounds(165, 35, 150, 25);
-		textField_Tours.setColumns(10);
-		add(textField_Tours);
+		textField_Turns = new JFormattedTextField(NumberFormat.getNumberInstance());
+		textField_Turns.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_Turns.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
+		textField_Turns.setText("0");
+		textField_Turns.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textField_Turns.setBounds(165, 35, 150, 25);
+		textField_Turns.setColumns(10);
+		add(textField_Turns);
 		
 		JLabel label_Tours0 = new JLabel("(0 = infini)");
 		label_Tours0.setBackground(Color.LIGHT_GRAY);
@@ -135,14 +186,14 @@ public class JPanel_Programme extends JPanel {
 		lblNombreDeDpts.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblNombreDeDpts);
 		
-		textField_Depots = new JTextField();
-		textField_Depots.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_Depots.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
-		textField_Depots.setText("0");
-		textField_Depots.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_Depots.setBounds(165, 115, 150, 25);
-		textField_Depots.setColumns(10);
-		add(textField_Depots);
+		textField_Deposits = new JFormattedTextField(NumberFormat.getNumberInstance());
+		textField_Deposits.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_Deposits.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
+		textField_Deposits.setText("0");
+		textField_Deposits.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textField_Deposits.setBounds(165, 115, 150, 25);
+		textField_Deposits.setColumns(10);
+		add(textField_Deposits);
 		
 		JLabel label_Depots0 = new JLabel("(0 = infini)");
 		label_Depots0.setBackground(Color.LIGHT_GRAY);
@@ -201,14 +252,28 @@ public class JPanel_Programme extends JPanel {
 		label_Pos.setFont(new Font("Tahoma", Font.BOLD, 25));
 		add(label_Pos);
 		
-		JButton button_Commencer = new JButton("Commencer");
-		button_Commencer.addActionListener(new ActionListener() {
+		button_Start = new JButton("Commencer");
+		button_Start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Program.test.start();
+				Program program = Program.getAll().stream().filter( p ->
+					p.getPlace().equals(comboBox_Place.getSelectedItem())
+					&& p.getCategory().equals(comboBox_Category.getSelectedItem()) 
+					&& p.getRessourceType().equals(comboBox_RessourceType.getSelectedItem())
+					&& p.getRessource().equals(comboBox_Ressource.getSelectedItem()))
+				.findFirst().orElse(null);
+				
+				program.setMaxCycles(Integer.valueOf(textField_Turns.getText()));
+				program.setMaxDeposits(Integer.valueOf(textField_Deposits.getText()));
+				program.start();
+				try {
+					program.join();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		});
-		button_Commencer.setBounds(475, 75, 150, 45);
-		button_Commencer.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
-		add(button_Commencer);
+		button_Start.setBounds(475, 75, 150, 45);
+		button_Start.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
+		add(button_Start);
 	}
 }

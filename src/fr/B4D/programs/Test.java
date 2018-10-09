@@ -1,12 +1,8 @@
 package fr.B4D.programs;
 
-import java.awt.AWTException;
 import java.awt.Point;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.util.List;
 
-import fr.B4D.classes.Bot;
 import fr.B4D.classes.ProgramInterface;
 import fr.B4D.classes.transports.B4DEdge;
 import fr.B4D.classes.transports.B4DGraph;
@@ -27,11 +23,11 @@ public final class Test {
 		    List<B4DEdge> shortestPath = graph.getPath(new Point(1,1), new Point(3,3));
 		    System.out.println(shortestPath);
 		    
-		    try {
+		   /* try {
 				System.out.println(Bot.world.getPosition().toString());
 			} catch (AWTException | UnsupportedFlavorException | IOException e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 	};
 }
