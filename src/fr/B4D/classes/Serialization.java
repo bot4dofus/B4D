@@ -21,12 +21,6 @@ public class Serialization {
 	  public Serialization(String format, File defaultFile) {
 		this.filter = new FileNameExtensionFilter("Fichiers de configuration B4D", format);
 		this.file = defaultFile;
-		try {
-			if(!this.file.exists())
-				this.file.createNewFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	  /************/

@@ -32,13 +32,15 @@ import fr.B4D.classes.Person;
 import fr.B4D.classes.transports.Zaap;
 import fr.B4D.modules.B4DConversion;
 import fr.B4D.modules.B4DMouse;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class JPanel_Personnage extends JPanel {
 
 	private static final long serialVersionUID = 8907893091716626123L;
 	
-	final int width = 635;
-	final int height = 310;
+	public final int width = 635;
+	public final int height = 310;
 	
 	private Vector<Vector<String>> dataTable;
 	private JTable table;
@@ -47,19 +49,34 @@ public class JPanel_Personnage extends JPanel {
 	private JLabel lblXY_Brakmar;
 	private JLabel lblXY_Sort;
 
-	private JButton btnModifierRappel = new JButton("Modifier");
+	private JButton btnModifierRappel;
 	private JComboBox<String> comboBox_Zaaps;
 	private JLabel lblPosition_Bonta;
-	private JButton btnModifierBonta = new JButton("Modifier");
+	private JButton btnModifierBonta;
 	private JLabel lblPosition_Brakmar;
-	private JButton btnModifierBrakmar = new JButton("Modifier");
-	private JButton btnModifierSort = new JButton("Modifier");
+	private JButton btnModifierBrakmar;
+	private JButton btnModifierSort;
 
 	/**
 	 * Create the panel.
 	 * @param lblXY_Rappel 
 	 */
 	public JPanel_Personnage() {
+		addComponentListener(new ComponentAdapter() {
+			public void componentShown(ComponentEvent e) {
+				if(Bot.configuration.gameFrame != null) {
+					btnModifierRappel.setEnabled(true);
+					btnModifierBonta.setEnabled(true);
+					btnModifierBrakmar.setEnabled(true);
+					btnModifierSort.setEnabled(true);
+				}else {
+					btnModifierRappel.setEnabled(false);
+					btnModifierBonta.setEnabled(false);
+					btnModifierBrakmar.setEnabled(false);
+					btnModifierSort.setEnabled(false);
+				}
+			}
+		});
 		setBackground(new Color(33,43,53));
 		setLayout(null);
 		setVisible(false);
@@ -90,7 +107,7 @@ public class JPanel_Personnage extends JPanel {
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent e) {
 				if(!e.getValueIsAdjusting()) {
-					ActualiserInfos(Bot.configuration.persons.get(e.getFirstIndex()));
+					ActualiserInfos(Bot.configuration.persons.get(table.getSelectedRow()));
 				}
 			}
 		});
@@ -166,8 +183,9 @@ public class JPanel_Personnage extends JPanel {
 		lblXY_Rappel.setBackground(Color.GRAY);
 		lblXY_Rappel.setBounds(0, 25, 150, 25);
 		panel_Potion_Rappel.add(lblXY_Rappel);
-		btnModifierRappel.setEnabled(false);
 		
+		btnModifierRappel = new JButton("Modifier");
+		btnModifierRappel.setEnabled(false);
 		btnModifierRappel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				B4DMouse.getPoint(
@@ -196,6 +214,7 @@ public class JPanel_Personnage extends JPanel {
 		panel_Potion_Rappel.add(lblDestination_Rappel);
 		
 		comboBox_Zaaps = new JComboBox<String>();
+		Zaap.getAll().stream().forEach(z -> this.comboBox_Zaaps.addItem(z.getName()));
 		comboBox_Zaaps.addActionListener (new ActionListener () {
 		    public void actionPerformed(ActionEvent e) {
 		    	if(table.getSelectedRow() != -1) {
@@ -236,8 +255,9 @@ public class JPanel_Personnage extends JPanel {
 		lblXY_Bonta.setBackground(Color.GRAY);
 		lblXY_Bonta.setBounds(0, 25, 150, 25);
 		panel_Potion_Bonta.add(lblXY_Bonta);
-		btnModifierBonta.setEnabled(false);
 		
+		btnModifierBonta = new JButton("Modifier");
+		btnModifierBonta.setEnabled(false);		
 		btnModifierBonta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				B4DMouse.getPoint(
@@ -296,8 +316,9 @@ public class JPanel_Personnage extends JPanel {
 		lblXY_Brakmar.setBackground(Color.GRAY);
 		lblXY_Brakmar.setBounds(0, 25, 150, 25);
 		panel_Potion_Brakmar.add(lblXY_Brakmar);
-		btnModifierBrakmar.setEnabled(false);
-		
+
+		btnModifierBrakmar = new JButton("Modifier");
+		btnModifierBrakmar.setEnabled(false);		
 		btnModifierBrakmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				B4DMouse.getPoint(
@@ -358,6 +379,7 @@ public class JPanel_Personnage extends JPanel {
 		lblXY_Sort.setBounds(0, 25, 150, 25);
 		panel_Sort.add(lblXY_Sort);
 		
+		btnModifierSort = new JButton("Modifier");
 		btnModifierSort.setEnabled(false);
 		btnModifierSort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -397,16 +419,12 @@ public class JPanel_Personnage extends JPanel {
 			row.add(personnage.pseudo);
 			dataTable.add(row);
 		}
-		
-		if(comboBox_Zaaps.getItemCount() == 0) {
-			for(Zaap zaap:Zaap.getAll())
-				this.comboBox_Zaaps.addItem(zaap.getNom());
-		}
 
 		table.revalidate();
 		table.repaint();
 	}
 	private void ActualiserInfos(Person personnage) {
+		
 		if(personnage.rappelPotionPosition != null)
 			this.lblXY_Rappel.setText(personnage.rappelPotionPosition.getX() + ":" + personnage.rappelPotionPosition.getY());
 		else
@@ -428,7 +446,7 @@ public class JPanel_Personnage extends JPanel {
 			this.lblXY_Sort.setText("X:Y");
 
 		if(personnage.rappelPotionDestination != null)
-			this.comboBox_Zaaps.setSelectedItem(personnage.rappelPotionDestination.getNom());
+			this.comboBox_Zaaps.setSelectedItem(personnage.rappelPotionDestination.getName());
 		
 		if(personnage.bontaPotionDestination != null)
 			this.lblPosition_Bonta.setText(personnage.bontaPotionDestination.getX() + ":" + personnage.bontaPotionDestination.getY());
@@ -439,17 +457,5 @@ public class JPanel_Personnage extends JPanel {
 			this.lblPosition_Brakmar.setText(personnage.brakmarPotionDestination.getX() + ":" + personnage.brakmarPotionDestination.getY());
 		else
 			this.lblPosition_Brakmar.setText("X:Y");
-		
-		if(Bot.configuration.gameFrame != null) {
-			btnModifierRappel.setEnabled(true);
-			btnModifierBonta.setEnabled(true);
-			btnModifierBrakmar.setEnabled(true);
-			btnModifierSort.setEnabled(true);
-		}else {
-			btnModifierRappel.setEnabled(false);
-			btnModifierBonta.setEnabled(false);
-			btnModifierBrakmar.setEnabled(false);
-			btnModifierSort.setEnabled(false);
-		}
 	}
 }

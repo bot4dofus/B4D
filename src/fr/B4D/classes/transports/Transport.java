@@ -24,11 +24,11 @@ public abstract class Transport implements TransportInterface{
 	 /** GET & SET **/
 	/***************/
 	
-	public String getNom() {
+	public String getName() {
 		return name;
 	}
 
-	public void setNom(String nom) {
+	public void setName(String nom) {
 		this.name = nom;
 	}
 

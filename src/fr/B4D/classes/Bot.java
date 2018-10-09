@@ -18,10 +18,7 @@ public final class Bot {
 	public static File configurationFile = new File("Configuration.B4D");	//Fichier de configuration par defaut
 	public static Configuration configuration = new Configuration();		//Créer la variable de type Configuration
 	public static Serialization configurationSerialization;					//Objet de serialisation de la configuration
-    
-    //public final ThreadProgramme As New Thread(AddressOf Programme_Test)  //Créer le thread pour le programme
-    //public final ThreadClavier As New Thread(AddressOf Detection_Clavier)	//Créer le thread pour la detection des touches
-    
+	
 	public static void main(String[] args) {
 		try {
 			if(!initFile.exists()) {
@@ -33,6 +30,7 @@ public final class Bot {
 
 			configurationSerialization = new Serialization("B4D", configurationFile);
 			if(!configurationFile.exists()) {
+				configurationFile.createNewFile();
 				configurationSerialization.Serialize(configuration);
 			}
 			else

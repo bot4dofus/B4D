@@ -108,7 +108,7 @@ public class Zaap extends Transport implements Serializable{
     }
 	
 	public static Zaap getZaap(String nom) throws B4DCannotFind {
-		return getAll().stream().filter(z -> z.getNom().equals(nom)).findFirst().orElseThrow(B4DCannotFind::new);
+		return getAll().stream().filter(z -> z.getName().equals(nom)).findFirst().orElseThrow(B4DCannotFind::new);
 	}
     
 	  /**************/
@@ -129,7 +129,7 @@ public class Zaap extends Transport implements Serializable{
                 	B4DMouse.leftClick(new PointF(0.6027178, 0.1626), false, 0.1);
                 
                 B4DMouse.leftClick(new PointF(0.60623, 0.2013958), false, 0.2);
-                B4DKeyboard.writeKeyboard(getZaap(destination).getNom());
+                B4DKeyboard.writeKeyboard(getZaap(destination).getName());
                 B4DMouse.doubleLeftClick(new PointF(0.4736422, 0.2891326), false);
 
                 B4DWait.waitForMap();
