@@ -7,6 +7,8 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
@@ -32,8 +34,6 @@ import fr.B4D.classes.Person;
 import fr.B4D.classes.transports.Zaap;
 import fr.B4D.modules.B4DConversion;
 import fr.B4D.modules.B4DMouse;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class JPanel_Personnage extends JPanel {
 
@@ -194,7 +194,7 @@ public class JPanel_Personnage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							Person person = Bot.configuration.persons.get(table.getSelectedRow());
-							person.rappelPotionPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
+							person.boosterPotionPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
 							ActualiserInfos(person);
 						}
 					});
@@ -219,7 +219,7 @@ public class JPanel_Personnage extends JPanel {
 		    public void actionPerformed(ActionEvent e) {
 		    	if(table.getSelectedRow() != -1) {
 					try {
-						Bot.configuration.persons.get(table.getSelectedRow()).rappelPotionDestination = Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString());
+						Bot.configuration.persons.get(table.getSelectedRow()).boosterPotionDestination = Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString());
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -425,8 +425,8 @@ public class JPanel_Personnage extends JPanel {
 	}
 	private void ActualiserInfos(Person personnage) {
 		
-		if(personnage.rappelPotionPosition != null)
-			this.lblXY_Rappel.setText(personnage.rappelPotionPosition.getX() + ":" + personnage.rappelPotionPosition.getY());
+		if(personnage.boosterPotionPosition != null)
+			this.lblXY_Rappel.setText(personnage.boosterPotionPosition.getX() + ":" + personnage.boosterPotionPosition.getY());
 		else
 			this.lblXY_Rappel.setText("X:Y");
 		
@@ -445,8 +445,8 @@ public class JPanel_Personnage extends JPanel {
 		else
 			this.lblXY_Sort.setText("X:Y");
 
-		if(personnage.rappelPotionDestination != null)
-			this.comboBox_Zaaps.setSelectedItem(personnage.rappelPotionDestination.getName());
+		if(personnage.boosterPotionDestination != null)
+			this.comboBox_Zaaps.setSelectedItem(personnage.boosterPotionDestination.getName());
 		
 		if(personnage.bontaPotionDestination != null)
 			this.lblPosition_Bonta.setText(personnage.bontaPotionDestination.getX() + ":" + personnage.bontaPotionDestination.getY());

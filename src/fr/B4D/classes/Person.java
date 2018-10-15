@@ -14,8 +14,8 @@ public class Person implements Serializable{
 	public String serveur = "";
 	public String pseudo = "";
 	
-	public PointF rappelPotionPosition = null;
-	public Zaap rappelPotionDestination = Zaap.Astrub;
+	public PointF boosterPotionPosition = null;
+	public Zaap boosterPotionDestination = Zaap.Astrub;
 	
 	public PointF bontaPotionPosition = null;
 	public Point bontaPotionDestination = new Point(-33, -56);
