@@ -1,8 +1,7 @@
 package fr.B4D.enu;
 
-public enum ZaapType {
-	Tous,
-    Aucun,
+public enum ZaapiType {
+    None,
     Atelier,
     HDV,
     Divers,

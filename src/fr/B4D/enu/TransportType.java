@@ -1,13 +1,12 @@
 package fr.B4D.enu;
 
 public enum TransportType {
-	Tous,
-    Aucun,
-    Marche,
+    None,
+    Walk,
     Zaap,
     ZaapiBonta,
     ZaapiBrakmar,
-    PotionRappel,
-    PotionBonta,
-    PotionBrakmar,
+    BoosterPotion,
+    BontaPotion,
+    BrakmarPotion,
 }
