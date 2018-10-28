@@ -4,15 +4,16 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.classes.transports.Zaap;
+import fr.B4D.enu.Server;
 
 public class Person implements Serializable{
 
 	private static final long serialVersionUID = -3206212064770380443L;
 	
-	public String account = "";
-	public String password = "";
-	public String serveur = "";
-	public String pseudo = "";
+	public String account;
+	public String password;
+	public Server server;
+	public String pseudo;
 	
 	public PointF boosterPotionPosition = null;
 	public Zaap boosterPotionDestination = Zaap.Astrub;
@@ -35,14 +36,14 @@ public class Person implements Serializable{
 	public Person() {
 		this.account = "Nom de compte";
 		this.password = "Mot de passe";
-		this.serveur = "Serveur";
+		this.server = Server.values()[0];
 		this.pseudo = "Pseudo";
 	}
 	
-	public Person(String account, String password, String serveur, String pseudo) {
+	public Person(String account, String password, Server serveur, String pseudo) {
 		this.account = account;
 		this.password = password;
-		this.serveur = serveur;
+		this.server = serveur;
 		this.pseudo = pseudo;
 	}
 }

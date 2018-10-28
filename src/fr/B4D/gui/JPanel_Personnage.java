@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.util.Arrays;
 import java.util.Vector;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -28,10 +29,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableColumn;
 
 import fr.B4D.classes.Bot;
 import fr.B4D.classes.Person;
 import fr.B4D.classes.transports.Zaap;
+import fr.B4D.enu.Server;
 import fr.B4D.modules.B4DConversion;
 import fr.B4D.modules.B4DMouse;
 
@@ -81,24 +84,28 @@ public class JPanel_Personnage extends JPanel {
 		setLayout(null);
 		setVisible(false);
 		
+		JComboBox<Server> comboBox_server = new JComboBox<Server>();
+		Arrays.asList(Server.values()).stream().forEach(s -> comboBox_server.addItem(s));
+		
 		dataTable = new Vector<Vector<String>>();
 		Vector<String> colonnes = new Vector<String>(Arrays.asList(new String[] {"Nom de compte","Mot de passe","Serveur","Pseudo"}));
 		table = new JTable(dataTable, colonnes);
+		TableColumn serverColumn = table.getColumnModel().getColumn(2);
+		serverColumn.setCellEditor(new DefaultCellEditor(comboBox_server));
 		table.getModel().addTableModelListener(new TableModelListener(){
 			public void tableChanged(TableModelEvent evt){
-				String text = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());
 				switch(evt.getColumn()){
 					case 0:
-						Bot.configuration.persons.get(evt.getFirstRow()).account = text;
+						Bot.configuration.persons.get(evt.getFirstRow()).account = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());
 						break;
 					case 1:
-						Bot.configuration.persons.get(evt.getFirstRow()).password = text;
+						Bot.configuration.persons.get(evt.getFirstRow()).password = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
 						break;
 					case 2:
-						Bot.configuration.persons.get(evt.getFirstRow()).serveur = text;
+						Bot.configuration.persons.get(evt.getFirstRow()).server = (Server) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
 						break;
 					case 3:
-						Bot.configuration.persons.get(evt.getFirstRow()).pseudo = text;
+						Bot.configuration.persons.get(evt.getFirstRow()).pseudo = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
 						break;
 				}
 				ActualiserInfos();
@@ -415,7 +422,7 @@ public class JPanel_Personnage extends JPanel {
 			Vector<String> row = new Vector<String>();
 			row.add(personnage.account);
 			row.add(personnage.password.replaceAll("(?s).", "*"));
-			row.add(personnage.serveur);
+			row.add(personnage.server.toString());
 			row.add(personnage.pseudo);
 			dataTable.add(row);
 		}

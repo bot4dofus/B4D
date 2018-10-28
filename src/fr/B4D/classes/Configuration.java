@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import fr.B4D.enu.Server;
+
 public class Configuration implements Serializable{
 
 	private static final long serialVersionUID = -1787414977374798817L;
@@ -21,8 +23,8 @@ public class Configuration implements Serializable{
 	
 	public Configuration(){
 		this.persons = new ArrayList<Person>();
-		persons.add(new Person("Nom1", "MDP1", "Serveur1", "Pseudo1"));
-		persons.add(new Person("Nom2", "MDP2", "Serveur2", "Pseudo2"));
+		persons.add(new Person("Nom1", "MDP1", Server.values()[0], "Pseudo1"));
+		persons.add(new Person("Nom2", "MDP2", Server.values()[1], "Pseudo2"));
 		this.gameFrame = null;
 		this.chatFrame = null;
 		this.chatBar = null;
