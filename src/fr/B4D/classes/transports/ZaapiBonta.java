@@ -3,7 +3,6 @@ package fr.B4D.classes.transports;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Point;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.B4D.classes.Bot;
@@ -15,8 +14,6 @@ import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
 
 public class ZaapiBonta extends Transport{
-	
-	private static final long serialVersionUID = -8407002185667801637L;
 
 	private ZaapiType zaapiType;
 	
