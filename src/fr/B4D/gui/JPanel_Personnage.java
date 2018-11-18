@@ -33,7 +33,7 @@ import javax.swing.table.TableColumn;
 
 import fr.B4D.classes.Bot;
 import fr.B4D.classes.Person;
-import fr.B4D.classes.transports.Zaap;
+import fr.B4D.classes.transport.transports.Zaap;
 import fr.B4D.enu.Server;
 import fr.B4D.modules.B4DConversion;
 import fr.B4D.modules.B4DMouse;

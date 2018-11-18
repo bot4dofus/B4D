@@ -7,16 +7,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.B4D.classes.transports.B4DEdge;
-import fr.B4D.classes.transports.B4DGraph;
-import fr.B4D.classes.transports.Zaap;
-import fr.B4D.classes.transports.ZaapiBonta;
-import fr.B4D.classes.transports.ZaapiBrakmar;
-import fr.B4D.classes.transports.Transport;
-import fr.B4D.classes.transports.TransportInterface;
+import fr.B4D.classes.transport.B4DEdge;
+import fr.B4D.classes.transport.B4DGraph;
+import fr.B4D.classes.transport.Transport;
+import fr.B4D.classes.transport.TransportInterface;
+import fr.B4D.classes.transport.TransportPath;
+import fr.B4D.classes.transport.transports.Zaap;
+import fr.B4D.classes.transport.transports.ZaapiBonta;
+import fr.B4D.classes.transport.transports.ZaapiBrakmar;
 import fr.B4D.enu.TransportType;
 import fr.B4D.exceptions.B4DCannotFind;
-import fr.B4D.modules.B4DKeyboard;
+import fr.B4D.exceptions.B4DWrongPosition;
+import fr.B4D.modules.B4DChat;
 import fr.B4D.modules.B4DScreen;
 
 public final class World implements TransportInterface{
@@ -36,7 +38,6 @@ public final class World implements TransportInterface{
 		patchTransport(ZaapiBonta.getAll(),TransportType.ZaapiBonta, zaapiBontaCost);
 		patchTransport(ZaapiBrakmar.getAll(),TransportType.ZaapiBrakmar, zaapiBrakmarCost);
 	}
-
 	private void addMapsPart1() {
 		world.addB4DVertex(new Point(0, 0), true);
 		world.addB4DVertex(new Point(-33, -65), true);
@@ -6303,8 +6304,7 @@ public final class World implements TransportInterface{
 		world.addB4DVertex(new Point(-76, -45), true);
 		world.addB4DVertex(new Point(-1, -66), true);
 	}
-	
-	
+
 	  /*********************/
 	 /** PATCH TRANSPORT **/
 	/*********************/
@@ -6319,16 +6319,20 @@ public final class World implements TransportInterface{
 		}
 	}
 	
-	  /**************/
-	 /** METHODES **/
-	/**************/
+	  /***********/
+	 /** GO TO **/
+	/***********/
 	
-	public void goTo(Point destination) throws AWTException, B4DCannotFind {		
+	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
+		TransportPath transportPath = getTransportPathTo(destination);
+		transportPath.use();
+	}		
+	public TransportPath getTransportPathTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {		
 		
 		//Add potions
-		if(Bot.configuration.persons.get(0).boosterPotionPosition != null)
+		if(Bot.configuration.persons.get(0).boosterPotionPosition != null) 
 			world.addB4DEdge(Bot.configuration.persons.get(0).position, Bot.configuration.persons.get(0).boosterPotionDestination.getPosition(), TransportType.BoosterPotion, boosterPotionCost);
-
+			
 		if(Bot.configuration.persons.get(0).bontaPotionPosition != null)
 			world.addB4DEdge(Bot.configuration.persons.get(0).position, Bot.configuration.persons.get(0).bontaPotionDestination, TransportType.BontaPotion, bontaPotionCost);
 
@@ -6337,7 +6341,6 @@ public final class World implements TransportInterface{
 		
 		//Get the shortest path
 	    List<B4DEdge> shortestPath = world.getPath(Bot.configuration.persons.get(0).position, destination).getEdgeList();
-	    System.out.println(shortestPath);
 
 	    //Remove potions
 		if(Bot.configuration.persons.get(0).boosterPotionPosition != null)
@@ -6348,10 +6351,16 @@ public final class World implements TransportInterface{
 		
 		if(Bot.configuration.persons.get(0).brakmarPotionPosition != null)
 			world.removeB4DEdge(Bot.configuration.persons.get(0).position, Bot.configuration.persons.get(0).brakmarPotionDestination);
+		
+		return new TransportPath(shortestPath);
 	}
 
+	  /**************/
+	 /** METHODES **/
+	/**************/
+	
 	public Point getPosition() throws AWTException, UnsupportedFlavorException, IOException {
-		B4DKeyboard.writeChat("/s %pos%", 0.5);
+		B4DChat.sendChat("/s %pos%", 0.5);
 		String chat = B4DScreen.getChatSelection();
 		chat = chat.substring(chat.lastIndexOf("["), chat.lastIndexOf("]"));
 		int middle = chat.indexOf(";");

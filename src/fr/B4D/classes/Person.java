@@ -3,7 +3,7 @@ package fr.B4D.classes;
 import java.awt.Point;
 import java.io.Serializable;
 
-import fr.B4D.classes.transports.Zaap;
+import fr.B4D.classes.transport.transports.Zaap;
 import fr.B4D.enu.Server;
 
 public class Person implements Serializable{

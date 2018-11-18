@@ -12,7 +12,7 @@ import fr.B4D.enu.RessourceType;
 import fr.B4D.exceptions.B4DFullInventory;
 import fr.B4D.exceptions.B4DStopProgram;
 import fr.B4D.exceptions.B4DWrongPosition;
-import fr.B4D.modules.B4DKeyboard;
+import fr.B4D.modules.B4DChat;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DOther;
 import fr.B4D.modules.B4DScreen;
@@ -128,7 +128,7 @@ public class Program extends Thread{
 	private void Intro() throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException{
 		
 		B4DOther.focusDofus();
-		B4DKeyboard.writeChat("/clear");
+		B4DChat.sendChat("/clear");
 		
 		if(B4DScreen.getPixelColor(new PointF(0.28, 0.99)).getGreen() > 200){	//Le mode solo n'est pas activé
             B4DMouse.leftClick(new PointF(0.28, 0.99), false);                	//Clic sur status
