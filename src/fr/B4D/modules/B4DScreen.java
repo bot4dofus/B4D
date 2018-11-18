@@ -11,7 +11,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
+
 import fr.B4D.classes.Bot;
 import fr.B4D.classes.PointF;
 import net.sourceforge.tess4j.Tesseract;
@@ -19,9 +21,9 @@ import net.sourceforge.tess4j.TesseractException;
 
 public final class B4DScreen {
 
-	  /*****************/
-	 /* COULEUR PIXEL */
-	/*****************/
+	  /*******************/
+	 /** COULEUR PIXEL **/
+	/*******************/
 	
 	public static Color getPixelColor(Point point) throws AWTException   {
 		return new Robot().getPixelColor(point.x, point.y);
@@ -30,9 +32,9 @@ public final class B4DScreen {
 		return getPixelColor(B4DConversion.pointFToPoint(pointF));
 	}
 	
-	  /*******************/
-	 /* RECHERCHE PIXEL */
-	/*******************/
+	  /*********************/
+	 /** RECHERCHE PIXEL **/
+	/*********************/
 	
 	public static boolean searchPixel(PointF P1, PointF P2, Color min, Color max, PointF point) throws AWTException {
 		
@@ -76,9 +78,9 @@ public final class B4DScreen {
 		return found;
 	}
 	
-	  /*******/
-	 /* OCR */
-	/*******/
+	  /*********/
+	 /** OCR **/
+	/*********/
 
 	public static String OCR(Rectangle rectangle) throws AWTException, IOException, TesseractException {
 		BufferedImage image = new Robot().createScreenCapture(rectangle);
@@ -98,26 +100,23 @@ public final class B4DScreen {
 		return OCR(Bot.configuration.chatFrame);
 	}
 	
-	  /*************/
-	 /* SELECTION */
-	/*************/
+	  /***************/
+	 /** SELECTION **/
+	/***************/
 
 	public static String getSelection(Point point) throws AWTException, UnsupportedFlavorException, IOException {
 		Robot robot = new Robot();
-		B4DMouse.rightClick(point, false);
+		B4DMouse.leftClick(point, false, 0.1);
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_A);
 		robot.keyRelease(KeyEvent.VK_A);
 		robot.keyPress(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-
-		return B4DKeyboard.RecupererPressePapier();
+		B4DWait.wait(1.0);
+		return B4DKeyboard.getClipboard();
 	}
 	public static String getSelection(PointF position) throws AWTException, UnsupportedFlavorException, IOException {
 		return getSelection(B4DConversion.pointFToPoint(position));
-	}
-	public static String getChatSelection() throws AWTException, UnsupportedFlavorException, IOException  {
-		return getSelection(new Point((int)(Bot.configuration.chatFrame.x + Bot.configuration.chatFrame.width*0.95), (int)(Bot.configuration.chatFrame.y + Bot.configuration.chatFrame.height*0.95)));
 	}
 }
