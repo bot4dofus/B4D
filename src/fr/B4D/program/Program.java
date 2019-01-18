@@ -10,19 +10,16 @@ import javax.swing.JOptionPane;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Configuration;
-import fr.B4D.enu.Category;
-import fr.B4D.enu.Place;
-import fr.B4D.enu.Ressource;
-import fr.B4D.enu.RessourceType;
-import fr.B4D.exceptions.B4DCannotFind;
-import fr.B4D.exceptions.B4DFullInventory;
-import fr.B4D.exceptions.B4DWrongPosition;
+import fr.B4D.farming.Ressource;
+import fr.B4D.farming.RessourceType;
 import fr.B4D.modules.B4DChat;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DOther;
 import fr.B4D.modules.B4DScreen;
 import fr.B4D.programs.Deplacement;
 import fr.B4D.threads.StopThread;
+import fr.B4D.transport.B4DCannotFind;
+import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.TesseractException;
 

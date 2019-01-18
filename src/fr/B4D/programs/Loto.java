@@ -3,9 +3,9 @@ package fr.B4D.programs;
 import java.awt.AWTException;
 import java.io.IOException;
 
-import fr.B4D.exceptions.B4DExchangeCanceled;
+import fr.B4D.interaction.B4DExchangeCanceled;
+import fr.B4D.interaction.Exchange;
 import fr.B4D.modules.B4DChat;
-import fr.B4D.program.Exchange;
 import fr.B4D.program.ProgramInterface;
 import net.sourceforge.tess4j.TesseractException;
 

@@ -1,4 +1,4 @@
-package fr.B4D.exceptions;
+package fr.B4D.interaction;
 
 public class B4DExchangeCanceled extends Exception{
 

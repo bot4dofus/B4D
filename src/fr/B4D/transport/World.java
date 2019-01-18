@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.B4D.bot.Configuration;
-import fr.B4D.enu.TransportType;
-import fr.B4D.exceptions.B4DCannotFind;
-import fr.B4D.exceptions.B4DWrongPosition;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.transport.transports.ZaapiBonta;
 import fr.B4D.transport.transports.ZaapiBrakmar;

@@ -17,7 +17,8 @@ import fr.B4D.transport.World;
 public final class B4D{
 	private static final String configurationFormat = "B4D";	
     private static final String[] adminMacAdresses = {"24-0A-64-51-AB-D5", "AC-22-0B-14-51-EB"};		//Adresse mac de l'admin
-	public static final World world = new World();                          //Créer la variable de type Monde
+	@Deprecated
+    public static final World world = new World();                          //Créer la variable de type Monde
     
     private boolean admin;
     private static Configuration configuration;

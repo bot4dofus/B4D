@@ -3,7 +3,7 @@ package fr.B4D.program;
 import java.awt.Point;
 import java.io.Serializable;
 
-import fr.B4D.enu.Server;
+import fr.B4D.bot.Server;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.utils.PointF;
 

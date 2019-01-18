@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import fr.B4D.enu.Server;
 import fr.B4D.program.Person;
 
 public class Configuration implements Serializable{

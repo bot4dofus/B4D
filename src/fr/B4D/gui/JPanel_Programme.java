@@ -22,10 +22,10 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.enu.Category;
-import fr.B4D.enu.Place;
-import fr.B4D.enu.Ressource;
-import fr.B4D.enu.RessourceType;
+import fr.B4D.farming.Ressource;
+import fr.B4D.farming.RessourceType;
+import fr.B4D.program.Category;
+import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 
 public class JPanel_Programme extends JPanel {

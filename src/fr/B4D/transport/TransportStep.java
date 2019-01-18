@@ -5,8 +5,6 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.bot.Configuration;
-import fr.B4D.exceptions.B4DCannotFind;
-import fr.B4D.exceptions.B4DWrongPosition;
 import fr.B4D.transport.transports.BontaPotion;
 import fr.B4D.transport.transports.BoosterPotion;
 import fr.B4D.transport.transports.BrakmarPotion;

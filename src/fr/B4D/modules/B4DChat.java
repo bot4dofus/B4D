@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import fr.B4D.bot.Configuration;
-import fr.B4D.chat.Message;
-import fr.B4D.enu.Channel;
+import fr.B4D.interaction.chat.Channel;
+import fr.B4D.interaction.chat.Message;
 
 public final class B4DChat {
 	

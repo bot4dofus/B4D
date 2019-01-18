@@ -1,4 +1,4 @@
-package fr.B4D.program;
+package fr.B4D.interaction;
 
 import java.awt.AWTException;
 import java.awt.Image;
@@ -6,7 +6,6 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.Serializable;
 
-import fr.B4D.exceptions.B4DExchangeCanceled;
 import fr.B4D.modules.B4DChat;
 import fr.B4D.modules.B4DKeyboard;
 import fr.B4D.modules.B4DMouse;

@@ -1,4 +1,4 @@
-package fr.B4D.enu;
+package fr.B4D.interaction.chat;
 
 public enum Channel {
 	General,

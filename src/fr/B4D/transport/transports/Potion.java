@@ -5,10 +5,10 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.bot.Configuration;
-import fr.B4D.exceptions.B4DCannotFind;
-import fr.B4D.exceptions.B4DWrongPosition;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
+import fr.B4D.transport.B4DCannotFind;
+import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 

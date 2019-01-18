@@ -1,8 +1,7 @@
-package fr.B4D.chat;
+package fr.B4D.interaction.chat;
 
 import java.io.Serializable;
 
-import fr.B4D.enu.Channel;
 import fr.B4D.modules.B4DChat;
 
 public class Message implements Serializable{

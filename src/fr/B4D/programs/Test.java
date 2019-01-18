@@ -4,10 +4,10 @@ import java.awt.AWTException;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
-import fr.B4D.exceptions.B4DCannotFind;
-import fr.B4D.exceptions.B4DWrongPosition;
 import fr.B4D.log.Logger;
 import fr.B4D.program.ProgramInterface;
+import fr.B4D.transport.B4DCannotFind;
+import fr.B4D.transport.B4DWrongPosition;
 import net.sourceforge.tess4j.TesseractException;
 
 public final class Test {

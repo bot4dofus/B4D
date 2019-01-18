@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import org.jgrapht.graph.DefaultWeightedEdge;
-import fr.B4D.enu.TransportType;
 
 public class B4DEdge extends DefaultWeightedEdge implements Serializable {
 

@@ -3,7 +3,7 @@ package fr.B4D.transport.transports;
 import java.awt.Point;
 import java.io.Serializable;
 
-import fr.B4D.enu.TransportType;
+import fr.B4D.transport.TransportType;
 import fr.B4D.utils.PointF;
 
 public class BoosterPotion extends Potion implements Serializable{

@@ -7,8 +7,6 @@ import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DirectedWeightedPseudograph;
 
-import fr.B4D.enu.TransportType;
-
 public class B4DGraph implements Serializable{
 
 	private static final long serialVersionUID = -2532108486622081288L;
