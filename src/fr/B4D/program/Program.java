@@ -1,36 +1,40 @@
-package fr.B4D.classes;
+package fr.B4D.program;
 
 import java.awt.AWTException;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import fr.B4D.bot.B4D;
+import fr.B4D.bot.Configuration;
 import fr.B4D.enu.Category;
 import fr.B4D.enu.Place;
 import fr.B4D.enu.Ressource;
 import fr.B4D.enu.RessourceType;
+import fr.B4D.exceptions.B4DCannotFind;
 import fr.B4D.exceptions.B4DFullInventory;
-import fr.B4D.exceptions.B4DStopProgram;
 import fr.B4D.exceptions.B4DWrongPosition;
 import fr.B4D.modules.B4DChat;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DOther;
 import fr.B4D.modules.B4DScreen;
-import fr.B4D.programs.Test;
+import fr.B4D.programs.Deplacement;
 import fr.B4D.threads.StopThread;
+import fr.B4D.utils.PointF;
+import net.sourceforge.tess4j.TesseractException;
 
-public class Program extends Thread{
+public class Program extends Thread implements Serializable{
+
+	private static final long serialVersionUID = -4725926340583319625L;
 
 	  /****************/
 	 /** COLLECTION **/
 	/****************/
 	
-	public final static Program test = new Program(Place.Aucune, Category.Aucune, RessourceType.Aucun, Ressource.Aucune, Test.test);
-	public final static Program test2 = new Program(Place.Aucune, Category.Recolte, RessourceType.Plante, Ressource.Treffle, Test.test);
-	public final static Program test3 = new Program(Place.Bonta, Category.Elevage, RessourceType.Tous, Ressource.Toutes, Test.test);
-	public final static Program test4 = new Program(Place.Bonta, Category.Elevage, RessourceType.Tous, Ressource.Aucune, Test.test);
-	public final static Program test5 = new Program(Place.Brakmar, Category.Poubelle, RessourceType.Tous, Ressource.Toutes, Test.test);
-	public final static Program test6 = new Program(Place.Brakmar, Category.Puit, RessourceType.Tous, Ressource.Toutes, Test.test);
+	public final static Program deplacement = new Program(Place.Aucune, Category.Aucune, RessourceType.Aucun, Ressource.Aucune, Deplacement.deplacement);
 	
 	  /***************/
 	 /** ATTRIBUTS **/
@@ -66,12 +70,7 @@ public class Program extends Thread{
 	
   public final static ArrayList<Program> getAll(){
   	ArrayList<Program> programs = new ArrayList<Program>();
-  	programs.add(test);
-  	programs.add(test2);
-  	programs.add(test3);
-  	programs.add(test4);
-  	programs.add(test5);
-  	programs.add(test6);
+  	programs.add(deplacement);
     return programs;
   }
 	
@@ -104,7 +103,7 @@ public class Program extends Thread{
 		this.maxDeposits = maxDeposits;
 	}
 
-	/**************/
+	  /**************/
 	 /** METHODES **/
 	/**************/
 	
@@ -114,15 +113,16 @@ public class Program extends Thread{
 		try {
 			Intro();
 			Tours();
-		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException e){
+			Outro();
+			System.out.println("fin");
+			//JOptionPane.showConfirmDialog(null, "Vous avez stoppé le bot.", "Fin", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException e){
 			Outro();
 			e.getStackTrace().toString();
-			//Message mal fini
-		}catch(B4DStopProgram e){
-			Outro();
-			//Message correctement fini
+			JOptionPane.showConfirmDialog(null, "Erreur : \n" + e.getMessage(), "Erreur", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+		}finally {
+			stopThread.interrupt();	//Arrete le thread
 		}
-		stopThread.interrupt();							//Arrete le thread
 	}
 
 	private void Intro() throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException{
@@ -135,22 +135,24 @@ public class Program extends Thread{
             B4DMouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
 		}
 
-		Bot.configuration.persons.get(0).position = Bot.world.getPosition();	//Ma position théorique devient la position réelle
+		Configuration.getInstance().persons.get(0).position = B4D.world.getPosition();	//Récupère la position actuelle
 	}
-	private void Tours() throws B4DStopProgram{
-		while(maxCycles != 0 && maxDeposits != 0) {
+	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException{
+
+		System.out.println("maxCycles ="+maxCycles);
+		System.out.println("maxDeposits ="+maxDeposits);
+		while(maxCycles != 0 || maxDeposits != 0) {
 			try {
 				program.run();
 			} catch (B4DFullInventory e) {			
-				
-				if(Bot.configuration.hdvWhenFull) {
+				if(Configuration.getInstance().hdvWhenFull) {
 					//Mettre en HDV
 				}
-				if(Bot.configuration.bankWhenFull) {
+				if(Configuration.getInstance().bankWhenFull) {
 					//Mettre en banque
 				}
-				if(Bot.configuration.stopWhenFull)
-					throw new B4DStopProgram();
+				if(Configuration.getInstance().stopWhenFull)
+					break;
 				
 				maxDeposits = (maxDeposits>0 ? maxDeposits-1 : maxDeposits);	//Décrémente le nombre de depots si non infini
 				
@@ -158,9 +160,8 @@ public class Program extends Thread{
 				maxCycles = (maxCycles>0 ? maxCycles-1 : maxCycles);			//Décrémente le nombre de cycles si non infini	
 			}
 		}
-		throw new B4DStopProgram();
 	}
 	private void Outro() {
-		B4DOther.focusBot();
+		//Nothing special for the moment
 	}
 }

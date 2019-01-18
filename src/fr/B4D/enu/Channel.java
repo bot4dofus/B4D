@@ -1,6 +1,6 @@
 package fr.B4D.enu;
 
-public enum MessageType {
+public enum Channel {
 	General,
 	Team,
 	Guild,

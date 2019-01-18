@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.PointF;
+import fr.B4D.bot.Configuration;
+import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
 public final class B4DScreen {
-
+	
 	  /*******************/
 	 /** COULEUR PIXEL **/
 	/*******************/
@@ -77,13 +77,24 @@ public final class B4DScreen {
 		}
 		return found;
 	}
+
+	  /****************/
+	 /** SCREENSHOT **/
+	/****************/
+	
+	public static BufferedImage takeSreenshot(Rectangle rectangle) throws AWTException {
+		return new Robot().createScreenCapture(rectangle);
+	}
+	public static BufferedImage takeSreenshot() throws AWTException {
+		return new Robot().createScreenCapture(Configuration.getInstance().gameFrame);
+	}
 	
 	  /*********/
 	 /** OCR **/
 	/*********/
-
+	
 	public static String OCR(Rectangle rectangle) throws AWTException, IOException, TesseractException {
-		BufferedImage image = new Robot().createScreenCapture(rectangle);
+		BufferedImage image = takeSreenshot(rectangle);
 		File file = File.createTempFile("screenshot", ".png");
 		ImageIO.write(image, "png", file);
 		Tesseract tessInst = new Tesseract();
@@ -97,7 +108,7 @@ public final class B4DScreen {
 		return OCR(B4DConversion.pointFToPoint(P1), B4DConversion.pointFToPoint(P2));
 	}
 	public static String getChatOCR() throws AWTException, IOException, TesseractException  {
-		return OCR(Bot.configuration.chatFrame);
+		return OCR(Configuration.getInstance().chatFrame);
 	}
 	
 	  /***************/

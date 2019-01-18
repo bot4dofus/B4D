@@ -1,13 +1,16 @@
-package fr.B4D.classes.transport;
+package fr.B4D.transport;
 
 import java.awt.AWTException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.B4D.exceptions.B4DCannotFind;
 import fr.B4D.exceptions.B4DWrongPosition;
 
-public class TransportPath {
+public class TransportPath implements Serializable{
+	
+	private static final long serialVersionUID = 6035526052301664166L;
 	
 	private ArrayList<TransportStep> transportPath;
 	

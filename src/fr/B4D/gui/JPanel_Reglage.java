@@ -19,12 +19,14 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
-import fr.B4D.classes.Bot;
+import fr.B4D.bot.B4D;
 import fr.B4D.modules.B4DMouse;
 
 public class JPanel_Reglage extends JPanel {
 
 	private static final long serialVersionUID = -4135111440537713705L;
+
+	private B4D b4d;
 	
 	public final int width = 635;
 	public final int height = 125;
@@ -41,7 +43,9 @@ public class JPanel_Reglage extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public JPanel_Reglage() {
+	public JPanel_Reglage(B4D b4d) {
+		this.b4d = b4d;
+		
 		setBackground(new Color(33,43,53));
 		setLayout(null);
 		setVisible(false);
@@ -94,7 +98,7 @@ public class JPanel_Reglage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							bottomRight = MouseInfo.getPointerInfo().getLocation();
-							Bot.configuration.gameFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+							b4d.getConfiguration().gameFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
 							ActualiserInfos();
 						}
 					});
@@ -153,7 +157,7 @@ public class JPanel_Reglage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							bottomRight = MouseInfo.getPointerInfo().getLocation();
-							Bot.configuration.chatFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
+							b4d.getConfiguration().chatFrame = new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y);
 							ActualiserInfos();
 						}
 					});		
@@ -196,7 +200,7 @@ public class JPanel_Reglage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/ChatBarre.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Bot.configuration.chatBar = MouseInfo.getPointerInfo().getLocation();
+							b4d.getConfiguration().chatBar = MouseInfo.getPointerInfo().getLocation();
 							ActualiserInfos();
 						}
 					});
@@ -239,7 +243,7 @@ public class JPanel_Reglage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/Minimap.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Bot.configuration.minimap = MouseInfo.getPointerInfo().getLocation();
+							b4d.getConfiguration().minimap = MouseInfo.getPointerInfo().getLocation();
 							ActualiserInfos();
 						}
 					});
@@ -258,29 +262,29 @@ public class JPanel_Reglage extends JPanel {
 	/**************/
 	
 	public void ActualiserInfos() {
-		if(Bot.configuration.gameFrame != null) {
-			this.lblXY_GameFrame.setText(Bot.configuration.gameFrame.x + ":" + Bot.configuration.gameFrame.y);
-			this.lblLH_GameFrame.setText(Bot.configuration.gameFrame.width + "x" + Bot.configuration.gameFrame.height);
+		if(b4d.getConfiguration().gameFrame != null) {
+			this.lblXY_GameFrame.setText(b4d.getConfiguration().gameFrame.x + ":" + b4d.getConfiguration().gameFrame.y);
+			this.lblLH_GameFrame.setText(b4d.getConfiguration().gameFrame.width + "x" + b4d.getConfiguration().gameFrame.height);
 		}else {
 			this.lblXY_GameFrame.setText("X:Y");
 			this.lblLH_GameFrame.setText("LxH");
 		}
 		
-		if(Bot.configuration.chatFrame != null) {
-			this.lblXY_ChatFrame.setText(Bot.configuration.chatFrame.x + ":" + Bot.configuration.chatFrame.y);
-			this.lblLH_ChatFrame.setText(Bot.configuration.chatFrame.width + "x" + Bot.configuration.chatFrame.height);
+		if(b4d.getConfiguration().chatFrame != null) {
+			this.lblXY_ChatFrame.setText(b4d.getConfiguration().chatFrame.x + ":" + b4d.getConfiguration().chatFrame.y);
+			this.lblLH_ChatFrame.setText(b4d.getConfiguration().chatFrame.width + "x" + b4d.getConfiguration().chatFrame.height);
 		}else {
 			this.lblXY_ChatFrame.setText("X:Y");
 			this.lblLH_ChatFrame.setText("LxH");
 		}
 		
-		if(Bot.configuration.chatBar != null)
-			this.lblXY_ChatBar.setText(Bot.configuration.chatBar.x + ":" + Bot.configuration.chatBar.y);
+		if(b4d.getConfiguration().chatBar != null)
+			this.lblXY_ChatBar.setText(b4d.getConfiguration().chatBar.x + ":" + b4d.getConfiguration().chatBar.y);
 		else
 			this.lblXY_ChatBar.setText("X:Y");
 		
-		if(Bot.configuration.minimap != null)
-			this.lblXY_Minimap.setText(Bot.configuration.minimap.x + ":" + Bot.configuration.minimap.y);
+		if(b4d.getConfiguration().minimap != null)
+			this.lblXY_Minimap.setText(b4d.getConfiguration().minimap.x + ":" + b4d.getConfiguration().minimap.y);
 		else
 			this.lblXY_Minimap.setText("X:Y");
 	}

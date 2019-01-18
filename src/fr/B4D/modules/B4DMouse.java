@@ -9,10 +9,10 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 
-import fr.B4D.classes.PointD;
-import fr.B4D.classes.PointF;
 import fr.B4D.gui.JFrame_GetPoint;
 import fr.B4D.gui.JFrame_GetPointImage;
+import fr.B4D.utils.PointD;
+import fr.B4D.utils.PointF;
 
 public final class B4DMouse {
 		

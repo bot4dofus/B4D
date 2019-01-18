@@ -1,6 +1,7 @@
-package fr.B4D.classes.transport;
+package fr.B4D.transport;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
@@ -8,8 +9,10 @@ import org.jgrapht.graph.DirectedWeightedPseudograph;
 
 import fr.B4D.enu.TransportType;
 
-public class B4DGraph{
+public class B4DGraph implements Serializable{
 
+	private static final long serialVersionUID = -2532108486622081288L;
+	
 	private DirectedWeightedPseudograph<Point, B4DEdge> graph;
 	
 	  /******************/

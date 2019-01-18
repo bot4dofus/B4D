@@ -14,6 +14,20 @@ public final class B4DKeyboard{
 	
 	static Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 	
+	  /****************/
+	 /** SINGLE KEY **/
+	/****************/
+	
+	public static void sendKey(int keyEvent, Double time) throws AWTException {
+		Robot robot = new Robot();
+		robot.keyPress(keyEvent);
+		robot.keyRelease(keyEvent);
+		B4DWait.wait(time);
+	}
+	public static void sendKey(int keyEvent) throws AWTException {
+		sendKey(keyEvent, 0.1);
+	}
+	
 	  /********************/
 	 /** WRITE KEYBOARD **/
 	/********************/

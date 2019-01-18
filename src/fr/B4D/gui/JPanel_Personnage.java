@@ -31,16 +31,19 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableColumn;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.Person;
-import fr.B4D.classes.transport.transports.Zaap;
+import fr.B4D.bot.B4D;
+import fr.B4D.bot.Configuration;
 import fr.B4D.enu.Server;
 import fr.B4D.modules.B4DConversion;
 import fr.B4D.modules.B4DMouse;
+import fr.B4D.program.Person;
+import fr.B4D.transport.transports.Zaap;
 
 public class JPanel_Personnage extends JPanel {
 
 	private static final long serialVersionUID = 8907893091716626123L;
+
+	private B4D b4d;
 	
 	public final int width = 635;
 	public final int height = 310;
@@ -64,22 +67,24 @@ public class JPanel_Personnage extends JPanel {
 	 * Create the panel.
 	 * @param lblXY_Rappel 
 	 */
-	public JPanel_Personnage() {
-		addComponentListener(new ComponentAdapter() {
-			public void componentShown(ComponentEvent e) {
-				if(Bot.configuration.gameFrame != null) {
-					btnModifierRappel.setEnabled(true);
-					btnModifierBonta.setEnabled(true);
-					btnModifierBrakmar.setEnabled(true);
-					btnModifierSort.setEnabled(true);
-				}else {
-					btnModifierRappel.setEnabled(false);
-					btnModifierBonta.setEnabled(false);
-					btnModifierBrakmar.setEnabled(false);
-					btnModifierSort.setEnabled(false);
-				}
-			}
-		});
+	public JPanel_Personnage(B4D b4d) {
+		this.b4d = b4d;
+		
+//		addComponentListener(new ComponentAdapter() {
+//			public void componentShown(ComponentEvent e) {
+//				if(b4d.getConfiguration().gameFrame != null) {
+//					btnModifierRappel.setEnabled(true);
+//					btnModifierBonta.setEnabled(true);
+//					btnModifierBrakmar.setEnabled(true);
+//					btnModifierSort.setEnabled(true);
+//				}else {
+//					btnModifierRappel.setEnabled(false);
+//					btnModifierBonta.setEnabled(false);
+//					btnModifierBrakmar.setEnabled(false);
+//					btnModifierSort.setEnabled(false);
+//				}
+//			}
+//		});
 		setBackground(new Color(33,43,53));
 		setLayout(null);
 		setVisible(false);
@@ -96,16 +101,16 @@ public class JPanel_Personnage extends JPanel {
 			public void tableChanged(TableModelEvent evt){
 				switch(evt.getColumn()){
 					case 0:
-						Bot.configuration.persons.get(evt.getFirstRow()).account = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());
+						b4d.getConfiguration().persons.get(evt.getFirstRow()).account = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());
 						break;
 					case 1:
-						Bot.configuration.persons.get(evt.getFirstRow()).password = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
+						b4d.getConfiguration().persons.get(evt.getFirstRow()).password = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
 						break;
 					case 2:
-						Bot.configuration.persons.get(evt.getFirstRow()).server = (Server) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
+						b4d.getConfiguration().persons.get(evt.getFirstRow()).server = (Server) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
 						break;
 					case 3:
-						Bot.configuration.persons.get(evt.getFirstRow()).pseudo = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
+						b4d.getConfiguration().persons.get(evt.getFirstRow()).pseudo = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
 						break;
 				}
 				ActualiserInfos();
@@ -114,7 +119,14 @@ public class JPanel_Personnage extends JPanel {
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent e) {
 				if(!e.getValueIsAdjusting()) {
-					ActualiserInfos(Bot.configuration.persons.get(table.getSelectedRow()));
+					if(b4d.getConfiguration().gameFrame != null) {
+						btnModifierRappel.setEnabled(true);
+						comboBox_Zaaps.setEnabled(true);
+						btnModifierBonta.setEnabled(true);
+						btnModifierBrakmar.setEnabled(true);
+						btnModifierSort.setEnabled(true);
+					}
+					ActualiserInfos(b4d.getConfiguration().persons.get(table.getSelectedRow()));
 				}
 			}
 		});
@@ -122,7 +134,7 @@ public class JPanel_Personnage extends JPanel {
 		JButton btnNouveau = new JButton("Nouveau");
 		btnNouveau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Bot.configuration.persons.add(new Person());
+				b4d.getConfiguration().persons.add(new Person());
 				ActualiserInfos();
 			}
 		});
@@ -135,7 +147,7 @@ public class JPanel_Personnage extends JPanel {
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow() != -1) {
-					Bot.configuration.persons.remove(table.getSelectedRow());
+					b4d.getConfiguration().persons.remove(table.getSelectedRow());
 					ActualiserInfos();
 				}
 			}
@@ -149,9 +161,9 @@ public class JPanel_Personnage extends JPanel {
 		btnJouerCePersonnage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow() != -1) {
-					Person personnage = Bot.configuration.persons.get(table.getSelectedRow());
-					Bot.configuration.persons.remove(personnage);
-					Bot.configuration.persons.add(0,personnage);
+					Person personnage = b4d.getConfiguration().persons.get(table.getSelectedRow());
+					b4d.getConfiguration().persons.remove(personnage);
+					b4d.getConfiguration().persons.add(0,personnage);
 					table.setRowSelectionInterval(0, 0);
 					ActualiserInfos();
 				}
@@ -200,7 +212,9 @@ public class JPanel_Personnage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionRappel.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Person person = Bot.configuration.persons.get(table.getSelectedRow());
+							Person person = b4d.getConfiguration().persons.get(table.getSelectedRow());
+							System.out.println(Configuration.getInstance());
+							System.out.println(b4d.getConfiguration());
 							person.boosterPotionPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
 							ActualiserInfos(person);
 						}
@@ -226,7 +240,7 @@ public class JPanel_Personnage extends JPanel {
 		    public void actionPerformed(ActionEvent e) {
 		    	if(table.getSelectedRow() != -1) {
 					try {
-						Bot.configuration.persons.get(table.getSelectedRow()).boosterPotionDestination = Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString());
+						b4d.getConfiguration().persons.get(table.getSelectedRow()).boosterPotionDestination = Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString());
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -272,7 +286,7 @@ public class JPanel_Personnage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionBonta.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Person person = Bot.configuration.persons.get(table.getSelectedRow());
+							Person person = b4d.getConfiguration().persons.get(table.getSelectedRow());
 							person.bontaPotionPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
 							ActualiserInfos(person);
 						}
@@ -333,7 +347,7 @@ public class JPanel_Personnage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionBrakmar.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Person person = Bot.configuration.persons.get(table.getSelectedRow());
+							Person person = b4d.getConfiguration().persons.get(table.getSelectedRow());
 							person.brakmarPotionPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
 							ActualiserInfos(person);
 						}
@@ -395,7 +409,7 @@ public class JPanel_Personnage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/Sort.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Person person = Bot.configuration.persons.get(table.getSelectedRow());
+							Person person = b4d.getConfiguration().persons.get(table.getSelectedRow());
 							person.spellPosition = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
 							ActualiserInfos(person);
 						}
@@ -418,7 +432,7 @@ public class JPanel_Personnage extends JPanel {
 		
 		this.dataTable.removeAllElements();
 		
-		for(Person personnage:Bot.configuration.persons) {
+		for(Person personnage:b4d.getConfiguration().persons) {
 			Vector<String> row = new Vector<String>();
 			row.add(personnage.account);
 			row.add(personnage.password.replaceAll("(?s).", "*"));

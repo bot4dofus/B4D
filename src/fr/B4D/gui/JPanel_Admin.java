@@ -1,24 +1,33 @@
 package fr.B4D.gui;
+import java.awt.AWTException;
 import java.awt.Color;
-
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import fr.B4D.classes.Bot;
-import fr.B4D.exceptions.B4DFullInventory;
-import fr.B4D.programs.Test;
-
-import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.HeadlessException;
+import java.awt.MouseInfo;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+import fr.B4D.bot.B4D;
+import fr.B4D.modules.B4DConversion;
+import fr.B4D.modules.B4DKeyboard;
+import fr.B4D.modules.B4DMouse;
+import fr.B4D.programs.Test;
+import fr.B4D.utils.PointF;
 
 public class JPanel_Admin extends JPanel {
 
 	private static final long serialVersionUID = -7603368625926813641L;
+
+	private B4D b4d;
 	
 	public final int width = 635;
 	public final int height = 70;
@@ -29,10 +38,12 @@ public class JPanel_Admin extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public JPanel_Admin() {
+	public JPanel_Admin(B4D b4d) {
+		this.b4d = b4d;
+		
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				if(Bot.configuration.gameFrame != null && Bot.configuration.chatFrame != null && Bot.configuration.chatBar != null && Bot.configuration.minimap != null) {
+				if(b4d.getConfiguration().gameFrame != null && b4d.getConfiguration().chatFrame != null && b4d.getConfiguration().chatBar != null && b4d.getConfiguration().minimap != null) {
 					btnStart.setEnabled(true);
 					btnRecord.setEnabled(true);
 				}else {
@@ -58,7 +69,7 @@ public class JPanel_Admin extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				try {					
 					Test.test.run();
-				} catch (B4DFullInventory e1) {
+				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			}
@@ -79,6 +90,19 @@ public class JPanel_Admin extends JPanel {
 		btnRecord = new JButton("Commencer");
 		btnRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				B4DMouse.getPoint(
+						"Cliquez à la position voulue.",
+						new MouseAdapter() {
+							public void mousePressed(MouseEvent e) {
+								try {
+									PointF point = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
+									String out = "new PointF(" + point.x + ", " + point.y + ")";
+									B4DKeyboard.setClipboard(out);
+								} catch (AWTException | HeadlessException ex) {
+									ex.printStackTrace();
+								}
+							}
+						});
 			}
 		});
 		btnRecord.setFont(new Font("Tahoma", Font.PLAIN, 13));

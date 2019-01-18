@@ -13,8 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.IOException;
-import java.net.SocketException;
-import java.net.UnknownHostException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,34 +20,54 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.Configuration;
-import fr.B4D.modules.B4DOther;
+import fr.B4D.bot.B4D;
+import fr.B4D.log.Logger;
 
-public class JFrame_B4D extends Thread{
+public class JFrame_B4D extends JFrame{
 
+	private static final long serialVersionUID = -7925109992438988807L;
+	
 	final static Color selectedTab = new Color(33,43,53);
 	final static Color unSelectedTab = new Color(52,63,73);
 
-	final static JPanel_Programme programPanel = new JPanel_Programme();
-	final static JPanel_Personnage personPanel = new JPanel_Personnage();
-	final static JPanel_Reglage settingPanel = new JPanel_Reglage();
-	final static JPanel_Admin adminPanel = new JPanel_Admin();
+	static JPanel_Programme programPanel;
+	static JPanel_Personnage personPanel;
+	static JPanel_Reglage settingPanel;
+	static JPanel_Admin adminPanel;
 
 	private Point offset;
 	final static int offset_x_Form = 20, offset_y_Form = 70;	
 	
-	public JFrame frame;										//Fenetre B4D
 	private JLabel lblProgrammes = new JLabel("Programmes");	//Bouton programmes
 	private JLabel lblPersonnages = new JLabel("Personnages");	//Bouton personnages
 	private JLabel lblReglages = new JLabel("R\u00E9glages");	//Bouton reglages
 	private JLabel lblAdmin = new JLabel("Admin");				//Bouton admin
 
+	private B4D b4d;
+	
+	public static void main(String[] args) {
+		try {
+			JFrame_B4D windowB4D = new JFrame_B4D();
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			windowB4D.setVisible(true);			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Create the application.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public JFrame_B4D(){
+	public JFrame_B4D() throws ClassNotFoundException, IOException{
+		b4d = new B4D();
+		programPanel = new JPanel_Programme(this, b4d);
+		personPanel = new JPanel_Personnage(b4d);
+		settingPanel = new JPanel_Reglage(b4d);
+		adminPanel = new JPanel_Admin(b4d);
 		initialize();
 	}
 
@@ -57,31 +75,30 @@ public class JFrame_B4D extends Thread{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setUndecorated(true);
-		frame.setResizable(false);
-		frame.setBackground(Color.GRAY);
-		frame.getContentPane().setBackground(unSelectedTab);
-		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/icones/Dofus_Rouge.png")));	//Defini l'icone
-		frame.setTitle("B4D");									//Defini le nom de la fenetre
-		frame.setBounds(100, 100, 807, 541);					//Defini les coordonnees
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Defini l'action lors de l'appui sur la cloix
-		frame.getContentPane().setLayout(null);
+		setUndecorated(true);
+		setResizable(false);
+		setBackground(Color.GRAY);
+		getContentPane().setBackground(unSelectedTab);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/icones/Dofus_Rouge.png")));	//Defini l'icone
+		setTitle("B4D");									//Defini le nom de la fenetre
+		setBounds(100, 100, 807, 541);					//Defini les coordonnees
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Defini l'action lors de l'appui sur la cloix
+		getContentPane().setLayout(null);
 
 		programPanel.setBounds(10, 60, 635, 235);
-		frame.getContentPane().add(programPanel);
+		getContentPane().add(programPanel);
 		personPanel.setBounds(10, 60, personPanel.width, personPanel.height);
-		frame.getContentPane().add(personPanel);
+		getContentPane().add(personPanel);
 		settingPanel.setBounds(10, 60, settingPanel.width, settingPanel.height);
-		frame.getContentPane().add(settingPanel);
+		getContentPane().add(settingPanel);
 		adminPanel.setBounds(10, 60, adminPanel.width, adminPanel.height);
-		frame.getContentPane().add(adminPanel);
+		getContentPane().add(adminPanel);
 		
 		JLabel lblReduce = new JLabel("-");
 		lblReduce.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frame.setState(Frame.ICONIFIED);
+				setState(Frame.ICONIFIED);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -96,7 +113,7 @@ public class JFrame_B4D extends Thread{
 		lblReduce.setForeground(Color.WHITE);
 		lblReduce.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblReduce.setBounds(595, 0, 30, 30);
-		frame.getContentPane().add(lblReduce);		
+		getContentPane().add(lblReduce);		
 		
 		JLabel lblClose = new JLabel("x");
 		lblClose.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -104,11 +121,11 @@ public class JFrame_B4D extends Thread{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					Bot.configurationSerialization.Serialize(Bot.configuration);
-				} catch (IOException e1) {
-					e1.printStackTrace();
+					b4d.saveConfiguration();
+				} catch (ClassNotFoundException | IOException ex) {
+					Logger.error("Impossible d'importer le fichier, fichier corrompu.", ex);
 				}
-				frame.dispose();
+				dispose();
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -123,20 +140,20 @@ public class JFrame_B4D extends Thread{
 		lblClose.setForeground(Color.WHITE);
 		lblClose.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblClose.setBounds(625, 0, 30, 30);
-		frame.getContentPane().add(lblClose);
+		getContentPane().add(lblClose);
 		
 		JLabel lblBd = new JLabel("Bot for Dofus");
 		lblBd.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				offset = frame.getMousePosition();
+				offset = getMousePosition();
 			}
 		});
 		lblBd.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				Point point = MouseInfo.getPointerInfo().getLocation();
-				frame.setLocation(point.x - (int)offset.getX(), point.y - (int)offset.getY());
+				setLocation(point.x - (int)offset.getX(), point.y - (int)offset.getY());
 			}
 		});
 		
@@ -146,7 +163,7 @@ public class JFrame_B4D extends Thread{
 		lblBd.setFont(new Font("Times New Roman", Font.ITALIC, 20));
 		lblBd.setBounds(0, 0, 655, 30);
 		lblBd.setIcon(new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/icones/Dofus.png"))));
-		frame.getContentPane().add(lblBd);
+		getContentPane().add(lblBd);
 		
 		/** PROGRAMMES PANEL **/
 		lblProgrammes.addMouseListener(new MouseAdapter() {
@@ -171,7 +188,7 @@ public class JFrame_B4D extends Thread{
 		lblProgrammes.setForeground(Color.WHITE);
 		lblProgrammes.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblProgrammes.setBounds(10, 30, 159, 30);
-		frame.getContentPane().add(lblProgrammes);
+		getContentPane().add(lblProgrammes);
 		
 		/** PERSONNAGES PANEL **/
 		lblPersonnages.addMouseListener(new MouseAdapter() {
@@ -196,7 +213,7 @@ public class JFrame_B4D extends Thread{
 		lblPersonnages.setForeground(Color.WHITE);
 		lblPersonnages.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblPersonnages.setBounds(169, 30, 159, 30);
-		frame.getContentPane().add(lblPersonnages);
+		getContentPane().add(lblPersonnages);
 		
 		/** REGLAGES PANEL **/
 		lblReglages.addMouseListener(new MouseAdapter() {
@@ -221,7 +238,7 @@ public class JFrame_B4D extends Thread{
 		lblReglages.setForeground(Color.WHITE);
 		lblReglages.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblReglages.setBounds(328, 30, 159, 30);
-		frame.getContentPane().add(lblReglages);
+		getContentPane().add(lblReglages);
 		
 		/** ADMIN PANEL **/
 		lblAdmin.addMouseListener(new MouseAdapter() {
@@ -240,12 +257,8 @@ public class JFrame_B4D extends Thread{
 					lblAdmin.setBackground(unSelectedTab);
 			}
 		});
-		try {
-			if(!B4DOther.getMacAdress().equals(Bot.adminMacAdresse))
-				lblAdmin.setVisible(false);
-		} catch (SocketException | UnknownHostException e) {
-			e.printStackTrace();
-		}
+		if(b4d.isAdmin())
+			lblAdmin.setVisible(false);
 	
 		lblAdmin.setOpaque(true);
 		lblAdmin.setBackground(unSelectedTab);
@@ -253,7 +266,7 @@ public class JFrame_B4D extends Thread{
 		lblAdmin.setForeground(Color.WHITE);
 		lblAdmin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblAdmin.setBounds(487, 30, 158, 30);
-		frame.getContentPane().add(lblAdmin);
+		getContentPane().add(lblAdmin);
 		
 		JPopupMenu popupMenu = new JPopupMenu();
 		
@@ -263,17 +276,11 @@ public class JFrame_B4D extends Thread{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Configuration configuration = Bot.configurationSerialization.Open();
-					if (configuration != null) {
-						Bot.configuration = configuration;
-						personPanel.ActualiserInfos();
-						settingPanel.ActualiserInfos();
-					}
-				} catch (ClassNotFoundException e1) {
-					e1.printStackTrace();						
-				} catch (IOException e1) {
-					System.out.println("Impossible de lire le fichier, fichier corrompu.");
-					e1.printStackTrace();
+					b4d.importConfiguration();
+					personPanel.ActualiserInfos();
+					settingPanel.ActualiserInfos();
+				} catch (ClassNotFoundException | IOException ex) {
+					Logger.error("Impossible d'importer le fichier, fichier corrompu.", ex);
 				}
 			}
 		});
@@ -284,16 +291,16 @@ public class JFrame_B4D extends Thread{
 		itemExport.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Bot.configurationSerialization.SaveAs(Bot.configuration);
-				} catch (ClassNotFoundException | IOException e1) {
-					e1.printStackTrace();
-				}
+					try {
+						b4d.exportConfiguration();
+					} catch (ClassNotFoundException | IOException ex) {
+						Logger.error("Impossible d'exporter le fichier.", ex);
+					}
 			}
 		});
 		popupMenu.add(itemExport);
 		
-		frame.addMouseListener(new MouseAdapter() {
+		addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (e.isPopupTrigger()) {
 					showMenu(e);
@@ -329,25 +336,25 @@ public class JFrame_B4D extends Thread{
 		switch(index) {
 		case 0:
 			lblProgrammes.setBackground(selectedTab);
-			frame.setSize(programPanel.width + offset_x_Form, programPanel.height + offset_y_Form);
+			setSize(programPanel.width + offset_x_Form, programPanel.height + offset_y_Form);
 			programPanel.setVisible(true);
 			break;
 		case 1:
 			lblPersonnages.setBackground(selectedTab);
-			frame.setSize(personPanel.width + offset_x_Form, personPanel.height + offset_y_Form);
+			setSize(personPanel.width + offset_x_Form, personPanel.height + offset_y_Form);
 			personPanel.setVisible(true);
 			break;
 		case 2:
 			lblReglages.setBackground(selectedTab);
-			frame.setSize(settingPanel.width + offset_x_Form, settingPanel.height + offset_y_Form);
+			setSize(settingPanel.width + offset_x_Form, settingPanel.height + offset_y_Form);
 			settingPanel.setVisible(true);
 			break;
 		case 3:
 			lblAdmin.setBackground(selectedTab);
-			frame.setSize(adminPanel.width + offset_x_Form, adminPanel.height + offset_y_Form);
+			setSize(adminPanel.width + offset_x_Form, adminPanel.height + offset_y_Form);
 			adminPanel.setVisible(true);
 			break;
-		}	
+		}
 	}
 }
 

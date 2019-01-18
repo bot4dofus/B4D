@@ -13,22 +13,27 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.Program;
+import fr.B4D.bot.B4D;
 import fr.B4D.enu.Category;
 import fr.B4D.enu.Place;
 import fr.B4D.enu.Ressource;
 import fr.B4D.enu.RessourceType;
+import fr.B4D.program.Program;
 
 public class JPanel_Programme extends JPanel {
 
 	private static final long serialVersionUID = -1975429297614634621L;
+
+	private JFrame parent;
+	private B4D b4d;
 	
 	public final int width = 635;
 	public final int height = 235;
@@ -45,14 +50,17 @@ public class JPanel_Programme extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public JPanel_Programme() {
+	public JPanel_Programme(JFrame parent, B4D b4d) {
+		this.parent = parent;
+		this.b4d = b4d;
+		
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
 				Program.getAll().stream().filter(p ->
 					((DefaultComboBoxModel<Place>)comboBox_Place.getModel()).getIndexOf(p.getPlace()) < 0)
 				.forEach(p -> comboBox_Place.addItem(p.getPlace()));
 				
-				if(Bot.configuration.gameFrame != null && Bot.configuration.chatFrame != null && Bot.configuration.chatBar != null && Bot.configuration.minimap != null) {
+				if(b4d.getConfiguration().gameFrame != null && b4d.getConfiguration().chatFrame != null && b4d.getConfiguration().chatBar != null && b4d.getConfiguration().minimap != null) {
 					button_Start.setEnabled(true);
 				}else {
 					button_Start.setEnabled(false);
@@ -265,10 +273,12 @@ public class JPanel_Programme extends JPanel {
 				program.setMaxCycles(Integer.valueOf(textField_Turns.getText()));
 				program.setMaxDeposits(Integer.valueOf(textField_Deposits.getText()));
 				program.start();
+				
 				try {
 					program.join();
+					parent.requestFocus();
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					JOptionPane.showConfirmDialog(null, "Vous avez stoppé le bot.", "Fin", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});

@@ -1,18 +1,21 @@
-package fr.B4D.classes.transport.transports;
+package fr.B4D.transport.transports;
 
 import java.awt.AWTException;
 import java.awt.Point;
+import java.io.Serializable;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.PointF;
-import fr.B4D.classes.transport.Transport;
+import fr.B4D.bot.Configuration;
 import fr.B4D.enu.TransportType;
 import fr.B4D.exceptions.B4DCannotFind;
 import fr.B4D.exceptions.B4DWrongPosition;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
+import fr.B4D.transport.Transport;
+import fr.B4D.utils.PointF;
 
-public class Walk extends Transport{
+public class Walk extends Transport implements Serializable{
+	
+	private static final long serialVersionUID = 3052740487765574838L;
 	
 	  /****************/
 	 /** CONSTANTES **/
@@ -42,7 +45,7 @@ public class Walk extends Transport{
 	
 	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
 		
-		if (!Bot.configuration.persons.get(0).position.equals(this.getPosition()))
+		if (!Configuration.getInstance().persons.get(0).position.equals(this.getPosition()))
 			throw new B4DWrongPosition();
 		
 		Point move = new Point(destination.x - super.getPosition().x, destination.y - super.getPosition().y);
@@ -56,6 +59,6 @@ public class Walk extends Transport{
 			B4DMouse.leftClick(goRight, true);
 
 		B4DWait.waitForMap();
-		Bot.configuration.persons.get(0).position = destination;
+		Configuration.getInstance().persons.get(0).position = destination;
 	}
 }

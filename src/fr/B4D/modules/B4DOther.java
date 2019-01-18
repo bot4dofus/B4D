@@ -5,15 +5,13 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import fr.B4D.classes.Bot;
-
 public final class B4DOther {
 		
 	  /*****************/
 	 /** ADRESSE MAC **/
 	/*****************/
 	
-	public static String getMacAdress() throws SocketException, UnknownHostException {
+	public static String getMacAddress() throws SocketException, UnknownHostException {
 
 		NetworkInterface network = NetworkInterface.getByInetAddress(InetAddress.getLocalHost());	
 		byte[] mac = network.getHardwareAddress();
@@ -22,10 +20,6 @@ public final class B4DOther {
 			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));		
 		}
 		return sb.toString();
-	}
-
-	public static void focusBot() {
-		Bot.window.frame.requestFocus();	//Donne le focus au bot
 	}
 	
 	public static void focusDofus() {

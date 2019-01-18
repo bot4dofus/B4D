@@ -1,28 +1,25 @@
-package fr.B4D.classes;
+package fr.B4D.transport;
 
 import java.awt.AWTException;
 import java.awt.Point;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.B4D.classes.transport.B4DEdge;
-import fr.B4D.classes.transport.B4DGraph;
-import fr.B4D.classes.transport.Transport;
-import fr.B4D.classes.transport.TransportInterface;
-import fr.B4D.classes.transport.TransportPath;
-import fr.B4D.classes.transport.transports.Zaap;
-import fr.B4D.classes.transport.transports.ZaapiBonta;
-import fr.B4D.classes.transport.transports.ZaapiBrakmar;
+import fr.B4D.bot.Configuration;
 import fr.B4D.enu.TransportType;
 import fr.B4D.exceptions.B4DCannotFind;
 import fr.B4D.exceptions.B4DWrongPosition;
-import fr.B4D.modules.B4DChat;
-import fr.B4D.modules.B4DScreen;
+import fr.B4D.transport.transports.Zaap;
+import fr.B4D.transport.transports.ZaapiBonta;
+import fr.B4D.transport.transports.ZaapiBrakmar;
 
-public final class World implements TransportInterface{
+public final class World implements TransportInterface, Serializable{
 
+	private static final long serialVersionUID = 3069416510525087204L;
+	
 	private B4DGraph world;
 	
 	  /******************/
@@ -6330,27 +6327,27 @@ public final class World implements TransportInterface{
 	public TransportPath getTransportPathTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {		
 		
 		//Add potions
-		if(Bot.configuration.persons.get(0).boosterPotionPosition != null) 
-			world.addB4DEdge(Bot.configuration.persons.get(0).position, Bot.configuration.persons.get(0).boosterPotionDestination.getPosition(), TransportType.BoosterPotion, boosterPotionCost);
+		if(Configuration.getInstance().persons.get(0).boosterPotionPosition != null) 
+			world.addB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).boosterPotionDestination.getPosition(), TransportType.BoosterPotion, boosterPotionCost);
 			
-		if(Bot.configuration.persons.get(0).bontaPotionPosition != null)
-			world.addB4DEdge(Bot.configuration.persons.get(0).position, Bot.configuration.persons.get(0).bontaPotionDestination, TransportType.BontaPotion, bontaPotionCost);
+		if(Configuration.getInstance().persons.get(0).bontaPotionPosition != null)
+			world.addB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).bontaPotionDestination, TransportType.BontaPotion, bontaPotionCost);
 
-		if(Bot.configuration.persons.get(0).brakmarPotionPosition != null)
-			world.addB4DEdge(Bot.configuration.persons.get(0).position, Bot.configuration.persons.get(0).brakmarPotionDestination, TransportType.BrakmarPotion, brakmarPotionCost);
+		if(Configuration.getInstance().persons.get(0).brakmarPotionPosition != null)
+			world.addB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).brakmarPotionDestination, TransportType.BrakmarPotion, brakmarPotionCost);
 		
 		//Get the shortest path
-	    List<B4DEdge> shortestPath = world.getPath(Bot.configuration.persons.get(0).position, destination).getEdgeList();
+	    List<B4DEdge> shortestPath = world.getPath(Configuration.getInstance().persons.get(0).position, destination).getEdgeList();
 
 	    //Remove potions
-		if(Bot.configuration.persons.get(0).boosterPotionPosition != null)
-			world.removeB4DEdge(Bot.configuration.persons.get(0).position, Bot.configuration.persons.get(0).boosterPotionDestination.getPosition());
+		if(Configuration.getInstance().persons.get(0).boosterPotionPosition != null)
+			world.removeB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).boosterPotionDestination.getPosition());
 		
-		if(Bot.configuration.persons.get(0).bontaPotionPosition != null)
-			world.removeB4DEdge(Bot.configuration.persons.get(0).position, Bot.configuration.persons.get(0).bontaPotionDestination);
+		if(Configuration.getInstance().persons.get(0).bontaPotionPosition != null)
+			world.removeB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).bontaPotionDestination);
 		
-		if(Bot.configuration.persons.get(0).brakmarPotionPosition != null)
-			world.removeB4DEdge(Bot.configuration.persons.get(0).position, Bot.configuration.persons.get(0).brakmarPotionDestination);
+		if(Configuration.getInstance().persons.get(0).brakmarPotionPosition != null)
+			world.removeB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).brakmarPotionDestination);
 		
 		return new TransportPath(shortestPath);
 	}
@@ -6360,11 +6357,12 @@ public final class World implements TransportInterface{
 	/**************/
 	
 	public Point getPosition() throws AWTException, UnsupportedFlavorException, IOException {
-		B4DChat.sendChat("/s %pos%", 0.5);
-		String chat = B4DScreen.getChatSelection();
-		chat = chat.substring(chat.lastIndexOf("["), chat.lastIndexOf("]"));
-		int middle = chat.indexOf(";");
-		return new Point(Integer.valueOf(chat.substring(0, middle)),Integer.valueOf(chat.substring(middle)));
+		/*B4DChat.sendChat("/s %pos%", 0);
+		ArrayList<Message> messages = B4DChat.parseChat();		
+		Message reponse = messages.stream().filter(m -> m.getMessageType().equals(MessageType.General) && m.getName().equals(Bot.configuration.persons.get(0).pseudo)).findFirst().orElse(null);
+		String[] coords = reponse.getText().split("\\[|\\]|;");
+		return new Point(Integer.valueOf(coords[1]),Integer.valueOf(coords[2]));*/
+		return new Point(3,-18);
 	}
 	
 }

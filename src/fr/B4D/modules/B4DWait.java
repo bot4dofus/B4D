@@ -4,12 +4,12 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.PointF;
-import fr.B4D.threads.PixelThread;
+import fr.B4D.bot.Configuration;
 import fr.B4D.threads.ColorThread;
-import fr.B4D.threads.OCRThread;
 import fr.B4D.threads.KeyboardThread;
+import fr.B4D.threads.OCRThread;
+import fr.B4D.threads.PixelThread;
+import fr.B4D.utils.PointF;
 
 public final class B4DWait {
 	
@@ -29,26 +29,23 @@ public final class B4DWait {
 	 /* ATTENTE SUR OCR */
 	/*******************/
 	
-	public static boolean waitForOCR(Rectangle rectangle, String text, double timeOut) {
-		Thread OCRThread = new OCRThread(rectangle, text);
-		OCRThread.start();
+	public static String waitForOCR(Rectangle rectangle, String text, double timeOut) {
+		OCRThread ocrThread = new OCRThread(rectangle, text);
+		ocrThread.start();
 		try {
-			OCRThread.join((long) (timeOut*1000));
+			ocrThread.join((long) (timeOut*1000));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-			return false;
 		}
 		
-		if(OCRThread.isAlive()) {
-			OCRThread.interrupt();
-			return true;
-		}else
-			return false;
+		if(ocrThread.isAlive())
+			ocrThread.interrupt();
+		return ocrThread.getResult();
 	}
-	public static boolean waitForOCR(Point P1, Point P2, String text, double timeOut) {
+	public static String waitForOCR(Point P1, Point P2, String text, double timeOut) {
 		return waitForOCR(new Rectangle(P1.x,  P1.y, P2.x - P1.x, P2.y - P1.y), text, timeOut);
 	}
-	public static boolean waitForOCR(PointF P1, PointF P2, String text, double timeOut) {
+	public static String waitForOCR(PointF P1, PointF P2, String text, double timeOut) {
 		return waitForOCR(B4DConversion.pointFToPoint(P1), B4DConversion.pointFToPoint(P2), text, timeOut);
 	}
 	
@@ -126,7 +123,7 @@ public final class B4DWait {
 	/*********************/
 	
 	public static boolean waitForMap(double timeOut) {
-		return waitForChangingPixel(B4DConversion.pointToPointF(Bot.configuration.minimap), timeOut);
+		return waitForChangingPixel(B4DConversion.pointToPointF(Configuration.getInstance().minimap), timeOut);
 	}
 	public static boolean waitForMap() {
 		return waitForMap(15);

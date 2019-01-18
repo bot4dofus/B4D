@@ -2,9 +2,9 @@ package fr.B4D.modules;
 
 import java.awt.Point;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.PointD;
-import fr.B4D.classes.PointF;
+import fr.B4D.bot.Configuration;
+import fr.B4D.utils.PointD;
+import fr.B4D.utils.PointF;
 
 public final class B4DConversion {
 	
@@ -24,8 +24,8 @@ public final class B4DConversion {
 
     /** Ecran > Proportionnel **/
     public static PointF pointToPointF(Point point){
-    	double X = (point.getX() - Bot.configuration.gameFrame.getX()) / Bot.configuration.gameFrame.getWidth();
-    	double Y = (point.getY() - Bot.configuration.gameFrame.getY()) / Bot.configuration.gameFrame.getHeight();
+    	double X = (point.getX() - Configuration.getInstance().gameFrame.getX()) / Configuration.getInstance().gameFrame.getWidth();
+    	double Y = (point.getY() - Configuration.getInstance().gameFrame.getY()) / Configuration.getInstance().gameFrame.getHeight();
         return new PointF(Math.round(X*Precision)/Precision, Math.round(Y*Precision)/Precision);
     }
 
@@ -42,8 +42,8 @@ public final class B4DConversion {
     
     /** Proportionnel > Ecran **/
     public static Point pointFToPoint(PointF point) {
-    	double X = (point.getX() * Bot.configuration.gameFrame.getWidth()) + Bot.configuration.gameFrame.getX();
-    	double Y = (point.getY() * Bot.configuration.gameFrame.getHeight()) + Bot.configuration.gameFrame.getY();
+    	double X = (point.getX() * Configuration.getInstance().gameFrame.getWidth()) + Configuration.getInstance().gameFrame.getX();
+    	double Y = (point.getY() * Configuration.getInstance().gameFrame.getHeight()) + Configuration.getInstance().gameFrame.getY();
         return new Point((int)X, (int)Y);
     }
 

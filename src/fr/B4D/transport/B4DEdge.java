@@ -1,11 +1,12 @@
-package fr.B4D.classes.transport;
+package fr.B4D.transport;
 
 import java.awt.Point;
+import java.io.Serializable;
 
 import org.jgrapht.graph.DefaultWeightedEdge;
 import fr.B4D.enu.TransportType;
 
-public class B4DEdge extends DefaultWeightedEdge {
+public class B4DEdge extends DefaultWeightedEdge implements Serializable {
 
 	private static final long serialVersionUID = -1834995736537050606L;
 	

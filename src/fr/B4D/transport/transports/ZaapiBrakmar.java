@@ -1,22 +1,25 @@
-package fr.B4D.classes.transport.transports;
+package fr.B4D.transport.transports;
 
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.PointF;
-import fr.B4D.classes.transport.Transport;
+import fr.B4D.bot.Configuration;
 import fr.B4D.enu.ZaapiType;
 import fr.B4D.exceptions.B4DCannotFind;
 import fr.B4D.exceptions.B4DWrongPosition;
 import fr.B4D.modules.B4DKeyboard;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
+import fr.B4D.transport.Transport;
+import fr.B4D.utils.PointF;
 
-public class ZaapiBrakmar extends Transport{
+public class ZaapiBrakmar extends Transport implements Serializable{
 	
+	private static final long serialVersionUID = -5452793287981409711L;
+
 	private ZaapiType zaapiType;
 	
 	  /****************/
@@ -147,7 +150,7 @@ public class ZaapiBrakmar extends Transport{
 	/**************/
 	
 	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
-		if (!Bot.configuration.persons.get(0).position.equals(this.getPosition()))
+		if (!Configuration.getInstance().persons.get(0).position.equals(this.getPosition()))
 			throw new B4DWrongPosition();
 		
 		B4DMouse.leftClick(super.getPositionF(), false);
@@ -171,6 +174,6 @@ public class ZaapiBrakmar extends Transport{
 	    B4DMouse.doubleLeftClick(new PointF(0.4736, 0.2891), false);
 	    
 	    B4DWait.waitForMap();
-	    Bot.configuration.persons.get(0).position = destination;
+	    Configuration.getInstance().persons.get(0).position = destination;
 	}
 }

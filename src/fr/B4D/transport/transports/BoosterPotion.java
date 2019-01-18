@@ -1,13 +1,16 @@
-package fr.B4D.classes.transport.transports;
+package fr.B4D.transport.transports;
 
 import java.awt.Point;
+import java.io.Serializable;
 
-import fr.B4D.classes.PointF;
 import fr.B4D.enu.TransportType;
+import fr.B4D.utils.PointF;
 
-public class BoosterPotion extends Potion{
+public class BoosterPotion extends Potion implements Serializable{
 	
-	  /******************/
+	private static final long serialVersionUID = -856550534597183430L;
+
+	/******************/
 	 /** CONSTRUCTEUR **/
 	/******************/
 	

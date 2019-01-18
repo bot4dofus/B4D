@@ -1,10 +1,11 @@
-package fr.B4D.classes;
+package fr.B4D.program;
 
 import java.awt.Point;
 import java.io.Serializable;
 
-import fr.B4D.classes.transport.transports.Zaap;
 import fr.B4D.enu.Server;
+import fr.B4D.transport.transports.Zaap;
+import fr.B4D.utils.PointF;
 
 public class Person implements Serializable{
 

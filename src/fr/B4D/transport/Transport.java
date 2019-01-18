@@ -1,10 +1,13 @@
-package fr.B4D.classes.transport;
+package fr.B4D.transport;
 
 import java.awt.Point;
+import java.io.Serializable;
 
-import fr.B4D.classes.PointF;
+import fr.B4D.utils.PointF;
 
-public abstract class Transport implements TransportInterface{
+public abstract class Transport implements TransportInterface, Serializable{
+	
+	private static final long serialVersionUID = 6764531654498330943L;
 	
 	private String name;
 	private Point position;

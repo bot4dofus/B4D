@@ -1,21 +1,24 @@
-package fr.B4D.classes.transport;
+package fr.B4D.transport;
 
 import java.awt.AWTException;
 import java.awt.Point;
+import java.io.Serializable;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.transport.transports.BontaPotion;
-import fr.B4D.classes.transport.transports.BoosterPotion;
-import fr.B4D.classes.transport.transports.BrakmarPotion;
-import fr.B4D.classes.transport.transports.Walk;
-import fr.B4D.classes.transport.transports.Zaap;
-import fr.B4D.classes.transport.transports.ZaapiBonta;
-import fr.B4D.classes.transport.transports.ZaapiBrakmar;
+import fr.B4D.bot.Configuration;
 import fr.B4D.exceptions.B4DCannotFind;
 import fr.B4D.exceptions.B4DWrongPosition;
+import fr.B4D.transport.transports.BontaPotion;
+import fr.B4D.transport.transports.BoosterPotion;
+import fr.B4D.transport.transports.BrakmarPotion;
+import fr.B4D.transport.transports.Walk;
+import fr.B4D.transport.transports.Zaap;
+import fr.B4D.transport.transports.ZaapiBonta;
+import fr.B4D.transport.transports.ZaapiBrakmar;
 
-public class TransportStep {
+public class TransportStep implements Serializable{
 
+	private static final long serialVersionUID = 5240292689676673762L;
+	
 	private Transport transport;
 	private Point destination;
 
@@ -26,13 +29,13 @@ public class TransportStep {
 	public TransportStep(B4DEdge edge) throws B4DCannotFind {
 		switch(edge.getTypeDeTransport()) {
 			case BoosterPotion:
-				transport = new BoosterPotion(edge.getSource(), Bot.configuration.persons.get(0).boosterPotionPosition);
+				transport = new BoosterPotion(edge.getSource(), Configuration.getInstance().persons.get(0).boosterPotionPosition);
 				break;
 			case BontaPotion:
-				transport = new BontaPotion(edge.getSource(), Bot.configuration.persons.get(0).bontaPotionPosition);
+				transport = new BontaPotion(edge.getSource(), Configuration.getInstance().persons.get(0).bontaPotionPosition);
 				break;
 			case BrakmarPotion:
-				transport = new BrakmarPotion(edge.getSource(), Bot.configuration.persons.get(0).brakmarPotionPosition);
+				transport = new BrakmarPotion(edge.getSource(), Configuration.getInstance().persons.get(0).brakmarPotionPosition);
 				break;
 			case Walk:
 				transport = new Walk(edge.getSource());

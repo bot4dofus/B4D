@@ -11,20 +11,29 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fr.B4D.classes.Bot;
-import fr.B4D.classes.Message;
-import fr.B4D.classes.PointF;
-import fr.B4D.enu.MessageType;
+import fr.B4D.bot.Configuration;
+import fr.B4D.chat.Message;
+import fr.B4D.enu.Channel;
 
 public final class B4DChat {
 	
-	  /****************/
-	 /** WRITE CHAT **/
-	/****************/
+	private final static String generalPrefix = "/s";
+	private final static String teamPrefix = "/t";
+	private final static String guildPrefix = "/g";
+	private final static String alliesPrefix = "/a";
+	private final static String groupPrefix = "/p";
+	private final static String privatePrefix = "/w";
+	private final static String kolizeumPrefix = "/k";
+	private final static String recruitmentPrefix = "/r";
+	private final static String businessPrefix = "/b";
+	
+	  /***************/
+	 /** SEND CHAT **/
+	/***************/
 	
 	public static void sendChat(String text, double time) {
 		try {
-			B4DMouse.leftClick(new PointF(0.05347166799, 0.98902195608), false, 0.5);
+			B4DMouse.leftClick(Configuration.getInstance().chatBar, false, 0.5);
 			B4DKeyboard.writeKeyboard(text,time);
 			
 			Robot robot = new Robot();
@@ -39,12 +48,23 @@ public final class B4DChat {
 		B4DChat.sendChat(text, 0.5);
 	}
 	
+	  /******************/
+	 /** SEND MESSAGE **/
+	/******************/
+	
+	public static void sendMessage(Channel channel, String text){
+		B4DChat.sendChat(text, 0.5);
+	}
+	public static void sendPrivateMessage(String name, String text){
+		B4DChat.sendChat(getChannelPrefix(Channel.Private) + " " + name + " " + text, 0.5);
+	}
+	
 	  /**************/
 	 /** GET CHAT **/
 	/**************/
 	
 	public static String getChat() throws AWTException, UnsupportedFlavorException, IOException  {
-		return B4DScreen.getSelection(new Point((int)(Bot.configuration.chatFrame.x + Bot.configuration.chatFrame.width*0.95), (int)(Bot.configuration.chatFrame.y + Bot.configuration.chatFrame.height*0.95)));
+		return B4DScreen.getSelection(new Point((int)(Configuration.getInstance().chatFrame.x + Configuration.getInstance().chatFrame.width*0.95), (int)(Configuration.getInstance().chatFrame.y + Configuration.getInstance().chatFrame.height*0.95)));
 	}
 	
 	public static ArrayList<Message> parseChat() throws AWTException, UnsupportedFlavorException, IOException{
@@ -62,7 +82,7 @@ public final class B4DChat {
 	
 	private static Message parseLine(String line) throws AWTException, UnsupportedFlavorException, IOException{
 		String sender = null, text = "";
-		MessageType messageType = MessageType.Information;
+		Channel messageType = Channel.Information;
 		List<String> words = Arrays.asList(line.split(" "));
 		
 		if(words.size() > 3) {
@@ -70,25 +90,25 @@ public final class B4DChat {
 				sender = words.get(1);
 				text = words.subList(3, words.size()).stream().collect(Collectors.joining(" "));
 				if(words.get(0).equals("(Équipe)"))
-					messageType = MessageType.Team;
+					messageType = Channel.Team;
 				else if(words.get(0).equals("(Guilde)"))
-					messageType = MessageType.Guild;
+					messageType = Channel.Guild;
 				else if(words.get(0).equals("(Alliance)"))
-					messageType = MessageType.Allies;
+					messageType = Channel.Allies;
 				else if(words.get(0).equals("(Groupe)"))
-					messageType = MessageType.Group;
+					messageType = Channel.Group;
 				else if(words.get(0).equals("à") || words.get(0).equals("de"))
-					messageType = MessageType.Private;
+					messageType = Channel.Private;
 				else if(words.get(0).equals("(Kolizéum)"))
-					messageType = MessageType.Kolizeum;
+					messageType = Channel.Kolizeum;
 				else if(words.get(0).equals("(Recrutement)"))
-					messageType = MessageType.Recruitment;
+					messageType = Channel.Recruitment;
 				else if(words.get(0).equals("(Commerce)"))
-					messageType = MessageType.Business;
+					messageType = Channel.Business;
 			}
 			else if(words.get(1).equals(":")) {
 				sender = words.get(0);
-				messageType = MessageType.General;
+				messageType = Channel.General;
 				text = words.subList(2, words.size()).stream().collect(Collectors.joining(" "));
 			}
 			else
@@ -99,4 +119,34 @@ public final class B4DChat {
 	
 		return new Message(sender, messageType, text);
 	}
+	
+	  /************************/
+	 /** GET CHANNEL PREFIX **/
+	/************************/
+	
+	public static String getChannelPrefix(Channel channel) {
+		switch(channel) {
+			case General:
+				return generalPrefix;
+			case Team:
+				return teamPrefix;
+			case Guild:
+				return guildPrefix;
+			case Allies:
+				return alliesPrefix;
+			case Group:
+				return groupPrefix;
+			case Private:
+				return privatePrefix;
+			case Kolizeum:
+				return kolizeumPrefix;
+			case Recruitment:
+				return recruitmentPrefix;
+			case Business:
+				return businessPrefix;
+			default:
+				return null;
+		}
+	}
+	
 }
