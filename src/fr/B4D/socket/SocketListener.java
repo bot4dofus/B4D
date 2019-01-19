@@ -3,6 +3,7 @@ package fr.B4D.socket;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+import fr.B4D.bot.Server;
 import net.sourceforge.jpcap.capture.PacketCapture;
 import net.sourceforge.jpcap.capture.RawPacketListener;
 import net.sourceforge.jpcap.net.RawPacket;
@@ -10,30 +11,18 @@ import net.sourceforge.jpcap.net.RawPacket;
 public class SocketListener {
 	private static final int INFINITE = -1;
 	private static final int PACKET_COUNT = INFINITE;
-	private static final String[] HOSTS = {"34.242.48.97"};
-	private static final String FILTER = "host " + HOSTS[0];
-	//Echo = 54.194.216.90
-	//Ilysael = 34.242.48.97
+	
 	private PacketCapture m_pcap;
 	private String m_device;
 
-	public SocketListener() throws Exception {
+	public SocketListener(Server server) throws Exception {
 		m_pcap = new PacketCapture();
 		m_device = NetworkFinder.find();
 		System.out.println("Device found : " + m_device);
 		m_pcap.open(m_device, 65535, true, 1000);
-		m_pcap.setFilter(FILTER, true);
+		m_pcap.setFilter("host " + server.getIp(), true);
 		m_pcap.addRawPacketListener(new RawPacketHandler());
 		m_pcap.capture(PACKET_COUNT);
-	}
-
-	public static void main(String[] args) {
-		try {
-			SocketListener example = new SocketListener();
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
 	}
 }
 
@@ -42,7 +31,7 @@ class RawPacketHandler implements RawPacketListener
 {
 	private int lengthHeaderOne = 6;
 	private int lengthHeaderTwo = 24;
-	private int lengthTrailer = 6;
+	//private int lengthTrailer = 6;
 	private String encoding = "UTF-8";
 	
 	public void rawPacketArrived(RawPacket data) {
@@ -108,9 +97,6 @@ class RawPacketHandler implements RawPacketListener
 			int lengthName = Byte.toUnsignedInt(data[lengthHeaderOne + lengthMessage + lengthHeaderTwo - 1]);
 			byte[] name = Arrays.copyOfRange(data, lengthHeaderOne + lengthMessage + lengthHeaderTwo, lengthHeaderOne + lengthMessage + lengthHeaderTwo + lengthName);
 			System.out.println("[" + new String(name, encoding) + "]");
-
-			
-			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

@@ -11,8 +11,6 @@ import fr.B4D.transport.B4DWrongPosition;
 public final class Deplacement {
 	public static ProgramInterface deplacement = new ProgramInterface() {
 
-		private static final long serialVersionUID = 324669121288069360L;
-
 		public void run() throws AWTException, B4DCannotFind, B4DWrongPosition {
 			B4D.world.goTo(new Point(4, -18));
 			B4D.world.goTo(new Point(3, -19));
