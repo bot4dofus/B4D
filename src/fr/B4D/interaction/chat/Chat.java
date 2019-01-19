@@ -59,7 +59,7 @@ public class Chat extends Thread{
 	public void addChatListener(ChatListener chatListener) {
 		this.chatListener = chatListener;
 	}
-
+	
 	public void run() {
 		Message message;
 		while(count != countTo) {
