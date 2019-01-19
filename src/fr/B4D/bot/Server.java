@@ -20,12 +20,13 @@ public class Server implements Serializable{
 	public final static Server AGRIDE = new Server("Agride", "0.0.0.0");
 	public final static Server NIDAS = new Server("Nidas", "0.0.0.0");
 	public final static Server USH = new Server("Ush", "0.0.0.0");
-	public final static Server ILYZAELLE = new Server("Ilyzaelle", "0.0.0.0");
+	public final static Server ILYZAELLE = new Server("Ilyzaelle", "34.242.48.97");
 	public final static Server JULITH = new Server("Julith", "0.0.0.0");
 
 	//Internationnals
 	public final static Server OTOMUSTAM = new Server("OtoMustam", "0.0.0.0");
 	public final static Server OMBRE = new Server("Ombre", "0.0.0.0");
+	public final static Server ECHO = new Server("Echo", "54.194.216.90");
 	
 	  /***************/
 	 /** ATTRIBUTS **/
@@ -61,6 +62,7 @@ public class Server implements Serializable{
     servers.add(JULITH);
     servers.add(OTOMUSTAM);
     servers.add(OMBRE);
+    servers.add(ECHO);
       return servers;
   }
 
