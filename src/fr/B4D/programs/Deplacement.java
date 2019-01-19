@@ -12,8 +12,8 @@ public final class Deplacement {
 	public static ProgramInterface deplacement = new ProgramInterface() {
 
 		public void run() throws AWTException, B4DCannotFind, B4DWrongPosition {
-			Dofus.world.goTo(new Point(4, -18));
-			Dofus.world.goTo(new Point(3, -19));
+			Dofus.getWorld().goTo(new Point(4, -18));
+			Dofus.getWorld().goTo(new Point(3, -19));
 		}
 	};
 }

@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
-import fr.B4D.log.Logger;
+import fr.B4D.program.Program;
 
 interface User32 extends Library {
     public static User32 INSTANCE = (User32) Native.loadLibrary("User32", User32.class);
@@ -17,9 +17,16 @@ public class KeyboardListener extends Thread{
 
 	private Thread program;
 	
-	public KeyboardListener(Thread program) {
+	  /***********************/
+	 /** GETTERS & SETTERS **/
+	/***********************/
+	public void setProgram(Program program) {
 		this.program = program;
 	}
+	
+	  /*********/
+	 /** RUN **/
+	/*********/
 	
 	public void run(){
 		boolean fin = false;
@@ -37,7 +44,7 @@ public class KeyboardListener extends Thread{
 					}else if(isPPressed()){
 						System.out.println("P pressed");
 						program.suspend();
-						Logger.popUp("Le bot a été mis sur pause. Appuyez sur 'Shift + L' pour le remettre sur lecture.");
+						B4D.logger.popUp("Le bot a été mis sur pause. Appuyez sur 'Shift + L' pour le remettre sur lecture.");
 					}else if(isLPressed()){
 						System.out.println("L pressed");
 						int response = JOptionPane.showConfirmDialog(null, "Êtes vous sûr de vouloir remettre le bot sur lecture ?", "Lecture", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);						
@@ -50,6 +57,10 @@ public class KeyboardListener extends Thread{
 			}
 		}
 	}
+	
+	  /*************/
+	 /** METHODS **/
+	/*************/
 	
 	private static boolean isSPressed()
 	{

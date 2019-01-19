@@ -7,7 +7,6 @@ import fr.B4D.bot.B4D;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
-import fr.B4D.log.Logger;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.CapturePacketException;
@@ -48,7 +47,7 @@ public class SocketListener extends Thread{
 		try {
 			m_pcap.capture(INFINITE);
 		} catch (CapturePacketException e) {
-			Logger.error("La capture des packet s'est arretée.", e);
+			B4D.logger.error("La capture des packet s'est arretée.", e);
 		}
 	}
 
@@ -82,7 +81,7 @@ public class SocketListener extends Thread{
 			byte[] pseudo = Arrays.copyOfRange(data, lengthHeaderOne + lengthText + lengthHeaderTwo, lengthHeaderOne + lengthText + lengthHeaderTwo + lengthName);
 			
 			Message message = new Message(new String(pseudo, encoding), channel, new String(text, encoding));
-			Dofus.chat.addMessage(message);
+			Dofus.getChat().addMessage(message);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

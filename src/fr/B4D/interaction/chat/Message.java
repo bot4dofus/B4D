@@ -2,7 +2,7 @@ package fr.B4D.interaction.chat;
 
 import java.io.Serializable;
 
-import fr.B4D.log.Logger;
+import fr.B4D.bot.B4D;
 import fr.B4D.modules.B4DChat;
 
 public class Message implements Serializable{
@@ -86,7 +86,7 @@ public class Message implements Serializable{
 			case(0x06):
 				return Channel.Recruitment;
 			default:
-				Logger.warning("[Unknow channel = " + key + "]");
+				B4D.logger.warning("[Unknow channel = " + key + "]");
 				return null;
 		}
 	}

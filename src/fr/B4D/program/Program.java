@@ -7,12 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.bot.KeyboardListener;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.farming.Ressource;
 import fr.B4D.farming.RessourceType;
-import fr.B4D.log.Logger;
 import fr.B4D.modules.B4DChat;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DOther;
@@ -121,23 +119,19 @@ public class Program extends Thread implements Serializable{
 		this.stopWhenFull = stopWhenFull;
 	}
 
-	/**************/
+	  /**************/
 	 /** METHODES **/
 	/**************/
 	
 	public void run() {
-		KeyboardListener stopThread = new KeyboardListener(this);	//Thread permettant de gérer le thread principal
-		stopThread.start();								//Demarre le thread
 		try {
 			Intro();
 			Tours();
 			Outro();
-			Logger.popUp("Le bot s'est correctement terminé.");
+			B4D.logger.popUp("Le bot s'est correctement terminé.");
 		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException e){
 			Outro();
-			Logger.error("Un problème à été rencontré durant l'éxecutions du programme.", e);
-		}finally {
-			stopThread.interrupt();	//Arrete le thread
+			B4D.logger.error("Un problème à été rencontré durant l'éxecutions du programme.", e);
 		}
 	}
 
@@ -151,7 +145,7 @@ public class Program extends Thread implements Serializable{
             B4DMouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
 		}
 
-		B4D.getConfiguration().getPersons().get(0).setPosition(Dofus.world.getPosition());	//Récupère la position actuelle
+		B4D.getConfiguration().getPersons().get(0).setPosition(Dofus.getWorld().getPosition());	//Récupère la position actuelle
 	}
 	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException{
 

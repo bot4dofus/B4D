@@ -8,8 +8,8 @@ public class Dofus {
 	 /** ATRIBUTS **/
 	/**************/
 	
-	public static Chat chat;;
-	public static World world;
+	private static Chat chat;
+	private static World world;
 	
 	  /*************/
 	 /** BUILDER **/

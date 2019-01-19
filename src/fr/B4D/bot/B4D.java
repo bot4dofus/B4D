@@ -35,6 +35,7 @@ public final class B4D{
     private static SocketListener socketListener;
     private static KeyboardListener keyboardListener;
     
+    public static Logger logger;    
 
 	  /***********************/
 	 /** GETTERS & SETTERS **/
@@ -43,11 +44,13 @@ public final class B4D{
 	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
 		String currentMacAddress = B4DOther.getMacAddress();
 		admin = (adminMacAdresses[0].equals(currentMacAddress) || adminMacAdresses[0].equals(currentMacAddress));
-		
-		configuration = DAOFactory.getConfigurationDAO().find();
 		filter = new FileNameExtensionFilter("Fichiers " + configurationFormat, configurationFormat);
 		
+		configuration = DAOFactory.getConfigurationDAO().find();
 		socketListener = new SocketListener();
+		keyboardListener = new KeyboardListener();
+		
+		logger = new Logger();
 	}
 
 	  /***********************/
@@ -87,16 +90,16 @@ public final class B4D{
 	}
 	
 	public void runProgram(Program program) {
-		KeyboardListener stopThread = new KeyboardListener(program);	//Thread permettant de gérer le programme (Pause, Lecture, Stop);
-		stopThread.start();												//Demarre le thread
+		B4D.getKeyboardListener().setProgram(program);	//Precise au thread, quel program gerer
+		B4D.getKeyboardListener().start();				//Demarre le thread
 		program.start();
 		try {
 			program.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		Dofus.chat.interrupt();
-		stopThread.interrupt();
+		Dofus.getChat().interrupt();
+		B4D.getKeyboardListener().interrupt();
 	}
 	
 	  public Configuration importConfiguration() throws ClassNotFoundException, IOException {		  

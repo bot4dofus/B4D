@@ -3,7 +3,6 @@ package fr.B4D.interaction.chat;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.log.Logger;
 import fr.B4D.programs.ChatListener;
 
 public class Chat extends Thread{
@@ -47,9 +46,9 @@ public class Chat extends Thread{
 	public void addMessage(Message message) {
 		if(filter.filter(message)) {
 			if(!messages.offer(message))
-				Logger.warning("Le chat est plein, le message n'a pas pu être ajouté.");
+				B4D.logger.warning("Le chat est plein, le message n'a pas pu être ajouté.");
 			else {
-				Logger.debug("CHAT : Nouveau message en file d'attente.");
+				B4D.logger.debug("Nouveau message en file d'attente.");
 				synchronized(lock){
 					lock.notifyAll();
 				}
@@ -81,7 +80,7 @@ public class Chat extends Thread{
 	}
 	
 	public void read(int countTo, long millis) {
-		Logger.debug("CHAT : Lancement du tread.");
+		B4D.logger.debug("CHAT : Lancement du tread.");
 		this.countTo = countTo;
 		B4D.getSocketListener().start();
 		this.start();
@@ -91,7 +90,7 @@ public class Chat extends Thread{
 			e.printStackTrace();
 		}
 		B4D.getSocketListener().interrupt();
-		Logger.debug("CHAT : Arret du tread.");
+		B4D.logger.debug("CHAT : Arret du tread.");
 	}	
 	public void read(int countTo) {
 		read(countTo, 0);
