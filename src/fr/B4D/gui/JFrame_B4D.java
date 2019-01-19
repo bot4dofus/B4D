@@ -32,21 +32,21 @@ public class JFrame_B4D extends JFrame{
 
 	private static final long serialVersionUID = -7925109992438988807L;
 	
-	final static Color selectedTab = new Color(33,43,53);
-	final static Color unSelectedTab = new Color(52,63,73);
-
-	static JPanel_Programme programPanel;
-	static JPanel_Personnage personPanel;
-	static JPanel_Reglage settingPanel;
-	static JPanel_Admin adminPanel;
+	public final static Color selectedTab = new Color(33,43,53);
+	public final static Color unSelectedTab = new Color(52,63,73);
 
 	private Point offset;
-	final static int offset_x_Form = 20, offset_y_Form = 70;	
+	private final int offset_x_Form = 20, offset_y_Form = 70;	
 	
-	private JLabel lblProgrammes = new JLabel("Programmes");	//Bouton programmes
-	private JLabel lblPersonnages = new JLabel("Personnages");	//Bouton personnages
-	private JLabel lblReglages = new JLabel("R\u00E9glages");	//Bouton reglages
-	private JLabel lblAdmin = new JLabel("Admin");				//Bouton admin
+	private final JPanel_Programme programPanel;
+	private final JPanel_Personnage personPanel;
+	private final JPanel_Reglage settingPanel;
+	private final JPanel_Admin adminPanel;
+	
+	private final JLabel lblProgrammes = new JLabel("Programmes");		//Bouton programmes
+	private final JLabel lblPersonnages = new JLabel("Personnages");	//Bouton personnages
+	private final JLabel lblReglages = new JLabel("R\u00E9glages");		//Bouton reglages
+	private final JLabel lblAdmin = new JLabel("Admin");				//Bouton admin
 
 	private B4D b4d;
 	
@@ -128,7 +128,7 @@ public class JFrame_B4D extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					b4d.saveConfiguration();
+					B4D.saveConfiguration();
 				} catch (ClassNotFoundException | IOException ex) {
 					B4D.logger.error("Impossible d'importer le fichier, fichier corrompu.", ex);
 				}
@@ -264,7 +264,7 @@ public class JFrame_B4D extends JFrame{
 					lblAdmin.setBackground(unSelectedTab);
 			}
 		});
-		if(b4d.isAdmin())
+		if(B4D.isAdmin())
 			lblAdmin.setVisible(false);
 	
 		lblAdmin.setOpaque(true);
@@ -283,7 +283,7 @@ public class JFrame_B4D extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					b4d.importConfiguration();
+					b4d.importFile();
 					personPanel.ActualiserInfos();
 					settingPanel.ActualiserInfos();
 				} catch (ClassNotFoundException | IOException ex) {
@@ -299,7 +299,7 @@ public class JFrame_B4D extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 					try {
-						b4d.exportConfiguration();
+						b4d.exportFile();
 					} catch (ClassNotFoundException | IOException ex) {
 						B4D.logger.error("Impossible d'exporter le fichier.", ex);
 					}
@@ -326,9 +326,9 @@ public class JFrame_B4D extends JFrame{
 		changerPanel(0);
 	}
 
-	  /************/
-	 /* METHODES */
-	/************/
+	  /**************/
+	 /** METHODES **/
+	/**************/
 	
 	private void changerPanel(int index) {
 		lblProgrammes.setBackground(unSelectedTab);
