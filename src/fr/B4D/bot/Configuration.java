@@ -25,8 +25,8 @@ public class Configuration implements Serializable{
 	
 	private Configuration(){
 		this.persons = new ArrayList<Person>();
-		persons.add(new Person("Nom1", "MDP1", Server.values()[0], "Pseudo1"));
-		persons.add(new Person("Nom2", "MDP2", Server.values()[1], "Pseudo2"));
+		persons.add(new Person("Nom de compte", "Mot de passe", Server.FURYE, "Pseudo"));
+		persons.add(new Person("Nom de compte", "Mot de passe", Server.OTOMUSTAM, "Pseudo"));
 		this.gameFrame = null;
 		this.chatFrame = null;
 		this.chatBar = null;

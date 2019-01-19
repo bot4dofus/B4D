@@ -7,8 +7,6 @@ import java.awt.SystemColor;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
@@ -70,27 +68,12 @@ public class JPanel_Personnage extends JPanel {
 	public JPanel_Personnage(B4D b4d) {
 		this.b4d = b4d;
 		
-//		addComponentListener(new ComponentAdapter() {
-//			public void componentShown(ComponentEvent e) {
-//				if(b4d.getConfiguration().gameFrame != null) {
-//					btnModifierRappel.setEnabled(true);
-//					btnModifierBonta.setEnabled(true);
-//					btnModifierBrakmar.setEnabled(true);
-//					btnModifierSort.setEnabled(true);
-//				}else {
-//					btnModifierRappel.setEnabled(false);
-//					btnModifierBonta.setEnabled(false);
-//					btnModifierBrakmar.setEnabled(false);
-//					btnModifierSort.setEnabled(false);
-//				}
-//			}
-//		});
 		setBackground(new Color(33,43,53));
 		setLayout(null);
 		setVisible(false);
 		
-		JComboBox<Server> comboBox_server = new JComboBox<Server>();
-		Arrays.asList(Server.values()).stream().forEach(s -> comboBox_server.addItem(s));
+		JComboBox<String> comboBox_server = new JComboBox<String>();
+		Server.getAll().stream().forEach(s -> comboBox_server.addItem(s.getName()));
 		
 		dataTable = new Vector<Vector<String>>();
 		Vector<String> colonnes = new Vector<String>(Arrays.asList(new String[] {"Nom de compte","Mot de passe","Serveur","Pseudo"}));
@@ -101,16 +84,16 @@ public class JPanel_Personnage extends JPanel {
 			public void tableChanged(TableModelEvent evt){
 				switch(evt.getColumn()){
 					case 0:
-						b4d.getConfiguration().persons.get(evt.getFirstRow()).account = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());
+						b4d.getConfiguration().persons.get(evt.getFirstRow()).account = table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString();
 						break;
 					case 1:
-						b4d.getConfiguration().persons.get(evt.getFirstRow()).password = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
+						b4d.getConfiguration().persons.get(evt.getFirstRow()).password = table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString();
 						break;
 					case 2:
-						b4d.getConfiguration().persons.get(evt.getFirstRow()).server = (Server) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
+						b4d.getConfiguration().persons.get(evt.getFirstRow()).server = Server.getServer(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());
 						break;
 					case 3:
-						b4d.getConfiguration().persons.get(evt.getFirstRow()).pseudo = (String) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn());;
+						b4d.getConfiguration().persons.get(evt.getFirstRow()).pseudo = table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString();
 						break;
 				}
 				ActualiserInfos();

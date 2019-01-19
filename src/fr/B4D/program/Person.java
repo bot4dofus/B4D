@@ -37,7 +37,7 @@ public class Person implements Serializable{
 	public Person() {
 		this.account = "Nom de compte";
 		this.password = "Mot de passe";
-		this.server = Server.values()[0];
+		this.server = Server.AGRIDE;
 		this.pseudo = "Pseudo";
 	}
 	
