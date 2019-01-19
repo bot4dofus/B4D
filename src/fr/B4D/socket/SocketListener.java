@@ -3,41 +3,52 @@ package fr.B4D.socket;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
-import fr.B4D.bot.Server;
+import fr.B4D.bot.Configuration;
+import fr.B4D.dofus.Dofus;
+import fr.B4D.interaction.chat.Channel;
+import fr.B4D.interaction.chat.Message;
+import fr.B4D.log.Logger;
+import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
+import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
+import net.sourceforge.jpcap.capture.CapturePacketException;
+import net.sourceforge.jpcap.capture.InvalidFilterException;
 import net.sourceforge.jpcap.capture.PacketCapture;
 import net.sourceforge.jpcap.capture.RawPacketListener;
 import net.sourceforge.jpcap.net.RawPacket;
 
-public class SocketListener {
+public class SocketListener extends Thread{
 	private static final int INFINITE = -1;
-	private static final int PACKET_COUNT = INFINITE;
+	
+	private static final int lengthHeaderOne = 6;
+	private static final int lengthHeaderTwo = 24;
+	//private static final int lengthTrailer = 6;
+	private static final String encoding = "UTF-8";
 	
 	private PacketCapture m_pcap;
 	private String m_device;
 
-	public SocketListener(Server server) throws Exception {
+	public SocketListener() throws CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
 		m_pcap = new PacketCapture();
 		m_device = NetworkFinder.find();
-		System.out.println("Device found : " + m_device);
+		System.out.println("Network found : " + m_device);
 		m_pcap.open(m_device, 65535, true, 1000);
-		m_pcap.setFilter("host " + server.getIp(), true);
-		m_pcap.addRawPacketListener(new RawPacketHandler());
-		m_pcap.capture(PACKET_COUNT);
+		m_pcap.setFilter("host " + Configuration.getInstance().persons.get(0).server.getIp(), true);
+		m_pcap.addRawPacketListener(new RawPacketListener() {
+			public void rawPacketArrived(RawPacket data) {
+				if(data.getData().length > 54) {
+					byte[] dataArray = Arrays.copyOfRange(data.getData(), 54, data.getData().length -1);
+					parseDofus(dataArray);
+				}
+			}
+			
+		});
 	}
-}
-
-
-class RawPacketHandler implements RawPacketListener 
-{
-	private int lengthHeaderOne = 6;
-	private int lengthHeaderTwo = 24;
-	//private int lengthTrailer = 6;
-	private String encoding = "UTF-8";
 	
-	public void rawPacketArrived(RawPacket data) {
-		if(data.getData().length > 54) {
-			byte[] dataArray = Arrays.copyOfRange(data.getData(), 54, data.getData().length -1);
-			parseDofus(dataArray);
+	public void run () {
+		try {
+			m_pcap.capture(INFINITE);
+		} catch (CapturePacketException e) {
+			Logger.error("La capture des packet s'est arretée.", e);
 		}
 	}
 
@@ -52,13 +63,8 @@ class RawPacketHandler implements RawPacketListener
 		//		|   \   A   |  18.X  |  0  0  0  |      X      |  ... |   0  0    |  XXXX  |
 		//		| Delimiter | Unknow | Delimiter | Name length | Name | Delimiter | Unknow |
 		//		|                  HeaderTwo                   | Name |       Trailer      |
-		
-		//System.out.println("[" + HexHelper.toString(data) + "]");
-		//ip.src eq 34.242.48.97 && frame contains "regex"
 
-		int byte0 = Byte.toUnsignedInt(data[0]);
-
-		if(byte0 == 0x0D) {
+		if(data[0] == 0x0D) {
 			parseChat(data);
 		}
 		//else
@@ -67,36 +73,16 @@ class RawPacketHandler implements RawPacketListener
 	
 	public void parseChat(byte[] data) {
 		try {
-			byte channel = data[3];
-			switch(channel) {
-				case(0x00):
-					System.out.print("[Général]");
-					break;
-				case(0x04):
-					System.out.print("[Groupe]");
-					break;
-				case(0x09):
-					System.out.print("[Privé]");
-					break;
-				case(0x05):
-					System.out.print("[Commerce]");
-					break;
-				case(0x06):
-					System.out.print("[Recrutement]");
-					break;
-				default:
-					System.out.print("[Unknow channel = " + data[3] + "]");
-					break;
-			}
+			Channel channel = Message.getChannel(data[3]);
 
-			int lengthMessage = Byte.toUnsignedInt(data[lengthHeaderOne - 1]);
+			int lengthText = Byte.toUnsignedInt(data[lengthHeaderOne - 1]);
+			byte[] text = Arrays.copyOfRange(data, lengthHeaderOne, lengthHeaderOne + lengthText);
+
+			int lengthName = Byte.toUnsignedInt(data[lengthHeaderOne + lengthText + lengthHeaderTwo - 1]);
+			byte[] pseudo = Arrays.copyOfRange(data, lengthHeaderOne + lengthText + lengthHeaderTwo, lengthHeaderOne + lengthText + lengthHeaderTwo + lengthName);
 			
-			byte[] message = Arrays.copyOfRange(data, lengthHeaderOne, lengthHeaderOne + lengthMessage);
-			System.out.print("[" + new String(message, encoding) + "]");
-
-			int lengthName = Byte.toUnsignedInt(data[lengthHeaderOne + lengthMessage + lengthHeaderTwo - 1]);
-			byte[] name = Arrays.copyOfRange(data, lengthHeaderOne + lengthMessage + lengthHeaderTwo, lengthHeaderOne + lengthMessage + lengthHeaderTwo + lengthName);
-			System.out.println("[" + new String(name, encoding) + "]");
+			Message message = new Message(new String(pseudo, encoding), channel, new String(text, encoding));
+			Dofus.chat.addMessage(message);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

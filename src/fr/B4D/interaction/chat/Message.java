@@ -2,22 +2,27 @@ package fr.B4D.interaction.chat;
 
 import java.io.Serializable;
 
+import fr.B4D.log.Logger;
 import fr.B4D.modules.B4DChat;
 
 public class Message implements Serializable{
 	
 	private static final long serialVersionUID = 5508700695491701427L;
+
+	  /**************/
+	 /** ATRIBUTS **/
+	/**************/
 	
-	private String name, text;
-	private Channel messageType;
+	private String pseudo, text;
+	private Channel channel;
 	
 	  /*************/
 	 /** BUILDER **/
 	/*************/
 	
-	public Message(String name, Channel messageType, String text) {
-		this.name = name;
-		this.messageType = messageType;
+	public Message(String pseudo, Channel channel, String text) {
+		this.pseudo = pseudo;
+		this.channel = channel;
 		this.text = text;
 	}
 
@@ -25,14 +30,14 @@ public class Message implements Serializable{
 	 /** GET SET **/
 	/*************/
 	
-	public String getName() {
-		return name;
+	public String getPseudo() {
+		return pseudo;
 	}
 	public String getText() {
 		return text;
 	}
-	public Channel getMessageType() {
-		return messageType;
+	public Channel getChannel() {
+		return channel;
 	}
 	
 	  /**************/
@@ -40,15 +45,15 @@ public class Message implements Serializable{
 	/**************/
 	
 	public void send() {
-		if (messageType == Channel.Private)
-			B4DChat.sendChat(B4DChat.getChannelPrefix(messageType) + " " + name + " " + text);
+		if (channel == Channel.Private)
+			B4DChat.sendChat(B4DChat.getChannelPrefix(channel) + " " + pseudo + " " + text);
 		else
-			B4DChat.sendChat(B4DChat.getChannelPrefix(messageType) + " " + text);
+			B4DChat.sendChat(B4DChat.getChannelPrefix(channel) + " " + text);
 	}
 	
-	public void answer(String text) {
-		if(messageType != Channel.Information) {
-			Message message = new Message(name, Channel.Private, text);
+	public void reply(String text) {
+		if(channel != Channel.Information) {
+			Message message = new Message(pseudo, Channel.Private, text);
 			message.send();
 		}
 	}
@@ -58,9 +63,31 @@ public class Message implements Serializable{
 	/***************/
 	
 	public String toString() {
-		if(name != null)
-			return "[" + messageType.toString() +"][" + name + "] " + text;
+		if(pseudo != null)
+			return "[" + channel.toString() +"][" + pseudo + "] " + text;
 		else
-			return "[" + messageType.toString() +"] " + text;
+			return "[" + channel.toString() +"] " + text;
+	}
+	
+	  /************/
+	 /** STATIC **/
+	/************/
+	
+	public static Channel getChannel(byte key) {
+		switch(key) {
+			case(0x00):
+				return Channel.General;
+			case(0x04):
+				return Channel.Team;
+			case(0x09):
+				return Channel.Private;
+			case(0x05):
+				return Channel.Business;
+			case(0x06):
+				return Channel.Recruitment;
+			default:
+				Logger.warning("[Unknow channel = " + key + "]");
+				return null;
+		}
 	}
 }
