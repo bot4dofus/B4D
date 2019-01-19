@@ -1,9 +1,10 @@
 package fr.B4D.log;
 
+import javax.swing.JOptionPane;
+
 public class Logger {
 	public static void popUp(String log) {
-		//popUp window with OK button
-		System.out.println(log);
+		JOptionPane.showConfirmDialog(null, log, "Information", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	public static void debud(String log) {
