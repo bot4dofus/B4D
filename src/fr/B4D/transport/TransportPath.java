@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.B4D.dofus.B4DCannotFind;
+
 public class TransportPath implements Serializable{
 	
 	private static final long serialVersionUID = 6035526052301664166L;

@@ -4,10 +4,10 @@ import java.awt.AWTException;
 import java.awt.Point;
 import java.io.Serializable;
 
-import fr.B4D.bot.Configuration;
+import fr.B4D.bot.B4D;
+import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
-import fr.B4D.transport.B4DCannotFind;
 import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.transport.Transport;
 import fr.B4D.transport.TransportType;
@@ -45,7 +45,7 @@ public class Walk extends Transport implements Serializable{
 	
 	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
 		
-		if (!Configuration.getInstance().persons.get(0).position.equals(this.getPosition()))
+		if (!B4D.getConfiguration().getPersons().get(0).getPosition().equals(this.getPosition()))
 			throw new B4DWrongPosition();
 		
 		Point move = new Point(destination.x - super.getPosition().x, destination.y - super.getPosition().y);
@@ -59,6 +59,6 @@ public class Walk extends Transport implements Serializable{
 			B4DMouse.leftClick(goRight, true);
 
 		B4DWait.waitForMap();
-		Configuration.getInstance().persons.get(0).position = destination;
+		B4D.getConfiguration().getPersons().get(0).setPosition(destination);
 	}
 }

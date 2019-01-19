@@ -3,7 +3,7 @@ package fr.B4D.socket;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
-import fr.B4D.bot.Configuration;
+import fr.B4D.bot.B4D;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
@@ -32,7 +32,7 @@ public class SocketListener extends Thread{
 		m_device = NetworkFinder.find();
 		System.out.println("Network found : " + m_device);
 		m_pcap.open(m_device, 65535, true, 1000);
-		m_pcap.setFilter("host " + Configuration.getInstance().persons.get(0).server.getIp(), true);
+		m_pcap.setFilter("host " + B4D.getConfiguration().getPersons().get(0).getServer().getIp(), true);
 		m_pcap.addRawPacketListener(new RawPacketListener() {
 			public void rawPacketArrived(RawPacket data) {
 				if(data.getData().length > 54) {

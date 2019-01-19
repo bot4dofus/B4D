@@ -26,8 +26,6 @@ import fr.B4D.utils.PointF;
 public class JPanel_Admin extends JPanel {
 
 	private static final long serialVersionUID = -7603368625926813641L;
-
-	private B4D b4d;
 	
 	public final int width = 635;
 	public final int height = 70;
@@ -38,12 +36,10 @@ public class JPanel_Admin extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public JPanel_Admin(B4D b4d) {
-		this.b4d = b4d;
-		
+	public JPanel_Admin() {		
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				if(b4d.getConfiguration().gameFrame != null && b4d.getConfiguration().chatFrame != null && b4d.getConfiguration().chatBar != null && b4d.getConfiguration().minimap != null) {
+				if(B4D.getConfiguration().getGameFrame() != null && B4D.getConfiguration().getChatFrame() != null && B4D.getConfiguration().getChatBar() != null && B4D.getConfiguration().getMinimap() != null) {
 					btnStart.setEnabled(true);
 					btnRecord.setEnabled(true);
 				}else {

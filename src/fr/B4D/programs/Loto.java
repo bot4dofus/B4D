@@ -19,8 +19,6 @@ public final class Loto {
 	
 	public static ProgramInterface loto = new ProgramInterface() {
 
-		private static final long serialVersionUID = -5468903986392371165L;
-
 		public void run() throws AWTException, IOException, TesseractException {			
 			try {
 				Exchange exchange = new Exchange(ticketPrice,0);

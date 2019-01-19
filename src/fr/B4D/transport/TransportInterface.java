@@ -4,6 +4,8 @@ import java.awt.AWTException;
 import java.awt.Point;
 import java.io.Serializable;
 
+import fr.B4D.dofus.B4DCannotFind;
+
 public interface TransportInterface extends Serializable {
 	final double zaapCost = 10;
 	final double zaapiBontaCost = 1;

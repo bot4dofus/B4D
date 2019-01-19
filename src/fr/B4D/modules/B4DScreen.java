@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import fr.B4D.bot.Configuration;
+import fr.B4D.bot.B4D;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -86,7 +86,7 @@ public final class B4DScreen {
 		return new Robot().createScreenCapture(rectangle);
 	}
 	public static BufferedImage takeSreenshot() throws AWTException {
-		return new Robot().createScreenCapture(Configuration.getInstance().gameFrame);
+		return new Robot().createScreenCapture(B4D.getConfiguration().getGameFrame());
 	}
 	
 	  /*********/
@@ -108,7 +108,7 @@ public final class B4DScreen {
 		return OCR(B4DConversion.pointFToPoint(P1), B4DConversion.pointFToPoint(P2));
 	}
 	public static String getChatOCR() throws AWTException, IOException, TesseractException  {
-		return OCR(Configuration.getInstance().chatFrame);
+		return OCR(B4D.getConfiguration().getChatFrame());
 	}
 	
 	  /***************/

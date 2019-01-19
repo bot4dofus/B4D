@@ -6,11 +6,11 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import fr.B4D.bot.Configuration;
+import fr.B4D.bot.B4D;
+import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.modules.B4DKeyboard;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
-import fr.B4D.transport.B4DCannotFind;
 import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.transport.Transport;
 import fr.B4D.transport.ZaapiType;
@@ -150,7 +150,7 @@ public class ZaapiBrakmar extends Transport implements Serializable{
 	/**************/
 	
 	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
-		if (!Configuration.getInstance().persons.get(0).position.equals(this.getPosition()))
+		if (!B4D.getConfiguration().getPersons().get(0).getPosition().equals(this.getPosition()))
 			throw new B4DWrongPosition();
 		
 		B4DMouse.leftClick(super.getPositionF(), false);
@@ -174,6 +174,6 @@ public class ZaapiBrakmar extends Transport implements Serializable{
 	    B4DMouse.doubleLeftClick(new PointF(0.4736, 0.2891), false);
 	    
 	    B4DWait.waitForMap();
-	    Configuration.getInstance().persons.get(0).position = destination;
+	    B4D.getConfiguration().getPersons().get(0).setPosition(destination);
 	}
 }

@@ -1,4 +1,4 @@
-package fr.B4D.transport;
+package fr.B4D.dofus;
 
 import java.awt.AWTException;
 import java.awt.Point;
@@ -8,7 +8,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.B4D.bot.Configuration;
+import fr.B4D.bot.B4D;
+import fr.B4D.transport.B4DEdge;
+import fr.B4D.transport.B4DGraph;
+import fr.B4D.transport.B4DWrongPosition;
+import fr.B4D.transport.Transport;
+import fr.B4D.transport.TransportInterface;
+import fr.B4D.transport.TransportPath;
+import fr.B4D.transport.TransportType;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.transport.transports.ZaapiBonta;
 import fr.B4D.transport.transports.ZaapiBrakmar;
@@ -6324,27 +6331,27 @@ public final class World implements TransportInterface, Serializable{
 	public TransportPath getTransportPathTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {		
 		
 		//Add potions
-		if(Configuration.getInstance().persons.get(0).boosterPotionPosition != null) 
-			world.addB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).boosterPotionDestination.getPosition(), TransportType.BoosterPotion, boosterPotionCost);
+		if(B4D.getConfiguration().getPersons().get(0).getBoosterPotionPosition() != null) 
+			world.addB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBoosterPotionDestination().getPosition(), TransportType.BoosterPotion, boosterPotionCost);
 			
-		if(Configuration.getInstance().persons.get(0).bontaPotionPosition != null)
-			world.addB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).bontaPotionDestination, TransportType.BontaPotion, bontaPotionCost);
+		if(B4D.getConfiguration().getPersons().get(0).getBontaPotionPosition() != null)
+			world.addB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBontaPotionDestination(), TransportType.BontaPotion, bontaPotionCost);
 
-		if(Configuration.getInstance().persons.get(0).brakmarPotionPosition != null)
-			world.addB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).brakmarPotionDestination, TransportType.BrakmarPotion, brakmarPotionCost);
+		if(B4D.getConfiguration().getPersons().get(0).getBrakmarPotionPosition() != null)
+			world.addB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBrakmarPotionDestination(), TransportType.BrakmarPotion, brakmarPotionCost);
 		
 		//Get the shortest path
-	    List<B4DEdge> shortestPath = world.getPath(Configuration.getInstance().persons.get(0).position, destination).getEdgeList();
+	    List<B4DEdge> shortestPath = world.getPath(B4D.getConfiguration().getPersons().get(0).getPosition(), destination).getEdgeList();
 
 	    //Remove potions
-		if(Configuration.getInstance().persons.get(0).boosterPotionPosition != null)
-			world.removeB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).boosterPotionDestination.getPosition());
+		if(B4D.getConfiguration().getPersons().get(0).getBoosterPotionPosition() != null)
+			world.removeB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBoosterPotionDestination().getPosition());
 		
-		if(Configuration.getInstance().persons.get(0).bontaPotionPosition != null)
-			world.removeB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).bontaPotionDestination);
+		if(B4D.getConfiguration().getPersons().get(0).getBontaPotionPosition() != null)
+			world.removeB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBontaPotionDestination());
 		
-		if(Configuration.getInstance().persons.get(0).brakmarPotionPosition != null)
-			world.removeB4DEdge(Configuration.getInstance().persons.get(0).position, Configuration.getInstance().persons.get(0).brakmarPotionDestination);
+		if(B4D.getConfiguration().getPersons().get(0).getBrakmarPotionPosition() != null)
+			world.removeB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBrakmarPotionDestination());
 		
 		return new TransportPath(shortestPath);
 	}

@@ -24,6 +24,10 @@ import javax.swing.UIManager;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.log.Logger;
+import fr.B4D.socket.NoSocketDetectedException;
+import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
+import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
+import net.sourceforge.jpcap.capture.InvalidFilterException;
 
 public class JFrame_B4D extends JFrame{
 
@@ -51,9 +55,9 @@ public class JFrame_B4D extends JFrame{
 		try {
 			JFrame_B4D windowB4D = new JFrame_B4D();
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			windowB4D.setVisible(true);			
+			windowB4D.setVisible(true);		
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.error("Erreur inconnu", e);
 		}
 	}
 	
@@ -61,13 +65,17 @@ public class JFrame_B4D extends JFrame{
 	 * Create the application.
 	 * @throws IOException 
 	 * @throws ClassNotFoundException 
+	 * @throws InvalidFilterException 
+	 * @throws CaptureDeviceOpenException 
+	 * @throws NoSocketDetectedException 
+	 * @throws CaptureDeviceLookupException 
 	 */
-	public JFrame_B4D() throws ClassNotFoundException, IOException{
+	public JFrame_B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException{
 		b4d = new B4D();
-		programPanel = new JPanel_Programme(this, b4d);
-		personPanel = new JPanel_Personnage(b4d);
-		settingPanel = new JPanel_Reglage(b4d);
-		adminPanel = new JPanel_Admin(b4d);
+		programPanel = new JPanel_Programme(this);
+		personPanel = new JPanel_Personnage();
+		settingPanel = new JPanel_Reglage();
+		adminPanel = new JPanel_Admin();
 		initialize();
 	}
 

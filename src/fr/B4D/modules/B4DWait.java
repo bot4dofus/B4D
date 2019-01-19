@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import fr.B4D.bot.Configuration;
+import fr.B4D.bot.B4D;
 import fr.B4D.threads.ColorThread;
 import fr.B4D.threads.KeyboardThread;
 import fr.B4D.threads.OCRThread;
@@ -123,7 +123,7 @@ public final class B4DWait {
 	/*********************/
 	
 	public static boolean waitForMap(double timeOut) {
-		return waitForChangingPixel(B4DConversion.pointToPointF(Configuration.getInstance().minimap), timeOut);
+		return waitForChangingPixel(B4DConversion.pointToPointF(B4D.getConfiguration().getMinimap()), timeOut);
 	}
 	public static boolean waitForMap() {
 		return waitForMap(15);

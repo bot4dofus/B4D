@@ -83,14 +83,14 @@ public class Chat extends Thread{
 	public void read(int countTo, long millis) {
 		Logger.debug("CHAT : Lancement du tread.");
 		this.countTo = countTo;
-		B4D.socketListener.start();
+		B4D.getSocketListener().start();
 		this.start();
 		try {
 			this.join(millis);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		B4D.socketListener.interrupt();
+		B4D.getSocketListener().interrupt();
 		Logger.debug("CHAT : Arret du tread.");
 	}	
 	public void read(int countTo) {

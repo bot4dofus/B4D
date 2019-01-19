@@ -6,19 +6,18 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import fr.B4D.bot.B4D;
-import fr.B4D.bot.Configuration;
+import fr.B4D.bot.KeyboardListener;
+import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.dofus.Dofus;
 import fr.B4D.farming.Ressource;
 import fr.B4D.farming.RessourceType;
+import fr.B4D.log.Logger;
 import fr.B4D.modules.B4DChat;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DOther;
 import fr.B4D.modules.B4DScreen;
 import fr.B4D.programs.Deplacement;
-import fr.B4D.threads.StopThread;
-import fr.B4D.transport.B4DCannotFind;
 import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.TesseractException;
@@ -47,6 +46,10 @@ public class Program extends Thread implements Serializable{
 	private int maxCycles;
 	private int maxDeposits;
 
+	private boolean hdvWhenFull;
+	private boolean bankWhenFull;
+	private boolean stopWhenFull;
+	
 	  /******************/
 	 /** CONSTRUCTEUR **/
 	/******************/
@@ -87,7 +90,7 @@ public class Program extends Thread implements Serializable{
 	public Ressource getRessource() {
 		return ressource;
 	}
-	  public int getMaxCycles() {
+	public int getMaxCycles() {
 		return maxCycles;
 	}
 	public void setMaxCycles(int maxCycles) {
@@ -99,24 +102,40 @@ public class Program extends Thread implements Serializable{
 	public void setMaxDeposits(int maxDeposits) {
 		this.maxDeposits = maxDeposits;
 	}
+	public boolean isHdvWhenFull() {
+		return hdvWhenFull;
+	}
+	public void setHdvWhenFull(boolean hdvWhenFull) {
+		this.hdvWhenFull = hdvWhenFull;
+	}
+	public boolean isBankWhenFull() {
+		return bankWhenFull;
+	}
+	public void setBankWhenFull(boolean bankWhenFull) {
+		this.bankWhenFull = bankWhenFull;
+	}
+	public boolean isStopWhenFull() {
+		return stopWhenFull;
+	}
+	public void setStopWhenFull(boolean stopWhenFull) {
+		this.stopWhenFull = stopWhenFull;
+	}
 
-	  /**************/
+	/**************/
 	 /** METHODES **/
 	/**************/
 	
 	public void run() {
-		StopThread stopThread = new StopThread(this);	//Thread permettant de gérer le thread principal
+		KeyboardListener stopThread = new KeyboardListener(this);	//Thread permettant de gérer le thread principal
 		stopThread.start();								//Demarre le thread
 		try {
 			Intro();
 			Tours();
 			Outro();
-			System.out.println("fin");
-			//JOptionPane.showConfirmDialog(null, "Vous avez stoppé le bot.", "Fin", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
+			Logger.popUp("Le bot s'est correctement terminé.");
 		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException e){
 			Outro();
-			e.getStackTrace().toString();
-			JOptionPane.showConfirmDialog(null, "Erreur : \n" + e.getMessage(), "Erreur", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+			Logger.error("Un problème à été rencontré durant l'éxecutions du programme.", e);
 		}finally {
 			stopThread.interrupt();	//Arrete le thread
 		}
@@ -132,7 +151,7 @@ public class Program extends Thread implements Serializable{
             B4DMouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
 		}
 
-		Configuration.getInstance().persons.get(0).position = B4D.world.getPosition();	//Récupère la position actuelle
+		B4D.getConfiguration().getPersons().get(0).setPosition(Dofus.world.getPosition());	//Récupère la position actuelle
 	}
 	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException{
 
@@ -142,13 +161,13 @@ public class Program extends Thread implements Serializable{
 			try {
 				program.run();
 			} catch (B4DFullInventory e) {			
-				if(Configuration.getInstance().hdvWhenFull) {
+				if(hdvWhenFull) {
 					//Mettre en HDV
 				}
-				if(Configuration.getInstance().bankWhenFull) {
+				if(bankWhenFull) {
 					//Mettre en banque
 				}
-				if(Configuration.getInstance().stopWhenFull)
+				if(stopWhenFull)
 					break;
 				
 				maxDeposits = (maxDeposits>0 ? maxDeposits-1 : maxDeposits);	//Décrémente le nombre de depots si non infini

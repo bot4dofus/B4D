@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fr.B4D.bot.Configuration;
+import fr.B4D.bot.B4D;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 
@@ -33,7 +33,7 @@ public final class B4DChat {
 	
 	public static void sendChat(String text, double time) {
 		try {
-			B4DMouse.leftClick(Configuration.getInstance().chatBar, false, 0.5);
+			B4DMouse.leftClick(B4D.getConfiguration().getChatBar(), false, 0.5);
 			B4DKeyboard.writeKeyboard(text,time);
 			
 			Robot robot = new Robot();
@@ -64,7 +64,7 @@ public final class B4DChat {
 	/**************/
 	
 	public static String getChat() throws AWTException, UnsupportedFlavorException, IOException  {
-		return B4DScreen.getSelection(new Point((int)(Configuration.getInstance().chatFrame.x + Configuration.getInstance().chatFrame.width*0.95), (int)(Configuration.getInstance().chatFrame.y + Configuration.getInstance().chatFrame.height*0.95)));
+		return B4DScreen.getSelection(new Point((int)(B4D.getConfiguration().getChatFrame().x + B4D.getConfiguration().getChatFrame().width*0.95), (int)(B4D.getConfiguration().getChatFrame().y + B4D.getConfiguration().getChatFrame().height*0.95)));
 	}
 	
 	public static ArrayList<Message> parseChat() throws AWTException, UnsupportedFlavorException, IOException{

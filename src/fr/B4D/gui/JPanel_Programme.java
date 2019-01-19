@@ -12,6 +12,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,8 +33,8 @@ public class JPanel_Programme extends JPanel {
 
 	private static final long serialVersionUID = -1975429297614634621L;
 
+	@SuppressWarnings("unused")
 	private JFrame parent;
-	private B4D b4d;
 	
 	public final int width = 635;
 	public final int height = 235;
@@ -44,15 +45,18 @@ public class JPanel_Programme extends JPanel {
 	private JComboBox<Ressource> comboBox_Ressource;
 	
 	private JFormattedTextField textField_Turns, textField_Deposits;
+
+	private JCheckBox checkBox_HDV;
+	private JCheckBox checkBox_Bank;
+	private JCheckBox checkBox_Stop;
 	
 	private JButton button_Start;
 
 	/**
 	 * Create the panel.
 	 */
-	public JPanel_Programme(JFrame parent, B4D b4d) {
+	public JPanel_Programme(JFrame parent) {
 		this.parent = parent;
-		this.b4d = b4d;
 		
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
@@ -60,7 +64,7 @@ public class JPanel_Programme extends JPanel {
 					((DefaultComboBoxModel<Place>)comboBox_Place.getModel()).getIndexOf(p.getPlace()) < 0)
 				.forEach(p -> comboBox_Place.addItem(p.getPlace()));
 				
-				if(b4d.getConfiguration().gameFrame != null && b4d.getConfiguration().chatFrame != null && b4d.getConfiguration().chatBar != null && b4d.getConfiguration().minimap != null) {
+				if(B4D.getConfiguration().getGameFrame() != null && B4D.getConfiguration().getChatFrame() != null && B4D.getConfiguration().getChatBar() != null && B4D.getConfiguration().getMinimap() != null) {
 					button_Start.setEnabled(true);
 				}else {
 					button_Start.setEnabled(false);
@@ -221,26 +225,26 @@ public class JPanel_Programme extends JPanel {
 		lblInventairePlein.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblInventairePlein);
 		
-		JCheckBox checkBox_HDV = new JCheckBox("Mettre en HDV");
+		checkBox_HDV = new JCheckBox("Mettre en HDV");
 		checkBox_HDV.setBackground(Color.LIGHT_GRAY);
 		checkBox_HDV.setForeground(Color.DARK_GRAY);
 		checkBox_HDV.setBounds(320, 35, 150, 20);
 		checkBox_HDV.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(checkBox_HDV);
 		
-		JCheckBox checkBox_Banque = new JCheckBox("Mettre en Banque");
-		checkBox_Banque.setBackground(Color.LIGHT_GRAY);
-		checkBox_Banque.setForeground(Color.DARK_GRAY);
-		checkBox_Banque.setBounds(320, 55, 150, 20);
-		checkBox_Banque.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		add(checkBox_Banque);
+		checkBox_Bank = new JCheckBox("Mettre en Banque");
+		checkBox_Bank.setBackground(Color.LIGHT_GRAY);
+		checkBox_Bank.setForeground(Color.DARK_GRAY);
+		checkBox_Bank.setBounds(320, 55, 150, 20);
+		checkBox_Bank.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(checkBox_Bank);
 		
-		JCheckBox checkBox_Arreter = new JCheckBox("Arreter");
-		checkBox_Arreter.setBackground(Color.LIGHT_GRAY);
-		checkBox_Arreter.setForeground(Color.DARK_GRAY);
-		checkBox_Arreter.setBounds(320, 75, 150, 20);
-		checkBox_Arreter.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		add(checkBox_Arreter);
+		checkBox_Stop = new JCheckBox("Arreter");
+		checkBox_Stop.setBackground(Color.LIGHT_GRAY);
+		checkBox_Stop.setForeground(Color.DARK_GRAY);
+		checkBox_Stop.setBounds(320, 75, 150, 20);
+		checkBox_Stop.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(checkBox_Stop);
 		
 		JLabel lblDpartEn = new JLabel("D\u00E9part en :");
 		lblDpartEn.setBackground(new Color(46, 139, 87));
@@ -272,6 +276,11 @@ public class JPanel_Programme extends JPanel {
 				
 				program.setMaxCycles(Integer.valueOf(textField_Turns.getText()));
 				program.setMaxDeposits(Integer.valueOf(textField_Deposits.getText()));
+				
+				program.setBankWhenFull(checkBox_HDV.isSelected());
+				program.setHdvWhenFull(checkBox_Bank.isSelected());
+				program.setStopWhenFull(checkBox_Stop.isSelected());
+				
 				program.start();
 				
 				try {

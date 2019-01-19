@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 
+import fr.B4D.bot.B4D;
 import fr.B4D.bot.Configuration;
 
 public class ConfigurationDAO extends DAO<Configuration> implements Serializable{
@@ -17,7 +18,7 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 	public Configuration find() throws IOException, ClassNotFoundException {
 		if(confFile.exists()) {
 			Serialization confSerialization = new Serialization(confFile);
-			return Configuration.setInstance(confSerialization.deserialize());
+			return B4D.setConfiguration(confSerialization.deserialize());
 		}
 		else
 			return create();
@@ -25,10 +26,10 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 
 	@Override
 	public Configuration create() throws IOException, ClassNotFoundException {
-		Configuration configuration = Configuration.getInstance();
+		Configuration configuration = B4D.getConfiguration();
 		Serialization confSerialization = new Serialization(confFile);
 		confSerialization.serialize(configuration);
-		return Configuration.setInstance(confSerialization.deserialize());
+		return B4D.setConfiguration(confSerialization.deserialize());
 	}
 
 	@Override

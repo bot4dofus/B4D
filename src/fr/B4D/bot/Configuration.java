@@ -5,25 +5,25 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import fr.B4D.program.Person;
-
 public class Configuration implements Serializable{
 
 	private static final long serialVersionUID = -1787414977374798817L;
-
-	public ArrayList<Person> persons;
-	public Rectangle gameFrame;
-	public Rectangle chatFrame;
-	public Point chatBar;
-	public Point minimap;
-
-	public boolean hdvWhenFull;
-	public boolean bankWhenFull;
-	public boolean stopWhenFull;
 	
-	private static Configuration instance;
+	  /**************/
+	 /** ATRIBUTS **/
+	/**************/
 	
-	private Configuration(){
+	private ArrayList<Person> persons;
+	private Rectangle gameFrame;
+	private Rectangle chatFrame;
+	private Point chatBar;
+	private Point minimap;
+
+	  /*************/
+	 /** BUILDER **/
+	/*************/
+	
+	public Configuration(){
 		this.persons = new ArrayList<Person>();
 		persons.add(new Person("Nom de compte", "Mot de passe", Server.FURYE, "Pseudo"));
 		persons.add(new Person("Nom de compte", "Mot de passe", Server.OTOMUSTAM, "Pseudo"));
@@ -31,19 +31,45 @@ public class Configuration implements Serializable{
 		this.chatFrame = null;
 		this.chatBar = null;
 		this.minimap = null;
-		this.hdvWhenFull = false;
-		this.bankWhenFull = false;
-		this.stopWhenFull = true;
 	}
 	
-	public static Configuration getInstance() {
-		if(instance == null)
-			instance = new Configuration();
-		return instance;
+	  /***********************/
+	 /** GETTERS & SETTERS **/
+	/***********************/
+
+	public ArrayList<Person> getPersons() {
+		return persons;
 	}
-	
-	public static Configuration setInstance(Configuration configuration) {
-		instance = configuration;
-		return instance;
+
+	public Rectangle getGameFrame() {
+		return gameFrame;
+	}
+
+	public void setGameFrame(Rectangle gameFrame) {
+		this.gameFrame = gameFrame;
+	}
+
+	public Rectangle getChatFrame() {
+		return chatFrame;
+	}
+
+	public void setChatFrame(Rectangle chatFrame) {
+		this.chatFrame = chatFrame;
+	}
+
+	public Point getChatBar() {
+		return chatBar;
+	}
+
+	public void setChatBar(Point chatBar) {
+		this.chatBar = chatBar;
+	}
+
+	public Point getMinimap() {
+		return minimap;
+	}
+
+	public void setMinimap(Point minimap) {
+		this.minimap = minimap;
 	}
 }
