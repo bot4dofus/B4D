@@ -56,7 +56,7 @@ public class JFrame_B4D extends JFrame{
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			windowB4D.setVisible(true);		
 		} catch (Exception e) {
-			B4D.logger.error("Erreur inconnu", e);
+			B4D.logger.error(e);
 		}
 	}
 	
@@ -129,8 +129,9 @@ public class JFrame_B4D extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				try {
 					B4D.saveConfiguration();
+					B4D.saveTeam();
 				} catch (ClassNotFoundException | IOException ex) {
-					B4D.logger.error("Impossible d'importer le fichier, fichier corrompu.", ex);
+					B4D.logger.error(ex);
 				}
 				dispose();
 			}
@@ -287,7 +288,7 @@ public class JFrame_B4D extends JFrame{
 					personPanel.ActualiserInfos();
 					settingPanel.ActualiserInfos();
 				} catch (ClassNotFoundException | IOException ex) {
-					B4D.logger.error("Impossible d'importer le fichier, fichier corrompu.", ex);
+					B4D.logger.popUp("Impossible d'importer le fichier, fichier corrompu.");
 				}
 			}
 		});
@@ -301,7 +302,7 @@ public class JFrame_B4D extends JFrame{
 					try {
 						b4d.exportFile();
 					} catch (ClassNotFoundException | IOException ex) {
-						B4D.logger.error("Impossible d'exporter le fichier.", ex);
+						B4D.logger.error(ex);
 					}
 			}
 		});

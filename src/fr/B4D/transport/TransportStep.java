@@ -28,13 +28,13 @@ public class TransportStep implements Serializable{
 	public TransportStep(B4DEdge edge) throws B4DCannotFind {
 		switch(edge.getTypeDeTransport()) {
 			case BoosterPotion:
-				transport = new BoosterPotion(edge.getSource(), B4D.getConfiguration().getPersons().get(0).getBoosterPotionPosition());
+				transport = new BoosterPotion(edge.getSource(), B4D.getTeam().get(0).getBoosterPotionPosition());
 				break;
 			case BontaPotion:
-				transport = new BontaPotion(edge.getSource(), B4D.getConfiguration().getPersons().get(0).getBontaPotionPosition());
+				transport = new BontaPotion(edge.getSource(), B4D.getTeam().get(0).getBontaPotionPosition());
 				break;
 			case BrakmarPotion:
-				transport = new BrakmarPotion(edge.getSource(), B4D.getConfiguration().getPersons().get(0).getBrakmarPotionPosition());
+				transport = new BrakmarPotion(edge.getSource(), B4D.getTeam().get(0).getBrakmarPotionPosition());
 				break;
 			case Walk:
 				transport = new Walk(edge.getSource());

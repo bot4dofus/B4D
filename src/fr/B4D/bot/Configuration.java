@@ -3,7 +3,6 @@ package fr.B4D.bot;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Configuration implements Serializable{
 
@@ -12,8 +11,7 @@ public class Configuration implements Serializable{
 	  /**************/
 	 /** ATRIBUTS **/
 	/**************/
-	
-	private ArrayList<Person> persons;
+
 	private Rectangle gameFrame;
 	private Rectangle chatFrame;
 	private Point chatBar;
@@ -24,9 +22,6 @@ public class Configuration implements Serializable{
 	/*************/
 	
 	public Configuration(){
-		this.persons = new ArrayList<Person>();
-		persons.add(new Person("Nom de compte", "Mot de passe", Server.FURYE, "Pseudo"));
-		persons.add(new Person("Nom de compte", "Mot de passe", Server.OTOMUSTAM, "Pseudo"));
 		this.gameFrame = null;
 		this.chatFrame = null;
 		this.chatBar = null;
@@ -36,10 +31,6 @@ public class Configuration implements Serializable{
 	  /***********************/
 	 /** GETTERS & SETTERS **/
 	/***********************/
-
-	public ArrayList<Person> getPersons() {
-		return persons;
-	}
 
 	public Rectangle getGameFrame() {
 		return gameFrame;

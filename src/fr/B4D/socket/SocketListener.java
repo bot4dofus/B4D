@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.Server;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
@@ -16,22 +17,34 @@ import net.sourceforge.jpcap.capture.RawPacketListener;
 import net.sourceforge.jpcap.net.RawPacket;
 
 public class SocketListener extends Thread{
+	
+	  /***************/
+	 /** CONSTANTS **/
+	/***************/
+	
 	private static final int INFINITE = -1;
 	
 	private static final int lengthHeaderOne = 6;
 	private static final int lengthHeaderTwo = 24;
 	//private static final int lengthTrailer = 6;
 	private static final String encoding = "UTF-8";
+
+	  /**************/
+	 /** ATRIBUTS **/
+	/**************/
 	
 	private PacketCapture m_pcap;
 	private String m_device;
 
+	  /*************/
+	 /** BUILDER **/
+	/*************/
+	
 	public SocketListener() throws CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
 		m_pcap = new PacketCapture();
 		m_device = NetworkFinder.find();
 		System.out.println("Network found : " + m_device);
 		m_pcap.open(m_device, 65535, true, 1000);
-		m_pcap.setFilter("host " + B4D.getConfiguration().getPersons().get(0).getServer().getIp(), true);
 		m_pcap.addRawPacketListener(new RawPacketListener() {
 			public void rawPacketArrived(RawPacket data) {
 				if(data.getData().length > 54) {
@@ -43,14 +56,30 @@ public class SocketListener extends Thread{
 		});
 	}
 	
+	  /*********/
+	 /** RUN **/
+	/*********/
+	
 	public void run () {
 		try {
 			m_pcap.capture(INFINITE);
 		} catch (CapturePacketException e) {
-			B4D.logger.error("La capture des packet s'est arretée.", e);
+			B4D.logger.error(e);
 		}
 	}
 
+	  /*************/
+	 /** METHODS **/
+	/*************/
+	
+	public void setFilter(Server serveur) throws InvalidFilterException {
+		m_pcap.setFilter("host " + serveur.getIp(), true);
+	}
+
+	  /*************/
+	 /** PARSING **/
+	/*************/
+	
 	public void parseDofus(byte[] data) {	
 
 		//							DOFUS PACKETS STRUCTURE
@@ -66,8 +95,8 @@ public class SocketListener extends Thread{
 		if(data[0] == 0x0D) {
 			parseChat(data);
 		}
-		//else
-			//System.out.println("[Unknow (" + byte0 + " " + byte1 + ")]");
+		else
+			System.out.println("[Unknow soket (" + data[0] + ")]");
 	}
 	
 	public void parseChat(byte[] data) {

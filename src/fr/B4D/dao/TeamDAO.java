@@ -12,9 +12,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.google.gson.Gson;
 
-import fr.B4D.bot.Configuration;
+import fr.B4D.bot.Team;
 
-public class ConfigurationDAO extends DAO<Configuration> implements Serializable{
+public class TeamDAO extends DAO<Team> implements Serializable{
 
 	private static final long serialVersionUID = -222219942703682998L;
 
@@ -22,7 +22,7 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 	 /** ATRIBUTS **/
 	/**************/
 	
-	private final static String format = "B4Dconfiguration";
+	private final static String format = "B4Dteam";
 	private final static String defaultName = "default";
     private final static String defaultFullName = defaultName + "." + format;
 	private static File defaultFile = new File(defaultFullName);
@@ -34,7 +34,7 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 	/*************/
 	
 	@Override
-	public Configuration find() throws IOException, ClassNotFoundException {
+	public Team find() throws IOException, ClassNotFoundException {
 		if(defaultFile.exists())
 			return deserialize(defaultFile);
 		else
@@ -42,15 +42,15 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 	}
 
 	@Override
-	protected Configuration create() throws IOException, ClassNotFoundException {
-		Configuration configuration = new Configuration();
-		serialize(configuration, defaultFile);
-		return configuration;
+	protected Team create() throws IOException, ClassNotFoundException {
+		Team team = new Team();
+		serialize(team, defaultFile);
+		return team;
 	}
 
 	@Override
-	public void update(Configuration confuguration) throws IOException, ClassNotFoundException {
-		serialize(confuguration, defaultFile);
+	public void update(Team team) throws IOException, ClassNotFoundException {
+		serialize(team, defaultFile);
 	}
 
 	  /*************/
@@ -67,23 +67,23 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 	/*********************/
 
 	@Override
-	public void serialize(Configuration configuration, File file) throws ClassNotFoundException, IOException {		  
+	public void serialize(Team team, File file) throws ClassNotFoundException, IOException {		  
 			FileOutputStream fileOut = new FileOutputStream(file.getAbsolutePath());
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			Gson gson = new Gson();
-			out.writeObject(gson.toJson(configuration));
+			out.writeObject(gson.toJson(team));
 			out.close();
 			fileOut.close();
 	  }
 
 	@Override
-	public Configuration deserialize(File file) throws ClassNotFoundException, IOException {
+	public Team deserialize(File file) throws ClassNotFoundException, IOException {
 			FileInputStream fileIn = new FileInputStream(file.getAbsolutePath());
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			Gson gson = new Gson();
-			Configuration configuration = gson.fromJson((String) in.readObject(), Configuration.class);
+			Team team = gson.fromJson((String) in.readObject(), Team.class);
 			in.close();
 			fileIn.close();
-			return configuration;
+			return team;
 	  }	
 }

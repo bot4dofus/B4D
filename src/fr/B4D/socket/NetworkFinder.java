@@ -9,7 +9,7 @@ import net.sourceforge.jpcap.capture.PacketCapture;
 
 public class NetworkFinder{
 
-	private final static int millisToWait = 10000;
+	private final static int millisToWait = 3000;
 
 	public static String find() throws CaptureDeviceLookupException, NoSocketDetectedException {
 		String[] devs = PacketCapture.lookupDevices();

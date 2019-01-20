@@ -79,16 +79,16 @@ public class JPanel_Personnage extends JPanel {
 			public void tableChanged(TableModelEvent evt){
 				switch(evt.getColumn()){
 					case 0:
-						B4D.getConfiguration().getPersons().get(evt.getFirstRow()).setAccount(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());
+						B4D.getTeam().get(evt.getFirstRow()).setAccount(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());
 						break;
 					case 1:
-						B4D.getConfiguration().getPersons().get(evt.getFirstRow()).setPassword(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());
+						B4D.getTeam().get(evt.getFirstRow()).setPassword(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());
 						break;
 					case 2:
-						B4D.getConfiguration().getPersons().get(evt.getFirstRow()).setServer(Server.getServer(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString()));
+						B4D.getTeam().get(evt.getFirstRow()).setServer(Server.getServer(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString()));
 						break;
 					case 3:
-						B4D.getConfiguration().getPersons().get(evt.getFirstRow()).setPseudo(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());
+						B4D.getTeam().get(evt.getFirstRow()).setPseudo(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());
 						break;
 				}
 				ActualiserInfos();
@@ -104,7 +104,7 @@ public class JPanel_Personnage extends JPanel {
 						btnModifierBrakmar.setEnabled(true);
 						btnModifierSort.setEnabled(true);
 					}
-					ActualiserInfos(B4D.getConfiguration().getPersons().get(table.getSelectedRow()));
+					ActualiserInfos(B4D.getTeam().get(table.getSelectedRow()));
 				}
 			}
 		});
@@ -112,7 +112,7 @@ public class JPanel_Personnage extends JPanel {
 		JButton btnNouveau = new JButton("Nouveau");
 		btnNouveau.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				B4D.getConfiguration().getPersons().add(new Person());
+				B4D.getTeam().add(new Person());
 				ActualiserInfos();
 			}
 		});
@@ -125,7 +125,7 @@ public class JPanel_Personnage extends JPanel {
 		btnSupprimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow() != -1) {
-					B4D.getConfiguration().getPersons().remove(table.getSelectedRow());
+					B4D.getTeam().remove(table.getSelectedRow());
 					ActualiserInfos();
 				}
 			}
@@ -139,9 +139,9 @@ public class JPanel_Personnage extends JPanel {
 		btnJouerCePersonnage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(table.getSelectedRow() != -1) {
-					Person personnage = B4D.getConfiguration().getPersons().get(table.getSelectedRow());
-					B4D.getConfiguration().getPersons().remove(personnage);
-					B4D.getConfiguration().getPersons().add(0,personnage);
+					Person personnage = B4D.getTeam().get(table.getSelectedRow());
+					B4D.getTeam().remove(personnage);
+					B4D.getTeam().add(0,personnage);
 					table.setRowSelectionInterval(0, 0);
 					ActualiserInfos();
 				}
@@ -190,7 +190,7 @@ public class JPanel_Personnage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionRappel.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Person person = B4D.getConfiguration().getPersons().get(table.getSelectedRow());
+							Person person = B4D.getTeam().get(table.getSelectedRow());
 							person.setBoosterPotionPosition(B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
@@ -216,7 +216,7 @@ public class JPanel_Personnage extends JPanel {
 		    public void actionPerformed(ActionEvent e) {
 		    	if(table.getSelectedRow() != -1) {
 					try {
-						B4D.getConfiguration().getPersons().get(table.getSelectedRow()).setBoosterPotionDestination(Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString()));
+						B4D.getTeam().get(table.getSelectedRow()).setBoosterPotionDestination(Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString()));
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -262,7 +262,7 @@ public class JPanel_Personnage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionBonta.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Person person = B4D.getConfiguration().getPersons().get(table.getSelectedRow());
+							Person person = B4D.getTeam().get(table.getSelectedRow());
 							person.setBontaPotionPosition(B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
@@ -323,7 +323,7 @@ public class JPanel_Personnage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionBrakmar.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Person person = B4D.getConfiguration().getPersons().get(table.getSelectedRow());
+							Person person = B4D.getTeam().get(table.getSelectedRow());
 							person.setBrakmarPotionPosition(B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
@@ -385,7 +385,7 @@ public class JPanel_Personnage extends JPanel {
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/Sort.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
-							Person person = B4D.getConfiguration().getPersons().get(table.getSelectedRow());
+							Person person = B4D.getTeam().get(table.getSelectedRow());
 							person.setSpellPosition(B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
@@ -408,7 +408,7 @@ public class JPanel_Personnage extends JPanel {
 		
 		this.dataTable.removeAllElements();
 		
-		for(Person personnage:B4D.getConfiguration().getPersons()) {
+		for(Person personnage:B4D.getTeam()) {
 			Vector<String> row = new Vector<String>();
 			row.add(personnage.getAccount());
 			row.add(personnage.getPassword().replaceAll("(?s).", "*"));

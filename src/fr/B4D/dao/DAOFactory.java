@@ -9,4 +9,7 @@ public class DAOFactory implements Serializable{
 	public static ConfigurationDAO getConfigurationDAO() {
 		return new ConfigurationDAO();
 	}
+	public static TeamDAO getTeamDAO() {
+		return new TeamDAO();
+	}
 }

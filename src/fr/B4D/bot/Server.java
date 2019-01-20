@@ -28,9 +28,9 @@ public class Server implements Serializable{
 	public final static Server OMBRE = new Server("Ombre", "0.0.0.0");
 	public final static Server ECHO = new Server("Echo", "54.194.216.90");
 	
-	  /***************/
-	 /** ATTRIBUTS **/
-	/***************/
+	  /**************/
+	 /** ATRIBUTS **/
+	/**************/
 	
 	private String name;
 	private String ip;

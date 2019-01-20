@@ -45,7 +45,7 @@ public class Walk extends Transport implements Serializable{
 	
 	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
 		
-		if (!B4D.getConfiguration().getPersons().get(0).getPosition().equals(this.getPosition()))
+		if (!B4D.getTeam().get(0).getPosition().equals(this.getPosition()))
 			throw new B4DWrongPosition();
 		
 		Point move = new Point(destination.x - super.getPosition().x, destination.y - super.getPosition().y);
@@ -59,6 +59,6 @@ public class Walk extends Transport implements Serializable{
 			B4DMouse.leftClick(goRight, true);
 
 		B4DWait.waitForMap();
-		B4D.getConfiguration().getPersons().get(0).setPosition(destination);
+		B4D.getTeam().get(0).setPosition(destination);
 	}
 }

@@ -64,7 +64,7 @@ public class JPanel_Admin extends JPanel {
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {					
-					Test.test.run();
+					Test.test.run(B4D.getTeam().get(0));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}

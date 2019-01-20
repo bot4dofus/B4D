@@ -6331,27 +6331,27 @@ public final class World implements TransportInterface, Serializable{
 	public TransportPath getTransportPathTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {		
 		
 		//Add potions
-		if(B4D.getConfiguration().getPersons().get(0).getBoosterPotionPosition() != null) 
-			world.addB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBoosterPotionDestination().getPosition(), TransportType.BoosterPotion, boosterPotionCost);
+		if(B4D.getTeam().get(0).getBoosterPotionPosition() != null) 
+			world.addB4DEdge(B4D.getTeam().get(0).getPosition(), B4D.getTeam().get(0).getBoosterPotionDestination().getPosition(), TransportType.BoosterPotion, boosterPotionCost);
 			
-		if(B4D.getConfiguration().getPersons().get(0).getBontaPotionPosition() != null)
-			world.addB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBontaPotionDestination(), TransportType.BontaPotion, bontaPotionCost);
+		if(B4D.getTeam().get(0).getBontaPotionPosition() != null)
+			world.addB4DEdge(B4D.getTeam().get(0).getPosition(), B4D.getTeam().get(0).getBontaPotionDestination(), TransportType.BontaPotion, bontaPotionCost);
 
-		if(B4D.getConfiguration().getPersons().get(0).getBrakmarPotionPosition() != null)
-			world.addB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBrakmarPotionDestination(), TransportType.BrakmarPotion, brakmarPotionCost);
+		if(B4D.getTeam().get(0).getBrakmarPotionPosition() != null)
+			world.addB4DEdge(B4D.getTeam().get(0).getPosition(), B4D.getTeam().get(0).getBrakmarPotionDestination(), TransportType.BrakmarPotion, brakmarPotionCost);
 		
 		//Get the shortest path
-	    List<B4DEdge> shortestPath = world.getPath(B4D.getConfiguration().getPersons().get(0).getPosition(), destination).getEdgeList();
+	    List<B4DEdge> shortestPath = world.getPath(B4D.getTeam().get(0).getPosition(), destination).getEdgeList();
 
 	    //Remove potions
-		if(B4D.getConfiguration().getPersons().get(0).getBoosterPotionPosition() != null)
-			world.removeB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBoosterPotionDestination().getPosition());
+		if(B4D.getTeam().get(0).getBoosterPotionPosition() != null)
+			world.removeB4DEdge(B4D.getTeam().get(0).getPosition(), B4D.getTeam().get(0).getBoosterPotionDestination().getPosition());
 		
-		if(B4D.getConfiguration().getPersons().get(0).getBontaPotionPosition() != null)
-			world.removeB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBontaPotionDestination());
+		if(B4D.getTeam().get(0).getBontaPotionPosition() != null)
+			world.removeB4DEdge(B4D.getTeam().get(0).getPosition(), B4D.getTeam().get(0).getBontaPotionDestination());
 		
-		if(B4D.getConfiguration().getPersons().get(0).getBrakmarPotionPosition() != null)
-			world.removeB4DEdge(B4D.getConfiguration().getPersons().get(0).getPosition(), B4D.getConfiguration().getPersons().get(0).getBrakmarPotionDestination());
+		if(B4D.getTeam().get(0).getBrakmarPotionPosition() != null)
+			world.removeB4DEdge(B4D.getTeam().get(0).getPosition(), B4D.getTeam().get(0).getBrakmarPotionDestination());
 		
 		return new TransportPath(shortestPath);
 	}

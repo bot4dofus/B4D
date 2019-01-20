@@ -280,7 +280,7 @@ public class JPanel_Programme extends JPanel {
 				program.setHdvWhenFull(checkBox_Bank.isSelected());
 				program.setStopWhenFull(checkBox_Stop.isSelected());
 				
-				program.start();
+				program.startWith(B4D.getTeam().get(0));
 				
 				try {
 					program.join();

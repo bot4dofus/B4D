@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.Person;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.farming.Ressource;
@@ -33,6 +34,8 @@ public class Program extends Thread implements Serializable{
 	  /***************/
 	 /** ATTRIBUTS **/
 	/***************/
+	
+	private Person person;
 	
 	private Place place;
 	private Category category;
@@ -123,6 +126,11 @@ public class Program extends Thread implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
+	public void startWith(Person person) {
+		this.person = person;
+		start();
+	}
+	
 	public void run() {
 		try {
 			Intro();
@@ -130,8 +138,7 @@ public class Program extends Thread implements Serializable{
 			Outro();
 			B4D.logger.popUp("Le bot s'est correctement terminé.");
 		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException e){
-			Outro();
-			B4D.logger.error("Un problème à été rencontré durant l'éxecutions du programme.", e);
+			B4D.logger.error(e);
 		}
 	}
 
@@ -145,15 +152,15 @@ public class Program extends Thread implements Serializable{
             B4DMouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
 		}
 
-		B4D.getConfiguration().getPersons().get(0).setPosition(Dofus.getWorld().getPosition());	//Récupère la position actuelle
+		B4D.getTeam().get(0).setPosition(Dofus.getWorld().getPosition());	//Récupère la position actuelle
 	}
 	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException{
 
-		System.out.println("maxCycles ="+maxCycles);
-		System.out.println("maxDeposits ="+maxDeposits);
+		System.out.println("maxCycles =" + maxCycles);
+		System.out.println("maxDeposits =" + maxDeposits);
 		while(maxCycles != 0 || maxDeposits != 0) {
 			try {
-				program.run();
+				program.run(person);
 			} catch (B4DFullInventory e) {			
 				if(hdvWhenFull) {
 					//Mettre en HDV

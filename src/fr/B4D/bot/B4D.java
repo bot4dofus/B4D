@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.B4D.dao.DAOFactory;
@@ -29,6 +30,8 @@ public final class B4D{
 	private static boolean admin;
 
 	private static Configuration configuration;
+	private static Team team;
+	
 	private static SocketListener socketListener;
 	private static KeyboardListener keyboardListener;
 
@@ -41,14 +44,15 @@ public final class B4D{
 	/***********************/
 
 	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
+		logger = new Logger();
+		
 		String currentMacAddress = B4DOther.getMacAddress();
 		admin = (adminMacAdresses[0].equals(currentMacAddress) || adminMacAdresses[0].equals(currentMacAddress));
 
 		configuration = DAOFactory.getConfigurationDAO().find();
+		team = DAOFactory.getTeamDAO().find();
 		socketListener = new SocketListener();
 		keyboardListener = new KeyboardListener();
-
-		logger = new Logger();
 		
 		dofus = new Dofus();
 	}
@@ -61,12 +65,12 @@ public final class B4D{
 		return admin;
 	}
 
+	public static Team getTeam() {
+		return team;
+	}
+	
 	public static Configuration getConfiguration() {
 		return configuration;
-	}
-
-	public static void saveConfiguration() throws ClassNotFoundException, IOException {
-		DAOFactory.getConfigurationDAO().update(configuration);
 	}
 
 	public static SocketListener getSocketListener() {
@@ -77,18 +81,30 @@ public final class B4D{
 		return keyboardListener;
 	}
 
+	/**********/
+	/** SAVE **/
+	/**********/
+	
+	public static void saveConfiguration() throws ClassNotFoundException, IOException {
+		DAOFactory.getConfigurationDAO().update(configuration);
+	}
+	
+	public static void saveTeam() throws ClassNotFoundException, IOException {
+		DAOFactory.getTeamDAO().update(team);
+	}
+	
 	/*************/
 	/** METHODS **/
 	/*************/
 
 	public void importFile() throws ClassNotFoundException, IOException {
 		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
-		//FileNameExtensionFilter teamFilter = DAOFactory.getConfigurationDAO().getFilter();
+		FileNameExtensionFilter teamFilter = DAOFactory.getTeamDAO().getFilter();
 
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));	  
 		fileChooser.setFileFilter(configurationFilter);	  
-		//fileChooser.addChoosableFileFilter(teamFilter);
+		fileChooser.addChoosableFileFilter(teamFilter);
 
 		if (fileChooser.showOpenDialog(new Frame()) == JFileChooser.APPROVE_OPTION) {			
 			File file = fileChooser.getSelectedFile();
@@ -96,26 +112,28 @@ public final class B4D{
 				configuration = DAOFactory.getConfigurationDAO().deserialize(file);
 				saveConfiguration();
 			}
-			//else
-				//DAOFactory.getTeamDAO().deserialize(file);
+			else {
+				team = DAOFactory.getTeamDAO().deserialize(file);
+				saveTeam();
+			}
 		}
 	}
 
 	public void exportFile() throws ClassNotFoundException, IOException {
 		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
-		//FileNameExtensionFilter teamFilter = DAOFactory.getConfigurationDAO().getFilter();
+		FileNameExtensionFilter teamFilter = DAOFactory.getTeamDAO().getFilter();
 		
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));	
 		fileChooser.setFileFilter(configurationFilter);	  
-		//fileChooser.addChoosableFileFilter(teamFilter);
+		fileChooser.addChoosableFileFilter(teamFilter);
 		
 		if (fileChooser.showSaveDialog(new Frame()) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			if (configurationFilter.accept(file))
 				DAOFactory.getConfigurationDAO().serialize(configuration, file);		
-			//else
-				//DAOFactory.getTeamDAO().serialize(team, file);
+			else
+				DAOFactory.getTeamDAO().serialize(team, file);
 		}
 	}
 
@@ -127,7 +145,8 @@ public final class B4D{
 	/** RUN **/
 	/*********/
 
-	public void runProgram(Program program) {
+	public void runProgram(Program program, Person person) throws InvalidFilterException {
+		socketListener.setFilter(person.getServer());
 		B4D.getKeyboardListener().setProgram(program);	//Precise au thread, quel program gerer
 		B4D.getKeyboardListener().start();				//Demarre le thread
 		program.start();

@@ -29,11 +29,11 @@ public class Logger {
 		System.err.println(log);
 	}
 
-	public void error(String message, Exception e) {
+	public void error(Exception e) {
 		e.printStackTrace();
-		int answer = JOptionPane.showConfirmDialog(null, message + "\n\n" + e.getMessage() + "\n\nVoulez vous envoyer le rappot d'erreur au développeur ?", "Erreur", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+		int answer = JOptionPane.showConfirmDialog(null, e.getMessage() + "\n\nVoulez vous envoyer le rappot d'erreur au développeur ?", "Erreur", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 		if (answer == JOptionPane.YES_OPTION) {
-			sendRepport(message, e);
+			sendRepport(e);
 		}
 	}
 	
@@ -44,8 +44,8 @@ public class Logger {
 	private void sendFeedback(String message) {
 		sendEmail(fromFeedback, message, null);
 	}
-	private void sendRepport(String message, Exception e) {
-		sendEmail(fromRepport, message, e);
+	private void sendRepport(Exception e) {
+		sendEmail(fromFeedback, null, e);
 	}
 	
 	private void sendEmail(String from, String message, Exception e) {

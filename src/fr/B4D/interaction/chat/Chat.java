@@ -54,6 +54,8 @@ public class Chat extends Thread{
 				}
 			}
 		}
+		else
+			B4D.logger.debug("Message non ajouté en file d'attente car ne correspond pas au filtre.");
 	}
 
 	public void addChatListener(ChatListener chatListener) {

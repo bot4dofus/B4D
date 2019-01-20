@@ -29,12 +29,12 @@ public abstract class Potion extends Transport implements Serializable{
 	/**************/
 	
 	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
-		if (!B4D.getConfiguration().getPersons().get(0).getPosition().equals(this.getPosition()))
+		if (!B4D.getTeam().get(0).getPosition().equals(this.getPosition()))
 			throw new B4DWrongPosition();
 		
 		B4DMouse.doubleLeftClick(super.getPositionF(), false);
 
 		B4DWait.waitForMap();
-		B4D.getConfiguration().getPersons().get(0).setPosition(destination);
+		B4D.getTeam().get(0).setPosition(destination);
 	}
 }

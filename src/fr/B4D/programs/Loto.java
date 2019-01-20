@@ -3,6 +3,7 @@ package fr.B4D.programs;
 import java.awt.AWTException;
 import java.io.IOException;
 
+import fr.B4D.bot.Person;
 import fr.B4D.interaction.B4DExchangeCanceled;
 import fr.B4D.interaction.Exchange;
 import fr.B4D.modules.B4DChat;
@@ -19,7 +20,7 @@ public final class Loto {
 	
 	public static ProgramInterface loto = new ProgramInterface() {
 
-		public void run() throws AWTException, IOException, TesseractException {			
+		public void run(Person person) throws AWTException, IOException, TesseractException {			
 			try {
 				Exchange exchange = new Exchange(ticketPrice,0);
 				String name = exchange.waitForExchange(welcomeMessage);
