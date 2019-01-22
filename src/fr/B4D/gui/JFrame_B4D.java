@@ -54,7 +54,7 @@ public class JFrame_B4D extends JFrame{
 		try {
 			JFrame_B4D windowB4D = new JFrame_B4D();
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			windowB4D.setVisible(true);		
+			windowB4D.setVisible(true);
 		} catch (Exception e) {
 			B4D.logger.error(e);
 		}
@@ -265,9 +265,6 @@ public class JFrame_B4D extends JFrame{
 					lblAdmin.setBackground(unSelectedTab);
 			}
 		});
-		if(B4D.isAdmin())
-			lblAdmin.setVisible(false);
-	
 		lblAdmin.setOpaque(true);
 		lblAdmin.setBackground(unSelectedTab);
 		lblAdmin.setHorizontalAlignment(SwingConstants.CENTER);

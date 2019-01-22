@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.B4D.dao.DAOFactory;
@@ -25,10 +24,6 @@ public final class B4D{
 	/** ATRIBUTS **/
 	/**************/
 
-	private static final String[] adminMacAdresses = {"24-0A-64-51-AB-D5", "AC-22-0B-14-51-EB"};		//Adresse mac de l'admin
-
-	private static boolean admin;
-
 	private static Configuration configuration;
 	private static Team team;
 	
@@ -45,12 +40,10 @@ public final class B4D{
 
 	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
 		logger = new Logger();
-		
-		String currentMacAddress = B4DOther.getMacAddress();
-		admin = (adminMacAdresses[0].equals(currentMacAddress) || adminMacAdresses[0].equals(currentMacAddress));
 
 		configuration = DAOFactory.getConfigurationDAO().find();
 		team = DAOFactory.getTeamDAO().find();
+		
 		socketListener = new SocketListener();
 		keyboardListener = new KeyboardListener();
 		
@@ -60,10 +53,6 @@ public final class B4D{
 	/***********************/
 	/** GETTERS & SETTERS **/
 	/***********************/
-
-	public static boolean isAdmin() {
-		return admin;
-	}
 
 	public static Team getTeam() {
 		return team;
@@ -147,15 +136,14 @@ public final class B4D{
 
 	public void runProgram(Program program, Person person) throws InvalidFilterException {
 		socketListener.setFilter(person.getServer());
-		B4D.getKeyboardListener().setProgram(program);	//Precise au thread, quel program gerer
-		B4D.getKeyboardListener().start();				//Demarre le thread
-		program.start();
+		keyboardListener.startWith(program);			//Demarre le thread du clavier
+		program.startWith(person);
 		try {
 			program.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		Dofus.getChat().interrupt();
-		B4D.getKeyboardListener().interrupt();
+		socketListener.interrupt();
+		keyboardListener.interrupt();
 	}
 }
