@@ -30,13 +30,4 @@ public class NetworkFinder{
 
 		return testers.stream().map(s -> s.getNetwork()).filter(n -> n != null).findFirst().orElseThrow(NoSocketDetectedException::new);
 	}
-
-	public static void main(String[] args) {
-		try {
-			System.out.println(NetworkFinder.find());
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-	}
 }

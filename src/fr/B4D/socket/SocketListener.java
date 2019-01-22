@@ -8,6 +8,8 @@ import fr.B4D.bot.Server;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
+import fr.B4D.interaction.chat.UnknowChannelException;
+import fr.B4D.interaction.chat.UnknowSocketTypeException;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.CapturePacketException;
@@ -24,10 +26,9 @@ public class SocketListener extends Thread{
 	
 	private static final int INFINITE = -1;
 	
-	private static final int lengthHeaderOne = 6;
 	private static final int lengthHeaderTwo = 24;
 	//private static final int lengthTrailer = 6;
-	private static final String encoding = "UTF-8";
+	private static final String encoding = "Cp857";
 
 	  /**************/
 	 /** ATRIBUTS **/
@@ -43,7 +44,7 @@ public class SocketListener extends Thread{
 	public SocketListener() throws CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
 		m_pcap = new PacketCapture();
 		m_device = NetworkFinder.find();
-		System.out.println("Network found : " + m_device);
+		B4D.logger.debug(this, "Network found : " + m_device);
 		m_pcap.open(m_device, 65535, true, 1000);
 		m_pcap.addRawPacketListener(new RawPacketListener() {
 			public void rawPacketArrived(RawPacket data) {
@@ -60,9 +61,11 @@ public class SocketListener extends Thread{
 	 /** RUN **/
 	/*********/
 	
-	public void run () {
+	public void run() {
 		try {
+			B4D.logger.debug(this, "Lancement du thread");
 			m_pcap.capture(INFINITE);
+			B4D.logger.debug(this, "Fin du thread");
 		} catch (CapturePacketException e) {
 			B4D.logger.error(e);
 		}
@@ -75,35 +78,62 @@ public class SocketListener extends Thread{
 	public void setFilter(Server serveur) throws InvalidFilterException {
 		m_pcap.setFilter("host " + serveur.getIp(), true);
 	}
-
+	
 	  /*************/
 	 /** PARSING **/
 	/*************/
 	
-	public void parseDofus(byte[] data) {	
+	private void parseDofus(byte[] data) {	
 
 		//							DOFUS PACKETS STRUCTURE
 		
-		//		|   X     X   |    X   |    X    |     0     |        X       |   ...   |
-		//		| Packet type | Unknow | Channel | Delimiter | Message length | Message |
-		//		|                           HeaderOne                         | Message |
+		//		|   X     X   |    X   |    X    |     X    X     |   ...   |
+		//		| Packet type | Unknow | Channel | Message length | Message |
+		//		|                      HeaderOne                  | Message |
 		
-		//		|   \   A   |  18.X  |  0  0  0  |      X      |  ... |   0  0    |  XXXX  |
+		//		|   \   A   |  18.X  |   0  0    |    X   X    |  ... |   0  0    |  XXXX  |
 		//		| Delimiter | Unknow | Delimiter | Name length | Name | Delimiter | Unknow |
 		//		|                  HeaderTwo                   | Name |       Trailer      |
 
 		if(data[0] == 0x0D) {
 			parseChat(data);
 		}
-		else
-			System.out.println("[Unknow soket (" + data[0] + ")]");
+		//else
+			//System.out.println("[Unknow soket (" + data[0] + ")]");
 	}
 	
-	public void parseChat(byte[] data) {
-		try {
-			Channel channel = Message.getChannel(data[3]);
+	private int getHeaderLength(byte[] data) throws UnknowSocketTypeException {
+		int length;
+		switch(Byte.toUnsignedInt(data[1])) {
+			case 197:
+			case 205:
+				length = 6;
+				break;
+			case 0xCE:
+			case 198:
+				length = 7;
+				break;
+			default:
+				length = -1;
+				break;
+		}
+		if(length == -1)
+			throw new UnknowSocketTypeException(data);
+		
+		return length;
+	}
+	
+	  /******************/
+	 /** PARSING CHAT **/
+	/******************/
+	
+	private void parseChat(byte[] data) {
 
-			int lengthText = Byte.toUnsignedInt(data[lengthHeaderOne - 1]);
+		try {
+			int lengthHeaderOne = getHeaderLength(data);			
+			Channel channel = Message.getChannel(data[lengthHeaderOne-3]);
+			
+			int lengthText = Byte.toUnsignedInt(data[lengthHeaderOne-2])*256 + Byte.toUnsignedInt(data[lengthHeaderOne-1]);
 			byte[] text = Arrays.copyOfRange(data, lengthHeaderOne, lengthHeaderOne + lengthText);
 
 			int lengthName = Byte.toUnsignedInt(data[lengthHeaderOne + lengthText + lengthHeaderTwo - 1]);
@@ -111,8 +141,8 @@ public class SocketListener extends Thread{
 			
 			Message message = new Message(new String(pseudo, encoding), channel, new String(text, encoding));
 			Dofus.getChat().addMessage(message);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+		} catch (UnknowChannelException | UnsupportedEncodingException | UnknowSocketTypeException e) {
+				B4D.logger.debug(this, e.getMessage());
 		}
 	}
 }

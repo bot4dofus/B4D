@@ -10,7 +10,6 @@ public class Chat extends Thread{
 	private ArrayBlockingQueue<Message> messages;
 	private ChatFilter filter;
 	private ChatListener chatListener;
-	private Object lock = new Object();
 	private int countTo = -1, count = 0;
 	
 	public Chat() {
@@ -38,53 +37,61 @@ public class Chat extends Thread{
 	public void addTextFilter(String regex) {
 		filter.setRegex(regex);
 	}
-
-	public void removeFilter() {
-		filter = new ChatFilter();
+	
+	public void addChatListener(ChatListener chatListener) {
+		this.chatListener = chatListener;
 	}
-
+	
+	
 	public void addMessage(Message message) {
 		if(filter.filter(message)) {
-			if(!messages.offer(message))
-				B4D.logger.warning("Le chat est plein, le message n'a pas pu être ajouté.");
-			else {
-				B4D.logger.debug("Nouveau message en file d'attente.");
-				synchronized(lock){
-					lock.notifyAll();
+			synchronized(messages){
+				if(!messages.offer(message))
+					B4D.logger.warning("Le chat est plein, le message n'a pas pu être ajouté.");
+				else
+					messages.notifyAll();
+			}
+		}
+		//else
+			//B4D.logger.debug("Message non ajouté en file d'attente car ne correspond pas au filtre.");
+	}
+
+	public Message waitForMessage() {
+		return waitForMessage(0);
+	}
+	public Message waitForMessage(long timeout) {
+		if(!B4D.getSocketListener().isAlive())
+			B4D.getSocketListener().start();
+		
+		Message message = messages.poll();
+		try {
+			if(message == null) {
+				synchronized(messages){
+					messages.wait(timeout);
+					message = messages.poll();
 				}
 			}
 		}
-		else
-			B4D.logger.debug("Message non ajouté en file d'attente car ne correspond pas au filtre.");
-	}
-
-	public void addChatListener(ChatListener chatListener) {
-		this.chatListener = chatListener;
+		catch(InterruptedException e) {
+			B4D.logger.error(e);
+		}
+		return message;
 	}
 	
 	public void run() {
 		Message message;
 		while(count != countTo) {
-			try {
-				message = messages.poll();
-				if(message == null) {
-					synchronized(lock){
-						lock.wait();
-						message = messages.poll();
-					}
-				}
-				chatListener.treatMessage(message);
-				count++;
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			message = waitForMessage(0);
+			chatListener.treatMessage(message);
+			count++;
 		}
 	}
 	
 	public void read(int countTo, long millis) {
-		B4D.logger.debug("CHAT : Lancement du tread.");
+		if(!B4D.getSocketListener().isAlive())
+			B4D.getSocketListener().start();
+		
 		this.countTo = countTo;
-		B4D.getSocketListener().start();
 		this.start();
 		try {
 			this.join(millis);
@@ -92,7 +99,7 @@ public class Chat extends Thread{
 			e.printStackTrace();
 		}
 		B4D.getSocketListener().interrupt();
-		B4D.logger.debug("CHAT : Arret du tread.");
+		this.interrupt();
 	}	
 	public void read(int countTo) {
 		read(countTo, 0);

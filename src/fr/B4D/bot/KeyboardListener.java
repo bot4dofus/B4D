@@ -17,16 +17,13 @@ public class KeyboardListener extends Thread{
 
 	private Thread program;
 	
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/
-	public void setProgram(Program program) {
-		this.program = program;
-	}
-	
 	  /*********/
 	 /** RUN **/
 	/*********/
+	
+	public void startWith(Program program) {
+		this.program = program;
+	}
 	
 	public void run(){
 		boolean fin = false;

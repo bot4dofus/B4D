@@ -2,7 +2,7 @@ package fr.B4D.interaction.chat;
 
 import java.io.Serializable;
 
-import fr.B4D.bot.B4D;
+import fr.B4D.dofus.Dofus;
 import fr.B4D.modules.B4DChat;
 
 public class Message implements Serializable{
@@ -51,11 +51,18 @@ public class Message implements Serializable{
 			B4DChat.sendChat(B4DChat.getChannelPrefix(channel) + " " + text);
 	}
 	
-	public void reply(String text) {
+	public void send(String text) {
 		if(channel != Channel.Information) {
-			Message message = new Message(pseudo, Channel.Private, text);
-			message.send();
+			this.text = text;
+			send();
 		}
+	}
+	
+	public Message waitForReply(long timeout) {
+		Dofus.getChat().addPseudoFilter(pseudo);
+		Message message = Dofus.getChat().waitForMessage(timeout);
+		Dofus.getChat().addPseudoFilter(null);
+		return message;
 	}
 	
 	  /***************/
@@ -73,21 +80,23 @@ public class Message implements Serializable{
 	 /** STATIC **/
 	/************/
 	
-	public static Channel getChannel(byte key) {
-		switch(key) {
-			case(0x00):
+	public static Channel getChannel(byte data) throws UnknowChannelException {
+		switch(Byte.toUnsignedInt(data)) {
+			case(0):
 				return Channel.General;
-			case(0x04):
+			case(4):
 				return Channel.Team;
-			case(0x09):
+			case(9):
+			//case(0x39):
 				return Channel.Private;
-			case(0x05):
+			case(5):
+			//case(0x23):
 				return Channel.Business;
-			case(0x06):
+			case(6):
+			//case(0x21):
 				return Channel.Recruitment;
 			default:
-				B4D.logger.warning("[Unknow channel = " + key + "]");
-				return null;
+				throw new UnknowChannelException(Byte.toUnsignedInt(data));
 		}
 	}
 }
