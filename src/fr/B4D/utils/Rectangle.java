@@ -9,9 +9,6 @@ public class Rectangle extends java.awt.Rectangle implements Serializable{
 
 	private static final long serialVersionUID = -4191850414544381904L;
 
-	public Rectangle() {
-		super();
-	}
 	public Rectangle(Point topLeft, Point bottomRigth) {
 		super(topLeft.x, topLeft.y, bottomRigth.x - topLeft.x, bottomRigth.y - topLeft.y);
 	}
