@@ -9,4 +9,5 @@ public enum Category {
     Quete,
     Elevage,
     Decouverte,
+    Test,
 }

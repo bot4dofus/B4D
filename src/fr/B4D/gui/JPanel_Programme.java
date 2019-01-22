@@ -173,13 +173,13 @@ public class JPanel_Programme extends JPanel {
 		textField_Turns = new JFormattedTextField(NumberFormat.getNumberInstance());
 		textField_Turns.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_Turns.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
-		textField_Turns.setText("0");
+		textField_Turns.setText("-1");
 		textField_Turns.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_Turns.setBounds(165, 35, 150, 25);
 		textField_Turns.setColumns(10);
 		add(textField_Turns);
 		
-		JLabel label_Tours0 = new JLabel("(0 = infini)");
+		JLabel label_Tours0 = new JLabel("(-1 = infini)");
 		label_Tours0.setBackground(Color.LIGHT_GRAY);
 		label_Tours0.setForeground(Color.DARK_GRAY);
 		label_Tours0.setOpaque(true);
@@ -200,13 +200,13 @@ public class JPanel_Programme extends JPanel {
 		textField_Deposits = new JFormattedTextField(NumberFormat.getNumberInstance());
 		textField_Deposits.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_Deposits.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
-		textField_Deposits.setText("0");
+		textField_Deposits.setText("-1");
 		textField_Deposits.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_Deposits.setBounds(165, 115, 150, 25);
 		textField_Deposits.setColumns(10);
 		add(textField_Deposits);
 		
-		JLabel label_Depots0 = new JLabel("(0 = infini)");
+		JLabel label_Depots0 = new JLabel("(-1 = infini)");
 		label_Depots0.setBackground(Color.LIGHT_GRAY);
 		label_Depots0.setForeground(Color.DARK_GRAY);
 		label_Depots0.setOpaque(true);

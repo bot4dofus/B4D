@@ -17,6 +17,7 @@ import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DOther;
 import fr.B4D.modules.B4DScreen;
 import fr.B4D.programs.Deplacement;
+import fr.B4D.programs.Test;
 import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.TesseractException;
@@ -30,6 +31,7 @@ public class Program extends Thread implements Serializable{
 	/****************/
 	
 	public final static Program deplacement = new Program(Place.Aucune, Category.Aucune, RessourceType.Aucun, Ressource.Aucune, Deplacement.deplacement);
+	public final static Program test = new Program(Place.Aucune, Category.Test, RessourceType.Aucun, Ressource.Aucune, Test.test2);
 	
 	  /***************/
 	 /** ATTRIBUTS **/
@@ -72,6 +74,7 @@ public class Program extends Thread implements Serializable{
   public final static ArrayList<Program> getAll(){
   	ArrayList<Program> programs = new ArrayList<Program>();
   	programs.add(deplacement);
+  	programs.add(test);
     return programs;
   }
 	
@@ -133,9 +136,12 @@ public class Program extends Thread implements Serializable{
 	
 	public void run() {
 		try {
-			Intro();
+			if(this.category != Category.Test)
+				Intro();
 			Tours();
-			Outro();
+			if(this.category != Category.Test)
+				Outro();
+			
 			B4D.logger.popUp("Le bot s'est correctement terminé.");
 		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException e){
 			B4D.logger.error(e);
@@ -155,10 +161,9 @@ public class Program extends Thread implements Serializable{
 		B4D.getTeam().get(0).setPosition(Dofus.getWorld().getPosition());	//Récupère la position actuelle
 	}
 	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException{
+		int nbCycles = 0, nbDeposits = 0;
 
-		System.out.println("maxCycles =" + maxCycles);
-		System.out.println("maxDeposits =" + maxDeposits);
-		while(maxCycles != 0 || maxDeposits != 0) {
+		while(nbCycles != maxCycles || nbDeposits != maxDeposits) {
 			try {
 				program.run(person);
 			} catch (B4DFullInventory e) {			
@@ -171,10 +176,10 @@ public class Program extends Thread implements Serializable{
 				if(stopWhenFull)
 					break;
 				
-				maxDeposits = (maxDeposits>0 ? maxDeposits-1 : maxDeposits);	//Décrémente le nombre de depots si non infini
+				maxDeposits++;
 				
 			}finally {
-				maxCycles = (maxCycles>0 ? maxCycles-1 : maxCycles);			//Décrémente le nombre de cycles si non infini	
+				maxCycles++;
 			}
 		}
 	}
