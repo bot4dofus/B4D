@@ -98,7 +98,7 @@ public final class B4DScreen {
 		File file = File.createTempFile("screenshot", ".png");
 		ImageIO.write(image, "png", file);
 		Tesseract tessInst = new Tesseract();
-		tessInst.setDatapath("./tessdata");
+		tessInst.setLanguage("fra");
 		return tessInst.doOCR(file);
 	}
 	public static String OCR(Point P1, Point P2) throws AWTException, IOException, TesseractException {
