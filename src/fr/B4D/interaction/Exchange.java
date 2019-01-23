@@ -9,9 +9,6 @@ import java.io.Serializable;
 import fr.B4D.bot.B4D;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
-import fr.B4D.modules.B4DKeyboard;
-import fr.B4D.modules.B4DMouse;
-import fr.B4D.modules.B4DScreen;
 import fr.B4D.modules.B4DWait;
 import fr.B4D.utils.PointF;
 import fr.B4D.utils.Rectangle;
@@ -86,14 +83,14 @@ public class Exchange implements Serializable{
 	 * @throws AWTException si impossible de valider l'échange
 	 */
 	public String waitForExchange(long timeout) throws AWTException {
-		if(!B4D.getSocketListener().isAlive())
-			B4D.getSocketListener().start();
+		if(!B4D.socketListener.isAlive())
+			B4D.socketListener.start();
 		
 		B4D.logger.debug(this, "Attente d'un échange");
 		String message;
 		while((message = B4DWait.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout)) == null);
 		String name = message.split(" ")[0];
-		B4DMouse.leftClick(waitForExchangeYesButton, false);
+		B4D.mouse.leftClick(waitForExchangeYesButton, false);
 		return name;
 	}
 //	public String waitForExchange(long timeout) throws AWTException {
@@ -105,7 +102,7 @@ public class Exchange implements Serializable{
 //				if(name == null) 
 //					name.wait(timeout);
 //				if(name != null)
-//					B4DMouse.leftClick(waitForExchangeYesButton, false);
+//					B4DB4D.mouse.leftClick(waitForExchangeYesButton, false);
 //			}
 //		}
 //		catch(InterruptedException e) {
@@ -126,13 +123,13 @@ public class Exchange implements Serializable{
 		
 		if(kamasOut > 0) {
 			//Clique sur le champs kamas
-			B4DKeyboard.writeKeyboard(Integer.toString(kamasOut));
+			B4D.keyboard.writeKeyboard(Integer.toString(kamasOut));
 		}
 		
 		do {
 			if(B4DWait.waitForOCR(kamasInRectangle, String.valueOf(kamasIn), timeout) == null)
 				cancelExchange();
-		}while(B4DScreen.searchPixel(new PointF(0.396, 0.2804), new PointF(0.396, 0.2914), new Color(100, 100, 0), new Color(255, 255, 50)) == null);
+		}while(B4D.screen.searchPixel(new PointF(0.396, 0.2804), new PointF(0.396, 0.2914), new Color(100, 100, 0), new Color(255, 255, 50)) == null);
 
 		do {				
 			message = new Message(name, Channel.Private, validationMessage);
@@ -142,10 +139,10 @@ public class Exchange implements Serializable{
 			if(message == null || !contains(message.getText(), validationKeys))
 				cancelExchange();
 				
-		}while(Integer.parseInt(B4DScreen.OCR(kamasInRectangle)) != kamasIn); //&& B4D);
+		}while(Integer.parseInt(B4D.screen.OCR(kamasInRectangle)) != kamasIn); //&& B4D);
 
-		Image image = B4DScreen.takeSreenshot();
-		B4DMouse.leftClick(validationButton, false);
+		Image image = B4D.screen.takeSreenshot();
+		B4D.mouse.leftClick(validationButton, false);
 		
 		B4D.logger.debug(this, "Echange éffectué");
 		return image;
@@ -162,7 +159,7 @@ public class Exchange implements Serializable{
 	public void cancelExchange() throws B4DExchangeCanceled, AWTException {
 		B4D.logger.debug(this, "Echange annulé");
 		if(isInProgress())
-			B4DMouse.leftClick(escapeButton, false);
+			B4D.mouse.leftClick(escapeButton, false);
 		throw new B4DExchangeCanceled();
 	}
 	

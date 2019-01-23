@@ -3,7 +3,7 @@ package fr.B4D.utils;
 import java.awt.Point;
 import java.io.Serializable;
 
-import fr.B4D.modules.B4DConversion;
+import fr.B4D.bot.B4D;
 
 public class Rectangle extends java.awt.Rectangle implements Serializable{
 
@@ -13,6 +13,6 @@ public class Rectangle extends java.awt.Rectangle implements Serializable{
 		super(topLeft.x, topLeft.y, bottomRigth.x - topLeft.x, bottomRigth.y - topLeft.y);
 	}
 	public Rectangle(PointF topLeft, PointF bottomRigth) {
-		this(B4DConversion.pointFToPoint(topLeft), B4DConversion.pointFToPoint(bottomRigth));
+		this(B4D.converter.pointFToPoint(topLeft), B4D.converter.pointFToPoint(bottomRigth));
 	}
 }

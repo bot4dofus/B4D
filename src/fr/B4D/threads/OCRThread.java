@@ -2,7 +2,7 @@ package fr.B4D.threads;
 
 import java.awt.Rectangle;
 
-import fr.B4D.modules.B4DScreen;
+import fr.B4D.bot.B4D;
 
 public class OCRThread extends Thread{
 	private Rectangle rectangle;
@@ -21,7 +21,7 @@ public class OCRThread extends Thread{
 		try{
 			String ocr;
 			do {
-				ocr = B4DScreen.OCR(rectangle);
+				ocr = B4D.screen.OCR(rectangle);
 				System.out.println(ocr);
 			}while(!ocr.contains(text));
 			result = ocr;

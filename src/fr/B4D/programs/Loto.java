@@ -32,6 +32,7 @@ public final class Loto {
 				String name = exchange.waitForExchange();
 				Message message = new Message(name, Channel.Private, welcomeMessage);
 				message.send();
+
 				Thread.sleep(1000);
 				message.reply(exchangeMessage);
 				Thread.sleep(1000);

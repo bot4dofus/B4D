@@ -3,7 +3,6 @@ package fr.B4D.transport.transports;
 import java.awt.Point;
 import java.io.Serializable;
 
-import fr.B4D.transport.TransportType;
 import fr.B4D.utils.PointF;
 
 public class BrakmarPotion extends Potion implements Serializable{
@@ -15,6 +14,6 @@ public class BrakmarPotion extends Potion implements Serializable{
 	/******************/
 	
 	public BrakmarPotion(Point position, PointF positionF) {
-		super(TransportType.BrakmarPotion.toString(), position, positionF, brakmarPotionCost);
+		super("Brakmar potion", position, positionF, brakmarPotionCost);
 	}
 }

@@ -1,4 +1,4 @@
-package fr.B4D.modules;
+package fr.B4D.bot.statics;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -10,21 +10,23 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-public final class B4DKeyboard{
+import fr.B4D.modules.B4DWait;
+
+public final class Keyboard{
 	
-	static Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	private static Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 	
 	  /****************/
 	 /** SINGLE KEY **/
 	/****************/
 	
-	public static void sendKey(int keyEvent, Double time) throws AWTException {
+	public void sendKey(int keyEvent, Double time) throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(keyEvent);
 		robot.keyRelease(keyEvent);
 		B4DWait.wait(time);
 	}
-	public static void sendKey(int keyEvent) throws AWTException {
+	public void sendKey(int keyEvent) throws AWTException {
 		sendKey(keyEvent, 0.1);
 	}
 	
@@ -32,7 +34,7 @@ public final class B4DKeyboard{
 	 /** WRITE KEYBOARD **/
 	/********************/
 	
-	public static void writeKeyboard(String text, double time) throws AWTException {
+	public void writeKeyboard(String text, double time) throws AWTException {
 		setClipboard(text);
 		
 		Robot robot = new Robot();
@@ -42,7 +44,7 @@ public final class B4DKeyboard{
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		B4DWait.wait(time);
 	}
-	public static void writeKeyboard(String text) throws AWTException {
+	public void writeKeyboard(String text) throws AWTException {
 		writeKeyboard(text, 0.5);
 	}
 	
@@ -50,10 +52,10 @@ public final class B4DKeyboard{
 	 /** CLIPBOARD **/
 	/***************/
 	
-	public static void setClipboard(String text) throws AWTException {
+	public void setClipboard(String text) throws AWTException {
 		clipboard.setContents(new StringSelection(text), null);
 	}
-	public static String getClipboard() throws AWTException, UnsupportedFlavorException, IOException{
+	public String getClipboard() throws AWTException, UnsupportedFlavorException, IOException{
         return (String) clipboard.getData(DataFlavor.stringFlavor);
 	}
 }

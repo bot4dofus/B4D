@@ -7,8 +7,6 @@ import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.dofus.Dofus;
-import fr.B4D.modules.B4DKeyboard;
-import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
 
 public class Message implements Serializable{
@@ -43,7 +41,7 @@ public class Message implements Serializable{
 	}
 
 	  /*************/
-	 /** GET SET **/
+	 /** GETTERS **/
 	/*************/
 	
 	public String getPseudo() {
@@ -62,8 +60,8 @@ public class Message implements Serializable{
 	
 	public static void sendChat(String text, double time) {
 		try {
-			B4DMouse.leftClick(B4D.getConfiguration().getChatBar(), false, 0.5);
-			B4DKeyboard.writeKeyboard(text,time);
+			B4D.mouse.chatClick();
+			B4D.keyboard.writeKeyboard(text,time);
 			
 			Robot robot = new Robot();
 			robot.keyPress(KeyEvent.VK_ENTER);
@@ -93,9 +91,9 @@ public class Message implements Serializable{
 	
 	public Message waitForReply(long timeout) {
 		B4D.logger.debug(this, "Attente d'une réponse");
-		Dofus.getChat().addPseudoFilter(pseudo);
-		Message message = Dofus.getChat().waitForMessage(timeout);
-		Dofus.getChat().addPseudoFilter(null);
+		Dofus.chat.addPseudoFilter(pseudo);
+		Message message = Dofus.chat.waitForMessage(timeout);
+		Dofus.chat.addPseudoFilter(null);
 		return message;
 	}
 	

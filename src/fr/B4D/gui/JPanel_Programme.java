@@ -13,7 +13,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,13 +26,11 @@ import fr.B4D.farming.RessourceType;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
+import net.sourceforge.jpcap.capture.InvalidFilterException;
 
 public class JPanel_Programme extends JPanel {
 
 	private static final long serialVersionUID = -1975429297614634621L;
-
-	@SuppressWarnings("unused")
-	private JFrame parent;
 	
 	public final int width = 635;
 	public final int height = 235;
@@ -50,20 +47,19 @@ public class JPanel_Programme extends JPanel {
 	private JCheckBox checkBox_Stop;
 	
 	private JButton button_Start;
-
+	
 	/**
 	 * Create the panel.
 	 */
-	public JPanel_Programme(JFrame parent) {
-		this.parent = parent;
+	public JPanel_Programme(B4D b4d) {
 		
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				Program.getAll().stream().filter(p ->
+				b4d.getPrograms().stream().filter(p ->
 					((DefaultComboBoxModel<Place>)comboBox_Place.getModel()).getIndexOf(p.getPlace()) < 0)
 				.forEach(p -> comboBox_Place.addItem(p.getPlace()));
 				
-				if(B4D.getConfiguration().getGameFrame() != null && B4D.getConfiguration().getChatFrame() != null && B4D.getConfiguration().getChatBar() != null && B4D.getConfiguration().getMinimap() != null) {
+				if(b4d.getConfiguration().getGameFrame() != null && b4d.getConfiguration().getChatFrame() != null && b4d.getConfiguration().getChatBar() != null && b4d.getConfiguration().getMinimap() != null) {
 					button_Start.setEnabled(true);
 				}else {
 					button_Start.setEnabled(false);
@@ -88,7 +84,7 @@ public class JPanel_Programme extends JPanel {
 		comboBox_Place.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBox_Category.removeAllItems();
-				Program.getAll().stream().filter(p ->
+				b4d.getPrograms().stream().filter(p ->
 					((DefaultComboBoxModel<Category>)comboBox_Category.getModel()).getIndexOf(p.getCategory()) < 0
 					&& p.getPlace().equals(comboBox_Place.getSelectedItem()))
 				.forEach(p -> comboBox_Category.addItem(p.getCategory()));
@@ -111,7 +107,7 @@ public class JPanel_Programme extends JPanel {
 		comboBox_Category.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBox_RessourceType.removeAllItems();
-				Program.getAll().stream().filter(p -> 
+				b4d.getPrograms().stream().filter(p -> 
 					((DefaultComboBoxModel<RessourceType>)comboBox_RessourceType.getModel()).getIndexOf(p.getRessourceType()) < 0
 					&& p.getPlace().equals(comboBox_Place.getSelectedItem())
 					&& p.getCategory().equals(comboBox_Category.getSelectedItem()))
@@ -135,7 +131,7 @@ public class JPanel_Programme extends JPanel {
 		comboBox_RessourceType.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBox_Ressource.removeAllItems();
-				Program.getAll().stream().filter(p ->
+				b4d.getPrograms().stream().filter(p ->
 						((DefaultComboBoxModel<Ressource>)comboBox_Ressource.getModel()).getIndexOf(p.getRessource()) < 0
 						&& p.getPlace().equals(comboBox_Place.getSelectedItem())
 						&& p.getCategory().equals(comboBox_Category.getSelectedItem()) 
@@ -266,7 +262,7 @@ public class JPanel_Programme extends JPanel {
 		button_Start = new JButton("Commencer");
 		button_Start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Program program = Program.getAll().stream().filter( p ->
+				Program program = b4d.getPrograms().stream().filter( p ->
 					p.getPlace().equals(comboBox_Place.getSelectedItem())
 					&& p.getCategory().equals(comboBox_Category.getSelectedItem()) 
 					&& p.getRessourceType().equals(comboBox_RessourceType.getSelectedItem())
@@ -280,12 +276,10 @@ public class JPanel_Programme extends JPanel {
 				program.setHdvWhenFull(checkBox_Bank.isSelected());
 				program.setStopWhenFull(checkBox_Stop.isSelected());
 				
-				program.startWith(B4D.getTeam().get(0));
-				
 				try {
-					program.join();
-					parent.requestFocus();
-				} catch (InterruptedException e) {
+					b4d.runProgram(program, b4d.getTeam().get(0));
+					getParent().requestFocus();
+				} catch (InterruptedException | InvalidFilterException e) {
 					JOptionPane.showConfirmDialog(null, "Vous avez stoppé le bot.", "Fin", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
