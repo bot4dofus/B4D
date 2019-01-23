@@ -28,7 +28,7 @@ public class SocketListener extends Thread{
 	
 	private static final int lengthHeaderTwo = 24;
 	//private static final int lengthTrailer = 6;
-	private static final String encoding = "Cp857";
+	private static final String encoding = "UTF-8";	//UTF-8 //Cp857
 
 	  /**************/
 	 /** ATRIBUTS **/
@@ -95,11 +95,13 @@ public class SocketListener extends Thread{
 		//		| Delimiter | Unknow | Delimiter | Name length | Name | Delimiter | Unknow |
 		//		|                  HeaderTwo                   | Name |       Trailer      |
 
-		if(data[0] == 0x0D) {
+		if(data[0] == 0x0D)
 			parseChat(data);
-		}
-		//else
-			//System.out.println("[Unknow soket (" + data[0] + ")]");
+//		else if(data[0] == 0x0e) {// puis 0xdd
+//			System.out.println("Echange !");
+//		}
+//		else
+//			System.out.println("[Unknow soket (" + data[0] + ")]");
 	}
 	
 	private int getHeaderLength(byte[] data) throws UnknowSocketTypeException {
@@ -107,6 +109,7 @@ public class SocketListener extends Thread{
 		switch(Byte.toUnsignedInt(data[1])) {
 			case 197:
 			case 205:
+			case 0xC9:
 				length = 6;
 				break;
 			case 0xCE:
