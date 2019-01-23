@@ -17,7 +17,8 @@ import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DOther;
 import fr.B4D.modules.B4DScreen;
 import fr.B4D.programs.Deplacement;
-import fr.B4D.programs.Test;
+import fr.B4D.programs.Loto;
+import fr.B4D.programs.tutorials.MessageAPI;
 import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.TesseractException;
@@ -31,7 +32,13 @@ public class Program extends Thread implements Serializable{
 	/****************/
 	
 	public final static Program deplacement = new Program(Place.Aucune, Category.Aucune, RessourceType.Aucun, Ressource.Aucune, Deplacement.deplacement);
-	public final static Program test = new Program(Place.Aucune, Category.Test, RessourceType.Aucun, Ressource.Aucune, Test.test2);
+	public final static Program loto = new Program(Place.Tous, Category.Jeux, RessourceType.Aucun, Ressource.Aucune, Loto.loto);
+	
+	/** TUTORIALS **/
+
+	public final static Program MessageAPItutorial1 = new Program(Place.Aucune, Category.Test, RessourceType.Aucun, Ressource.Aucune, MessageAPI.tutorial1);
+	public final static Program MessageAPItutorial2 = new Program(Place.Aucune, Category.Test, RessourceType.Aucun, Ressource.Aucune, MessageAPI.tutorial2);
+	public final static Program MessageAPItutorial3 = new Program(Place.Aucune, Category.Test, RessourceType.Aucun, Ressource.Aucune, MessageAPI.tutorial3);
 	
 	  /***************/
 	 /** ATTRIBUTS **/
@@ -74,7 +81,10 @@ public class Program extends Thread implements Serializable{
   public final static ArrayList<Program> getAll(){
   	ArrayList<Program> programs = new ArrayList<Program>();
   	programs.add(deplacement);
-  	programs.add(test);
+  	programs.add(loto);
+  	programs.add(MessageAPItutorial1);
+  	programs.add(MessageAPItutorial2);
+  	programs.add(MessageAPItutorial3);
     return programs;
   }
 	
@@ -143,7 +153,7 @@ public class Program extends Thread implements Serializable{
 				Outro();
 			
 			B4D.logger.popUp("Le bot s'est correctement terminé.");
-		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException e){
+		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException | InterruptedException e){
 			B4D.logger.error(e);
 		}
 	}
@@ -160,7 +170,7 @@ public class Program extends Thread implements Serializable{
 
 		B4D.getTeam().get(0).setPosition(Dofus.getWorld().getPosition());	//Récupère la position actuelle
 	}
-	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException{
+	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException{
 		int nbCycles = 0, nbDeposits = 0;
 
 		while(nbCycles != maxCycles || nbDeposits != maxDeposits) {
