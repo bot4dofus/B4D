@@ -1,8 +1,16 @@
 package fr.B4D.bot;
 
+import java.awt.AWTException;
 import java.awt.Point;
 import java.io.Serializable;
+import java.util.List;
 
+import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.dofus.Dofus;
+import fr.B4D.transport.B4DEdge;
+import fr.B4D.transport.B4DWrongPosition;
+import fr.B4D.transport.TransportPath;
+import fr.B4D.transport.TransportType;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.utils.PointF;
 
@@ -147,6 +155,41 @@ public class Person implements Serializable{
 	public void setInventoryFull(boolean inventoryFull) {
 		this.inventoryFull = inventoryFull;
 	}
+	
+	  /***********/
+	 /** GO TO **/
+	/***********/
+	
+	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
+		TransportPath transportPath = getTransportPathTo(destination);
+		transportPath.use();
+	}		
+	public TransportPath getTransportPathTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {		
+		
+		//Add potions
+		if(boosterPotionDestination != null) 
+			Dofus.world.addB4DEdge(position, boosterPotionDestination.getPosition(), TransportType.BoosterPotion, boosterPotionCost);
+			
+		if(bontaPotionDestination != null)
+			Dofus.world.addB4DEdge(position, bontaPotionDestination, TransportType.BontaPotion, bontaPotionCost);
 
+		if(brakmarPotionDestination != null)
+			Dofus.world.addB4DEdge(position, brakmarPotionDestination, TransportType.BrakmarPotion, brakmarPotionCost);
+		
+		//Get the shortest path
+	    List<B4DEdge> shortestPath = Dofus.world.getPath(position, destination).getEdgeList();
+
+	    //Remove potions
+		if(boosterPotionDestination != null)
+			Dofus.world.removeB4DEdge(position, boosterPotionDestination.getPosition());
+		
+		if(bontaPotionDestination != null)
+			Dofus.world.removeB4DEdge(position, bontaPotionDestination);
+		
+		if(brakmarPotionDestination != null)
+			Dofus.world.removeB4DEdge(position, brakmarPotionDestination);
+		
+		return new TransportPath(shortestPath);
+	}
 	
 }

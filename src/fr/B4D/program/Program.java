@@ -14,7 +14,6 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.farming.Ressource;
 import fr.B4D.farming.RessourceType;
 import fr.B4D.interaction.chat.Message;
-import fr.B4D.modules.B4DOther;
 import fr.B4D.programs.Deplacement;
 import fr.B4D.programs.Loto;
 import fr.B4D.programs.tutorials.MessageAPI;
@@ -159,7 +158,7 @@ public class Program extends Thread implements Serializable{
 
 	private void Intro(Person person) throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException{
 		
-		B4DOther.focusDofus();
+		B4D.screen.focusDofus();
 		Message.sendChat("/clear");
 		
 		if(B4D.screen.getPixelColor(new PointF(0.28, 0.99)).getGreen() > 200){	//Le mode solo n'est pas activé
@@ -167,7 +166,7 @@ public class Program extends Thread implements Serializable{
             Mouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
 		}
 
-		person.setPosition(Dofus.getWorld().getPosition());	//Récupère la position actuelle
+		person.setPosition(Dofus.world.getPosition());	//Récupère la position actuelle
 	}
 	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException{
 		int nbCycles = 0, nbDeposits = 0;

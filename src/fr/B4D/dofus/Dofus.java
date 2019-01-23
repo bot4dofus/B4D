@@ -8,8 +8,8 @@ public class Dofus {
 	 /** ATRIBUTS **/
 	/**************/
 	
-	private static Chat chat;
-	private static World world;
+	public static Chat chat;
+	public static World world;
 	
 	  /*************/
 	 /** BUILDER **/
@@ -18,16 +18,5 @@ public class Dofus {
 	public Dofus() {
 		chat = new Chat(100);
 		world = new World();
-	}
-	
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/
-	
-	public static Chat getChat() {
-		return chat;
-	}
-	public static World getWorld() {
-		return world;
 	}
 }

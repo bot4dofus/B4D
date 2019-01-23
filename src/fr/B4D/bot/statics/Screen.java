@@ -142,11 +142,16 @@ public final class Screen {
 		return getSelection(B4D.converter.pointFToPoint(position));
 	}
 	
-	  /***************/
-	 /** OPERATORS **/
-	/***************/
+	  /************/
+	 /** OTHERS **/
+	/************/
 	
 	public boolean isBetween(Color couleur, Color min, Color max) {
 		return (min.getRed() <= couleur.getRed() && couleur.getRed() <= max.getRed() && min.getGreen() <= couleur.getGreen() && couleur.getGreen() <= max.getGreen() && min.getBlue() <= couleur.getBlue() && couleur.getBlue() <= max.getBlue());
+	}
+
+	public void focusDofus() {
+		// TODO Auto-generated method stub
+		
 	}
 }

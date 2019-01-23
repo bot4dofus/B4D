@@ -39,8 +39,8 @@ public final class B4D{
 	public static Mouse mouse;
 	public static Keyboard keyboard;
 	
-	private static Configuration configuration;
-	private static Team team;
+	private Configuration configuration;
+	private Team team;
 	private ArrayList<Program> programs;
 	
 	/*************/
@@ -69,24 +69,31 @@ public final class B4D{
 	/***********************/
 	/** GETTERS & SETTERS **/
 	/***********************/
-
-	public Team getTeam() {
-		return team;
-	}
 	
 	public Configuration getConfiguration() {
 		return configuration;
+	}	
+	private void setConfiguration(Configuration configuration) throws ClassNotFoundException, IOException {
+		this.configuration = configuration;
+		saveConfiguration();
 	}
-
+	public Team getTeam() {
+		return team;
+	}
+	private void setTeam(Team team) throws ClassNotFoundException, IOException {
+		this.team = team;
+		saveTeam();
+	}
+	
 	/**********/
 	/** SAVE **/
 	/**********/
 	
-	public void saveConfiguration() throws ClassNotFoundException, IOException {
+	private void saveConfiguration() throws ClassNotFoundException, IOException {
 		DAOFactory.getConfigurationDAO().update(configuration);
 	}
 	
-	public void saveTeam() throws ClassNotFoundException, IOException {
+	private void saveTeam() throws ClassNotFoundException, IOException {
 		DAOFactory.getTeamDAO().update(team);
 	}
 	
@@ -105,13 +112,10 @@ public final class B4D{
 
 		if (fileChooser.showOpenDialog(new Frame()) == JFileChooser.APPROVE_OPTION) {			
 			File file = fileChooser.getSelectedFile();
-			if (configurationFilter.accept(file)) {
-				configuration = DAOFactory.getConfigurationDAO().deserialize(file);
-				saveConfiguration();
-			}
+			if (configurationFilter.accept(file))
+				setConfiguration(DAOFactory.getConfigurationDAO().deserialize(file));
 			else {
-				team = DAOFactory.getTeamDAO().deserialize(file);
-				saveTeam();
+				setTeam(DAOFactory.getTeamDAO().deserialize(file));
 			}
 		}
 	}

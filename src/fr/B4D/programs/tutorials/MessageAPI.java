@@ -18,7 +18,7 @@ import net.sourceforge.tess4j.TesseractException;
 public final class MessageAPI {	
 	public static ProgramInterface tutorial1 = new ProgramInterface() {
 		public void run(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
-			Message message = Dofus.getChat().waitForMessage(0);
+			Message message = Dofus.chat.waitForMessage(0);
 			B4D.logger.popUp("Message de " + message.getPseudo() + "(" + message.getChannel() + ") : " + message.getText());
 		}
 	};
@@ -28,8 +28,8 @@ public final class MessageAPI {
 		public void run(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
 			Message message = new Message("Raptor", Channel.Private, "Salut !");
 			message.send();
-			Dofus.getChat().addPseudoFilter("Raptor");
-			message = Dofus.getChat().waitForMessage(60000);
+			Dofus.chat.addPseudoFilter("Raptor");
+			message = Dofus.chat.waitForMessage(60000);
 			if(message != null)
 				message.reply("ca va ?");
 			else	
@@ -40,14 +40,14 @@ public final class MessageAPI {
 	
 	public static ProgramInterface tutorial3 = new ProgramInterface() {
 		public void run(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
-			Dofus.getChat().addChannelFilter(Channel.Business);
-			Dofus.getChat().addTextFilter("offre");
-			Dofus.getChat().addChatListener(new ChatListener() {
+			Dofus.chat.addChannelFilter(Channel.Business);
+			Dofus.chat.addTextFilter("offre");
+			Dofus.chat.addChatListener(new ChatListener() {
 				public void treatMessage(Message message) {
 					message.reply("Bonjour, je suis interresé");
 				}
 			});
-			Dofus.getChat().read(10);
+			Dofus.chat.read(10);
 		}
 	};
 }

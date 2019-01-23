@@ -43,7 +43,7 @@ public class Message implements Serializable{
 	}
 
 	  /*************/
-	 /** GET SET **/
+	 /** GETTERS **/
 	/*************/
 	
 	public String getPseudo() {
@@ -93,9 +93,9 @@ public class Message implements Serializable{
 	
 	public Message waitForReply(long timeout) {
 		B4D.logger.debug(this, "Attente d'une réponse");
-		Dofus.getChat().addPseudoFilter(pseudo);
-		Message message = Dofus.getChat().waitForMessage(timeout);
-		Dofus.getChat().addPseudoFilter(null);
+		Dofus.chat.addPseudoFilter(pseudo);
+		Message message = Dofus.chat.waitForMessage(timeout);
+		Dofus.chat.addPseudoFilter(null);
 		return message;
 	}
 	

@@ -127,12 +127,6 @@ public class JFrame_B4D extends JFrame{
 		lblClose.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					b4d.saveConfiguration();
-					b4d.saveTeam();
-				} catch (ClassNotFoundException | IOException ex) {
-					B4D.logger.error(ex);
-				}
 				dispose();
 			}
 			@Override
