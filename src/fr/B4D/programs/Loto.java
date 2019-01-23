@@ -32,17 +32,17 @@ public final class Loto {
 				String name = exchange.waitForExchange();
 				Message message = new Message(name, Channel.Private, welcomeMessage);
 				message.send();
-				message.send(exchangeMessage);
+				message.reply(exchangeMessage);
 				
 				String sort;
 				do {
-					message.send(questionMessage);
+					message.reply(questionMessage);
 					message = message.waitForReply(timeout);
 					sort = parseSort(message.getText());
 				}while(sort == null);
 				
 				Image image = exchange.exchange(validationMessage + sort + " ?", validationKeys);
-				message.send(tkanksMessage);
+				message.reply(tkanksMessage);
 				
 				
 				
