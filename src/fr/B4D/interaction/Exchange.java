@@ -9,7 +9,6 @@ import java.io.Serializable;
 import fr.B4D.bot.B4D;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
-import fr.B4D.modules.B4DChat;
 import fr.B4D.modules.B4DKeyboard;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DScreen;

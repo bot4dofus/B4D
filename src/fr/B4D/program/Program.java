@@ -12,7 +12,7 @@ import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.farming.Ressource;
 import fr.B4D.farming.RessourceType;
-import fr.B4D.modules.B4DChat;
+import fr.B4D.interaction.chat.Message;
 import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DOther;
 import fr.B4D.modules.B4DScreen;
@@ -161,7 +161,7 @@ public class Program extends Thread implements Serializable{
 	private void Intro() throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException{
 		
 		B4DOther.focusDofus();
-		B4DChat.sendChat("/clear");
+		Message.sendChat("/clear");
 		
 		if(B4DScreen.getPixelColor(new PointF(0.28, 0.99)).getGreen() > 200){	//Le mode solo n'est pas activé
             B4DMouse.leftClick(new PointF(0.28, 0.99), false);                	//Clic sur status
@@ -173,7 +173,7 @@ public class Program extends Thread implements Serializable{
 	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException{
 		int nbCycles = 0, nbDeposits = 0;
 
-		while(nbCycles != maxCycles || nbDeposits != maxDeposits) {
+		while(nbCycles != maxCycles && nbDeposits != maxDeposits) {
 			try {
 				program.run(person);
 			} catch (B4DFullInventory e) {			

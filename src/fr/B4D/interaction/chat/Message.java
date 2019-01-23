@@ -1,14 +1,29 @@
 package fr.B4D.interaction.chat;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.dofus.Dofus;
-import fr.B4D.modules.B4DChat;
+import fr.B4D.modules.B4DKeyboard;
+import fr.B4D.modules.B4DMouse;
+import fr.B4D.modules.B4DWait;
 
 public class Message implements Serializable{
 	
 	private static final long serialVersionUID = 5508700695491701427L;
+
+	private final static String generalPrefix = "/s";
+	private final static String teamPrefix = "/t";
+	private final static String guildPrefix = "/g";
+	private final static String alliesPrefix = "/a";
+	private final static String groupPrefix = "/p";
+	private final static String privatePrefix = "/w";
+	private final static String kolizeumPrefix = "/k";
+	private final static String recruitmentPrefix = "/r";
+	private final static String businessPrefix = "/b";
 
 	  /**************/
 	 /** ATRIBUTS **/
@@ -45,11 +60,28 @@ public class Message implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
+	public static void sendChat(String text, double time) {
+		try {
+			B4DMouse.leftClick(B4D.getConfiguration().getChatBar(), false, 0.5);
+			B4DKeyboard.writeKeyboard(text,time);
+			
+			Robot robot = new Robot();
+			robot.keyPress(KeyEvent.VK_ENTER);
+			robot.keyRelease(KeyEvent.VK_ENTER);
+			B4DWait.wait(0.1);
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void sendChat(String text){
+		sendChat(text, 0.5);
+	}
+	
 	public void send() {
 		if (channel == Channel.Private)
-			B4DChat.sendChat(B4DChat.getChannelPrefix(channel) + " " + pseudo + " " + text);
+			sendChat(getChannelPrefix(channel) + " " + pseudo + " " + text);
 		else
-			B4DChat.sendChat(B4DChat.getChannelPrefix(channel) + " " + text);
+			sendChat(getChannelPrefix(channel) + " " + text);
 	}
 	
 	public void reply(String text) {
@@ -81,6 +113,31 @@ public class Message implements Serializable{
 	  /************/
 	 /** STATIC **/
 	/************/
+	
+	public static String getChannelPrefix(Channel channel) {
+		switch(channel) {
+			case General:
+				return generalPrefix;
+			case Team:
+				return teamPrefix;
+			case Guild:
+				return guildPrefix;
+			case Allies:
+				return alliesPrefix;
+			case Group:
+				return groupPrefix;
+			case Private:
+				return privatePrefix;
+			case Kolizeum:
+				return kolizeumPrefix;
+			case Recruitment:
+				return recruitmentPrefix;
+			case Business:
+				return businessPrefix;
+			default:
+				return null;
+		}
+	}
 	
 	public static Channel getChannel(byte data) throws UnknowChannelException {
 		switch(Byte.toUnsignedInt(data)) {
