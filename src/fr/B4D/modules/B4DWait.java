@@ -117,15 +117,4 @@ public final class B4DWait {
 	public static boolean waitForColor(PointF point, Color min, Color max, double timeOut) {
 		return waitForColor(B4D.converter.pointFToPoint(point), min, max, timeOut);
 	}
-	
-	  /*********************/
-	 /** ATTENTE SUR MAP **/
-	/*********************/
-	
-	public static boolean waitForMap(double timeOut) {
-		return waitForChangingPixel(B4D.converter.pointToPointF(B4D.getConfiguration().getMinimap()), timeOut);
-	}
-	public static boolean waitForMap() {
-		return waitForMap(15);
-	}
 }

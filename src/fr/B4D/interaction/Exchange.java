@@ -7,9 +7,6 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.bot.statics.Keyboard;
-import fr.B4D.bot.statics.Mouse;
-import fr.B4D.bot.statics.Screen;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.modules.B4DWait;
@@ -90,7 +87,7 @@ public class Exchange implements Serializable{
 		String message;
 		while((message = B4DWait.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout)) == null);
 		String name = message.split(" ")[0];
-		Mouse.leftClick(waitForExchangeYesButton, false);
+		B4D.mouse.leftClick(waitForExchangeYesButton, false);
 		return name;
 	}
 //	public String waitForExchange(long timeout) throws AWTException {
@@ -102,7 +99,7 @@ public class Exchange implements Serializable{
 //				if(name == null) 
 //					name.wait(timeout);
 //				if(name != null)
-//					B4DMouse.leftClick(waitForExchangeYesButton, false);
+//					B4DB4D.mouse.leftClick(waitForExchangeYesButton, false);
 //			}
 //		}
 //		catch(InterruptedException e) {
@@ -123,7 +120,7 @@ public class Exchange implements Serializable{
 		
 		if(kamasOut > 0) {
 			//Clique sur le champs kamas
-			Keyboard.writeKeyboard(Integer.toString(kamasOut));
+			B4D.keyboard.writeKeyboard(Integer.toString(kamasOut));
 		}
 		
 		do {
@@ -142,7 +139,7 @@ public class Exchange implements Serializable{
 		}while(Integer.parseInt(B4D.screen.OCR(kamasInRectangle)) != kamasIn); //&& B4D);
 
 		Image image = B4D.screen.takeSreenshot();
-		Mouse.leftClick(validationButton, false);
+		B4D.mouse.leftClick(validationButton, false);
 		
 		B4D.logger.debug(this, "Echange éffectué");
 		return image;
@@ -159,7 +156,7 @@ public class Exchange implements Serializable{
 	public void cancelExchange() throws B4DExchangeCanceled, AWTException {
 		B4D.logger.debug(this, "Echange annulé");
 		if(isInProgress())
-			Mouse.leftClick(escapeButton, false);
+			B4D.mouse.leftClick(escapeButton, false);
 		throw new B4DExchangeCanceled();
 	}
 	

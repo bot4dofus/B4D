@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.bot.statics.Keyboard;
-import fr.B4D.bot.statics.Mouse;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.modules.B4DWait;
 import fr.B4D.transport.B4DWrongPosition;
@@ -113,18 +111,12 @@ public class Zaap extends Transport implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
-	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
-		if (!B4D.getTeam().get(0).getPosition().equals(this.getPosition()))
-			throw new B4DWrongPosition();
+	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {		
+		B4D.mouse.leftClick(super.getPositionF(), false);
 		
-		Mouse.leftClick(super.getPositionF(), false);
-			
 		B4DWait.waitForColor(new PointF(0.4472, 0.7367), new Color(186, 125, 0), new Color(255, 255, 50), 10);
-		Mouse.leftClick(new PointF(0.6062, 0.2013), false, 0.2);
-		Keyboard.writeKeyboard(getZaap(destination).getName());
-		Mouse.doubleLeftClick(new PointF(0.4736, 0.2891), false);
-		
-		B4DWait.waitForMap();
-		B4D.getTeam().get(0).setPosition(destination);
+		B4D.mouse.leftClick(new PointF(0.6062, 0.2013), false, 0.2);
+		B4D.keyboard.writeKeyboard(getZaap(destination).getName());
+		B4D.mouse.doubleLeftClick(new PointF(0.4736, 0.2891), false);
 	}
 }

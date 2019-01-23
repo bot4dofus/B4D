@@ -7,25 +7,27 @@ import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DirectedWeightedPseudograph;
 
+import fr.B4D.transport.transports.Walk;
+
 public class B4DGraph implements Serializable{
 
 	private static final long serialVersionUID = -2532108486622081288L;
 	
-	private DirectedWeightedPseudograph<Point, B4DEdge> graph;
+	private DirectedWeightedPseudograph<Point, TransportStep> graph;
 	
 	  /******************/
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
 	public B4DGraph() {
-		this.graph = new DirectedWeightedPseudograph<Point, B4DEdge>(B4DEdge.class);
+		this.graph = new DirectedWeightedPseudograph<Point, TransportStep>(TransportStep.class);
 	}
 	
 	  /*********************/
 	 /** METHODES VERTEX **/
 	/*********************/
 	
-	public void addB4DVertex(Point vertex, Boolean autoConnect) {
+	public void addVertex(Point vertex, Boolean autoConnect) {
 		graph.addVertex(vertex);
 		
 		Point up = new Point(vertex.x,vertex.y - 1);
@@ -35,17 +37,17 @@ public class B4DGraph implements Serializable{
 		
 		if(autoConnect) {
 			if(!graph.containsEdge(vertex, up))
-				this.addB4DEdge(vertex, up, TransportType.Walk, 1);
+				this.addEdge(new TransportStep(new Walk(vertex), up));
 			if(!graph.containsEdge(vertex, down))
-				this.addB4DEdge(vertex, down, TransportType.Walk, 1);
+				this.addEdge(new TransportStep(new Walk(vertex), down));
 			if(!graph.containsEdge(vertex, right))
-				this.addB4DEdge(vertex, right, TransportType.Walk, 1);
+				this.addEdge(new TransportStep(new Walk(vertex), right));
 			if(!graph.containsEdge(vertex, left))
-				this.addB4DEdge(vertex, left, TransportType.Walk, 1);
+				this.addEdge(new TransportStep(new Walk(vertex), left));
 		}
 	}
 	
-	public void removeB4DVertex(Point vertex) {
+	public void removeVertex(Point vertex) {
 		graph.removeVertex(vertex);
 	}
 	
@@ -53,26 +55,24 @@ public class B4DGraph implements Serializable{
 	 /** METHODES EDGE **/
 	/*******************/
 	
-	public void addB4DEdge(Point sourceVertex, Point targetVertex, TransportType transportType, double weight) {
-		if(!graph.containsVertex(sourceVertex))
-			graph.addVertex(sourceVertex);
+	public void addEdge(TransportStep transportStep) {
+		if(!graph.containsVertex(transportStep.getTransport().getPosition()))
+			graph.addVertex(transportStep.getTransport().getPosition());
 		
-		if(!graph.containsVertex(targetVertex))
-			graph.addVertex(targetVertex);
+		if(!graph.containsVertex(transportStep.getDestination()))
+			graph.addVertex(transportStep.getDestination());
 			
-	    B4DEdge edge = graph.addEdge(sourceVertex, targetVertex);
-	    edge.setTypeDeTransport(transportType);
-	    graph.setEdgeWeight(edge, weight);
+	    graph.setEdgeWeight(transportStep, transportStep.getTransport().getWeight());
 	}
 	
-	public void removeB4DEdge(Point sourceVertex, Point targetVertex) {
-		graph.removeEdge(sourceVertex, targetVertex);
+	public void removeEdge(TransportStep transportStep) {
+		graph.removeEdge(transportStep.getTransport().getPosition(), transportStep.getDestination());
 	}
 	  /**************/
 	 /** METHODES **/
 	/**************/
 	
-	public GraphPath<Point, B4DEdge> getPath(Point source, Point target) {
-		return new DijkstraShortestPath<Point, B4DEdge>(graph).getPath(source, target);
+	public GraphPath<Point, TransportStep> getPath(Point source, Point target) {
+		return new DijkstraShortestPath<Point, TransportStep>(graph).getPath(source, target);
 	}
 }

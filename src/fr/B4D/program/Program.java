@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
-import fr.B4D.bot.statics.Mouse;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.farming.Ressource;
@@ -162,8 +161,8 @@ public class Program extends Thread implements Serializable{
 		Message.sendChat("/clear");
 		
 		if(B4D.screen.getPixelColor(new PointF(0.28, 0.99)).getGreen() > 200){	//Le mode solo n'est pas activé
-            Mouse.leftClick(new PointF(0.28, 0.99), false);                	//Clic sur status
-            Mouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
+            B4D.mouse.leftClick(new PointF(0.28, 0.99), false);                	//Clic sur status
+            B4D.mouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
 		}
 
 		person.setPosition(Dofus.world.getPosition());	//Récupère la position actuelle

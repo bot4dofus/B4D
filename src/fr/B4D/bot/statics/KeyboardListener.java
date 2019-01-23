@@ -60,19 +60,19 @@ public class KeyboardListener extends Thread{
 	 /** METHODS **/
 	/*************/
 	
-	private static boolean isSPressed()
+	private boolean isSPressed()
 	{
 		return User32.INSTANCE.GetAsyncKeyState('s') == -32767;
 	}
-	private static boolean isPPressed()
+	private boolean isPPressed()
 	{
 		return User32.INSTANCE.GetAsyncKeyState('p') == -32767;
 	}
-	private static boolean isLPressed()
+	private boolean isLPressed()
 	{
 		return User32.INSTANCE.GetAsyncKeyState('l') == -32767;
 	}
-	private static boolean isShiftPressed()	{
+	private boolean isShiftPressed()	{
 		return (User32.INSTANCE.GetKeyState(0x10) & 0x80) == 0x80;
 	}
 }

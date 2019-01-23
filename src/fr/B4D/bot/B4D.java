@@ -62,7 +62,7 @@ public final class B4D{
 		keyboardListener = new KeyboardListener();
 		converter = new Converter(configuration);
 		screen = new Screen(configuration);
-		mouse = new Mouse();
+		mouse = new Mouse(configuration);
 		keyboard = new Keyboard();
 	}
 	

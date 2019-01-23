@@ -17,8 +17,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.bot.statics.Keyboard;
-import fr.B4D.bot.statics.Mouse;
 import fr.B4D.programs.Test;
 import fr.B4D.utils.PointF;
 
@@ -86,14 +84,14 @@ public class JPanel_Admin extends JPanel {
 		btnRecord = new JButton("Commencer");
 		btnRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mouse.getPoint(
+				B4D.mouse.getPoint(
 						"Cliquez à la position voulue.",
 						new MouseAdapter() {
 							public void mousePressed(MouseEvent e) {
 								try {
 									PointF point = B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation());
 									String out = "new PointF(" + point.x + ", " + point.y + ")";
-									Keyboard.setClipboard(out);
+									B4D.keyboard.setClipboard(out);
 								} catch (AWTException | HeadlessException ex) {
 									ex.printStackTrace();
 								}

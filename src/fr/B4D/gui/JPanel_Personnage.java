@@ -32,7 +32,7 @@ import javax.swing.table.TableColumn;
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
 import fr.B4D.bot.Server;
-import fr.B4D.bot.statics.Mouse;
+import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.transport.transports.Zaap;
 
 public class JPanel_Personnage extends JPanel {
@@ -188,13 +188,13 @@ public class JPanel_Personnage extends JPanel {
 		btnModifierRappel.setEnabled(false);
 		btnModifierRappel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mouse.getPoint(
+				B4D.mouse.getPoint(
 					"Cliquez sur votre potion de rappel",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionRappel.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							Person person = b4d.getTeam().get(table.getSelectedRow());
-							person.setBoosterPotionPosition(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
+							person.getBoosterPotion().getTransport().setPositionF(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
 					});
@@ -219,7 +219,7 @@ public class JPanel_Personnage extends JPanel {
 		    public void actionPerformed(ActionEvent e) {
 		    	if(table.getSelectedRow() != -1) {
 					try {
-						b4d.getTeam().get(table.getSelectedRow()).setBoosterPotionDestination(Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString()));
+						b4d.getTeam().get(table.getSelectedRow()).getBoosterPotion().getDestination().setLocation(Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString()).getPosition());
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -260,13 +260,13 @@ public class JPanel_Personnage extends JPanel {
 		btnModifierBonta.setEnabled(false);		
 		btnModifierBonta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mouse.getPoint(
+				B4D.mouse.getPoint(
 					"Cliquez sur votre potion de bonta",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionBonta.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							Person person = b4d.getTeam().get(table.getSelectedRow());
-							person.setBontaPotionPosition(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
+							person.getBontaPotion().getTransport().setPositionF(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
 					});
@@ -321,13 +321,13 @@ public class JPanel_Personnage extends JPanel {
 		btnModifierBrakmar.setEnabled(false);		
 		btnModifierBrakmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mouse.getPoint(
+				B4D.mouse.getPoint(
 					"Cliquez sur votre potion de brakmar",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/PotionBrakmar.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							Person person = b4d.getTeam().get(table.getSelectedRow());
-							person.setBrakmarPotionPosition(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
+							person.getBrakmarPotion().getTransport().setPositionF(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
 					});
@@ -383,7 +383,7 @@ public class JPanel_Personnage extends JPanel {
 		btnModifierSort.setEnabled(false);
 		btnModifierSort.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mouse.getPoint(
+				B4D.mouse.getPoint(
 					"Cliquez sur votre sort principal",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/Sort.png"))),
 					new MouseAdapter() {
@@ -425,18 +425,18 @@ public class JPanel_Personnage extends JPanel {
 	}
 	private void ActualiserInfos(Person personnage) {
 		
-		if(personnage.getBoosterPotionPosition() != null)
-			this.lblXY_Rappel.setText(personnage.getBoosterPotionPosition().getX() + ":" + personnage.getBoosterPotionPosition().getY());
+		if(personnage.getBoosterPotion() != null)
+			this.lblXY_Rappel.setText(personnage.getBoosterPotion().getTransport().getPositionF().getX() + ":" + personnage.getBoosterPotion().getTransport().getPositionF().getY());
 		else
 			this.lblXY_Rappel.setText("X:Y");
 		
-		if(personnage.getBontaPotionPosition() != null)
-			this.lblXY_Bonta.setText(personnage.getBontaPotionPosition().getX() + ":" + personnage.getBontaPotionPosition().getY());
+		if(personnage.getBontaPotion() != null)
+			this.lblXY_Bonta.setText(personnage.getBontaPotion().getTransport().getPositionF().getX() + ":" + personnage.getBontaPotion().getTransport().getPositionF().getY());
 		else
 			this.lblXY_Bonta.setText("X:Y");
 
-		if(personnage.getBrakmarPotionPosition() != null)
-			this.lblXY_Brakmar.setText(personnage.getBrakmarPotionPosition().getX() + ":" + personnage.getBrakmarPotionPosition().getY());
+		if(personnage.getBrakmarPotion() != null)
+			this.lblXY_Brakmar.setText(personnage.getBrakmarPotion().getTransport().getPositionF().getX() + ":" + personnage.getBrakmarPotion().getTransport().getPositionF().getY());
 		else
 			this.lblXY_Brakmar.setText("X:Y");
 
@@ -445,16 +445,18 @@ public class JPanel_Personnage extends JPanel {
 		else
 			this.lblXY_Sort.setText("X:Y");
 
-		if(personnage.getBoosterPotionDestination() != null)
-			this.comboBox_Zaaps.setSelectedItem(personnage.getBoosterPotionDestination().getName());
+		if(personnage.getBoosterPotion() != null)
+			try {
+				this.comboBox_Zaaps.setSelectedItem(Zaap.getZaap(personnage.getBoosterPotion().getDestination()).getName());
+			} catch (B4DCannotFind e) {}
 		
-		if(personnage.getBontaPotionDestination() != null)
-			this.lblPosition_Bonta.setText(personnage.getBontaPotionDestination().getX() + ":" + personnage.getBontaPotionDestination().getY());
+		if(personnage.getBontaPotion() != null)
+			this.lblPosition_Bonta.setText(personnage.getBontaPotion().getDestination().getX() + ":" + personnage.getBontaPotion().getDestination().getY());
 		else
 			this.lblPosition_Bonta.setText("X:Y");
 		
-		if(personnage.getBrakmarPotionDestination() != null)
-			this.lblPosition_Brakmar.setText(personnage.getBrakmarPotionDestination().getX() + ":" + personnage.getBrakmarPotionDestination().getY());
+		if(personnage.getBrakmarPotion() != null)
+			this.lblPosition_Brakmar.setText(personnage.getBrakmarPotion().getDestination().getX() + ":" + personnage.getBrakmarPotion().getDestination().getY());
 		else
 			this.lblPosition_Brakmar.setText("X:Y");
 	}

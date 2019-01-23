@@ -128,7 +128,7 @@ public final class Screen {
 
 	public String getSelection(Point point) throws AWTException, UnsupportedFlavorException, IOException {
 		Robot robot = new Robot();
-		Mouse.leftClick(point, false, 0.1);
+		B4D.mouse.leftClick(point, false, 0.1);
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_A);
 		robot.keyRelease(KeyEvent.VK_A);
@@ -136,10 +136,21 @@ public final class Screen {
 		robot.keyRelease(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		B4DWait.wait(1.0);
-		return Keyboard.getClipboard();
+		return B4D.keyboard.getClipboard();
 	}
 	public String getSelection(PointF position) throws AWTException, UnsupportedFlavorException, IOException {
 		return getSelection(B4D.converter.pointFToPoint(position));
+	}
+	
+	  /*********************/
+	 /** ATTENTE SUR MAP **/
+	/*********************/
+	
+	public boolean waitForMap(double timeOut) {
+		return B4DWait.waitForChangingPixel(B4D.converter.pointToPointF(configuration.getMinimap()), timeOut);
+	}
+	public boolean waitForMap() {
+		return waitForMap(15);
 	}
 	
 	  /************/

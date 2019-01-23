@@ -20,7 +20,6 @@ import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.bot.statics.Mouse;
 
 public class JPanel_Reglage extends JPanel {
 
@@ -85,7 +84,7 @@ public class JPanel_Reglage extends JPanel {
 		JButton button_GameFrame = new JButton("Modifier");
 		button_GameFrame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mouse.getPoints(
+				B4D.mouse.getPoints(
 					"Cliquez dans le coin suppérieur gauche",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/ZoneHautGauche.png"))),
 					new MouseAdapter() {
@@ -144,7 +143,7 @@ public class JPanel_Reglage extends JPanel {
 		JButton button_ChatFrame = new JButton("Modifier");
 		button_ChatFrame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mouse.getPoints(
+				B4D.mouse.getPoints(
 					"Cliquez dans le coin suppérieur gauche de la zone de chat",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/ChatHautGauche.png"))),
 					new MouseAdapter() {
@@ -195,7 +194,7 @@ public class JPanel_Reglage extends JPanel {
 		JButton button_ChatBar = new JButton("Modifier");
 		button_ChatBar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 Mouse.getPoint(
+				 B4D.mouse.getPoint(
 					"Cliquez dans la barre de chat",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/ChatBarre.png"))),
 					new MouseAdapter() {
@@ -238,7 +237,7 @@ public class JPanel_Reglage extends JPanel {
 		JButton button_Minimap = new JButton("Modifier");
 		button_Minimap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Mouse.getPoint(
+				B4D.mouse.getPoint(
 					"Cliquez sur la minimap",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/Minimap.png"))),
 					new MouseAdapter() {

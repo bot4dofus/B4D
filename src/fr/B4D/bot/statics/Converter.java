@@ -2,7 +2,6 @@ package fr.B4D.bot.statics;
 
 import java.awt.Point;
 
-import fr.B4D.bot.B4D;
 import fr.B4D.bot.Configuration;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;

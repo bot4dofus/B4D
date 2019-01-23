@@ -20,13 +20,13 @@ public final class Keyboard{
 	 /** SINGLE KEY **/
 	/****************/
 	
-	public static void sendKey(int keyEvent, Double time) throws AWTException {
+	public void sendKey(int keyEvent, Double time) throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(keyEvent);
 		robot.keyRelease(keyEvent);
 		B4DWait.wait(time);
 	}
-	public static void sendKey(int keyEvent) throws AWTException {
+	public void sendKey(int keyEvent) throws AWTException {
 		sendKey(keyEvent, 0.1);
 	}
 	
@@ -34,7 +34,7 @@ public final class Keyboard{
 	 /** WRITE KEYBOARD **/
 	/********************/
 	
-	public static void writeKeyboard(String text, double time) throws AWTException {
+	public void writeKeyboard(String text, double time) throws AWTException {
 		setClipboard(text);
 		
 		Robot robot = new Robot();
@@ -44,7 +44,7 @@ public final class Keyboard{
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		B4DWait.wait(time);
 	}
-	public static void writeKeyboard(String text) throws AWTException {
+	public void writeKeyboard(String text) throws AWTException {
 		writeKeyboard(text, 0.5);
 	}
 	
@@ -52,10 +52,10 @@ public final class Keyboard{
 	 /** CLIPBOARD **/
 	/***************/
 	
-	public static void setClipboard(String text) throws AWTException {
+	public void setClipboard(String text) throws AWTException {
 		clipboard.setContents(new StringSelection(text), null);
 	}
-	public static String getClipboard() throws AWTException, UnsupportedFlavorException, IOException{
+	public String getClipboard() throws AWTException, UnsupportedFlavorException, IOException{
         return (String) clipboard.getData(DataFlavor.stringFlavor);
 	}
 }

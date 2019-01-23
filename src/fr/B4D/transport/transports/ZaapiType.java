@@ -1,4 +1,4 @@
-package fr.B4D.transport;
+package fr.B4D.transport.transports;
 
 public enum ZaapiType {
     None,
