@@ -29,8 +29,11 @@ public final class MessageAPI {
 			Message message = new Message("Raptor", Channel.Private, "Salut !");
 			message.send();
 			Dofus.getChat().addPseudoFilter("Raptor");
-			message = Dofus.getChat().waitForMessage(0);
-			message.reply("ca va ?");
+			message = Dofus.getChat().waitForMessage(60000);
+			if(message != null)
+				message.reply("ca va ?");
+			else	
+				B4D.logger.popUp("Le temps d'attente de 1 min est dépassé.");				
 		}
 	};
 	
