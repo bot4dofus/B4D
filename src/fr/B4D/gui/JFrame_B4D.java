@@ -71,10 +71,10 @@ public class JFrame_B4D extends JFrame{
 	 */
 	public JFrame_B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException{
 		b4d = new B4D();
-		programPanel = new JPanel_Programme(this);
-		personPanel = new JPanel_Personnage();
-		settingPanel = new JPanel_Reglage();
-		adminPanel = new JPanel_Admin();
+		programPanel = new JPanel_Programme(b4d);
+		personPanel = new JPanel_Personnage(b4d);
+		settingPanel = new JPanel_Reglage(b4d);
+		adminPanel = new JPanel_Admin(b4d);
 		initialize();
 	}
 
@@ -128,8 +128,8 @@ public class JFrame_B4D extends JFrame{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					B4D.saveConfiguration();
-					B4D.saveTeam();
+					b4d.saveConfiguration();
+					b4d.saveTeam();
 				} catch (ClassNotFoundException | IOException ex) {
 					B4D.logger.error(ex);
 				}

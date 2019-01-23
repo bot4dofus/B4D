@@ -13,9 +13,9 @@ import fr.B4D.utils.PointF;
 
 public final class B4DWait {
 	
-	  /******************/
-	 /* ATTENTE SIMPLE */
-	/******************/
+	  /********************/
+	 /** ATTENTE SIMPLE **/
+	/********************/
 	
 	public static void wait(double timeOut) {
 		try {
@@ -25,9 +25,9 @@ public final class B4DWait {
 		}
 	}
 	
-	  /*******************/
-	 /* ATTENTE SUR OCR */
-	/*******************/
+	  /*********************/
+	 /** ATTENTE SUR OCR **/
+	/*********************/
 	
 	public static String waitForOCR(Rectangle rectangle, String text, double timeOut) {
 		OCRThread ocrThread = new OCRThread(rectangle, text);
@@ -46,12 +46,12 @@ public final class B4DWait {
 		return waitForOCR(new Rectangle(P1.x,  P1.y, P2.x - P1.x, P2.y - P1.y), text, timeOut);
 	}
 	public static String waitForOCR(PointF P1, PointF P2, String text, double timeOut) {
-		return waitForOCR(B4DConversion.pointFToPoint(P1), B4DConversion.pointFToPoint(P2), text, timeOut);
+		return waitForOCR(B4D.converter.pointFToPoint(P1), B4D.converter.pointFToPoint(P2), text, timeOut);
 	}
 	
-	  /**********************/
-	 /* ATTENTE SUR TOUCHE */
-	/**********************/
+	  /************************/
+	 /** ATTENTE SUR TOUCHE **/
+	/************************/
 	
 	public static boolean waitForKeyboard(double timeOut) {
 		Thread keyboardThread = new KeyboardThread();
@@ -91,7 +91,7 @@ public final class B4DWait {
 			return false;
 	}
 	public static boolean waitForChangingPixel(PointF point, double timeOut) {
-		return waitForChangingPixel(B4DConversion.pointFToPoint(point), timeOut);
+		return waitForChangingPixel(B4D.converter.pointFToPoint(point), timeOut);
 	}
 	
 	  /**********************************/
@@ -115,7 +115,7 @@ public final class B4DWait {
 			return false;
 	}
 	public static boolean waitForColor(PointF point, Color min, Color max, double timeOut) {
-		return waitForColor(B4DConversion.pointFToPoint(point), min, max, timeOut);
+		return waitForColor(B4D.converter.pointFToPoint(point), min, max, timeOut);
 	}
 	
 	  /*********************/
@@ -123,7 +123,7 @@ public final class B4DWait {
 	/*********************/
 	
 	public static boolean waitForMap(double timeOut) {
-		return waitForChangingPixel(B4DConversion.pointToPointF(B4D.getConfiguration().getMinimap()), timeOut);
+		return waitForChangingPixel(B4D.converter.pointToPointF(B4D.getConfiguration().getMinimap()), timeOut);
 	}
 	public static boolean waitForMap() {
 		return waitForMap(15);

@@ -1,4 +1,4 @@
-package fr.B4D.modules;
+package fr.B4D.bot.statics;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -10,9 +10,11 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-public final class B4DKeyboard{
+import fr.B4D.modules.B4DWait;
+
+public final class Keyboard{
 	
-	static Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	private static Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 	
 	  /****************/
 	 /** SINGLE KEY **/

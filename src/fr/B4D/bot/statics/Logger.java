@@ -1,4 +1,4 @@
-package fr.B4D.bot;
+package fr.B4D.bot.statics;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

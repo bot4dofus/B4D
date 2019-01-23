@@ -6,9 +6,9 @@ import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.statics.Keyboard;
+import fr.B4D.bot.statics.Mouse;
 import fr.B4D.dofus.Dofus;
-import fr.B4D.modules.B4DKeyboard;
-import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
 
 public class Message implements Serializable{
@@ -62,8 +62,8 @@ public class Message implements Serializable{
 	
 	public static void sendChat(String text, double time) {
 		try {
-			B4DMouse.leftClick(B4D.getConfiguration().getChatBar(), false, 0.5);
-			B4DKeyboard.writeKeyboard(text,time);
+			Mouse.leftClick(B4D.getConfiguration().getChatBar(), false, 0.5);
+			Keyboard.writeKeyboard(text,time);
 			
 			Robot robot = new Robot();
 			robot.keyPress(KeyEvent.VK_ENTER);

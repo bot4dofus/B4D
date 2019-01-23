@@ -59,8 +59,8 @@ public class Chat extends Thread{
 		return waitForMessage(0);
 	}
 	public Message waitForMessage(long timeout) {
-		if(!B4D.getSocketListener().isAlive())
-			B4D.getSocketListener().start();
+		if(!B4D.socketListener.isAlive())
+			B4D.socketListener.start();
 		
 		Message message = messages.poll();
 		try {
@@ -87,8 +87,8 @@ public class Chat extends Thread{
 	}
 	
 	public void read(int countTo, long millis) {
-		if(!B4D.getSocketListener().isAlive())
-			B4D.getSocketListener().start();
+		if(!B4D.socketListener.isAlive())
+			B4D.socketListener.start();
 		
 		this.countTo = countTo;
 		this.start();
@@ -97,7 +97,7 @@ public class Chat extends Thread{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		B4D.getSocketListener().interrupt();
+		B4D.socketListener.interrupt();
 		this.interrupt();
 	}	
 	public void read(int countTo) {

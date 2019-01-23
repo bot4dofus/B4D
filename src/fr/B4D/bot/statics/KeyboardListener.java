@@ -1,10 +1,11 @@
-package fr.B4D.bot;
+package fr.B4D.bot.statics;
 
 import javax.swing.JOptionPane;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 
+import fr.B4D.bot.B4D;
 import fr.B4D.program.Program;
 
 interface User32 extends Library {

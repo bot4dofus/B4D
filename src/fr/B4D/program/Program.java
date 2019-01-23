@@ -8,14 +8,13 @@ import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
+import fr.B4D.bot.statics.Mouse;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.farming.Ressource;
 import fr.B4D.farming.RessourceType;
 import fr.B4D.interaction.chat.Message;
-import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DOther;
-import fr.B4D.modules.B4DScreen;
 import fr.B4D.programs.Deplacement;
 import fr.B4D.programs.Loto;
 import fr.B4D.programs.tutorials.MessageAPI;
@@ -147,7 +146,7 @@ public class Program extends Thread implements Serializable{
 	public void run() {
 		try {
 			if(this.category != Category.Test)
-				Intro();
+				Intro(person);
 			Tours();
 			if(this.category != Category.Test)
 				Outro();
@@ -158,17 +157,17 @@ public class Program extends Thread implements Serializable{
 		}
 	}
 
-	private void Intro() throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException{
+	private void Intro(Person person) throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException{
 		
 		B4DOther.focusDofus();
 		Message.sendChat("/clear");
 		
-		if(B4DScreen.getPixelColor(new PointF(0.28, 0.99)).getGreen() > 200){	//Le mode solo n'est pas activé
-            B4DMouse.leftClick(new PointF(0.28, 0.99), false);                	//Clic sur status
-            B4DMouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
+		if(B4D.screen.getPixelColor(new PointF(0.28, 0.99)).getGreen() > 200){	//Le mode solo n'est pas activé
+            Mouse.leftClick(new PointF(0.28, 0.99), false);                	//Clic sur status
+            Mouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
 		}
 
-		B4D.getTeam().get(0).setPosition(Dofus.getWorld().getPosition());	//Récupère la position actuelle
+		person.setPosition(Dofus.getWorld().getPosition());	//Récupère la position actuelle
 	}
 	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException{
 		int nbCycles = 0, nbDeposits = 0;

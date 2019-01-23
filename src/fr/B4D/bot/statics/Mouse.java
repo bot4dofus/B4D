@@ -1,4 +1,4 @@
-package fr.B4D.modules;
+package fr.B4D.bot.statics;
 
 import java.awt.AWTException;
 import java.awt.Point;
@@ -9,15 +9,17 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 
+import fr.B4D.bot.B4D;
 import fr.B4D.gui.JFrame_GetPoint;
 import fr.B4D.gui.JFrame_GetPointImage;
+import fr.B4D.modules.B4DWait;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 
-public final class B4DMouse {
-		
-	  /***************/
-	 /** GET POINT **/
+public final class Mouse {
+	  
+	/***************/
+	/** GET POINT **/
 	/***************/
 
 	public static void getPoint(String text, MouseAdapter mouseAdapter) {
@@ -67,17 +69,17 @@ public final class B4DMouse {
 	}
 	//PointF
 	public static void Place(PointF position, double attente) throws AWTException {
-		Place(B4DConversion.pointFToPoint(position), attente);
+		Place(B4D.converter.pointFToPoint(position), attente);
 	}
 	public static void Place(PointF position) throws AWTException {
-		Place(B4DConversion.pointFToPoint(position), 0);
+		Place(B4D.converter.pointFToPoint(position), 0);
 	}
 	//PointD
 	public static void Place(PointD position, double attente) throws AWTException {
-		Place(B4DConversion.pointDToPoint(position), attente);
+		Place(B4D.converter.pointDToPoint(position), attente);
 	}
 	public static void Place(PointD position) throws AWTException {
-		Place(B4DConversion.pointDToPoint(position), 0);
+		Place(B4D.converter.pointDToPoint(position), 0);
 	}
 	
 	  /******************/
@@ -102,16 +104,16 @@ public final class B4DMouse {
 		rightClick(position, maj, 1);
 	}
 	public static void rightClick(PointF position, boolean maj, double timeOut) throws AWTException{
-		rightClick(B4DConversion.pointFToPoint(position), maj, timeOut);
+		rightClick(B4D.converter.pointFToPoint(position), maj, timeOut);
 	}
 	public static void rightClick(PointF position, boolean maj) throws AWTException{
-		rightClick(B4DConversion.pointFToPoint(position), maj, 1);
+		rightClick(B4D.converter.pointFToPoint(position), maj, 1);
 	}
 	public static void rightClick(PointD position, boolean maj, double timeOut) throws AWTException{
-		rightClick(B4DConversion.pointDToPoint(position), maj, timeOut);
+		rightClick(B4D.converter.pointDToPoint(position), maj, timeOut);
 	}
 	public static void rightClick(PointD position, boolean maj) throws AWTException{
-		rightClick(B4DConversion.pointDToPoint(position), maj, 1);
+		rightClick(B4D.converter.pointDToPoint(position), maj, 1);
 	}
 	
 	  /*******************/
@@ -135,16 +137,16 @@ public final class B4DMouse {
 		leftClick(position, maj, 1);
 	}	
 	public static void leftClick(PointF position, boolean maj, double timeOut) throws AWTException{
-		leftClick(B4DConversion.pointFToPoint(position), maj, timeOut);
+		leftClick(B4D.converter.pointFToPoint(position), maj, timeOut);
 	}
 	public static void leftClick(PointF position, boolean maj) throws AWTException{
-		leftClick(B4DConversion.pointFToPoint(position), maj, 1);
+		leftClick(B4D.converter.pointFToPoint(position), maj, 1);
 	}
 	public static void leftClick(PointD position, boolean maj, double timeOut) throws AWTException{
-		leftClick(B4DConversion.pointDToPoint(position), maj, timeOut);
+		leftClick(B4D.converter.pointDToPoint(position), maj, timeOut);
 	}
 	public static void leftClick(PointD position, boolean maj) throws AWTException{
-		leftClick(B4DConversion.pointDToPoint(position), maj, 1);
+		leftClick(B4D.converter.pointDToPoint(position), maj, 1);
 	}
 	
 	  /**************************/
@@ -159,16 +161,16 @@ public final class B4DMouse {
 		doubleLeftClick(position, maj, 1);
 	}
 	public static void doubleLeftClick(PointF position, boolean maj, double timeOut) throws AWTException{
-		doubleLeftClick(B4DConversion.pointFToPoint(position), maj, timeOut);
+		doubleLeftClick(B4D.converter.pointFToPoint(position), maj, timeOut);
 	}
 	public static void doubleLeftClick(PointF position, boolean maj) throws AWTException{
-		doubleLeftClick(B4DConversion.pointFToPoint(position), maj, 1);
+		doubleLeftClick(B4D.converter.pointFToPoint(position), maj, 1);
 	}
 	public static void doubleLeftClick(PointD position, boolean maj, double timeOut) throws AWTException{
-		doubleLeftClick(B4DConversion.pointDToPoint(position), maj, timeOut);
+		doubleLeftClick(B4D.converter.pointDToPoint(position), maj, timeOut);
 	}
 	public static void doubleLeftClick(PointD position, boolean maj) throws AWTException{
-		doubleLeftClick(B4DConversion.pointDToPoint(position), maj, 1);
+		doubleLeftClick(B4D.converter.pointDToPoint(position), maj, 1);
 	}
 	
 	  /**************************/
@@ -184,15 +186,15 @@ public final class B4DMouse {
 		tripleLeftClick(position, maj, 1);
 	}
 	public static void tripleLeftClick(PointF position, boolean maj, double timeOut) throws AWTException{
-		tripleLeftClick(B4DConversion.pointFToPoint(position), maj, timeOut);
+		tripleLeftClick(B4D.converter.pointFToPoint(position), maj, timeOut);
 	}
 	public static void tripleLeftClick(PointF position, boolean maj) throws AWTException{
-		tripleLeftClick(B4DConversion.pointFToPoint(position), maj, 1);
+		tripleLeftClick(B4D.converter.pointFToPoint(position), maj, 1);
 	}
 	public static void tripleLeftClick(PointD position, boolean maj, double timeOut) throws AWTException{
-		tripleLeftClick(B4DConversion.pointDToPoint(position), maj, timeOut);
+		tripleLeftClick(B4D.converter.pointDToPoint(position), maj, timeOut);
 	}
 	public static void tripleLeftClick(PointD position, boolean maj) throws AWTException{
-		tripleLeftClick(B4DConversion.pointDToPoint(position), maj, 1);
+		tripleLeftClick(B4D.converter.pointDToPoint(position), maj, 1);
 	}
 }

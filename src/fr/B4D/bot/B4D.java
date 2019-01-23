@@ -8,9 +8,14 @@ import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import fr.B4D.bot.statics.Converter;
+import fr.B4D.bot.statics.Keyboard;
+import fr.B4D.bot.statics.KeyboardListener;
+import fr.B4D.bot.statics.Logger;
+import fr.B4D.bot.statics.Mouse;
+import fr.B4D.bot.statics.Screen;
 import fr.B4D.dao.DAOFactory;
 import fr.B4D.dofus.Dofus;
-import fr.B4D.modules.B4DOther;
 import fr.B4D.program.Program;
 import fr.B4D.socket.NoSocketDetectedException;
 import fr.B4D.socket.SocketListener;
@@ -24,61 +29,64 @@ public final class B4D{
 	/** ATRIBUTS **/
 	/**************/
 
-	private static Configuration configuration;
-	private static Team team;
-	
-	private static SocketListener socketListener;
-	private static KeyboardListener keyboardListener;
-
-	public static Logger logger;    
-
 	private Dofus dofus;
 	
-	/***********************/
-	/** GETTERS & SETTERS **/
-	/***********************/
+	public static Logger logger;
+	public static SocketListener socketListener;
+	public static KeyboardListener keyboardListener;
+	public static Converter converter;
+	public static Screen screen;
+	public static Mouse mouse;
+	public static Keyboard keyboard;
+	
+	private static Configuration configuration;
+	private static Team team;
+	private ArrayList<Program> programs;
+	
+	/*************/
+	/** BUILDER **/
+	/*************/
 
 	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
-		logger = new Logger();
+		dofus = new Dofus();
 
+		/** LOGGER **/
+		logger = new Logger();
+		
+		/** DYNAMICS **/
 		configuration = DAOFactory.getConfigurationDAO().find();
 		team = DAOFactory.getTeamDAO().find();
 		
+		/** STATICS **/
 		socketListener = new SocketListener();
 		keyboardListener = new KeyboardListener();
-		
-		dofus = new Dofus();
+		converter = new Converter(configuration);
+		screen = new Screen(configuration);
+		mouse = new Mouse();
+		keyboard = new Keyboard();
 	}
-
+	
 	/***********************/
 	/** GETTERS & SETTERS **/
 	/***********************/
 
-	public static Team getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 	
-	public static Configuration getConfiguration() {
+	public Configuration getConfiguration() {
 		return configuration;
-	}
-
-	public static SocketListener getSocketListener() {
-		return socketListener;
-	}
-
-	public static KeyboardListener getKeyboardListener() {
-		return keyboardListener;
 	}
 
 	/**********/
 	/** SAVE **/
 	/**********/
 	
-	public static void saveConfiguration() throws ClassNotFoundException, IOException {
+	public void saveConfiguration() throws ClassNotFoundException, IOException {
 		DAOFactory.getConfigurationDAO().update(configuration);
 	}
 	
-	public static void saveTeam() throws ClassNotFoundException, IOException {
+	public void saveTeam() throws ClassNotFoundException, IOException {
 		DAOFactory.getTeamDAO().update(team);
 	}
 	
@@ -134,15 +142,11 @@ public final class B4D{
 	/** RUN **/
 	/*********/
 
-	public void runProgram(Program program, Person person) throws InvalidFilterException {
+	public void runProgram(Program program, Person person) throws InvalidFilterException, InterruptedException {
 		socketListener.setFilter(person.getServer());
 		keyboardListener.startWith(program);			//Demarre le thread du clavier
 		program.startWith(person);
-		try {
-			program.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		program.join();
 		socketListener.interrupt();
 		keyboardListener.interrupt();
 	}

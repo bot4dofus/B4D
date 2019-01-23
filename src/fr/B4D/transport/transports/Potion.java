@@ -5,8 +5,8 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.statics.Mouse;
 import fr.B4D.dofus.B4DCannotFind;
-import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
 import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.transport.Transport;
@@ -32,7 +32,7 @@ public abstract class Potion extends Transport implements Serializable{
 		if (!B4D.getTeam().get(0).getPosition().equals(this.getPosition()))
 			throw new B4DWrongPosition();
 		
-		B4DMouse.doubleLeftClick(super.getPositionF(), false);
+		Mouse.doubleLeftClick(super.getPositionF(), false);
 
 		B4DWait.waitForMap();
 		B4D.getTeam().get(0).setPosition(destination);

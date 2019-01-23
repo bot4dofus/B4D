@@ -5,8 +5,8 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.statics.Mouse;
 import fr.B4D.dofus.B4DCannotFind;
-import fr.B4D.modules.B4DMouse;
 import fr.B4D.modules.B4DWait;
 import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.transport.Transport;
@@ -50,13 +50,13 @@ public class Walk extends Transport implements Serializable{
 		
 		Point move = new Point(destination.x - super.getPosition().x, destination.y - super.getPosition().y);
 		if(move.equals(up))
-			B4DMouse.leftClick(goUp, true);
+			Mouse.leftClick(goUp, true);
 		else if(move.equals(down))
-			B4DMouse.leftClick(goDown, true);
+			Mouse.leftClick(goDown, true);
 		else if(move.equals(left))
-			B4DMouse.leftClick(goLeft, true);
+			Mouse.leftClick(goLeft, true);
 		else if(move.equals(right))
-			B4DMouse.leftClick(goRight, true);
+			Mouse.leftClick(goRight, true);
 
 		B4DWait.waitForMap();
 		B4D.getTeam().get(0).setPosition(destination);

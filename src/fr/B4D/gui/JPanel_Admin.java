@@ -17,9 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.modules.B4DConversion;
-import fr.B4D.modules.B4DKeyboard;
-import fr.B4D.modules.B4DMouse;
+import fr.B4D.bot.statics.Keyboard;
+import fr.B4D.bot.statics.Mouse;
 import fr.B4D.programs.Test;
 import fr.B4D.utils.PointF;
 
@@ -36,10 +35,11 @@ public class JPanel_Admin extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public JPanel_Admin() {		
+	public JPanel_Admin(B4D b4d) {
+				
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				if(B4D.getConfiguration().getGameFrame() != null && B4D.getConfiguration().getChatFrame() != null && B4D.getConfiguration().getChatBar() != null && B4D.getConfiguration().getMinimap() != null) {
+				if(b4d.getConfiguration().getGameFrame() != null && b4d.getConfiguration().getChatFrame() != null && b4d.getConfiguration().getChatBar() != null && b4d.getConfiguration().getMinimap() != null) {
 					btnStart.setEnabled(true);
 					btnRecord.setEnabled(true);
 				}else {
@@ -64,7 +64,7 @@ public class JPanel_Admin extends JPanel {
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {					
-					Test.test.run(B4D.getTeam().get(0));
+					Test.test.run(b4d.getTeam().get(0));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -86,14 +86,14 @@ public class JPanel_Admin extends JPanel {
 		btnRecord = new JButton("Commencer");
 		btnRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				B4DMouse.getPoint(
+				Mouse.getPoint(
 						"Cliquez à la position voulue.",
 						new MouseAdapter() {
 							public void mousePressed(MouseEvent e) {
 								try {
-									PointF point = B4DConversion.pointToPointF(MouseInfo.getPointerInfo().getLocation());
+									PointF point = B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation());
 									String out = "new PointF(" + point.x + ", " + point.y + ")";
-									B4DKeyboard.setClipboard(out);
+									Keyboard.setClipboard(out);
 								} catch (AWTException | HeadlessException ex) {
 									ex.printStackTrace();
 								}
