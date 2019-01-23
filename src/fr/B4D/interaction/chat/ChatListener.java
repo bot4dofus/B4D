@@ -1,6 +1,4 @@
-package fr.B4D.programs;
-
-import fr.B4D.interaction.chat.Message;
+package fr.B4D.interaction.chat;
 
 public interface ChatListener {
 	public void treatMessage(Message message);

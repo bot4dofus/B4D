@@ -8,6 +8,7 @@ public enum Category {
     Puit,
     Quete,
     Elevage,
-    Decouverte,
+    Exploration,
+    Jeux,
     Test,
 }

@@ -3,7 +3,6 @@ package fr.B4D.interaction.chat;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.programs.ChatListener;
 
 public class Chat extends Thread{
 
