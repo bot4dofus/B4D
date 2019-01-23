@@ -2,6 +2,7 @@ package fr.B4D.interaction.chat;
 
 import java.io.Serializable;
 
+import fr.B4D.bot.B4D;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.modules.B4DChat;
 
@@ -51,14 +52,15 @@ public class Message implements Serializable{
 			B4DChat.sendChat(B4DChat.getChannelPrefix(channel) + " " + text);
 	}
 	
-	public void send(String text) {
-		if(channel != Channel.Information) {
-			this.text = text;
-			send();
-		}
+	public void reply(String text) {
+		if(channel == Channel.Business || channel == Channel.Recruitment)
+			channel = Channel.Private;
+		this.text = text;
+		send();
 	}
 	
 	public Message waitForReply(long timeout) {
+		B4D.logger.debug(this, "Attente d'une réponse");
 		Dofus.getChat().addPseudoFilter(pseudo);
 		Message message = Dofus.getChat().waitForMessage(timeout);
 		Dofus.getChat().addPseudoFilter(null);
@@ -86,14 +88,11 @@ public class Message implements Serializable{
 				return Channel.General;
 			case(4):
 				return Channel.Team;
-			case(9):
-			//case(0x39):
+			case(0x09):
 				return Channel.Private;
 			case(5):
-			//case(0x23):
 				return Channel.Business;
 			case(6):
-			//case(0x21):
 				return Channel.Recruitment;
 			default:
 				throw new UnknowChannelException(Byte.toUnsignedInt(data));

@@ -36,46 +36,45 @@ public final class B4DScreen {
 	 /** RECHERCHE PIXEL **/
 	/*********************/
 	
-	public static boolean searchPixel(PointF P1, PointF P2, Color min, Color max, PointF point) throws AWTException {
-		
+	public static PointF searchPixel(PointF P1, PointF P2, Color min, Color max) throws AWTException {
 		Point Point1 = B4DConversion.pointFToPoint(P1);
 		Point Point2 = B4DConversion.pointFToPoint(P2);
-		int width = Point2.x - Point1.x, height = Point2.y - Point1.y;
 		
 		Color color;
+		Point point;
 		
-		for(int j=0;j<height;j++) {
-			for(int i=0;i<width;i++) {
-				color = getPixelColor(new Point(i, j));
-				
-				if(B4DOperator.isBetween(color, min, max)) {
-					point = B4DConversion.pointToPointF(new Point(i+Point1.x, j+Point1.y));
-					return true;
-				}
+		for(int y=Point1.y;y<=Point2.y;y++) {
+			for(int x=Point1.x;x<=Point2.x;x++) {
+				point = new Point(x, y);
+				color = getPixelColor(point);
+				System.out.println(color + "     " + point);
+				if(B4DOperator.isBetween(color, min, max))
+					return B4DConversion.pointToPointF(point);
 			}
 		}
-		return false;
+		return null;
 	}
-	public static boolean searchPixels(PointF P1, PointF P2, Color min, Color max, ArrayList<PointF> points) throws AWTException {
+	public static ArrayList<PointF> searchPixels(PointF P1, PointF P2, Color min, Color max) throws AWTException {
 		
 		Point Point1 = B4DConversion.pointFToPoint(P1);
 		Point Point2 = B4DConversion.pointFToPoint(P2);
-		int width = Point2.x - Point1.x, height = Point2.y - Point1.y;
+		ArrayList<PointF> points = new ArrayList<PointF>();
 		
 		Color color;
-		boolean found = false;
+		Point point;
 		
-		for(int j=0;j<height;j++) {
-			for(int i=0;i<width;i++) {
-				color = getPixelColor(new Point(i, j));
+		for(int y=Point1.y;y<=Point2.y;y++) {
+			for(int x=Point1.x;x<=Point2.x;x++) {
+				point = new Point(x, y);
+				color = getPixelColor(point);
 				
-				if(B4DOperator.isBetween(color, min, max)) {
-					points.add(B4DConversion.pointToPointF(new Point(i+Point1.x, j+Point1.y)));
-					found = true;
-				}
+				if(B4DOperator.isBetween(color, min, max))
+					points.add(B4DConversion.pointToPointF(point));
 			}
 		}
-		return found;
+		if (points.isEmpty())
+			points = null;
+		return points;
 	}
 
 	  /****************/

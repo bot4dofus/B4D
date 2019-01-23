@@ -19,10 +19,10 @@ public class OCRThread extends Thread{
 	
 	public void run(){
 		try{
-			//while(!B4DScreen.OCR(rectangle).contains(texte));
 			String ocr;
 			do {
 				ocr = B4DScreen.OCR(rectangle);
+				System.out.println(ocr);
 			}while(!ocr.contains(text));
 			result = ocr;
 		}catch (Exception e){
