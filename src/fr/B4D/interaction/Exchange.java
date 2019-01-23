@@ -86,6 +86,9 @@ public class Exchange implements Serializable{
 	 * @throws AWTException si impossible de valider l'échange
 	 */
 	public String waitForExchange(long timeout) throws AWTException {
+		if(!B4D.getSocketListener().isAlive())
+			B4D.getSocketListener().start();
+		
 		B4D.logger.debug(this, "Attente d'un échange");
 		String message;
 		while((message = B4DWait.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout)) == null);
