@@ -1,5 +1,6 @@
 package fr.B4D.bot.statics;
 
+import java.awt.Component;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,7 +30,7 @@ public class Logger {
 	/*************/
 	
 	public void popUp(String log) {
-		debug(this, "Popshowed : " + log);
+		debug(this, "Popup showed : " + log);
 		JOptionPane.showMessageDialog(null, log, "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 	

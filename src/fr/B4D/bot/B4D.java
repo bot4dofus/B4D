@@ -48,10 +48,11 @@ public final class B4D{
 	/*************/
 
 	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
-		dofus = new Dofus();
-
+		
 		/** LOGGER **/
 		logger = new Logger();
+		
+		dofus = new Dofus();
 		
 		/** DYNAMICS **/
 		configuration = DAOFactory.getConfigurationDAO().find();
@@ -89,11 +90,11 @@ public final class B4D{
 	/** SAVE **/
 	/**********/
 	
-	private void saveConfiguration() throws ClassNotFoundException, IOException {
+	public void saveConfiguration() throws ClassNotFoundException, IOException {
 		DAOFactory.getConfigurationDAO().update(configuration);
 	}
 	
-	private void saveTeam() throws ClassNotFoundException, IOException {
+	public void saveTeam() throws ClassNotFoundException, IOException {
 		DAOFactory.getTeamDAO().update(team);
 	}
 	
