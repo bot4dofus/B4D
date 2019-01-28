@@ -62,6 +62,7 @@ public class Chat extends Thread{
 		if(!B4D.socketListener.isAlive())
 			B4D.socketListener.start();
 		
+		B4D.logger.debug(this, "Attente d'un message");
 		Message message = messages.poll();
 		try {
 			if(message == null) {
@@ -70,6 +71,10 @@ public class Chat extends Thread{
 					message = messages.poll();
 				}
 			}
+			if(message == null)
+				B4D.logger.debug(this, "Aucun message reçu (timeout)");
+			else
+				B4D.logger.debug(this, "Message reçu [" + message + "]");
 		}
 		catch(InterruptedException e) {
 			B4D.logger.error(e);
