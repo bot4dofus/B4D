@@ -33,9 +33,9 @@ public class Program extends Thread implements Serializable{
 	
 	/** TUTORIALS **/
 
-	public final static Program MessageAPItutorial1 = new Program(Place.Aucune, Category.Test, RessourceType.Aucun, Ressource.Aucune, MessageAPI.tutorial1);
-	public final static Program MessageAPItutorial2 = new Program(Place.Aucune, Category.Test, RessourceType.Aucun, Ressource.Aucune, MessageAPI.tutorial2);
-	public final static Program MessageAPItutorial3 = new Program(Place.Aucune, Category.Test, RessourceType.Aucun, Ressource.Aucune, MessageAPI.tutorial3);
+	public final static Program MessageAPItutorial1 = new Program(Place.Aucune, Category.Test, RessourceType.Tutorial1, Ressource.Aucune, MessageAPI.tutorial1);
+	public final static Program MessageAPItutorial2 = new Program(Place.Aucune, Category.Test, RessourceType.Tutorial2, Ressource.Aucune, MessageAPI.tutorial2);
+	public final static Program MessageAPItutorial3 = new Program(Place.Aucune, Category.Test, RessourceType.Tutorial3, Ressource.Aucune, MessageAPI.tutorial3);
 	
 	  /***************/
 	 /** ATTRIBUTS **/

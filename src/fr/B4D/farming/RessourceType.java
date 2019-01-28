@@ -13,4 +13,7 @@ public enum RessourceType {
     Reproduction,
     Chasse,
     IlePrincipale,
+    Tutorial1,
+    Tutorial2,
+    Tutorial3,
 }
