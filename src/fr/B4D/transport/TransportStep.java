@@ -29,8 +29,14 @@ public class TransportStep implements Serializable{
 	public Transport getTransport() {
 		return transport;
 	}
+	public void setTransport(Transport transport) {
+		this.transport = transport;
+	}
 	public Point getDestination() {
 		return destination;
+	}
+	public void setDestination(Point destination) {
+		this.destination = destination;
 	}
 	
 	  /**************/
@@ -39,5 +45,13 @@ public class TransportStep implements Serializable{
 	
 	public void use() throws AWTException, B4DCannotFind, B4DWrongPosition {
 		transport.goTo(destination);
+	}
+
+	  /**************/
+	 /** TOSTRING **/
+	/**************/
+	
+	public String toString() {
+		return transport.getPosition() + " vers " + destination + " via " + transport.getName();
 	}
 }

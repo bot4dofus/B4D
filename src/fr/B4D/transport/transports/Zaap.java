@@ -47,7 +47,7 @@ public class Zaap extends Transport implements Serializable{
     public final static Zaap Cania_Lac_Cania = new Zaap("Plaine de Cania (Lac de Cania)", new Point(-3, -42), new PointF(0.7504, 0.2234));
     public final static Zaap Cania_Massif_Cania = new Zaap("Plaine de Cania (Massif de Cania)", new Point(-13, -28), new PointF(0.6404, 0.3988));
     public final static Zaap Cania_Plaine_Porkass = new Zaap("Plaine de Cania (Plaine des Porkass)", new Point(-5, -23), new PointF(0.3258, 0.3266));
-    public final static Zaap Cania_Plaines_Rocheuses = new Zaap("Plaine de Cania (Plaines Rocheuses)", new Point(17, -47), new PointF(0.3234, 0.3337));
+    public final static Zaap Cania_Plaines_Rocheuses = new Zaap("Plaine de Cania (Plaines Rocheuses)", new Point(-17, -47), new PointF(0.3234, 0.3337));
     public final static Zaap Cania_Routes_Rocailleuses = new Zaap("Plaine de Cania (Routes Rocailleuses)", new Point(-20, -20), new PointF(0.4302, 0.3537));
     public final static Zaap Saharach = new Zaap("Saharach (Dunes des ossements)", new Point(15, -58), new PointF(0.3595, 0.3076));
     public final static Zaap Tainela = new Zaap("Tainéla (Berceau)", new Point(1, -32), new PointF(0.4992, 0.3978));    

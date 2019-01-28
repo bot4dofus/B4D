@@ -60,7 +60,7 @@ public class Zaapi extends Transport implements Serializable{
     public final static Zaapi Bibliotheque_Bonta = new Zaapi("Bibliotheque", new Point(-33, -58), new PointF(0.4068745, 0.7095808), ZaapiType.Divers);
     public final static Zaapi Epicerie_Bonta = new Zaapi("Epicerie", new Point(-33, -54), new PointF(0.2318145, 0.2654691), ZaapiType.Divers);
     public final static Zaapi Hotel_Metiers_Bonta = new Zaapi("Hotel des metiers", new Point(-33, -55), new PointF(0.86251, 0.5638723), ZaapiType.Divers);
-    public final static Zaapi Milice_Bonta = new Zaapi("Milice", new Point(-55, -56), new PointF(0.7505995, 0.498004), ZaapiType.Divers);
+    public final static Zaapi Milice_Bonta = new Zaapi("Milice", new Point(-33, -56), new PointF(0.7505995, 0.498004), ZaapiType.Divers);
     public final static Zaapi Place_Marchande_Bonta = new Zaapi("Place marchande", new Point(-32, -54), new PointF(0.3661071, 0.2734531), ZaapiType.Divers);
     public final static Zaapi Taverne_Alakarte_Bonta = new Zaapi("Taverne Alakarte", new Point(-29, -57), new PointF(0.7418066, 0.50998), ZaapiType.Divers);
     public final static Zaapi Taverne_Bagrutte_Bonta = new Zaapi("Taverne de la Bagrutte", new Point(-34, -60), new PointF(0.6003197, 0.6556886), ZaapiType.Divers);

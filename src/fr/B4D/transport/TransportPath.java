@@ -39,4 +39,16 @@ public class TransportPath implements Serializable{
 	public double getWeigth() {
 		return transportPath.stream().mapToDouble(t -> t.getTransport().getWeight()).sum();
 	}
+	
+	  /**************/
+	 /** TOSTRING **/
+	/**************/
+	
+	public String toString() {
+		String out = "\nFrom " +  transportPath.get(0).getTransport().getPosition() + " to " + transportPath.get(transportPath.size()-1).getDestination() + "\n";
+		out += "Total weight = " + getWeigth() + "(" + transportPath.size() + " step)\n";
+		for(TransportStep step : transportPath)
+			out += step + "\n";
+		return out;
+	}
 }

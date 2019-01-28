@@ -25,14 +25,14 @@ public final class World implements Serializable{
 	
 	public World() {
 		graph = new B4DGraph();
-		addMapsPart1();
-		addMapsPart2();
-		addMapsPart3();
+		addVertexPart1();
+		addVertexPart2();
+		addVertexPart3();
 		patchTransport(Zaap.getAll());
 		patchTransport(Zaapi.getAllBonta());
 		patchTransport(Zaapi.getAllBrakmar());
 	}
-	private void addMapsPart1() {
+	private void addVertexPart1() {
 		graph.addVertex(new Point(0, 0), true);
 		graph.addVertex(new Point(-33, -65), true);
 		graph.addVertex(new Point(-32, -65), true);
@@ -3026,7 +3026,7 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-17, -24), true);
 		graph.addVertex(new Point(-18, -24), true);
 	}
-	private void addMapsPart2() {
+	private void addVertexPart2() {
 		graph.addVertex(new Point(-19, -24), true);
 		graph.addVertex(new Point(-20, -24), true);
 		graph.addVertex(new Point(-20, -25), true);
@@ -6020,7 +6020,7 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-64, -54), true);
 		graph.addVertex(new Point(-64, -55), true);
 	}
-	private void addMapsPart3() {
+	private void addVertexPart3() {
 		graph.addVertex(new Point(-65, -55), true);
 		graph.addVertex(new Point(-66, -55), true);
 		graph.addVertex(new Point(-67, -55), true);
@@ -6299,6 +6299,7 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-1, -66), true);
 	}
 
+	
 	  /*************/
 	 /** GETTERS **/
 	/*************/
