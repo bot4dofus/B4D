@@ -219,7 +219,7 @@ public class JPanel_Personnage extends JPanel {
 		    public void actionPerformed(ActionEvent e) {
 		    	if(table.getSelectedRow() != -1) {
 					try {
-						b4d.getTeam().get(table.getSelectedRow()).getBoosterPotion().getDestination().setLocation(Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString()).getPosition());
+						b4d.getTeam().get(table.getSelectedRow()).getBoosterPotion().setDestination(Zaap.getZaap(comboBox_Zaaps.getSelectedItem().toString()).getPosition());
 					} catch (Exception ex) {
 						ex.printStackTrace();
 					}
@@ -425,17 +425,17 @@ public class JPanel_Personnage extends JPanel {
 	}
 	private void ActualiserInfos(Person personnage) {
 		
-		if(personnage.getBoosterPotion() != null)
+		if(personnage.getBoosterPotion().getTransport().getPositionF() != null)
 			this.lblXY_Rappel.setText(personnage.getBoosterPotion().getTransport().getPositionF().getX() + ":" + personnage.getBoosterPotion().getTransport().getPositionF().getY());
 		else
 			this.lblXY_Rappel.setText("X:Y");
 		
-		if(personnage.getBontaPotion() != null)
+		if(personnage.getBontaPotion().getTransport().getPositionF() != null)
 			this.lblXY_Bonta.setText(personnage.getBontaPotion().getTransport().getPositionF().getX() + ":" + personnage.getBontaPotion().getTransport().getPositionF().getY());
 		else
 			this.lblXY_Bonta.setText("X:Y");
 
-		if(personnage.getBrakmarPotion() != null)
+		if(personnage.getBrakmarPotion().getTransport().getPositionF() != null)
 			this.lblXY_Brakmar.setText(personnage.getBrakmarPotion().getTransport().getPositionF().getX() + ":" + personnage.getBrakmarPotion().getTransport().getPositionF().getY());
 		else
 			this.lblXY_Brakmar.setText("X:Y");
@@ -445,17 +445,17 @@ public class JPanel_Personnage extends JPanel {
 		else
 			this.lblXY_Sort.setText("X:Y");
 
-		if(personnage.getBoosterPotion() != null)
+		if(personnage.getBoosterPotion().getDestination() != null)
 			try {
 				this.comboBox_Zaaps.setSelectedItem(Zaap.getZaap(personnage.getBoosterPotion().getDestination()).getName());
 			} catch (B4DCannotFind e) {}
 		
-		if(personnage.getBontaPotion() != null)
+		if(personnage.getBontaPotion().getDestination() != null)
 			this.lblPosition_Bonta.setText(personnage.getBontaPotion().getDestination().getX() + ":" + personnage.getBontaPotion().getDestination().getY());
 		else
 			this.lblPosition_Bonta.setText("X:Y");
 		
-		if(personnage.getBrakmarPotion() != null)
+		if(personnage.getBrakmarPotion().getDestination() != null)
 			this.lblPosition_Brakmar.setText(personnage.getBrakmarPotion().getDestination().getX() + ":" + personnage.getBrakmarPotion().getDestination().getY());
 		else
 			this.lblPosition_Brakmar.setText("X:Y");

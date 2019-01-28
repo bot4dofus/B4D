@@ -11,6 +11,9 @@ import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.transport.TransportInterface;
 import fr.B4D.transport.TransportPath;
 import fr.B4D.transport.TransportStep;
+import fr.B4D.transport.transports.BontaPotion;
+import fr.B4D.transport.transports.BoosterPotion;
+import fr.B4D.transport.transports.BrakmarPotion;
 import fr.B4D.utils.PointF;
 
 public class Person implements Serializable, TransportInterface{
@@ -36,10 +39,7 @@ public class Person implements Serializable, TransportInterface{
 	/*************/
 	
 	public Person() {
-		this.account = "Nom de compte";
-		this.password = "Mot de passe";
-		this.server = Server.AGRIDE;
-		this.pseudo = "Pseudo";
+		this("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo");
 	}
 	
 	public Person(String account, String password, Server serveur, String pseudo) {
@@ -47,6 +47,10 @@ public class Person implements Serializable, TransportInterface{
 		this.password = password;
 		this.server = serveur;
 		this.pseudo = pseudo;
+		
+		this.boosterPotion = new TransportStep(new BoosterPotion(null, null), null);
+		this.bontaPotion = new TransportStep(new BontaPotion(null, null), bontaPotionDestination);
+		this.brakmarPotion = new TransportStep(new BrakmarPotion(null, null), brakmarPotionDestination);
 	}
 	
 	  /***********************/
@@ -107,7 +111,7 @@ public class Person implements Serializable, TransportInterface{
 	}
 
 	public void setSpellPosition(PointF spellPosition) {
-		this.spellPosition.setLocation(spellPosition);
+		this.spellPosition = spellPosition;
 	}
 
 	public Point getPosition() {
@@ -115,7 +119,7 @@ public class Person implements Serializable, TransportInterface{
 	}
 
 	public void setPosition(Point position) {
-		this.position.setLocation(position);
+		this.position = position;
 	}
 
 	public boolean isInventoryFull() {
@@ -137,14 +141,20 @@ public class Person implements Serializable, TransportInterface{
 	public TransportPath getTransportPathTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {		
 		
 		//Add potions
-		if(boosterPotion != null) 
+		if(boosterPotion != null) {
+			boosterPotion.getTransport().setPosition(position);
 			Dofus.world.getGraph().addEdge(boosterPotion);
+		}
 			
-		if(bontaPotion != null)
+		if(bontaPotion != null){
+			bontaPotion.getTransport().setPosition(position);
 			Dofus.world.getGraph().addEdge(bontaPotion);
+		}
 
-		if(brakmarPotion != null)
+		if(brakmarPotion != null){
+			brakmarPotion.getTransport().setPosition(position);
 			Dofus.world.getGraph().addEdge(brakmarPotion);
+		}
 		
 		//Get the shortest path
 	    List<TransportStep> shortestPath = Dofus.world.getGraph().getPath(position, destination).getEdgeList();

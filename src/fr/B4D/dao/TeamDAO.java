@@ -70,8 +70,9 @@ public class TeamDAO extends DAO<Team> implements Serializable{
 	public void serialize(Team team, File file) throws ClassNotFoundException, IOException {		  
 			FileOutputStream fileOut = new FileOutputStream(file.getAbsolutePath());
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			Gson gson = new Gson();
-			out.writeObject(gson.toJson(team));
+			//Gson gson = new Gson();
+			//out.writeObject(gson.toJson(team));
+			out.writeObject(team);
 			out.close();
 			fileOut.close();
 	  }
@@ -80,8 +81,9 @@ public class TeamDAO extends DAO<Team> implements Serializable{
 	public Team deserialize(File file) throws ClassNotFoundException, IOException {
 			FileInputStream fileIn = new FileInputStream(file.getAbsolutePath());
 			ObjectInputStream in = new ObjectInputStream(fileIn);
-			Gson gson = new Gson();
-			Team team = gson.fromJson((String) in.readObject(), Team.class);
+			//Gson gson = new Gson();
+			//Team team = gson.fromJson((String) in.readObject(), Team.class);
+			Team team = (Team) in.readObject();
 			in.close();
 			fileIn.close();
 			return team;

@@ -169,7 +169,7 @@ public class JPanel_Programme extends JPanel {
 		textField_Turns = new JFormattedTextField(NumberFormat.getNumberInstance());
 		textField_Turns.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_Turns.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
-		textField_Turns.setText("-1");
+		textField_Turns.setText("1");
 		textField_Turns.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		textField_Turns.setBounds(165, 35, 150, 25);
 		textField_Turns.setColumns(10);
