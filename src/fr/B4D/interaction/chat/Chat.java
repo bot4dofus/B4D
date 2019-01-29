@@ -43,34 +43,32 @@ public class Chat extends Thread{
 	
 	
 	public void addMessage(Message message) {
-		if(filter.filter(message)) {
-			synchronized(messages){
-				if(!messages.offer(message))
-					B4D.logger.warning("Le chat est plein, le message n'a pas pu être ajouté.");
-				else
-					messages.notifyAll();
+		synchronized(messages){
+			if(!messages.offer(message)) {
+				messages.poll();
+				messages.offer(message);
 			}
+			messages.notifyAll();
 		}
-		//else
-			//B4D.logger.debug("Message non ajouté en file d'attente car ne correspond pas au filtre.");
 	}
 
 	public Message waitForMessage() {
 		return waitForMessage(0);
 	}
-	public Message waitForMessage(long timeout) {
-		if(!B4D.socketListener.isAlive())
-			B4D.socketListener.start();
-		
-		B4D.logger.debug(this, "Attente d'un message");
-		Message message = messages.poll();
+	public Message waitForMessage(long timeout) {		
+		Message message = null;
 		try {
-			if(message == null) {
-				synchronized(messages){
-					messages.wait(timeout);
-					message = messages.poll();
+			B4D.logger.debug(this, "Attente d'un message");
+			do {
+				message = messages.poll();
+				if(message == null) {
+					synchronized(messages){
+						messages.wait(timeout);
+						message = messages.poll();
+					}
 				}
-			}
+			}while(!filter.filter(message));
+			
 			if(message == null)
 				B4D.logger.debug(this, "Aucun message reçu (timeout)");
 			else

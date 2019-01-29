@@ -148,11 +148,15 @@ public final class B4D{
 	/*********/
 
 	public void runProgram(Program program, Person person) throws InvalidFilterException, InterruptedException {
+		if(!socketListener.isAlive())
+			socketListener.start();
+		if(!keyboardListener.isAlive())
+			keyboardListener.start();
+		
 		socketListener.setFilter(person.getServer());
-		keyboardListener.startWith(program);			//Demarre le thread du clavier
+		keyboardListener.setProgram(program);
+		
 		program.startWith(person);
 		program.join();
-		socketListener.interrupt();
-		keyboardListener.interrupt();
 	}
 }

@@ -3,6 +3,7 @@ package fr.B4D.interaction;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 
@@ -22,16 +23,18 @@ public class Exchange implements Serializable{
 	 /** CONSTANTS **/
 	/***************/
 	
-	private final String waitForExchangeKey = "souhaite"; //clef permettant de valider l'echange
+	private final String waitForExchangeKey = "avec vous"; //clef permettant de valider l'echange
 	
 	private final Rectangle waitForExchangeRectangle = new Rectangle(new PointF(0.3762, 0.4756), new PointF(0.6238, 0.5055)); //Zone des kamas entrants
 	private final PointF waitForExchangeYesButton = new PointF(0.4143, 0.5304);		//Emplacement du bouton accepter
+
+	private static String[] validationKeys = {"oui","Oui","OUI","ui","Ui","yes","Yes","YES", "yep", "Yep", "YEP","ouai","Ouai","OUAI"};
 	
 	private final int timeout = 30000; 												//Timeout avant echec de l'échange
-	private final Rectangle kamasInRectangle = new Rectangle(new PointF(0.2163, 0.2562), new PointF(0.2835, 0.2742)); //Zone somme entrante
+	private final Rectangle kamasInRectangle = new Rectangle(new PointF(0.2163, 0.2527), new PointF(0.283, 0.2747)); //Zone somme entrante
 
 	private final PointF escapeButton = new PointF(0.8093, 0.0888);			//Emplacement de la croix
-	private final PointF validationButton = new PointF(0.3491, 0.5334);		//Emplacement du bouton de validation de l'echange
+	private final PointF validationButton = new PointF(0.382, 0.5345);		//Emplacement du bouton de validation de l'echange
 	
 	  /**************/
 	 /** ATRIBUTS **/
@@ -82,20 +85,23 @@ public class Exchange implements Serializable{
 	 * @return le nom du joueur ayant demandé l'échange. {@code null} si timeout
 	 * @throws AWTException si impossible de valider l'échange
 	 */
-	public String waitForExchange(long timeout) throws AWTException {
+	public String waitForExchange(int timeout) throws AWTException {
 		if(!B4D.socketListener.isAlive())
 			B4D.socketListener.start();
 		
 		B4D.logger.debug(this, "Attente d'un échange");
-		String message;
-		while((message = B4DWait.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout)) == null);
-		String name = message.split(" ")[0];
-		B4D.mouse.leftClick(waitForExchangeYesButton, false);
+		String message = B4DWait.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout);
+		
+		if(message == null)
+			B4D.logger.debug(this, "Aucun échange demandé (timeout)");
+		else {
+			name = message.split(" ")[0];
+			B4D.logger.debug(this, "Echange avec [" + name + "]");
+			B4D.mouse.leftClick(waitForExchangeYesButton, false);
+		}
 		return name;
 	}
 //	public String waitForExchange(long timeout) throws AWTException {
-//		if(!B4D.getSocketListener().isAlive())
-//			B4D.getSocketListener().start();
 //		
 //		try {
 //			synchronized(name){
@@ -117,33 +123,36 @@ public class Exchange implements Serializable{
 	 * @return
 	 * @throws B4DExchangeCanceled si 
 	 */
-	public Image exchange(String validationMessage, String[] validationKeys) throws B4DExchangeCanceled, AWTException, TesseractException, NumberFormatException, IOException {
+	public Image exchange(String validationMessage) throws B4DExchangeCanceled, AWTException, TesseractException, NumberFormatException, IOException {
 		B4D.logger.debug(this, "Début de l'échange");
 		Message message;
 		
 		if(kamasOut > 0) {
-			//Clique sur le champs kamas
+			B4D.mouse.doubleLeftClick(new PointF(0.494, 0.2627), false);
 			B4D.keyboard.writeKeyboard(Integer.toString(kamasOut));
 		}
 		
 		do {
-			if(B4DWait.waitForOCR(kamasInRectangle, String.valueOf(kamasIn), timeout) == null)
-				cancelExchange();
-		}while(B4D.screen.searchPixel(new PointF(0.396, 0.2804), new PointF(0.396, 0.2914), new Color(100, 100, 0), new Color(255, 255, 50)) == null);
-
-		do {				
-			message = new Message(name, Channel.Private, validationMessage);
+			message = new Message(name, Channel.Private, "Entre " + kamasIn + " kamas et valide");
 			message.send();
-			message = message.waitForReply(timeout);
 			
-			if(message == null || !contains(message.getText(), validationKeys))
-				cancelExchange();
+			do {
+				if(B4DWait.waitForOCR(kamasInRectangle, String.valueOf(kamasIn), timeout) == null)
+					cancelExchange();
+			}while(!isValided());
+			
+			do {
+				message = new Message(name, Channel.Private, validationMessage);
+				message.send();
+				message = message.waitForReply(timeout);
 				
-		}while(Integer.parseInt(B4D.screen.OCR(kamasInRectangle)) != kamasIn); //&& B4D);
+				if(message == null)
+						cancelExchange();
+			}while(!contains(message.getText(), validationKeys));					
+		}while(B4D.screen.OCR(kamasInRectangle).equals(String.valueOf(kamasIn)) || !isValided());
 
-		Image image = B4D.screen.takeSreenshot();
+		BufferedImage image = B4D.screen.takeSreenshot();
 		B4D.mouse.leftClick(validationButton, false);
-		
 		B4D.logger.debug(this, "Echange éffectué");
 		return image;
 	}
@@ -164,9 +173,14 @@ public class Exchange implements Serializable{
 	}
 	
 	private boolean isInProgress() {
-		//if window still here
-			//return true;
-		//else
-			return false;
+		try {
+			return (B4D.screen.getPixelColor(validationButton).getBlue() == 0);
+		} catch (AWTException e) {
+			return true;
+		}
+	}
+	
+	private boolean isValided() throws AWTException {
+		return B4D.screen.searchPixel(new PointF(0.396, 0.2804), new PointF(0.396, 0.2914), new Color(100, 100, 0), new Color(255, 255, 50)) != null;
 	}
 }
