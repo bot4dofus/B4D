@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -130,6 +131,8 @@ public class JFrame_B4D extends JFrame{
 				try {
 					b4d.saveConfiguration();
 					b4d.saveTeam();
+					B4D.socketListener.interrupt();
+					B4D.keyboardListener.interrupt();
 					dispose();
 				} catch (ClassNotFoundException | IOException e1) {
 					B4D.logger.error(e1);

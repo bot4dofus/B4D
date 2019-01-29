@@ -2,7 +2,7 @@ package fr.B4D.program;
 
 public enum Place {
     Tous,
-    Aucune,
+    Aucun,
     Astrub,
     Bonta,
     Brakmar,

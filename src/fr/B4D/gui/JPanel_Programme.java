@@ -21,8 +21,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.farming.Ressource;
-import fr.B4D.farming.RessourceType;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
@@ -37,8 +35,8 @@ public class JPanel_Programme extends JPanel {
 	
 	private JComboBox<Place> comboBox_Place;
 	private JComboBox<Category> comboBox_Category;
-	private JComboBox<RessourceType> comboBox_RessourceType;
-	private JComboBox<Ressource> comboBox_Ressource;
+	private JComboBox<String> comboBox_SubCategory;
+	private JComboBox<String> comboBox_Name;
 	
 	private JFormattedTextField textField_Turns, textField_Deposits;
 
@@ -106,19 +104,19 @@ public class JPanel_Programme extends JPanel {
 		comboBox_Category = new JComboBox<Category>();
 		comboBox_Category.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				comboBox_RessourceType.removeAllItems();
+				comboBox_SubCategory.removeAllItems();
 				b4d.getPrograms().stream().filter(p -> 
-					((DefaultComboBoxModel<RessourceType>)comboBox_RessourceType.getModel()).getIndexOf(p.getRessourceType()) < 0
+					((DefaultComboBoxModel<String>)comboBox_SubCategory.getModel()).getIndexOf(p.getSubCategory()) < 0
 					&& p.getPlace().equals(comboBox_Place.getSelectedItem())
 					&& p.getCategory().equals(comboBox_Category.getSelectedItem()))
-				.forEach(p -> comboBox_RessourceType.addItem(p.getRessourceType()));
+				.forEach(p -> comboBox_SubCategory.addItem(p.getSubCategory()));
 			}
 		});
 		comboBox_Category.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		comboBox_Category.setBounds(10, 90, 150, 25);
 		add(comboBox_Category);
 		
-		JLabel lblType = new JLabel("Type :");
+		JLabel lblType = new JLabel("Sous-catégorie :");
 		lblType.setBackground(new Color(46, 139, 87));
 		lblType.setForeground(Color.WHITE);
 		lblType.setOpaque(true);
@@ -127,23 +125,23 @@ public class JPanel_Programme extends JPanel {
 		lblType.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblType);
 		
-		comboBox_RessourceType = new JComboBox<RessourceType>();
-		comboBox_RessourceType.addActionListener(new ActionListener() {
+		comboBox_SubCategory = new JComboBox<String>();
+		comboBox_SubCategory.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				comboBox_Ressource.removeAllItems();
+				comboBox_Name.removeAllItems();
 				b4d.getPrograms().stream().filter(p ->
-						((DefaultComboBoxModel<Ressource>)comboBox_Ressource.getModel()).getIndexOf(p.getRessource()) < 0
+						((DefaultComboBoxModel<String>)comboBox_Name.getModel()).getIndexOf(p.getProgramName()) < 0
 						&& p.getPlace().equals(comboBox_Place.getSelectedItem())
 						&& p.getCategory().equals(comboBox_Category.getSelectedItem()) 
-						&& p.getRessourceType().equals(comboBox_RessourceType.getSelectedItem()))
-				.forEach(p -> comboBox_Ressource.addItem(p.getRessource()));
+						&& p.getSubCategory().equals(comboBox_SubCategory.getSelectedItem()))
+				.forEach(p -> comboBox_Name.addItem(p.getProgramName()));
 			}
 		});
-		comboBox_RessourceType.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		comboBox_RessourceType.setBounds(10, 145, 150, 25);
-		add(comboBox_RessourceType);
+		comboBox_SubCategory.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		comboBox_SubCategory.setBounds(10, 145, 150, 25);
+		add(comboBox_SubCategory);
 		
-		JLabel lblRessource = new JLabel("Ressource :");
+		JLabel lblRessource = new JLabel("Nom :");
 		lblRessource.setBackground(new Color(46, 139, 87));
 		lblRessource.setForeground(Color.WHITE);
 		lblRessource.setOpaque(true);
@@ -152,10 +150,10 @@ public class JPanel_Programme extends JPanel {
 		lblRessource.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(lblRessource);
 		
-		comboBox_Ressource = new JComboBox<Ressource>();
-		comboBox_Ressource.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		comboBox_Ressource.setBounds(10, 200, 150, 25);
-		add(comboBox_Ressource);
+		comboBox_Name = new JComboBox<String>();
+		comboBox_Name.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		comboBox_Name.setBounds(10, 200, 150, 25);
+		add(comboBox_Name);
 		
 		JLabel lblNombreDeTours = new JLabel("Nombre de tours :");
 		lblNombreDeTours.setBackground(new Color(46, 139, 87));
@@ -265,8 +263,8 @@ public class JPanel_Programme extends JPanel {
 				Program program = b4d.getPrograms().stream().filter( p ->
 					p.getPlace().equals(comboBox_Place.getSelectedItem())
 					&& p.getCategory().equals(comboBox_Category.getSelectedItem()) 
-					&& p.getRessourceType().equals(comboBox_RessourceType.getSelectedItem())
-					&& p.getRessource().equals(comboBox_Ressource.getSelectedItem()))
+					&& p.getSubCategory().equals(comboBox_SubCategory.getSelectedItem())
+					&& p.getProgramName().equals(comboBox_Name.getSelectedItem()))
 				.findFirst().orElse(null);
 				
 				program.setMaxCycles(Integer.valueOf(textField_Turns.getText()));

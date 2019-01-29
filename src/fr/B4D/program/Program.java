@@ -10,12 +10,11 @@ import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.dofus.Dofus;
-import fr.B4D.farming.Ressource;
-import fr.B4D.farming.RessourceType;
 import fr.B4D.interaction.chat.Message;
-import fr.B4D.programs.Deplacement;
 import fr.B4D.programs.Loto;
+import fr.B4D.programs.tutorials.ExchangeAPI;
 import fr.B4D.programs.tutorials.MessageAPI;
+import fr.B4D.programs.tutorials.TransportAPI;
 import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.TesseractException;
@@ -28,14 +27,21 @@ public class Program extends Thread implements Serializable{
 	 /** COLLECTION **/
 	/****************/
 	
-	public final static Program deplacement = new Program(Place.Aucune, Category.Aucune, RessourceType.Aucun, Ressource.Aucune, Deplacement.deplacement);
-	public final static Program loto = new Program(Place.Tous, Category.Jeux, RessourceType.Aucun, Ressource.Aucune, Loto.loto);
+	public final static Program loto = new Program(Place.Astrub, Category.Jeux, "Argent", "Loto", Loto.loto);
 	
 	/** TUTORIALS **/
 
-	public final static Program MessageAPItutorial1 = new Program(Place.Aucune, Category.Test, RessourceType.Tutorial1, Ressource.Aucune, MessageAPI.tutorial1);
-	public final static Program MessageAPItutorial2 = new Program(Place.Aucune, Category.Test, RessourceType.Tutorial2, Ressource.Aucune, MessageAPI.tutorial2);
-	public final static Program MessageAPItutorial3 = new Program(Place.Aucune, Category.Test, RessourceType.Tutorial3, Ressource.Aucune, MessageAPI.tutorial3);
+	public final static Program messageAPItutorial1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", MessageAPI.tutorial1);
+	public final static Program messageAPItutorial2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", MessageAPI.tutorial2);
+	public final static Program messageAPItutorial3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", MessageAPI.tutorial3);
+
+	public final static Program exchangeAPItutorial1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", ExchangeAPI.tutorial1);
+	public final static Program exchangeAPItutorial2 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 2", ExchangeAPI.tutorial2);
+	public final static Program exchangeAPItutorial3 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 3", ExchangeAPI.tutorial3);
+	
+	public final static Program transportAPItutorial1 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 1", TransportAPI.tutorial1);
+	public final static Program transportAPItutorial2 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 2", TransportAPI.tutorial2);
+	public final static Program transportAPItutorial3 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 3", TransportAPI.tutorial3);
 	
 	  /***************/
 	 /** ATTRIBUTS **/
@@ -45,8 +51,8 @@ public class Program extends Thread implements Serializable{
 	
 	private Place place;
 	private Category category;
-	private RessourceType ressourceType;
-	private Ressource ressource;
+	private String subCategory;
+	private String programName;
 
 	private ProgramInterface program;
 	
@@ -61,11 +67,11 @@ public class Program extends Thread implements Serializable{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
-	public Program(Place place, Category category, RessourceType type, Ressource ressource, ProgramInterface program) {
+	public Program(Place place, Category category, String subCategory, String programName, ProgramInterface program) {
 		this.place = place;
 		this.category = category;
-		this.ressourceType = type;
-		this.ressource = ressource;
+		this.subCategory = subCategory;
+		this.programName = programName;
 		this.program = program;
 		this.maxCycles = -1;
 		this.maxDeposits = -1;
@@ -77,11 +83,22 @@ public class Program extends Thread implements Serializable{
 	
   public final static ArrayList<Program> getAll(){
   	ArrayList<Program> programs = new ArrayList<Program>();
-  	programs.add(deplacement);
+  	
   	programs.add(loto);
-  	programs.add(MessageAPItutorial1);
-  	programs.add(MessageAPItutorial2);
-  	programs.add(MessageAPItutorial3);
+
+	/** TUTORIALS **/
+  	
+  	programs.add(messageAPItutorial1);
+  	programs.add(messageAPItutorial2);
+  	programs.add(messageAPItutorial3);
+  	
+  	programs.add(exchangeAPItutorial1);
+  	programs.add(exchangeAPItutorial2);
+  	programs.add(exchangeAPItutorial3);
+  	
+  	programs.add(transportAPItutorial1);
+  	programs.add(transportAPItutorial2);
+  	programs.add(transportAPItutorial3);
     return programs;
   }
 	
@@ -95,11 +112,11 @@ public class Program extends Thread implements Serializable{
 	public Category getCategory() {
 		return category;
 	}
-	public RessourceType getRessourceType() {
-		return ressourceType;
+	public String getSubCategory() {
+		return subCategory;
 	}
-	public Ressource getRessource() {
-		return ressource;
+	public String getProgramName() {
+		return programName;
 	}
 	public int getMaxCycles() {
 		return maxCycles;
@@ -149,7 +166,7 @@ public class Program extends Thread implements Serializable{
 			if(this.category != Category.Test)
 				Outro();
 			
-			B4D.logger.popUp("Le bot s'est correctement terminé.");
+			//B4D.logger.popUp("Le bot s'est correctement terminé.");
 		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException | InterruptedException e){
 			B4D.logger.error(e);
 		}
@@ -169,7 +186,7 @@ public class Program extends Thread implements Serializable{
 	}
 	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException{
 		int nbCycles = 0, nbDeposits = 0;
-
+		
 		while(nbCycles != maxCycles && nbDeposits != maxDeposits) {
 			try {
 				program.run(person);
@@ -183,10 +200,10 @@ public class Program extends Thread implements Serializable{
 				if(stopWhenFull)
 					break;
 				
-				maxDeposits++;
+				nbDeposits++;
 				
 			}finally {
-				maxCycles++;
+				nbCycles++;
 			}
 		}
 	}

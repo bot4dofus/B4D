@@ -11,4 +11,5 @@ public enum Category {
     Exploration,
     Jeux,
     Test,
+    Tutorial,
 }
