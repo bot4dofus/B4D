@@ -261,18 +261,18 @@ public class Zaapi extends Transport implements Serializable{
 		
 	    switch(this.zaapiType) {
 	    	case Atelier:
-		        B4D.mouse.leftClick(new PointF(0.3253, 0.1626), false, 0.1);
+		        B4D.mouse.leftClick(new PointF(0.3253, 0.1626), false, 100);
 		        break;
 		    case HDV:
-		    	B4D.mouse.leftClick(new PointF(0.3253, 0.1626), false, 0.1);
+		    	B4D.mouse.leftClick(new PointF(0.3253, 0.1626), false, 100);
 		    	break;
 		    case Divers:
-		    	B4D.mouse.leftClick(new PointF(0.6027, 0.1626), false, 0.1);
+		    	B4D.mouse.leftClick(new PointF(0.6027, 0.1626), false, 100);
 		    	break;
 			default:
 				break;
 	    }
-	    B4D.mouse.leftClick(new PointF(0.6062, 0.2013), false, 0.2);
+	    B4D.mouse.leftClick(new PointF(0.6062, 0.2013), false, 200);
 	    B4D.keyboard.writeKeyboard(getZaap(destination).getName());
 	    B4D.mouse.doubleLeftClick(new PointF(0.4736, 0.2891), false);
 	}

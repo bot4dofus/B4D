@@ -70,24 +70,24 @@ public final class Mouse {
 	/************/
 	
 	//Point
-	public void Place(Point position, double attente) throws AWTException {
+	public void Place(Point position, int millis) throws AWTException {
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
-		B4DWait.wait(attente);
+		B4DWait.wait(millis);
 	}
 	public void Place(Point position) throws AWTException {
 		Place(position, 0);
 	}
 	//PointF
-	public void Place(PointF position, double attente) throws AWTException {
-		Place(B4D.converter.pointFToPoint(position), attente);
+	public void Place(PointF position, int millis) throws AWTException {
+		Place(B4D.converter.pointFToPoint(position), millis);
 	}
 	public void Place(PointF position) throws AWTException {
 		Place(B4D.converter.pointFToPoint(position), 0);
 	}
 	//PointD
-	public void Place(PointD position, double attente) throws AWTException {
-		Place(B4D.converter.pointDToPoint(position), attente);
+	public void Place(PointD position, int millis) throws AWTException {
+		Place(B4D.converter.pointDToPoint(position), millis);
 	}
 	public void Place(PointD position) throws AWTException {
 		Place(B4D.converter.pointDToPoint(position), 0);
@@ -98,7 +98,7 @@ public final class Mouse {
 	/******************/
 	
 	//Point
-	public void rightClick(Point position, boolean maj, double timeOut) throws AWTException{
+	public void rightClick(Point position, boolean maj, int millis) throws AWTException{
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 			
@@ -109,29 +109,29 @@ public final class Mouse {
 		if(maj)	
 			robot.keyRelease(KeyEvent.VK_SHIFT);
 
-		B4DWait.wait(timeOut);		
+		B4DWait.wait(millis);		
 	}
 	public void rightClick(Point position, boolean maj) throws AWTException{
-		rightClick(position, maj, 1);
+		rightClick(position, maj, 1000);
 	}
-	public void rightClick(PointF position, boolean maj, double timeOut) throws AWTException{
-		rightClick(B4D.converter.pointFToPoint(position), maj, timeOut);
+	public void rightClick(PointF position, boolean maj, int millis) throws AWTException{
+		rightClick(B4D.converter.pointFToPoint(position), maj, millis);
 	}
 	public void rightClick(PointF position, boolean maj) throws AWTException{
-		rightClick(B4D.converter.pointFToPoint(position), maj, 1);
+		rightClick(B4D.converter.pointFToPoint(position), maj, 1000);
 	}
-	public void rightClick(PointD position, boolean maj, double timeOut) throws AWTException{
-		rightClick(B4D.converter.pointDToPoint(position), maj, timeOut);
+	public void rightClick(PointD position, boolean maj, int millis) throws AWTException{
+		rightClick(B4D.converter.pointDToPoint(position), maj, millis);
 	}
 	public void rightClick(PointD position, boolean maj) throws AWTException{
-		rightClick(B4D.converter.pointDToPoint(position), maj, 1);
+		rightClick(B4D.converter.pointDToPoint(position), maj, 1000);
 	}
 	
 	  /*******************/
 	 /** CLIQUE GAUCHE **/
 	/*******************/
 	
-	public void leftClick(Point position, boolean maj, double timeOut) throws AWTException {
+	public void leftClick(Point position, boolean maj, int millis) throws AWTException {
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 			
@@ -142,71 +142,71 @@ public final class Mouse {
 		if(maj)	
 			robot.keyRelease(KeyEvent.VK_SHIFT);
 
-		B4DWait.wait(timeOut);
+		B4DWait.wait(millis);
 	}	
 	public void leftClick(Point position, boolean maj) throws AWTException{
-		leftClick(position, maj, 1);
+		leftClick(position, maj, 1000);
 	}	
-	public void leftClick(PointF position, boolean maj, double timeOut) throws AWTException{
-		leftClick(B4D.converter.pointFToPoint(position), maj, timeOut);
+	public void leftClick(PointF position, boolean maj, int millis) throws AWTException{
+		leftClick(B4D.converter.pointFToPoint(position), maj, millis);
 	}
 	public void leftClick(PointF position, boolean maj) throws AWTException{
-		leftClick(B4D.converter.pointFToPoint(position), maj, 1);
+		leftClick(B4D.converter.pointFToPoint(position), maj, 1000);
 	}
-	public void leftClick(PointD position, boolean maj, double timeOut) throws AWTException{
-		leftClick(B4D.converter.pointDToPoint(position), maj, timeOut);
+	public void leftClick(PointD position, boolean maj, int millis) throws AWTException{
+		leftClick(B4D.converter.pointDToPoint(position), maj, millis);
 	}
 	public void leftClick(PointD position, boolean maj) throws AWTException{
-		leftClick(B4D.converter.pointDToPoint(position), maj, 1);
+		leftClick(B4D.converter.pointDToPoint(position), maj, 1000);
 	}
 	
 	  /**************************/
 	 /** DOUBLE CLIQUE GAUCHE **/
 	/**************************/
 	
-	public void doubleLeftClick(Point position, boolean maj, double timeOut) throws AWTException {
+	public void doubleLeftClick(Point position, boolean maj, int millis) throws AWTException {
 		leftClick(position, maj, 0);
-		leftClick(position, maj, timeOut);
+		leftClick(position, maj, millis);
 	}	
 	public void doubleLeftClick(Point position, boolean maj) throws AWTException{
-		doubleLeftClick(position, maj, 1);
+		doubleLeftClick(position, maj, 1000);
 	}
-	public void doubleLeftClick(PointF position, boolean maj, double timeOut) throws AWTException{
-		doubleLeftClick(B4D.converter.pointFToPoint(position), maj, timeOut);
+	public void doubleLeftClick(PointF position, boolean maj, int millis) throws AWTException{
+		doubleLeftClick(B4D.converter.pointFToPoint(position), maj, millis);
 	}
 	public void doubleLeftClick(PointF position, boolean maj) throws AWTException{
-		doubleLeftClick(B4D.converter.pointFToPoint(position), maj, 1);
+		doubleLeftClick(B4D.converter.pointFToPoint(position), maj, 1000);
 	}
-	public void doubleLeftClick(PointD position, boolean maj, double timeOut) throws AWTException{
-		doubleLeftClick(B4D.converter.pointDToPoint(position), maj, timeOut);
+	public void doubleLeftClick(PointD position, boolean maj, int millis) throws AWTException{
+		doubleLeftClick(B4D.converter.pointDToPoint(position), maj, millis);
 	}
 	public void doubleLeftClick(PointD position, boolean maj) throws AWTException{
-		doubleLeftClick(B4D.converter.pointDToPoint(position), maj, 1);
+		doubleLeftClick(B4D.converter.pointDToPoint(position), maj, 1000);
 	}
 	
 	  /**************************/
 	 /** TRIPLE CLIQUE GAUCHE **/
 	/**************************/
 	
-	public void tripleLeftClick(Point position, boolean maj, double timeOut) throws AWTException {
+	public void tripleLeftClick(Point position, boolean maj, int millis) throws AWTException {
 		leftClick(position, maj, 0);
 		leftClick(position, maj, 0);
-		leftClick(position, maj, timeOut);
+		leftClick(position, maj, millis);
 	}	
 	public void tripleLeftClick(Point position, boolean maj) throws AWTException{
-		tripleLeftClick(position, maj, 1);
+		tripleLeftClick(position, maj, 1000);
 	}
-	public void tripleLeftClick(PointF position, boolean maj, double timeOut) throws AWTException{
-		tripleLeftClick(B4D.converter.pointFToPoint(position), maj, timeOut);
+	public void tripleLeftClick(PointF position, boolean maj, int millis) throws AWTException{
+		tripleLeftClick(B4D.converter.pointFToPoint(position), maj, millis);
 	}
 	public void tripleLeftClick(PointF position, boolean maj) throws AWTException{
-		tripleLeftClick(B4D.converter.pointFToPoint(position), maj, 1);
+		tripleLeftClick(B4D.converter.pointFToPoint(position), maj, 1000);
 	}
-	public void tripleLeftClick(PointD position, boolean maj, double timeOut) throws AWTException{
-		tripleLeftClick(B4D.converter.pointDToPoint(position), maj, timeOut);
+	public void tripleLeftClick(PointD position, boolean maj, int millis) throws AWTException{
+		tripleLeftClick(B4D.converter.pointDToPoint(position), maj, millis);
 	}
 	public void tripleLeftClick(PointD position, boolean maj) throws AWTException{
-		tripleLeftClick(B4D.converter.pointDToPoint(position), maj, 1);
+		tripleLeftClick(B4D.converter.pointDToPoint(position), maj, 1000);
 	}
 
 	  /**********/
@@ -214,7 +214,7 @@ public final class Mouse {
 	/**********/
 	
 	public void chatClick() throws AWTException{
-		leftClick(configuration.getChatBar(), false, 0.5);
+		leftClick(configuration.getChatBar(), false, 500);
 	}
 	
 }

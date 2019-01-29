@@ -59,7 +59,6 @@ public final class Screen {
 			for(int x=Point1.x;x<=Point2.x;x++) {
 				point = new Point(x, y);
 				color = getPixelColor(point);
-				System.out.println(color + "     " + point);
 				if(isBetween(color, min, max))
 					return B4D.converter.pointToPointF(point);
 			}
@@ -110,7 +109,8 @@ public final class Screen {
 		ImageIO.write(image, "png", file);
 		Tesseract tessInst = new Tesseract();
 		tessInst.setLanguage("fra");
-		return tessInst.doOCR(file);
+		String out = tessInst.doOCR(file);
+		return out.replaceAll("\n", " ");
 	}
 	public String OCR(Point P1, Point P2) throws AWTException, IOException, TesseractException {
 		return OCR(new Rectangle(P1.x,  P1.y, P2.x - P1.x, P2.y - P1.y));
@@ -128,14 +128,14 @@ public final class Screen {
 
 	public String getSelection(Point point) throws AWTException, UnsupportedFlavorException, IOException {
 		Robot robot = new Robot();
-		B4D.mouse.leftClick(point, false, 0.1);
+		B4D.mouse.leftClick(point, false, 100);
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_A);
 		robot.keyRelease(KeyEvent.VK_A);
 		robot.keyPress(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4DWait.wait(1.0);
+		B4DWait.wait(1000);
 		return B4D.keyboard.getClipboard();
 	}
 	public String getSelection(PointF position) throws AWTException, UnsupportedFlavorException, IOException {
@@ -146,7 +146,7 @@ public final class Screen {
 	 /** ATTENTE SUR MAP **/
 	/*********************/
 	
-	public boolean waitForMap(double timeOut) {
+	public boolean waitForMap(int timeOut) {
 		return B4DWait.waitForChangingPixel(B4D.converter.pointToPointF(configuration.getMinimap()), timeOut);
 	}
 	public boolean waitForMap() {

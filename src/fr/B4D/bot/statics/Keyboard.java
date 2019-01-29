@@ -20,21 +20,21 @@ public final class Keyboard{
 	 /** SINGLE KEY **/
 	/****************/
 	
-	public void sendKey(int keyEvent, Double time) throws AWTException {
+	public void sendKey(int keyEvent, int time) throws AWTException {
 		Robot robot = new Robot();
 		robot.keyPress(keyEvent);
 		robot.keyRelease(keyEvent);
 		B4DWait.wait(time);
 	}
 	public void sendKey(int keyEvent) throws AWTException {
-		sendKey(keyEvent, 0.1);
+		sendKey(keyEvent, 100);
 	}
 	
 	  /********************/
 	 /** WRITE KEYBOARD **/
 	/********************/
 	
-	public void writeKeyboard(String text, double time) throws AWTException {
+	public void writeKeyboard(String text, int time) throws AWTException {
 		setClipboard(text);
 		
 		Robot robot = new Robot();
@@ -45,7 +45,7 @@ public final class Keyboard{
 		B4DWait.wait(time);
 	}
 	public void writeKeyboard(String text) throws AWTException {
-		writeKeyboard(text, 0.5);
+		writeKeyboard(text, 500);
 	}
 	
 	  /***************/

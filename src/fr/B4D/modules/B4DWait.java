@@ -17,9 +17,9 @@ public final class B4DWait {
 	 /** ATTENTE SIMPLE **/
 	/********************/
 	
-	public static void wait(double timeOut) {
+	public static void wait(int timeOut) {
 		try {
-			Thread.sleep((long) (timeOut*1000));
+			Thread.sleep(timeOut);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -29,11 +29,11 @@ public final class B4DWait {
 	 /** ATTENTE SUR OCR **/
 	/*********************/
 	
-	public static String waitForOCR(Rectangle rectangle, String text, double timeOut) {
+	public static String waitForOCR(Rectangle rectangle, String text, int timeOut) {
 		OCRThread ocrThread = new OCRThread(rectangle, text);
 		ocrThread.start();
 		try {
-			ocrThread.join((long) (timeOut*1000));
+			ocrThread.join(timeOut);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -42,10 +42,10 @@ public final class B4DWait {
 			ocrThread.interrupt();
 		return ocrThread.getResult();
 	}
-	public static String waitForOCR(Point P1, Point P2, String text, double timeOut) {
+	public static String waitForOCR(Point P1, Point P2, String text, int timeOut) {
 		return waitForOCR(new Rectangle(P1.x,  P1.y, P2.x - P1.x, P2.y - P1.y), text, timeOut);
 	}
-	public static String waitForOCR(PointF P1, PointF P2, String text, double timeOut) {
+	public static String waitForOCR(PointF P1, PointF P2, String text, int timeOut) {
 		return waitForOCR(B4D.converter.pointFToPoint(P1), B4D.converter.pointFToPoint(P2), text, timeOut);
 	}
 	
@@ -53,11 +53,11 @@ public final class B4DWait {
 	 /** ATTENTE SUR TOUCHE **/
 	/************************/
 	
-	public static boolean waitForKeyboard(double timeOut) {
+	public static boolean waitForKeyboard(int timeOut) {
 		Thread keyboardThread = new KeyboardThread();
 		keyboardThread.start();
 		try {
-			keyboardThread.join((long) (timeOut*1000));
+			keyboardThread.join(timeOut);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			return false;
@@ -74,11 +74,11 @@ public final class B4DWait {
 	 /** ATTENTE SUR CHANGEMENT DE PIXEL **/
 	/*************************************/
 	
-	public static boolean waitForChangingPixel(Point point, double timeOut) {
+	public static boolean waitForChangingPixel(Point point, int timeOut) {
 		Thread pixelThread = new PixelThread(point);
 		pixelThread.start();
 		try {
-			pixelThread.join((long) (timeOut*1000));
+			pixelThread.join(timeOut);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			return false;
@@ -90,7 +90,7 @@ public final class B4DWait {
 		}else
 			return false;
 	}
-	public static boolean waitForChangingPixel(PointF point, double timeOut) {
+	public static boolean waitForChangingPixel(PointF point, int timeOut) {
 		return waitForChangingPixel(B4D.converter.pointFToPoint(point), timeOut);
 	}
 	
@@ -98,11 +98,11 @@ public final class B4DWait {
 	 /** ATTENTE SUR COULEUR DE PIXEL **/
 	/**********************************/
 	
-	public static boolean waitForColor(Point point, Color min, Color max, double timeOut) {
+	public static boolean waitForColor(Point point, Color min, Color max, int timeOut) {
 		Thread colorThread = new ColorThread(point, min, max);
 		colorThread.start();
 		try {
-			colorThread.join((long) (timeOut*1000));
+			colorThread.join(timeOut);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			return false;
@@ -114,7 +114,7 @@ public final class B4DWait {
 		}else
 			return false;
 	}
-	public static boolean waitForColor(PointF point, Color min, Color max, double timeOut) {
+	public static boolean waitForColor(PointF point, Color min, Color max, int timeOut) {
 		return waitForColor(B4D.converter.pointFToPoint(point), min, max, timeOut);
 	}
 }

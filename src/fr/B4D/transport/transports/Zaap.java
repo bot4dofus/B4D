@@ -115,7 +115,7 @@ public class Zaap extends Transport implements Serializable{
 		B4D.mouse.leftClick(super.getPositionF(), false);
 		
 		B4DWait.waitForColor(new PointF(0.4472, 0.7367), new Color(186, 125, 0), new Color(255, 255, 50), 10);
-		B4D.mouse.leftClick(new PointF(0.6062, 0.2013), false, 0.2);
+		B4D.mouse.leftClick(new PointF(0.6062, 0.2013), false, 200);
 		B4D.keyboard.writeKeyboard(getZaap(destination).getName());
 		B4D.mouse.doubleLeftClick(new PointF(0.4736, 0.2891), false);
 	}

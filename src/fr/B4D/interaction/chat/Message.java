@@ -58,21 +58,21 @@ public class Message implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
-	public static void sendChat(String text, double time) {
+	public static void sendChat(String text, int millis) {
 		try {
 			B4D.mouse.chatClick();
-			B4D.keyboard.writeKeyboard(text,time);
+			B4D.keyboard.writeKeyboard(text, millis);
 			
 			Robot robot = new Robot();
 			robot.keyPress(KeyEvent.VK_ENTER);
 			robot.keyRelease(KeyEvent.VK_ENTER);
-			B4DWait.wait(0.1);
+			B4DWait.wait(100);
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
 	}
 	public static void sendChat(String text){
-		sendChat(text, 0.5);
+		sendChat(text, 500);
 	}
 	
 	public void send() {
