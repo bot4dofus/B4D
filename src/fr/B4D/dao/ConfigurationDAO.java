@@ -10,8 +10,6 @@ import java.io.Serializable;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.google.gson.Gson;
-
 import fr.B4D.bot.Configuration;
 
 public class ConfigurationDAO extends DAO<Configuration> implements Serializable{
@@ -70,8 +68,7 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 	public void serialize(Configuration configuration, File file) throws ClassNotFoundException, IOException {		  
 			FileOutputStream fileOut = new FileOutputStream(file.getAbsolutePath());
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			Gson gson = new Gson();
-			out.writeObject(gson.toJson(configuration));
+			out.writeObject(configuration);
 			out.close();
 			fileOut.close();
 	  }
@@ -80,8 +77,7 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 	public Configuration deserialize(File file) throws ClassNotFoundException, IOException {
 			FileInputStream fileIn = new FileInputStream(file.getAbsolutePath());
 			ObjectInputStream in = new ObjectInputStream(fileIn);
-			Gson gson = new Gson();
-			Configuration configuration = gson.fromJson((String) in.readObject(), Configuration.class);
+			Configuration configuration = (Configuration) in.readObject();
 			in.close();
 			fileIn.close();
 			return configuration;
