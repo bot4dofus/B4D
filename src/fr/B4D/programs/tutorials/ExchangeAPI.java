@@ -5,6 +5,7 @@ import java.awt.Image;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
+import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.interaction.B4DExchangeCanceled;
@@ -23,8 +24,9 @@ public final class ExchangeAPI {
 			String name = exchange.waitForExchange();
 			try {
 				Image proof = exchange.exchange("T'es sur ?");
+				B4D.logger.popUp("Echange avec " + name + " effectué. Voici la preuve " + proof);
 			} catch (B4DExchangeCanceled e) {
-				//Do nothing
+				B4D.logger.popUp("L'échange à été annulé");
 			}
 		}
 	};
