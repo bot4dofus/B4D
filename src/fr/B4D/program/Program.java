@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
@@ -160,15 +161,21 @@ public class Program extends Thread implements Serializable{
 	
 	public void run() {
 		try {
-			intro();
-			cycle();
+			try {
+				intro();
+				cycle();
+			} catch (StopProgramException e) {
+				B4D.logger.debug(this, "Program stoped");
+			}
 			outro();
-		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException | InterruptedException e){
+		} catch (CancelProgramException e) {
+			B4D.logger.debug(this, "Program canceled");
+		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException | InterruptedException | GeneralSecurityException e){
 			B4D.logger.error(e);
 		}
 	}
 
-	private void intro() throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException{
+	private void intro() throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException, GeneralSecurityException, StopProgramException, CancelProgramException{
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
 			Message.sendChat("/clear");
@@ -182,13 +189,14 @@ public class Program extends Thread implements Serializable{
 		}
 		program.intro(person);
 	}
-	private void cycle() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException{
+	private void cycle() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException, StopProgramException, CancelProgramException{
 		int nbCycles = 0, nbDeposits = 0;
 		
 		while(nbCycles != maxCycles && nbDeposits != maxDeposits) {
 			try {
 				program.cycle(person);
-			} catch (B4DFullInventory e) {			
+			} catch (FullInventoryException e) {
+
 				if(hdvWhenFull) {
 					//Mettre en HDV
 				}
@@ -196,7 +204,7 @@ public class Program extends Thread implements Serializable{
 					//Mettre en banque
 				}
 				if(stopWhenFull)
-					break;
+					throw new StopProgramException();
 				
 				nbDeposits++;
 				
@@ -205,7 +213,7 @@ public class Program extends Thread implements Serializable{
 			}
 		}
 	}
-	private void outro() {
+	private void outro() throws CancelProgramException {
 		program.outro(person);
 		//B4D.logger.popUp("Le bot s'est correctement terminé.");
 	}

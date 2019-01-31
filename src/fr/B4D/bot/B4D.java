@@ -147,16 +147,20 @@ public final class B4D{
 	/** RUN **/
 	/*********/
 
-	public void runProgram(Program program, Person person) throws InvalidFilterException, InterruptedException {
+	public void runProgram(Program program, Person person) {
 		if(!socketListener.isAlive())
 			socketListener.start();
 		if(!keyboardListener.isAlive())
 			keyboardListener.start();
 		
-		socketListener.setFilter(person.getServer());
-		keyboardListener.setProgram(program);
-		
-		program.startWith(person);
-		program.join();
+		try {
+			socketListener.setFilter(person.getServer());
+			keyboardListener.setProgram(program);
+			
+			program.startWith(person);
+			program.join();
+		} catch (InvalidFilterException | InterruptedException e) {
+			B4D.logger.error(e);
+		}
 	}
 }

@@ -14,7 +14,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
@@ -24,7 +23,6 @@ import fr.B4D.bot.B4D;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
-import net.sourceforge.jpcap.capture.InvalidFilterException;
 
 public class JPanel_Programme extends JPanel {
 
@@ -274,12 +272,8 @@ public class JPanel_Programme extends JPanel {
 				program.setHdvWhenFull(checkBox_Bank.isSelected());
 				program.setStopWhenFull(checkBox_Stop.isSelected());
 				
-				try {
-					b4d.runProgram(program, b4d.getTeam().get(0));
-					getParent().requestFocus();
-				} catch (InterruptedException | InvalidFilterException e) {
-					JOptionPane.showConfirmDialog(null, "Vous avez stoppé le bot.", "Fin", JOptionPane.OK_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				}
+				b4d.runProgram(program, b4d.getTeam().get(0));
+				getParent().requestFocus();
 			}
 		});
 		button_Start.setBounds(475, 75, 150, 45);
