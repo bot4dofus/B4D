@@ -17,14 +17,18 @@ import net.sourceforge.tess4j.TesseractException;
 
 public final class MessageAPI {	
 	public static ProgramInterface tutorial1 = new ProgramInterface() {
-		public void run(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
+		public void intro(Person person) {}
+		public void outro(Person person) {}
+		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
 			Message message = Dofus.chat.waitForMessage(0);
 			B4D.logger.popUp("Message de " + message.getPseudo() + "(" + message.getChannel() + ") : " + message.getText());
 		}
 	};
 	
 	public static ProgramInterface tutorial2 = new ProgramInterface() {
-		public void run(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
+		public void intro(Person person) {}
+		public void outro(Person person) {}
+		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
 			Message message = new Message("Solwy", Channel.Private, "Salut !");
 			message.send();
 			Dofus.chat.addPseudoFilter("Solwy");
@@ -37,7 +41,9 @@ public final class MessageAPI {
 	};
 	
 	public static ProgramInterface tutorial3 = new ProgramInterface() {
-		public void run(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
+		public void intro(Person person) {}
+		public void outro(Person person) {}
+		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
 			Dofus.chat.addChannelFilter(Channel.Business);
 			Dofus.chat.addTextFilter("moi");
 			Dofus.chat.addChatListener(new ChatListener() {

@@ -160,36 +160,34 @@ public class Program extends Thread implements Serializable{
 	
 	public void run() {
 		try {
-			if(this.category != Category.Test)
-				Intro(person);
-			Tours();
-			if(this.category != Category.Test)
-				Outro();
-			
-			//B4D.logger.popUp("Le bot s'est correctement terminé.");
+			intro();
+			cycle();
+			outro();
 		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException | InterruptedException e){
 			B4D.logger.error(e);
 		}
 	}
 
-	private void Intro(Person person) throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException{
-		
-		B4D.screen.focusDofus();
-		Message.sendChat("/clear");
-		
-		if(B4D.screen.getPixelColor(new PointF(0.28, 0.99)).getGreen() > 200){	//Le mode solo n'est pas activé
-            B4D.mouse.leftClick(new PointF(0.28, 0.99), false);                	//Clic sur status
-            B4D.mouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
+	private void intro() throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException{
+		if(this.category != Category.Test) {
+			B4D.screen.focusDofus();
+			Message.sendChat("/clear");
+			
+			if(B4D.screen.getPixelColor(new PointF(0.28, 0.99)).getGreen() > 200){	//Le mode solo n'est pas activé
+	            B4D.mouse.leftClick(new PointF(0.28, 0.99), false);                	//Clic sur status
+	            B4D.mouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
+			}
+			
+			person.setPosition(Dofus.world.getPosition());	//Récupère la position actuelle
 		}
-
-		person.setPosition(Dofus.world.getPosition());	//Récupère la position actuelle
+		program.intro(person);
 	}
-	private void Tours() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException{
+	private void cycle() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException{
 		int nbCycles = 0, nbDeposits = 0;
 		
 		while(nbCycles != maxCycles && nbDeposits != maxDeposits) {
 			try {
-				program.run(person);
+				program.cycle(person);
 			} catch (B4DFullInventory e) {			
 				if(hdvWhenFull) {
 					//Mettre en HDV
@@ -207,7 +205,8 @@ public class Program extends Thread implements Serializable{
 			}
 		}
 	}
-	private void Outro() {
-		//Nothing special for the moment
+	private void outro() {
+		program.outro(person);
+		//B4D.logger.popUp("Le bot s'est correctement terminé.");
 	}
 }

@@ -10,5 +10,7 @@ import fr.B4D.transport.B4DWrongPosition;
 import net.sourceforge.tess4j.TesseractException;
 
 public interface ProgramInterface{
-	public void run(Person person) throws B4DFullInventory, AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException ;
+	public void intro(Person person);
+	public void cycle(Person person) throws B4DFullInventory, AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException ;
+	public void outro(Person person);
 }

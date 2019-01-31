@@ -16,7 +16,9 @@ import net.sourceforge.tess4j.TesseractException;
 public final class ExchangeAPI {	
 
 	public static ProgramInterface tutorial1 = new ProgramInterface() {
-		public void run(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
+		public void intro(Person person) {}
+		public void outro(Person person) {}
+		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
 			Exchange exchange = new Exchange(2,1);
 			String name = exchange.waitForExchange();
 			try {
@@ -28,13 +30,17 @@ public final class ExchangeAPI {
 	};
 	
 	public static ProgramInterface tutorial2 = new ProgramInterface() {
-		public void run(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
+		public void intro(Person person) {}
+		public void outro(Person person) {}
+		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
 			
 		}
 	};
 	
 	public static ProgramInterface tutorial3 = new ProgramInterface() {
-		public void run(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
+		public void intro(Person person) {}
+		public void outro(Person person) {}
+		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
 			
 		}
 	};
