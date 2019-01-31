@@ -22,13 +22,19 @@ import fr.B4D.google.sheet.SheetsServiceUtil;
 
 public class GoogleSheetTest {
 	private static Sheets sheetsService;
+	private static String SHEET_URL = "https://docs.google.com/spreadsheets/d/1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw/edit#gid=987770465";
 	private static String SPREADSHEET_ID = "1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw";
-
+	
 	@Before
 	public void setup() throws GeneralSecurityException, IOException {
 		sheetsService = SheetsServiceUtil.getSheetsService();
 	}
-
+	
+	@Test
+	public void parseUrl() {
+		Assert.assertEquals(SPREADSHEET_ID, SheetsServiceUtil.getIdFromUrl(SHEET_URL));
+	}
+	
 	@Test
 	public void write() throws IOException {
 		ValueRange body = new ValueRange()
@@ -49,7 +55,7 @@ public class GoogleSheetTest {
 
 	@Test
 	public void read() throws IOException {
-		List<String> ranges = Arrays.asList("B20:C29");
+		List<String> ranges = Arrays.asList("B20:C1000");
 		BatchGetValuesResponse readResult = sheetsService.spreadsheets().values()
 				.batchGet(SPREADSHEET_ID)
 				.setRanges(ranges)

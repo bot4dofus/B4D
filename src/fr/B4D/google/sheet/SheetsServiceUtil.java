@@ -20,4 +20,10 @@ public class SheetsServiceUtil {
           .setApplicationName(APPLICATION_NAME)
           .build();
     }
+    
+    public static String getIdFromUrl(String url) {
+    	int begin = url.indexOf("/d/");
+    	String subUrl = url.substring(begin+3);
+    	return subUrl.substring(0, subUrl.indexOf("/"));
+    }
 }
