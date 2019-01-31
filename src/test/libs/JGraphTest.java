@@ -19,7 +19,7 @@ import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.InvalidFilterException;
 ;
-public class JGraphT {
+public class JGraphTest {
 
 	@Before
 	public void before() {

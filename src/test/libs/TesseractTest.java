@@ -12,7 +12,7 @@ import fr.B4D.utils.PointF;
 import fr.B4D.utils.Rectangle;
 import net.sourceforge.tess4j.TesseractException;
 
-public class Tesseract {
+public class TesseractTest {
 
 	@Test
 	public void test() throws AWTException, IOException, TesseractException {
