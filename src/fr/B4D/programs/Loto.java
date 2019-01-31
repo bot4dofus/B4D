@@ -26,8 +26,12 @@ public final class Loto {
 	private static String tkanksMessage = "Merci d'avoir parié ! :) Tu peux consulter le tirage en cours et les tirages archivés via ce lien : https://urlz.fr/4EHx";
 	
 	public static ProgramInterface loto = new ProgramInterface() {
-
-		public void run(Person person) throws AWTException, IOException, TesseractException, InterruptedException {			
+		
+		public void intro(Person person) {
+			
+		}
+		
+		public void cycle(Person person) throws AWTException, IOException, TesseractException, InterruptedException {			
 			try {
 				Exchange exchange = new Exchange(ticketPrice, 0);
 				String name = exchange.waitForExchange();
@@ -51,13 +55,14 @@ public final class Loto {
 				LocalDateTime date = LocalDateTime.now();
 				
 				Image image = exchange.exchange(validationMessage + sort + " ? (" + formatter.format(date) + ")");
-				message.reply(tkanksMessage);
-				
-				//https://docs.google.com/spreadsheets/d/1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw/edit#gid=1102216258
-				
+				message.reply(tkanksMessage);				
 			} catch (B4DExchangeCanceled e) {
 				
 			}
+		}
+
+		public void outro(Person person) {
+			//Do nothing for the moment
 		}
 	};
 	
