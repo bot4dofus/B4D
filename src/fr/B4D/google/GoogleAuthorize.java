@@ -9,7 +9,7 @@ import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.common.collect.Lists;
 
-public class GoogleAuthorizeUtil {
+public class GoogleAuthorize {
 	
 	  public static final String CLOUD_PLATFORM = "https://www.googleapis.com/auth/cloud-platform";
 	  public static final String SQLSERVICE_ADMIN = "https://www.googleapis.com/auth/sqlservice.admin";
@@ -17,7 +17,7 @@ public class GoogleAuthorizeUtil {
 	  public static final String DRIVE = "https://www.googleapis.com/auth/drive";
 	
     public static Credential authorize() throws IOException, GeneralSecurityException {
-    	InputStream in = GoogleAuthorizeUtil.class.getResourceAsStream("/main/resources/b4d_service.json");
+    	InputStream in = GoogleAuthorize.class.getResourceAsStream("/main/resources/b4d_service.json");
     	GoogleCredential credential = GoogleCredential.fromStream(in).createScoped(getAllCredentials());
         return credential;
     }

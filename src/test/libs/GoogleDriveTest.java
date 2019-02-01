@@ -32,31 +32,20 @@ public class GoogleDriveTest {
 		Assert.assertEquals(DRIVE_ID, id);
 	}
 	
+	  /**********/
+	 /** LIST **/
+	/**********/
+	
+	@Test
+	public void listAll() throws IOException {
+		List<File> items = drive.listAll();
+		items.stream().forEach(i-> System.out.println(i));
+	}
+	
 	@Test
 	public void listFiles() throws IOException {
 		List<File> files = drive.listFiles();
 		files.stream().forEach(f -> System.out.println(f));
-	}
-	
-	@Test
-	public void createFile() throws IOException {
-		drive.createFile("text/plain", "Test.txt");
-	}
-
-	@Test
-	public void uploadFile() throws IOException {
-		java.io.File file = new java.io.File("errors.txt");
-		drive.uploadFile("text/plain", "erros_uploaded.txt", file);
-	}
-
-	@Test
-	public void copyFile() throws IOException {
-		drive.copyFile("1ZtOFbbaICeS_FJbn5-TGkJ5aEimGefzK", "copie de errors");
-	}
-	
-	@Test
-	public void removeFile() {
-		drive.removeFile("1mbd5PLIHMfOi3f3gHsTcSiDDEzawWGZv");
 	}
 	
 	@Test
@@ -65,13 +54,110 @@ public class GoogleDriveTest {
 		folders.stream().forEach(f -> System.out.println(f));
 	}
 	
+	  /************************/
+	 /** CREATE/REMOVE FILE **/
+	/************************/
+	
 	@Test
-	public void createFolder() throws IOException {
-		drive.createFolder("Dossier test");
+	public void createFile() throws IOException {
+		File file = drive.createFile("text/plain", "Test create");
+		Assert.assertNotNull(file);
+		drive.removeFile(file.getId());
 	}
 	
 	@Test
-	public void removeFolder() {
-		drive.removeFolder("");
+	public void removeFile() throws IOException {
+		File file = drive.createFile("text/plain", "Test create");
+		Assert.assertNotNull(file);
+		drive.removeFile(file.getId());
+	}
+	
+	  /*******************/
+	 /** MANAGING FILE **/
+	/*******************/
+
+	@Test
+	public void copyFile() throws IOException {
+		File file = drive.createFile("text/plain", "Test copy");
+		File newFile = drive.copyFile(file.getId(), "Copied by B4D");
+		Assert.assertNotNull(file);
+		Assert.assertNotNull(newFile);
+		drive.removeFile(file.getId());
+		drive.removeFile(newFile.getId());
+	}
+	
+	@Test
+	public void moveFile() throws IOException {
+		File folder = drive.createFolder("Test move");
+		File file = drive.createFile("text/plain", "Test move");
+		File newFile = drive.moveFile(file.getId(), folder.getId());
+		Assert.assertEquals(file.getName(), newFile.getName());
+		drive.removeFile(newFile.getId());
+		drive.removeFolder(folder.getId());
+	}
+	
+	@Test
+	public void renameFile() throws IOException {
+		File file = drive.createFile("text/plain", "Test rename");
+		File newFile = drive.renameFile(file.getId(), "Renamed by B4D");
+		Assert.assertEquals("Renamed by B4D", newFile.getName());
+		drive.removeFile(newFile.getId());
+	}
+	
+	  /**************************/
+	 /** UPLOAD/DOWNLOAD FILE **/
+	/**************************/
+	
+	@Test
+	public void uploadFile() throws IOException {
+		java.io.File file = new java.io.File("Test upload");
+		if(! file.exists())
+			file.createNewFile();
+		File newFile = drive.uploadFile("text/plain", "Uploaded by B4D", file);
+		Assert.assertNotNull(newFile);
+		file.delete();
+		drive.removeFile(newFile.getId());
+	}
+	
+	@Test
+	public void downloadFile() throws IOException {
+		java.io.File file = drive.downloadFile("1BEnsmHu3EACmxvBlizY1c_PWpp9DQsxz", "Downloaded by B4D");
+		Assert.assertNotNull(file);
+	}
+
+	  /************/
+	 /** FOLDER **/
+	/************/
+	
+	@Test
+	public void createFolder() throws IOException {
+		File folder = drive.createFolder("Dossier test");
+		Assert.assertNotNull(folder);
+		drive.removeFolder(folder.getId());
+	}
+	
+	@Test
+	public void removeFolder() throws IOException {
+		File folder = drive.createFolder("Dossier test");
+		Assert.assertNotNull(folder);
+		drive.removeFolder(folder.getId());
+	}
+	
+	  /****************/
+	 /** NAVIGATION **/
+	/****************/
+
+	@Test
+	public void stepInto() throws IOException {
+		File folder = drive.createFolder("Dossier de test");
+		drive.stepInto(folder.getId());
+		createFile();
+		stepBack();
+		listAll();
+	}
+
+	@Test
+	public void stepBack() {
+		drive.stepBack();
 	}
 }

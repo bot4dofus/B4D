@@ -2,6 +2,7 @@ package fr.B4D.google;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,8 +10,16 @@ import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.sheets.v4.Sheets;
-import com.google.api.services.sheets.v4.model.Spreadsheet;
-import com.google.api.services.sheets.v4.model.SpreadsheetProperties;
+import com.google.api.services.sheets.v4.model.AddSheetRequest;
+import com.google.api.services.sheets.v4.model.BatchUpdateSpreadsheetRequest;
+import com.google.api.services.sheets.v4.model.BatchUpdateSpreadsheetResponse;
+import com.google.api.services.sheets.v4.model.ClearValuesRequest;
+import com.google.api.services.sheets.v4.model.ClearValuesResponse;
+import com.google.api.services.sheets.v4.model.CopySheetToAnotherSpreadsheetRequest;
+import com.google.api.services.sheets.v4.model.DeleteSheetRequest;
+import com.google.api.services.sheets.v4.model.Request;
+import com.google.api.services.sheets.v4.model.Sheet;
+import com.google.api.services.sheets.v4.model.SheetProperties;
 import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
@@ -23,7 +32,7 @@ public class GoogleSheet {
     public GoogleSheet(String id) throws IOException, GeneralSecurityException {
     	this.id = id;
     	
-        Credential credential = GoogleAuthorizeUtil.authorize();
+        Credential credential = GoogleAuthorize.authorize();
         sheets = new Sheets.Builder(
           GoogleNetHttpTransport.newTrustedTransport(), 
           JacksonFactory.getDefaultInstance(), credential)
@@ -50,17 +59,42 @@ public class GoogleSheet {
 				.getValues();
 	}
 	
-	public List<List<Object>> clear(String string) {
+	public ClearValuesResponse clear(String range) throws IOException {
+		return sheets.spreadsheets().values()
+				.clear(id, range, new ClearValuesRequest())
+				.execute();
+	}
+	
+	public List<Sheet> listSheets() throws IOException {
+		return sheets.spreadsheets().get(id).execute().getSheets();
+	}
+	
+	public BatchUpdateSpreadsheetResponse createSheet(String name) throws IOException {
+		AddSheetRequest addSheetRequest = new AddSheetRequest().setProperties(new SheetProperties().setTitle(name));
+		Request request = new Request().setAddSheet(addSheetRequest);
+		List<Request> requests = new ArrayList<>();
+		requests.add(request);
+		BatchUpdateSpreadsheetRequest requestBody = new BatchUpdateSpreadsheetRequest().setRequests(requests);
+		return sheets.spreadsheets().batchUpdate(id, requestBody).execute();
+	}
+	
+	public SheetProperties copySheet(Integer sheetId, String name) throws IOException {
+		CopySheetToAnotherSpreadsheetRequest requestBody = new CopySheetToAnotherSpreadsheetRequest().setDestinationSpreadsheetId(id);
+	    return sheets.spreadsheets().sheets().copyTo(id, sheetId, requestBody).execute().setTitle(name);
+	}
+	
+	public BatchUpdateSpreadsheetResponse renameSheet(int sheetId, String name) throws IOException {
+		//TO DO
 		return null;
 	}
 	
-	public Spreadsheet addSheet(String name) throws IOException {
-		Spreadsheet spreadSheet = new Spreadsheet().setProperties(new SpreadsheetProperties().setTitle(name));
-		return sheets.spreadsheets().create(spreadSheet).execute();
-	}
-	
-	public Spreadsheet removeSheet(String sheetId) {
-		return null;
+	public BatchUpdateSpreadsheetResponse removeSheet(int sheetId) throws IOException {		
+		DeleteSheetRequest deleteSheetRequest = new DeleteSheetRequest().setSheetId(sheetId);
+		Request request = new Request().setDeleteSheet(deleteSheetRequest);
+		List<Request> requests = new ArrayList<>();
+		requests.add(request);
+		BatchUpdateSpreadsheetRequest requestBody = new BatchUpdateSpreadsheetRequest().setRequests(requests);
+		return sheets.spreadsheets().batchUpdate(id, requestBody).execute();
 	}
     
     public static String getIdFromUrl(String url) {
