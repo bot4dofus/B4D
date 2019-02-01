@@ -169,7 +169,7 @@ public class Program extends Thread implements Serializable{
 			}
 			outro();
 		} catch (CancelProgramException e) {
-			B4D.logger.debug(this, "Program canceled");
+			B4D.logger.popUp(e.getMessage());
 		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException | InterruptedException | GeneralSecurityException e){
 			B4D.logger.error(e);
 		}

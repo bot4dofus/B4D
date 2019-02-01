@@ -38,8 +38,8 @@ public final class Loto {
 
 	
 	private static final String DRIVE_ID = "1HLj2cvMY3FO1XOlNJo1KUCamKRlfyaQj";
-	private static final String PROGRESS_ID = "1mbd5PLIHMfOi3f3gHsTcSiDDEzawWGZv";
-	private static final String ARCHIVE_ID = "1FQ8WRwAO5ms-tyv7GOk_U7o3sFw77z-n";
+	private static final String PROGRESS_ID = "1Vg6ouB29LwcbndBMT0YH18gs_yyNVwYZ";
+	private static final String ARCHIVE_ID = "194JnsPRtE8Mz6B-gPYHVBNiPwqy2KWLu";
 	private static final String MODEL_SHEET_ID = "1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw";
 	
 	private static String rangeTitle = "A1";
@@ -76,7 +76,7 @@ public final class Loto {
 				String title = "Tirage n°" + number + " - En cours";
 				
 				//Create the image folder
-				imageFolder = drive.createFolder(title);
+				imageFolder = drive.createFolder("Images");
 				
 				//Copy the original sheet and moved it
 				File file = drive.copyFile(MODEL_SHEET_ID, title);
@@ -93,7 +93,7 @@ public final class Loto {
 			}
 			else {
 				//Get the image folder
-				File imageFolder = drive.listFiles().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
+				File imageFolder = drive.listFolders().stream().filter(f -> f.getName().contains("Images")).findFirst().orElse(null);
 				if(imageFolder == null)
 					throw new CancelProgramException("Impossible de trouver le dossier image");
 				
