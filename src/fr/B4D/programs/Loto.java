@@ -35,9 +35,12 @@ public final class Loto {
 	
 	private static String validationMessage = "Tu confirmes parier pour le prix de " + ticketPrice + " kamas sur le sort ";
 	private static String tkanksMessage = "Merci d'avoir parié ! :) Tu peux consulter le tirage en cours et les tirages archivés via ce lien : https://urlz.fr/4EHx";
+
 	
 	private static final String DRIVE_ID = "1HLj2cvMY3FO1XOlNJo1KUCamKRlfyaQj";
-	private static final String SHEET_ID = "1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw";
+	private static final String PROGRESS_ID = "1mbd5PLIHMfOi3f3gHsTcSiDDEzawWGZv";
+	private static final String ARCHIVE_ID = "1FQ8WRwAO5ms-tyv7GOk_U7o3sFw77z-n";
+	private static final String MODEL_SHEET_ID = "1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw";
 	
 	private static String rangeTitle = "A1";
 	private static String rangeDate = "A11";
@@ -49,6 +52,7 @@ public final class Loto {
 	
 	public static ProgramInterface loto = new ProgramInterface() {
 
+		private File imageFolder;
 		private GoogleDrive drive;
 		private GoogleSheet sheet;
 		
@@ -56,7 +60,10 @@ public final class Loto {
 			int response = JOptionPane.showConfirmDialog(null, "Voulez vous créer un nouveau tirage ?\n- Oui : Je créer un nouveau tirage\n- Non : Je saisie l'url d'un tirage existant", "Tirage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if(response == JOptionPane.CANCEL_OPTION)
 				throw new CancelProgramException();
-			else if (response == JOptionPane.YES_OPTION) {
+
+			drive = new GoogleDrive(DRIVE_ID);
+			
+			if (response == JOptionPane.YES_OPTION) {
 				String number = (String)JOptionPane.showInputDialog(null, "Numéro du tirage :", null);
 				String date = (String)JOptionPane.showInputDialog(null, "Date :", null);
 				String hour = (String)JOptionPane.showInputDialog(null, "Heure :", null);
@@ -65,11 +72,19 @@ public final class Loto {
 				
 				if(number == null || date == null || hour == null || position == null)
 					throw new CancelProgramException();
+
+				String title = "Tirage n°" + number + " - En cours";
 				
-				drive = new GoogleDrive(DRIVE_ID);
-				File file = drive.copyFile(SHEET_ID, "Tirage du " + date);
+				//Create the image folder
+				imageFolder = drive.createFolder(title);
+				
+				//Copy the original sheet and moved it
+				File file = drive.copyFile(MODEL_SHEET_ID, title);
+				file = drive.moveFile(file.getId(), PROGRESS_ID);
+				
+				//Get the sheet
 				sheet = new GoogleSheet(file.getId());
-				sheet.write(Arrays.asList(Arrays.asList("Tirage n°" + number + " - En cours")), rangeTitle);
+				sheet.write(Arrays.asList(Arrays.asList(title)), rangeTitle);
 				sheet.write(Arrays.asList(Arrays.asList(date)), rangeDate);
 				sheet.write(Arrays.asList(Arrays.asList(hour)), rangeHour);
 				sheet.write(Arrays.asList(Arrays.asList(position)), rangePosition);
@@ -77,10 +92,20 @@ public final class Loto {
 				sheet.write(Arrays.asList(Arrays.asList(person.getPseudo())), rangeOrganizer);
 			}
 			else {
-				String url = (String)JOptionPane.showInputDialog(null, "Url du google sheet :", null);
-				if(url == null)
-					throw new CancelProgramException();
-				sheet = new GoogleSheet(GoogleSheet.getIdFromUrl(url));
+				//Get the image folder
+				File imageFolder = drive.listFiles().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
+				if(imageFolder == null)
+					throw new CancelProgramException("Impossible de trouver le dossier image");
+				
+				//Search the sheet
+				drive.stepInto(PROGRESS_ID);
+				File sheetFile = drive.listFiles().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
+				if(sheetFile == null)
+					throw new CancelProgramException("Impossible de trouver le google sheet du tirage en cours");
+
+				//Get the sheet
+				sheet = new GoogleSheet(sheetFile.getId());
+				drive.stepBack();
 			}
 		}
 		
@@ -112,7 +137,9 @@ public final class Loto {
 				
 				java.io.File file = java.io.File.createTempFile("b4d-temp", "png");
 			    ImageIO.write(image, "png", file);
-				drive.uploadFile("image/png", name, file);
+			    
+				File uploadedImage = drive.uploadFile("image/png", name, file);
+				drive.moveFile(uploadedImage.getId(), imageFolder.getId());
 				
 				List<List<Object>> result = sheet.read(rangeData);
 				int nb = 20 + result.size();

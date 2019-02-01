@@ -6,6 +6,11 @@ public class CancelProgramException extends Exception{
 
 	public CancelProgramException()
     {
-    	super("Program canceled");
+    	super();
+    }
+	
+	public CancelProgramException(String message)
+    {
+    	super(message);
     }
 }
