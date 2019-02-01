@@ -123,7 +123,7 @@ public class Exchange implements Serializable{
 	 * @return
 	 * @throws B4DExchangeCanceled si 
 	 */
-	public Image exchange(String validationMessage) throws B4DExchangeCanceled, AWTException, TesseractException, NumberFormatException, IOException {
+	public BufferedImage exchange(String validationMessage) throws B4DExchangeCanceled, AWTException, TesseractException, NumberFormatException, IOException {
 		B4D.logger.debug(this, "Début de l'échange");
 		Message message;
 		
