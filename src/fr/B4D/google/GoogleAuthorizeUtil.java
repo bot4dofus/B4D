@@ -1,4 +1,4 @@
-package fr.B4D.google.sheet;
+package fr.B4D.google;
 
 import java.io.IOException;
 import java.io.InputStream;

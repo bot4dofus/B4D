@@ -9,64 +9,61 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.api.services.sheets.v4.Sheets;
-import com.google.api.services.sheets.v4.model.BatchGetValuesResponse;
 import com.google.api.services.sheets.v4.model.Spreadsheet;
-import com.google.api.services.sheets.v4.model.SpreadsheetProperties;
 import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
-import com.google.api.services.sheets.v4.model.ValueRange;
 
-import fr.B4D.google.sheet.SheetsServiceUtil;
+import fr.B4D.google.GoogleSheet;
 
 // https://www.baeldung.com/google-sheets-java-client
 
 public class GoogleSheetTest {
-	private static Sheets sheetsService;
+	private static GoogleSheet sheet;
 	private static String SHEET_URL = "https://docs.google.com/spreadsheets/d/1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw/edit#gid=987770465";
-	private static String SPREADSHEET_ID = "1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw";
+	private static String SHEET_ID = "1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw";
+	
+	private String id;
 	
 	@Before
 	public void setup() throws GeneralSecurityException, IOException {
-		sheetsService = SheetsServiceUtil.getSheetsService();
+		sheet = new GoogleSheet(SHEET_ID);
 	}
 	
 	@Test
-	public void parseUrl() {
-		Assert.assertEquals(SPREADSHEET_ID, SheetsServiceUtil.getIdFromUrl(SHEET_URL));
+	public void getId() throws IOException {
+		String id = GoogleSheet.getIdFromUrl(SHEET_URL);
+		Assert.assertEquals(SHEET_ID, id);
 	}
 	
 	@Test
 	public void write() throws IOException {
-		ValueRange body = new ValueRange()
-				.setValues(Arrays.asList(
+		List<List<Object>> content = Arrays.asList(
 						Arrays.asList("Solwe", "50 Tacle"),
-						Arrays.asList("Zaak", "2 P.A.")));
-		UpdateValuesResponse result = sheetsService.spreadsheets().values()
-				.update(SPREADSHEET_ID, "B20", body)
-				.setValueInputOption("RAW")
-				.execute();
+						Arrays.asList("Zaak", "2 P.A."));
+		UpdateValuesResponse result = sheet.write(content, "B20");
 		System.out.println(result);
 	}
 
 	@Test
-	public void append() throws IOException {
-		
-	}
-
-	@Test
 	public void read() throws IOException {
-		List<String> ranges = Arrays.asList("B20:C1000");
-		BatchGetValuesResponse readResult = sheetsService.spreadsheets().values()
-				.batchGet(SPREADSHEET_ID)
-				.setRanges(ranges)
-				.execute();
-		System.out.println(readResult.getValueRanges().get(0).getValues());
+		List<List<Object>> readResult = sheet.read("B20:C1000");
+		System.out.println(readResult);
 	}
-
+	
+	@Test
+	public void clear() throws IOException {
+		List<List<Object>> readResult = sheet.clear("B20:C1000");
+		System.out.println(readResult);
+	}
+	
 	@Test
 	public void addSheet() throws IOException {
-		Spreadsheet spreadSheet = new Spreadsheet().setProperties(new SpreadsheetProperties().setTitle("My Spreadsheet"));
-		Spreadsheet result = sheetsService.spreadsheets().create(spreadSheet).execute();
+		Spreadsheet result = sheet.addSheet("My Spreadsheet");
+		Assert.assertNotNull(result.getSpreadsheetId());
+	}
+	
+	@Test
+	public void removeSheet() throws IOException {
+		Spreadsheet result = sheet.removeSheet(id);
 		Assert.assertNotNull(result.getSpreadsheetId());
 	}
 }
