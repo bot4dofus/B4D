@@ -29,7 +29,7 @@ public final class MessageAPI {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
-			Message message = new Message("Solwy", Channel.Private, "Salut !");
+			Message message = new Message("Solwy", Channel.PRIVATE, "Salut !");
 			message.send();
 			Dofus.chat.addPseudoFilter("Solwy");
 			message = Dofus.chat.waitForMessage(60000);
@@ -44,7 +44,7 @@ public final class MessageAPI {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
-			Dofus.chat.addChannelFilter(Channel.Business);
+			Dofus.chat.addChannelFilter(Channel.BUSINESS);
 			Dofus.chat.addTextFilter("moi");
 			Dofus.chat.addChatListener(new ChatListener() {
 				public void treatMessage(Message message) {

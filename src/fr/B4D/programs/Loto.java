@@ -114,7 +114,7 @@ public final class Loto {
 			try {
 				Exchange exchange = new Exchange(ticketPrice, 0);
 				String name = exchange.waitForExchange();
-				Message message = new Message(name, Channel.Private, welcomeMessage);
+				Message message = new Message(name, Channel.PRIVATE, welcomeMessage);
 				message.send();
 				
 				String sort;

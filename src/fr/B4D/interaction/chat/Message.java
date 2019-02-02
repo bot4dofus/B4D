@@ -13,16 +13,6 @@ public class Message implements Serializable{
 	
 	private static final long serialVersionUID = 5508700695491701427L;
 
-	private final static String generalPrefix = "/s";
-	private final static String teamPrefix = "/t";
-	private final static String guildPrefix = "/g";
-	private final static String alliesPrefix = "/a";
-	private final static String groupPrefix = "/p";
-	private final static String privatePrefix = "/w";
-	private final static String kolizeumPrefix = "/k";
-	private final static String recruitmentPrefix = "/r";
-	private final static String businessPrefix = "/b";
-
 	  /**************/
 	 /** ATRIBUTS **/
 	/**************/
@@ -76,15 +66,15 @@ public class Message implements Serializable{
 	}
 	
 	public void send() {
-		if (channel == Channel.Private)
-			sendChat(getChannelPrefix(channel) + " " + pseudo + " " + text);
+		if (channel == Channel.PRIVATE)
+			sendChat(channel.getPrefix() + " " + pseudo + " " + text);
 		else
-			sendChat(getChannelPrefix(channel) + " " + text);
+			sendChat(channel.getPrefix() + " " + text);
 	}
 	
 	public void reply(String text) {
-		if(channel == Channel.Business || channel == Channel.Recruitment)
-			channel = Channel.Private;
+		if(channel == Channel.BUSINESS || channel == Channel.RECRUITMENT)
+			channel = Channel.PRIVATE;
 		this.text = text;
 		send();
 	}
@@ -112,43 +102,18 @@ public class Message implements Serializable{
 	 /** STATIC **/
 	/************/
 	
-	public static String getChannelPrefix(Channel channel) {
-		switch(channel) {
-			case General:
-				return generalPrefix;
-			case Team:
-				return teamPrefix;
-			case Guild:
-				return guildPrefix;
-			case Allies:
-				return alliesPrefix;
-			case Group:
-				return groupPrefix;
-			case Private:
-				return privatePrefix;
-			case Kolizeum:
-				return kolizeumPrefix;
-			case Recruitment:
-				return recruitmentPrefix;
-			case Business:
-				return businessPrefix;
-			default:
-				return null;
-		}
-	}
-	
 	public static Channel getChannel(byte data) throws UnknowChannelException {
 		switch(Byte.toUnsignedInt(data)) {
 			case(0):
-				return Channel.General;
+				return Channel.GENERAL;
 			case(4):
-				return Channel.Team;
+				return Channel.TEAM;
 			case(0x09):
-				return Channel.Private;
+				return Channel.PRIVATE;
 			case(5):
-				return Channel.Business;
+				return Channel.BUSINESS;
 			case(6):
-				return Channel.Recruitment;
+				return Channel.RECRUITMENT;
 			default:
 				throw new UnknowChannelException(Byte.toUnsignedInt(data));
 		}

@@ -2,7 +2,6 @@ package fr.B4D.interaction;
 
 import java.awt.AWTException;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
@@ -133,7 +132,7 @@ public class Exchange implements Serializable{
 		}
 		
 		do {
-			message = new Message(name, Channel.Private, "Entre " + kamasIn + " kamas et valide");
+			message = new Message(name, Channel.PRIVATE, "Entre " + kamasIn + " kamas et valide");
 			message.send();
 			
 			do {
@@ -142,7 +141,7 @@ public class Exchange implements Serializable{
 			}while(!isValided());
 			
 			do {
-				message = new Message(name, Channel.Private, validationMessage);
+				message = new Message(name, Channel.PRIVATE, validationMessage);
 				message.send();
 				message = message.waitForReply(timeout);
 				

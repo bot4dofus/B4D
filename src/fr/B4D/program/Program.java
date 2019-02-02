@@ -11,13 +11,13 @@ import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.dofus.Dofus;
+import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.programs.Loto;
 import fr.B4D.programs.tutorials.ExchangeAPI;
 import fr.B4D.programs.tutorials.MessageAPI;
 import fr.B4D.programs.tutorials.TransportAPI;
 import fr.B4D.transport.B4DWrongPosition;
-import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.TesseractException;
 
 public class Program extends Thread implements Serializable{
@@ -28,7 +28,7 @@ public class Program extends Thread implements Serializable{
 	 /** COLLECTION **/
 	/****************/
 	
-	public final static Program loto = new Program(Place.Astrub, Category.Jeux, "Argent", "Loto", Loto.loto);
+	public final static Program loto = new Program(Place.Astrub, Category.Jeux, "Argent", "Loto", Loto.loto, Channel.PRIVATE);
 	
 	/** TUTORIALS **/
 
@@ -48,12 +48,14 @@ public class Program extends Thread implements Serializable{
 	 /** ATTRIBUTS **/
 	/***************/
 	
-	private Person person;
 	
 	private Place place;
 	private Category category;
 	private String subCategory;
 	private String programName;
+	
+	private Channel displayedChannel;
+	//private Status status;
 
 	private ProgramInterface program;
 	
@@ -63,19 +65,25 @@ public class Program extends Thread implements Serializable{
 	private boolean hdvWhenFull;
 	private boolean bankWhenFull;
 	private boolean stopWhenFull;
+
+	private Person person;
 	
 	  /******************/
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
-	public Program(Place place, Category category, String subCategory, String programName, ProgramInterface program) {
+	public Program(Place place, Category category, String subCategory, String programName, ProgramInterface program, Channel displayedChannel) {
 		this.place = place;
 		this.category = category;
 		this.subCategory = subCategory;
 		this.programName = programName;
+		this.displayedChannel = displayedChannel;
 		this.program = program;
 		this.maxCycles = -1;
 		this.maxDeposits = -1;
+	}
+	public Program(Place place, Category category, String subCategory, String programName, ProgramInterface program) {
+		this(place, category, subCategory, programName, program, null);
 	}
 	
 	  /************************/
@@ -156,7 +164,7 @@ public class Program extends Thread implements Serializable{
 	
 	public void startWith(Person person) {
 		this.person = person;
-		start();
+		run();
 	}
 	
 	public void run() {
@@ -180,10 +188,9 @@ public class Program extends Thread implements Serializable{
 			B4D.screen.focusDofus();
 			Message.sendChat("/clear");
 			
-			if(B4D.screen.getPixelColor(new PointF(0.28, 0.99)).getGreen() > 200){	//Le mode solo n'est pas activé
-	            B4D.mouse.leftClick(new PointF(0.28, 0.99), false);                	//Clic sur status
-	            B4D.mouse.leftClick(new PointF(0.3, 0.976), false);                	//Clic sur solo
-			}
+			if(displayedChannel != null)
+				Channel.displayChannels(displayedChannel);
+			//status.setStatus();
 			
 			person.setPosition(Dofus.world.getPosition());	//Récupère la position actuelle
 		}
