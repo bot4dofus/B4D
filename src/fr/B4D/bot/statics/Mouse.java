@@ -70,27 +70,27 @@ public final class Mouse {
 	/************/
 	
 	//Point
-	public void Place(Point position, int millis) throws AWTException {
+	public void place(Point position, int millis) throws AWTException {
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 		B4DWait.wait(millis);
 	}
-	public void Place(Point position) throws AWTException {
-		Place(position, 0);
+	public void place(Point position) throws AWTException {
+		place(position, 0);
 	}
 	//PointF
-	public void Place(PointF position, int millis) throws AWTException {
-		Place(B4D.converter.pointFToPoint(position), millis);
+	public void place(PointF position, int millis) throws AWTException {
+		place(B4D.converter.pointFToPoint(position), millis);
 	}
-	public void Place(PointF position) throws AWTException {
-		Place(B4D.converter.pointFToPoint(position), 0);
+	public void place(PointF position) throws AWTException {
+		place(B4D.converter.pointFToPoint(position), 0);
 	}
 	//PointD
 	public void Place(PointD position, int millis) throws AWTException {
-		Place(B4D.converter.pointDToPoint(position), millis);
+		place(B4D.converter.pointDToPoint(position), millis);
 	}
 	public void Place(PointD position) throws AWTException {
-		Place(B4D.converter.pointDToPoint(position), 0);
+		place(B4D.converter.pointDToPoint(position), 0);
 	}
 	
 	  /******************/
