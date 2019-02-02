@@ -11,21 +11,26 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.ChatListener;
 import fr.B4D.interaction.chat.Message;
+import fr.B4D.program.Category;
+import fr.B4D.program.Place;
+import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.transport.B4DWrongPosition;
 import net.sourceforge.tess4j.TesseractException;
 
 public final class MessageAPI {	
-	public static ProgramInterface tutorial1 = new ProgramInterface() {
+	
+	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
 			Message message = Dofus.chat.waitForMessage(0);
 			B4D.logger.popUp("Message de " + message.getPseudo() + "(" + message.getChannel() + ") : " + message.getText());
 		}
-	};
+	});
 	
-	public static ProgramInterface tutorial2 = new ProgramInterface() {
+
+	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
@@ -38,9 +43,9 @@ public final class MessageAPI {
 			else	
 				B4D.logger.popUp("Le temps d'attente de 1 min est dépassé.");				
 		}
-	};
-	
-	public static ProgramInterface tutorial3 = new ProgramInterface() {
+	});
+
+	public final static Program TUTORIAL3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
@@ -53,5 +58,5 @@ public final class MessageAPI {
 			});
 			Dofus.chat.read(3);
 		}
-	};
+	});
 }

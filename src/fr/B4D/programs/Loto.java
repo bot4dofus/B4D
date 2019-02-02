@@ -22,6 +22,9 @@ import fr.B4D.interaction.Exchange;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.Category;
+import fr.B4D.program.Place;
+import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -50,7 +53,7 @@ public final class Loto {
 	private static String rangeOrganizer = "B17";
 	private static String rangeData = "B20:B1000";
 	
-	public static ProgramInterface loto = new ProgramInterface() {
+	public final static Program LOTO = new Program(Place.Astrub, Category.Jeux, "Argent", "Loto", new Channel[] {Channel.PRIVATE}, new ProgramInterface() {
 
 		private File imageFolder;
 		private GoogleDrive drive;
@@ -162,5 +165,5 @@ public final class Loto {
 		private String parseSort(String message) {
 			return "Roulette";
 		}
-	};
+	});
 }

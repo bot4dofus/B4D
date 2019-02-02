@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
@@ -28,18 +30,6 @@ public class Program extends Thread implements Serializable{
 	 /** COLLECTION **/
 	/****************/
 	
-	public final static Program loto = new Program(Place.Astrub, Category.Jeux, "Argent", "Loto", Loto.loto, Channel.PRIVATE);
-	
-	/** TUTORIALS **/
-
-	public final static Program messageAPItutorial1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", MessageAPI.tutorial1);
-	public final static Program messageAPItutorial2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", MessageAPI.tutorial2);
-	public final static Program messageAPItutorial3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", MessageAPI.tutorial3);
-
-	public final static Program exchangeAPItutorial1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", ExchangeAPI.tutorial1);
-	
-	public final static Program transportAPItutorial1 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 1", TransportAPI.tutorial1);
-	public final static Program transportAPItutorial2 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 2", TransportAPI.tutorial2);
 	
 	  /***************/
 	 /** ATTRIBUTS **/
@@ -51,7 +41,7 @@ public class Program extends Thread implements Serializable{
 	private String subCategory;
 	private String programName;
 	
-	private Channel displayedChannel;
+	private List<Channel> displayedChannels;
 	//private Status status;
 
 	private ProgramInterface program;
@@ -69,18 +59,19 @@ public class Program extends Thread implements Serializable{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
-	public Program(Place place, Category category, String subCategory, String programName, ProgramInterface program, Channel displayedChannel) {
+	public Program(Place place, Category category, String subCategory, String programName, Channel[] displayedChannels, ProgramInterface program) {
 		this.place = place;
 		this.category = category;
 		this.subCategory = subCategory;
 		this.programName = programName;
-		this.displayedChannel = displayedChannel;
+		
+		if(displayedChannels == null)
+			this.displayedChannels = null;
+		else
+			this.displayedChannels = Arrays.asList(displayedChannels);
 		this.program = program;
 		this.maxCycles = -1;
 		this.maxDeposits = -1;
-	}
-	public Program(Place place, Category category, String subCategory, String programName, ProgramInterface program) {
-		this(place, category, subCategory, programName, program, null);
 	}
 	
 	  /************************/
@@ -90,18 +81,18 @@ public class Program extends Thread implements Serializable{
   public final static ArrayList<Program> getAll(){
   	ArrayList<Program> programs = new ArrayList<Program>();
   	
-  	programs.add(loto);
+  	programs.add(Loto.LOTO);
 
 	/** TUTORIALS **/
   	
-  	programs.add(messageAPItutorial1);
-  	programs.add(messageAPItutorial2);
-  	programs.add(messageAPItutorial3);
+  	programs.add(MessageAPI.TUTORIAL1);
+  	programs.add(MessageAPI.TUTORIAL2);
+  	programs.add(MessageAPI.TUTORIAL3);
   	
-  	programs.add(exchangeAPItutorial1);
+  	programs.add(ExchangeAPI.TUTORIAL1);
   	
-  	programs.add(transportAPItutorial1);
-  	programs.add(transportAPItutorial2);
+  	programs.add(TransportAPI.TUTORIAL1);
+  	programs.add(TransportAPI.TUTORIAL2);
     return programs;
   }
 	
@@ -182,8 +173,8 @@ public class Program extends Thread implements Serializable{
 			B4D.screen.focusDofus();
 			Message.sendChat("/clear");
 			
-			if(displayedChannel != null)
-				Channel.displayChannels(displayedChannel);
+			if(displayedChannels != null)
+				Channel.displayChannels(displayedChannels);
 			//status.setStatus();
 			
 			person.setPosition(Dofus.world.getPosition());	//Récupère la position actuelle
