@@ -23,15 +23,7 @@ public final class TransportAPI {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition {
-			B4D.logger.popUp("Le programme de test marche correctement.");
-		}
-	};
-
-	public static ProgramInterface tutorial3 = new ProgramInterface() {
-		public void intro(Person person) {}
-		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition {
-			
+			person.goTo(person.getBontaPotion().getDestination());
 		}
 	};
 }

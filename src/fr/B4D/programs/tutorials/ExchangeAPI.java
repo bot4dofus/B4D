@@ -20,30 +20,14 @@ public final class ExchangeAPI {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
-			Exchange exchange = new Exchange(2,1);
+			Exchange exchange = new Exchange(100000,0);
 			String name = exchange.waitForExchange();
 			try {
-				Image proof = exchange.exchange("T'es sur ?");
+				Image proof = exchange.exchange("T'es sur de ce don ?");
 				B4D.logger.popUp("Echange avec " + name + " effectué. Voici la preuve " + proof);
 			} catch (B4DExchangeCanceled e) {
 				B4D.logger.popUp("L'échange à été annulé");
 			}
-		}
-	};
-	
-	public static ProgramInterface tutorial2 = new ProgramInterface() {
-		public void intro(Person person) {}
-		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
-			
-		}
-	};
-	
-	public static ProgramInterface tutorial3 = new ProgramInterface() {
-		public void intro(Person person) {}
-		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
-			
 		}
 	};
 }
