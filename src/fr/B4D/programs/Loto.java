@@ -34,7 +34,7 @@ public final class Loto {
 	private static long timeout = 30000;
 	
 	private static String validationMessage = "Tu confirmes parier pour le prix de " + ticketPrice + " kamas sur le sort ";
-	private static String tkanksMessage = "Merci d'avoir parié ! :) Tu peux consulter le tirage en cours et les tirages archivés via ce lien : https://urlz.fr/4EHx";
+	private static String tkanksMessage = "Merci d'avoir parié ! :) Tu peux consulter le tirage en cours et les tirages archivés via ce lien : https://urlz.fr/8O4Y";
 
 	
 	private static final String DRIVE_ID = "1HLj2cvMY3FO1XOlNJo1KUCamKRlfyaQj";
@@ -57,7 +57,7 @@ public final class Loto {
 		private GoogleSheet sheet;
 		
 		public void intro(Person person) throws IOException, GeneralSecurityException, CancelProgramException {			
-			int response = JOptionPane.showConfirmDialog(null, "Voulez vous créer un nouveau tirage ?\n- Oui : Je créer un nouveau tirage\n- Non : Je saisie l'url d'un tirage existant", "Tirage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+			int response = JOptionPane.showConfirmDialog(null, "Voulez vous créer un nouveau tirage ?\n- Oui : Je créer un nouveau tirage\n- Non : Reprendre le tirage en cours", "Tirage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if(response == JOptionPane.CANCEL_OPTION)
 				throw new CancelProgramException();
 
@@ -74,9 +74,10 @@ public final class Loto {
 					throw new CancelProgramException();
 
 				String title = "Tirage n°" + number + " - En cours";
+				String image_folder = "Tirage n°" + number + " - Images";
 				
 				//Create the image folder
-				imageFolder = drive.createFolder("Images");
+				imageFolder = drive.createFolder(image_folder);
 				
 				//Copy the original sheet and moved it
 				File file = drive.copyFile(MODEL_SHEET_ID, title);
@@ -93,7 +94,7 @@ public final class Loto {
 			}
 			else {
 				//Get the image folder
-				File imageFolder = drive.listFolders().stream().filter(f -> f.getName().contains("Images")).findFirst().orElse(null);
+				File imageFolder = drive.listFolders().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
 				if(imageFolder == null)
 					throw new CancelProgramException("Impossible de trouver le dossier image");
 				
@@ -142,7 +143,9 @@ public final class Loto {
 				drive.moveFile(uploadedImage.getId(), imageFolder.getId());
 				
 				List<List<Object>> result = sheet.read(rangeData);
-				int nb = 20 + result.size();
+				int nb = 20;
+				if(result != null)
+					nb += result.size();
 				
 				List<List<Object>> content = Arrays.asList(Arrays.asList(name, sort));
 				sheet.write(content, "B"+nb);
