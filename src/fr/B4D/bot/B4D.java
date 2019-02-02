@@ -41,7 +41,6 @@ public final class B4D{
 	
 	private Configuration configuration;
 	private Team team;
-	private ArrayList<Program> programs;
 	
 	/*************/
 	/** BUILDER **/
@@ -158,8 +157,7 @@ public final class B4D{
 			keyboardListener.setProgram(program);
 			
 			program.startWith(person);
-			program.join();
-		} catch (InvalidFilterException | InterruptedException e) {
+		} catch (InvalidFilterException e) {
 			B4D.logger.error(e);
 		}
 	}
