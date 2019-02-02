@@ -4,13 +4,12 @@ public class CancelProgramException extends Exception{
 
 	private static final long serialVersionUID = 6971038782335799708L;
 
-	public CancelProgramException()
-    {
-    	super();
+	@Deprecated
+	public CancelProgramException() {
+    	this("Raison Inconnu");
     }
 	
-	public CancelProgramException(String message)
-    {
-    	super(message);
+	public CancelProgramException(String message) {
+    	super("Le programme a été intérompu pour la raison suivante :\n" + message);
     }
 }

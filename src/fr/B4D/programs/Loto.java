@@ -59,7 +59,7 @@ public final class Loto {
 		public void intro(Person person) throws IOException, GeneralSecurityException, CancelProgramException {			
 			int response = JOptionPane.showConfirmDialog(null, "Voulez vous créer un nouveau tirage ?\n- Oui : Je créer un nouveau tirage\n- Non : Reprendre le tirage en cours", "Tirage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if(response == JOptionPane.CANCEL_OPTION)
-				throw new CancelProgramException();
+				throw new CancelProgramException("Vous avez annulé le programme.");
 
 			drive = new GoogleDrive(DRIVE_ID);
 			
@@ -71,7 +71,7 @@ public final class Loto {
 				String price = (String)JOptionPane.showInputDialog(null, "Prix du ticket :", null);
 				
 				if(number == null || date == null || hour == null || position == null)
-					throw new CancelProgramException();
+					throw new CancelProgramException("Tous les champs doivent petre remplis.");
 
 				String title = "Tirage n°" + number + " - En cours";
 				String image_folder = "Tirage n°" + number + " - Images";
@@ -96,13 +96,13 @@ public final class Loto {
 				//Get the image folder
 				File imageFolder = drive.listFolders().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
 				if(imageFolder == null)
-					throw new CancelProgramException("Impossible de trouver le dossier image");
+					throw new CancelProgramException("Impossible de trouver le dossier image.");
 				
 				//Search the sheet
 				drive.stepInto(PROGRESS_ID);
 				File sheetFile = drive.listFiles().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
 				if(sheetFile == null)
-					throw new CancelProgramException("Impossible de trouver le google sheet du tirage en cours");
+					throw new CancelProgramException("Impossible de trouver le google sheet du tirage en cours.");
 
 				//Get the sheet
 				sheet = new GoogleSheet(sheetFile.getId());
