@@ -3,6 +3,7 @@ package fr.B4D.interaction.chat;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,9 +12,11 @@ import fr.B4D.bot.B4D;
 import fr.B4D.modules.B4DWait;
 import fr.B4D.utils.PointF;
 
-public class Channel {
+public class Channel implements Serializable{
 	
-	  /****************/
+	private static final long serialVersionUID = 4872542387501307482L;
+	
+	/****************/
 	 /** COLLECTION **/
 	/****************/
 	
@@ -104,7 +107,7 @@ public class Channel {
 	public static void displayChannels(Channel...channel) throws AWTException {
 		displayChannels(Arrays.asList(channel));
 	}
-	private static void displayChannels(List<Channel> channels) throws AWTException {
+	public static void displayChannels(List<Channel> channels) throws AWTException {
 		B4D.mouse.leftClick(new PointF(0.0052, 0.991), false, 200);		//Ouvre le menu du chat
 		List<PointF> matchs = B4D.screen.searchPixels(new PointF(0.1339, 0.7285), new PointF(0.1339, 0.985), new Color(100, 100, 100), new Color(255, 255, 255));
 		PointF arrowPosition = matchs.get(matchs.size() - 1);
