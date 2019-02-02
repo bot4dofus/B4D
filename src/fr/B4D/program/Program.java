@@ -37,12 +37,9 @@ public class Program extends Thread implements Serializable{
 	public final static Program messageAPItutorial3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", MessageAPI.tutorial3);
 
 	public final static Program exchangeAPItutorial1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", ExchangeAPI.tutorial1);
-	public final static Program exchangeAPItutorial2 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 2", ExchangeAPI.tutorial2);
-	public final static Program exchangeAPItutorial3 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 3", ExchangeAPI.tutorial3);
 	
 	public final static Program transportAPItutorial1 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 1", TransportAPI.tutorial1);
 	public final static Program transportAPItutorial2 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 2", TransportAPI.tutorial2);
-	public final static Program transportAPItutorial3 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 3", TransportAPI.tutorial3);
 	
 	  /***************/
 	 /** ATTRIBUTS **/
@@ -102,12 +99,9 @@ public class Program extends Thread implements Serializable{
   	programs.add(messageAPItutorial3);
   	
   	programs.add(exchangeAPItutorial1);
-  	programs.add(exchangeAPItutorial2);
-  	programs.add(exchangeAPItutorial3);
   	
   	programs.add(transportAPItutorial1);
   	programs.add(transportAPItutorial2);
-  	programs.add(transportAPItutorial3);
     return programs;
   }
 	
