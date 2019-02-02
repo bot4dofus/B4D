@@ -32,14 +32,13 @@ public final class Loto {
 	private static int ticketPrice = 1;
 	private static String welcomeMessage = "Bonjour, pour avoir plus d'infos sur le règlement de la roulette merci de consulter ce lien : https://urlz.fr/8g6H";
 	private static String questionMessage = "Sur quel sort veux-tu parrier ?";
-	private static String exchangeMessage = "Le prix du pari est actuellement de " + ticketPrice + " kamas. Il suffit de valider pour acheter un ticket. Pour éviter toute triche, il n'est pas possible d'acheter plusieurs tickets.";
+	private static String exchangeMessage = "Le prix du pari est actuellement de %s kamas. Il suffit de valider pour acheter un ticket. Pour éviter toute triche, il n'est pas possible d'acheter plusieurs tickets.";
 	
 	private static long timeout = 30000;
 	
-	private static String validationMessage = "Tu confirmes parier pour le prix de " + ticketPrice + " kamas sur le sort ";
+	private static String validationMessage = "Tu confirmes parier pour le prix de %s kamas sur le sort %s ? (%s)";
 	private static String tkanksMessage = "Merci d'avoir parié ! :) Tu peux consulter le tirage en cours et les tirages archivés via ce lien : https://urlz.fr/8O4Y";
 
-	
 	private static final String DRIVE_ID = "1HLj2cvMY3FO1XOlNJo1KUCamKRlfyaQj";
 	private static final String PROGRESS_ID = "1Vg6ouB29LwcbndBMT0YH18gs_yyNVwYZ";
 	private static final String ARCHIVE_ID = "194JnsPRtE8Mz6B-gPYHVBNiPwqy2KWLu";
@@ -63,7 +62,7 @@ public final class Loto {
 			int response = JOptionPane.showConfirmDialog(null, "Voulez vous créer un nouveau tirage ?\n- Oui : Je créer un nouveau tirage\n- Non : Reprendre le tirage en cours", "Tirage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 			if(response == JOptionPane.CANCEL_OPTION)
 				throw new CancelProgramException("Vous avez annulé le programme.");
-
+			
 			drive = new GoogleDrive(DRIVE_ID);
 			
 			if (response == JOptionPane.YES_OPTION) {
@@ -131,12 +130,12 @@ public final class Loto {
 					sort = parseSort(message.getText());
 				}while(sort == null);
 
-				message.reply(exchangeMessage);
+				message.reply(String.format(exchangeMessage, ticketPrice));
 				
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("mm:HH dd/MM/yyyy");
 				LocalDateTime date = LocalDateTime.now();
 				
-				BufferedImage image = exchange.exchange(validationMessage + sort + " ? (" + formatter.format(date) + ")");
+				BufferedImage image = exchange.exchange(String.format(validationMessage, sort, formatter.format(date)));
 				message.reply(tkanksMessage);
 				
 				java.io.File file = java.io.File.createTempFile("b4d-temp", "png");
