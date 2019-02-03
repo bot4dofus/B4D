@@ -7,6 +7,8 @@ import java.util.List;
 
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.dofus.Dofus;
+import fr.B4D.interaction.chat.Channel;
+import fr.B4D.interaction.chat.Message;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.B4DWrongPosition;
@@ -21,6 +23,10 @@ import fr.B4D.utils.PointF;
 public class Person implements Serializable, TransportInterface{
 
 	private static final long serialVersionUID = -3206212064770380443L;
+
+	  /***************/
+	 /** ATTRIBUTS **/
+	/***************/
 	
 	private String account;
 	private String password;
@@ -124,6 +130,28 @@ public class Person implements Serializable, TransportInterface{
 		this.position = position;
 	}
 
+	public void setPosition() throws StopProgramException, CancelProgramException {
+		Message message;
+		Dofus.chat.addPseudoFilter(pseudo);
+		do {
+			message = new Message(null, Channel.GENERAL, "%pos%");
+			message.send();
+			message = Dofus.chat.waitForMessage(1000);
+		}while(message == null);
+		
+		String text = message.getText();
+		int firstComma = text.indexOf(",");
+		int secondComma = text.indexOf(",", firstComma+1);
+		int thirdComma = text.indexOf(",", secondComma+1);
+		int end = text.indexOf("}");
+		
+		int x = Integer.parseInt(text.substring(firstComma+1, secondComma));
+		int y = Integer.parseInt(text.substring(secondComma+1, thirdComma));
+		int z = Integer.parseInt(text.substring(thirdComma+1, end));
+		
+		setPosition(new Point(x, y));
+	}
+	
 	public boolean isInventoryFull() {
 		return inventoryFull;
 	}
