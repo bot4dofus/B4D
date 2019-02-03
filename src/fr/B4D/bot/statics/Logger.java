@@ -32,7 +32,7 @@ public class Logger {
 	/**************/
 
 	private final String path = "errors.txt";
-	private final String username = "lucas.bergeron@outlook.fr";
+	private final String username = "b4d.developer@outlook.fr";
 	private final String password = "*****************";
 
 	/*************/
@@ -54,15 +54,28 @@ public class Logger {
 
 	public void error(Exception e) {
 		e.printStackTrace();
-		String message = e.getMessage() + "\n\n=====\n\nVoulez vous envoyer le rappot d'erreur au développeur ?";
-		int answer = JOptionPane.showConfirmDialog(null, message, "Erreur", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+		if(addRepport(e)) {
+			String message = e.getMessage() + "\n\n=====\n\nVoulez vous envoyer le rappot d'erreur au développeur ?";
+			int answer = JOptionPane.showConfirmDialog(null, message, "Erreur", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 
-		if (answer == JOptionPane.YES_OPTION) {
-			if(addRepport(e))
-				sendEmail("Repport B4D", null, path);
+//			if (answer == JOptionPane.YES_OPTION)
+//					sendEmail("Repport B4D", null, path);
 		}
 	}
 
+	public boolean addRepport(Exception e) {		
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
+			PrintWriter pw = new PrintWriter(writer);
+			e.printStackTrace(pw);
+			pw.print("\n\n");
+			writer.close();
+			return numberOfLines(path) > 100;
+		} catch (IOException e1) {
+			return false;
+		}
+	}
+	
 	private int numberOfLines(String path) {
 		int linenumber = 0;
 		try{
@@ -87,21 +100,6 @@ public class Logger {
 	public void sendFeedback(String message) {
 		sendEmail("Feedback B4D", message, null);
 	}
-
-	public boolean addRepport(Exception e) {		
-		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
-			PrintWriter pw = new PrintWriter(writer);
-			e.printStackTrace(pw);
-			pw.print("\n\n");
-			writer.close();
-			return numberOfLines(path) > 100;
-		} catch (IOException e1) {
-			return false;
-		}
-	}
-
-
 
 	public void sendEmail(String subject, String message, String path) {
 
@@ -145,6 +143,11 @@ public class Logger {
 			mail.setContent(multipart);
 			Transport.send(mail);
 			debug(this, "Repport sent");
+			
+			File file = new File(path);
+			if(file.exists())
+				file.delete();
+			
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
