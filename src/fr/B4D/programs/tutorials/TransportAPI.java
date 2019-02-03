@@ -15,7 +15,7 @@ import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.B4DWrongPosition;
 
 public final class TransportAPI {
-	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 1", null, Status.SOLO, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 1", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException {
@@ -24,7 +24,7 @@ public final class TransportAPI {
 		}
 	});
 
-	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 2", null, Status.SOLO, new ProgramInterface() {
+	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 2", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException {

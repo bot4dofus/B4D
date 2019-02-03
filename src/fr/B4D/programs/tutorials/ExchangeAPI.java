@@ -10,6 +10,7 @@ import fr.B4D.bot.Person;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.interaction.B4DExchangeCanceled;
 import fr.B4D.interaction.Exchange;
+import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
@@ -22,7 +23,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 public final class ExchangeAPI {	
 
-	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", null, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, NumberFormatException, CancelProgramException {

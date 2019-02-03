@@ -23,7 +23,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 public final class MessageAPI {	
 	
-	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", null, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
@@ -33,7 +33,7 @@ public final class MessageAPI {
 	});
 	
 
-	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", null, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException {
@@ -48,7 +48,7 @@ public final class MessageAPI {
 		}
 	});
 
-	public final static Program TUTORIAL3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", null, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException {
