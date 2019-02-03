@@ -7,6 +7,8 @@ import java.util.List;
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
 import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
 
 public class TransportPath implements Serializable{
 	
@@ -26,7 +28,7 @@ public class TransportPath implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
-	public void use(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition {
+	public void use(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException {
 		for(TransportStep step:transportPath) {
 			if (!person.getPosition().equals(step.getTransport().getPosition()))
 				throw new B4DWrongPosition();

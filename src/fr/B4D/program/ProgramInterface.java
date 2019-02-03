@@ -12,6 +12,6 @@ import net.sourceforge.tess4j.TesseractException;
 
 public interface ProgramInterface{
 	public void intro(Person person) throws StopProgramException, CancelProgramException, IOException, GeneralSecurityException;
-	public void cycle(Person person) throws StopProgramException, CancelProgramException, FullInventoryException, AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, InterruptedException ;
+	public void cycle(Person person) throws StopProgramException, CancelProgramException, FullInventoryException, AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException;
 	public void outro(Person person) throws CancelProgramException;
 }

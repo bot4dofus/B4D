@@ -26,6 +26,7 @@ import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
+import fr.B4D.program.StopProgramException;
 import net.sourceforge.tess4j.TesseractException;
 
 public final class Loto {
@@ -112,7 +113,7 @@ public final class Loto {
 			}
 		}
 		
-		public void cycle(Person person) throws AWTException, IOException, TesseractException, InterruptedException {			
+		public void cycle(Person person) throws AWTException, IOException, TesseractException, StopProgramException, NumberFormatException, CancelProgramException {			
 			try {
 				Exchange exchange = new Exchange(ticketPrice, 0);
 				String name = exchange.waitForExchange();

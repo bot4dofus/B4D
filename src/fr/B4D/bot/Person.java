@@ -7,6 +7,8 @@ import java.util.List;
 
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.dofus.Dofus;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.B4DWrongPosition;
 import fr.B4D.transport.TransportInterface;
 import fr.B4D.transport.TransportPath;
@@ -134,7 +136,7 @@ public class Person implements Serializable, TransportInterface{
 	 /** GO TO **/
 	/***********/
 	
-	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {
+	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException {
 		TransportPath transportPath = getTransportPathTo(destination);
 		transportPath.use(this);
 	}		

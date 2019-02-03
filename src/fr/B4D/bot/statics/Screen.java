@@ -16,7 +16,11 @@ import javax.imageio.ImageIO;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Configuration;
-import fr.B4D.modules.B4DWait;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
+import fr.B4D.threads.ColorThread;
+import fr.B4D.threads.OCRThread;
+import fr.B4D.threads.PixelThread;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -126,7 +130,7 @@ public final class Screen {
 	 /** SELECTION **/
 	/***************/
 
-	public String getSelection(Point point) throws AWTException, UnsupportedFlavorException, IOException {
+	public String getSelection(Point point) throws AWTException, UnsupportedFlavorException, IOException, StopProgramException, CancelProgramException {
 		Robot robot = new Robot();
 		B4D.mouse.leftClick(point, false, 100);
 		robot.keyPress(KeyEvent.VK_CONTROL);
@@ -135,22 +139,11 @@ public final class Screen {
 		robot.keyPress(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4DWait.wait(1000);
+		B4D.wait.wait(1000);
 		return B4D.keyboard.getClipboard();
 	}
-	public String getSelection(PointF position) throws AWTException, UnsupportedFlavorException, IOException {
+	public String getSelection(PointF position) throws AWTException, UnsupportedFlavorException, IOException, StopProgramException, CancelProgramException {
 		return getSelection(B4D.converter.pointFToPoint(position));
-	}
-	
-	  /*********************/
-	 /** ATTENTE SUR MAP **/
-	/*********************/
-	
-	public boolean waitForMap(int timeOut) {
-		return B4DWait.waitForChangingPixel(B4D.converter.pointToPointF(configuration.getMinimap()), timeOut);
-	}
-	public boolean waitForMap() {
-		return waitForMap(15);
 	}
 	
 	  /************/
@@ -164,5 +157,88 @@ public final class Screen {
 	public void focusDofus() {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	  /*********************/
+	 /** ATTENTE SUR MAP **/
+	/*********************/
+	
+	public boolean waitForMap(int timeOut) {
+		return waitForChangingPixel(B4D.converter.pointToPointF(configuration.getMinimap()), timeOut);
+	}
+	public boolean waitForMap() {
+		return waitForMap(15);
+	}
+	
+	  /*********************/
+	 /** ATTENTE SUR OCR **/
+	/*********************/
+	
+	public String waitForOCR(Rectangle rectangle, String text, int timeOut) {
+		OCRThread ocrThread = new OCRThread(rectangle, text);
+		ocrThread.start();
+		try {
+			ocrThread.join(timeOut);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		if(ocrThread.isAlive())
+			ocrThread.interrupt();
+		return ocrThread.getResult();
+	}
+	public String waitForOCR(Point P1, Point P2, String text, int timeOut) {
+		return waitForOCR(new Rectangle(P1.x,  P1.y, P2.x - P1.x, P2.y - P1.y), text, timeOut);
+	}
+	public String waitForOCR(PointF P1, PointF P2, String text, int timeOut) {
+		return waitForOCR(B4D.converter.pointFToPoint(P1), B4D.converter.pointFToPoint(P2), text, timeOut);
+	}
+	
+	  /*************************************/
+	 /** ATTENTE SUR CHANGEMENT DE PIXEL **/
+	/*************************************/
+	
+	public boolean waitForChangingPixel(Point point, int timeOut) {
+		Thread pixelThread = new PixelThread(point);
+		pixelThread.start();
+		try {
+			pixelThread.join(timeOut);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		if(pixelThread.isAlive()) {
+			pixelThread.interrupt();
+			return true;
+		}else
+			return false;
+	}
+	public boolean waitForChangingPixel(PointF point, int timeOut) {
+		return waitForChangingPixel(B4D.converter.pointFToPoint(point), timeOut);
+	}
+	
+	  /**********************************/
+	 /** ATTENTE SUR COULEUR DE PIXEL **/
+	/**********************************/
+	
+	public boolean waitForColor(Point point, Color min, Color max, int timeOut) {
+		Thread colorThread = new ColorThread(point, min, max);
+		colorThread.start();
+		try {
+			colorThread.join(timeOut);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		if(colorThread.isAlive()) {
+			colorThread.interrupt();
+			return true;
+		}else
+			return false;
+	}
+	public boolean waitForColor(PointF point, Color min, Color max, int timeOut) {
+		return waitForColor(B4D.converter.pointFToPoint(point), min, max, timeOut);
 	}
 }

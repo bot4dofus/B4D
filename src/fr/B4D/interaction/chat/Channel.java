@@ -9,7 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.modules.B4DWait;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
 public class Channel implements Serializable{
@@ -70,7 +71,7 @@ public class Channel implements Serializable{
 	 /** PRIVATE **/
 	/*************/ 
 	
-	private void toggle(PointF arrowPosition) throws AWTException {
+	private void toggle(PointF arrowPosition) throws AWTException, StopProgramException, CancelProgramException {
 		PointF checkPosition = new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);		
 		B4D.mouse.leftClick(checkPosition, false, 500);
 	}
@@ -104,10 +105,10 @@ public class Channel implements Serializable{
 		    return channels;
 		  }
 	
-	public static void displayChannels(Channel...channel) throws AWTException {
+	public static void displayChannels(Channel...channel) throws AWTException, StopProgramException, CancelProgramException {
 		displayChannels(Arrays.asList(channel));
 	}
-	public static void displayChannels(List<Channel> channels) throws AWTException {
+	public static void displayChannels(List<Channel> channels) throws AWTException, StopProgramException, CancelProgramException {
 		B4D.mouse.leftClick(new PointF(0.0052, 0.991), false, 200);		//Ouvre le menu du chat
 		List<PointF> matchs = B4D.screen.searchPixels(new PointF(0.1339, 0.7285), new PointF(0.1339, 0.985), new Color(100, 100, 100), new Color(255, 255, 255));
 		PointF arrowPosition = matchs.get(matchs.size() - 1);
@@ -124,6 +125,6 @@ public class Channel implements Serializable{
 			channel.toggle(arrowPosition);
 
 		B4D.keyboard.sendKey(KeyEvent.VK_ESCAPE, 100);			//Ferme le menu du chat
-		B4DWait.waitForChangingPixel(arrowPosition, 10000);		//Attend la fermeture du menu
+		B4D.screen.waitForChangingPixel(arrowPosition, 10000);		//Attend la fermeture du menu
 	}
 }

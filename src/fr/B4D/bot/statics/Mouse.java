@@ -13,7 +13,8 @@ import fr.B4D.bot.B4D;
 import fr.B4D.bot.Configuration;
 import fr.B4D.gui.JFrame_GetPoint;
 import fr.B4D.gui.JFrame_GetPointImage;
-import fr.B4D.modules.B4DWait;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 
@@ -70,26 +71,26 @@ public final class Mouse {
 	/************/
 	
 	//Point
-	public void place(Point position, int millis) throws AWTException {
+	public void place(Point position, int millis) throws AWTException, StopProgramException, CancelProgramException {
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
-		B4DWait.wait(millis);
+		B4D.wait.wait(millis);
 	}
-	public void place(Point position) throws AWTException {
+	public void place(Point position) throws AWTException, StopProgramException, CancelProgramException {
 		place(position, 0);
 	}
 	//PointF
-	public void place(PointF position, int millis) throws AWTException {
+	public void place(PointF position, int millis) throws AWTException, StopProgramException, CancelProgramException {
 		place(B4D.converter.pointFToPoint(position), millis);
 	}
-	public void place(PointF position) throws AWTException {
+	public void place(PointF position) throws AWTException, StopProgramException, CancelProgramException {
 		place(B4D.converter.pointFToPoint(position), 0);
 	}
 	//PointD
-	public void Place(PointD position, int millis) throws AWTException {
+	public void Place(PointD position, int millis) throws AWTException, StopProgramException, CancelProgramException {
 		place(B4D.converter.pointDToPoint(position), millis);
 	}
-	public void Place(PointD position) throws AWTException {
+	public void Place(PointD position) throws AWTException, StopProgramException, CancelProgramException {
 		place(B4D.converter.pointDToPoint(position), 0);
 	}
 	
@@ -98,7 +99,7 @@ public final class Mouse {
 	/******************/
 	
 	//Point
-	public void rightClick(Point position, boolean maj, int millis) throws AWTException{
+	public void rightClick(Point position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 			
@@ -109,21 +110,21 @@ public final class Mouse {
 		if(maj)	
 			robot.keyRelease(KeyEvent.VK_SHIFT);
 
-		B4DWait.wait(millis);		
+		B4D.wait.wait(millis);		
 	}
-	public void rightClick(Point position, boolean maj) throws AWTException{
+	public void rightClick(Point position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		rightClick(position, maj, 1000);
 	}
-	public void rightClick(PointF position, boolean maj, int millis) throws AWTException{
+	public void rightClick(PointF position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.pointFToPoint(position), maj, millis);
 	}
-	public void rightClick(PointF position, boolean maj) throws AWTException{
+	public void rightClick(PointF position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.pointFToPoint(position), maj, 1000);
 	}
-	public void rightClick(PointD position, boolean maj, int millis) throws AWTException{
+	public void rightClick(PointD position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.pointDToPoint(position), maj, millis);
 	}
-	public void rightClick(PointD position, boolean maj) throws AWTException{
+	public void rightClick(PointD position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.pointDToPoint(position), maj, 1000);
 	}
 	
@@ -131,7 +132,7 @@ public final class Mouse {
 	 /** CLIQUE GAUCHE **/
 	/*******************/
 	
-	public void leftClick(Point position, boolean maj, int millis) throws AWTException {
+	public void leftClick(Point position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException {
 		Robot robot = new Robot();
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 			
@@ -142,21 +143,21 @@ public final class Mouse {
 		if(maj)	
 			robot.keyRelease(KeyEvent.VK_SHIFT);
 
-		B4DWait.wait(millis);
+		B4D.wait.wait(millis);
 	}	
-	public void leftClick(Point position, boolean maj) throws AWTException{
+	public void leftClick(Point position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		leftClick(position, maj, 1000);
 	}	
-	public void leftClick(PointF position, boolean maj, int millis) throws AWTException{
+	public void leftClick(PointF position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.pointFToPoint(position), maj, millis);
 	}
-	public void leftClick(PointF position, boolean maj) throws AWTException{
+	public void leftClick(PointF position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.pointFToPoint(position), maj, 1000);
 	}
-	public void leftClick(PointD position, boolean maj, int millis) throws AWTException{
+	public void leftClick(PointD position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.pointDToPoint(position), maj, millis);
 	}
-	public void leftClick(PointD position, boolean maj) throws AWTException{
+	public void leftClick(PointD position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.pointDToPoint(position), maj, 1000);
 	}
 	
@@ -164,23 +165,23 @@ public final class Mouse {
 	 /** DOUBLE CLIQUE GAUCHE **/
 	/**************************/
 	
-	public void doubleLeftClick(Point position, boolean maj, int millis) throws AWTException {
+	public void doubleLeftClick(Point position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException {
 		leftClick(position, maj, 0);
 		leftClick(position, maj, millis);
 	}	
-	public void doubleLeftClick(Point position, boolean maj) throws AWTException{
+	public void doubleLeftClick(Point position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		doubleLeftClick(position, maj, 1000);
 	}
-	public void doubleLeftClick(PointF position, boolean maj, int millis) throws AWTException{
+	public void doubleLeftClick(PointF position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.pointFToPoint(position), maj, millis);
 	}
-	public void doubleLeftClick(PointF position, boolean maj) throws AWTException{
+	public void doubleLeftClick(PointF position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.pointFToPoint(position), maj, 1000);
 	}
-	public void doubleLeftClick(PointD position, boolean maj, int millis) throws AWTException{
+	public void doubleLeftClick(PointD position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.pointDToPoint(position), maj, millis);
 	}
-	public void doubleLeftClick(PointD position, boolean maj) throws AWTException{
+	public void doubleLeftClick(PointD position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.pointDToPoint(position), maj, 1000);
 	}
 	
@@ -188,24 +189,24 @@ public final class Mouse {
 	 /** TRIPLE CLIQUE GAUCHE **/
 	/**************************/
 	
-	public void tripleLeftClick(Point position, boolean maj, int millis) throws AWTException {
+	public void tripleLeftClick(Point position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException {
 		leftClick(position, maj, 0);
 		leftClick(position, maj, 0);
 		leftClick(position, maj, millis);
 	}	
-	public void tripleLeftClick(Point position, boolean maj) throws AWTException{
+	public void tripleLeftClick(Point position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		tripleLeftClick(position, maj, 1000);
 	}
-	public void tripleLeftClick(PointF position, boolean maj, int millis) throws AWTException{
+	public void tripleLeftClick(PointF position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.pointFToPoint(position), maj, millis);
 	}
-	public void tripleLeftClick(PointF position, boolean maj) throws AWTException{
+	public void tripleLeftClick(PointF position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.pointFToPoint(position), maj, 1000);
 	}
-	public void tripleLeftClick(PointD position, boolean maj, int millis) throws AWTException{
+	public void tripleLeftClick(PointD position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.pointDToPoint(position), maj, millis);
 	}
-	public void tripleLeftClick(PointD position, boolean maj) throws AWTException{
+	public void tripleLeftClick(PointD position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.pointDToPoint(position), maj, 1000);
 	}
 
@@ -213,7 +214,7 @@ public final class Mouse {
 	 /** CHAT **/
 	/**********/
 	
-	public void chatClick() throws AWTException{
+	public void chatClick() throws AWTException, StopProgramException, CancelProgramException{
 		leftClick(configuration.getChatBar(), false, 500);
 	}
 	

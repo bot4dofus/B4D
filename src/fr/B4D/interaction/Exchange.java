@@ -9,7 +9,8 @@ import java.io.Serializable;
 import fr.B4D.bot.B4D;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
-import fr.B4D.modules.B4DWait;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 import fr.B4D.utils.Rectangle;
 import net.sourceforge.tess4j.TesseractException;
@@ -74,8 +75,10 @@ public class Exchange implements Serializable{
 	/** Permet d'attendre un échange provoqué par un joueur.
 	 * @return le nom du joueur ayant demandé l'échange
 	 * @throws AWTException si impossible de valider l'échange
+	 * @throws StopProgramException 
+	 * @throws CancelProgramException 
 	 */
-	public String waitForExchange() throws AWTException {
+	public String waitForExchange() throws AWTException, StopProgramException, CancelProgramException {
 		return waitForExchange(0);
 	}
 
@@ -83,13 +86,15 @@ public class Exchange implements Serializable{
 	 * @param timeout le nombre de millisecondes à attendre avant timeout
 	 * @return le nom du joueur ayant demandé l'échange. {@code null} si timeout
 	 * @throws AWTException si impossible de valider l'échange
+	 * @throws StopProgramException 
+	 * @throws CancelProgramException 
 	 */
-	public String waitForExchange(int timeout) throws AWTException {
+	public String waitForExchange(int timeout) throws StopProgramException, AWTException, CancelProgramException {
 		if(!B4D.socketListener.isAlive())
 			B4D.socketListener.start();
 		
 		B4D.logger.debug(this, "Attente d'un échange");
-		String message = B4DWait.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout);
+		String message = B4D.screen.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout);
 		
 		if(message == null)
 			B4D.logger.debug(this, "Aucun échange demandé (timeout)");
@@ -100,29 +105,8 @@ public class Exchange implements Serializable{
 		}
 		return name;
 	}
-//	public String waitForExchange(long timeout) throws AWTException {
-//		
-//		try {
-//			synchronized(name){
-//				if(name == null) 
-//					name.wait(timeout);
-//				if(name != null)
-//					B4DB4D.mouse.leftClick(waitForExchangeYesButton, false);
-//			}
-//		}
-//		catch(InterruptedException e) {
-//			B4D.logger.error(e);
-//		}
-//		return name;
-//	}
 	
-	/**
-	 * @param validationMessage
-	 * @param validationKeys
-	 * @return
-	 * @throws B4DExchangeCanceled si 
-	 */
-	public BufferedImage exchange(String validationMessage) throws B4DExchangeCanceled, AWTException, TesseractException, NumberFormatException, IOException {
+	public BufferedImage exchange(String validationMessage) throws B4DExchangeCanceled, AWTException, TesseractException, NumberFormatException, IOException, StopProgramException, CancelProgramException {
 		B4D.logger.debug(this, "Début de l'échange");
 		Message message;
 		
@@ -136,7 +120,7 @@ public class Exchange implements Serializable{
 			message.send();
 			
 			do {
-				if(B4DWait.waitForOCR(kamasInRectangle, String.valueOf(kamasIn), timeout) == null)
+				if(B4D.screen.waitForOCR(kamasInRectangle, String.valueOf(kamasIn), timeout) == null)
 					cancelExchange();
 			}while(!isValided());
 			
@@ -164,7 +148,7 @@ public class Exchange implements Serializable{
 		return false;
 	}
 	
-	public void cancelExchange() throws B4DExchangeCanceled, AWTException {
+	public void cancelExchange() throws B4DExchangeCanceled, AWTException, StopProgramException, CancelProgramException {
 		B4D.logger.debug(this, "Echange annulé");
 		if(isInProgress())
 			B4D.mouse.leftClick(escapeButton, false);

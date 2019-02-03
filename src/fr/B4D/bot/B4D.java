@@ -14,6 +14,7 @@ import fr.B4D.bot.statics.KeyboardListener;
 import fr.B4D.bot.statics.Logger;
 import fr.B4D.bot.statics.Mouse;
 import fr.B4D.bot.statics.Screen;
+import fr.B4D.bot.statics.Wait;
 import fr.B4D.dao.DAOFactory;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.program.Program;
@@ -38,12 +39,13 @@ public final class B4D{
 	public static Screen screen;
 	public static Mouse mouse;
 	public static Keyboard keyboard;
+	public static Wait wait;
 	
 	private Configuration configuration;
 	private Team team;
 	
-	/*************/
-	/** BUILDER **/
+	  /*************/
+	 /** BUILDER **/
 	/*************/
 
 	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
@@ -64,6 +66,7 @@ public final class B4D{
 		screen = new Screen(configuration);
 		mouse = new Mouse(configuration);
 		keyboard = new Keyboard();
+		wait = new Wait();
 	}
 	
 	/***********************/
@@ -97,8 +100,8 @@ public final class B4D{
 		DAOFactory.getTeamDAO().update(team);
 	}
 	
-	/*************/
-	/** METHODS **/
+	  /*************/
+	 /** METHODS **/
 	/*************/
 
 	public void importFile() throws ClassNotFoundException, IOException {
@@ -154,8 +157,6 @@ public final class B4D{
 		
 		try {
 			socketListener.setFilter(person.getServer());
-			keyboardListener.setProgram(program);
-			
 			program.startWith(person);
 		} catch (InvalidFilterException e) {
 			B4D.logger.error(e);

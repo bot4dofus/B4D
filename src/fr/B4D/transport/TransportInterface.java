@@ -5,6 +5,8 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
 
 public interface TransportInterface extends Serializable {
 	final double zaapCost = 10;
@@ -18,5 +20,5 @@ public interface TransportInterface extends Serializable {
 	final Point bontaPotionDestination = new Point(-33, -56);
 	final Point brakmarPotionDestination = new Point(-26,36);
 
-	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition;
+	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException;
 }

@@ -7,7 +7,8 @@ import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.dofus.Dofus;
-import fr.B4D.modules.B4DWait;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
 
 public class Message implements Serializable{
 	
@@ -48,7 +49,7 @@ public class Message implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
-	public static void sendChat(String text, int millis) {
+	public static void sendChat(String text, int millis) throws StopProgramException, CancelProgramException {
 		try {
 			B4D.mouse.chatClick();
 			B4D.keyboard.writeKeyboard(text, millis);
@@ -56,23 +57,23 @@ public class Message implements Serializable{
 			Robot robot = new Robot();
 			robot.keyPress(KeyEvent.VK_ENTER);
 			robot.keyRelease(KeyEvent.VK_ENTER);
-			B4DWait.wait(100);
+			B4D.wait.wait(100);
 		} catch (AWTException e) {
 			e.printStackTrace();
 		}
 	}
-	public static void sendChat(String text){
+	public static void sendChat(String text) throws StopProgramException, CancelProgramException{
 		sendChat(text, 500);
 	}
 	
-	public void send() {
+	public void send() throws StopProgramException, CancelProgramException {
 		if (channel == Channel.PRIVATE)
 			sendChat(channel.getPrefix() + " " + pseudo + " " + text);
 		else
 			sendChat(channel.getPrefix() + " " + text);
 	}
 	
-	public void reply(String text) {
+	public void reply(String text) throws StopProgramException, CancelProgramException {
 		if(channel == Channel.BUSINESS || channel == Channel.RECRUITMENT)
 			channel = Channel.PRIVATE;
 		this.text = text;

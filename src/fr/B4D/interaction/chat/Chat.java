@@ -3,13 +3,14 @@ package fr.B4D.interaction.chat;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
 
 public class Chat extends Thread{
 
 	private ArrayBlockingQueue<Message> messages;
 	private ChatFilter filter;
 	private ChatListener chatListener;
-	private int countTo = -1, count = 0;
 	
 	public Chat() {
 		this(100);
@@ -80,33 +81,16 @@ public class Chat extends Thread{
 		return message;
 	}
 	
-	public void run() {
+	public void read(int countTo) throws StopProgramException, CancelProgramException {		
+		int count = 0;
 		Message message;
 		while(count != countTo) {
 			message = waitForMessage(0);
 			chatListener.treatMessage(message);
 			count++;
 		}
-	}
-	
-	public void read(int countTo, long millis) {
-		if(!B4D.socketListener.isAlive())
-			B4D.socketListener.start();
-		
-		this.countTo = countTo;
-		this.start();
-		try {
-			this.join(millis);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		B4D.socketListener.interrupt();
-		this.interrupt();
 	}	
-	public void read(int countTo) {
-		read(countTo, 0);
-	}	
-	public void read(long millis) {
-		read(-1, millis);
+	public void read() throws StopProgramException, CancelProgramException {
+		read(-1);
 	}
 }

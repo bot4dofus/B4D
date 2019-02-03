@@ -10,10 +10,12 @@ import fr.B4D.bot.Person;
 import fr.B4D.dofus.B4DCannotFind;
 import fr.B4D.interaction.B4DExchangeCanceled;
 import fr.B4D.interaction.Exchange;
+import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
+import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.B4DWrongPosition;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -22,7 +24,7 @@ public final class ExchangeAPI {
 	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
+		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, NumberFormatException, CancelProgramException {
 			Exchange exchange = new Exchange(100000,0);
 			String name = exchange.waitForExchange();
 			try {

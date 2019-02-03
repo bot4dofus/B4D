@@ -10,7 +10,10 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
-import fr.B4D.modules.B4DWait;
+import fr.B4D.bot.B4D;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
+import fr.B4D.threads.KeyboardThread;
 
 public final class Keyboard{
 	
@@ -20,13 +23,13 @@ public final class Keyboard{
 	 /** SINGLE KEY **/
 	/****************/
 	
-	public void sendKey(int keyEvent, int time) throws AWTException {
+	public void sendKey(int keyEvent, int time) throws AWTException, StopProgramException, CancelProgramException {
 		Robot robot = new Robot();
 		robot.keyPress(keyEvent);
 		robot.keyRelease(keyEvent);
-		B4DWait.wait(time);
+		B4D.wait.wait(time);
 	}
-	public void sendKey(int keyEvent) throws AWTException {
+	public void sendKey(int keyEvent) throws AWTException, StopProgramException, CancelProgramException {
 		sendKey(keyEvent, 100);
 	}
 	
@@ -34,7 +37,7 @@ public final class Keyboard{
 	 /** WRITE KEYBOARD **/
 	/********************/
 	
-	public void writeKeyboard(String text, int time) throws AWTException {
+	public void writeKeyboard(String text, int time) throws AWTException, StopProgramException, CancelProgramException {
 		setClipboard(text);
 		
 		Robot robot = new Robot();
@@ -42,9 +45,9 @@ public final class Keyboard{
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4DWait.wait(time);
+		B4D.wait.wait(time);
 	}
-	public void writeKeyboard(String text) throws AWTException {
+	public void writeKeyboard(String text) throws AWTException, StopProgramException, CancelProgramException {
 		writeKeyboard(text, 500);
 	}
 	
@@ -57,5 +60,26 @@ public final class Keyboard{
 	}
 	public String getClipboard() throws AWTException, UnsupportedFlavorException, IOException{
         return (String) clipboard.getData(DataFlavor.stringFlavor);
+	}
+	
+	  /************************/
+	 /** ATTENTE SUR TOUCHE **/
+	/************************/
+	
+	public boolean waitForKeyboard(int timeOut) {
+		Thread keyboardThread = new KeyboardThread();
+		keyboardThread.start();
+		try {
+			keyboardThread.join(timeOut);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		if(keyboardThread.isAlive()) {
+			keyboardThread.interrupt();
+			return false;
+		}else 
+			return true;
 	}
 }

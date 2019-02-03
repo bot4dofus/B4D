@@ -11,10 +11,12 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.ChatListener;
 import fr.B4D.interaction.chat.Message;
+import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
+import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.B4DWrongPosition;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -33,7 +35,7 @@ public final class MessageAPI {
 	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
+		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException {
 			Message message = new Message("Solwy", Channel.PRIVATE, "Salut !");
 			message.send();
 			Dofus.chat.addPseudoFilter("Solwy");
@@ -48,11 +50,11 @@ public final class MessageAPI {
 	public final static Program TUTORIAL3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException {
+		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException {
 			Dofus.chat.addChannelFilter(Channel.BUSINESS);
 			Dofus.chat.addTextFilter("moi");
 			Dofus.chat.addChatListener(new ChatListener() {
-				public void treatMessage(Message message) {
+				public void treatMessage(Message message) throws StopProgramException, CancelProgramException {
 					message.reply("C'est qui moi ?");
 				}
 			});
