@@ -8,9 +8,17 @@ import fr.B4D.program.StopProgramException;
 
 public class Chat extends Thread{
 
+	  /***************/
+	 /** ATTRIBUTS **/
+	/***************/
+	
 	private ArrayBlockingQueue<Message> messages;
 	private ChatFilter filter;
 	private ChatListener chatListener;
+
+	  /*************/
+	 /** BUILDER **/
+	/*************/
 	
 	public Chat() {
 		this(100);
@@ -26,6 +34,10 @@ public class Chat extends Thread{
 		};
 	}
 
+	  /************/
+	 /** FILTER **/
+	/************/
+	
 	public void addPseudoFilter(String pseudo) {
 		filter.setPseudo(pseudo);
 	}
@@ -38,10 +50,9 @@ public class Chat extends Thread{
 		filter.setRegex(regex);
 	}
 	
-	public void addChatListener(ChatListener chatListener) {
-		this.chatListener = chatListener;
-	}
-	
+	  /**********/
+	 /** QUEU **/
+	/**********/
 	
 	public void addMessage(Message message) {
 		synchronized(messages){
@@ -53,6 +64,31 @@ public class Chat extends Thread{
 		}
 	}
 
+	  /**************/
+	 /** LISTENER **/
+	/**************/
+	
+	public void addChatListener(ChatListener chatListener) {
+		this.chatListener = chatListener;
+	}
+	
+	public void read(int countTo) throws StopProgramException, CancelProgramException {		
+		int count = 0;
+		Message message;
+		while(count != countTo) {
+			message = waitForMessage(0);
+			chatListener.treatMessage(message);
+			count++;
+		}
+	}	
+	public void read() throws StopProgramException, CancelProgramException {
+		read(-1);
+	}
+	
+	  /**********************/
+	 /** WAIT FOR MESSAGE **/
+	/**********************/
+	
 	public Message waitForMessage() {
 		return waitForMessage(0);
 	}
@@ -80,17 +116,14 @@ public class Chat extends Thread{
 		}
 		return message;
 	}
+
+	  /***********/
+	 /** OTHER **/
+	/***********/
 	
-	public void read(int countTo) throws StopProgramException, CancelProgramException {		
-		int count = 0;
-		Message message;
-		while(count != countTo) {
-			message = waitForMessage(0);
-			chatListener.treatMessage(message);
-			count++;
+	public void clear() {
+		synchronized(messages){
+			messages.clear();
 		}
-	}	
-	public void read() throws StopProgramException, CancelProgramException {
-		read(-1);
 	}
 }
