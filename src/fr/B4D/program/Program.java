@@ -31,14 +31,13 @@ public class Program implements Serializable{
 	 /** ATTRIBUTS **/
 	/***************/
 	
-	
 	private Place place;
 	private Category category;
 	private String subCategory;
 	private String programName;
 	
 	private List<Channel> displayedChannels;
-	//private Status status;
+	private Status status;
 
 	private ProgramInterface program;
 	
@@ -55,7 +54,7 @@ public class Program implements Serializable{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
-	public Program(Place place, Category category, String subCategory, String programName, Channel[] displayedChannels, ProgramInterface program) {
+	public Program(Place place, Category category, String subCategory, String programName, Channel[] displayedChannels, Status status, ProgramInterface program) {
 		this.place = place;
 		this.category = category;
 		this.subCategory = subCategory;
@@ -65,7 +64,10 @@ public class Program implements Serializable{
 			this.displayedChannels = null;
 		else
 			this.displayedChannels = Arrays.asList(displayedChannels);
+		this.status = status;
+		
 		this.program = program;
+		
 		this.maxCycles = -1;
 		this.maxDeposits = -1;
 	}
@@ -163,15 +165,17 @@ public class Program implements Serializable{
 	}
 
 	private void intro() throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException, GeneralSecurityException, StopProgramException, CancelProgramException{
+		Dofus.chat.clear();
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
 			Message.sendChat("/clear");
 			
 			if(displayedChannels != null)
 				Channel.displayChannels(displayedChannels);
-			//status.setStatus();
+			if(status != null)
+				status.setStatus();
 			
-			person.setPosition(Dofus.world.getPosition());	//Récupère la position actuelle
+			person.setPosition();	//Récupère la position actuelle
 		}
 		program.intro(person);
 	}
@@ -201,6 +205,6 @@ public class Program implements Serializable{
 	}
 	private void outro() throws CancelProgramException {
 		program.outro(person);
-		//B4D.logger.popUp("Le bot s'est correctement terminé.");
+		B4D.logger.popUp("Le bot s'est correctement terminé.");
 	}
 }
