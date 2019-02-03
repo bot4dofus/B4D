@@ -15,7 +15,6 @@ import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.B4DWrongPosition;
-import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.TesseractException;
 
 public final class Test {
@@ -23,12 +22,8 @@ public final class Test {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws FullInventoryException, AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException {
-			//B4D.logger.popUp("Le programme de test marche correctement.");
-			B4D.mouse.place(new PointF(0.25,0.25), 1000);
-			B4D.mouse.place(new PointF(0.25,0.75), 1000);
-			B4D.mouse.place(new PointF(0.75,0.75), 1000);
-			B4D.mouse.place(new PointF(0.75,0.25), 1000);
+			B4D.logger.popUp("Le programme de test marche correctement.");
 		}
 	};
-	public final static Program TEST = new Program(Place.Aucun, Category.Test, "Test", "Test", null, test);
+	public final static Program TEST = new Program(Place.Aucun, Category.Test, "Test", "Test", null, null, test);
 }

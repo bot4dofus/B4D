@@ -26,6 +26,7 @@ import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
+import fr.B4D.program.Status;
 import fr.B4D.program.StopProgramException;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -53,7 +54,7 @@ public final class Loto {
 	private static String rangeOrganizer = "B17";
 	private static String rangeData = "B20:B1000";
 	
-	public final static Program LOTO = new Program(Place.Astrub, Category.Jeux, "Argent", "Loto", new Channel[] {Channel.PRIVATE}, new ProgramInterface() {
+	public final static Program LOTO = new Program(Place.Astrub, Category.Jeux, "Argent", "Loto", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 
 		private File imageFolder;
 		private GoogleDrive drive;
