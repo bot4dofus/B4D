@@ -10,7 +10,6 @@ import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
-import fr.B4D.program.Status;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.B4DWrongPosition;
 

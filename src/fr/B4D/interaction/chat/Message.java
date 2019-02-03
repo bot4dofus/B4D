@@ -25,6 +25,17 @@ public class Message implements Serializable{
 	 /** BUILDER **/
 	/*************/
 	
+	public Message(Channel channel, String text) {
+		this.channel = channel;
+		this.text = text;
+	}
+	
+	public Message(String pseudo, String text) {
+		this.pseudo = pseudo;
+		this.channel = Channel.PRIVATE;
+		this.text = text;
+	}
+	
 	public Message(String pseudo, Channel channel, String text) {
 		this.pseudo = pseudo;
 		this.channel = channel;
@@ -82,9 +93,15 @@ public class Message implements Serializable{
 	
 	public Message waitForReply(long timeout) {
 		B4D.logger.debug(this, "Attente d'une réponse");
-		Dofus.chat.addPseudoFilter(pseudo);
+		if(pseudo != null)
+			Dofus.chat.addPseudoFilter(pseudo);
+		else
+			Dofus.chat.addChannelFilter(Channel.PRIVATE);
+		
 		Message message = Dofus.chat.waitForMessage(timeout);
+		
 		Dofus.chat.addPseudoFilter(null);
+		Dofus.chat.addChannelFilter(null);
 		return message;
 	}
 	

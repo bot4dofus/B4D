@@ -134,10 +134,12 @@ public class Person implements Serializable, TransportInterface{
 		Message message;
 		Dofus.chat.addPseudoFilter(pseudo);
 		do {
-			message = new Message(null, Channel.GENERAL, "%pos%");
+			message = new Message(Channel.GENERAL, "%pos%");
 			message.send();
 			message = Dofus.chat.waitForMessage(1000);
 		}while(message == null);
+
+		Dofus.chat.addPseudoFilter(null);
 		
 		String text = message.getText();
 		int firstComma = text.indexOf(",");

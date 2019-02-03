@@ -37,7 +37,7 @@ public final class MessageAPI {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException {
-			Message message = new Message("Solwy", Channel.PRIVATE, "Salut !");
+			Message message = new Message("Solwy", "Salut !");
 			message.send();
 			Dofus.chat.addPseudoFilter("Solwy");
 			message = Dofus.chat.waitForMessage(60000);

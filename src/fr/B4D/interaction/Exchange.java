@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
@@ -116,7 +115,7 @@ public class Exchange implements Serializable{
 		}
 		
 		do {
-			message = new Message(name, Channel.PRIVATE, "Entre " + kamasIn + " kamas et valide");
+			message = new Message(name, "Entre " + kamasIn + " kamas et valide");
 			message.send();
 			
 			do {
@@ -125,7 +124,7 @@ public class Exchange implements Serializable{
 			}while(!isValided());
 			
 			do {
-				message = new Message(name, Channel.PRIVATE, validationMessage);
+				message = new Message(name, validationMessage);
 				message.send();
 				message = message.waitForReply(timeout);
 				
