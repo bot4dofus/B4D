@@ -23,6 +23,17 @@ import net.sourceforge.tess4j.TesseractException;
 
 public final class ExchangeAPI {	
 
+	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueur.<br/>
+	 *  <br/>
+	 *  Fonctionnement :
+	 *  <ul>
+	 *  	<li>Création de l'objet échange avec 100 000 kamas entrants, 0 kamas sortants.</li>
+	 *  	<li>Attente d'une demande d'échange.</li>
+	 *  	<li>Procède à l'échange avec un message de confirmation auquel la personne peut répondre uniquement par "oui" ou "non".</li>
+	 *  	<li>Affiche le nom du joueur qui vient de réaliser l'échange ainsi que la preuve de son consentement.</li>
+	 *  </ul>
+	 *  Dans le cas où l'échange est annulé par le joueur, un exception est levée. Un message différent est alors affiché.<br/>
+	 */
 	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
