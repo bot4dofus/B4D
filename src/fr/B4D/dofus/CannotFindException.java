@@ -1,10 +1,10 @@
 package fr.B4D.dofus;
 
-public class B4DCannotFind extends Exception{
+public class CannotFindException extends Exception{
 
 	private static final long serialVersionUID = -2949855971863227080L;
 
-	public B4DCannotFind()
+	public CannotFindException()
     {
     	super("Cannot found the object on the map.");
     }

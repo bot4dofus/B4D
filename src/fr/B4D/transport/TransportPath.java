@@ -6,7 +6,7 @@ import java.util.List;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
-import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
@@ -20,7 +20,7 @@ public class TransportPath implements Serializable{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
-	public TransportPath(List<TransportStep> shortestPath) throws B4DCannotFind {
+	public TransportPath(List<TransportStep> shortestPath) throws CannotFindException {
 		this.transportPath = shortestPath;
 	}
 	
@@ -28,10 +28,10 @@ public class TransportPath implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
-	public void use(Person person) throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException {
+	public void use(Person person) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {
 		for(TransportStep step:transportPath) {
 			if (!person.getPosition().equals(step.getTransport().getPosition()))
-				throw new B4DWrongPosition();
+				throw new WrongPositionException();
 			step.use();
 			B4D.screen.waitForMap();
 			person.setPosition(step.getDestination());
@@ -48,7 +48,7 @@ public class TransportPath implements Serializable{
 	
 	public String toString() {
 		String out = "\nFrom " +  transportPath.get(0).getTransport().getPosition() + " to " + transportPath.get(transportPath.size()-1).getDestination() + "\n";
-		out += "Total weight = " + getWeigth() + "(" + transportPath.size() + " step)\n";
+		out += "Total weight = " + getWeigth() + " (" + transportPath.size() + " steps)\n";
 		for(TransportStep step : transportPath)
 			out += step + "\n";
 		return out;

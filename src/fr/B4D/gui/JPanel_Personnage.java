@@ -32,7 +32,7 @@ import javax.swing.table.TableColumn;
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
 import fr.B4D.bot.Server;
-import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.dofus.CannotFindException;
 import fr.B4D.transport.transports.Zaap;
 
 public class JPanel_Personnage extends JPanel {
@@ -448,7 +448,7 @@ public class JPanel_Personnage extends JPanel {
 		if(personnage.getBoosterPotion().getDestination() != null)
 			try {
 				this.comboBox_Zaaps.setSelectedItem(Zaap.getZaap(personnage.getBoosterPotion().getDestination()).getName());
-			} catch (B4DCannotFind e) {}
+			} catch (CannotFindException e) {}
 		
 		if(personnage.getBontaPotion().getDestination() != null)
 			this.lblPosition_Bonta.setText(personnage.getBontaPotion().getDestination().getX() + ":" + personnage.getBontaPotion().getDestination().getY());

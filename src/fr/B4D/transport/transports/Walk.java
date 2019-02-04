@@ -5,10 +5,10 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.transport.B4DWrongPosition;
+import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
@@ -37,20 +37,21 @@ public class Walk extends Transport implements Serializable{
 	public Walk(Point position) {
 		super("Walking", position, null, walkCost);
 	}
-	
+
 	  /**************/
 	 /** METHODES **/
 	/**************/
 	
-	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException {		
+	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {		
 		Point move = new Point(destination.x - super.getPosition().x, destination.y - super.getPosition().y);
 		if(move.equals(up))
-			B4D.mouse.leftClick(goUp, true);
+			B4D.mouse.leftClick(goUp, false);
 		else if(move.equals(down))
-			B4D.mouse.leftClick(goDown, true);
+			B4D.mouse.leftClick(goDown, false);
 		else if(move.equals(left))
-			B4D.mouse.leftClick(goLeft, true);
+			B4D.mouse.leftClick(goLeft, false);
 		else if(move.equals(right))
-			B4D.mouse.leftClick(goRight, true);
+			B4D.mouse.leftClick(goRight, false);
+	    B4D.screen.waitForMap(20000);
 	}
 }

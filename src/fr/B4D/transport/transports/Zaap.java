@@ -7,10 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.transport.B4DWrongPosition;
+import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
@@ -100,24 +100,25 @@ public class Zaap extends Transport implements Serializable{
         return zaaps;
     }
     
-    public final static Zaap getZaap(Point position) throws B4DCannotFind{
-    	return (Zaap) getAll().stream().filter(z -> z.getPosition().equals(position)).findFirst().orElseThrow(B4DCannotFind::new);
+    public final static Zaap getZaap(Point position) throws CannotFindException{
+    	return (Zaap) getAll().stream().filter(z -> z.getPosition().equals(position)).findFirst().orElseThrow(CannotFindException::new);
     }
 	
-	public static Zaap getZaap(String nom) throws B4DCannotFind {
-		return (Zaap) getAll().stream().filter(z -> z.getName().equals(nom)).findFirst().orElseThrow(B4DCannotFind::new);
+	public static Zaap getZaap(String nom) throws CannotFindException {
+		return (Zaap) getAll().stream().filter(z -> z.getName().equals(nom)).findFirst().orElseThrow(CannotFindException::new);
 	}
 	
 	  /**************/
 	 /** METHODES **/
 	/**************/
 	
-	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException {		
+	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {		
 		B4D.mouse.leftClick(super.getPositionF(), false);
 		
 		B4D.screen.waitForColor(new PointF(0.4472, 0.7367), new Color(186, 125, 0), new Color(255, 255, 50), 10);
 		B4D.mouse.leftClick(new PointF(0.6062, 0.2013), false, 200);
 		B4D.keyboard.writeKeyboard(getZaap(destination).getName());
 		B4D.mouse.doubleLeftClick(new PointF(0.4736, 0.2891), false);
+	    B4D.screen.waitForMap(20000);
 	}
 }

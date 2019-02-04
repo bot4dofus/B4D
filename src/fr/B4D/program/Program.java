@@ -10,8 +10,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.CannotGetPositionException;
 import fr.B4D.bot.Person;
-import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.dofus.CannotFindException;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
@@ -20,7 +21,7 @@ import fr.B4D.programs.Test;
 import fr.B4D.programs.tutorials.ExchangeAPI;
 import fr.B4D.programs.tutorials.MessageAPI;
 import fr.B4D.programs.tutorials.TransportAPI;
-import fr.B4D.transport.B4DWrongPosition;
+import fr.B4D.transport.WrongPositionException;
 import net.sourceforge.tess4j.TesseractException;
 
 public class Program implements Serializable{
@@ -148,6 +149,7 @@ public class Program implements Serializable{
 	
 	public void startWith(Person person) {
 		this.person = person;
+		
 		try {
 			try {
 				intro();
@@ -159,12 +161,12 @@ public class Program implements Serializable{
 		} catch (CancelProgramException e) {
 			if(e.getMessage() != null)
 				B4D.logger.popUp(e.getMessage());
-		}catch(B4DWrongPosition | AWTException | UnsupportedFlavorException | IOException | B4DCannotFind | TesseractException | GeneralSecurityException e){
+		}catch(WrongPositionException | CannotFindException | CannotGetPositionException | TesseractException | GeneralSecurityException  | AWTException | UnsupportedFlavorException | IOException e){
 			B4D.logger.error(e);
 		}
 	}
 
-	private void intro() throws B4DWrongPosition, AWTException, UnsupportedFlavorException, IOException, GeneralSecurityException, StopProgramException, CancelProgramException{
+	private void intro() throws WrongPositionException, AWTException, UnsupportedFlavorException, IOException, GeneralSecurityException, StopProgramException, CancelProgramException, CannotGetPositionException{
 		Dofus.chat.clear();
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
@@ -179,7 +181,7 @@ public class Program implements Serializable{
 		}
 		program.intro(person);
 	}
-	private void cycle() throws AWTException, B4DCannotFind, B4DWrongPosition, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException{
+	private void cycle() throws AWTException, CannotFindException, WrongPositionException, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException{
 		int nbCycles = 0, nbDeposits = 0;
 		
 		while(nbCycles != maxCycles && nbDeposits != maxDeposits) {

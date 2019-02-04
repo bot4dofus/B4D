@@ -5,19 +5,18 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.List;
 
-import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.dofus.CannotFindException;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.transport.B4DWrongPosition;
+import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.TransportInterface;
 import fr.B4D.transport.TransportPath;
 import fr.B4D.transport.TransportStep;
-import fr.B4D.transport.transports.BontaPotion;
-import fr.B4D.transport.transports.BoosterPotion;
-import fr.B4D.transport.transports.BrakmarPotion;
+import fr.B4D.transport.transports.Potion;
+import fr.B4D.transport.transports.Zaap;
 import fr.B4D.utils.PointF;
 
 public class Person implements Serializable, TransportInterface{
@@ -56,9 +55,9 @@ public class Person implements Serializable, TransportInterface{
 		this.server = serveur;
 		this.pseudo = pseudo;
 		
-		this.boosterPotion = new TransportStep(new BoosterPotion(null, null), null);
-		this.bontaPotion = new TransportStep(new BontaPotion(null, null), bontaPotionDestination);
-		this.brakmarPotion = new TransportStep(new BrakmarPotion(null, null), brakmarPotionDestination);
+		this.boosterPotion = new TransportStep(new Potion("Booster potion", null, null, boosterPotionCost), Zaap.Astrub.getPosition());
+		this.bontaPotion = new TransportStep(new Potion("Bonta potion", null, null, bontaPotionCost), bontaPotionDestination);
+		this.brakmarPotion = new TransportStep(new Potion("Brakmar potion", null, null, brakmarPotionCost), brakmarPotionDestination);
 	}
 	
 	  /***********************/
@@ -130,14 +129,15 @@ public class Person implements Serializable, TransportInterface{
 		this.position = position;
 	}
 
-	public void setPosition() throws StopProgramException, CancelProgramException {
+	public void setPosition() throws StopProgramException, CancelProgramException, CannotGetPositionException {
 		Message message;
 		Dofus.chat.addPseudoFilter(pseudo);
-		do {
-			message = new Message(Channel.GENERAL, "%pos%");
-			message.send();
-			message = Dofus.chat.waitForMessage(1000);
-		}while(message == null);
+		
+		message = new Message(Channel.GENERAL, "%pos%");
+		message.send();
+		message = Dofus.chat.waitForMessage(1000);
+		if(message == null)
+			throw new CannotGetPositionException();
 
 		Dofus.chat.addPseudoFilter(null);
 		
@@ -166,24 +166,24 @@ public class Person implements Serializable, TransportInterface{
 	 /** GO TO **/
 	/***********/
 	
-	public void goTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException {
+	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {
 		TransportPath transportPath = getTransportPathTo(destination);
 		transportPath.use(this);
 	}		
-	public TransportPath getTransportPathTo(Point destination) throws AWTException, B4DCannotFind, B4DWrongPosition {		
+	public TransportPath getTransportPathTo(Point destination) throws AWTException, CannotFindException, WrongPositionException {		
 		
 		//Add potions
-		if(boosterPotion != null) {
+		if(boosterPotion.getTransport().getPositionF() != null) {
 			boosterPotion.getTransport().setPosition(position);
 			Dofus.world.getGraph().addEdge(boosterPotion);
 		}
 			
-		if(bontaPotion != null){
+		if(bontaPotion.getTransport().getPositionF() != null){
 			bontaPotion.getTransport().setPosition(position);
 			Dofus.world.getGraph().addEdge(bontaPotion);
 		}
 
-		if(brakmarPotion != null){
+		if(brakmarPotion.getTransport().getPositionF() != null){
 			brakmarPotion.getTransport().setPosition(position);
 			Dofus.world.getGraph().addEdge(brakmarPotion);
 		}
@@ -192,13 +192,13 @@ public class Person implements Serializable, TransportInterface{
 	    List<TransportStep> shortestPath = Dofus.world.getGraph().getPath(position, destination).getEdgeList();
 
 	    //Remove potions
-		if(brakmarPotion != null)
+		if(boosterPotion.getTransport().getPositionF() != null)
 			Dofus.world.getGraph().removeEdge(boosterPotion);
 		
-		if(bontaPotion != null)
+		if(bontaPotion.getTransport().getPositionF() != null)
 			Dofus.world.getGraph().removeEdge(bontaPotion);
 		
-		if(brakmarPotion != null)
+		if(brakmarPotion.getTransport().getPositionF() != null)
 			Dofus.world.getGraph().removeEdge(brakmarPotion);
 		
 		return new TransportPath(shortestPath);

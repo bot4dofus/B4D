@@ -4,7 +4,7 @@ import java.awt.AWTException;
 import java.awt.Point;
 import java.io.Serializable;
 
-import fr.B4D.dofus.B4DCannotFind;
+import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
@@ -45,7 +45,7 @@ public class TransportStep implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
-	public void use() throws AWTException, B4DCannotFind, B4DWrongPosition, StopProgramException, CancelProgramException {
+	public void use() throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {
 		transport.goTo(destination);
 	}
 
