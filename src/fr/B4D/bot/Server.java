@@ -12,23 +12,23 @@ public class Server implements Serializable{
 	/****************/
 	
 	//French
-	public final static Server FURYE = new Server("Furye", "0.0.0.0");
-	public final static Server MERIANA = new Server("Mériana", "0.0.0.0");
-	public final static Server MERKATOR = new Server("Merkator", "0.0.0.0");
-	public final static Server PANDORE = new Server("Pandore", "0.0.0.0");
-	public final static Server BRUMEN = new Server("Brumen", "0.0.0.0");
-	public final static Server AGRIDE = new Server("Agride", "0.0.0.0");
-	public final static Server NIDAS = new Server("Nidas", "0.0.0.0");
-	public final static Server USH = new Server("Ush", "0.0.0.0");
-	public final static Server JULITH = new Server("Julith", "0.0.0.0");
+	public final static Server FURYE = new Server("Furye", "34.255.26.216");
+	public final static Server MERIANA = new Server("Mériana", "34.243.42.81");
+	public final static Server MERKATOR = new Server("Merkator", "34.253.54.78");
+	public final static Server PANDORE = new Server("Pandore", "34.255.15.190");
+	public final static Server BRUMEN = new Server("Brumen", "34.243.167.137");
+	public final static Server AGRIDE = new Server("Agride", "34.255.26.216");
+	public final static Server NIDAS = new Server("Nidas", "52.50.239.1");
+	public final static Server USH = new Server("Ush", "52.214.35.62");
+	public final static Server JULITH = new Server("Julith", "52.213.230.140");
 
 	//Internationnals
 	public final static Server ECHO = new Server("Echo", "54.194.216.90");
 	public final static Server ILYZAELLE = new Server("Ilyzaelle", "34.242.48.97");
 
 	//Specials
-	public final static Server OTOMUSTAM = new Server("OtoMustam", "0.0.0.0");
-	public final static Server TOURNOIS = new Server("Tournois", "0.0.0.0");
+	//public final static Server OTOMUSTAM = new Server("OtoMustam", "0.0.0.0");
+	//public final static Server TOURNOIS = new Server("Tournois", "0.0.0.0");
 	public final static Server OMBRE = new Server("Ombre", "54.77.55.234");
 	
 	  /**************/
@@ -61,11 +61,14 @@ public class Server implements Serializable{
     servers.add(AGRIDE);
     servers.add(NIDAS);
     servers.add(USH);
-    servers.add(ILYZAELLE);
     servers.add(JULITH);
-    servers.add(OTOMUSTAM);
-    servers.add(OMBRE);
+    
     servers.add(ECHO);
+    servers.add(ILYZAELLE);
+    
+    //servers.add(OTOMUSTAM);
+    //servers.add(TOURNOIS);
+    servers.add(OMBRE);
       return servers;
   }
 
