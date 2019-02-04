@@ -23,6 +23,14 @@ import net.sourceforge.tess4j.TesseractException;
 
 public final class MessageAPI {	
 	
+	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des messages entre joueurs.<br/>
+	 *  <br/>
+	 *  Fonctionnement :
+	 *  <ul>
+	 *  	<li>Attente d'un message quelconque dans le chat.</li>
+	 *  	<li>Affiche le message reçu ainsi que l'auteur et le canal.</li>
+	 *  </ul>
+	 */
 	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
@@ -31,16 +39,25 @@ public final class MessageAPI {
 			B4D.logger.popUp("Message de " + message.getPseudo() + "(" + message.getChannel() + ") : " + message.getText());
 		}
 	});
-	
 
+	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueurs.<br/>
+	 *  <br/>
+	 *  Fonctionnement :
+	 *  <ul>
+	 *  	<li>Envoi d'un message privé à "Solwy".</li>
+	 *  	<li>Envoi du message.</li>
+	 *  	<li>Attente de la réponse du joueur.</li>
+	 *  	<li>Répond "ça va ?" si le joueur à répondu. Affiche un message si il n'a pas répondu après 1 min = 60000 ms.</li>
+	 *  </ul>
+	 *  Dans le cas où l'échange est annulé par le joueur, un exception est levée. Un message différent est alors affiché.<br/>
+	 */
 	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws AWTException, CannotFindException, WrongPositionException, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException {
 			Message message = new Message("Solwy", "Salut !");
 			message.send();
-			Dofus.chat.addPseudoFilter("Solwy");
-			message = Dofus.chat.waitForMessage(60000);
+			message = message.waitForReply(60000);
 			if(message != null)
 				message.reply("ça va ?");
 			else	
@@ -48,6 +65,16 @@ public final class MessageAPI {
 		}
 	});
 
+	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueurs.<br/>
+	 *  <br/>
+	 *  Fonctionnement :
+	 *  <ul>
+	 *  	<li>Ajout d'un filtre canal : Seul les messages du canal commerce seront traités.</li>
+	 *  	<li>Ajout d'un filtre texte : Seul les messages contenant "moi" seront traités.</li>
+	 *  	<li>Ajout d'une opération à éffectuer pour chaque message correspondant au filtre.</li>
+	 *  	<li>Débute la lecture du chat en précisant à 3 le nombre de messages qui seront traités.</li>
+	 *  </ul>
+	 */
 	public final static Program TUTORIAL3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
