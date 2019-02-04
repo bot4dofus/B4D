@@ -20,7 +20,7 @@ public class B4DGraph implements Serializable{
 	/******************/
 	
 	public B4DGraph() {
-		this.graph = new DirectedWeightedPseudograph<Point, TransportStep>(TransportStep.class);
+		graph = new DirectedWeightedPseudograph<Point, TransportStep>(TransportStep.class);
 	}
 	
 	  /*********************/
@@ -37,26 +37,26 @@ public class B4DGraph implements Serializable{
 		
 		if(autoConnect) {
 			if(graph.containsVertex(up)) {
-				this.addEdge(new TransportStep(new Walk(vertex), up));
-				this.addEdge(new TransportStep(new Walk(up), vertex));
+				addEdge(new TransportStep(new Walk(vertex), up));
+				addEdge(new TransportStep(new Walk(up), vertex));
 			}
 			if(graph.containsVertex(down)) {
-				this.addEdge(new TransportStep(new Walk(vertex), down));
-				this.addEdge(new TransportStep(new Walk(down), vertex));
+				addEdge(new TransportStep(new Walk(vertex), down));
+				addEdge(new TransportStep(new Walk(down), vertex));
 			}
 			if(graph.containsVertex(right)) {
-				this.addEdge(new TransportStep(new Walk(vertex), right));
-				this.addEdge(new TransportStep(new Walk(right), vertex));
+				addEdge(new TransportStep(new Walk(vertex), right));
+				addEdge(new TransportStep(new Walk(right), vertex));
 			}
 			if(graph.containsVertex(left)) {
-				this.addEdge(new TransportStep(new Walk(vertex), left));
-				this.addEdge(new TransportStep(new Walk(left), vertex));
+				addEdge(new TransportStep(new Walk(vertex), left));
+				addEdge(new TransportStep(new Walk(left), vertex));
 			}
 		}
 	}
 	
 	public void removeVertex(Point vertex) {
-		this.graph.removeVertex(vertex);
+		graph.removeVertex(vertex);
 	}
 	
 	  /*******************/
@@ -64,18 +64,25 @@ public class B4DGraph implements Serializable{
 	/*******************/
 	
 	public void addEdge(TransportStep transportStep) {
-		this.graph.addEdge(transportStep.getTransport().getPosition(), transportStep.getDestination(), transportStep);
-		this.graph.setEdgeWeight(transportStep, transportStep.getTransport().getWeight());
+		graph.addEdge(transportStep.getTransport().getPosition(), transportStep.getDestination(), transportStep);
+		graph.setEdgeWeight(transportStep, transportStep.getTransport().getWeight());
 	}
 	
 	public void removeEdge(TransportStep transportStep) {
-		this.graph.removeEdge(transportStep.getTransport().getPosition(), transportStep.getDestination());
+		removeEdge(transportStep.getTransport().getPosition(), transportStep.getDestination(), false);
 	}
+	public void removeEdge(Point origin, Point destination, boolean symetric) {
+		graph.removeEdge(origin, destination);
+		if(symetric)
+			graph.removeEdge(destination, origin);
+	}
+	
+	
 	  /**************/
 	 /** METHODES **/
 	/**************/
 	
 	public GraphPath<Point, TransportStep> getPath(Point source, Point target) {
-		return new DijkstraShortestPath<Point, TransportStep>(this.graph).getPath(source, target);
+		return new DijkstraShortestPath<Point, TransportStep>(graph).getPath(source, target);
 	}
 }

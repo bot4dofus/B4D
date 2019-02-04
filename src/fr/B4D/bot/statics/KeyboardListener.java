@@ -27,7 +27,7 @@ public class KeyboardListener extends Thread{
 			while(!fin) {
 				if(isShiftPressed() && isSPressed())
 					B4D.wait.suspend();
-				this.wait(500);
+				Thread.sleep(500);
 			}
 			B4D.logger.debug(this, "Fin du thread");
 		} catch (InterruptedException e) {

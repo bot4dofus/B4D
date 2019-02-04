@@ -163,11 +163,13 @@ public final class Screen {
 	 /** ATTENTE SUR MAP **/
 	/*********************/
 	
-	public boolean waitForMap(int timeOut) {
-		return waitForChangingPixel(B4D.converter.pointToPointF(configuration.getMinimap()), timeOut);
+	public boolean waitForMap(int timeOut) throws StopProgramException, CancelProgramException {
+		boolean out = waitForChangingPixel(B4D.converter.pointToPointF(configuration.getMinimap()), timeOut);
+		B4D.wait.wait(1000);
+		return out;
 	}
-	public boolean waitForMap() {
-		return waitForMap(15);
+	public boolean waitForMap() throws StopProgramException, CancelProgramException {
+		return waitForMap(20000);
 	}
 	
 	  /*********************/
@@ -180,7 +182,7 @@ public final class Screen {
 		try {
 			ocrThread.join(timeOut);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			B4D.logger.error(e);
 		}
 		
 		if(ocrThread.isAlive())
@@ -204,8 +206,7 @@ public final class Screen {
 		try {
 			pixelThread.join(timeOut);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
-			return false;
+			B4D.logger.error(e);
 		}
 		
 		if(pixelThread.isAlive()) {
@@ -228,8 +229,7 @@ public final class Screen {
 		try {
 			colorThread.join(timeOut);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
-			return false;
+			B4D.logger.error(e);
 		}
 		
 		if(colorThread.isAlive()) {

@@ -102,6 +102,8 @@ public class Chat extends Thread{
 					synchronized(messages){
 						messages.wait(timeout);
 						message = messages.poll();
+						if(message == null) 
+							break;
 					}
 				}
 			}while(!filter.filter(message));

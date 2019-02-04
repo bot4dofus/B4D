@@ -61,6 +61,10 @@ public class SocketListener extends Thread{
 	 /** RUN **/
 	/*********/
 	
+	public void interrupt() {
+		m_pcap.endCapture();
+	}
+	
 	public void run() {
 		try {
 			B4D.logger.debug(this, "Lancement du thread");

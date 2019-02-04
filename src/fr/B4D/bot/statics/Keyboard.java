@@ -72,8 +72,7 @@ public final class Keyboard{
 		try {
 			keyboardThread.join(timeOut);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
-			return false;
+			B4D.logger.error(e);
 		}
 		
 		if(keyboardThread.isAlive()) {
