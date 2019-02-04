@@ -22,18 +22,19 @@ public class Exchange implements Serializable{
 	 /** CONSTANTS **/
 	/***************/
 	
-	private final String waitForExchangeKey = "avec vous"; //clef permettant de valider l'echange
+	private final int timeout = 30000;	//Timeout avant echec de l'échange
 	
-	private final Rectangle waitForExchangeRectangle = new Rectangle(new PointF(0.3762, 0.4756), new PointF(0.6238, 0.5055)); //Zone des kamas entrants
-	private final PointF waitForExchangeYesButton = new PointF(0.4143, 0.5304);		//Emplacement du bouton accepter
-
+	private final Rectangle waitForExchangeRectangle = new Rectangle(new PointF(0.3104,0.476), new PointF(0.6904,0.506)); 	//Zone des kamas entrants
+	private final String waitForExchangeKey = "avec vous"; 						//clef permettant de valider l'echange
+	private final PointF waitForExchangeYesButton = new PointF(0.3688,0.5299);	//Emplacement du bouton accepter
+	
+	private final Rectangle kamasInRectangle = new Rectangle(new PointF(0.0648,0.2525), new PointF(0.1672,0.2745)); 		//Zone somme entrante
+	private final PointF kamasOutArea = new PointF(0.4912,0.2625);
+	
 	private static String[] validationKeys = {"oui","Oui","OUI","ui","Ui","yes","Yes","YES", "yep", "Yep", "YEP","ouai","Ouai","OUAI"};
 	
-	private final int timeout = 30000; 												//Timeout avant echec de l'échange
-	private final Rectangle kamasInRectangle = new Rectangle(new PointF(0.2163, 0.2527), new PointF(0.283, 0.2747)); //Zone somme entrante
-
-	private final PointF escapeButton = new PointF(0.8093, 0.0888);			//Emplacement de la croix
-	private final PointF validationButton = new PointF(0.382, 0.5345);		//Emplacement du bouton de validation de l'echange
+	private final PointF escapeButton = new PointF(0.9752,0.0888);			//Emplacement de la croix
+	private final PointF validationButton = new PointF(0.3192,0.5349);		//Emplacement du bouton de validation de l'echange
 	
 	  /**************/
 	 /** ATRIBUTS **/
@@ -110,7 +111,7 @@ public class Exchange implements Serializable{
 		Message message;
 		
 		if(kamasOut > 0) {
-			B4D.mouse.doubleLeftClick(new PointF(0.494, 0.2627), false);
+			B4D.mouse.doubleLeftClick(kamasOutArea, false);
 			B4D.keyboard.writeKeyboard(Integer.toString(kamasOut));
 		}
 		
@@ -163,6 +164,6 @@ public class Exchange implements Serializable{
 	}
 	
 	private boolean isValided() throws AWTException {
-		return B4D.screen.searchPixel(new PointF(0.396, 0.2804), new PointF(0.396, 0.2914), new Color(100, 100, 0), new Color(255, 255, 50)) != null;
+		return B4D.screen.searchPixel(new PointF(0.3408,0.2804), new PointF(0.3408,0.2914), new Color(100, 100, 0), new Color(255, 255, 50)) != null;
 	}
 }

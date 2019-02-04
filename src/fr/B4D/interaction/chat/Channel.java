@@ -17,25 +17,23 @@ public class Channel implements Serializable{
 	
 	private static final long serialVersionUID = 4872542387501307482L;
 	
-	/****************/
+	  /****************/
 	 /** COLLECTION **/
 	/****************/
 	
-	public final static Channel GENERAL = new Channel("General", "/s", new PointF(0.0166, -0.2664 + 0*0.0216));
-	public final static Channel TEAM = new Channel("Team", "/t", new PointF(0.0166, -0.2664 + 1*0.0216));
-	public final static Channel GUILD = new Channel("Guild", "/g", new PointF(0.0166, -0.2664 + 2*0.0216));
-	public final static Channel ALLIES = new Channel("Allies", "/a", new PointF(0.0166, -0.2664 + 3*0.0216));
-	public final static Channel GROUP = new Channel("Group", "/p", new PointF(0.0166, -0.2664 + 4*0.0216));
-	public final static Channel BUSINESS = new Channel("Business", "/b", new PointF(0.0166, -0.2664 + 5*0.0216));
-	public final static Channel RECRUITMENT = new Channel("Recruitment", "/r", new PointF(0.0166, -0.2664 + 6*0.0216));
-	public final static Channel PRIVATE = new Channel("Private", "/w", new PointF(0.0166, -0.2664 + 7*0.0216));
-	public final static Channel INFORMATION = new Channel("Information", null, new PointF(0.0166, -0.2664 + 8*0.0216));
-	public final static Channel FIGHT = new Channel("Fight", null, new PointF(0.0166, -0.2664 + 9*0.0216));
-	public final static Channel PROMOTION = new Channel("Promotion", null, new PointF(0.0166, -0.2664 + 10*0.0216));
-	public final static Channel KOLIZEUM = new Channel("Kolizeum", "/k", new PointF(0.0166, -0.2664 + 11*0.0216));
-	public final static Channel EN_COMMUNITY = new Channel("EnCommunity", "/c", new PointF(0.0166, -0.2664 + 12*0.0216));
-
-	
+	public final static Channel GENERAL = new Channel("General", "/s", new PointF(0.024, -0.266 + 0*0.0216));
+	public final static Channel TEAM = new Channel("Team", "/t", new PointF(0.024, -0.266 + 1*0.0216));
+	public final static Channel GUILD = new Channel("Guild", "/g", new PointF(0.024, -0.266 + 2*0.0216));
+	public final static Channel ALLIES = new Channel("Allies", "/a", new PointF(0.024, -0.266 + 3*0.0216));
+	public final static Channel GROUP = new Channel("Group", "/p", new PointF(0.024, -0.266 + 4*0.0216));
+	public final static Channel BUSINESS = new Channel("Business", "/b", new PointF(0.024, -0.266 + 5*0.0216));
+	public final static Channel RECRUITMENT = new Channel("Recruitment", "/r", new PointF(0.024, -0.266 + 6*0.0216));
+	public final static Channel PRIVATE = new Channel("Private", "/w", new PointF(0.024, -0.266 + 7*0.0216));
+	public final static Channel INFORMATION = new Channel("Information", null, new PointF(0.024, -0.266 + 8*0.0216));
+	public final static Channel FIGHT = new Channel("Fight", null, new PointF(0.024, -0.266 + 9*0.0216));
+	public final static Channel PROMOTION = new Channel("Promotion", null, new PointF(0.024, -0.266 + 10*0.0216));
+	public final static Channel KOLIZEUM = new Channel("Kolizeum", "/k", new PointF(0.024, -0.266 + 11*0.0216));
+	public final static Channel EN_COMMUNITY = new Channel("EnCommunity", "/c", new PointF(0.024, -0.266 + 12*0.0216));
 	
 	  /**************/
 	 /** ATRIBUTS **/
@@ -57,7 +55,7 @@ public class Channel implements Serializable{
 	
 	  /*************/
 	 /** GETTERS **/
-	/*************/ 
+	/*************/
 	
 	public String getName() {
 		return this.name;
@@ -69,7 +67,7 @@ public class Channel implements Serializable{
 	
 	  /*************/
 	 /** PRIVATE **/
-	/*************/ 
+	/*************/
 	
 	private void toggle(PointF arrowPosition) throws AWTException, StopProgramException, CancelProgramException {
 		PointF checkPosition = new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);		
@@ -109,8 +107,8 @@ public class Channel implements Serializable{
 		displayChannels(Arrays.asList(channel));
 	}
 	public static void displayChannels(List<Channel> channels) throws AWTException, StopProgramException, CancelProgramException {
-		B4D.mouse.leftClick(new PointF(0.0052, 0.991), false, 200);		//Ouvre le menu du chat
-		List<PointF> matchs = B4D.screen.searchPixels(new PointF(0.1339, 0.7285), new PointF(0.1339, 0.985), new Color(100, 100, 100), new Color(255, 255, 255));
+		B4D.mouse.leftClick(new PointF(-0.26,0.991), false, 200);		//Ouvre le menu du chat
+		List<PointF> matchs = B4D.screen.searchPixels(new PointF(-0.0616,0.7285), new PointF(-0.0616,0.985), new Color(100, 100, 100), new Color(255, 255, 255));
 		PointF arrowPosition = matchs.get(matchs.size() - 1);
 		B4D.mouse.leftClick(arrowPosition, false, 100);	//Affiche les caneaux affichés
 		

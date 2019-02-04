@@ -258,24 +258,24 @@ public class Zaapi extends Transport implements Serializable{
 	
 	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {			
 		B4D.mouse.leftClick(super.getPositionF(), false);
-		B4D.screen.waitForColor(new PointF(0.4472, 0.7367), new Color(186, 125, 0), new Color(255, 255, 50), 10);
+		B4D.screen.waitForColor(new PointF(0.4192,0.7365), new Color(186, 125, 0), new Color(255, 255, 50), 10);
 		
 	    switch(this.zaapiType) {
 	    	case Atelier:
-		        B4D.mouse.leftClick(new PointF(0.3253, 0.1626), false, 100);
+		        B4D.mouse.leftClick(new PointF(0.232,0.1627), false, 100);
 		        break;
 		    case HDV:
-		    	B4D.mouse.leftClick(new PointF(0.3253, 0.1626), false, 100);
+		    	B4D.mouse.leftClick(new PointF(0.232,0.1627), false, 100);
 		    	break;
 		    case Divers:
-		    	B4D.mouse.leftClick(new PointF(0.6027, 0.1626), false, 100);
+		    	B4D.mouse.leftClick(new PointF(0.6584,0.1627), false, 100);
 		    	break;
 			default:
 				break;
 	    }
-	    B4D.mouse.leftClick(new PointF(0.6062, 0.2013), false, 200);
+	    B4D.mouse.leftClick(new PointF(0.6632,0.2006), false, 200);
 	    B4D.keyboard.writeKeyboard(getZaap(destination).getName());
-	    B4D.mouse.doubleLeftClick(new PointF(0.4736, 0.2891), false);
+	    B4D.mouse.doubleLeftClick(new PointF(0.46,0.2884), false);
 	    B4D.screen.waitForMap(20000);
 	}
 }

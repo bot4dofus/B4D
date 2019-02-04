@@ -97,10 +97,21 @@ public class JPanel_Reglage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							bottomRight = MouseInfo.getPointerInfo().getLocation();
-							b4d.getConfiguration().setGameFrame(new Rectangle(topLeft.x, topLeft.y, bottomRight.x - topLeft.x, bottomRight.y - topLeft.y));
+							
+							int width = bottomRight.x - topLeft.x;
+							int height = bottomRight.y - topLeft.y;
+							int realWidth = height * 1157 / 927;
+							b4d.getConfiguration().setGameFrame(new Rectangle((width - realWidth)/2, topLeft.y, realWidth, height));
+							
 							ActualiserInfos();
 						}
 					});
+//		        LocalConfiguration.ZoneDeJeu.Location = GetPoint(Images.Images.Item(0), "Cliquer dans le coin suppérieur gauche de la fenêtre de jeu.")
+//		        Dim CurrentPosition As Point = GetPoint(Images.Images.Item(1), "Cliquer dans le coin inférieur droit de la fenêtre de jeu, puis appuyez sur '+'. (Ne pas fermer cette fenetre)")
+//
+//		        LocalConfiguration.ZoneDeJeu.Height = CurrentPosition.Y - LocalConfiguration.ZoneDeJeu.Location.Y
+//		        LocalConfiguration.ZoneDeJeu.Width = LocalConfiguration.ZoneDeJeu.Height * 1157 / 927
+//		        LocalConfiguration.ZoneDeJeu.Location = New Point((Screen.PrimaryScreen.Bounds.Width - LocalConfiguration.ZoneDeJeu.Width) / 2, LocalConfiguration.ZoneDeJeu.Location.Y)
 			}
 		});
 		button_GameFrame.setFont(new Font("Tahoma", Font.PLAIN, 13));

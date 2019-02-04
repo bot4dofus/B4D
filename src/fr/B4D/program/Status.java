@@ -20,7 +20,7 @@ public class Status {
 	 /** ATRIBUTS **/
 	/**************/
 	
-	private final PointF statusMenuPosition = new PointF(0.3564, 0.989);
+	private final PointF statusMenuPosition = new PointF(0.28,0.989);
 	
 	private String name;
 	private PointF relativPosition;
