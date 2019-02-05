@@ -9,7 +9,7 @@ import org.jgrapht.graph.DirectedWeightedPseudograph;
 
 import fr.B4D.transport.transports.Walk;
 
-public class B4DGraph implements Serializable{
+public class Graph implements Serializable{
 
 	private static final long serialVersionUID = -2532108486622081288L;
 	
@@ -19,7 +19,7 @@ public class B4DGraph implements Serializable{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
-	public B4DGraph() {
+	public Graph() {
 		graph = new DirectedWeightedPseudograph<Point, TransportStep>(TransportStep.class);
 	}
 	
