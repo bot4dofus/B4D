@@ -138,7 +138,7 @@ public class SocketListener extends Thread{
 
 		try {
 			int lengthHeaderOne = getHeaderLength(data);			
-			Channel channel = Message.getChannel(data[lengthHeaderOne-3]);
+			Channel channel = Channel.fromByte(data[lengthHeaderOne-3]);
 			
 			int lengthText = Byte.toUnsignedInt(data[lengthHeaderOne-2])*256 + Byte.toUnsignedInt(data[lengthHeaderOne-1]);
 			byte[] text = Arrays.copyOfRange(data, lengthHeaderOne, lengthHeaderOne + lengthText);

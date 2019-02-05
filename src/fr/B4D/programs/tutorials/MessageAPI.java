@@ -81,7 +81,7 @@ public final class MessageAPI {
 		public void cycle(Person person) throws AWTException, CannotFindException, WrongPositionException, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException {
 			Dofus.chat.addChannelFilter(Channel.BUSINESS);
 			Dofus.chat.addTextFilter("moi");
-			Dofus.chat.addChatListener(new ChatListener() {
+			Dofus.chat.setChatListener(new ChatListener() {
 				public void treatMessage(Message message) throws StopProgramException, CancelProgramException {
 					message.reply("C'est qui moi ?");
 				}

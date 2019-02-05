@@ -61,7 +61,7 @@ public final class Converter {
     public Point pointFToPoint(PointF point) {
     	double X = (point.getX() * configuration.getGameFrame().getWidth()) + configuration.getGameFrame().getX();
     	double Y = (point.getY() * configuration.getGameFrame().getHeight()) + configuration.getGameFrame().getY();
-        return new Point((int)X, (int)Y);
+        return new Point((int)Math.round(X), (int)Math.round(Y));
     }
 
     /** Dofus > Ecran **/
@@ -82,6 +82,6 @@ public final class Converter {
     public PointD pointFToPointD(PointF point) {
     	double X = (point.getX() / CaseWidthF - point.getY() / CaseHeightF) / 2;
     	double Y = (point.getX() / CaseWidthF + point.getY() / CaseHeightF) / 2;
-    	return new PointD((int)X, (int)Y);
+    	return new PointD((int)Math.round(X), (int)Math.round(Y));
     }    
 }

@@ -170,7 +170,8 @@ public class Program implements Serializable{
 		Dofus.chat.clear();
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
-			Message.sendChat("/clear");
+			Message clear = new Message("/clear");
+			clear.send();
 			
 			if(displayedChannels != null)
 				Channel.displayChannels(displayedChannels);
