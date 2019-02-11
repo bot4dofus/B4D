@@ -20,7 +20,7 @@ public class TransportPath implements Serializable{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
-	public TransportPath(List<TransportStep> shortestPath) throws CannotFindException {
+	public TransportPath(List<TransportStep> shortestPath) {
 		this.transportPath = shortestPath;
 	}
 	

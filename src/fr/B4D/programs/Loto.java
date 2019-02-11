@@ -17,8 +17,8 @@ import com.google.api.services.drive.model.File;
 import fr.B4D.bot.Person;
 import fr.B4D.google.GoogleDrive;
 import fr.B4D.google.GoogleSheet;
-import fr.B4D.interaction.B4DExchangeCanceled;
 import fr.B4D.interaction.Exchange;
+import fr.B4D.interaction.ExchangeCanceledException;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.program.CancelProgramException;
@@ -154,8 +154,8 @@ public final class Loto {
 				List<List<Object>> content = Arrays.asList(Arrays.asList(name, sort));
 				sheet.write(content, "B"+nb);
 				
-			} catch (B4DExchangeCanceled e) {
-				
+			} catch (ExchangeCanceledException e) {
+				//Do nothing
 			}
 		}
 

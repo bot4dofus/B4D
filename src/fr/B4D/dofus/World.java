@@ -1,13 +1,10 @@
 package fr.B4D.dofus;
 
-import java.awt.AWTException;
 import java.awt.Point;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import fr.B4D.transport.B4DGraph;
+import fr.B4D.transport.Graph;
 import fr.B4D.transport.Transport;
 import fr.B4D.transport.TransportStep;
 import fr.B4D.transport.transports.Zaap;
@@ -17,22 +14,28 @@ public final class World implements Serializable{
 
 	private static final long serialVersionUID = 3069416510525087204L;
 	
-	private B4DGraph graph;
+	private Graph graph;
 	
 	  /******************/
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
 	public World() {
-		graph = new B4DGraph();
-		addVertexPart1();
-		addVertexPart2();
-		addVertexPart3();
+		graph = new Graph();
+		createWorld();
+		addObstacles();
+		
 		patchTransport(Zaap.getAll());
 		patchTransport(Zaapi.getAllBonta());
 		patchTransport(Zaapi.getAllBrakmar());
 	}
-	private void addVertexPart1() {
+	
+	private void createWorld() {
+		addWorldPart1();
+		addWorldPart2();
+		addWorldPart3();
+	}
+	private void addWorldPart1() {
 		graph.addVertex(new Point(0, 0), true);
 		graph.addVertex(new Point(-33, -65), true);
 		graph.addVertex(new Point(-32, -65), true);
@@ -3026,7 +3029,7 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-17, -24), true);
 		graph.addVertex(new Point(-18, -24), true);
 	}
-	private void addVertexPart2() {
+	private void addWorldPart2() {
 		graph.addVertex(new Point(-19, -24), true);
 		graph.addVertex(new Point(-20, -24), true);
 		graph.addVertex(new Point(-20, -25), true);
@@ -6020,7 +6023,7 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-64, -54), true);
 		graph.addVertex(new Point(-64, -55), true);
 	}
-	private void addVertexPart3() {
+	private void addWorldPart3() {
 		graph.addVertex(new Point(-65, -55), true);
 		graph.addVertex(new Point(-66, -55), true);
 		graph.addVertex(new Point(-67, -55), true);
@@ -6298,13 +6301,28 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-76, -45), true);
 		graph.addVertex(new Point(-1, -66), true);
 	}
-
+	
+	private void addObstacles() {
+		astrubWalls();
+	}
+	private void astrubWalls() {
+		graph.removeEdge(new Point(5,-19), new Point(5,-20), true);
+		graph.removeEdge(new Point(6,-19), new Point(6,-20), true);
+		graph.removeEdge(new Point(6,-19), new Point(7,-19), true);
+		graph.removeEdge(new Point(6,-17), new Point(7,-17), true);
+		graph.removeEdge(new Point(6,-17), new Point(6,-16), true);
+		graph.removeEdge(new Point(4,-17), new Point(4,-16), true);
+		graph.removeEdge(new Point(3,-17), new Point(3,-16), true);
+		graph.removeEdge(new Point(3,-17), new Point(2,-17), true);
+		graph.removeEdge(new Point(3,-19), new Point(2,-19), true);
+		graph.removeEdge(new Point(3,-19), new Point(3,-20), true);
+	}
 	
 	  /*************/
 	 /** GETTERS **/
 	/*************/
 	
-	public B4DGraph getGraph() {
+	public Graph getGraph() {
 		return graph;
 	}
 	
@@ -6319,19 +6337,5 @@ public final class World implements Serializable{
 					graph.addEdge(new TransportStep(t1, t2.getPosition()));
 			}
 		}
-	}
-
-	  /**************/
-	 /** METHODES **/
-	/**************/
-	
-	public Point getPosition() throws AWTException, UnsupportedFlavorException, IOException {
-		/*B4DChat.sendChat("/s %pos%", 0);
-		ArrayList<Message> messages = B4DChat.parseChat();		
-		Message reponse = messages.stream().filter(m -> m.getMessageType().equals(MessageType.General) && m.getName().equals(Bot.configuration.persons.get(0).pseudo)).findFirst().orElse(null);
-		String[] coords = reponse.getText().split("\\[|\\]|;");
-		return new Point(Integer.valueOf(coords[1]),Integer.valueOf(coords[2]));*/
-		return new Point(3,-18);
-	}
-	
+	}	
 }

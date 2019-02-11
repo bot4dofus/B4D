@@ -121,14 +121,14 @@ public class Exchange implements Serializable{
 	/** Réalise l'échange avec le joueur
 	 * @param validationMessage - Question posé au joueur avant de confirmer l'échange. Celui-ci peut répondre par "".
 	 * @return Image preuve du consentant du joueur.
-	 * @throws ExchangeCanceled Si l'échange est annulé.
+	 * @throws ExchangeCanceledException Si l'échange est annulé.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws AWTException Si un problème de souris ou clavier survient.
 	 * @throws TesseractException Si un problème d'OCR survient.
 	 * @throws IOException Si un problème d'image survient.
 	 */
-	public BufferedImage exchange(String validationMessage) throws ExchangeCanceled, AWTException, TesseractException, IOException, StopProgramException, CancelProgramException {
+	public BufferedImage exchange(String validationMessage) throws ExchangeCanceledException, AWTException, TesseractException, IOException, StopProgramException, CancelProgramException {
 		B4D.logger.debug(this, "Début de l'échange");
 		Message message;
 		
@@ -176,16 +176,16 @@ public class Exchange implements Serializable{
 	}
 	
 	/** Annule l'échange en cours si celui-ci l'est encore.
-	 * @throws ExchangeCanceled Si l'échange est annulé.
+	 * @throws ExchangeCanceledException Si l'échange est annulé.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws AWTException Si un problème de souris ou clavier survient.
 	 */
-	public void cancelExchange() throws ExchangeCanceled, AWTException, StopProgramException, CancelProgramException {
+	public void cancelExchange() throws ExchangeCanceledException, AWTException, StopProgramException, CancelProgramException {
 		B4D.logger.debug(this, "Echange annulé");
 		if(isInProgress())
 			B4D.mouse.leftClick(escapeButton, false);
-		throw new ExchangeCanceled();
+		throw new ExchangeCanceledException();
 	}
 	
 	/** Permet de savoir si l'échange est encore en cours.
