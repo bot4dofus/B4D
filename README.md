@@ -64,6 +64,10 @@ Afin de vérifier la bonne configuration du bot, vous pouvez lancer les tutoriau
 
 [Expliquer ici les paramètres de lancement d'un programme]
 
+## Rapport d'erreurs
+
+B4D inclu un système de gestion des erreurs permettant de signaler aux développeurs d'éventuels problèmes. Lorsqu'un message d'erreur apparait, choisissez "Envoyer le rapport d'erreur" pour signaler celle-ci.
+
 # Contribution
 ## Prérequis 
 
