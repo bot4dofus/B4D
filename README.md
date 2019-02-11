@@ -1,3 +1,3 @@
 - [WIKI](https://github.com/LucBerge/B4D/wiki) (Explications, documentations et contributions)
 - [JAVA DOC]() (Documentation généré automatiquement)
-- [BUGS] (https://github.com/LucBerge/B4D/issues) (Rapport d'erreurs)
+- [BUGS](https://github.com/LucBerge/B4D/issues) (Rapport d'erreurs)
