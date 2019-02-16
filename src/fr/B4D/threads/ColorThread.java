@@ -18,7 +18,7 @@ public class ColorThread extends Thread{
 		
 	public void run(){
 		try{
-			while(B4D.screen.isBetween(B4D.screen.getPixelColor(pixel), min, max));
+			while(!B4D.screen.isBetween(B4D.screen.getPixelColor(pixel), min, max));
 		}catch (Exception e){
 			Thread.currentThread().interrupt();			
 		}

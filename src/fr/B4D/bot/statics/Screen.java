@@ -164,9 +164,7 @@ public final class Screen {
 	/*********************/
 	
 	public boolean waitForMap(int timeOut) throws StopProgramException, CancelProgramException {
-		boolean out = waitForChangingPixel(B4D.converter.pointToPointF(configuration.getMinimap()), timeOut);
-		B4D.wait.wait(1000);
-		return out;
+		return waitForChangingPixel(B4D.converter.pointToPointF(configuration.getMinimap()), timeOut);
 	}
 	public boolean waitForMap() throws StopProgramException, CancelProgramException {
 		return waitForMap(20000);

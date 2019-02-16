@@ -29,7 +29,7 @@ public class Zaap extends Transport implements Serializable{
     public final static Zaap Amakna_Plaines_Scarafeuilles = new Zaap("Amakna (Plaine des Scarafeuilles)", new Point(-1, 24), new PointF(0.2576, 0.509));
     public final static Zaap Amakna_Port_Madrestam = new Zaap("Amakna (Port de Madrestam)", new Point(7, -4), new PointF(0.6027, 0.2234));
     public final static Zaap Amakna_Village = new Zaap("Amakna (Village d'Amakna)", new Point(-2, 0), new PointF(0.6798, 0.2325));
-    public final static Zaap Astrub = new Zaap("Astrub (Cite d'astrub)", new Point(5, -18), new PointF(0.5407, 0.4037));
+    public final static Zaap Astrub = new Zaap("Astrub (Cite d'astrub)", new Point(5, -18), new PointF(0.6056, 0.3104));
     public final static Zaap Sufokia_Rivage = new Zaap("Baie de Sufokia (Rivage sufokien)", new Point(10, 22), new PointF(0.5401, 0.3377));
     public final static Zaap Sufokia_Village = new Zaap("Baie de Sufokia (Sufokia)", new Point(13, 26), new PointF(0.7376, 0.2896));
     public final static Zaap Sufokia_Temple_Alliances = new Zaap("Baie de Sufokia (Temple des alliances)", new Point(13, 35), new PointF(0.8122, 0.1162));
@@ -114,8 +114,7 @@ public class Zaap extends Transport implements Serializable{
 	
 	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {		
 		B4D.mouse.leftClick(super.getPositionF(), false);
-		
-		B4D.screen.waitForColor(new PointF(0.4192,0.7365), new Color(186, 125, 0), new Color(255, 255, 50), 10);
+		B4D.screen.waitForColor(new PointF(0.4432, 0.7365), new Color(170, 200, 0), new Color(210, 255, 50), 10000);
 		B4D.mouse.leftClick(new PointF(0.6632,0.2006), false, 200);
 		B4D.keyboard.writeKeyboard(getZaap(destination).getName());
 		B4D.mouse.doubleLeftClick(new PointF(0.46,0.2884), false);

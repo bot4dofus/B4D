@@ -20,19 +20,19 @@ public class KeyboardListener extends Thread{
 	/*********/
 	
 	public void run(){
-		try {
-			B4D.logger.debug(this, "Lancement du thread");
-			boolean fin = false;
+		B4D.logger.debug(this, "Lancement du thread");
+		boolean fin = false;
 
-			while(!fin) {
-				if(isShiftPressed() && isSPressed())
-					B4D.wait.suspend();
+		while(!fin) {
+			if(isShiftPressed() && isSPressed())
+				B4D.wait.suspend();
+			try {
 				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				fin = true;
 			}
-			B4D.logger.debug(this, "Fin du thread");
-		} catch (InterruptedException e) {
-			B4D.logger.error(e);
 		}
+		B4D.logger.debug(this, "Fin du thread");
 	}
 	
 	  /*************/

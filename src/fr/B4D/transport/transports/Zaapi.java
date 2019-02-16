@@ -258,7 +258,7 @@ public class Zaapi extends Transport implements Serializable{
 	
 	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {			
 		B4D.mouse.leftClick(super.getPositionF(), false);
-		B4D.screen.waitForColor(new PointF(0.4192,0.7365), new Color(186, 125, 0), new Color(255, 255, 50), 10);
+		B4D.screen.waitForColor(new PointF(0.4432, 0.7365), new Color(170, 200, 0), new Color(210, 255, 50), 10000);
 		
 	    switch(this.zaapiType) {
 	    	case Atelier:
