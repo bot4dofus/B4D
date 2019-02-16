@@ -77,5 +77,11 @@
 		<artifactId>google-api-services-drive</artifactId>
 		<version>v3-rev136-1.25.0</version>
 	</dependency>
+	<dependency>
+		<groupId>com.github.kirviq</groupId>
+		<artifactId>dumbster</artifactId>
+		<version>1.7.1</version>
+		<scope>test</scope>
+	</dependency>
   </dependencies>
 </project>

@@ -32,7 +32,7 @@ public class Logger {
 	/**************/
 
 	private final String path = "errors.txt";
-	private final String username = "b4d.developer@outlook.fr";
+	private final String username = "b4d.developer@outlook.com";
 	private final String password = "*****************";
 
 	/*************/
