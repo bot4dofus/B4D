@@ -1,11 +1,12 @@
 #Ecplise
 .settings/
+bin/
+target/
 .project
 .classpath
 
 #Other
-bin/
-target/
+world_creation/
 **/*.GridCreator
 **/*.txt
 **/*.B4Dconfiguration
