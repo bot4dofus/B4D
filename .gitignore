@@ -1,7 +1,10 @@
+/.settings/
 /bin/
-/*.GridCreator
-/*.txt
-/*.B4Dconfiguration
-/*.B4Dteam
 /target/
-/*.json
+/.classpath
+/.project
+/**/*.GridCreator
+/**/*.txt
+/**/*.B4Dconfiguration
+/**/*.B4Dteam
+/**/*.json
