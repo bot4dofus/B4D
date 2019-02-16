@@ -9,6 +9,5 @@ target/
 world_creation/
 **/*.GridCreator
 **/*.txt
-**/*.B4Dconfiguration
-**/*.B4Dteam
-src/main/resources/
+**/*.b4d
+**/*.json
