@@ -11,4 +11,4 @@ world_creation/
 **/*.txt
 **/*.B4Dconfiguration
 **/*.B4Dteam
-**/*.json
+src/main/resources/
