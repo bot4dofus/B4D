@@ -50,7 +50,6 @@ public final class B4D{
 
 	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
 		
-		System.out.println(System.getProperty("java.library.path"));
 		/** LOGGER **/
 		logger = new Logger();
 		
