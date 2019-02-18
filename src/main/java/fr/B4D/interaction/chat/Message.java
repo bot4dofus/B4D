@@ -99,7 +99,7 @@ public class Message implements Serializable{
 	/**********/
 	
 	/** Envoi du message avec un temps d'attente par défaut de 500ms.
-	 * Cela est identique à {@code send(text, 500)}.
+	 * Cela est identique à {@code send(500)}.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
@@ -108,7 +108,7 @@ public class Message implements Serializable{
 	}
 	
 	/** Envoi du message avec un temps d'attente.
-	 * @param millis - Temps d'attente après l'envoi.
+	 * @param millis - Temps d'attente après envoi.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */

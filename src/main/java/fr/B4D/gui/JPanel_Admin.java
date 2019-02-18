@@ -1,5 +1,4 @@
 package fr.B4D.gui;
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -89,10 +88,10 @@ public class JPanel_Admin extends JPanel {
 						new MouseAdapter() {
 							public void mousePressed(MouseEvent e) {
 								try {
-									PointF point = B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation());
+									PointF point = B4D.converter.toPointF(MouseInfo.getPointerInfo().getLocation());
 									String out = "new PointF(" + point.x + ", " + point.y + ")";
 									B4D.keyboard.setClipboard(out);
-								} catch (AWTException | HeadlessException ex) {
+								} catch (HeadlessException ex) {
 									ex.printStackTrace();
 								}
 							}

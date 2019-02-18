@@ -22,6 +22,7 @@ public class OCRThread extends Thread{
 			String ocr;
 			do {
 				ocr = B4D.screen.OCR(rectangle);
+				Thread.sleep(100);
 			}while(!ocr.contains(text));
 			result = ocr;
 		}catch (Exception e){

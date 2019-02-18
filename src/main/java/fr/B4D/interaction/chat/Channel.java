@@ -50,11 +50,6 @@ public class Channel implements Serializable{
 	 /** BUILDER **/
 	/*************/
 	
-	/** Constructeur de la classe {@code Exchange}.
-	 * @param kamasIn - Nombre de kamas attendu de la part du joueur.
-	 * @param kamasOut - Nombre de kamas donné au joueur.
-	 */
-	
 	/** Constructeur de la classe {@code Channel}.
 	 * @param name - Nom de la classe
 	 * @param prefix - Préfix de la classe

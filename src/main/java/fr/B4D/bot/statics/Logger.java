@@ -25,6 +25,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.swing.JOptionPane;
 
+/** La classe {@code Logger} permet d'accéder à toutes les méthodes liés aux logs et aux erreurs.
+ */
 public class Logger {
 
 	/**************/
@@ -39,19 +41,33 @@ public class Logger {
 	/** METHODS **/
 	/*************/
 
+	/** Permet d'afficher un message dans une fenêtre graphique. Celui-ci est aussi affiché dans la console.
+	 * @param log - Message à afficher.
+	 */
 	public void popUp(String log) {
 		debug(this, "Popup showed : " + log);
 		JOptionPane.showMessageDialog(null, log, "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	/** Permet d'afficher un message dans la console.
+	 * Cette méthode doit être utilisé ainsi {@code B4D.logger.debug(this, "...")}.
+	 * @param c - Classe appelante.
+	 * @param log - Message à afficher.
+	 */
 	public void debug(Object c, String log) {
 		System.out.println("[" + c.getClass().getName() + "] " + log);
 	}
 
+	/** Permet d'afficher un message d'alerte dans la console.
+	 * @param log - Message à afficher.
+	 */
 	public void warning(String log) {
 		System.err.println(log);
 	}
 
+	/** Permet d'afficher un message d'erreur dans une fenêtre graphique en demandant si l'utilisateur veut envoyer le rapport d'erreur.
+	 * @param e - Exception de l'erreur.
+	 */
 	public void error(Exception e) {
 		e.printStackTrace();
 		if(addRepport(e)) {
@@ -63,6 +79,10 @@ public class Logger {
 		}
 	}
 
+	/** Permet d'ajouter la trace d'éxecution de l'erreur dans un fichier texte.
+	 * @param e - Exception de l'erreur.
+	 * @return {@code true} si le fichier texte dépasse 100 lignes, {@code false} sinon.
+	 */
 	public boolean addRepport(Exception e) {		
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
@@ -76,9 +96,13 @@ public class Logger {
 		}
 	}
 	
+	/** Permet de compter le nombre ligne d'un fichier.
+	 * @param path - Chemin vers le fichier.
+	 * @return - Nombre de ligne du fichier. {@code -1} si e fichier n'existe pas.
+	 */
 	private int numberOfLines(String path) {
-		int linenumber = 0;
 		try{
+			int linenumber = 0;
 			File file = new File(path);
 			if(file.exists()){
 				FileReader fr = new FileReader(file);
@@ -87,20 +111,29 @@ public class Logger {
 					linenumber++;
 				lnr.close();
 			}
+			return linenumber;
 		}catch(IOException e){
-			e.printStackTrace();
+			return -1;
 		}
-		return linenumber;
 	}
 
 	/*******************/
 	/** EMAIL METHODS **/
 	/*******************/
 
+	/** Permet d'envoyer un commentaire à l'auteur via email.
+	 * Cela est identique à {@code sendEmail("Feedback B4D", message, null)}.
+	 * @param message - Commentaire à destination de l'auteur.
+	 */
 	public void sendFeedback(String message) {
 		sendEmail("Feedback B4D", message, null);
 	}
 
+	/** Permet d'envoyer un email à l'auteur.
+	 * @param subject - Objet de l'email.
+	 * @param message - Contenu de l'email. Aucun contenu n'est ajouté à l'email si {@code null}.
+	 * @param path - Chemin vers le fichier à attacher à l'email.  Aucun fichier n'est attaché à l'email si {@code null}.
+	 */
 	public void sendEmail(String subject, String message, String path) {
 
         Properties properties = new Properties();

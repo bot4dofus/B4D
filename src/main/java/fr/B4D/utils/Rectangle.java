@@ -13,6 +13,6 @@ public class Rectangle extends java.awt.Rectangle implements Serializable{
 		super(topLeft.x, topLeft.y, bottomRigth.x - topLeft.x, bottomRigth.y - topLeft.y);
 	}
 	public Rectangle(PointF topLeft, PointF bottomRigth) {
-		this(B4D.converter.pointFToPoint(topLeft), B4D.converter.pointFToPoint(bottomRigth));
+		this(B4D.converter.toPoint(topLeft), B4D.converter.toPoint(bottomRigth));
 	}
 }

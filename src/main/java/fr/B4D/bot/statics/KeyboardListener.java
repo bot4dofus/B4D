@@ -13,12 +13,18 @@ interface User32 extends Library {
     short GetKeyState(int key);
 }
 
+/** La classe {@code KeyboardListener} permet d'écouter les touches enfoncées par l'utilisateur.
+ * Cette classe étend la classe {@code Thread}.
+ */
 public class KeyboardListener extends Thread{
 	
 	  /*********/
 	 /** RUN **/
 	/*********/
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	public void run(){
 		B4D.logger.debug(this, "Lancement du thread");
 		boolean fin = false;
@@ -39,9 +45,16 @@ public class KeyboardListener extends Thread{
 	 /** METHODS **/
 	/*************/
 	
+	/** Permet de savoir si la touche S est enfoncée.
+	 * @return {@code true} si la touche est enfoncée, {@code false} sinon.
+	 */
 	private boolean isSPressed() {
 		return User32.INSTANCE.GetAsyncKeyState(KeyEvent.VK_S) != 0;
 	}
+	
+	/** Permet de savoir si la touche Shift (Maj) est enfoncée.
+	 * @return {@code true} si la touche est enfoncée, {@code false} sinon.
+	 */
 	private boolean isShiftPressed() {
 		return (User32.INSTANCE.GetKeyState(KeyEvent.VK_SHIFT) & 0x80) == 0x80;
 	}

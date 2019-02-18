@@ -15,7 +15,7 @@ import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
 /** La classe {@code Zaapi} représente un zaapi.
- * Cette classe implémente la classe {@code Transport}.
+ * Cette classe étend la classe {@code Transport}.
  * Un zaapi est représenté par un type de zaapi.
  */
 public class Zaapi extends Transport implements Serializable{

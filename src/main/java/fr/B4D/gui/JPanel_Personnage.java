@@ -194,7 +194,7 @@ public class JPanel_Personnage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							Person person = b4d.getTeam().get(table.getSelectedRow());
-							person.getBoosterPotion().getTransport().setPositionF(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
+							person.getBoosterPotion().getTransport().setPositionF(B4D.converter.toPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
 					});
@@ -266,7 +266,7 @@ public class JPanel_Personnage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							Person person = b4d.getTeam().get(table.getSelectedRow());
-							person.getBontaPotion().getTransport().setPositionF(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
+							person.getBontaPotion().getTransport().setPositionF(B4D.converter.toPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
 					});
@@ -327,7 +327,7 @@ public class JPanel_Personnage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							Person person = b4d.getTeam().get(table.getSelectedRow());
-							person.getBrakmarPotion().getTransport().setPositionF(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
+							person.getBrakmarPotion().getTransport().setPositionF(B4D.converter.toPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
 					});
@@ -389,7 +389,7 @@ public class JPanel_Personnage extends JPanel {
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							Person person = b4d.getTeam().get(table.getSelectedRow());
-							person.setSpellPosition(B4D.converter.pointToPointF(MouseInfo.getPointerInfo().getLocation()));
+							person.setSpellPosition(B4D.converter.toPointF(MouseInfo.getPointerInfo().getLocation()));
 							ActualiserInfos(person);
 						}
 					});
