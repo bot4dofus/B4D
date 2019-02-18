@@ -8,6 +8,9 @@ import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
+/** La classe {@code TransportStep} représente une étape dans un chemin entre deux point de la carte.
+ * Une étape est défini par un transport et une destination.
+ */
 public class TransportStep implements Serializable{
 
 	private static final long serialVersionUID = 5240292689676673762L;
@@ -18,7 +21,11 @@ public class TransportStep implements Serializable{
 	  /*************/
 	 /** BUILDER **/
 	/*************/
-	
+
+	/** Constructeur de la classe {@code TransportStep}. 
+	 * @param transport - Transport utilisé pour l'étape.
+	 * @param destination - Destination du transport.
+	 */
 	public TransportStep(Transport transport, Point destination) {
 		this.transport = transport;
 		this.destination = destination;
@@ -28,15 +35,30 @@ public class TransportStep implements Serializable{
 	 /** GETTERS **/
 	/*************/
 	
+	/** Retourne le transport de l'étape.
+	 * @return Transport de l'étape.
+	 */
 	public Transport getTransport() {
 		return transport;
 	}
+	
+	/** Modifi le transport de l'étape.
+	 * @param transport - Nouveau transport de l'étape.
+	 */
 	public void setTransport(Transport transport) {
 		this.transport = transport;
 	}
+	
+	/** Retourne la destination de l'étape.
+	 * @return Destination de l'étape.
+	 */
 	public Point getDestination() {
 		return destination;
 	}
+	
+	/** Modifi le destination de l'étape.
+	 * @param destination - Nouvelle destination de l'étape.
+	 */
 	public void setDestination(Point destination) {
 		this.destination = destination;
 	}
@@ -45,6 +67,14 @@ public class TransportStep implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
+	/** Permet d'utiliser le transport de l'étape.
+	 * @param person - Joueur utilisant le transport.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 * @throws CannotFindException Si la destination d'une de l'étape est introuvable.
+	 * @throws WrongPositionException Si le joueur est mal placé pour emprunter le moyen de transport.
+	 * @throws AWTException Si un problème de souris survient.
+	 */
 	public void use() throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {
 		transport.goTo(destination);
 	}
@@ -53,6 +83,9 @@ public class TransportStep implements Serializable{
 	 /** TOSTRING **/
 	/**************/
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	public String toString() {
 		return transport.getPosition() + " vers " + destination + " via " + transport.getName();
 	}

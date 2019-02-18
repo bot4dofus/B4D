@@ -12,6 +12,9 @@ import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
+/** La classe {@code Potion} représente une potion de transport.
+ * Cette classe implémente la classe {@code Transport}.
+ */
 public class Potion extends Transport implements Serializable{
 	
 	private static final long serialVersionUID = -4986470216030169585L;
@@ -20,6 +23,12 @@ public class Potion extends Transport implements Serializable{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
+	/** Constructeur de la classe {@code Potion}.
+	 * @param name - Nom de la potion.
+	 * @param position - Position de l'utilisation de la potion sur la carte.
+	 * @param positionF - Position relative de la potion.
+	 * @param weigth - Poid de la potion.
+	 */
 	public Potion(String name, Point position, PointF positionF, double weigth) {
 		super(name, position, positionF, weigth);
 	}
@@ -28,6 +37,9 @@ public class Potion extends Transport implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
+	/* (non-Javadoc)
+	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
+	 */
 	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {		
 		B4D.mouse.doubleLeftClick(super.getPositionF(), false);
 	    B4D.screen.waitForMap(20000);

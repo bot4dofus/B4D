@@ -5,13 +5,14 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
+/** La classe {@code Walk} représente une marche.
+ * Cette classe implémente la classe {@code Transport}.
+ */
 public class Walk extends Transport implements Serializable{
 	
 	private static final long serialVersionUID = 3052740487765574838L;
@@ -34,6 +35,9 @@ public class Walk extends Transport implements Serializable{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
+	/** Constructeur de la classe {@code Walk}.
+	 * @param position - Position de la marche sur l'écran.
+	 */
 	public Walk(Point position) {
 		super("Walking", position, null, walkCost);
 	}
@@ -42,7 +46,10 @@ public class Walk extends Transport implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
-	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {		
+	/* (non-Javadoc)
+	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
+	 */
+	public void goTo(Point destination) throws AWTException, StopProgramException, CancelProgramException{		
 		Point move = new Point(destination.x - super.getPosition().x, destination.y - super.getPosition().y);
 		if(move.equals(up))
 			B4D.mouse.leftClick(goUp, false);

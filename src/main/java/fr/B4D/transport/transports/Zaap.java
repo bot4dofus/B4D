@@ -14,6 +14,9 @@ import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
+/** La classe {@code Zaap} représente un zaap.
+ * Cette classe implémente la classe {@code Transport}.
+ */
 public class Zaap extends Transport implements Serializable{
 	
 	private static final long serialVersionUID = -1582072889545306350L;
@@ -57,6 +60,11 @@ public class Zaap extends Transport implements Serializable{
 	 /** CONSTRUCTEUR **/
 	/******************/
 	
+	/** Constructeur de la classe {@code Zaap}.
+	 * @param name - Nom du zaap.
+	 * @param position - Position du zaap sur la carte.
+	 * @param positionF - Position relative du zaap.
+	 */
 	public Zaap(String name, Point position, PointF positionF) {
 		super(name, position, positionF, zaapCost);
 	}
@@ -65,6 +73,9 @@ public class Zaap extends Transport implements Serializable{
 	 /** METHODES STATIQUES **/
 	/************************/
 	
+    /** Retourne la liste de tous les zaaps.
+     * @return Liste de tous les zaaps.
+     */
     public final static ArrayList<Transport> getAll(){
     	ArrayList<Transport> zaaps = new ArrayList<Transport>();
         zaaps.add(Amakna_Foret_Malefique);
@@ -100,18 +111,31 @@ public class Zaap extends Transport implements Serializable{
         return zaaps;
     }
     
+    /** Permet de retrouver un zaap à partir de sa position.
+     * @param position - Position du zaap.
+     * @return Zaap correspondant.
+     * @throws CannotFindException Si aucun zaap ne correspond à cette position.
+     */
     public final static Zaap getZaap(Point position) throws CannotFindException{
     	return (Zaap) getAll().stream().filter(z -> z.getPosition().equals(position)).findFirst().orElseThrow(CannotFindException::new);
     }
 	
-	public static Zaap getZaap(String nom) throws CannotFindException {
-		return (Zaap) getAll().stream().filter(z -> z.getName().equals(nom)).findFirst().orElseThrow(CannotFindException::new);
+    /** Permet de retrouver un zaap à partir de son nom.
+     * @param name - Nom du zaap.
+     * @return Zaap correspondant.
+     * @throws CannotFindException Si aucun zaap ne possède ce nom.
+     */
+	public static Zaap getZaap(String name) throws CannotFindException {
+		return (Zaap) getAll().stream().filter(z -> z.getName().equals(name)).findFirst().orElseThrow(CannotFindException::new);
 	}
 	
 	  /**************/
 	 /** METHODES **/
 	/**************/
 	
+	/* (non-Javadoc)
+	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
+	 */
 	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {		
 		B4D.mouse.leftClick(super.getPositionF(), false);
 		B4D.screen.waitForColor(new PointF(0.4432, 0.7365), new Color(170, 200, 0), new Color(210, 255, 50), 10000);

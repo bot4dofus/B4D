@@ -14,6 +14,10 @@ import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
+/** La classe {@code Zaapi} représente un zaapi.
+ * Cette classe implémente la classe {@code Transport}.
+ * Un zaapi est représenté par un type de zaapi.
+ */
 public class Zaapi extends Transport implements Serializable{
 
 	private static final long serialVersionUID = -1579035196209575267L;
@@ -122,10 +126,16 @@ public class Zaapi extends Transport implements Serializable{
     public final static Zaapi Zaap_Brakmar = new Zaapi("Zaap", new Point(-26, 35), new PointF(0.7713, 0.3627), ZaapiType.Divers);
 	
     
-	  /******************/
-	 /** CONSTRUCTEUR **/
-	/******************/
+	  /*************/
+	 /** BUILDER **/
+	/*************/
 	
+	/** Constructeur de la classe {@code Zaapi}.
+	 * @param name - Nom du zaapi.
+	 * @param position - Position du zaapi sur la carte.
+	 * @param positionF - Position relative du zaapi.
+	 * @param zaapiType - Type de zaapi.
+	 */
 	public Zaapi(String name, Point position, PointF positionF, ZaapiType zaapiType) {
 		super(name, position, positionF, zaapiCost);
 		this.zaapiType = zaapiType;
@@ -135,6 +145,9 @@ public class Zaapi extends Transport implements Serializable{
 	 /** METHODES STATIQUES **/
 	/************************/
 	
+    /** Retourne la liste de tous les zaapis de Bonta.
+     * @return Liste de tous les zaapis de Bonta.
+     */
     public final static ArrayList<Transport> getAllBonta(){
     	ArrayList<Transport> zaapis = new ArrayList<Transport>();
     	zaapis.add(Atelier_Alchimistes_Bonta );
@@ -186,7 +199,10 @@ public class Zaapi extends Transport implements Serializable{
     	zaapis.add(Zaap_Bonta );
         return zaapis;
     }
-        
+    
+    /** Retourne la liste de tous les zaapis de Brakmar.
+     * @return Liste de tous les zaapis de Brakmar.
+     */
     public final static ArrayList<Transport> getAllBrakmar(){
     	ArrayList<Transport> zaapis = new ArrayList<Transport>();
     	zaapis.add(Atelier_Alchimistes_Brakmar);
@@ -238,24 +254,40 @@ public class Zaapi extends Transport implements Serializable{
         return zaapis;
     }
     
+    /** Retourne la liste de tous les zaapis.
+     * @return Liste de tous les zaapis.
+     */
     public final static ArrayList<Transport> getAll(){
 		ArrayList<Transport> zaapis = getAllBonta();
 		zaapis.addAll(getAllBrakmar());
 		return zaapis;
     }
     
-    public final static Zaapi getZaap(Point position) throws CannotFindException{
+    /** Permet de retrouver un zaapi à partir de sa position.
+     * @param position - Position du zaapi.
+     * @return Zaapi correspondant.
+     * @throws CannotFindException Si aucun zaapi ne correspond à cette position.
+     */
+    public final static Zaapi getZaapi(Point position) throws CannotFindException{
     	return (Zaapi) getAll().stream().filter(z -> z.getPosition().equals(position)).findFirst().orElseThrow(CannotFindException::new);
     }
 	
-	public static Zaapi getZaap(String nom) throws CannotFindException {
-		return (Zaapi) getAll().stream().filter(z -> z.getName().equals(nom)).findFirst().orElseThrow(CannotFindException::new);
+    /** Permet de retrouver un zaapi à partir de son nom.
+     * @param position - Nom du zaapi.
+     * @return Zaapi correspondant.
+     * @throws CannotFindException Si aucun zaapi ne possède ce nom.
+     */
+	public static Zaapi getZaapi(String name) throws CannotFindException {
+		return (Zaapi) getAll().stream().filter(z -> z.getName().equals(name)).findFirst().orElseThrow(CannotFindException::new);
 	}
 	
 	  /**************/
 	 /** METHODES **/
 	/**************/
 	
+	/* (non-Javadoc)
+	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
+	 */
 	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {			
 		B4D.mouse.leftClick(super.getPositionF(), false);
 		B4D.screen.waitForColor(new PointF(0.4432, 0.7365), new Color(170, 200, 0), new Color(210, 255, 50), 10000);
@@ -274,7 +306,7 @@ public class Zaapi extends Transport implements Serializable{
 				break;
 	    }
 	    B4D.mouse.leftClick(new PointF(0.6632,0.2006), false, 200);
-	    B4D.keyboard.writeKeyboard(getZaap(destination).getName());
+	    B4D.keyboard.writeKeyboard(getZaapi(destination).getName());
 	    B4D.mouse.doubleLeftClick(new PointF(0.46,0.2884), false);
 	    B4D.screen.waitForMap(20000);
 	}
