@@ -70,13 +70,15 @@ public class Logger {
 	 */
 	public void error(Exception e) {
 		e.printStackTrace();
-		if(addRepport(e)) {
-			String message = e.getMessage() + "\n\n=====\n\nVoulez vous envoyer le rappot d'erreur au développeur ?";
+		boolean sendRepport = addRepport(e);
+		if(sendRepport) {
+			String message = e.getMessage() + "\n\nVoulez vous envoyer le rappot d'erreur aux développeurs ?";
 			int answer = JOptionPane.showConfirmDialog(null, message, "Erreur", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 
 //			if (answer == JOptionPane.YES_OPTION)
 //					sendEmail("Repport B4D", null, path);
-		}
+		}else
+			JOptionPane.showConfirmDialog(null, e.getMessage() + "\n\nLorsque qu'un envoi du rapport d'erreur vous sera proposé, dites \"Oui\" pour signaler cette erreur aux développeurs.", "Erreur", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
 	}
 
 	/** Permet d'ajouter la trace d'éxecution de l'erreur dans un fichier texte.

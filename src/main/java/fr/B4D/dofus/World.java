@@ -10,6 +10,9 @@ import fr.B4D.transport.TransportStep;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.transport.transports.Zaapi;
 
+/** La classe {@code World} représente le monde de dofus.
+ * Un monde est défini par un graph.
+ */
 public final class World implements Serializable{
 
 	private static final long serialVersionUID = 3069416510525087204L;
@@ -19,7 +22,9 @@ public final class World implements Serializable{
 	  /******************/
 	 /** CONSTRUCTEUR **/
 	/******************/
-	
+
+	/** Constructeur de la classe {@code World}.
+	 */
 	public World() {
 		graph = new Graph();
 		createWorld();
@@ -30,11 +35,16 @@ public final class World implements Serializable{
 		patchTransport(Zaapi.getAllBrakmar());
 	}
 	
+	/** Permet d'ajouter les vertex du monde des douzes avec connexion automatique.
+	 */
 	private void createWorld() {
 		addWorldPart1();
 		addWorldPart2();
 		addWorldPart3();
 	}
+	
+	/** Permet d'ajouter les vertex du monde des douzes avec connexion automatique (partie 1/3).
+	 */
 	private void addWorldPart1() {
 		graph.addVertex(new Point(0, 0), true);
 		graph.addVertex(new Point(-33, -65), true);
@@ -3029,6 +3039,9 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-17, -24), true);
 		graph.addVertex(new Point(-18, -24), true);
 	}
+
+	/** Permet d'ajouter les vertex du monde des douzes avec connexion automatique (partie 2/3).
+	 */
 	private void addWorldPart2() {
 		graph.addVertex(new Point(-19, -24), true);
 		graph.addVertex(new Point(-20, -24), true);
@@ -6023,6 +6036,9 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-64, -54), true);
 		graph.addVertex(new Point(-64, -55), true);
 	}
+
+	/** Permet d'ajouter les vertex du monde des douzes avec connexion automatique (partie 3/3).
+	 */
 	private void addWorldPart3() {
 		graph.addVertex(new Point(-65, -55), true);
 		graph.addVertex(new Point(-66, -55), true);
@@ -6301,10 +6317,15 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-76, -45), true);
 		graph.addVertex(new Point(-1, -66), true);
 	}
-	
+
+	/** Permet d'ajouter les obstacles du monde des douzes tel que les murailes, les lisières de forêt où les falaises
+	 */
 	private void addObstacles() {
 		astrubWalls();
 	}
+	
+	/** Ajoute les murailles d'astrubs
+	 */
 	private void astrubWalls() {
 		graph.removeEdge(new Point(5,-19), new Point(5,-20), true);
 		graph.removeEdge(new Point(6,-19), new Point(6,-20), true);
@@ -6322,6 +6343,9 @@ public final class World implements Serializable{
 	 /** GETTERS **/
 	/*************/
 	
+	/** Retourne le graph du monde.
+	 * @return Graph du monde.
+	 */
 	public Graph getGraph() {
 		return graph;
 	}
@@ -6330,6 +6354,9 @@ public final class World implements Serializable{
 	 /** PATCH TRANSPORT **/
 	/*********************/
 	
+	/** Permet d'ajouter au graph une liste de transport.
+	 * @param transports - Liste de transports.
+	 */
 	private void patchTransport(ArrayList<Transport> transports) {
 		for(Transport t1:transports) {
 			for(Transport t2:transports) {

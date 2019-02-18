@@ -12,6 +12,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.B4D.bot.Configuration;
 
+/** La classe {@code ConfigurationDAO} permet de gérer la sauvegarde des instances de la classe {@code Configuration}.
+ * Cette classe étend la classe {@code DAO<Configuration>}.
+ */
 public class ConfigurationDAO extends DAO<Configuration> implements Serializable{
 
 	private static final long serialVersionUID = -222219942703682998L;
@@ -28,9 +31,24 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
     private static FileNameExtensionFilter filter = new FileNameExtensionFilter("Fichiers de configuration " + format, format);
 	
 	  /*************/
+	 /** GETTERS **/
+	/*************/
+
+	/* (non-Javadoc)
+	 * @see fr.B4D.dao.DAO#getFilter()
+	 */
+	@Override
+	public FileNameExtensionFilter getFilter() {
+		return filter;
+	}
+    
+	  /*************/
 	 /** METHODS **/
 	/*************/
 	
+	/* (non-Javadoc)
+	 * @see fr.B4D.dao.DAO#find()
+	 */
 	@Override
 	public Configuration find() throws IOException, ClassNotFoundException {
 		if(defaultFile.exists())
@@ -39,6 +57,9 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 			return create();
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.B4D.dao.DAO#create()
+	 */
 	@Override
 	protected Configuration create() throws IOException {
 		Configuration configuration = new Configuration();
@@ -46,24 +67,21 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 		return configuration;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.B4D.dao.DAO#update(java.lang.Object)
+	 */
 	@Override
 	public void update(Configuration confuguration) throws IOException {
 		serialize(confuguration, defaultFile);
-	}
-
-	  /*************/
-	 /** GETTERS **/
-	/*************/
-
-	@Override
-	public FileNameExtensionFilter getFilter() {
-		return filter;
 	}
 	
 	  /*********************/
 	 /** IMPORT & EXPORT **/
 	/*********************/
 
+	/* (non-Javadoc)
+	 * @see fr.B4D.dao.DAO#serialize(java.lang.Object, java.io.File)
+	 */
 	@Override
 	public void serialize(Configuration configuration, File file) throws IOException {		  
 			FileOutputStream fileOut = new FileOutputStream(file.getAbsolutePath());
@@ -73,8 +91,11 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 			fileOut.close();
 	  }
 
+	/* (non-Javadoc)
+	 * @see fr.B4D.dao.DAO#deserialize(java.io.File)
+	 */
 	@Override
-	public Configuration deserialize(File file) throws ClassNotFoundException, IOException {
+	public Configuration deserialize(File file) throws IOException, ClassNotFoundException {
 			FileInputStream fileIn = new FileInputStream(file.getAbsolutePath());
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			Configuration configuration = (Configuration) in.readObject();

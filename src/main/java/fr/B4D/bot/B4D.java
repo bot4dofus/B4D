@@ -139,8 +139,8 @@ public final class B4D{
 	/*************/
 
 	/** Permet d'importer une configuration ou une team.
-	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	 * @throws ClassNotFoundException Si impossible de déserialiser.
+	 * @throws IOException Si impossible de sérialiser.
 	 */
 	public void importFile() throws ClassNotFoundException, IOException {
 		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
@@ -161,10 +161,9 @@ public final class B4D{
 	}
 
 	/** Permet d'exporter une configuration ou une team.
-	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	 * @throws IOException Si impossible de sérialiser.
 	 */
-	public void exportFile() throws ClassNotFoundException, IOException {
+	public void exportFile() throws IOException {
 		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
 		FileNameExtensionFilter teamFilter = DAOFactory.getTeamDAO().getFilter();
 		

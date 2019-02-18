@@ -26,7 +26,6 @@ import fr.B4D.bot.B4D;
 import fr.B4D.socket.NoSocketDetectedException;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
-import net.sourceforge.jpcap.capture.InvalidFilterException;
 
 public class JFrame_B4D extends JFrame{
 
@@ -291,7 +290,7 @@ public class JFrame_B4D extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 					try {
 						b4d.exportFile();
-					} catch (ClassNotFoundException | IOException ex) {
+					} catch (IOException ex) {
 						B4D.logger.error(ex);
 					}
 			}
