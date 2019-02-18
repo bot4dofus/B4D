@@ -1,7 +1,7 @@
-Ce bot Ã  Ã©tÃ© conÃ§u par @LucBerge et est sous License MIT.
+Ce bot à été conçu par [@LucBerge](https://github.com/LucBerge) et est sous License MIT.
 
 **Liens utiles**
 
 - [WIKI](https://github.com/LucBerge/B4D/wiki) (Explications, documentations et contributions)
-- [JAVA DOC]() (Documentation gÃ©nÃ©rÃ©e automatiquement)
+- [JAVA DOC]() (Documentation générée automatiquement)
 - [BUGS](https://github.com/LucBerge/B4D/issues) (Rapport d'erreurs)
