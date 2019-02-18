@@ -24,6 +24,9 @@ import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.InvalidFilterException;
 
+/** La classe {@code B4D} est la classe principale du bot.
+ * Elle fournit les méthodes dont à besoin l'interface graphique pour fonctionner.
+ */
 public final class B4D{
 
 	/**************/
@@ -48,7 +51,15 @@ public final class B4D{
 	 /** BUILDER **/
 	/*************/
 
-	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
+	/** Constructeur de la classe {@code B4D} et sauvegarde la nouvelle instance dans un fichier. 
+	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
+	 * @throws IOException Si impossible de créer les fichiers de configuration.
+	 * @throws CaptureDeviceLookupException Si aucun réseau n'est détecté.
+	 * @throws NoSocketDetectedException Si aucun trame n'est détectée.
+	 * @throws CaptureDeviceOpenException Si le réseau de capture ne peut pas être écouté.
+	 * @throws InvalidFilterException Si une erreur de 
+	 */
+	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException {
 		
 		/** LOGGER **/
 		logger = new Logger();
@@ -73,17 +84,34 @@ public final class B4D{
 	/** GETTERS & SETTERS **/
 	/***********************/
 	
+	/** Retourne la configuration actuelle de la fenêtre de jeu.
+	 * @return Configuration de la fenêtre de jeu.
+	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}	
-	private void setConfiguration(Configuration configuration) throws ClassNotFoundException, IOException {
+	
+	/** Modifi la configuration de la fenêtre de jeu.
+	 * @param configuration - Nouvelle configuration de la fenêtre de jeu.
+	 * @throws IOException Si impossible de sérialiser la configuration.
+	 */
+	private void setConfiguration(Configuration configuration) throws IOException {
 		this.configuration = configuration;
 		saveConfiguration();
 	}
+	
+	/** Retourne la team du joueur.
+	 * @return Team du joueur.
+	 */
 	public Team getTeam() {
 		return team;
 	}
-	private void setTeam(Team team) throws ClassNotFoundException, IOException {
+	
+	/** Modifi la team du joueur et sauvegarde la nouvelle instance dans un fichier.
+	 * @param team - Nouvelle team du joueur.
+	 * @throws IOException Si impossible de sérialiser la configuration.
+	 */
+	private void setTeam(Team team) throws IOException {
 		this.team = team;
 		saveTeam();
 	}
@@ -92,11 +120,17 @@ public final class B4D{
 	/** SAVE **/
 	/**********/
 	
-	public void saveConfiguration() throws ClassNotFoundException, IOException {
+	/** Sauvegarde l'instance actuelle de la configuration dans un fichier.
+	 * @throws IOException Si impossible de sérialiser la configuration.
+	 */
+	public void saveConfiguration() throws IOException {
 		DAOFactory.getConfigurationDAO().update(configuration);
 	}
 	
-	public void saveTeam() throws ClassNotFoundException, IOException {
+	/** Sauvegarde l'instance actuelle de la team dans un fichier.
+	 * @throws IOException Si impossible de sérialiser la configuration.
+	 */
+	public void saveTeam() throws IOException {
 		DAOFactory.getTeamDAO().update(team);
 	}
 	
@@ -104,6 +138,10 @@ public final class B4D{
 	 /** METHODS **/
 	/*************/
 
+	/** Permet d'importer une configuration ou une team.
+	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
+	 * @throws IOException Si impossible de sérialiser la configuration.
+	 */
 	public void importFile() throws ClassNotFoundException, IOException {
 		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
 		FileNameExtensionFilter teamFilter = DAOFactory.getTeamDAO().getFilter();
@@ -117,12 +155,15 @@ public final class B4D{
 			File file = fileChooser.getSelectedFile();
 			if (configurationFilter.accept(file))
 				setConfiguration(DAOFactory.getConfigurationDAO().deserialize(file));
-			else {
+			else if(teamFilter.accept(file))
 				setTeam(DAOFactory.getTeamDAO().deserialize(file));
-			}
 		}
 	}
 
+	/** Permet d'exporter une configuration ou une team.
+	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
+	 * @throws IOException Si impossible de sérialiser la configuration.
+	 */
 	public void exportFile() throws ClassNotFoundException, IOException {
 		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
 		FileNameExtensionFilter teamFilter = DAOFactory.getTeamDAO().getFilter();
@@ -136,11 +177,14 @@ public final class B4D{
 			File file = fileChooser.getSelectedFile();
 			if (configurationFilter.accept(file))
 				DAOFactory.getConfigurationDAO().serialize(configuration, file);		
-			else
+			else if(teamFilter.accept(file))
 				DAOFactory.getTeamDAO().serialize(team, file);
 		}
 	}
 
+	/** Retourne la liste de tous les programmes.
+	 * @return Liste de tous les programmes.
+	 */
 	public ArrayList<Program> getPrograms(){
 		return Program.getAll();
 	}
@@ -149,6 +193,10 @@ public final class B4D{
 	/** RUN **/
 	/*********/
 
+	/** Permet de lancer un programme avec une configuration et un personnage particulier.
+	 * @param program - Programme à éxecuter.
+	 * @param person - Personnage qui éxecute le programme.
+	 */
 	public void runProgram(Program program, Person person) {
 		if(!socketListener.isAlive())
 			socketListener.start();

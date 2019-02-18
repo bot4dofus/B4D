@@ -60,16 +60,7 @@ public class JFrame_B4D extends JFrame{
 		}
 	}
 	
-	/**
-	 * Create the application.
-	 * @throws IOException 
-	 * @throws ClassNotFoundException 
-	 * @throws InvalidFilterException 
-	 * @throws CaptureDeviceOpenException 
-	 * @throws NoSocketDetectedException 
-	 * @throws CaptureDeviceLookupException 
-	 */
-	public JFrame_B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException{
+	public JFrame_B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException{
 		b4d = new B4D();
 		programPanel = new JPanel_Programme(b4d);
 		personPanel = new JPanel_Personnage(b4d);
@@ -133,7 +124,7 @@ public class JFrame_B4D extends JFrame{
 					B4D.socketListener.interrupt();
 					B4D.keyboardListener.interrupt();
 					dispose();
-				} catch (ClassNotFoundException | IOException e1) {
+				} catch (IOException e1) {
 					B4D.logger.error(e1);
 				}
 			}

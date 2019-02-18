@@ -41,7 +41,7 @@ public class SocketListener extends Thread{
 	 /** BUILDER **/
 	/*************/
 	
-	public SocketListener() throws CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException, InvalidFilterException {
+	public SocketListener() throws CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException {
 		m_pcap = new PacketCapture();
 		m_device = NetworkFinder.find();
 		B4D.logger.debug(this, "Network found : " + m_device);

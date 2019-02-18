@@ -3,6 +3,9 @@ package fr.B4D.bot;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/** La classe {@code Server} représente un serveur de jeu dofus.
+ * Un serveur est défini par un nom et une ip.
+ */
 public class Server implements Serializable{
 
 	private static final long serialVersionUID = 4209292777849996330L;
@@ -41,17 +44,42 @@ public class Server implements Serializable{
 	  /*****************/
 	 /** CONSTRUCTOR **/
 	/*****************/
-	
+
+	/** Constructeur de la classe {@code Server}.
+	 * @param name - Nom du serveur.
+	 * @param ip - Ip du serveur au format x.x.x.x.
+	 */
 	public Server(String name, String ip) {
 		this.name = name;
 		this.ip = ip;
 	}
 
+	  /***********************/
+	 /** GETTERS & SETTERS **/
+	/***********************/
+
+	/** Retourne le nom du serveur.
+	 * @return Nom du serveur.
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/** Retourne l'ip du serveur.
+	 * @return Ip du serveur.
+	 */
+	public String getIp() {
+		return ip;
+	}
+	
 	  /************************/
 	 /** METHODES STATIQUES **/
 	/************************/
 	
-  public final static ArrayList<Server> getAll(){
+  /** Retourne la liste de tous les serveurs.
+ * @return Liste de tous les serveur.
+ */
+public final static ArrayList<Server> getAll(){
   	ArrayList<Server> servers = new ArrayList<Server>();
     servers.add(FURYE);
     servers.add(MERIANA);
@@ -72,19 +100,12 @@ public class Server implements Serializable{
       return servers;
   }
 
-  public final static Server getServer(String name) {
+  /** Permet de retrouver un serveur à partir de son nom.
+ * @param name - Nom du serveur.
+ * @return Serveur correspondant, {@code null} si aucun résultat.
+ */
+public final static Server getServer(String name) {
 	  return getAll().stream().filter(s -> s.getName().equals(name)).findFirst().orElse(null);
   }
-  
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/
-  
-	public String getName() {
-		return name;
-	}
 
-	public String getIp() {
-		return ip;
-	}
 }

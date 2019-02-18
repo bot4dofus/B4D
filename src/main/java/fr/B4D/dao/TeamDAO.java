@@ -40,14 +40,14 @@ public class TeamDAO extends DAO<Team> implements Serializable{
 	}
 
 	@Override
-	protected Team create() throws IOException, ClassNotFoundException {
+	protected Team create() throws IOException {
 		Team team = new Team();
 		serialize(team, defaultFile);
 		return team;
 	}
 
 	@Override
-	public void update(Team team) throws IOException, ClassNotFoundException {
+	public void update(Team team) throws IOException {
 		serialize(team, defaultFile);
 	}
 
@@ -65,7 +65,7 @@ public class TeamDAO extends DAO<Team> implements Serializable{
 	/*********************/
 
 	@Override
-	public void serialize(Team team, File file) throws ClassNotFoundException, IOException {		  
+	public void serialize(Team team, File file) throws IOException {		  
 			FileOutputStream fileOut = new FileOutputStream(file.getAbsolutePath());
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(team);

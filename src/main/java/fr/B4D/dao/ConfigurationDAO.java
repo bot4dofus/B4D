@@ -40,14 +40,14 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 	}
 
 	@Override
-	protected Configuration create() throws IOException, ClassNotFoundException {
+	protected Configuration create() throws IOException {
 		Configuration configuration = new Configuration();
 		serialize(configuration, defaultFile);
 		return configuration;
 	}
 
 	@Override
-	public void update(Configuration confuguration) throws IOException, ClassNotFoundException {
+	public void update(Configuration confuguration) throws IOException {
 		serialize(confuguration, defaultFile);
 	}
 
@@ -65,7 +65,7 @@ public class ConfigurationDAO extends DAO<Configuration> implements Serializable
 	/*********************/
 
 	@Override
-	public void serialize(Configuration configuration, File file) throws ClassNotFoundException, IOException {		  
+	public void serialize(Configuration configuration, File file) throws IOException {		  
 			FileOutputStream fileOut = new FileOutputStream(file.getAbsolutePath());
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(configuration);
