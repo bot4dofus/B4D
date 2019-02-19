@@ -18,6 +18,9 @@ import net.sourceforge.jpcap.capture.RawPacketListener;
 import net.sourceforge.jpcap.net.RawPacket;
 import net.sourceforge.jpcap.util.HexHelper;
 
+/** La classe {@code SocketListener} permet d'écouter de sniffer et traiter les trames dofus.
+ * Cette classe étend la classe {@code Thread}.
+ */
 public class SocketListener extends Thread{
 	
 	  /***************/
@@ -35,17 +38,22 @@ public class SocketListener extends Thread{
 	/**************/
 	
 	private PacketCapture m_pcap;
-	private String m_device;
+	private String network;
 
 	  /*************/
 	 /** BUILDER **/
 	/*************/
 	
-	public SocketListener() throws CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException {
+	/** Constructeur de la classe {@code SocketListener}.
+	 * @throws B4DException Si aucuns des réseaux n'est actif.
+	 * @throws CaptureDeviceLookupException Si aucun réseau n'est détecté.
+	 * @throws CaptureDeviceOpenException Si il est impossible d'ouvrir le réseau.
+	 */
+	public SocketListener() throws B4DException, CaptureDeviceLookupException, CaptureDeviceOpenException {
 		m_pcap = new PacketCapture();
-		m_device = NetworkFinder.find();
-		B4D.logger.debug(this, "Network found : " + m_device);
-		m_pcap.open(m_device, 65535, true, 1000);
+		network = NetworkFinder.find();
+		B4D.logger.debug(this, "Network found : " + network);
+		m_pcap.open(network, 65535, true, 1000);
 		m_pcap.addRawPacketListener(new RawPacketListener() {
 			public void rawPacketArrived(RawPacket data) {
 				if(data.getData().length > 54) {
@@ -61,10 +69,16 @@ public class SocketListener extends Thread{
 	 /** RUN **/
 	/*********/
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#interrupt()
+	 */
 	public void interrupt() {
 		m_pcap.endCapture();
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	public void run() {
 		try {
 			B4D.logger.debug(this, "Lancement du thread");
@@ -79,6 +93,10 @@ public class SocketListener extends Thread{
 	 /** METHODS **/
 	/*************/
 	
+	/** Modifi le filtre du sniffeur pour traiter uniquement les trâmes vennant du serveur.
+	 * @param serveur - Serveur du joueur.
+	 * @throws InvalidFilterException Si le filtre n'est pas valide.
+	 */
 	public void setFilter(Server serveur) throws InvalidFilterException {
 		m_pcap.setFilter("host " + serveur.getIp(), true);
 	}
@@ -87,6 +105,9 @@ public class SocketListener extends Thread{
 	 /** PARSING **/
 	/*************/
 	
+	/** Parse les trâmes entrantes.
+	 * @param data - Trâmes entrante.
+	 */
 	private void parseDofus(byte[] data) {	
 
 		//							DOFUS PACKETS STRUCTURE
@@ -108,6 +129,11 @@ public class SocketListener extends Thread{
 //			System.out.println("[Unknow soket (" + data[0] + ")]");
 	}
 	
+	/** Retourne la taille de l'entête de la trâme.
+	 * @param data - Trâme entrante.
+	 * @return Taile de l'entête.
+	 * @throws B4DException Si le type de trâme et donc la taille de l'entête est inconnue.
+	 */
 	private int getHeaderLength(byte[] data) throws B4DException {
 		int length;
 		switch(Byte.toUnsignedInt(data[1])) {
@@ -134,6 +160,10 @@ public class SocketListener extends Thread{
 	 /** PARSING CHAT **/
 	/******************/
 	
+	/** Parse une trâme lorsque celle-ci est de type chat.
+	 * Les informations du message sont extraites et ajouté à la queu du chat.
+	 * @param data - Trâme entrante.
+	 */
 	private void parseChat(byte[] data) {
 
 		try {

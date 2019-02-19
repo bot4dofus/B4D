@@ -5,20 +5,34 @@ import java.awt.Point;
 
 import fr.B4D.bot.B4D;
 
+/** La classe {@code ColorThread} permet d'attendre qu'un pixel soit compris dans un intervale de couleur.
+ * Cette classe étend la classe {@code Thread}.
+ */
 public class ColorThread extends Thread{
 	private Point pixel;
 	private Color color, min, max;
-		
+
+	/** Constructeur de la classe {@code ColorThread}.
+	 * @param pixel - Position du pixel en coodonnées simples.
+	 * @param min - Couleur minimale.
+	 * @param max - Couleur maximale.
+	 */
 	public ColorThread(Point pixel, Color min, Color max) {
 		this.pixel = pixel;
 		this.min = min;
 		this.max = max;
 	}
 		
+	/** Retourne la couleur du pixel.
+	 * @return Couleur du pixel. {@code null} si le pixel n'est pas dans l'interval attendu.
+	 */
 	public Color getColor() {
 		return this.color;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	public void run(){
 		try{
 			Color color;

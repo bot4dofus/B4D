@@ -9,14 +9,23 @@ interface User32 extends Library {
 	short GetKeyState(int key);
 }
 
+/** La classe {@code KeyboardThread} permet d'attendre l'appui sur une touche.
+ * Cette classe étend la classe {@code Thread}.
+ */
 public class KeyboardThread extends Thread{
 
 	private int key = -1;
 
+	/** Retourne la touche enfoncé par le joueur.
+	 * @return Couleur du pixel. {@code -1} si aucune touche n'a été enfoncée.
+	 */
 	public int getKey() {
 		return this.key;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Thread#run()
+	 */
 	public void run(){	
 		try {
 			char i = 0;	

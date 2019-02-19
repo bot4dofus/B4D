@@ -24,10 +24,10 @@ import fr.B4D.utils.PointF;
  * 
  * Coordonnées du damier de dofus :<br/>
  * 
- *	&nbsp;/&nbsp;X<br/>
+ *	&nbsp;&nbsp;/&nbsp;X<br/>
  *	/<br/>
  *	\<br/>
- *  &nbsp;\&nbsp;Y<br/><br/>
+ *  &nbsp;&nbsp;\&nbsp;Y<br/><br/>
  * 
  */
 public final class Converter {

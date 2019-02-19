@@ -288,7 +288,7 @@ public final class Screen {
 	 /** ATTENTE SUR OCR **/
 	/*********************/
 	
-	/** Permet d'attendre qu'une chaine de caractère s'affiche à l'écran.
+	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
 	 * @param rectangle - Zone de l'écran.
 	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
@@ -305,10 +305,10 @@ public final class Screen {
 		
 		if(ocrThread.isAlive())
 			ocrThread.interrupt();
-		return ocrThread.getResult();
+		return ocrThread.getText();
 	}
 
-	/** Permet d'attendre qu'une chaine de caractère s'affiche à l'écran.
+	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
 	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées simples.
 	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées simples.
 	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
@@ -319,7 +319,7 @@ public final class Screen {
 		return waitForOCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y), regex, timeOut);
 	}
 	
-	/** Permet d'attendre qu'une chaine de caractère s'affiche à l'écran.
+	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
 	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées relatives.
 	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées relatives.
 	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.

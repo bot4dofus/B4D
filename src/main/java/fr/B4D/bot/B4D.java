@@ -18,7 +18,6 @@ import fr.B4D.bot.statics.Wait;
 import fr.B4D.dao.DAOFactory;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.program.Program;
-import fr.B4D.socket.NoSocketDetectedException;
 import fr.B4D.socket.SocketListener;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
@@ -51,15 +50,15 @@ public final class B4D{
 	 /** BUILDER **/
 	/*************/
 
-	/** Constructeur de la classe {@code B4D} et sauvegarde la nouvelle instance dans un fichier. 
+	/** Constructeur de la classe {@code B4D} et sauvegarde la nouvelle instance dans un fichier.
+	 * @throws B4DException Si une exception B4D est levée.
 	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
 	 * @throws IOException Si impossible de créer les fichiers de configuration.
 	 * @throws CaptureDeviceLookupException Si aucun réseau n'est détecté.
-	 * @throws NoSocketDetectedException Si aucun trame n'est détectée.
 	 * @throws CaptureDeviceOpenException Si le réseau de capture ne peut pas être écouté.
-	 * @throws InvalidFilterException Si une erreur de 
+	 * @throws InvalidFilterException Si le filtre réseau n'est pas correcte.
 	 */
-	public B4D() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, NoSocketDetectedException, CaptureDeviceOpenException {
+	public B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException {
 		
 		/** LOGGER **/
 		logger = new Logger();

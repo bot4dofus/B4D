@@ -5,6 +5,9 @@ import java.awt.AWTException;
 import fr.B4D.bot.B4D;
 import fr.B4D.utils.PointF;
 
+/** La classe {@code Status} représente un status de jeu.
+ * Un status est défini par un nom et une position relative au menu status.
+ */
 public class Status {
 	
 	  /****************/
@@ -29,6 +32,10 @@ public class Status {
 	 /** BUILDER **/
 	/*************/
 	
+	/** Constructeur de la classe {@code Message}. 
+	 * @param name - Nom du status.
+	 * @param relativPosition - Position relative du status par rapport au menu status.
+	 */
 	public Status(String name, PointF relativPosition) {
 		this.name = name;
 		this.relativPosition = relativPosition;
@@ -38,6 +45,9 @@ public class Status {
 	 /** GETTERS **/
 	/*************/ 
 	
+	/** Retourne le nom du status.
+	 * @return Nom du status.
+	 */
 	public String getName() {
 		return this.name;
 	}
@@ -46,6 +56,11 @@ public class Status {
 	 /** STATIC **/
 	/************/
 	
+	/** Active le status pour le joueur en cours.
+	 * @throws StopProgramException
+	 * @throws CancelProgramException
+	 * @throws AWTException
+	 */
 	public void setStatus() throws AWTException, StopProgramException, CancelProgramException {
 		B4D.mouse.leftClick(statusMenuPosition, false, 200);		//Ouvre le menu des status
 		PointF checkPosition = new PointF(statusMenuPosition.x + relativPosition.x, statusMenuPosition.y + relativPosition.y);		
