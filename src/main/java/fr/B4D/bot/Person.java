@@ -204,8 +204,9 @@ public class Person implements Serializable, TransportInterface{
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
+	 * @throws AWTException Si un problème d'interface survient.
 	 */
-	public void setPosition() throws StopProgramException, CancelProgramException, B4DException {
+	public void setPosition() throws StopProgramException, CancelProgramException, B4DException, AWTException {
 		Message message;
 		Dofus.chat.addPseudoFilter(pseudo);
 		

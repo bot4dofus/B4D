@@ -1,5 +1,7 @@
 package fr.B4D.interaction.chat;
 
+import java.awt.AWTException;
+
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
@@ -10,6 +12,7 @@ public interface ChatListener {
 	 * @param message - Message traité.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws AWTException Si un problème d'interface survient.
 	 */
-	public void treatMessage(Message message) throws StopProgramException, CancelProgramException;
+	public void treatMessage(Message message) throws StopProgramException, CancelProgramException, AWTException;
 }

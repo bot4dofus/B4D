@@ -102,8 +102,9 @@ public class Message implements Serializable{
 	 * Cela est identique à {@code send(500)}.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws AWTException Si un problème d'interface survient.
 	 */
-	public void send() throws StopProgramException, CancelProgramException {
+	public void send() throws StopProgramException, CancelProgramException, AWTException {
 		send(500);
 	}
 	
@@ -111,8 +112,9 @@ public class Message implements Serializable{
 	 * @param millis - Temps d'attente après envoi.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws AWTException Si un problème d'interface survient.
 	 */
-	public void send(int millis) throws StopProgramException, CancelProgramException {
+	public void send(int millis) throws StopProgramException, CancelProgramException, AWTException {
 		if (channel == null) {
 			if (pseudo == null) {
 				send(text, millis);
@@ -134,19 +136,12 @@ public class Message implements Serializable{
 	 * @param millis - Temps d'attente après l'envoi.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws AWTException Si un problème d'interface survient.
 	 */
-	private void send(String text, int millis) throws StopProgramException, CancelProgramException {
-		try {
-			B4D.mouse.chatClick();
-			B4D.keyboard.writeKeyboard(text, millis);
-			
-			Robot robot = new Robot();
-			robot.keyPress(KeyEvent.VK_ENTER);
-			robot.keyRelease(KeyEvent.VK_ENTER);
-			B4D.wait.wait(100);
-		} catch (AWTException e) {
-			e.printStackTrace();
-		}
+	private void send(String text, int millis) throws StopProgramException, CancelProgramException, AWTException {
+		B4D.mouse.chatClick();
+		B4D.keyboard.writeKeyboard(text, millis);
+		B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 100);
 	}
 	
 	  /***********/
@@ -159,8 +154,9 @@ public class Message implements Serializable{
 	 * @param text - Réponse au joueur.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws AWTException Si un problème d'interface survient.
 	 */
-	public void reply(String text) throws StopProgramException, CancelProgramException {
+	public void reply(String text) throws StopProgramException, CancelProgramException, AWTException {
 		reply(text, 500);
 	}
 
@@ -170,8 +166,9 @@ public class Message implements Serializable{
 	 * @param millis - Temps d'attente après l'envoi.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws AWTException Si un problème d'interface survient.
 	 */
-	public void reply(String text, int millis) throws StopProgramException, CancelProgramException {
+	public void reply(String text, int millis) throws StopProgramException, CancelProgramException, AWTException {
 		if(pseudo != null) {
 			if(channel == Channel.BUSINESS || channel == Channel.RECRUITMENT)
 				channel = Channel.PRIVATE;

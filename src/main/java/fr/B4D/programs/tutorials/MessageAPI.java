@@ -78,7 +78,7 @@ public final class MessageAPI {
 			Dofus.chat.addChannelFilter(Channel.BUSINESS);
 			Dofus.chat.addTextFilter("moi");
 			Dofus.chat.setChatListener(new ChatListener() {
-				public void treatMessage(Message message) throws StopProgramException, CancelProgramException {
+				public void treatMessage(Message message) throws StopProgramException, CancelProgramException, AWTException {
 					message.reply("C'est qui moi ?");
 				}
 			});
