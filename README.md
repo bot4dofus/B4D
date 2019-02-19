@@ -3,5 +3,5 @@ Ce bot à été conçu par [@LucBerge](https://github.com/LucBerge) et est sous Lice
 **Liens utiles**
 
 - [WIKI](https://github.com/LucBerge/B4D/wiki) (Explications, documentations et contributions)
-- [JAVA DOC]() (Documentation générée automatiquement)
+- [JAVA DOC](https://lucberge.github.io/B4D/) (Documentation générée automatiquement)
 - [BUGS](https://github.com/LucBerge/B4D/issues) (Rapport d'erreurs)
