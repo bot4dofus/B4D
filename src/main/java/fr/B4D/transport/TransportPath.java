@@ -5,8 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
-import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
@@ -37,15 +37,14 @@ public class TransportPath implements Serializable{
 	/** Permet d'utiliser le chemin en empruntant tous les transports du chemin.
 	 * @param person - Joueur utilisant le chemin.
 	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws CannotFindException Si la destination d'une des étapes est introuvable.
-	 * @throws WrongPositionException Si le joueur est mal placé pour emprunter un moyen de transport.
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void use(Person person) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {
+	public void use(Person person) throws StopProgramException, CancelProgramException, B4DException, AWTException {
 		for(TransportStep step:transportPath) {
 			if (!person.getPosition().equals(step.getTransport().getPosition()))
-				throw new WrongPositionException();
+				throw new B4DException("Wrong position.");
 			step.use();
 			B4D.screen.waitForMap();
 			person.setPosition(step.getDestination());
@@ -53,7 +52,7 @@ public class TransportPath implements Serializable{
 	}
 	
 	/** Retourne le poid total du chemin.
-	 * @return
+	 * @return Poid totale du chemin.
 	 */
 	public double getWeigth() {
 		return transportPath.stream().mapToDouble(t -> t.getTransport().getWeight()).sum();

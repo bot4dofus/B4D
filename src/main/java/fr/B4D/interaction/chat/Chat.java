@@ -48,7 +48,7 @@ public class Chat extends Thread{
 	/*************/
 	
 	/** Modifie la sub-routine de traitement des messages.
-	 * @param chatListener - Nouvelle sub-routine
+	 * @param chatListener - Nouvelle sub-routine.
 	 */
 	public void setChatListener(ChatListener chatListener) {
 		this.chatListener = chatListener;

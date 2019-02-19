@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
@@ -174,9 +175,9 @@ public class Channel implements Serializable{
 	/** Permet de retourner le canal correspondant à un octet.
 	 * @param data - Octet du canal.
 	 * @return Canal correspondant.
-	 * @throws UnknowChannelException Si l'octet ne correspont à aucun canal connu.
+	 * @throws B4DException Si une exception de type B4D est levée.
 	 */
-	public static Channel fromByte(byte data) throws UnknowChannelException {
+	public static Channel fromByte(byte data) throws B4DException {
 		switch(Byte.toUnsignedInt(data)) {
 			case(0):
 				return GENERAL;
@@ -189,7 +190,7 @@ public class Channel implements Serializable{
 			case(6):
 				return RECRUITMENT;
 			default:
-				throw new UnknowChannelException(Byte.toUnsignedInt(data));
+				throw new B4DException("Unknow channel " + Byte.toUnsignedInt(data));
 		}
 	}
 }

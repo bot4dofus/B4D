@@ -5,13 +5,11 @@ import java.awt.Point;
 import java.io.Serializable;
 import java.util.List;
 
-import fr.B4D.dofus.CannotFindException;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.TransportInterface;
 import fr.B4D.transport.TransportPath;
 import fr.B4D.transport.TransportStep;
@@ -204,10 +202,10 @@ public class Person implements Serializable, TransportInterface{
 
 	/** Met à jour la position actuelle du joueur à tapant %pos% dans le chat.
 	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws CannotGetPositionException Si aucun message n'est lu dans le chat.
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws B4DException Si une exception de type B4D est levée.
 	 */
-	public void setPosition() throws StopProgramException, CancelProgramException, CannotGetPositionException {
+	public void setPosition() throws StopProgramException, CancelProgramException, B4DException {
 		Message message;
 		Dofus.chat.addPseudoFilter(pseudo);
 		
@@ -215,7 +213,7 @@ public class Person implements Serializable, TransportInterface{
 		message.send();
 		message = Dofus.chat.waitForMessage(1000);
 		if(message == null)
-			throw new CannotGetPositionException();
+			throw new B4DException("Cannot get the current position.");
 
 		Dofus.chat.addPseudoFilter(null);
 		
@@ -253,7 +251,7 @@ public class Person implements Serializable, TransportInterface{
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
 	 */
-	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {
+	public void goTo(Point destination) throws AWTException, StopProgramException, CancelProgramException, B4DException {
 		TransportPath transportPath = getTransportPathTo(destination);
 		transportPath.use(this);
 	}

@@ -265,8 +265,8 @@ public class JPanel_Programme extends JPanel {
 					&& p.getProgramName().equals(comboBox_Name.getSelectedItem()))
 				.findFirst().orElse(null);
 				
-				program.setMaxCycles(Integer.valueOf(textField_Turns.getText()));
-				program.setMaxDeposits(Integer.valueOf(textField_Deposits.getText()));
+				program.setCycles(Integer.valueOf(textField_Turns.getText()));
+				program.setDeposits(Integer.valueOf(textField_Deposits.getText()));
 				
 				program.setBankWhenFull(checkBox_HDV.isSelected());
 				program.setHdvWhenFull(checkBox_Bank.isSelected());

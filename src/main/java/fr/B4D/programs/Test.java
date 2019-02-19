@@ -1,7 +1,6 @@
 package fr.B4D.programs;
 
 import java.awt.AWTException;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 import fr.B4D.bot.B4D;
@@ -14,14 +13,13 @@ import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.transport.WrongPositionException;
 import net.sourceforge.tess4j.TesseractException;
 
 public final class Test {
 	public static ProgramInterface test = new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws FullInventoryException, AWTException, CannotFindException, WrongPositionException, UnsupportedFlavorException, IOException, TesseractException, StopProgramException, CancelProgramException {
+		public void cycle(Person person) throws FullInventoryException, AWTException, CannotFindException, IOException, TesseractException, StopProgramException, CancelProgramException {
 			B4D.logger.popUp("Le programme de test marche correctement.");
 		}
 	};

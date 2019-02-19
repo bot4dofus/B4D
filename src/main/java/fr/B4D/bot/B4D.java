@@ -32,7 +32,7 @@ public final class B4D{
 	/**************/
 	/** ATRIBUTS **/
 	/**************/
-
+	
 	private Dofus dofus;
 	
 	public static Logger logger;
@@ -204,7 +204,7 @@ public final class B4D{
 		
 		try {
 			socketListener.setFilter(person.getServer());
-			program.startWith(person);
+			program.start(person);
 		} catch (InvalidFilterException e) {
 			B4D.logger.error(e);
 		}

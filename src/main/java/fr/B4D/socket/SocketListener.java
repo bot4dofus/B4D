@@ -4,12 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Server;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
-import fr.B4D.interaction.chat.UnknowChannelException;
-import fr.B4D.interaction.chat.UnknowSocketTypeException;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.CapturePacketException;
@@ -17,6 +16,7 @@ import net.sourceforge.jpcap.capture.InvalidFilterException;
 import net.sourceforge.jpcap.capture.PacketCapture;
 import net.sourceforge.jpcap.capture.RawPacketListener;
 import net.sourceforge.jpcap.net.RawPacket;
+import net.sourceforge.jpcap.util.HexHelper;
 
 public class SocketListener extends Thread{
 	
@@ -108,7 +108,7 @@ public class SocketListener extends Thread{
 //			System.out.println("[Unknow soket (" + data[0] + ")]");
 	}
 	
-	private int getHeaderLength(byte[] data) throws UnknowSocketTypeException {
+	private int getHeaderLength(byte[] data) throws B4DException {
 		int length;
 		switch(Byte.toUnsignedInt(data[1])) {
 			case 197:
@@ -125,7 +125,7 @@ public class SocketListener extends Thread{
 				break;
 		}
 		if(length == -1)
-			throw new UnknowSocketTypeException(data);
+			throw new B4DException("Unknow socket type [" + HexHelper.toString(data) + "]");
 		
 		return length;
 	}
@@ -148,8 +148,8 @@ public class SocketListener extends Thread{
 			
 			Message message = new Message(new String(pseudo, encoding), channel, new String(text, encoding));
 			Dofus.chat.addMessage(message);
-		} catch (UnknowChannelException | UnsupportedEncodingException | UnknowSocketTypeException e) {
-				B4D.logger.debug(this, e.getMessage());
+		} catch (B4DException | UnsupportedEncodingException e) {
+				B4D.logger.warning(this, e.getMessage());
 		}
 	}
 }

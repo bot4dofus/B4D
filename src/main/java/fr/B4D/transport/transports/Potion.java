@@ -8,7 +8,6 @@ import fr.B4D.bot.B4D;
 import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
@@ -40,7 +39,7 @@ public class Potion extends Transport implements Serializable{
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
 	 */
-	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {		
+	public void goTo(Point destination) throws AWTException, CannotFindException, StopProgramException, CancelProgramException {		
 		B4D.mouse.doubleLeftClick(super.getPositionF(), false);
 	    B4D.screen.waitForMap(20000);
 	}

@@ -7,10 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.transport.WrongPositionException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
@@ -268,7 +268,7 @@ public class Zaapi extends Transport implements Serializable{
      * @return Zaapi correspondant.
      * @throws CannotFindException Si aucun zaapi ne correspond à cette position.
      */
-    public final static Zaapi getZaapi(Point position) throws CannotFindException{
+    public final static Zaapi getZaapi(Point position) throws B4DException{
     	return (Zaapi) getAll().stream().filter(z -> z.getPosition().equals(position)).findFirst().orElseThrow(CannotFindException::new);
     }
 	
@@ -277,7 +277,7 @@ public class Zaapi extends Transport implements Serializable{
      * @return Zaapi correspondant.
      * @throws CannotFindException Si aucun zaapi ne possède ce nom.
      */
-	public static Zaapi getZaapi(String name) throws CannotFindException {
+	public static Zaapi getZaapi(String name) throws B4DException {
 		return (Zaapi) getAll().stream().filter(z -> z.getName().equals(name)).findFirst().orElseThrow(CannotFindException::new);
 	}
 	
@@ -288,7 +288,7 @@ public class Zaapi extends Transport implements Serializable{
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
 	 */
-	public void goTo(Point destination) throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {			
+	public void goTo(Point destination) throws AWTException, B4DException, StopProgramException, CancelProgramException {			
 		B4D.mouse.leftClick(super.getPositionF(), false);
 		B4D.screen.waitForColor(new PointF(0.4432, 0.7365), new Color(170, 200, 0), new Color(210, 255, 50), 10000);
 		

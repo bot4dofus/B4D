@@ -4,7 +4,7 @@ import java.awt.AWTException;
 import java.awt.Point;
 import java.io.Serializable;
 
-import fr.B4D.dofus.CannotFindException;
+import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
@@ -70,12 +70,12 @@ public class TransportStep implements Serializable{
 	/** Permet d'utiliser le transport de l'étape.
 	 * @param person - Joueur utilisant le transport.
 	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws CannotFindException Si la destination d'une de l'étape est introuvable.
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws WrongPositionException Si le joueur est mal placé pour emprunter le moyen de transport.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void use() throws AWTException, CannotFindException, WrongPositionException, StopProgramException, CancelProgramException {
+	public void use() throws AWTException, StopProgramException, CancelProgramException, B4DException {
 		transport.goTo(destination);
 	}
 

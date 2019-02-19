@@ -59,10 +59,11 @@ public class Logger {
 	}
 
 	/** Permet d'afficher un message d'alerte dans la console.
+	 * @param c - Classe appelante.
 	 * @param log - Message à afficher.
 	 */
-	public void warning(String log) {
-		System.err.println(log);
+	public void warning(Object c, String log) {
+		System.err.println("[" + c.getClass().getName() + "] " + log);
 	}
 
 	/** Permet d'afficher un message d'erreur dans une fenêtre graphique en demandant si l'utilisateur veut envoyer le rapport d'erreur.
