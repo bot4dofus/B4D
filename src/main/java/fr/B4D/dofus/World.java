@@ -10,7 +10,7 @@ import fr.B4D.transport.TransportStep;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.transport.transports.Zaapi;
 
-/** La classe {@code World} représente le monde de dofus.
+/** La classe {@code World} représente le monde de dofus.<br><br>
  * Un monde est défini par un graph.
  */
 public final class World implements Serializable{

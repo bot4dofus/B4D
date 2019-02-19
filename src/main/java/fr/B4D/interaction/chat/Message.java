@@ -10,7 +10,7 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code Message} représente un message, généralement un message du chat.<br/>
+/** La classe {@code Message} représente un message, généralement un message du chat.<br><br>
  * Un message est défini par un pseudo, un canal et un texte.
  */
 public class Message implements Serializable{
@@ -183,8 +183,7 @@ public class Message implements Serializable{
 	/** Permet d'attendre la réponse du joueur sans limite de temps.
 	 * Si le pseudo est connu, la réponse sera détectée sur tous les canaux possible.
 	 * Sinon, seul le canal privé sera accepté.
-	 * Cela est identique à {@code waitForReply(0)}. 
-	 * @param timeout - Durée d'attente maximale en millisecondes.
+	 * Cela est identique à {@code waitForReply(0)}.
 	 * @return Message détecté. {@code null} si timeout.
 	 */
 	public Message waitForReply() {

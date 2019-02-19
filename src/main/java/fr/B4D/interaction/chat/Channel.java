@@ -14,7 +14,7 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Channel} représente un canal de diffusion du chat.<br/>
+/** La classe {@code Channel} représente un canal de diffusion du chat.<br><br>
  * Un canal est défini par un nom, un préfix et un point d'activation.
  */
 public class Channel implements Serializable{
@@ -143,7 +143,7 @@ public class Channel implements Serializable{
 	}
 	
 	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront désactivés.
-	 * @param channel - Liste des canaux à afficher.
+	 * @param channels - Liste des canaux à afficher.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.

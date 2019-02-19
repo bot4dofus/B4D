@@ -6,7 +6,7 @@ import fr.B4D.bot.B4D;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code Chat} représente le chat de dofus.<br/>
+/** La classe {@code Chat} représente le chat de dofus.<br><br>
  * Un chat est défini par une queue de messages, un filtre et une sub-routine.
  */
 public class Chat extends Thread{

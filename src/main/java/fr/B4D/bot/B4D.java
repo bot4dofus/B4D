@@ -23,7 +23,7 @@ import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.InvalidFilterException;
 
-/** La classe {@code B4D} est la classe principale du bot.
+/** La classe {@code B4D} est la classe principale du bot.<br><br>
  * Elle fournit les méthodes dont à besoin l'interface graphique pour fonctionner.
  */
 public final class B4D{
@@ -56,7 +56,6 @@ public final class B4D{
 	 * @throws IOException Si impossible de créer les fichiers de configuration.
 	 * @throws CaptureDeviceLookupException Si aucun réseau n'est détecté.
 	 * @throws CaptureDeviceOpenException Si le réseau de capture ne peut pas être écouté.
-	 * @throws InvalidFilterException Si le filtre réseau n'est pas correcte.
 	 */
 	public B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException {
 		

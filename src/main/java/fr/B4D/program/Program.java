@@ -22,7 +22,7 @@ import fr.B4D.programs.tutorials.MessageAPI;
 import fr.B4D.programs.tutorials.TransportAPI;
 import net.sourceforge.tess4j.TesseractException;
 
-/** La classe {@code Program} représente un programme B4D.
+/** La classe {@code Program} représente un programme B4D.<br><br>
  * Un programme est défini par un lieux, une catégorie, une sous catégorie, un nom et une sub-routine implémentant l'interface {@code ProgramInterface}.
  * Il est possible de spécifier les canaux affichées dans le chat et le status du joueur.
  */
@@ -194,7 +194,7 @@ public final static ArrayList<Program> getAll(){
 	
 	/** Présice si le joueur veut vider son inventaire en banque lorsque celui-ci est plein.
 	 * Cela permet par exemple, de stocker automatiquement les ressources que l'on vient de récupérer. 
-	 * @return bankWhenFull - {@code true} si le joueur veut vider son inventaire en banque lorsque celui-ci est plein, {@code false} sinon.
+	 * @param bankWhenFull - {@code true} si le joueur veut vider son inventaire en banque lorsque celui-ci est plein, {@code false} sinon.
 	 */
 	public void setBankWhenFull(boolean bankWhenFull) {
 		this.bankWhenFull = bankWhenFull;

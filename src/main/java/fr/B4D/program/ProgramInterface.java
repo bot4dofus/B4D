@@ -6,9 +6,11 @@ import java.security.GeneralSecurityException;
 
 import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
-import fr.B4D.dofus.CannotFindException;
 import net.sourceforge.tess4j.TesseractException;
 
+/** Interface représentant un programme et ses sub-routines.
+ *
+ */
 public interface ProgramInterface{
 	
 	/** Fonction d'introduction du programme. Celle-ci ne sera éxecutée qu'une seule fois en début de programme.
@@ -32,7 +34,7 @@ public interface ProgramInterface{
 	 * @throws IOException Si un problème de fichier survient.
 	 * @throws NumberFormatException Si un problème d'encodage survient.
 	 */
-	public void cycle(Person person) throws StopProgramException, CancelProgramException, FullInventoryException, AWTException, CannotFindException, IOException, TesseractException, NumberFormatException, B4DException;
+	public void cycle(Person person) throws StopProgramException, CancelProgramException, FullInventoryException, AWTException, IOException, TesseractException, NumberFormatException, B4DException;
 	
 	/** Fonction de fin du programme. Celle-ci ne sera éxecutée qu'une seule fois en fin de programme.
 	 * @param person - Personnage avec lequel lancer la fonction de fin.

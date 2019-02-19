@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
-/** La classe {@code Configuration} représente la configuration de l'écran de jeu.
+/** La classe {@code Configuration} représente la configuration de l'écran de jeu.<br><br>
  * Elle est définit par une zone de jeu, une zone de chat, une barre de chat et une minimap.
  */
 public class Configuration implements Serializable{
@@ -45,7 +45,7 @@ public class Configuration implements Serializable{
 	}
 
 	/** Modifi la zone de jeu.
-	 * @param gameFrame Nouvelle zone de jeu.
+	 * @param gameFrame - Nouvelle zone de jeu.
 	 */
 	public void setGameFrame(Rectangle gameFrame) {
 		this.gameFrame = gameFrame;
@@ -59,7 +59,7 @@ public class Configuration implements Serializable{
 	}
 
 	/** Modifi la zone de chat.
-	 * @param chatFrame Nouvelle zone de chat.
+	 * @param chatFrame - Nouvelle zone de chat.
 	 */
 	public void setChatFrame(Rectangle chatFrame) {
 		this.chatFrame = chatFrame;
@@ -73,7 +73,7 @@ public class Configuration implements Serializable{
 	}
 
 	/** Modifi la position de la barre de chat.
-	 * @param chatBar - Nouvelles position de la barre de chat en coordonnées simples.
+	 * @param chatBar - Nouvelle position de la barre de chat en coordonnées simples.
 	 */
 	public void setChatBar(Point chatBar) {
 		this.chatBar = chatBar;
@@ -87,7 +87,7 @@ public class Configuration implements Serializable{
 	}
 
 	/** Modifi la position de la minimap.
-	 * @param chatBar - Nouvelles position de la minimap en coordonnées simples.
+	 * @param minimap - Nouvelle position de la minimap en coordonnées simples.
 	 */
 	public void setMinimap(Point minimap) {
 		this.minimap = minimap;

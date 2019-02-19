@@ -18,7 +18,7 @@ import net.sourceforge.jpcap.capture.RawPacketListener;
 import net.sourceforge.jpcap.net.RawPacket;
 import net.sourceforge.jpcap.util.HexHelper;
 
-/** La classe {@code SocketListener} permet d'écouter de sniffer et traiter les trames dofus.
+/** La classe {@code SocketListener} permet d'écouter de sniffer et traiter les trames dofus.<br><br>
  * Cette classe étend la classe {@code Thread}.
  */
 public class SocketListener extends Thread{

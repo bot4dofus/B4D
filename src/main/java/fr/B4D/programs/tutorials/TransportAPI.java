@@ -14,8 +14,8 @@ import fr.B4D.program.StopProgramException;
 
 public final class TransportAPI {
 	
-	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des transports.<br/>
-	 *  <br/>
+	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des transports.<br>
+	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
 	 *  	<li>Se rend en (4, -18).</li>
@@ -31,8 +31,8 @@ public final class TransportAPI {
 		}
 	});
 
-	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des transports.<br/>
-	 *  <br/>
+	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des transports.<br>
+	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
 	 *  	<li>Se rend au zaap enregistré par le joueur.</li>

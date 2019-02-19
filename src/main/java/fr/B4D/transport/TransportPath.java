@@ -10,7 +10,7 @@ import fr.B4D.bot.Person;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code TransportPath} représente un chemin entre deux point de la carte.
+/** La classe {@code TransportPath} représente un chemin entre deux point de la carte.<br><br>
  * Un chemin est défini par une liste d'étapes.
  */
 public class TransportPath implements Serializable{

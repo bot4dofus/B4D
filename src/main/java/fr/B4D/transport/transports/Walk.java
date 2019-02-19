@@ -10,7 +10,7 @@ import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Walk} représente une marche.
+/** La classe {@code Walk} représente une marche.<br><br>
  * Cette classe étend la classe {@code Transport}.
  */
 public class Walk extends Transport implements Serializable{

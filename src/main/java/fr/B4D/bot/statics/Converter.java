@@ -6,28 +6,28 @@ import fr.B4D.bot.Configuration;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Converter} permet de convertir une position entre différents systèmes de coordonnées.<br/><br/>
+/** La classe {@code Converter} permet de convertir une position entre différents systèmes de coordonnées.<br><br>
  * 
- * Coordonnées simples :<br/>
+ * Coordonnées simples :<br>
  * 
- *	&nbsp;_______<br/>
- *	|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y<br/>
- *	|<br/>
- *	|&nbsp;&nbsp;X<br/><br/>
+ *	&nbsp;_______<br>
+ *	|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y<br>
+ *	|<br>
+ *	|&nbsp;&nbsp;X<br><br>
  *
- * Coordonnées relatives :<br/>
+ * Coordonnées relatives :<br>
  * 
- *	&nbsp;_______<br/>
- *	|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br/>
- *	|<br/>
- *	|&nbsp;&nbsp;1<br/><br/>
+ *	&nbsp;_______<br>
+ *	|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br>
+ *	|<br>
+ *	|&nbsp;&nbsp;1<br><br>
  * 
- * Coordonnées du damier de dofus :<br/>
+ * Coordonnées du damier de dofus :<br>
  * 
- *	&nbsp;&nbsp;/&nbsp;X<br/>
- *	/<br/>
- *	\<br/>
- *  &nbsp;&nbsp;\&nbsp;Y<br/><br/>
+ *	&nbsp;&nbsp;/&nbsp;X<br>
+ *	/<br>
+ *	\<br>
+ *  &nbsp;&nbsp;\&nbsp;Y<br><br>
  * 
  */
 public final class Converter {

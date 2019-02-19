@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
 
-/** La classe {@code Rectangle} représente une zone de l'écran.
+/** La classe {@code Rectangle} représente une zone de l'écran.<br><br>
  * Un rectangle est défini par un point suppérieur gauche et un point inférieur droit.
  */
 public class Rectangle extends java.awt.Rectangle implements Serializable{

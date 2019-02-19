@@ -17,8 +17,8 @@ import fr.B4D.transport.transports.Potion;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Person} représente un joueur. Un joueur est défini par un nom de compte, un mot de passe, un serveur et un pseudo
- *
+/** La classe {@code Person} représente un joueur.<br><br>
+ * Un joueur est défini par un nom de compte, un mot de passe, un serveur et un pseudo
  */
 public class Person implements Serializable, TransportInterface{
 

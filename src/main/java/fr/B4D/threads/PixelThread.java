@@ -5,7 +5,7 @@ import java.awt.Point;
 
 import fr.B4D.bot.B4D;
 
-/** La classe {@code PixelThread} permet d'attendre qu'un pixel change de couleur.
+/** La classe {@code PixelThread} permet d'attendre qu'un pixel change de couleur.<br><br>
  * Cette classe étend la classe {@code Thread}.
  */
 public class PixelThread extends Thread{

@@ -13,7 +13,7 @@ interface User32 extends Library {
     short GetKeyState(int key);
 }
 
-/** La classe {@code KeyboardListener} permet d'écouter les touches enfoncées par l'utilisateur.
+/** La classe {@code KeyboardListener} permet d'écouter les touches enfoncées par l'utilisateur.<br><br>
  * Cette classe étend la classe {@code Thread}.
  */
 public class KeyboardListener extends Thread{

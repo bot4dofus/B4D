@@ -8,13 +8,12 @@ import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
-import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Zaap} représente un zaap.
+/** La classe {@code Zaap} représente un zaap.<br><br>
  * Cette classe étend la classe {@code Transport}.
  */
 public class Zaap extends Transport implements Serializable{
@@ -114,19 +113,27 @@ public class Zaap extends Transport implements Serializable{
     /** Permet de retrouver un zaap à partir de sa position.
      * @param position - Position du zaap.
      * @return Zaap correspondant.
-     * @throws CannotFindException Si aucun zaap ne correspond à cette position.
+     * @throws B4DException Si aucun zaap ne correspond à cette position.
      */
     public final static Zaap getZaap(Point position) throws B4DException{
-    	return (Zaap) getAll().stream().filter(z -> z.getPosition().equals(position)).findFirst().orElseThrow(CannotFindException::new);
+    	for(Transport zaap: getAll()) {
+			if(zaap.getPosition().equals(position))
+				return (Zaap) zaap;
+		}
+		throw new B4DException("Cannot found the zaap in position [" + position.x + ":" + position.y + "] on the map.");
     }
 	
     /** Permet de retrouver un zaap à partir de son nom.
      * @param name - Nom du zaap.
      * @return Zaap correspondant.
-     * @throws CannotFindException Si aucun zaap ne possède ce nom.
+     * @throws B4DException Si aucun zaap ne possède ce nom.
      */
 	public static Zaap getZaap(String name) throws B4DException {
-		return (Zaap) getAll().stream().filter(z -> z.getName().equals(name)).findFirst().orElseThrow(CannotFindException::new);
+		for(Transport zaap: getAll()) {
+			if(zaap.getName().equals(name))
+				return (Zaap) zaap;
+		}
+		throw new B4DException("Cannot found the zaap \"" + name + "\" on the map.");
 	}
 	
 	  /**************/

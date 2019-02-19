@@ -8,13 +8,12 @@ import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
-import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Zaapi} représente un zaapi.
+/** La classe {@code Zaapi} représente un zaapi.<br><br>
  * Cette classe étend la classe {@code Transport}.
  * Un zaapi est représenté par un type de zaapi.
  */
@@ -266,19 +265,27 @@ public class Zaapi extends Transport implements Serializable{
     /** Permet de retrouver un zaapi à partir de sa position.
      * @param position - Position du zaapi.
      * @return Zaapi correspondant.
-     * @throws CannotFindException Si aucun zaapi ne correspond à cette position.
+     * @throws B4DException Si aucun zaapi ne correspond à cette position.
      */
     public final static Zaapi getZaapi(Point position) throws B4DException{
-    	return (Zaapi) getAll().stream().filter(z -> z.getPosition().equals(position)).findFirst().orElseThrow(CannotFindException::new);
+		for(Transport zaapi: getAll()) {
+			if(zaapi.getPosition().equals(position))
+				return (Zaapi) zaapi;
+		}
+		throw new B4DException("Cannot found the zaapi in position [" + position.x + ":" + position.y + "] on the map.");
     }
 	
     /** Permet de retrouver un zaapi à partir de son nom.
-     * @param position - Nom du zaapi.
+     * @param name - Nom du zaapi.
      * @return Zaapi correspondant.
-     * @throws CannotFindException Si aucun zaapi ne possède ce nom.
+     * @throws B4DException Si aucun zaapi ne possède ce nom.
      */
 	public static Zaapi getZaapi(String name) throws B4DException {
-		return (Zaapi) getAll().stream().filter(z -> z.getName().equals(name)).findFirst().orElseThrow(CannotFindException::new);
+		for(Transport zaapi: getAll()) {
+			if(zaapi.getName().equals(name))
+				return (Zaapi) zaapi;
+		}
+		throw new B4DException("Cannot found the zaapi \"" + name + "\" on the map.");
 	}
 	
 	  /**************/

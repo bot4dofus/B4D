@@ -8,7 +8,7 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code TransportStep} représente une étape dans un chemin entre deux point de la carte.
+/** La classe {@code TransportStep} représente une étape dans un chemin entre deux point de la carte.<br><br>
  * Une étape est défini par un transport et une destination.
  */
 public class TransportStep implements Serializable{
@@ -68,11 +68,9 @@ public class TransportStep implements Serializable{
 	/**************/
 	
 	/** Permet d'utiliser le transport de l'étape.
-	 * @param person - Joueur utilisant le transport.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
-	 * @throws WrongPositionException Si le joueur est mal placé pour emprunter le moyen de transport.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
 	public void use() throws AWTException, StopProgramException, CancelProgramException, B4DException {

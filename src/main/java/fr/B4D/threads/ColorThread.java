@@ -5,7 +5,7 @@ import java.awt.Point;
 
 import fr.B4D.bot.B4D;
 
-/** La classe {@code ColorThread} permet d'attendre qu'un pixel soit compris dans un intervale de couleur.
+/** La classe {@code ColorThread} permet d'attendre qu'un pixel soit compris dans un intervale de couleur.<br><br>
  * Cette classe étend la classe {@code Thread}.
  */
 public class ColorThread extends Thread{

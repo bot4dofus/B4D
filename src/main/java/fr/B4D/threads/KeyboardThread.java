@@ -9,7 +9,7 @@ interface User32 extends Library {
 	short GetKeyState(int key);
 }
 
-/** La classe {@code KeyboardThread} permet d'attendre l'appui sur une touche.
+/** La classe {@code KeyboardThread} permet d'attendre l'appui sur une touche.<br><br>
  * Cette classe étend la classe {@code Thread}.
  */
 public class KeyboardThread extends Thread{

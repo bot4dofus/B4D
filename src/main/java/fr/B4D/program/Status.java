@@ -5,7 +5,7 @@ import java.awt.AWTException;
 import fr.B4D.bot.B4D;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Status} représente un status de jeu.
+/** La classe {@code Status} représente un status de jeu.<br><br>
  * Un status est défini par un nom et une position relative au menu status.
  */
 public class Status {
@@ -57,9 +57,9 @@ public class Status {
 	/************/
 	
 	/** Active le status pour le joueur en cours.
-	 * @throws StopProgramException
-	 * @throws CancelProgramException
-	 * @throws AWTException
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws AWTException Si un problème de souris survient.
 	 */
 	public void setStatus() throws AWTException, StopProgramException, CancelProgramException {
 		B4D.mouse.leftClick(statusMenuPosition, false, 200);		//Ouvre le menu des status

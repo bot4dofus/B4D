@@ -500,6 +500,12 @@ public final class Mouse {
 	 /** CHAT **/
 	/**********/
 	
+	/** Permet de cliquer dans la barre de chat.
+	 * @param millis - Temps d'attente après clique.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws AWTException Si un problème de souris survient.
+	 */
 	public void chatClick(int millis) throws AWTException, StopProgramException, CancelProgramException{
 		leftClick(configuration.getChatBar(), false, millis);
 	}

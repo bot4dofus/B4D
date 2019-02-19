@@ -14,7 +14,7 @@ import fr.B4D.utils.PointF;
 import fr.B4D.utils.Rectangle;
 import net.sourceforge.tess4j.TesseractException;
 
-/** La classe {@code Exchange} représente un échange avec un joueur.<br/>
+/** La classe {@code Exchange} représente un échange avec un joueur.<br><br>
  * Un échange est défini par un nombre de kamas entrants et un nombre de kamas sortants.
  */
 public class Exchange implements Serializable{

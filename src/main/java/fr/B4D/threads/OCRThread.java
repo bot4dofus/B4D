@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 
 import fr.B4D.bot.B4D;
 
-/** La classe {@code OCRThread} permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
+/** La classe {@code OCRThread} permet d'attendre qu'une chaine de caractère soit détectée à l'écran.<br><br>
  * Cette classe étend la classe {@code Thread}.
  */
 public class OCRThread extends Thread{

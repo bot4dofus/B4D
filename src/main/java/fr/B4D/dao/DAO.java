@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-/** La classe {@code DAO<T>} est une classe abstraite.
+/** La classe {@code DAO<T>} est une classe abstraite.<br><br>
  * Elle permet pas de gérer la sauvegarde des instances de la classe générique.
  */
 public abstract class DAO<T> implements Serializable{	

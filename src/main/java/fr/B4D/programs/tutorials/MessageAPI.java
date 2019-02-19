@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
-import fr.B4D.dofus.CannotFindException;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.ChatListener;
@@ -20,8 +19,8 @@ import fr.B4D.program.StopProgramException;
 
 public final class MessageAPI {	
 	
-	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des messages entre joueurs.<br/>
-	 *  <br/>
+	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des messages entre joueurs.<br>
+	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
 	 *  	<li>Attente d'un message quelconque dans le chat.</li>
@@ -31,14 +30,14 @@ public final class MessageAPI {
 	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, CannotFindException, IOException {
+		public void cycle(Person person) throws AWTException, IOException {
 			Message message = Dofus.chat.waitForMessage(0);
 			B4D.logger.popUp("Message de " + message.getPseudo() + "(" + message.getChannel() + ") : " + message.getText());
 		}
 	});
 
-	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueurs.<br/>
-	 *  <br/>
+	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueurs.<br>
+	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
 	 *  	<li>Envoi d'un message privé à "Solwy".</li>
@@ -46,12 +45,12 @@ public final class MessageAPI {
 	 *  	<li>Attente de la réponse du joueur.</li>
 	 *  	<li>Répond "ça va ?" si le joueur à répondu. Affiche un message si il n'a pas répondu après 1 min = 60000 ms.</li>
 	 *  </ul>
-	 *  Dans le cas où l'échange est annulé par le joueur, un exception est levée. Un message différent est alors affiché.<br/>
+	 *  Dans le cas où l'échange est annulé par le joueur, un exception est levée. Un message différent est alors affiché.<br>
 	 */
 	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, CannotFindException, IOException, StopProgramException, CancelProgramException {
+		public void cycle(Person person) throws AWTException, IOException, StopProgramException, CancelProgramException {
 			Message message = new Message("Solwy", "Salut !");
 			message.send();
 			message = message.waitForReply(60000);
@@ -62,8 +61,8 @@ public final class MessageAPI {
 		}
 	});
 
-	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueurs.<br/>
-	 *  <br/>
+	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueurs.<br>
+	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
 	 *  	<li>Ajout d'un filtre canal : Seul les messages du canal commerce seront traités.</li>
@@ -75,7 +74,7 @@ public final class MessageAPI {
 	public final static Program TUTORIAL3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, CannotFindException, IOException, StopProgramException, CancelProgramException {
+		public void cycle(Person person) throws AWTException, IOException, StopProgramException, CancelProgramException {
 			Dofus.chat.addChannelFilter(Channel.BUSINESS);
 			Dofus.chat.addTextFilter("moi");
 			Dofus.chat.setChatListener(new ChatListener() {

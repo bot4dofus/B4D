@@ -224,7 +224,7 @@ public final class Screen {
 	}
 	
 	/** Permet de récupérer une chaine de caractère séléctionnée en faisant un double clique et Ctrl+C.
-	 * @param point - Position de la sélection en coordonnées relatives.
+	 * @param position - Position de la sélection en coordonnées relatives.
 	 * @return Chaine de caractère représentant la sélection. {@code null} si rien n'a été sélectionnée où si la sélection est vide.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.

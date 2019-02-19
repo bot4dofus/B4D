@@ -5,13 +5,12 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.dofus.CannotFindException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Potion} représente une potion de transport.
+/** La classe {@code Potion} représente une potion de transport.<br><br>
  * Cette classe étend la classe {@code Transport}.
  */
 public class Potion extends Transport implements Serializable{
@@ -39,7 +38,7 @@ public class Potion extends Transport implements Serializable{
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
 	 */
-	public void goTo(Point destination) throws AWTException, CannotFindException, StopProgramException, CancelProgramException {		
+	public void goTo(Point destination) throws AWTException, StopProgramException, CancelProgramException {		
 		B4D.mouse.doubleLeftClick(super.getPositionF(), false);
 	    B4D.screen.waitForMap(20000);
 	}

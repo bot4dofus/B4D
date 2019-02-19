@@ -9,7 +9,7 @@ import org.jgrapht.graph.DirectedWeightedPseudograph;
 
 import fr.B4D.transport.transports.Walk;
 
-/** La classe {@code Graph} représente la carte du monde de dofus.<br/>
+/** La classe {@code Graph} représente la carte du monde de dofus.<br><br>
  * Un graph est représenté par des noeuds (vertex) et des arêtes (edges).
  * Les différents moyens de transport sont modélisés par les arêtes.
  */

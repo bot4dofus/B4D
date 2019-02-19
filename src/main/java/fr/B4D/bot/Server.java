@@ -3,7 +3,7 @@ package fr.B4D.bot;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/** La classe {@code Server} représente un serveur de jeu dofus.
+/** La classe {@code Server} représente un serveur de jeu dofus.<br><br>
  * Un serveur est défini par un nom et une ip.
  */
 public class Server implements Serializable{
