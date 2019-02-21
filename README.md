@@ -1,7 +1,8 @@
-Ce bot ‡ ÈtÈ conÁu par [@LucBerge](https://github.com/LucBerge) et est sous License MIT.
+Ce bot √† √©t√© con√ßu par [@LucBerge](https://github.com/LucBerge) et est sous License MIT.
 
 **Liens utiles**
 
 - [WIKI](https://github.com/LucBerge/B4D/wiki) (Explications, documentations et contributions)
-- [JAVA DOC](https://lucberge.github.io/B4D/) (Documentation gÈnÈrÈe automatiquement)
+- [INSTALLATION](https://github.com/LucBerge/B4D/wiki) (T√©l√©chargement et installation)
+- [JAVA DOC](https://lucberge.github.io/B4D/) (Documentation g√©n√©r√©e automatiquement)
 - [BUGS](https://github.com/LucBerge/B4D/issues) (Rapport d'erreurs)
