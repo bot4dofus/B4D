@@ -36,7 +36,7 @@ public class JPanel_Admin extends JPanel {
 				
 		addComponentListener(new ComponentAdapter() {
 			public void componentShown(ComponentEvent e) {
-				if(b4d.getConfiguration().getGameFrame() != null && b4d.getConfiguration().getChatFrame() != null && b4d.getConfiguration().getChatBar() != null && b4d.getConfiguration().getMinimap() != null) {
+				if(b4d.getConfiguration().getGameFrame() != null && b4d.getConfiguration().getChatMenu() != null && b4d.getConfiguration().getChatBar() != null && b4d.getConfiguration().getMinimap() != null) {
 					btnStart.setEnabled(true);
 					btnRecord.setEnabled(true);
 				}else {

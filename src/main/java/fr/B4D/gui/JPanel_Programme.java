@@ -55,7 +55,7 @@ public class JPanel_Programme extends JPanel {
 					((DefaultComboBoxModel<Place>)comboBox_Place.getModel()).getIndexOf(p.getPlace()) < 0)
 				.forEach(p -> comboBox_Place.addItem(p.getPlace()));
 				
-				if(b4d.getConfiguration().getGameFrame() != null && b4d.getConfiguration().getChatFrame() != null && b4d.getConfiguration().getChatBar() != null && b4d.getConfiguration().getMinimap() != null) {
+				if(b4d.getConfiguration().isComplet()) {
 					button_Start.setEnabled(true);
 				}else {
 					button_Start.setEnabled(false);

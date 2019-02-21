@@ -1,8 +1,11 @@
-package fr.B4D.program;
+package fr.B4D.interaction;
 
 import java.awt.AWTException;
+import java.awt.Point;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.program.CancelProgramException;
+import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
 /** La classe {@code Status} représente un status de jeu.<br><br>
@@ -23,7 +26,7 @@ public class Status {
 	 /** ATRIBUTS **/
 	/**************/
 	
-	private final PointF statusMenuPosition = new PointF(0.28,0.989);
+	private static PointF statusMenuPosition;
 	
 	private String name;
 	private PointF relativPosition;
@@ -41,9 +44,9 @@ public class Status {
 		this.relativPosition = relativPosition;
 	}
 	
-	  /*************/
-	 /** GETTERS **/
-	/*************/ 
+	  /***********************/
+	 /** GETTERS & SETTERS **/
+	/***********************/ 
 	
 	/** Retourne le nom du status.
 	 * @return Nom du status.
@@ -52,18 +55,42 @@ public class Status {
 		return this.name;
 	}
 	
+	/** Modifi la position du menu des status.
+	 * @param statusMenuPosition - Nouvelle position du menu des status.
+	 */
+	public static void setStatusMenuPosition(Point statusMenuPosition) {
+		Status.statusMenuPosition = B4D.converter.toPointF(statusMenuPosition);
+	}
+	
 	  /************/
 	 /** STATIC **/
 	/************/
 	
 	/** Active le status pour le joueur en cours.
+	 * @return {@code true} si le status a été activé, {@code false} sinon.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void setStatus() throws AWTException, StopProgramException, CancelProgramException {
-		B4D.mouse.leftClick(statusMenuPosition, false, 200);		//Ouvre le menu des status
-		PointF checkPosition = new PointF(statusMenuPosition.x + relativPosition.x, statusMenuPosition.y + relativPosition.y);		
-		B4D.mouse.leftClick(checkPosition, false, 100);
+	public boolean setStatus() throws AWTException, StopProgramException, CancelProgramException {
+		if(statusMenuPosition != null) {
+			B4D.mouse.leftClick(statusMenuPosition, false, 200);		//Ouvre le menu des status
+			PointF checkPosition = new PointF(statusMenuPosition.x + relativPosition.x, statusMenuPosition.y + relativPosition.y);		
+			B4D.mouse.leftClick(checkPosition, false, 100);
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	  /***************/
+	 /** TO STRING **/
+	/***************/
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return name;
 	}
 }

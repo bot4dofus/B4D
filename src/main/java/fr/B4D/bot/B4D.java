@@ -17,6 +17,8 @@ import fr.B4D.bot.statics.Screen;
 import fr.B4D.bot.statics.Wait;
 import fr.B4D.dao.DAOFactory;
 import fr.B4D.dofus.Dofus;
+import fr.B4D.interaction.Status;
+import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.Program;
 import fr.B4D.socket.SocketListener;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
@@ -76,6 +78,9 @@ public final class B4D{
 		mouse = new Mouse(configuration);
 		keyboard = new Keyboard();
 		wait = new Wait();
+		
+		Channel.setChatMenuPosition(configuration.getChatMenu());
+		Status.setStatusMenuPosition(configuration.getStatus());
 	}
 	
 	/***********************/

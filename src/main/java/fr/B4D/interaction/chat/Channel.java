@@ -2,6 +2,7 @@ package fr.B4D.interaction.chat;
 
 import java.awt.AWTException;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,6 +44,8 @@ public class Channel implements Serializable{
 	 /** ATRIBUTS **/
 	/**************/
 	
+	private static PointF chatMenuPosition;
+	
 	private String name;
 	private String prefix;
 	private PointF relativCheckPosition;
@@ -66,6 +69,13 @@ public class Channel implements Serializable{
 	 /** GETTERS **/
 	/*************/
 	
+	/** Modifi la position du menu du chat.
+	 * @param chatMenuPosition - Nouvelle position du menu du chat.
+	 */
+	public static void setChatMenuPosition(Point chatMenuPosition) {
+		Channel.chatMenuPosition = B4D.converter.toPointF(chatMenuPosition);
+	}
+	
 	/** Retourne le nom du canal.
 	 * @return Nom du canal.
 	 */
@@ -84,6 +94,18 @@ public class Channel implements Serializable{
 	 /** PRIVATE **/
 	/*************/
 	
+	/** Retourne l'état du canal.
+	 * @param arrowPosition - Position du menu.
+	 * @return {@code true} si le canal est affiché, {@code false} sinon.
+	 * @throws AWTException Si un problème de souris survient.
+	 */
+	private boolean isDisplayed(PointF arrowPosition) throws AWTException {
+		PointF checkPosition = new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);
+		PointF checkTopLeft = new PointF(checkPosition.x, checkPosition.y - 0.005);
+		PointF checkBottomRight = new PointF(checkPosition.x, checkPosition.y + 0.005);		
+		return (B4D.screen.searchPixel(checkTopLeft, checkBottomRight, new Color(50,50,50), new Color(255,255,255)) != null);
+	}
+	
 	/** Change l'état du canal.
 	 * @param arrowPosition - Position du menu.
 	 * @throws StopProgramException Si le programme est stoppé.
@@ -95,16 +117,36 @@ public class Channel implements Serializable{
 		B4D.mouse.leftClick(checkPosition, false, 500);
 	}
 	
-	/** Retourne l'état du canal.
+	/** Active/Affiche le canal.
 	 * @param arrowPosition - Position du menu.
-	 * @return {@code true} si le canal est affiché, {@code false} sinon.
+	 * @return {@code true} si l'état du canal a changé, {@code false} sinon.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
-	private boolean isDisplayed(PointF arrowPosition) throws AWTException {
-		PointF checkPosition = new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);
-		PointF checkTopLeft = new PointF(checkPosition.x, checkPosition.y - 0.005);
-		PointF checkBottomRight = new PointF(checkPosition.x, checkPosition.y + 0.005);		
-		return (B4D.screen.searchPixel(checkTopLeft, checkBottomRight, new Color(50,50,50), new Color(255,255,255)) != null);
+	private boolean enable(PointF arrowPosition) throws StopProgramException, CancelProgramException, AWTException {
+		if(!isDisplayed(arrowPosition)) {
+			toggle(arrowPosition);
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	/** Désactive/Cache le canal.
+	 * @param arrowPosition - Position du menu.
+	 * @return {@code true} si l'état du canal a changé, {@code false} sinon.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 * @throws AWTException Si un problème de souris survient.
+	 */
+	private boolean disable(PointF arrowPosition) throws StopProgramException, CancelProgramException, AWTException {
+		if(isDisplayed(arrowPosition)) {
+			toggle(arrowPosition);
+			return true;
+		}
+		else
+			return false;
 	}
 	
 	  /************/
@@ -134,43 +176,45 @@ public class Channel implements Serializable{
 	
 	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront désactivés.
 	 * @param channel - Liste des canaux à afficher.
+	 * @return Liste des canaux ayant changé d'état.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public static void displayChannels(Channel...channel) throws AWTException, StopProgramException, CancelProgramException {
-		displayChannels(Arrays.asList(channel));
+	public static List<Channel> displayChannels(Channel...channel) throws AWTException, StopProgramException, CancelProgramException {
+		return displayChannels(Arrays.asList(channel));
 	}
 	
 	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront désactivés.
 	 * @param channels - Liste des canaux à afficher.
+	 * @return Liste des canaux ayant changé d'état.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public static void displayChannels(List<Channel> channels) throws AWTException, StopProgramException, CancelProgramException {
-		B4D.mouse.leftClick(new PointF(-0.26,0.991), false, 200);		//Ouvre le menu du chat
-		List<PointF> matchs = B4D.screen.searchPixels(new PointF(-0.0616,0.7285), new PointF(-0.0616,0.985), new Color(100, 100, 100), new Color(255, 255, 255));
-		PointF arrowPosition = matchs.get(matchs.size() - 1);
-		B4D.mouse.leftClick(arrowPosition, false, 100);	//Affiche les caneaux affichés
+	public static List<Channel> displayChannels(List<Channel> channels) throws AWTException, StopProgramException, CancelProgramException {
 		
-		List<Channel> toToggle = new ArrayList<Channel>();
+		B4D.mouse.leftClick(chatMenuPosition, false, 200);		//Ouvre le menu du chat
+		List<PointF> matchs = B4D.screen.searchPixels(new PointF(chatMenuPosition.x + 0.1984, chatMenuPosition.y - 0.2625), new PointF(chatMenuPosition.x + 0.1984, chatMenuPosition.y - 0.006), new Color(100, 100, 100), new Color(255, 255, 255));
+		PointF arrowPosition = matchs.get(matchs.size() - 1);
+		B4D.mouse.place(arrowPosition, 500);		//Affiche les caneaux affichés
+		
+		List<Channel> toggles = new ArrayList<Channel>();
 		
 		for(Channel channel: getAll()) {
-			if(channel.isDisplayed(arrowPosition) != channels.contains(channel)) {
-				toToggle.add(channel);
-			}
+			boolean toggled;
+			if(channels.contains(channel))
+				toggled = channel.enable(arrowPosition);
+			else
+				toggled = channel.disable(arrowPosition);
+			if(toggled)
+				toggles.add(channel);
 		}
-		for(Channel channel: toToggle) 
-			channel.toggle(arrowPosition);
 
 		B4D.keyboard.sendKey(KeyEvent.VK_ESCAPE, 100);			//Ferme le menu du chat
 		B4D.screen.waitForChangingPixel(arrowPosition, 10000);		//Attend la fermeture du menu
+		return toggles;
 	}
-	
-	  /************/
-	 /** STATIC **/
-	/************/
 	
 	/** Permet de retourner le canal correspondant à un octet.
 	 * @param data - Octet du canal.
@@ -192,5 +236,16 @@ public class Channel implements Serializable{
 			default:
 				throw new B4DException("Unknow channel " + Byte.toUnsignedInt(data));
 		}
+	}
+	
+	  /***************/
+	 /** TO STRING **/
+	/***************/
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return name + "(" + prefix + ")";
 	}
 }

@@ -19,6 +19,7 @@ import fr.B4D.google.GoogleDrive;
 import fr.B4D.google.GoogleSheet;
 import fr.B4D.interaction.Exchange;
 import fr.B4D.interaction.ExchangeCanceledException;
+import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.program.CancelProgramException;
@@ -26,7 +27,6 @@ import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
-import fr.B4D.program.Status;
 import fr.B4D.program.StopProgramException;
 import net.sourceforge.tess4j.TesseractException;
 

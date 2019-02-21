@@ -13,6 +13,7 @@ import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
 import fr.B4D.dofus.Dofus;
+import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.programs.Loto;

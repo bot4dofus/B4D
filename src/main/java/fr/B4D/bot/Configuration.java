@@ -4,6 +4,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.Serializable;
 
+import fr.B4D.interaction.Status;
+import fr.B4D.interaction.chat.Channel;
+
 /** La classe {@code Configuration} représente la configuration de l'écran de jeu.<br><br>
  * Elle est définit par une zone de jeu, une zone de chat, une barre de chat et une minimap.
  */
@@ -16,8 +19,9 @@ public class Configuration implements Serializable{
 	/**************/
 
 	private Rectangle gameFrame;
-	private Rectangle chatFrame;
+	private Point chatMenu;
 	private Point chatBar;
+	private Point status;
 	private Point minimap;
 
 	  /*************/
@@ -28,7 +32,7 @@ public class Configuration implements Serializable{
 	 */
 	public Configuration(){
 		this.gameFrame = null;
-		this.chatFrame = null;
+		this.chatMenu = null;
 		this.chatBar = null;
 		this.minimap = null;
 	}
@@ -51,18 +55,19 @@ public class Configuration implements Serializable{
 		this.gameFrame = gameFrame;
 	}
 
-	/** Retourne la zone de chat;
-	 * @return Zone de chat.
+	/** Retourne la position du menu du chat;
+	 * @return Position du menu du chat en coordonnées simples.
 	 */
-	public Rectangle getChatFrame() {
-		return chatFrame;
+	public Point getChatMenu() {
+		return chatMenu;
 	}
 
-	/** Modifi la zone de chat.
-	 * @param chatFrame - Nouvelle zone de chat.
+	/** Modifi la position du menu du chat.
+	 * @param chatMenu - Nouvelle position du menu du chat en coordonnées simples.
 	 */
-	public void setChatFrame(Rectangle chatFrame) {
-		this.chatFrame = chatFrame;
+	public void setChatMenu(Point chatMenu) {
+		this.chatMenu = chatMenu;
+		Channel.setChatMenuPosition(chatMenu);
 	}
 
 	/** Retourne la position de la barre de chat.
@@ -79,6 +84,21 @@ public class Configuration implements Serializable{
 		this.chatBar = chatBar;
 	}
 
+	/** Retourne la position du status.
+	 * @return Position du status en coordonnées simples.
+	 */
+	public Point getStatus() {
+		return status;
+	}
+
+	/** Modifi la position du status.
+	 * @param chatBar - Nouvelle position du status en coordonnées simples.
+	 */
+	public void setStatus(Point status) {
+		this.status = status;
+		Status.setStatusMenuPosition(status);
+	}
+	
 	/** Retourne la position de la minimap.
 	 * @return Position de la minimap en coordonnées simples.
 	 */
@@ -91,5 +111,17 @@ public class Configuration implements Serializable{
 	 */
 	public void setMinimap(Point minimap) {
 		this.minimap = minimap;
+	}
+	
+
+	  /*************/
+	 /** METHODS **/
+	/*************/
+	
+	/** Retourne un boolean représentant si la totalité des paramètres ont été configurés.
+	 * @return {@code true} si la configuration est complète, {@code false} sinon.
+	 */
+	public boolean isComplet() {
+		return gameFrame != null && chatMenu != null && chatBar != null && status != null && minimap != null;
 	}
 }
