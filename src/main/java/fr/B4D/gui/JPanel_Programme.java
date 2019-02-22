@@ -55,7 +55,7 @@ public class JPanel_Programme extends JPanel {
 					((DefaultComboBoxModel<Place>)comboBox_Place.getModel()).getIndexOf(p.getPlace()) < 0)
 				.forEach(p -> comboBox_Place.addItem(p.getPlace()));
 				
-				if(b4d.getConfiguration().isComplet()) {
+				if(b4d.getConfiguration().isComplet() && !b4d.getTeam().isEmpty()) {
 					button_Start.setEnabled(true);
 				}else {
 					button_Start.setEnabled(false);
