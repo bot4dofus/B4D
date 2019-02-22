@@ -92,7 +92,7 @@ public class Configuration implements Serializable{
 	}
 
 	/** Modifi la position du status.
-	 * @param chatBar - Nouvelle position du status en coordonnées simples.
+	 * @param status - Nouvelle position du status en coordonnées simples.
 	 */
 	public void setStatus(Point status) {
 		this.status = status;
