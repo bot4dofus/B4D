@@ -26,7 +26,7 @@ public class Status {
 	 /** ATRIBUTS **/
 	/**************/
 	
-	private static PointF statusMenuPosition;
+	private static Point statusMenuPosition;
 	
 	private String name;
 	private PointF relativPosition;
@@ -59,7 +59,7 @@ public class Status {
 	 * @param statusMenuPosition - Nouvelle position du menu des status.
 	 */
 	public static void setStatusMenuPosition(Point statusMenuPosition) {
-		Status.statusMenuPosition = B4D.converter.toPointF(statusMenuPosition);
+		Status.statusMenuPosition = statusMenuPosition;
 	}
 	
 	  /************/
@@ -74,8 +74,9 @@ public class Status {
 	 */
 	public boolean setStatus() throws AWTException, StopProgramException, CancelProgramException {
 		if(statusMenuPosition != null) {
-			B4D.mouse.leftClick(statusMenuPosition, false, 200);		//Ouvre le menu des status
-			PointF checkPosition = new PointF(statusMenuPosition.x + relativPosition.x, statusMenuPosition.y + relativPosition.y);		
+			PointF menu = B4D.converter.toPointF(statusMenuPosition);
+			B4D.mouse.leftClick(menu, false, 200);		//Ouvre le menu des status
+			PointF checkPosition = new PointF(menu.x + relativPosition.x, menu.y + relativPosition.y);		
 			B4D.mouse.leftClick(checkPosition, false, 100);
 			return true;
 		}

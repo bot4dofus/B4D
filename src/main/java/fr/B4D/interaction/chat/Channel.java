@@ -44,7 +44,7 @@ public class Channel implements Serializable{
 	 /** ATRIBUTS **/
 	/**************/
 	
-	private static PointF chatMenuPosition;
+	private static Point chatMenuPosition;
 	
 	private String name;
 	private String prefix;
@@ -73,7 +73,7 @@ public class Channel implements Serializable{
 	 * @param chatMenuPosition - Nouvelle position du menu du chat.
 	 */
 	public static void setChatMenuPosition(Point chatMenuPosition) {
-		Channel.chatMenuPosition = B4D.converter.toPointF(chatMenuPosition);
+		Channel.chatMenuPosition = chatMenuPosition;
 	}
 	
 	/** Retourne le nom du canal.
@@ -187,32 +187,36 @@ public class Channel implements Serializable{
 	
 	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront désactivés.
 	 * @param channels - Liste des canaux à afficher.
-	 * @return Liste des canaux ayant changé d'état.
+	 * @return Liste des canaux ayant changé d'état, {@code null} si impossible d'ouvrir le menu.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
 	public static List<Channel> displayChannels(List<Channel> channels) throws AWTException, StopProgramException, CancelProgramException {
+		List<Channel> toggles = null;
 		
-		B4D.mouse.leftClick(chatMenuPosition, false, 200);		//Ouvre le menu du chat
-		List<PointF> matchs = B4D.screen.searchPixels(new PointF(chatMenuPosition.x + 0.1984, chatMenuPosition.y - 0.2625), new PointF(chatMenuPosition.x + 0.1984, chatMenuPosition.y - 0.006), new Color(100, 100, 100), new Color(255, 255, 255));
-		PointF arrowPosition = matchs.get(matchs.size() - 1);
-		B4D.mouse.place(arrowPosition, 500);		//Affiche les caneaux affichés
-		
-		List<Channel> toggles = new ArrayList<Channel>();
-		
-		for(Channel channel: getAll()) {
-			boolean toggled;
-			if(channels.contains(channel))
-				toggled = channel.enable(arrowPosition);
-			else
-				toggled = channel.disable(arrowPosition);
-			if(toggled)
-				toggles.add(channel);
-		}
+		if(chatMenuPosition != null) {
+			PointF menu = B4D.converter.toPointF(chatMenuPosition);
+			B4D.mouse.leftClick(menu, false, 200);		//Ouvre le menu du chat
+			List<PointF> matchs = B4D.screen.searchPixels(new PointF(menu.x + 0.1984, menu.y - 0.2625), new PointF(menu.x + 0.1984, menu.y - 0.006), new Color(100, 100, 100), new Color(255, 255, 255));
+			PointF arrowPosition = matchs.get(matchs.size() - 1);
+			B4D.mouse.place(arrowPosition, 500);		//Affiche les caneaux affichés
+			
+			toggles = new ArrayList<Channel>();
+			
+			for(Channel channel: getAll()) {
+				boolean toggled;
+				if(channels.contains(channel))
+					toggled = channel.enable(arrowPosition);
+				else
+					toggled = channel.disable(arrowPosition);
+				if(toggled)
+					toggles.add(channel);
+			}
 
-		B4D.keyboard.sendKey(KeyEvent.VK_ESCAPE, 100);			//Ferme le menu du chat
-		B4D.screen.waitForChangingPixel(arrowPosition, 10000);		//Attend la fermeture du menu
+			B4D.keyboard.sendKey(KeyEvent.VK_ESCAPE, 100);				//Ferme le menu du chat
+			B4D.screen.waitForChangingPixel(arrowPosition, 10000);		//Attend la fermeture du menu
+		}
 		return toggles;
 	}
 	
