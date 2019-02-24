@@ -1,31 +1,24 @@
 package fr.B4D.bot.statics;
 
-import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Test;
-
-import fr.B4D.bot.statics.Logger;
-import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
-import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
-import net.sourceforge.jpcap.capture.InvalidFilterException;
 
 public class LoggerTest {
 
 	private Logger logger;
 	
 	@Before
-	public void before() throws ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, InvalidFilterException {
+	public void before() {
 		logger = new Logger();
 	}
 	
 	@Test
-	public void test() {
-		try {
-			throw new Exception("This is a test");
-		} catch (Exception e) {
-			logger.addRepport(e);
-			logger.sendEmail("JUnit test", "This is a test", "errors.txt");
-		}
+	public void addRepport() {
+		logger.addRepport(new Exception("This is a test"));
+	}
+	
+	@Test
+	public void sendEmail() {
+		logger.sendEmail("JUnit test", "This is a test", "errors.txt");
 	}
 }
