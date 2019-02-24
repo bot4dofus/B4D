@@ -3,7 +3,6 @@ package fr.B4D.interaction;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
@@ -126,9 +125,8 @@ public class Exchange implements Serializable{
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws AWTException Si un problème de souris ou clavier survient.
 	 * @throws TesseractException Si un problème d'OCR survient.
-	 * @throws IOException Si un problème d'image survient.
 	 */
-	public BufferedImage exchange(String validationMessage) throws ExchangeCanceledException, AWTException, TesseractException, IOException, StopProgramException, CancelProgramException {
+	public BufferedImage exchange(String validationMessage) throws ExchangeCanceledException, AWTException, TesseractException, StopProgramException, CancelProgramException {
 		B4D.logger.debug(this, "Début de l'échange");
 		Message message;
 		

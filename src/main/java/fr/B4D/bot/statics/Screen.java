@@ -7,11 +7,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Configuration;
@@ -164,15 +160,12 @@ public final class Screen {
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws TesseractException Si impossible de réaliser l'OCR.
 	 * @throws AWTException Si un problème d'écran survient.
-	 * @throws IOException Si un problème de fichier survient.
 	 */
-	public String OCR(Rectangle rectangle) throws AWTException, IOException, TesseractException {
+	public String OCR(Rectangle rectangle) throws AWTException, TesseractException {
 		BufferedImage image = takeSreenshot(rectangle);
-		File file = File.createTempFile("screenshot", ".png");
-		ImageIO.write(image, "png", file);
 		Tesseract tessInst = new Tesseract();
 		tessInst.setLanguage("fra");
-		String out = tessInst.doOCR(file);
+		String out = tessInst.doOCR(image);
 		return out.replaceAll("\n", " ");
 	}
 	
@@ -182,9 +175,8 @@ public final class Screen {
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws TesseractException Si impossible de réaliser l'OCR.
 	 * @throws AWTException Si un problème d'écran survient.
-	 * @throws IOException Si un problème de fichier survient.
 	 */
-	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws AWTException, IOException, TesseractException {
+	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws AWTException, TesseractException {
 		return OCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y));
 	}
 	
@@ -194,9 +186,8 @@ public final class Screen {
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws TesseractException Si impossible de réaliser l'OCR.
 	 * @throws AWTException Si un problème d'écran survient.
-	 * @throws IOException Si un problème de fichier survient.
 	 */
-	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws AWTException, IOException, TesseractException {
+	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws AWTException, TesseractException {
 		return OCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner));
 	}
 	
@@ -210,9 +201,8 @@ public final class Screen {
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.
-	 * @throws IOException Si un problème de fichier survient.
 	 */
-	public String getSelection(Point point) throws AWTException, IOException, StopProgramException, CancelProgramException {
+	public String getSelection(Point point) throws AWTException, StopProgramException, CancelProgramException {
 		Robot robot = new Robot();
 		B4D.mouse.doubleLeftClick(point, false, 100);
 		robot.keyPress(KeyEvent.VK_CONTROL);
@@ -229,9 +219,8 @@ public final class Screen {
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.
-	 * @throws IOException Si un problème de fichier survient.
 	 */
-	public String getSelection(PointF position) throws AWTException, IOException, StopProgramException, CancelProgramException {
+	public String getSelection(PointF position) throws AWTException, StopProgramException, CancelProgramException {
 		return getSelection(B4D.converter.toPoint(position));
 	}
 	

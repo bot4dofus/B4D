@@ -1,10 +1,7 @@
 package fr.B4D.program;
 
 import java.awt.AWTException;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.io.Serializable;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -236,7 +233,7 @@ public final static ArrayList<Program> getAll(){
 		} catch (CancelProgramException e) {
 			if(e.getMessage() != null)
 				B4D.logger.popUp(e.getMessage());
-		}catch(B4DException | TesseractException | GeneralSecurityException  | AWTException | UnsupportedFlavorException | IOException e){
+		}catch(B4DException | TesseractException  | AWTException e){
 			B4D.logger.error(e);
 		}
 	}
@@ -253,10 +250,8 @@ public final static ArrayList<Program> getAll(){
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws AWTException Si un problème de souris ou clavier survient.
-	 * @throws IOException Si un problème de fichier survient.
-     * @throws GeneralSecurityException Si problèmes de sécurité survient.
 	 */
-	private void intro() throws StopProgramException, CancelProgramException, B4DException, AWTException, IOException, GeneralSecurityException {
+	private void intro() throws StopProgramException, CancelProgramException, B4DException, AWTException {
 		Dofus.chat.clear();
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
@@ -282,11 +277,9 @@ public final static ArrayList<Program> getAll(){
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws AWTException Si un problème de souris ou clavier survient.
-	 * @throws IOException Si un problème de fichier survient.
 	 * @throws TesseractException Si une exception Tesseract est levée.
-	 * @throws UnsupportedFlavorException
 	 */
-	private void cycle() throws B4DException, StopProgramException, CancelProgramException, AWTException, UnsupportedFlavorException, IOException, TesseractException{
+	private void cycle() throws B4DException, StopProgramException, CancelProgramException, AWTException, TesseractException{
 		
 		while(cycles != 0 && deposits != 0) {
 			try {
