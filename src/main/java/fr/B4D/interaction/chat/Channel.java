@@ -194,7 +194,6 @@ public class Channel implements Serializable{
 	 */
 	public static List<Channel> displayChannels(List<Channel> channels) throws AWTException, StopProgramException, CancelProgramException {
 		List<Channel> toggles = null;
-		toggles.add(null);
 		
 		if(chatMenuPosition != null) {
 			PointF menu = B4D.converter.toPointF(chatMenuPosition);
