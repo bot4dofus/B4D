@@ -73,7 +73,11 @@ public class Logger {
 		e.printStackTrace();
 		boolean sendRepport = addRepport(e);
 		if(sendRepport) {
-			String message = e.getMessage() + "\n\nVoulez vous envoyer le rappot d'erreur aux développeurs ?";
+			String message;
+			if(e.getMessage() == null)
+					message = "Une erreur s'est produite.\nVoulez vous envoyer le rappot d'erreur aux développeurs ?";
+			else
+				message = e.getMessage() + "\nVoulez vous envoyer le rappot d'erreur aux développeurs ?";
 			int answer = JOptionPane.showConfirmDialog(null, message, "Erreur", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 
 //			if (answer == JOptionPane.YES_OPTION)

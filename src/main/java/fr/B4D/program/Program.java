@@ -234,7 +234,7 @@ public final static ArrayList<Program> getAll(){
 		} catch (CancelProgramException e) {
 			if(e.getMessage() != null)
 				B4D.logger.popUp(e.getMessage());
-		}catch(B4DException | IOException |TesseractException | AWTException e){
+		}catch(Exception e){
 			B4D.logger.error(e);
 		}
 	}
