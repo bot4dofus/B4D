@@ -2,7 +2,6 @@ package fr.B4D.program;
 
 import java.awt.AWTException;
 import java.io.IOException;
-import java.security.GeneralSecurityException;
 
 import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
@@ -19,9 +18,8 @@ public interface ProgramInterface{
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws IOException Si un problème de fichier survient.
-     * @throws GeneralSecurityException Si problèmes de sécurité survient.
 	 */
-	public void intro(Person person) throws StopProgramException, CancelProgramException, B4DException, IOException, GeneralSecurityException;
+	public void intro(Person person) throws StopProgramException, CancelProgramException, B4DException, IOException;
 	
 	/** Fonction principale du programme. Celle-ci sera éxecutée plusieurs fois.
 	 * @param person - Personnage avec lequel lancer le programme.
@@ -32,9 +30,8 @@ public interface ProgramInterface{
 	 * @throws TesseractException Si une exception Tesseract est levée.
 	 * @throws AWTException Si un problème de souris ou clavier survient. 
 	 * @throws IOException Si un problème de fichier survient.
-	 * @throws NumberFormatException Si un problème d'encodage survient.
 	 */
-	public void cycle(Person person) throws StopProgramException, CancelProgramException, FullInventoryException, AWTException, IOException, TesseractException, NumberFormatException, B4DException;
+	public void cycle(Person person) throws StopProgramException, CancelProgramException, FullInventoryException, AWTException, IOException, TesseractException, B4DException;
 	
 	/** Fonction de fin du programme. Celle-ci ne sera éxecutée qu'une seule fois en fin de programme.
 	 * @param person - Personnage avec lequel lancer la fonction de fin.

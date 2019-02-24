@@ -1,6 +1,7 @@
 package fr.B4D.program;
 
 import java.awt.AWTException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -233,7 +234,7 @@ public final static ArrayList<Program> getAll(){
 		} catch (CancelProgramException e) {
 			if(e.getMessage() != null)
 				B4D.logger.popUp(e.getMessage());
-		}catch(B4DException | TesseractException  | AWTException e){
+		}catch(B4DException | IOException |TesseractException | AWTException e){
 			B4D.logger.error(e);
 		}
 	}
@@ -250,8 +251,9 @@ public final static ArrayList<Program> getAll(){
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws AWTException Si un problème de souris ou clavier survient.
+	 * @throws IOException Si un problème de fichier survient.
 	 */
-	private void intro() throws StopProgramException, CancelProgramException, B4DException, AWTException {
+	private void intro() throws StopProgramException, CancelProgramException, B4DException, AWTException, IOException {
 		Dofus.chat.clear();
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
@@ -278,8 +280,9 @@ public final static ArrayList<Program> getAll(){
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws AWTException Si un problème de souris ou clavier survient.
 	 * @throws TesseractException Si une exception Tesseract est levée.
+	 * @throws IOException Si un problème de fichier survient.
 	 */
-	private void cycle() throws B4DException, StopProgramException, CancelProgramException, AWTException, TesseractException{
+	private void cycle() throws B4DException, StopProgramException, CancelProgramException, AWTException, TesseractException, IOException{
 		
 		while(cycles != 0 && deposits != 0) {
 			try {
