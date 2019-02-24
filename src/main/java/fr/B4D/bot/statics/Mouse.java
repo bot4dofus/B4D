@@ -24,6 +24,7 @@ import fr.B4D.utils.PointF;
 public final class Mouse {
 
 	private Configuration configuration;
+	private Robot robot;
     
 	/*************/
 	/** BUILDER **/
@@ -31,9 +32,11 @@ public final class Mouse {
 
 	/** Constructeur de la classe {@code Mouse}. 
      * @param configuration - Configuration de l'écran de jeu.
+	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation de la souris
      */
-    public Mouse(Configuration configuration) {
+    public Mouse(Configuration configuration) throws AWTException {
     	this.configuration = configuration;
+		this.robot = new Robot();
     }
     
 	/***************/
@@ -106,10 +109,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après positionnement.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void place(Point position, int millis) throws AWTException, StopProgramException, CancelProgramException {
-		Robot robot = new Robot();
+	public void place(Point position, int millis) throws StopProgramException, CancelProgramException {
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 		B4D.wait.wait(millis);
 	}
@@ -119,9 +120,8 @@ public final class Mouse {
 	 * @param position - Position de la souris en coordonnées simples.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void place(Point position) throws AWTException, StopProgramException, CancelProgramException {
+	public void place(Point position) throws StopProgramException, CancelProgramException {
 		place(position, 0);
 	}
 	
@@ -130,9 +130,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après positionnement.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void place(PointF position, int millis) throws AWTException, StopProgramException, CancelProgramException {
+	public void place(PointF position, int millis) throws StopProgramException, CancelProgramException {
 		place(B4D.converter.toPoint(position), millis);
 	}
 	
@@ -143,7 +142,7 @@ public final class Mouse {
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void place(PointF position) throws AWTException, StopProgramException, CancelProgramException {
+	public void place(PointF position) throws StopProgramException, CancelProgramException {
 		place(B4D.converter.toPoint(position), 0);
 	}
 
@@ -152,9 +151,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après positionnement.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void place(PointD position, int millis) throws AWTException, StopProgramException, CancelProgramException {
+	public void place(PointD position, int millis) throws StopProgramException, CancelProgramException {
 		place(B4D.converter.toPoint(position), millis);
 	}
 	
@@ -163,9 +161,8 @@ public final class Mouse {
 	 * @param position - Position de la souris en coordonnées du damier de dofus.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void place(PointD position) throws AWTException, StopProgramException, CancelProgramException {
+	public void place(PointD position) throws StopProgramException, CancelProgramException {
 		place(B4D.converter.toPoint(position), 0);
 	}
 	
@@ -179,10 +176,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void rightClick(Point position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
-		Robot robot = new Robot();
+	public void rightClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 			
 		if(maj)
@@ -201,9 +196,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void rightClick(Point position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void rightClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
 		rightClick(position, maj, 1000);
 	}
 	
@@ -213,9 +207,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void rightClick(PointF position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
+	public void rightClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -225,9 +218,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void rightClick(PointF position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void rightClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -237,9 +229,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void rightClick(PointD position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
+	public void rightClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -249,9 +240,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void rightClick(PointD position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void rightClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -265,10 +255,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void leftClick(Point position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException {
-		Robot robot = new Robot();
+	public void leftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException {
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 			
 		if(maj)
@@ -287,9 +275,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void leftClick(Point position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void leftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
 		leftClick(position, maj, 1000);
 	}
 	
@@ -299,9 +286,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void leftClick(PointF position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
+	public void leftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -311,9 +297,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void leftClick(PointF position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void leftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -323,9 +308,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void leftClick(PointD position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
+	public void leftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -335,9 +319,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void leftClick(PointD position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void leftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -351,9 +334,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void doubleLeftClick(Point position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException {
+	public void doubleLeftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException {
 		leftClick(position, maj, 0);
 		leftClick(position, maj, millis);
 	}
@@ -364,9 +346,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void doubleLeftClick(Point position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void doubleLeftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(position, maj, 1000);
 	}
 	
@@ -376,9 +357,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void doubleLeftClick(PointF position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
+	public void doubleLeftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -388,9 +368,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void doubleLeftClick(PointF position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void doubleLeftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -400,9 +379,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void doubleLeftClick(PointD position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
+	public void doubleLeftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -412,9 +390,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void doubleLeftClick(PointD position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void doubleLeftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -428,9 +405,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void tripleLeftClick(Point position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException {
+	public void tripleLeftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException {
 		leftClick(position, maj, 0);
 		leftClick(position, maj, 0);
 		leftClick(position, maj, millis);
@@ -442,9 +418,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void tripleLeftClick(Point position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void tripleLeftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(position, maj, 1000);
 	}
 	
@@ -454,9 +429,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void tripleLeftClick(PointF position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
+	public void tripleLeftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -466,9 +440,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void tripleLeftClick(PointF position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void tripleLeftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -478,9 +451,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void tripleLeftClick(PointD position, boolean maj, int millis) throws AWTException, StopProgramException, CancelProgramException{
+	public void tripleLeftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -490,9 +462,8 @@ public final class Mouse {
 	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void tripleLeftClick(PointD position, boolean maj) throws AWTException, StopProgramException, CancelProgramException{
+	public void tripleLeftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 
@@ -504,9 +475,8 @@ public final class Mouse {
 	 * @param millis - Temps d'attente après clique.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void chatClick(int millis) throws AWTException, StopProgramException, CancelProgramException{
+	public void chatClick(int millis) throws StopProgramException, CancelProgramException{
 		leftClick(configuration.getChatBar(), false, millis);
 	}
 	
@@ -514,9 +484,8 @@ public final class Mouse {
 	 * Cela est identique à {@code chatClick(500)}.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void chatClick() throws AWTException, StopProgramException, CancelProgramException{
+	public void chatClick() throws StopProgramException, CancelProgramException{
 		chatClick(500);
 	}
 }

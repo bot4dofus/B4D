@@ -26,16 +26,19 @@ import net.sourceforge.tess4j.TesseractException;
 public final class Screen {
 	
 	private Configuration configuration;
-    
+	private Robot robot;
+	
 	/*************/
 	/** BUILDER **/
 	/*************/
     
 	/** Constructeur de la classe {@code Screen}. 
      * @param configuration - Configuration de l'écran de jeu.
+	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation de l'écran
      */
-    public Screen(Configuration configuration) {
+    public Screen(Configuration configuration) throws AWTException {
     	this.configuration = configuration;
+		this.robot = new Robot();
     }
 	
 	  /*******************/
@@ -45,27 +48,24 @@ public final class Screen {
 	/** Permet de récupérer la couleur d'un pixel.
 	 * @param point - Point en coordonnées simples.
 	 * @return Couleur du pixel.
-	 * @throws AWTException Si un problème d'écran survient.
 	 */
-	public Color getPixelColor(Point point) throws AWTException   {
-		return new Robot().getPixelColor(point.x, point.y);
+	public Color getPixelColor(Point point) {
+		return robot.getPixelColor(point.x, point.y);
 	}
 	
 	/** Permet de récupérer la couleur d'un pixel.
 	 * @param point - Point en coordonnées relatives.
 	 * @return Couleur du pixel.
-	 * @throws AWTException Si un problème d'écran survient.
 	 */
-	public Color getPixelColor(PointF point) throws AWTException {
+	public Color getPixelColor(PointF point) {
 		return getPixelColor(B4D.converter.toPoint(point));
 	}
 	
 	/** Permet de récupérer la couleur d'un pixel.
 	 * @param point - Point en coordonnées du damier de dofus.
 	 * @return Couleur du pixel.
-	 * @throws AWTException Si un problème d'écran survient.
 	 */
-	public Color getPixelColor(PointD point) throws AWTException {
+	public Color getPixelColor(PointD point) {
 		return getPixelColor(B4D.converter.toPoint(point));
 	}
 	
@@ -78,10 +78,9 @@ public final class Screen {
 	 * @param bottomRightHandCorner - Point inférieur droit du rectangle de recherche en coordonnées relatives.
 	 * @param min - Couleur minimum.
 	 * @param max - Couleur maximum.
-	 * @return Position du pixel en coordonnées relatives.
-	 * @throws AWTException Si un problème d'écran survient.
+	 * @return Position du pixel en coordonnées relatives. {@code null} si aucun pixel n'a été trouvé.
 	 */
-	public PointF searchPixel(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) throws AWTException {
+	public PointF searchPixel(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) {
 		Point Point1 = B4D.converter.toPoint(topLeftHandCorner);
 		Point Point2 = B4D.converter.toPoint(bottomRightHandCorner);
 		
@@ -104,10 +103,9 @@ public final class Screen {
 	 * @param bottomRightHandCorner - Point inférieur droit du rectangle de recherche en coordonnées relatives.
 	 * @param min - Couleur minimum.
 	 * @param max - Couleur maximum.
-	 * @return Liste des pixels en coordonnées relatives correspondants au critère de recherche.
-	 * @throws AWTException Si un problème d'écran survient.
+	 * @return Liste des pixels en coordonnées relatives correspondants au critère de recherche. {@code null} si aucun pixel n'a été trouvé.
 	 */
-	public ArrayList<PointF> searchPixels(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) throws AWTException {
+	public ArrayList<PointF> searchPixels(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) {
 		
 		Point Point1 = B4D.converter.toPoint(topLeftHandCorner);
 		Point Point2 = B4D.converter.toPoint(bottomRightHandCorner);
@@ -137,18 +135,16 @@ public final class Screen {
 	/** Permet de faire une capture d'écrans d'une zone précise.
 	 * @param rectangle - Zone à capturer.
 	 * @return Image de la zone capturée.
-	 * @throws AWTException Si un problème d'écran survient.
 	 */
-	public BufferedImage takeSreenshot(Rectangle rectangle) throws AWTException {
-		return new Robot().createScreenCapture(rectangle);
+	public BufferedImage takeSreenshot(Rectangle rectangle) {
+		return robot.createScreenCapture(rectangle);
 	}
 	
 	/** Permet de faire une capture d'écrans de la zone de jeu.
 	 * @return Image de la zone de jeu.
-	 * @throws AWTException Si un problème d'écran survient.
 	 */
-	public BufferedImage takeSreenshot() throws AWTException {
-		return new Robot().createScreenCapture(configuration.getGameFrame());
+	public BufferedImage takeSreenshot() {
+		return robot.createScreenCapture(configuration.getGameFrame());
 	}
 	
 	  /*********/
@@ -159,9 +155,8 @@ public final class Screen {
 	 * @param rectangle - Zone de l'écran.
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws TesseractException Si impossible de réaliser l'OCR.
-	 * @throws AWTException Si un problème d'écran survient.
 	 */
-	public String OCR(Rectangle rectangle) throws AWTException, TesseractException {
+	public String OCR(Rectangle rectangle) throws TesseractException {
 		BufferedImage image = takeSreenshot(rectangle);
 		Tesseract tessInst = new Tesseract();
 		tessInst.setLanguage("fra");
@@ -174,9 +169,8 @@ public final class Screen {
 	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées simples.
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws TesseractException Si impossible de réaliser l'OCR.
-	 * @throws AWTException Si un problème d'écran survient.
 	 */
-	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws AWTException, TesseractException {
+	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws TesseractException {
 		return OCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y));
 	}
 	
@@ -185,9 +179,8 @@ public final class Screen {
 	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées relatives.
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws TesseractException Si impossible de réaliser l'OCR.
-	 * @throws AWTException Si un problème d'écran survient.
 	 */
-	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws AWTException, TesseractException {
+	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws TesseractException {
 		return OCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner));
 	}
 	
@@ -200,10 +193,8 @@ public final class Screen {
 	 * @return Chaine de caractère représentant la sélection. {@code null} si rien n'a été sélectionnée où si la sélection est vide.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public String getSelection(Point point) throws AWTException, StopProgramException, CancelProgramException {
-		Robot robot = new Robot();
+	public String getSelection(Point point) throws StopProgramException, CancelProgramException {
 		B4D.mouse.doubleLeftClick(point, false, 100);
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_C);
@@ -218,9 +209,8 @@ public final class Screen {
 	 * @return Chaine de caractère représentant la sélection. {@code null} si rien n'a été sélectionnée où si la sélection est vide.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public String getSelection(PointF position) throws AWTException, StopProgramException, CancelProgramException {
+	public String getSelection(PointF position) throws StopProgramException, CancelProgramException {
 		return getSelection(B4D.converter.toPoint(position));
 	}
 	

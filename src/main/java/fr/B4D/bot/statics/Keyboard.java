@@ -1,7 +1,6 @@
 package fr.B4D.bot.statics;
 
 import java.awt.AWTException;
-
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -21,6 +20,19 @@ import fr.B4D.threads.KeyboardThread;
 public final class Keyboard{
 	
 	private static Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+	private Robot robot;
+	
+	/*************/
+	/** BUILDER **/
+	/*************/
+
+	/** Constructeur de la classe {@code Mouse}. 
+     * @param configuration - Configuration de l'écran de jeu.
+	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation du clavier
+     */
+    public Keyboard() throws AWTException {
+		this.robot = new Robot();
+    }
 	
 	  /****************/
 	 /** SINGLE KEY **/
@@ -31,10 +43,8 @@ public final class Keyboard{
 	 * @param time - Temps d'attente après l'appui sur la touche.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de clavier survient.
 	 */
-	public void sendKey(int keyEvent, int time) throws AWTException, StopProgramException, CancelProgramException {
-		Robot robot = new Robot();
+	public void sendKey(int keyEvent, int time) throws StopProgramException, CancelProgramException {
 		robot.keyPress(keyEvent);
 		robot.keyRelease(keyEvent);
 		B4D.wait.wait(time);
@@ -45,9 +55,8 @@ public final class Keyboard{
 	 * @param keyEvent - Entier représentant le touche du clavier.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de clavier survient.
 	 */
-	public void sendKey(int keyEvent) throws AWTException, StopProgramException, CancelProgramException {
+	public void sendKey(int keyEvent) throws StopProgramException, CancelProgramException {
 		sendKey(keyEvent, 100);
 	}
 	
@@ -61,12 +70,9 @@ public final class Keyboard{
 	 * @param time - Temps d'attente après écriture du texte.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de clavier survient.
 	 */
-	public void writeKeyboard(String text, int time) throws AWTException, StopProgramException, CancelProgramException {
-		setClipboard(text);
-		
-		Robot robot = new Robot();
+	public void writeKeyboard(String text, int time) throws StopProgramException, CancelProgramException {
+		setClipboard(text);		
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
@@ -80,9 +86,8 @@ public final class Keyboard{
 	 * @param text - Texte à écrire.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de clavier survient.
 	 */
-	public void writeKeyboard(String text) throws AWTException, StopProgramException, CancelProgramException {
+	public void writeKeyboard(String text) throws StopProgramException, CancelProgramException {
 		writeKeyboard(text, 500);
 	}
 	

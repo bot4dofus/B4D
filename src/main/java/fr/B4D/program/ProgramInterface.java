@@ -1,6 +1,5 @@
 package fr.B4D.program;
 
-import java.awt.AWTException;
 import java.io.IOException;
 
 import fr.B4D.bot.B4DException;
@@ -27,11 +26,10 @@ public interface ProgramInterface{
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws FullInventoryException Si l'inventaire est plein.
-	 * @throws TesseractException Si une exception Tesseract est levée.
-	 * @throws AWTException Si un problème de souris ou clavier survient. 
+	 * @throws TesseractException Si une exception Tesseract est levée. 
 	 * @throws IOException Si un problème de fichier survient.
 	 */
-	public void cycle(Person person) throws StopProgramException, CancelProgramException, FullInventoryException, AWTException, IOException, TesseractException, B4DException;
+	public void cycle(Person person) throws StopProgramException, CancelProgramException, FullInventoryException, IOException, TesseractException, B4DException;
 	
 	/** Fonction de fin du programme. Celle-ci ne sera éxecutée qu'une seule fois en fin de programme.
 	 * @param person - Personnage avec lequel lancer la fonction de fin.

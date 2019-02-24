@@ -1,5 +1,6 @@
 package fr.B4D.bot;
 
+import java.awt.AWTException;
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
@@ -58,8 +59,9 @@ public final class B4D{
 	 * @throws IOException Si impossible de créer les fichiers de configuration.
 	 * @throws CaptureDeviceLookupException Si aucun réseau n'est détecté.
 	 * @throws CaptureDeviceOpenException Si le réseau de capture ne peut pas être écouté.
+	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation des périphériques
 	 */
-	public B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException {
+	public B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, AWTException {
 		
 		/** LOGGER **/
 		logger = new Logger();

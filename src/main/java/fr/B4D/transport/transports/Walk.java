@@ -1,6 +1,5 @@
 package fr.B4D.transport.transports;
 
-import java.awt.AWTException;
 import java.awt.Point;
 import java.io.Serializable;
 
@@ -49,7 +48,7 @@ public class Walk extends Transport implements Serializable{
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
 	 */
-	public void goTo(Point destination) throws AWTException, StopProgramException, CancelProgramException{		
+	public void goTo(Point destination) throws StopProgramException, CancelProgramException{		
 		Point move = new Point(destination.x - super.getPosition().x, destination.y - super.getPosition().y);
 		if(move.equals(up))
 			B4D.mouse.leftClick(goUp, false);

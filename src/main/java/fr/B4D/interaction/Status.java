@@ -1,6 +1,5 @@
 package fr.B4D.interaction;
 
-import java.awt.AWTException;
 import java.awt.Point;
 
 import fr.B4D.bot.B4D;
@@ -70,9 +69,8 @@ public class Status {
 	 * @return {@code true} si le status a été activé, {@code false} sinon.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public boolean setStatus() throws AWTException, StopProgramException, CancelProgramException {
+	public boolean setStatus() throws StopProgramException, CancelProgramException {
 		if(statusMenuPosition != null) {
 			PointF menu = B4D.converter.toPointF(statusMenuPosition);
 			B4D.mouse.leftClick(menu, false, 200);		//Ouvre le menu des status

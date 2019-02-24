@@ -17,7 +17,7 @@ public class ScreenTest {
 	private Screen screen;
 	
 	@Before
-	public void before() throws ClassNotFoundException, IOException {
+	public void before() throws ClassNotFoundException, IOException, AWTException {
 		Configuration configuration = DAOFactory.getConfigurationDAO().find();
 		screen = new Screen(configuration);
 	}

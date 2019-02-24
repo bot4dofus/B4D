@@ -1,6 +1,5 @@
 package fr.B4D.programs;
 
-import java.awt.AWTException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -123,7 +122,7 @@ public final class Loto {
 			}
 		}
 		
-		public void cycle(Person person) throws AWTException, IOException, TesseractException, StopProgramException, NumberFormatException, CancelProgramException {			
+		public void cycle(Person person) throws IOException, TesseractException, StopProgramException, NumberFormatException, CancelProgramException {			
 			try {
 				Exchange exchange = new Exchange(ticketPrice, 0);
 				String name = exchange.waitForExchange();

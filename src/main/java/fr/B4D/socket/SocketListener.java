@@ -146,6 +146,9 @@ public class SocketListener extends Thread{
 			case 198:
 				length = 7;
 				break;
+			case 0x75:
+				length = 9;
+				break;
 			default:
 				length = -1;
 				break;

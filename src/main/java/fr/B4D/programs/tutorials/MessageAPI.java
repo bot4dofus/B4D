@@ -1,6 +1,5 @@
 package fr.B4D.programs.tutorials;
 
-import java.awt.AWTException;
 import java.io.IOException;
 
 import fr.B4D.bot.B4D;
@@ -30,7 +29,7 @@ public final class MessageAPI {
 	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, IOException {
+		public void cycle(Person person) throws IOException {
 			Message message = Dofus.chat.waitForMessage(0);
 			B4D.logger.popUp("Message de " + message.getPseudo() + "(" + message.getChannel() + ") : " + message.getText());
 		}
@@ -50,7 +49,7 @@ public final class MessageAPI {
 	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, IOException, StopProgramException, CancelProgramException {
+		public void cycle(Person person) throws IOException, StopProgramException, CancelProgramException {
 			Message message = new Message("Solwy", "Salut !");
 			message.send();
 			message = message.waitForReply(60000);
@@ -74,11 +73,11 @@ public final class MessageAPI {
 	public final static Program TUTORIAL3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, IOException, StopProgramException, CancelProgramException {
+		public void cycle(Person person) throws IOException, StopProgramException, CancelProgramException {
 			Dofus.chat.addChannelFilter(Channel.BUSINESS);
 			Dofus.chat.addTextFilter("moi");
 			Dofus.chat.setChatListener(new ChatListener() {
-				public void treatMessage(Message message) throws StopProgramException, CancelProgramException, AWTException {
+				public void treatMessage(Message message) throws StopProgramException, CancelProgramException {
 					message.reply("C'est qui moi ?");
 				}
 			});
