@@ -194,6 +194,7 @@ public class Channel implements Serializable{
 	 */
 	public static List<Channel> displayChannels(List<Channel> channels) throws AWTException, StopProgramException, CancelProgramException {
 		List<Channel> toggles = null;
+		toggles.add(null);
 		
 		if(chatMenuPosition != null) {
 			PointF menu = B4D.converter.toPointF(chatMenuPosition);
@@ -214,7 +215,7 @@ public class Channel implements Serializable{
 					toggles.add(channel);
 			}
 
-			B4D.keyboard.sendKey(KeyEvent.VK_ESCAPE, 100);				//Ferme le menu du chat
+			B4D.keyboard.sendKey(KeyEvent.VK_ESCAPE, 0);				//Ferme le menu du chat
 			B4D.screen.waitForChangingPixel(arrowPosition, 10000);		//Attend la fermeture du menu
 		}
 		return toggles;
@@ -250,6 +251,6 @@ public class Channel implements Serializable{
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return name + "(" + prefix + ")";
+		return name;
 	}
 }

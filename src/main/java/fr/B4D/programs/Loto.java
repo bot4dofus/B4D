@@ -116,7 +116,8 @@ public final class Loto {
 					drive.stepBack();
 				}
 			}catch (IOException e) {
-				throw new IOException("Fichier de certificats \"" + CREDENTIALS + "\" manquant.");
+				e.printStackTrace();
+				throw new CancelProgramException("Fichier de certificat \"" + CREDENTIALS + "\" manquant ou érroné.");
 			}catch (GeneralSecurityException e) {
 				throw new CancelProgramException("Certificat érroné.");
 			}
