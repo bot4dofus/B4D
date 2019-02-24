@@ -60,14 +60,17 @@ public final class Loto {
 		private GoogleDrive drive;
 		private GoogleSheet sheet;
 		
-		public void intro(Person person) throws IOException, CancelProgramException {	
+		public void intro(Person person) throws CancelProgramException {	
 
 			try {
 				int response = JOptionPane.showConfirmDialog(null, "Voulez vous créer un nouveau tirage ?\n- Oui : Je créer un nouveau tirage\n- Non : Reprendre le tirage en cours", "Tirage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
 				if(response == JOptionPane.CANCEL_OPTION)
 					throw new CancelProgramException("Vous avez annulé le programme.");
-
-				drive = new GoogleDrive(DRIVE_ID, CREDENTIALS);
+				try {
+					drive = new GoogleDrive(DRIVE_ID, CREDENTIALS);
+				}catch (Exception e) {
+					throw new CancelProgramException("Fichier de certificat \"" + CREDENTIALS + "\" manquant ou érroné.");
+				}
 
 				if (response == JOptionPane.YES_OPTION) {
 					String number = (String)JOptionPane.showInputDialog(null, "Numéro du tirage :", null);
@@ -114,15 +117,14 @@ public final class Loto {
 					sheet = new GoogleSheet(sheetFile.getId(), CREDENTIALS);
 					drive.stepBack();
 				}
-			}catch (IOException e) {
-				e.printStackTrace();
-				throw new CancelProgramException("Fichier de certificat \"" + CREDENTIALS + "\" manquant ou érroné.");
 			}catch (GeneralSecurityException e) {
 				throw new CancelProgramException("Certificat érroné.");
+			}catch (IOException e) {
+				throw new CancelProgramException("Cannot create, write, read, copy or move a file.");
 			}
 		}
 		
-		public void cycle(Person person) throws IOException, TesseractException, StopProgramException, NumberFormatException, CancelProgramException {			
+		public void cycle(Person person) throws TesseractException, StopProgramException, NumberFormatException, CancelProgramException {			
 			try {
 				Exchange exchange = new Exchange(ticketPrice, 0);
 				String name = exchange.waitForExchange();
@@ -164,6 +166,8 @@ public final class Loto {
 				
 			} catch (ExchangeCanceledException e) {
 				//Do nothing
+			}catch (IOException e) {
+				throw new CancelProgramException("Cannot create, write, read, copy or move a file.");
 			}
 		}
 
