@@ -19,6 +19,7 @@ public class GraphTest {
 
 	@Before
 	public void before() {
+		@SuppressWarnings("unused")
 		Dofus dofus = new Dofus();
 	}
 	
