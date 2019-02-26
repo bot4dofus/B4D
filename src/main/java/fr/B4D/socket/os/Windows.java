@@ -1,11 +1,12 @@
 package fr.B4D.socket.os;
 
-import java.util.ArrayList;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 import fr.B4D.bot.B4DException;
-import fr.B4D.socket.NetworkTester;
+import fr.B4D.socket.NetworkDeviceInfo;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.PacketCapture;
 
@@ -14,40 +15,43 @@ import net.sourceforge.jpcap.capture.PacketCapture;
  */
 public class Windows extends OperatingSystem{
 
-	private final static int MILLIS_TO_WAIT = 3000;
-	
 	/** Constructeur de la classe {@code Windows}.
 	 */
 	public Windows() {
 		super("Windows", "jpcap.dll");
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see fr.B4D.socket.os.OperatingSystem#findActiveDevice()
 	 */
 	public String findActiveDevice() throws B4DException {
-		try {
-			String[] devs = PacketCapture.lookupDevices();
-			ArrayList<NetworkTester> testers = new ArrayList<NetworkTester>();
-			CountDownLatch socketDetected = new CountDownLatch(1);
 
-			for(int i=0; i<devs.length; i++) {
-				devs[i] = devs[i].substring(0, devs[i].indexOf("\n"));
-				testers.add(new NetworkTester(devs[i], socketDetected));
+		try {
+			String currentAddress = null;
+			Enumeration<NetworkInterface> nis = NetworkInterface.getNetworkInterfaces();
+			while(nis.hasMoreElements() && currentAddress == null)
+			{
+				NetworkInterface ni = (NetworkInterface) nis.nextElement();
+				if(ni.isUp()) {
+					Enumeration<InetAddress> ias = ni.getInetAddresses();
+					while (ias.hasMoreElements() && currentAddress == null)
+					{
+						InetAddress ia = (InetAddress) ias.nextElement();
+						if(!ia.isSiteLocalAddress() && !ia.isLoopbackAddress())
+							currentAddress = ia.getHostAddress();
+					}
+				}
 			}
-			testers.stream().forEach(s -> s.start());
-			try {
-				socketDetected.await(MILLIS_TO_WAIT, TimeUnit.MILLISECONDS);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+
+			if(currentAddress == null)
+				throw new B4DException("Merci de vérifier votre connection internet.", false);
+
+			for (String jpcapDevice : PacketCapture.lookupDevices()) {
+				NetworkDeviceInfo info = new NetworkDeviceInfo(jpcapDevice);
+				if(info.getInterfaceAddress().equals(currentAddress))
+					return info.getJpcapDeviceName();
 			}
-			testers.stream().forEach(s -> s.interrupt());
-			
-			for(NetworkTester tester:testers) {
-				if(tester.isActif())
-					return tester.getNetwork();
-			}
-		} catch (CaptureDeviceLookupException e1) {
+		} catch (CaptureDeviceLookupException | SocketException e1) {
 			//Do nothing
 		}
 		throw new B4DException("No active device detected. Please try again.");
