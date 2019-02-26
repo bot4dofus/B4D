@@ -22,6 +22,8 @@ public abstract class OperatingSystem {
 	private String library;
 	
 	/** Constructeur de la classe {@code OperatingSystem}.
+	 * @param name - Nom du système d'exploitation.
+	 * @param library - Nom de la librairie jpcap utilisée.
 	 */
 	public OperatingSystem(String name, String library) {
 		String paths = System.getProperty("java.library.path");

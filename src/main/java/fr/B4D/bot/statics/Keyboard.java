@@ -27,7 +27,6 @@ public final class Keyboard{
 	/*************/
 
 	/** Constructeur de la classe {@code Mouse}. 
-     * @param configuration - Configuration de l'écran de jeu.
 	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation du clavier
      */
     public Keyboard() throws AWTException {

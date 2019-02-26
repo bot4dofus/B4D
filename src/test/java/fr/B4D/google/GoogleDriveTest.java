@@ -19,63 +19,57 @@ public class GoogleDriveTest {
 	private static final String CREDENTIALS = "b4d_service.json";
 	private static final String DRIVE_URL = "https://drive.google.com/drive/folders/1HLj2cvMY3FO1XOlNJo1KUCamKRlfyaQj?fbclid=IwAR2NqwO3XcxHDvEqGsu6s_ggFw7fnuVNDvFrSyH3JmXCrcXlUxYkeoZmEWc";
 	private static final String DRIVE_ID = "1HLj2cvMY3FO1XOlNJo1KUCamKRlfyaQj";
-	
+
 	private GoogleDrive drive;
-	
+
 	@Before
 	public void setup() throws GeneralSecurityException, IOException {
 		drive = new GoogleDrive(DRIVE_ID, CREDENTIALS);
 	}
-	
+
 	@Test
 	public void getId() throws IOException {
 		String id = GoogleDrive.getIdFromUrl(DRIVE_URL);
 		Assert.assertEquals(DRIVE_ID, id);
 	}
-	
-	  /**********/
-	 /** LIST **/
-	/**********/
-	
+
+	/* LIST */
+
 	@Test
 	public void listAll() throws IOException {
 		List<File> items = drive.listAll();
 		items.stream().forEach(i-> System.out.println(i));
 	}
-	
+
 	@Test
 	public void listFiles() throws IOException {
 		List<File> files = drive.listFiles();
 		files.stream().forEach(f -> System.out.println(f));
 	}
-	
+
 	@Test
 	public void listFolders() throws IOException {
 		List<File> folders = drive.listFolders();
 		folders.stream().forEach(f -> System.out.println(f));
 	}
-	
-	  /************************/
-	 /** CREATE/REMOVE FILE **/
-	/************************/
-	
+
+	/* CREATE/REMOVE FILE */
+
 	@Test
 	public void createFile() throws IOException {
 		File file = drive.createFile("text/plain", "Test create");
 		Assert.assertNotNull(file);
 		drive.removeFile(file.getId());
 	}
-	
+
 	@Test
 	public void removeFile() throws IOException {
 		File file = drive.createFile("text/plain", "Test create");
 		Assert.assertNotNull(file);
 		drive.removeFile(file.getId());
 	}
-	
-	  /*******************/
-	 /** MANAGING FILE **/
-	/*******************/
+
+	/* MANAGING FILE */
 
 	@Test
 	public void copyFile() throws IOException {
@@ -86,7 +80,7 @@ public class GoogleDriveTest {
 		drive.removeFile(file.getId());
 		drive.removeFile(newFile.getId());
 	}
-	
+
 	@Test
 	public void moveFile() throws IOException {
 		File folder = drive.createFolder("Test move");
@@ -96,7 +90,7 @@ public class GoogleDriveTest {
 		drive.removeFile(newFile.getId());
 		drive.removeFolder(folder.getId());
 	}
-	
+
 	@Test
 	public void renameFile() throws IOException {
 		File file = drive.createFile("text/plain", "Test rename");
@@ -104,11 +98,9 @@ public class GoogleDriveTest {
 		Assert.assertEquals("Renamed by B4D", newFile.getName());
 		drive.removeFile(newFile.getId());
 	}
-	
-	  /**************************/
-	 /** UPLOAD/DOWNLOAD FILE **/
-	/**************************/
-	
+
+	/* UPLOAD/DOWNLOAD FILE */
+
 	@Test
 	public void uploadFile() throws IOException {
 		java.io.File file = new java.io.File("Test upload");
@@ -119,34 +111,30 @@ public class GoogleDriveTest {
 		file.delete();
 		drive.removeFile(newFile.getId());
 	}
-	
+
 	@Test
 	public void downloadFile() throws IOException {
 		java.io.File file = drive.downloadFile("1BEnsmHu3EACmxvBlizY1c_PWpp9DQsxz", "Downloaded by B4D");
 		Assert.assertNotNull(file);
 	}
 
-	  /************/
-	 /** FOLDER **/
-	/************/
-	
+	/* FOLDER */
+
 	@Test
 	public void createFolder() throws IOException {
 		File folder = drive.createFolder("Dossier test");
 		Assert.assertNotNull(folder);
 		drive.removeFolder(folder.getId());
 	}
-	
+
 	@Test
 	public void removeFolder() throws IOException {
 		File folder = drive.createFolder("Dossier test");
 		Assert.assertNotNull(folder);
 		drive.removeFolder(folder.getId());
 	}
-	
-	  /****************/
-	 /** NAVIGATION **/
-	/****************/
+
+	/* NAVIGATION */
 
 	@Test
 	public void stepInto() throws IOException {

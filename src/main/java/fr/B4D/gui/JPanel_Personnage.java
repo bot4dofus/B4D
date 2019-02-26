@@ -61,7 +61,7 @@ public class JPanel_Personnage extends JPanel {
 	
 	/**
 	 * Create the panel.
-	 * @param lblXY_Rappel 
+	 * @param b4d - Instance du bot.
 	 */
 	public JPanel_Personnage(B4D b4d) {
 		this.b4d = b4d;

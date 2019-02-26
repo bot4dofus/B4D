@@ -10,7 +10,7 @@ public class B4DException extends Exception{
 	
 	/** Constructeur de l'exception {@code B4DException}.
 	 * Aucun rapport d'erreur ne pourra être envoyé.
-	 * Cela est identique à {@code B4DException(false)
+	 * Cela est identique à {@code B4DException(false)}.
 	 */
 	public B4DException() {
     	this(false);
@@ -26,7 +26,7 @@ public class B4DException extends Exception{
 	
 	/** Constructeur de l'exception {@code B4DException}.
 	 * Un rapport d'erreur pourra être envoyé.
-	 * Cela est identique à {@code B4DException(raison, true)
+	 * Cela est identique à {@code B4DException(raison, true)}.
 	 * @param raison - Raison de l'exception.
 	 */
 	public B4DException(String raison)

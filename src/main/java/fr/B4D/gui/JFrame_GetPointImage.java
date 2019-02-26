@@ -22,6 +22,9 @@ public class JFrame_GetPointImage{
 
 	/**
 	 * Create the application.
+	 * @param text - Texte affiché à l'écran.
+	 * @param image - Image affichée à l'écran.
+	 * @param mouseListener Sub-routine exécutée lors qu clique.
 	 */
 	public JFrame_GetPointImage(String text, ImageIcon image, MouseListener mouseListener) {
 		this.text = text;

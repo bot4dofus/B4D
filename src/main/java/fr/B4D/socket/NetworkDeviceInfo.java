@@ -162,8 +162,6 @@ public class NetworkDeviceInfo {
     /**
      * Get the interface's IP address.
      * @return Interface's IP address.
-     * @bug This may not be correct for interfaces with multiple IP addresses. For this reason, it is
-     *      left as a raw string rather than being converted to an InetAddress.
      */
     public final String getInterfaceAddress () {
         return interfaceAddress;
@@ -172,8 +170,7 @@ public class NetworkDeviceInfo {
 
     /**
      * Get the interface's subnet mask.
-     * @return Interface's subnet mask.
-     * @bug Same issue as getInterfaceAddress(). 
+     * @return Interface's subnet mask. 
      */
     public final String getInterfaceSubnetMask () {
         return interfaceSubnetMask;

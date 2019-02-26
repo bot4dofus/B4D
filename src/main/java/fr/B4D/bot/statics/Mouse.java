@@ -140,7 +140,6 @@ public final class Mouse {
 	 * @param position - Position de la souris en coordonnées relatives.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
 	public void place(PointF position) throws StopProgramException, CancelProgramException {
 		place(B4D.converter.toPoint(position), 0);
