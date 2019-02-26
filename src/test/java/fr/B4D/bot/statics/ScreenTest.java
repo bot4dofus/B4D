@@ -1,26 +1,30 @@
 package fr.B4D.bot.statics;
 
 import java.awt.AWTException;
-import java.awt.Color;
 import java.awt.Point;
 import java.io.IOException;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import fr.B4D.bot.B4D;
-import fr.B4D.utils.PointF;
+import fr.B4D.bot.Configuration;
+import fr.B4D.dao.DAOFactory;
 import fr.B4D.utils.Rectangle;
 import net.sourceforge.tess4j.TesseractException;
 
 public class ScreenTest {
 
+	private Screen screen;
+	
+	@Before
+	public void before() throws ClassNotFoundException, IOException, AWTException {
+		Configuration configuration = DAOFactory.getConfigurationDAO().find();
+		screen = new Screen(configuration);
+	}
+	
 	@Test
 	public void test() throws AWTException, IOException, TesseractException {
-		String out = B4D.screen.OCR(new Rectangle(new Point(340,500), new Point(1170,990)));
+		String out = screen.OCR(new Rectangle(new Point(0,0), new Point(500,300)));
 		System.out.println(out);
-	}
-	@Test
-	public void test2() throws AWTException {
-		System.out.println(B4D.screen.searchPixel(new PointF(0,0), new PointF(0,0), new Color(100, 100, 0), new Color(255, 255, 50)));
 	}
 }

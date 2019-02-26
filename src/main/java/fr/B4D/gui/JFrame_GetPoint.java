@@ -25,6 +25,8 @@ public class JFrame_GetPoint {
 
 	/**
 	 * Create the application.
+	 * @param text - Texte affiché à l'écran.
+	 * @param mouseListener - Sub-routine exécutée lors du clique.
 	 */
 	public JFrame_GetPoint(String text, MouseListener mouseListener) {
 		this.text = text;

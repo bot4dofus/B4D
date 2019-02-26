@@ -19,7 +19,7 @@ public class StatusTest {
 	private static boolean setUpDone = false;
 	
 	@Before
-	public void before() throws ClassNotFoundException, B4DException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException {
+	public void before() throws ClassNotFoundException, B4DException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, AWTException {
 		if(!setUpDone) {
 			@SuppressWarnings("unused")
 			B4D b4d = new B4D();

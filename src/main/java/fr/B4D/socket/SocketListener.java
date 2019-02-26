@@ -9,7 +9,7 @@ import fr.B4D.bot.Server;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
-import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
+import fr.B4D.socket.os.OperatingSystem;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.CapturePacketException;
 import net.sourceforge.jpcap.capture.InvalidFilterException;
@@ -45,13 +45,20 @@ public class SocketListener extends Thread{
 	/*************/
 	
 	/** Constructeur de la classe {@code SocketListener}.
-	 * @throws B4DException Si aucuns des réseaux n'est actif.
-	 * @throws CaptureDeviceLookupException Si aucun réseau n'est détecté.
+	 * @throws B4DException Si utilisation d'une jvm 64bit, si aucune librairie jpcap trouvée ou si aucun des réseaux n'est actif.
 	 * @throws CaptureDeviceOpenException Si il est impossible d'ouvrir le réseau.
 	 */
-	public SocketListener() throws B4DException, CaptureDeviceLookupException, CaptureDeviceOpenException {
+	public SocketListener() throws B4DException, CaptureDeviceOpenException{
+		
+		if(System.getProperty("os.arch").contains("64"))
+			throw new B4DException("Vous exécutez le bot avec une version java 64-bit. Merci d'installer java 32-bit et recommencer.", false);
+		
+		OperatingSystem os = OperatingSystem.getCurrent();
+		if(!os.libraryExists())
+			throw new B4DException("Impossible de trouver le fichier " + os.getLibrary() + ".", false);
+		
 		m_pcap = new PacketCapture();
-		network = NetworkFinder.find();
+		network = os.findActiveDevice();
 		B4D.logger.debug(this, "Network found : " + network);
 		m_pcap.open(network, 65535, true, 1000);
 		m_pcap.addRawPacketListener(new RawPacketListener() {
@@ -146,12 +153,15 @@ public class SocketListener extends Thread{
 			case 198:
 				length = 7;
 				break;
+			case 0x75:
+				length = 9;
+				break;
 			default:
 				length = -1;
 				break;
 		}
 		if(length == -1)
-			throw new B4DException("Unknow socket type [" + HexHelper.toString(data) + "]");
+			throw new B4DException("Unknow socket type [" + HexHelper.toString(data) + "]", false);
 		
 		return length;
 	}

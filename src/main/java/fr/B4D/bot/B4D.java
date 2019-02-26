@@ -1,5 +1,6 @@
 package fr.B4D.bot;
 
+import java.awt.AWTException;
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,6 @@ import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.Program;
 import fr.B4D.socket.SocketListener;
-import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.InvalidFilterException;
 
@@ -56,10 +56,10 @@ public final class B4D{
 	 * @throws B4DException Si une exception B4D est levée.
 	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
 	 * @throws IOException Si impossible de créer les fichiers de configuration.
-	 * @throws CaptureDeviceLookupException Si aucun réseau n'est détecté.
 	 * @throws CaptureDeviceOpenException Si le réseau de capture ne peut pas être écouté.
+	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation des périphériques
 	 */
-	public B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException {
+	public B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceOpenException, AWTException {
 		
 		/** LOGGER **/
 		logger = new Logger();

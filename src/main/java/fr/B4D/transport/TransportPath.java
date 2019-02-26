@@ -1,6 +1,5 @@
 package fr.B4D.transport;
 
-import java.awt.AWTException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -39,9 +38,8 @@ public class TransportPath implements Serializable{
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void use(Person person) throws StopProgramException, CancelProgramException, B4DException, AWTException {
+	public void use(Person person) throws StopProgramException, CancelProgramException, B4DException {
 		for(TransportStep step:transportPath) {
 			if (!person.getPosition().equals(step.getTransport().getPosition()))
 				throw new B4DException("Wrong position.");

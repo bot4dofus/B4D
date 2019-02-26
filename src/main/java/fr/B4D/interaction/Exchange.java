@@ -1,9 +1,7 @@
 package fr.B4D.interaction;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
@@ -86,22 +84,20 @@ public class Exchange implements Serializable{
 	
 	/** Permet d'attendre sans limite de temps un échange proposé par un joueur. Cela est identique à {@code waitForExchange(0)}.
 	 * @return Pseudo du joueur ayant proposé l'échange et {@code null} si timeout.
-	 * @throws AWTException Si impossible de valider l'échange.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public String waitForExchange() throws AWTException, StopProgramException, CancelProgramException {
+	public String waitForExchange() throws StopProgramException, CancelProgramException {
 		return waitForExchange(0);
 	}
 
 	/** Permet d'attendre un échange provoqué par un joueur en présisant une durée maximal d'attente
 	 * @param timeout - Durée d'attente maximale en millisecondes.
 	 * @return Pseudo du joueur ayant proposé l'échange et {@code null} si timeout.
-	 * @throws AWTException Si impossible de valider l'échange.
 	 * @throws StopProgramException Si le programme est stoppé .
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public String waitForExchange(int timeout) throws StopProgramException, AWTException, CancelProgramException {
+	public String waitForExchange(int timeout) throws StopProgramException, CancelProgramException {
 		if(!B4D.socketListener.isAlive())
 			B4D.socketListener.start();
 		
@@ -124,11 +120,9 @@ public class Exchange implements Serializable{
 	 * @throws ExchangeCanceledException Si l'échange est annulé.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws AWTException Si un problème de souris ou clavier survient.
 	 * @throws TesseractException Si un problème d'OCR survient.
-	 * @throws IOException Si un problème d'image survient.
 	 */
-	public BufferedImage exchange(String validationMessage) throws ExchangeCanceledException, AWTException, TesseractException, IOException, StopProgramException, CancelProgramException {
+	public BufferedImage exchange(String validationMessage) throws ExchangeCanceledException, TesseractException, StopProgramException, CancelProgramException {
 		B4D.logger.debug(this, "Début de l'échange");
 		Message message;
 		
@@ -179,9 +173,8 @@ public class Exchange implements Serializable{
 	 * @throws ExchangeCanceledException Si l'échange est annulé.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws AWTException Si un problème de souris ou clavier survient.
 	 */
-	public void cancelExchange() throws ExchangeCanceledException, AWTException, StopProgramException, CancelProgramException {
+	public void cancelExchange() throws ExchangeCanceledException, StopProgramException, CancelProgramException {
 		B4D.logger.debug(this, "Echange annulé");
 		if(isInProgress())
 			B4D.mouse.leftClick(escapeButton, false);
@@ -192,17 +185,13 @@ public class Exchange implements Serializable{
 	 * @return {@code true} si l'échange est en cours, sinon {@code false}.
 	 */
 	private boolean isInProgress() {
-		try {
-			return (B4D.screen.getPixelColor(validationButton).getBlue() == 0);
-		} catch (AWTException e) {
-			return true;
-		}
+		return (B4D.screen.getPixelColor(validationButton).getBlue() == 0);
 	}
 	
 	/** Permet de savoir si le joueur à validé l'échange.
 	 * @return {@code true} si le joueur à validé, sinon {@code false}.
 	 */
-	private boolean isValided() throws AWTException {
+	private boolean isValided() {
 		return B4D.screen.searchPixel(new PointF(0.3408,0.2804), new PointF(0.3408,0.2914), new Color(100, 100, 0), new Color(255, 255, 50)) != null;
 	}
 }

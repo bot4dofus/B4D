@@ -6,6 +6,7 @@ target/
 .classpath
 
 #Other
+wiki/
 world_creation/
 **/*.GridCreator
 **/*.txt

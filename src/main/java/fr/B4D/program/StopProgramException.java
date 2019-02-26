@@ -13,6 +13,6 @@ public class StopProgramException extends B4DException{
 	 */
 	public StopProgramException()
     {
-    	super("Program stoped");
+    	super("Program stoped", false);
     }
 }

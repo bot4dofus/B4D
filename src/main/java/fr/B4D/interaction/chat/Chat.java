@@ -114,9 +114,8 @@ public class Chat extends Thread{
 	 * @param countTo - Nombre de message à traiter.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws AWTException Si un problème d'interface survient.
 	 */
-	public void read(int countTo) throws StopProgramException, CancelProgramException, AWTException {		
+	public void read(int countTo) throws StopProgramException, CancelProgramException {		
 		int count = 0;
 		Message message;
 		while(count != countTo) {

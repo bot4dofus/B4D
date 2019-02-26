@@ -1,8 +1,6 @@
 package fr.B4D.programs.tutorials;
 
-import java.awt.AWTException;
 import java.awt.Image;
-import java.io.IOException;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
@@ -34,7 +32,7 @@ public final class ExchangeAPI {
 	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws AWTException, IOException, StopProgramException, CancelProgramException, TesseractException {
+		public void cycle(Person person) throws StopProgramException, CancelProgramException, TesseractException {
 			Exchange exchange = new Exchange(100000,0);
 			String name = exchange.waitForExchange();
 			try {

@@ -1,6 +1,5 @@
 package fr.B4D.programs;
 
-import java.awt.AWTException;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -61,61 +60,71 @@ public final class Loto {
 		private GoogleDrive drive;
 		private GoogleSheet sheet;
 		
-		public void intro(Person person) throws IOException, GeneralSecurityException, CancelProgramException {			
-			int response = JOptionPane.showConfirmDialog(null, "Voulez vous créer un nouveau tirage ?\n- Oui : Je créer un nouveau tirage\n- Non : Reprendre le tirage en cours", "Tirage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-			if(response == JOptionPane.CANCEL_OPTION)
-				throw new CancelProgramException("Vous avez annulé le programme.");
-			
-			drive = new GoogleDrive(DRIVE_ID, CREDENTIALS);
-			
-			if (response == JOptionPane.YES_OPTION) {
-				String number = (String)JOptionPane.showInputDialog(null, "Numéro du tirage :", null);
-				String date = (String)JOptionPane.showInputDialog(null, "Date :", null);
-				String hour = (String)JOptionPane.showInputDialog(null, "Heure :", null);
-				String position = (String)JOptionPane.showInputDialog(null, "Position :", null);
-				String price = (String)JOptionPane.showInputDialog(null, "Prix du ticket :", null);
-				
-				if(number == null || date == null || hour == null || position == null)
-					throw new CancelProgramException("Tous les champs doivent petre remplis.");
+		public void intro(Person person) throws CancelProgramException {	
 
-				String title = "Tirage n°" + number + " - En cours";
-				String image_folder = "Tirage n°" + number + " - Images";
-				
-				//Create the image folder
-				imageFolder = drive.createFolder(image_folder);
-				
-				//Copy the original sheet and moved it
-				File file = drive.copyFile(MODEL_SHEET_ID, title);
-				file = drive.moveFile(file.getId(), PROGRESS_ID);
-				
-				//Get the sheet
-				sheet = new GoogleSheet(file.getId(), CREDENTIALS);
-				sheet.write(Arrays.asList(Arrays.asList(title)), rangeTitle);
-				sheet.write(Arrays.asList(Arrays.asList(date)), rangeDate);
-				sheet.write(Arrays.asList(Arrays.asList(hour)), rangeHour);
-				sheet.write(Arrays.asList(Arrays.asList(position)), rangePosition);
-				sheet.write(Arrays.asList(Arrays.asList(price)), rangePrice);
-				sheet.write(Arrays.asList(Arrays.asList(person.getPseudo())), rangeOrganizer);
-			}
-			else {
-				//Get the image folder
-				File imageFolder = drive.listFolders().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
-				if(imageFolder == null)
-					throw new CancelProgramException("Impossible de trouver le dossier image.");
-				
-				//Search the sheet
-				drive.stepInto(PROGRESS_ID);
-				File sheetFile = drive.listFiles().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
-				if(sheetFile == null)
-					throw new CancelProgramException("Impossible de trouver le google sheet du tirage en cours.");
+			try {
+				int response = JOptionPane.showConfirmDialog(null, "Voulez vous créer un nouveau tirage ?\n- Oui : Je créer un nouveau tirage\n- Non : Reprendre le tirage en cours", "Tirage", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if(response == JOptionPane.CANCEL_OPTION)
+					throw new CancelProgramException("Vous avez annulé le programme.");
+				try {
+					drive = new GoogleDrive(DRIVE_ID, CREDENTIALS);
+				}catch (Exception e) {
+					throw new CancelProgramException("Fichier de certificat \"" + CREDENTIALS + "\" manquant ou érroné.");
+				}
 
-				//Get the sheet
-				sheet = new GoogleSheet(sheetFile.getId(), CREDENTIALS);
-				drive.stepBack();
+				if (response == JOptionPane.YES_OPTION) {
+					String number = (String)JOptionPane.showInputDialog(null, "Numéro du tirage :", null);
+					String date = (String)JOptionPane.showInputDialog(null, "Date :", null);
+					String hour = (String)JOptionPane.showInputDialog(null, "Heure :", null);
+					String position = (String)JOptionPane.showInputDialog(null, "Position :", null);
+					String price = (String)JOptionPane.showInputDialog(null, "Prix du ticket :", null);
+
+					if(number == null || date == null || hour == null || position == null)
+						throw new CancelProgramException("Tous les champs doivent petre remplis.");
+
+					String title = "Tirage n°" + number + " - En cours";
+					String image_folder = "Tirage n°" + number + " - Images";
+
+					//Create the image folder
+					imageFolder = drive.createFolder(image_folder);
+
+					//Copy the original sheet and moved it
+					File file = drive.copyFile(MODEL_SHEET_ID, title);
+					file = drive.moveFile(file.getId(), PROGRESS_ID);
+
+					//Get the sheet
+					sheet = new GoogleSheet(file.getId(), CREDENTIALS);
+					sheet.write(Arrays.asList(Arrays.asList(title)), rangeTitle);
+					sheet.write(Arrays.asList(Arrays.asList(date)), rangeDate);
+					sheet.write(Arrays.asList(Arrays.asList(hour)), rangeHour);
+					sheet.write(Arrays.asList(Arrays.asList(position)), rangePosition);
+					sheet.write(Arrays.asList(Arrays.asList(price)), rangePrice);
+					sheet.write(Arrays.asList(Arrays.asList(person.getPseudo())), rangeOrganizer);
+				}
+				else {
+					//Get the image folder
+					File imageFolder = drive.listFolders().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
+					if(imageFolder == null)
+						throw new CancelProgramException("Impossible de trouver le dossier image.");
+
+					//Search the sheet
+					drive.stepInto(PROGRESS_ID);
+					File sheetFile = drive.listFiles().stream().filter(f -> f.getName().contains("Tirage")).findFirst().orElse(null);
+					if(sheetFile == null)
+						throw new CancelProgramException("Impossible de trouver le google sheet du tirage en cours.");
+
+					//Get the sheet
+					sheet = new GoogleSheet(sheetFile.getId(), CREDENTIALS);
+					drive.stepBack();
+				}
+			}catch (GeneralSecurityException e) {
+				throw new CancelProgramException("Certificat érroné.");
+			}catch (IOException e) {
+				throw new CancelProgramException("Cannot create, write, read, copy or move a file.");
 			}
 		}
 		
-		public void cycle(Person person) throws AWTException, IOException, TesseractException, StopProgramException, NumberFormatException, CancelProgramException {			
+		public void cycle(Person person) throws TesseractException, StopProgramException, NumberFormatException, CancelProgramException {			
 			try {
 				Exchange exchange = new Exchange(ticketPrice, 0);
 				String name = exchange.waitForExchange();
@@ -157,6 +166,8 @@ public final class Loto {
 				
 			} catch (ExchangeCanceledException e) {
 				//Do nothing
+			}catch (IOException e) {
+				throw new CancelProgramException("Cannot create, write, read, copy or move a file.");
 			}
 		}
 

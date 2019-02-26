@@ -1,6 +1,5 @@
 package fr.B4D.transport.transports;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Point;
 import java.io.Serializable;
@@ -295,7 +294,7 @@ public class Zaapi extends Transport implements Serializable{
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
 	 */
-	public void goTo(Point destination) throws AWTException, B4DException, StopProgramException, CancelProgramException {			
+	public void goTo(Point destination) throws B4DException, StopProgramException, CancelProgramException {			
 		B4D.mouse.leftClick(super.getPositionF(), false);
 		B4D.screen.waitForColor(new PointF(0.4432, 0.7365), new Color(170, 200, 0), new Color(210, 255, 50), 10000);
 		

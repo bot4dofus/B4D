@@ -25,6 +25,8 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.swing.JOptionPane;
 
+import fr.B4D.bot.B4DException;
+
 /** La classe {@code Logger} permet d'accéder à toutes les méthodes liés aux logs et aux erreurs.
  */
 public class Logger {
@@ -67,19 +69,32 @@ public class Logger {
 	}
 
 	/** Permet d'afficher un message d'erreur dans une fenêtre graphique en demandant si l'utilisateur veut envoyer le rapport d'erreur.
-	 * @param e - Exception de l'erreur.
+	 * @param e - Trace de l'erreur.
 	 */
 	public void error(Exception e) {
 		e.printStackTrace();
-		boolean sendRepport = addRepport(e);
-		if(sendRepport) {
-			String message = e.getMessage() + "\n\nVoulez vous envoyer le rappot d'erreur aux développeurs ?";
-			int answer = JOptionPane.showConfirmDialog(null, message, "Erreur", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 
-//			if (answer == JOptionPane.YES_OPTION)
-//					sendEmail("Repport B4D", null, path);
-		}else
-			JOptionPane.showConfirmDialog(null, e.getMessage() + "\n\nLorsque qu'un envoi du rapport d'erreur vous sera proposé, dites \"Oui\" pour signaler cette erreur aux développeurs.", "Erreur", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+		boolean canSendRepport = true;
+		if(e instanceof B4DException)
+			canSendRepport = ((B4DException)e).canSendRepport();
+
+		if(!canSendRepport)
+			JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+		else {
+			boolean sendRepport = addRepport(e);
+			if(sendRepport) {
+				String message;
+				if(e.getMessage() == null)
+					message = "Une erreur s'est produite.\nVoulez vous envoyer le rappot d'erreur aux développeurs ?";
+				else
+					message = e.getMessage() + "\nVoulez vous envoyer le rappot d'erreur aux développeurs ?";
+				int answer = JOptionPane.showConfirmDialog(null, message, "Erreur", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
+
+				//			if (answer == JOptionPane.YES_OPTION)
+				//				sendEmail("Repport B4D", null, path);
+			}else
+				JOptionPane.showConfirmDialog(null, e.getMessage() + "\n\nLorsque qu'un envoi du rapport d'erreur vous sera proposé, dites \"Oui\" pour signaler cette erreur aux développeurs.", "Erreur", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	/** Permet d'ajouter la trace d'éxecution de l'erreur dans un fichier texte.
@@ -98,7 +113,7 @@ public class Logger {
 			return false;
 		}
 	}
-	
+
 	/** Permet de compter le nombre ligne d'un fichier.
 	 * @param path - Chemin vers le fichier.
 	 * @return - Nombre de ligne du fichier. {@code -1} si e fichier n'existe pas.
@@ -139,30 +154,30 @@ public class Logger {
 	 */
 	public void sendEmail(String subject, String message, String path) {
 
-        Properties properties = new Properties();
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.host", "smtp-mail.outlook.com");
-        properties.put("mail.smtp.port", "587");
-        
-        properties.put("mail.smtp.user", username);
-        properties.put("mail.smtp.password", password);
-        
-        Session session = Session.getInstance(properties,
-          new javax.mail.Authenticator() {
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-          });
-		
+		Properties properties = new Properties();
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.host", "smtp-mail.outlook.com");
+		properties.put("mail.smtp.port", "587");
+
+		properties.put("mail.smtp.user", username);
+		properties.put("mail.smtp.password", password);
+
+		Session session = Session.getInstance(properties,
+				new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		});
+
 		try {
 			MimeMessage mail = new MimeMessage(session);
 			mail.setFrom(new InternetAddress(username));
 			mail.addRecipient(Message.RecipientType.TO, new InternetAddress(username));
 			mail.setSubject(subject);
-			
+
 			Multipart multipart = new MimeMultipart();
-			
+
 			if(message != null) {
 				BodyPart bodyPart = new MimeBodyPart();
 				bodyPart.setText(message);
@@ -179,11 +194,11 @@ public class Logger {
 			mail.setContent(multipart);
 			Transport.send(mail);
 			debug(this, "Repport sent");
-			
+
 			File file = new File(path);
 			if(file.exists())
 				file.delete();
-			
+
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}

@@ -1,5 +1,6 @@
 package fr.B4D.gui;
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
@@ -59,7 +60,7 @@ public class JFrame_B4D extends JFrame{
 		}
 	}
 	
-	public JFrame_B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException{
+	public JFrame_B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, AWTException{
 		b4d = new B4D();
 		programPanel = new JPanel_Programme(b4d);
 		personPanel = new JPanel_Personnage(b4d);

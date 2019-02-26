@@ -1,6 +1,5 @@
 package fr.B4D.bot;
 
-import java.awt.AWTException;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.List;
@@ -204,9 +203,8 @@ public class Person implements Serializable, TransportInterface{
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
-	 * @throws AWTException Si un problème d'interface survient.
 	 */
-	public void setPosition() throws StopProgramException, CancelProgramException, B4DException, AWTException {
+	public void setPosition() throws StopProgramException, CancelProgramException, B4DException {
 		Message message;
 		Dofus.chat.addPseudoFilter(pseudo);
 		
@@ -252,7 +250,7 @@ public class Person implements Serializable, TransportInterface{
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
 	 */
-	public void goTo(Point destination) throws AWTException, StopProgramException, CancelProgramException, B4DException {
+	public void goTo(Point destination) throws StopProgramException, CancelProgramException, B4DException {
 		TransportPath transportPath = getTransportPathTo(destination);
 		transportPath.use(this);
 	}

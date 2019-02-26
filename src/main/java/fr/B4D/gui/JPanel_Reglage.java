@@ -42,6 +42,7 @@ public class JPanel_Reglage extends JPanel {
 	
 	/**
 	 * Create the panel.
+	 * @param b4d - Instance du bot.
 	 */
 	public JPanel_Reglage(B4D b4d) {
 		this.b4d = b4d;

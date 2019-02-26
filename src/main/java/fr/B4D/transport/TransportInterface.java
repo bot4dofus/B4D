@@ -1,6 +1,5 @@
 package fr.B4D.transport;
 
-import java.awt.AWTException;
 import java.awt.Point;
 import java.io.Serializable;
 
@@ -27,7 +26,6 @@ public interface TransportInterface extends Serializable {
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public void goTo(Point destination) throws StopProgramException, CancelProgramException, B4DException, AWTException;
+	public void goTo(Point destination) throws StopProgramException, CancelProgramException, B4DException;
 }

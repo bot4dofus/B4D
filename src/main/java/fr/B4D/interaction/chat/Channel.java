@@ -97,9 +97,8 @@ public class Channel implements Serializable{
 	/** Retourne l'état du canal.
 	 * @param arrowPosition - Position du menu.
 	 * @return {@code true} si le canal est affiché, {@code false} sinon.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	private boolean isDisplayed(PointF arrowPosition) throws AWTException {
+	private boolean isDisplayed(PointF arrowPosition) {
 		PointF checkPosition = new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);
 		PointF checkTopLeft = new PointF(checkPosition.x, checkPosition.y - 0.005);
 		PointF checkBottomRight = new PointF(checkPosition.x, checkPosition.y + 0.005);		
@@ -110,9 +109,8 @@ public class Channel implements Serializable{
 	 * @param arrowPosition - Position du menu.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	private void toggle(PointF arrowPosition) throws AWTException, StopProgramException, CancelProgramException {
+	private void toggle(PointF arrowPosition) throws StopProgramException, CancelProgramException {
 		PointF checkPosition = new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);		
 		B4D.mouse.leftClick(checkPosition, false, 500);
 	}
@@ -124,7 +122,7 @@ public class Channel implements Serializable{
 	 * @throws CancelProgramException Si le programme est annulé.
 	 * @throws AWTException Si un problème de souris survient.
 	 */
-	private boolean enable(PointF arrowPosition) throws StopProgramException, CancelProgramException, AWTException {
+	private boolean enable(PointF arrowPosition) throws StopProgramException, CancelProgramException {
 		if(!isDisplayed(arrowPosition)) {
 			toggle(arrowPosition);
 			return true;
@@ -138,9 +136,8 @@ public class Channel implements Serializable{
 	 * @return {@code true} si l'état du canal a changé, {@code false} sinon.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	private boolean disable(PointF arrowPosition) throws StopProgramException, CancelProgramException, AWTException {
+	private boolean disable(PointF arrowPosition) throws StopProgramException, CancelProgramException {
 		if(isDisplayed(arrowPosition)) {
 			toggle(arrowPosition);
 			return true;
@@ -190,9 +187,8 @@ public class Channel implements Serializable{
 	 * @return Liste des canaux ayant changé d'état, {@code null} si impossible d'ouvrir le menu.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
 	 */
-	public static List<Channel> displayChannels(List<Channel> channels) throws AWTException, StopProgramException, CancelProgramException {
+	public static List<Channel> displayChannels(List<Channel> channels) throws StopProgramException, CancelProgramException {
 		List<Channel> toggles = null;
 		
 		if(chatMenuPosition != null) {
@@ -214,7 +210,7 @@ public class Channel implements Serializable{
 					toggles.add(channel);
 			}
 
-			B4D.keyboard.sendKey(KeyEvent.VK_ESCAPE, 100);				//Ferme le menu du chat
+			B4D.keyboard.sendKey(KeyEvent.VK_ESCAPE, 0);				//Ferme le menu du chat
 			B4D.screen.waitForChangingPixel(arrowPosition, 10000);		//Attend la fermeture du menu
 		}
 		return toggles;
@@ -250,6 +246,6 @@ public class Channel implements Serializable{
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return name + "(" + prefix + ")";
+		return name;
 	}
 }
