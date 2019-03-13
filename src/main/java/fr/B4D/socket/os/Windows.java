@@ -37,7 +37,7 @@ public class Windows extends OperatingSystem{
 					while (ias.hasMoreElements() && currentAddress == null)
 					{
 						InetAddress ia = (InetAddress) ias.nextElement();
-						if(!ia.isSiteLocalAddress() && !ia.isLoopbackAddress())
+						if(ia.isSiteLocalAddress() && !ia.isLoopbackAddress())
 							currentAddress = ia.getHostAddress();
 					}
 				}

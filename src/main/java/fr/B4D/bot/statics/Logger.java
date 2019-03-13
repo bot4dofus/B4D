@@ -93,7 +93,7 @@ public class Logger {
 				//			if (answer == JOptionPane.YES_OPTION)
 				//				sendEmail("Repport B4D", null, path);
 			}else
-				JOptionPane.showConfirmDialog(null, e.getMessage() + "\n\nLorsque qu'un envoi du rapport d'erreur vous sera proposé, dites \"Oui\" pour signaler cette erreur aux développeurs.", "Erreur", JOptionPane.OK_OPTION, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, e.getMessage() + "\n\nLorsque qu'un envoi du rapport d'erreur vous sera proposé, dites \"Oui\" pour signaler cette erreur aux développeurs.", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
