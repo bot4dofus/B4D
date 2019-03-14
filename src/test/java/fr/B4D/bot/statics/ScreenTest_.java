@@ -12,7 +12,7 @@ import fr.B4D.dao.DAOFactory;
 import fr.B4D.utils.Rectangle;
 import net.sourceforge.tess4j.TesseractException;
 
-public class ScreenTest {
+public class ScreenTest_ {
 
 	private Screen screen;
 	

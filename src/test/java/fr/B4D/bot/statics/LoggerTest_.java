@@ -3,7 +3,7 @@ package fr.B4D.bot.statics;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LoggerTest {
+public class LoggerTest_ {
 
 	private Logger logger;
 	

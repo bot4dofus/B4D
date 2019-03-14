@@ -19,7 +19,7 @@ import fr.B4D.google.GoogleSheet;
 
 // https://www.baeldung.com/google-sheets-java-client
 
-public class GoogleSheetTest {
+public class GoogleSheetTest_ {
 	private static final String CREDENTIALS = "b4d_service.json";
 	private static final String SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw/edit#gid=987770465";
 	private static final String SPREADSHEET_ID = "1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw";
