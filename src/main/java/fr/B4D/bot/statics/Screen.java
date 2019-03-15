@@ -1,4 +1,4 @@
-package fr.B4D.bot.statics;
+ï»¿package fr.B4D.bot.statics;
 
 import java.awt.AWTException;
 import java.awt.Color;
@@ -21,7 +21,7 @@ import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-/** La classe {@code Screen} permet d'accéder à toutes les méthodes liés à l'écran.
+/** La classe {@code Screen} permet d'accÃ©der Ã  toutes les mÃ©thodes liÃ©s Ã  l'Ã©cran.
  */
 public final class Screen {
 	
@@ -33,8 +33,8 @@ public final class Screen {
 	/*************/
     
 	/** Constructeur de la classe {@code Screen}. 
-     * @param configuration - Configuration de l'écran de jeu.
-	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation de l'écran
+     * @param configuration - Configuration de l'Ã©cran de jeu.
+	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation de l'Ã©cran
      */
     public Screen(Configuration configuration) throws AWTException {
     	this.configuration = configuration;
@@ -45,24 +45,24 @@ public final class Screen {
 	 /** COULEUR PIXEL **/
 	/*******************/
 	
-	/** Permet de récupérer la couleur d'un pixel.
-	 * @param point - Point en coordonnées simples.
+	/** Permet de rÃ©cupÃ©rer la couleur d'un pixel.
+	 * @param point - Point en coordonnÃ©es simples.
 	 * @return Couleur du pixel.
 	 */
 	public Color getPixelColor(Point point) {
 		return robot.getPixelColor(point.x, point.y);
 	}
 	
-	/** Permet de récupérer la couleur d'un pixel.
-	 * @param point - Point en coordonnées relatives.
+	/** Permet de rÃ©cupÃ©rer la couleur d'un pixel.
+	 * @param point - Point en coordonnÃ©es relatives.
 	 * @return Couleur du pixel.
 	 */
 	public Color getPixelColor(PointF point) {
 		return getPixelColor(B4D.converter.toPoint(point));
 	}
 	
-	/** Permet de récupérer la couleur d'un pixel.
-	 * @param point - Point en coordonnées du damier de dofus.
+	/** Permet de rÃ©cupÃ©rer la couleur d'un pixel.
+	 * @param point - Point en coordonnÃ©es du damier de dofus.
 	 * @return Couleur du pixel.
 	 */
 	public Color getPixelColor(PointD point) {
@@ -73,12 +73,12 @@ public final class Screen {
 	 /** RECHERCHE PIXEL **/
 	/*********************/
 	
-	/** Permet de rechercher un pixel correspondant à un certain critère parmis une plage de pixels.
-	 * @param topLeftHandCorner - Point suppérieur gauche du rectangle de recherche en coordonnées relatives.
-	 * @param bottomRightHandCorner - Point inférieur droit du rectangle de recherche en coordonnées relatives.
+	/** Permet de rechercher un pixel correspondant Ã  un certain critÃ¨re parmis une plage de pixels.
+	 * @param topLeftHandCorner - Point suppÃ©rieur gauche du rectangle de recherche en coordonnÃ©es relatives.
+	 * @param bottomRightHandCorner - Point infÃ©rieur droit du rectangle de recherche en coordonnÃ©es relatives.
 	 * @param min - Couleur minimum.
 	 * @param max - Couleur maximum.
-	 * @return Position du pixel en coordonnées relatives. {@code null} si aucun pixel n'a été trouvé.
+	 * @return Position du pixel en coordonnÃ©es relatives. {@code null} si aucun pixel n'a Ã©tÃ© trouvÃ©.
 	 */
 	public PointF searchPixel(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) {
 		Point Point1 = B4D.converter.toPoint(topLeftHandCorner);
@@ -98,12 +98,12 @@ public final class Screen {
 		return null;
 	}
 	
-	/** Permet de rechercher tous les pixels correspondants à un certain critère parmis une plage de pixels.
-	 * @param topLeftHandCorner - Point suppérieur gauche du rectangle de recherche en coordonnées relatives.
-	 * @param bottomRightHandCorner - Point inférieur droit du rectangle de recherche en coordonnées relatives.
+	/** Permet de rechercher tous les pixels correspondants Ã  un certain critÃ¨re parmis une plage de pixels.
+	 * @param topLeftHandCorner - Point suppÃ©rieur gauche du rectangle de recherche en coordonnÃ©es relatives.
+	 * @param bottomRightHandCorner - Point infÃ©rieur droit du rectangle de recherche en coordonnÃ©es relatives.
 	 * @param min - Couleur minimum.
 	 * @param max - Couleur maximum.
-	 * @return Liste des pixels en coordonnées relatives correspondants au critère de recherche. {@code null} si aucun pixel n'a été trouvé.
+	 * @return Liste des pixels en coordonnÃ©es relatives correspondants au critÃ¨re de recherche. {@code null} si aucun pixel n'a Ã©tÃ© trouvÃ©.
 	 */
 	public ArrayList<PointF> searchPixels(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) {
 		
@@ -132,15 +132,15 @@ public final class Screen {
 	 /** SCREENSHOT **/
 	/****************/
 	
-	/** Permet de faire une capture d'écrans d'une zone précise.
-	 * @param rectangle - Zone à capturer.
-	 * @return Image de la zone capturée.
+	/** Permet de faire une capture d'Ã©crans d'une zone prÃ©cise.
+	 * @param rectangle - Zone Ã  capturer.
+	 * @return Image de la zone capturÃ©e.
 	 */
 	public BufferedImage takeSreenshot(Rectangle rectangle) {
 		return robot.createScreenCapture(rectangle);
 	}
 	
-	/** Permet de faire une capture d'écrans de la zone de jeu.
+	/** Permet de faire une capture d'Ã©crans de la zone de jeu.
 	 * @return Image de la zone de jeu.
 	 */
 	public BufferedImage takeSreenshot() {
@@ -151,10 +151,10 @@ public final class Screen {
 	 /** OCR **/
 	/*********/
 	
-	/** Permet de faire une reconnaissance optique de caractère sur une zone précise de l'écran.
-	 * @param rectangle - Zone de l'écran.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
-	 * @throws TesseractException Si impossible de réaliser l'OCR.
+	/** Permet de faire une reconnaissance optique de caractÃ¨re sur une zone prÃ©cise de l'Ã©cran.
+	 * @param rectangle - Zone de l'Ã©cran.
+	 * @return Chaine de caractÃ¨re identifiÃ©e dans la zone, {@code null} si rien n'a Ã©tÃ© trouvÃ©.
+	 * @throws TesseractException Si impossible de rÃ©aliser l'OCR.
 	 */
 	public String OCR(Rectangle rectangle) throws TesseractException {
 		BufferedImage image = takeSreenshot(rectangle);
@@ -164,21 +164,21 @@ public final class Screen {
 		return out.replaceAll("\n", " ");
 	}
 	
-	/** Permet de faire une reconnaissance optique de caractère sur une zone précise de l'écran.
-	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées simples.
-	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées simples.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
-	 * @throws TesseractException Si impossible de réaliser l'OCR.
+	/** Permet de faire une reconnaissance optique de caractÃ¨re sur une zone prÃ©cise de l'Ã©cran.
+	 * @param topLeftHandCorner - Point suppÃ©rieur gauche de la zone en coordonnÃ©es simples.
+	 * @param bottomRightHandCorner - Point infÃ©rieur droit de la zone en coordonnÃ©es simples.
+	 * @return Chaine de caractÃ¨re identifiÃ©e dans la zone, {@code null} si rien n'a Ã©tÃ© trouvÃ©.
+	 * @throws TesseractException Si impossible de rÃ©aliser l'OCR.
 	 */
 	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws TesseractException {
 		return OCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y));
 	}
 	
-	/** Permet de faire une reconnaissance optique de caractère sur une zone précise de l'écran.
-	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées relatives.
-	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées relatives.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
-	 * @throws TesseractException Si impossible de réaliser l'OCR.
+	/** Permet de faire une reconnaissance optique de caractÃ¨re sur une zone prÃ©cise de l'Ã©cran.
+	 * @param topLeftHandCorner - Point suppÃ©rieur gauche de la zone en coordonnÃ©es relatives.
+	 * @param bottomRightHandCorner - Point infÃ©rieur droit de la zone en coordonnÃ©es relatives.
+	 * @return Chaine de caractÃ¨re identifiÃ©e dans la zone, {@code null} si rien n'a Ã©tÃ© trouvÃ©.
+	 * @throws TesseractException Si impossible de rÃ©aliser l'OCR.
 	 */
 	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws TesseractException {
 		return OCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner));
@@ -188,11 +188,11 @@ public final class Screen {
 	 /** SELECTION **/
 	/***************/
 
-	/** Permet de récupérer une chaine de caractère séléctionnée en faisant un double clique et Ctrl+C.
-	 * @param point - Position de la sélection en coordonnées simples.
-	 * @return Chaine de caractère représentant la sélection. {@code null} si rien n'a été sélectionnée où si la sélection est vide.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/** Permet de rÃ©cupÃ©rer une chaine de caractÃ¨re sÃ©lÃ©ctionnÃ©e en faisant un double clique et Ctrl+C.
+	 * @param point - Position de la sÃ©lection en coordonnÃ©es simples.
+	 * @return Chaine de caractÃ¨re reprÃ©sentant la sÃ©lection. {@code null} si rien n'a Ã©tÃ© sÃ©lectionnÃ©e oÃ¹ si la sÃ©lection est vide.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	public String getSelection(Point point) throws StopProgramException, CancelProgramException {
 		B4D.mouse.doubleLeftClick(point, false, 100);
@@ -204,11 +204,11 @@ public final class Screen {
 		return B4D.keyboard.getClipboard();
 	}
 	
-	/** Permet de récupérer une chaine de caractère séléctionnée en faisant un double clique et Ctrl+C.
-	 * @param position - Position de la sélection en coordonnées relatives.
-	 * @return Chaine de caractère représentant la sélection. {@code null} si rien n'a été sélectionnée où si la sélection est vide.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/** Permet de rÃ©cupÃ©rer une chaine de caractÃ¨re sÃ©lÃ©ctionnÃ©e en faisant un double clique et Ctrl+C.
+	 * @param position - Position de la sÃ©lection en coordonnÃ©es relatives.
+	 * @return Chaine de caractÃ¨re reprÃ©sentant la sÃ©lection. {@code null} si rien n'a Ã©tÃ© sÃ©lectionnÃ©e oÃ¹ si la sÃ©lection est vide.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	public String getSelection(PointF position) throws StopProgramException, CancelProgramException {
 		return getSelection(B4D.converter.toPoint(position));
@@ -228,7 +228,7 @@ public final class Screen {
 		return (min.getRed() <= couleur.getRed() && couleur.getRed() <= max.getRed() && min.getGreen() <= couleur.getGreen() && couleur.getGreen() <= max.getGreen() && min.getBlue() <= couleur.getBlue() && couleur.getBlue() <= max.getBlue());
 	}
 
-	/** Permet donner le focus à la fenêtre de jeu.
+	/** Permet donner le focus Ã  la fenÃªtre de jeu.
 	 */
 	public void focusDofus() {
 		// TODO Auto-generated method stub
@@ -240,24 +240,24 @@ public final class Screen {
 	
 	/** Permet d'attendre l'appui sur une touche.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Entier représentant la touche enfoncée. {@code -1} si timeout.
+	 * @return Entier reprÃ©sentant la touche enfoncÃ©e. {@code -1} si timeout.
 	 */
 	
 	/** Permet d'attendre un changement de map.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return {@code true} si le joueur à changé de map, {@code false} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	 * @return {@code true} si le joueur Ã  changÃ© de map, {@code false} si timeout.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	public boolean waitForMap(int timeOut) throws StopProgramException, CancelProgramException {
 		return waitForChangingPixel(B4D.converter.toPointF(configuration.getMinimap()), timeOut) != null;
 	}
 	
 	/** Permet d'attendre un changement de map sans limite de temps. 
-	 * Cela est identique à {@code waitForMap(0)}.
-	 * @return {@code true} si le joueur à changé de map, {@code false} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	 * Cela est identique Ã  {@code waitForMap(0)}.
+	 * @return {@code true} si le joueur Ã  changÃ© de map, {@code false} si timeout.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	public boolean waitForMap() throws StopProgramException, CancelProgramException {
 		return waitForMap(0);
@@ -267,11 +267,11 @@ public final class Screen {
 	 /** ATTENTE SUR OCR **/
 	/*********************/
 	
-	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
-	 * @param rectangle - Zone de l'écran.
-	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
+	/** Permet d'attendre qu'une chaine de caractÃ¨re soit dÃ©tectÃ©e Ã  l'Ã©cran.
+	 * @param rectangle - Zone de l'Ã©cran.
+	 * @param regex - ExprÃ©sion rÃ©guliÃ¨re que doit contenir la chaine de caractÃ¨re.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si timeout.
+	 * @return Chaine de caractÃ¨re identifiÃ©e dans la zone, {@code null} si timeout.
 	 */
 	public String waitForOCR(Rectangle rectangle, String regex, int timeOut) {
 		OCRThread ocrThread = new OCRThread(rectangle, regex);
@@ -287,23 +287,23 @@ public final class Screen {
 		return ocrThread.getText();
 	}
 
-	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
-	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées simples.
-	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées simples.
-	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
+	/** Permet d'attendre qu'une chaine de caractÃ¨re soit dÃ©tectÃ©e Ã  l'Ã©cran.
+	 * @param topLeftHandCorner - Point suppÃ©rieur gauche de la zone en coordonnÃ©es simples.
+	 * @param bottomRightHandCorner - Point infÃ©rieur droit de la zone en coordonnÃ©es simples.
+	 * @param regex - ExprÃ©sion rÃ©guliÃ¨re que doit contenir la chaine de caractÃ¨re.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si timeout.
+	 * @return Chaine de caractÃ¨re identifiÃ©e dans la zone, {@code null} si timeout.
 	 */
 	public String waitForOCR(Point topLeftHandCorner, Point bottomRightHandCorner, String regex, int timeOut) {
 		return waitForOCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y), regex, timeOut);
 	}
 	
-	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
-	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées relatives.
-	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées relatives.
-	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
+	/** Permet d'attendre qu'une chaine de caractÃ¨re soit dÃ©tectÃ©e Ã  l'Ã©cran.
+	 * @param topLeftHandCorner - Point suppÃ©rieur gauche de la zone en coordonnÃ©es relatives.
+	 * @param bottomRightHandCorner - Point infÃ©rieur droit de la zone en coordonnÃ©es relatives.
+	 * @param regex - ExprÃ©sion rÃ©guliÃ¨re que doit contenir la chaine de caractÃ¨re.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si timeout.
+	 * @return Chaine de caractÃ¨re identifiÃ©e dans la zone, {@code null} si timeout.
 	 */
 	public String waitForOCR(PointF topLeftHandCorner, PointF bottomRightHandCorner, String regex, int timeOut) {
 		return waitForOCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner), regex, timeOut);
@@ -314,7 +314,7 @@ public final class Screen {
 	/*************************************/
 	
 	/** Permet d'attendre qu'un pixel change de couleur.
-	 * @param point - Position du pixel en coordonnées simples.
+	 * @param point - Position du pixel en coordonnÃ©es simples.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return Nouvelle couleur du pixel, {@code null} si timeout.
 	 */
@@ -333,7 +333,7 @@ public final class Screen {
 	}
 	
 	/** Permet d'attendre qu'un pixel change de couleur.
-	 * @param point - Position du pixel en coordonnées relatives.
+	 * @param point - Position du pixel en coordonnÃ©es relatives.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return Nouvelle couleur du pixel, {@code null} si timeout.
 	 */
@@ -346,7 +346,7 @@ public final class Screen {
 	/**********************************/
 	
 	/** Permet d'attendre qu'un pixel soit compris dans un intervale de couleur.
-	 * @param point - Position du pixel en coordonnées simples.
+	 * @param point - Position du pixel en coordonnÃ©es simples.
 	 * @param min - Couleur minimale.
 	 * @param max - Couleur maximale.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
@@ -367,7 +367,7 @@ public final class Screen {
 	}
 	
 	/** Permet d'attendre qu'un pixel soit compris dans un intervale de couleur.
-	 * @param point - Position du pixel en coordonnées relatives.
+	 * @param point - Position du pixel en coordonnÃ©es relatives.
 	 * @param min - Couleur minimale.
 	 * @param max - Couleur maximale.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.

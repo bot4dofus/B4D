@@ -1,4 +1,4 @@
-package fr.B4D.threads;
+ï»¿package fr.B4D.threads;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;
@@ -10,14 +10,14 @@ interface User32 extends Library {
 }
 
 /** La classe {@code KeyboardThread} permet d'attendre l'appui sur une touche.<br><br>
- * Cette classe étend la classe {@code Thread}.
+ * Cette classe Ã©tend la classe {@code Thread}.
  */
 public class KeyboardThread extends Thread{
 
 	private int key = -1;
 
-	/** Retourne la touche enfoncé par le joueur.
-	 * @return Couleur du pixel. {@code -1} si aucune touche n'a été enfoncée.
+	/** Retourne la touche enfoncÃ© par le joueur.
+	 * @return Couleur du pixel. {@code -1} si aucune touche n'a Ã©tÃ© enfoncÃ©e.
 	 */
 	public int getKey() {
 		return this.key;

@@ -1,4 +1,4 @@
-package fr.B4D.bot;
+ï»¿package fr.B4D.bot;
 
 import java.awt.Point;
 import java.io.Serializable;
@@ -16,8 +16,8 @@ import fr.B4D.transport.transports.Potion;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Person} représente un joueur.<br><br>
- * Un joueur est défini par un nom de compte, un mot de passe, un serveur et un pseudo
+/** La classe {@code Person} reprÃ©sente un joueur.<br><br>
+ * Un joueur est dÃ©fini par un nom de compte, un mot de passe, un serveur et un pseudo
  */
 public class Person implements Serializable, TransportInterface{
 
@@ -45,8 +45,8 @@ public class Person implements Serializable, TransportInterface{
 	 /** BUILDER **/
 	/*************/
 	
-	/** Constructeur de la classe {@code Person} utilisant les champs par défaut.
-	 * Cela est identique à {@code new Person("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo")}.
+	/** Constructeur de la classe {@code Person} utilisant les champs par dÃ©faut.
+	 * Cela est identique Ã  {@code new Person("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo")}.
 	 */
 	public Person() {
 		this("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo");
@@ -199,10 +199,10 @@ public class Person implements Serializable, TransportInterface{
 		this.position = position;
 	}
 
-	/** Met à jour la position actuelle du joueur à tapant %pos% dans le chat.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	/** Met Ã  jour la position actuelle du joueur Ã  tapant %pos% dans le chat.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
+	 * @throws B4DException Si une exception de type B4D est levÃ©e.
 	 */
 	public void setPosition() throws StopProgramException, CancelProgramException, B4DException {
 		Message message;
@@ -229,14 +229,14 @@ public class Person implements Serializable, TransportInterface{
 		setPosition(new Point(x, y));
 	}
 	
-	/** Retourne un booléen représentant l'inventaire du joueur.
+	/** Retourne un boolÃ©en reprÃ©sentant l'inventaire du joueur.
 	 * @return {@code true} si l'inventaire est plein et {@code false} sinon.
 	 */
 	public boolean isInventoryFull() {
 		return inventoryFull;
 	}
 
-	/** Modifie l'état du l'inventaire du joueur.
+	/** Modifie l'Ã©tat du l'inventaire du joueur.
 	 * @param inventoryFull - {@code true} si l'inventaire est plein et {@code false} sinon.
 	 */
 	public void setInventoryFull(boolean inventoryFull) {
@@ -256,8 +256,8 @@ public class Person implements Serializable, TransportInterface{
 	}
 	
 	/** Retourne le chemin le plus court entre la position actuelle du joueur et la destination.
-	 * @param destination - Destination à atteindre. Vous pouver utiliser {@code new Point(X, Y)} pour définir un nouveau point.
-	 * @return Chemin à suivre pour atteindre la destination. {@code null} si la destination n'est pas atteignable.
+	 * @param destination - Destination Ã  atteindre. Vous pouver utiliser {@code new Point(X, Y)} pour dÃ©finir un nouveau point.
+	 * @return Chemin Ã  suivre pour atteindre la destination. {@code null} si la destination n'est pas atteignable.
 	 */
 	public TransportPath getTransportPathTo(Point destination) {		
 		

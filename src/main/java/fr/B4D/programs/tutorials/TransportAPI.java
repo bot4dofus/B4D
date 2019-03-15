@@ -1,4 +1,4 @@
-package fr.B4D.programs.tutorials;
+ï»¿package fr.B4D.programs.tutorials;
 
 import java.awt.Point;
 
@@ -13,7 +13,7 @@ import fr.B4D.program.StopProgramException;
 
 public final class TransportAPI {
 	
-	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des transports.<br>
+	/** Ce tutoriel Ã  pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des transports.<br>
 	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
@@ -30,11 +30,11 @@ public final class TransportAPI {
 		}
 	});
 
-	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des transports.<br>
+	/** Ce tutoriel Ã  pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des transports.<br>
 	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
-	 *  	<li>Se rend au zaap enregistré par le joueur.</li>
+	 *  	<li>Se rend au zaap enregistrÃ© par le joueur.</li>
 	 *  </ul>
 	 */
 	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 2", null, null, new ProgramInterface() {

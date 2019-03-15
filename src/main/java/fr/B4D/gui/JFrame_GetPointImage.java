@@ -1,4 +1,4 @@
-package fr.B4D.gui;
+ï»¿package fr.B4D.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,9 +22,9 @@ public class JFrame_GetPointImage{
 
 	/**
 	 * Create the application.
-	 * @param text - Texte affiché à l'écran.
-	 * @param image - Image affichée à l'écran.
-	 * @param mouseListener Sub-routine exécutée lors qu clique.
+	 * @param text - Texte affichÃ© Ã  l'Ã©cran.
+	 * @param image - Image affichÃ©e Ã  l'Ã©cran.
+	 * @param mouseListener Sub-routine exÃ©cutÃ©e lors qu clique.
 	 */
 	public JFrame_GetPointImage(String text, ImageIcon image, MouseListener mouseListener) {
 		this.text = text;

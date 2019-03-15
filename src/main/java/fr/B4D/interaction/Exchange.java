@@ -1,4 +1,4 @@
-package fr.B4D.interaction;
+ï»¿package fr.B4D.interaction;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -12,8 +12,8 @@ import fr.B4D.utils.PointF;
 import fr.B4D.utils.Rectangle;
 import net.sourceforge.tess4j.TesseractException;
 
-/** La classe {@code Exchange} représente un échange avec un joueur.<br><br>
- * Un échange est défini par un nombre de kamas entrants et un nombre de kamas sortants.
+/** La classe {@code Exchange} reprÃ©sente un Ã©change avec un joueur.<br><br>
+ * Un Ã©change est dÃ©fini par un nombre de kamas entrants et un nombre de kamas sortants.
  */
 public class Exchange implements Serializable{
 
@@ -23,7 +23,7 @@ public class Exchange implements Serializable{
 	 /** CONSTANTS **/
 	/***************/
 	
-	private final int timeout = 30000;	//Timeout avant echec de l'échange
+	private final int timeout = 30000;	//Timeout avant echec de l'Ã©change
 	
 	private final Rectangle waitForExchangeRectangle = new Rectangle(new PointF(0.3104,0.476), new PointF(0.6904,0.506)); 	//Zone des kamas entrants
 	private final String waitForExchangeKey = "avec vous"; 						//clef permettant de valider l'echange
@@ -50,7 +50,7 @@ public class Exchange implements Serializable{
 	
 	/** Constructeur de la classe {@code Exchange}.
 	 * @param kamasIn - Nombre de kamas attendu de la part du joueur.
-	 * @param kamasOut - Nombre de kamas donné au joueur.
+	 * @param kamasOut - Nombre de kamas donnÃ© au joueur.
 	 */
 	public Exchange(int kamasIn, int kamasOut) {
 		this.kamasIn = kamasIn;
@@ -61,14 +61,14 @@ public class Exchange implements Serializable{
 	 /** GETTERS **/
 	/*************/
 	
-	/** Retourne le pseudo de la personne avec qui l'échange à lieu.
+	/** Retourne le pseudo de la personne avec qui l'Ã©change Ã  lieu.
 	 * @return Pseudo de la personne ou {@code null} si le nom n'est pas connu.
 	 */
 	public String getPseudo() {
 		return pseudo;
 	}
 
-	/** Modifi le pseudo du joueur avec qui l'échange à lieu.
+	/** Modifi le pseudo du joueur avec qui l'Ã©change Ã  lieu.
 	 * @param pseudo - Pseudo du joueur.
 	 */
 	public void setPseudo(String pseudo) {
@@ -82,30 +82,30 @@ public class Exchange implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
-	/** Permet d'attendre sans limite de temps un échange proposé par un joueur. Cela est identique à {@code waitForExchange(0)}.
-	 * @return Pseudo du joueur ayant proposé l'échange et {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/** Permet d'attendre sans limite de temps un Ã©change proposÃ© par un joueur. Cela est identique Ã  {@code waitForExchange(0)}.
+	 * @return Pseudo du joueur ayant proposÃ© l'Ã©change et {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
 	 */
 	public String waitForExchange() throws StopProgramException, CancelProgramException {
 		return waitForExchange(0);
 	}
 
-	/** Permet d'attendre un échange provoqué par un joueur en présisant une durée maximal d'attente
-	 * @param timeout - Durée d'attente maximale en millisecondes.
-	 * @return Pseudo du joueur ayant proposé l'échange et {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé .
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/** Permet d'attendre un Ã©change provoquÃ© par un joueur en prÃ©sisant une durÃ©e maximal d'attente
+	 * @param timeout - DurÃ©e d'attente maximale en millisecondes.
+	 * @return Pseudo du joueur ayant proposÃ© l'Ã©change et {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppÃ© .
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
 	 */
 	public String waitForExchange(int timeout) throws StopProgramException, CancelProgramException {
 		if(!B4D.socketListener.isAlive())
 			B4D.socketListener.start();
 		
-		B4D.logger.debug(this, "Attente d'un échange");
+		B4D.logger.debug(this, "Attente d'un Ã©change");
 		String message = B4D.screen.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout);
 		
 		if(message == null)
-			B4D.logger.debug(this, "Aucun échange demandé (timeout)");
+			B4D.logger.debug(this, "Aucun Ã©change demandÃ© (timeout)");
 		else {
 			pseudo = message.split(" ")[0];
 			B4D.logger.debug(this, "Echange avec [" + pseudo + "]");
@@ -114,16 +114,16 @@ public class Exchange implements Serializable{
 		return pseudo;
 	}
 	
-	/** Réalise l'échange avec le joueur
-	 * @param validationMessage - Question posé au joueur avant de confirmer l'échange. Celui-ci peut répondre par "".
+	/** RÃ©alise l'Ã©change avec le joueur
+	 * @param validationMessage - Question posÃ© au joueur avant de confirmer l'Ã©change. Celui-ci peut rÃ©pondre par "".
 	 * @return Image preuve du consentant du joueur.
-	 * @throws ExchangeCanceledException Si l'échange est annulé.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws TesseractException Si un problème d'OCR survient.
+	 * @throws ExchangeCanceledException Si l'Ã©change est annulÃ©.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
+	 * @throws TesseractException Si un problÃ¨me d'OCR survient.
 	 */
 	public BufferedImage exchange(String validationMessage) throws ExchangeCanceledException, TesseractException, StopProgramException, CancelProgramException {
-		B4D.logger.debug(this, "Début de l'échange");
+		B4D.logger.debug(this, "DÃ©but de l'Ã©change");
 		Message message;
 		
 		if(kamasOut > 0) {
@@ -152,14 +152,14 @@ public class Exchange implements Serializable{
 
 		BufferedImage image = B4D.screen.takeSreenshot();
 		B4D.mouse.leftClick(validationButton, false);
-		B4D.logger.debug(this, "Echange éffectué");
+		B4D.logger.debug(this, "Echange Ã©ffectuÃ©");
 		return image;
 	}
 	
-	/** Permet de savoir si une chaine de caractère contient un des motifis correspondants.
-	 * @param string - Chaine de caractère dans laquelle chercher la clef.
+	/** Permet de savoir si une chaine de caractÃ¨re contient un des motifis correspondants.
+	 * @param string - Chaine de caractÃ¨re dans laquelle chercher la clef.
 	 * @param keys - Tableau des clefs possibles
-	 * @return {@code true} si la chaine de caractère contient une des clefs, sinon {@code false}.
+	 * @return {@code true} si la chaine de caractÃ¨re contient une des clefs, sinon {@code false}.
 	 */
 	private static boolean contains(String string, String[] keys) {
 		for(String key:keys) {
@@ -169,27 +169,27 @@ public class Exchange implements Serializable{
 		return false;
 	}
 	
-	/** Annule l'échange en cours si celui-ci l'est encore.
-	 * @throws ExchangeCanceledException Si l'échange est annulé.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/** Annule l'Ã©change en cours si celui-ci l'est encore.
+	 * @throws ExchangeCanceledException Si l'Ã©change est annulÃ©.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
 	 */
 	public void cancelExchange() throws ExchangeCanceledException, StopProgramException, CancelProgramException {
-		B4D.logger.debug(this, "Echange annulé");
+		B4D.logger.debug(this, "Echange annulÃ©");
 		if(isInProgress())
 			B4D.mouse.leftClick(escapeButton, false);
 		throw new ExchangeCanceledException();
 	}
 	
-	/** Permet de savoir si l'échange est encore en cours.
-	 * @return {@code true} si l'échange est en cours, sinon {@code false}.
+	/** Permet de savoir si l'Ã©change est encore en cours.
+	 * @return {@code true} si l'Ã©change est en cours, sinon {@code false}.
 	 */
 	private boolean isInProgress() {
 		return (B4D.screen.getPixelColor(validationButton).getBlue() == 0);
 	}
 	
-	/** Permet de savoir si le joueur à validé l'échange.
-	 * @return {@code true} si le joueur à validé, sinon {@code false}.
+	/** Permet de savoir si le joueur Ã  validÃ© l'Ã©change.
+	 * @return {@code true} si le joueur Ã  validÃ©, sinon {@code false}.
 	 */
 	private boolean isValided() {
 		return B4D.screen.searchPixel(new PointF(0.3408,0.2804), new PointF(0.3408,0.2914), new Color(100, 100, 0), new Color(255, 255, 50)) != null;

@@ -1,4 +1,4 @@
-package fr.B4D.gui;
+﻿package fr.B4D.gui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
@@ -85,7 +85,7 @@ public class JPanel_Admin extends JPanel {
 		btnRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				B4D.mouse.getPoint(
-						"Cliquez � la position voulue.",
+						"Cliquez à la position voulue.",
 						new MouseAdapter() {
 							public void mousePressed(MouseEvent e) {
 								try {

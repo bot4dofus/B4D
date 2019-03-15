@@ -1,11 +1,11 @@
-package fr.B4D.socket.os;
+ï»¿package fr.B4D.socket.os;
 
 import java.util.List;
 
 import fr.B4D.bot.B4DException;
 
-/** La classe {@code Linux} représente un système d'exploitation Linux.<br><br>
- * Cette classe étend la classe {@code OperatingSystem}.
+/** La classe {@code Linux} reprÃ©sente un systÃ¨me d'exploitation Linux.<br><br>
+ * Cette classe Ã©tend la classe {@code OperatingSystem}.
  */
 public class Linux extends OperatingSystem{
 	

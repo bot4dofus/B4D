@@ -1,4 +1,4 @@
-package fr.B4D.socket;
+﻿package fr.B4D.socket;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;

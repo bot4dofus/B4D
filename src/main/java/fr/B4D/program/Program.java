@@ -1,4 +1,4 @@
-package fr.B4D.program;
+ï»¿package fr.B4D.program;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -20,9 +20,9 @@ import fr.B4D.programs.tutorials.MessageAPI;
 import fr.B4D.programs.tutorials.TransportAPI;
 import net.sourceforge.tess4j.TesseractException;
 
-/** La classe {@code Program} représente un programme B4D.<br><br>
- * Un programme est défini par un lieux, une catégorie, une sous catégorie, un nom et une sub-routine implémentant l'interface {@code ProgramInterface}.
- * Il est possible de spécifier les canaux affichées dans le chat et le status du joueur.
+/** La classe {@code Program} reprÃ©sente un programme B4D.<br><br>
+ * Un programme est dÃ©fini par un lieux, une catÃ©gorie, une sous catÃ©gorie, un nom et une sub-routine implÃ©mentant l'interface {@code ProgramInterface}.
+ * Il est possible de spÃ©cifier les canaux affichÃ©es dans le chat et le status du joueur.
  */
 public class Program implements Serializable{
 
@@ -56,12 +56,12 @@ public class Program implements Serializable{
 	/******************/
 
 	/** Constructeur de la classe {@code Program}. 
-	 * @param place - Lieu d'éxecution du programme.
-	 * @param category - Catégorie du programme.
-	 * @param subCategory - Sous catégorie du programme.
+	 * @param place - Lieu d'Ã©xecution du programme.
+	 * @param category - CatÃ©gorie du programme.
+	 * @param subCategory - Sous catÃ©gorie du programme.
 	 * @param programName - Nom du programme.
-	 * @param displayedChannels - Canaux affichés pendant le programme. Si {@code null}, les canaux seront laissés par défaut.
-	 * @param status - Status du joueur pendant le programme. Si {@code null}, le status sera laissé par défaut.
+	 * @param displayedChannels - Canaux affichÃ©s pendant le programme. Si {@code null}, les canaux seront laissÃ©s par dÃ©faut.
+	 * @param status - Status du joueur pendant le programme. Si {@code null}, le status sera laissÃ© par dÃ©faut.
 	 * @param program - Sub-routine du programme.
 	 */
 	public Program(Place place, Category category, String subCategory, String programName, Channel[] displayedChannels, Status status, ProgramInterface program) {
@@ -112,22 +112,22 @@ public final static ArrayList<Program> getAll(){
 	 /** GETTERS & SETTERS **/
 	/***********************/
 	
-	/** Retourne le lieu d'éxecution du programme.
-	 * @return Lieux d'éxecution du programme.
+	/** Retourne le lieu d'Ã©xecution du programme.
+	 * @return Lieux d'Ã©xecution du programme.
 	 */
 	public Place getPlace() {
 		return place;
 	}
 	
-	/** Retourne la catégorie du programme.
-	 * @return Catégorie du programme.
+	/** Retourne la catÃ©gorie du programme.
+	 * @return CatÃ©gorie du programme.
 	 */
 	public Category getCategory() {
 		return category;
 	}
 	
-	/** Retourne la sous catégorie du programme.
-	 * @return Sous ctégorie du programme.
+	/** Retourne la sous catÃ©gorie du programme.
+	 * @return Sous ctÃ©gorie du programme.
 	 */
 	public String getSubCategory() {
 		return subCategory;
@@ -154,58 +154,58 @@ public final static ArrayList<Program> getAll(){
 		this.cycles = cycles;
 	}
 	
-	/** Retourne le nombre de dépôts avant la fin du programme.
-	 * @return Nombre de dépôts restants.
+	/** Retourne le nombre de dÃ©pÃ´ts avant la fin du programme.
+	 * @return Nombre de dÃ©pÃ´ts restants.
 	 */
 	public int getDeposits() {
 		return deposits;
 	}
 	
-	/** Modifi le nombre de dépôts avant la fin du programme.
-	 * @param deposits - Nombre de dépôts avant fin du programme.
+	/** Modifi le nombre de dÃ©pÃ´ts avant la fin du programme.
+	 * @param deposits - Nombre de dÃ©pÃ´ts avant fin du programme.
 	 */
 	public void setDeposits(int deposits) {
 		this.deposits = deposits;
 	}
 	
-	/** Retourne un booléen représentant si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein.
+	/** Retourne un boolÃ©en reprÃ©sentant si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein.
 	 * @return {@code true} si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein, {@code false} sinon.
 	 */
 	public boolean isHdvWhenFull() {
 		return hdvWhenFull;
 	}
 	
-	/** Présice si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein.
-	 * Cela permet par exemple, de vendre automatiquement les ressources que l'on vient de récupérer. 
+	/** PrÃ©sice si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein.
+	 * Cela permet par exemple, de vendre automatiquement les ressources que l'on vient de rÃ©cupÃ©rer. 
 	 * @param hdvWhenFull - {@code true} si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein, {@code false} sinon.
 	 */
 	public void setHdvWhenFull(boolean hdvWhenFull) {
 		this.hdvWhenFull = hdvWhenFull;
 	}
 	
-	/** Retourne un booléen représentant si le joueur veut vider son inventaire en banque lorsque celui-ci est plein.
+	/** Retourne un boolÃ©en reprÃ©sentant si le joueur veut vider son inventaire en banque lorsque celui-ci est plein.
 	 * @return {@code true} si le joueur veut vider son inventaire en banque lorsque celui-ci est plein, {@code false} sinon.
 	 */
 	public boolean isBankWhenFull() {
 		return bankWhenFull;
 	}
 	
-	/** Présice si le joueur veut vider son inventaire en banque lorsque celui-ci est plein.
-	 * Cela permet par exemple, de stocker automatiquement les ressources que l'on vient de récupérer. 
+	/** PrÃ©sice si le joueur veut vider son inventaire en banque lorsque celui-ci est plein.
+	 * Cela permet par exemple, de stocker automatiquement les ressources que l'on vient de rÃ©cupÃ©rer. 
 	 * @param bankWhenFull - {@code true} si le joueur veut vider son inventaire en banque lorsque celui-ci est plein, {@code false} sinon.
 	 */
 	public void setBankWhenFull(boolean bankWhenFull) {
 		this.bankWhenFull = bankWhenFull;
 	}
 	
-	/** Retourne un booléen représentant si le joueur veut stopper le programme lorsque l'inventaire est plein.
+	/** Retourne un boolÃ©en reprÃ©sentant si le joueur veut stopper le programme lorsque l'inventaire est plein.
 	 * @return {@code true} si le joueur veut stopper le programme lorsque l'inventaire est plein, {@code false} sinon.
 	 */
 	public boolean isStopWhenFull() {
 		return stopWhenFull;
 	}
 	
-	/** Précise si le joueur veut stopper le programme lorsque son inventaire est plein.
+	/** PrÃ©cise si le joueur veut stopper le programme lorsque son inventaire est plein.
 	 * @param stopWhenFull - {@code true} si le joueur veut stopper le programme lorsque l'inventaire est plein, {@code false} sinon.
 	 */
 	public void setStopWhenFull(boolean stopWhenFull) {
@@ -238,18 +238,18 @@ public final static ArrayList<Program> getAll(){
 		}
 	}
 
-	/** Fonction d'introduction du programme. Celle-ci ne sera éxecutée qu'une seule fois et permet de :<br/>
+	/** Fonction d'introduction du programme. Celle-ci ne sera Ã©xecutÃ©e qu'une seule fois et permet de :<br/>
 	 * <ul>
 	 * <li>Effacer le chat.</li>
-	 * <li>Modifier les canaux affichés dans le chat.</li>
+	 * <li>Modifier les canaux affichÃ©s dans le chat.</li>
 	 * <li>Modifier le status du joueur.</li>
-	 * <li>Récupérer la position actuelle du joueur.</li>
-	 * <li>Exécuter la sub-routine d'intro du programme.</li>
+	 * <li>RÃ©cupÃ©rer la position actuelle du joueur.</li>
+	 * <li>ExÃ©cuter la sub-routine d'intro du programme.</li>
 	 * </ul>
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
-	 * @throws IOException Si un problème de fichier survient.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
+	 * @throws B4DException Si une exception de type B4D est levÃ©e.
+	 * @throws IOException Si un problÃ¨me de fichier survient.
 	 */
 	private void intro() throws StopProgramException, CancelProgramException, B4DException, IOException {
 		Dofus.chat.clear();
@@ -263,21 +263,21 @@ public final static ArrayList<Program> getAll(){
 			if(status != null)
 				status.setStatus();
 			
-			person.setPosition();	//Récupère la position actuelle
+			person.setPosition();	//RÃ©cupÃ¨re la position actuelle
 		}
 		program.intro(person);
 	}
 	
-	/** Fonction principale du programme. Celle-ci ne sera éxecutée qu'une seule fois et permet d'exécuter la sub-routine cycle du programme.
-	 * Celle-ci sera exécuté tant que le nombre de cycles et le nombre de dépôts seront atteint.
-	 * En fonction des paramètres de lancement du programme, si l'inventaire est plein, les items sont automatiquement mit en HDV ou en banque.
-	 * Le programme peut aussi être stoppé.
+	/** Fonction principale du programme. Celle-ci ne sera Ã©xecutÃ©e qu'une seule fois et permet d'exÃ©cuter la sub-routine cycle du programme.
+	 * Celle-ci sera exÃ©cutÃ© tant que le nombre de cycles et le nombre de dÃ©pÃ´ts seront atteint.
+	 * En fonction des paramÃ¨tres de lancement du programme, si l'inventaire est plein, les items sont automatiquement mit en HDV ou en banque.
+	 * Le programme peut aussi Ãªtre stoppÃ©.
 	 * 
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
-	 * @throws TesseractException Si une exception Tesseract est levée.
-	 * @throws IOException Si un problème de fichier survient.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
+	 * @throws B4DException Si une exception de type B4D est levÃ©e.
+	 * @throws TesseractException Si une exception Tesseract est levÃ©e.
+	 * @throws IOException Si un problÃ¨me de fichier survient.
 	 */
 	private void cycle() throws B4DException, StopProgramException, CancelProgramException, TesseractException, IOException{
 		
@@ -302,6 +302,6 @@ public final static ArrayList<Program> getAll(){
 	}
 	private void outro() throws CancelProgramException {
 		program.outro(person);
-		B4D.logger.popUp("Le bot s'est correctement terminé.");
+		B4D.logger.popUp("Le bot s'est correctement terminÃ©.");
 	}
 }

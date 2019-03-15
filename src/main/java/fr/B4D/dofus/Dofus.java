@@ -1,8 +1,8 @@
-package fr.B4D.dofus;
+﻿package fr.B4D.dofus;
 
 import fr.B4D.interaction.chat.Chat;
 
-/** La classe {@code Dofus} permet d'acc�der au monde est au chat de dofus.
+/** La classe {@code Dofus} permet d'accéder au monde est au chat de dofus.
  */
 public class Dofus {
 	

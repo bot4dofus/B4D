@@ -1,4 +1,4 @@
-package fr.B4D.dofus;
+ï»¿package fr.B4D.dofus;
 
 import java.awt.Point;
 import java.io.Serializable;
@@ -10,8 +10,8 @@ import fr.B4D.transport.TransportStep;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.transport.transports.Zaapi;
 
-/** La classe {@code World} représente le monde de dofus.<br><br>
- * Un monde est défini par un graph.
+/** La classe {@code World} reprÃ©sente le monde de dofus.<br><br>
+ * Un monde est dÃ©fini par un graph.
  */
 public final class World implements Serializable{
 
@@ -6318,7 +6318,7 @@ public final class World implements Serializable{
 		graph.addVertex(new Point(-1, -66), true);
 	}
 
-	/** Permet d'ajouter les obstacles du monde des douzes tel que les murailes, les lisières de forêt où les falaises
+	/** Permet d'ajouter les obstacles du monde des douzes tel que les murailes, les lisiÃ¨res de forÃªt oÃ¹ les falaises
 	 */
 	private void addObstacles() {
 		astrubWalls();

@@ -1,4 +1,4 @@
-package fr.B4D.socket.os;
+ï»¿package fr.B4D.socket.os;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -10,8 +10,8 @@ import fr.B4D.socket.NetworkDeviceInfo;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.PacketCapture;
 
-/** La classe {@code Windows} représente un système d'exploitation Windows.<br><br>
- * Cette classe étend la classe {@code OperatingSystem}.
+/** La classe {@code Windows} reprÃ©sente un systÃ¨me d'exploitation Windows.<br><br>
+ * Cette classe Ã©tend la classe {@code OperatingSystem}.
  */
 public class Windows extends OperatingSystem{
 
@@ -44,7 +44,7 @@ public class Windows extends OperatingSystem{
 			}
 
 			if(currentAddress == null)
-				throw new B4DException("Merci de vérifier votre connection internet.", false);
+				throw new B4DException("Merci de vÃ©rifier votre connection internet.", false);
 
 			for (String jpcapDevice : PacketCapture.lookupDevices()) {
 				NetworkDeviceInfo info = new NetworkDeviceInfo(jpcapDevice);

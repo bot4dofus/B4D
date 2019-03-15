@@ -1,4 +1,4 @@
-package fr.B4D.socket.os;
+ï»¿package fr.B4D.socket.os;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,8 +10,8 @@ import java.util.List;
 
 import fr.B4D.bot.B4DException;
 
-/** La classe {@code OperatingSystem} représente un système d'exploitation.<br><br>
- * Un système d'exploitation est définit par un nom et une librairie jpcap.
+/** La classe {@code OperatingSystem} reprÃ©sente un systÃ¨me d'exploitation.<br><br>
+ * Un systÃ¨me d'exploitation est dÃ©finit par un nom et une librairie jpcap.
  */
 public abstract class OperatingSystem {
 	
@@ -22,8 +22,8 @@ public abstract class OperatingSystem {
 	private String library;
 	
 	/** Constructeur de la classe {@code OperatingSystem}.
-	 * @param name - Nom du système d'exploitation.
-	 * @param library - Nom de la librairie jpcap utilisée.
+	 * @param name - Nom du systÃ¨me d'exploitation.
+	 * @param library - Nom de la librairie jpcap utilisÃ©e.
 	 */
 	public OperatingSystem(String name, String library) {
 		String paths = System.getProperty("java.library.path");
@@ -34,14 +34,14 @@ public abstract class OperatingSystem {
 		this.library = library;
 	}
 	
-	/** Retourne le nom du système d'exploitation.
-	 * @return Nom du système d'exploitation.
+	/** Retourne le nom du systÃ¨me d'exploitation.
+	 * @return Nom du systÃ¨me d'exploitation.
 	 */
 	public String getName() {
 		return name;
 	}
 	
-	/** Retourne le nom de la librairie jpcap correspondant au système d'exploitation.
+	/** Retourne le nom de la librairie jpcap correspondant au systÃ¨me d'exploitation.
 	 * @return Nom de la librairie jpcap.
 	 */
 	public String getLibrary() {
@@ -55,15 +55,15 @@ public abstract class OperatingSystem {
 		return new File(library).exists();
 	}
 	
-	/** Permet de récupérer le réseau actif.
-	 * @return Nom du réseau utilisé.
-	 * @throws B4DException Si aucuns des réseaux n'est actif.
+	/** Permet de rÃ©cupÃ©rer le rÃ©seau actif.
+	 * @return Nom du rÃ©seau utilisÃ©.
+	 * @throws B4DException Si aucuns des rÃ©seaux n'est actif.
 	 */
 	public abstract String findActiveDevice() throws B4DException;
 	
-	/** Retourne le système d'exploitation utilisé.
-	 * @return Système d'exploitation utilisé.
-	 * @throws B4DException Si le système d'exploitation est inconnu.
+	/** Retourne le systÃ¨me d'exploitation utilisÃ©.
+	 * @return SystÃ¨me d'exploitation utilisÃ©.
+	 * @throws B4DException Si le systÃ¨me d'exploitation est inconnu.
 	 */
 	public static OperatingSystem getCurrent() throws B4DException {
 		String OS = System.getProperty("os.name");
@@ -80,9 +80,9 @@ public abstract class OperatingSystem {
 		}
 	}
 	
-	/** Permet d'exécuter une commande dans le terminal.
-	 * @param command - Commande à exécuter.
-	 * @return Résultat de la commande
+	/** Permet d'exÃ©cuter une commande dans le terminal.
+	 * @param command - Commande Ã  exÃ©cuter.
+	 * @return RÃ©sultat de la commande
 	 */
 	public static List<String> exec(String command) {
 		List<String> lines = new ArrayList<String>();

@@ -1,4 +1,4 @@
-package fr.B4D.bot;
+ï»¿package fr.B4D.bot;
 
 import java.awt.AWTException;
 import java.awt.Frame;
@@ -26,7 +26,7 @@ import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.InvalidFilterException;
 
 /** La classe {@code B4D} est la classe principale du bot.<br><br>
- * Elle fournit les méthodes dont à besoin l'interface graphique pour fonctionner.
+ * Elle fournit les mÃ©thodes dont Ã  besoin l'interface graphique pour fonctionner.
  */
 public final class B4D{
 
@@ -53,11 +53,11 @@ public final class B4D{
 	/*************/
 
 	/** Constructeur de la classe {@code B4D} et sauvegarde la nouvelle instance dans un fichier.
-	 * @throws B4DException Si une exception B4D est levée.
-	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
-	 * @throws IOException Si impossible de créer les fichiers de configuration.
-	 * @throws CaptureDeviceOpenException Si le réseau de capture ne peut pas être écouté.
-	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation des périphériques
+	 * @throws B4DException Si une exception B4D est levÃ©e.
+	 * @throws ClassNotFoundException Si un problÃ¨me de dÃ©serialisation survient.
+	 * @throws IOException Si impossible de crÃ©er les fichiers de configuration.
+	 * @throws CaptureDeviceOpenException Si le rÃ©seau de capture ne peut pas Ãªtre Ã©coutÃ©.
+	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation des pÃ©riphÃ©riques
 	 */
 	public B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceOpenException, AWTException {
 		
@@ -87,16 +87,16 @@ public final class B4D{
 	/** GETTERS & SETTERS **/
 	/***********************/
 	
-	/** Retourne la configuration actuelle de la fenêtre de jeu.
-	 * @return Configuration de la fenêtre de jeu.
+	/** Retourne la configuration actuelle de la fenÃªtre de jeu.
+	 * @return Configuration de la fenÃªtre de jeu.
 	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}	
 	
-	/** Modifi la configuration de la fenêtre de jeu.
-	 * @param configuration - Nouvelle configuration de la fenêtre de jeu.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	/** Modifi la configuration de la fenÃªtre de jeu.
+	 * @param configuration - Nouvelle configuration de la fenÃªtre de jeu.
+	 * @throws IOException Si impossible de sÃ©rialiser la configuration.
 	 */
 	private void setConfiguration(Configuration configuration) throws IOException {
 		this.configuration = configuration;
@@ -112,7 +112,7 @@ public final class B4D{
 	
 	/** Modifi la team du joueur et sauvegarde la nouvelle instance dans un fichier.
 	 * @param team - Nouvelle team du joueur.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	 * @throws IOException Si impossible de sÃ©rialiser la configuration.
 	 */
 	private void setTeam(Team team) throws IOException {
 		this.team = team;
@@ -124,14 +124,14 @@ public final class B4D{
 	/**********/
 	
 	/** Sauvegarde l'instance actuelle de la configuration dans un fichier.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	 * @throws IOException Si impossible de sÃ©rialiser la configuration.
 	 */
 	public void saveConfiguration() throws IOException {
 		DAOFactory.getConfigurationDAO().update(configuration);
 	}
 	
 	/** Sauvegarde l'instance actuelle de la team dans un fichier.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	 * @throws IOException Si impossible de sÃ©rialiser la configuration.
 	 */
 	public void saveTeam() throws IOException {
 		DAOFactory.getTeamDAO().update(team);
@@ -142,8 +142,8 @@ public final class B4D{
 	/*************/
 
 	/** Permet d'importer une configuration ou une team.
-	 * @throws ClassNotFoundException Si impossible de déserialiser.
-	 * @throws IOException Si impossible de sérialiser.
+	 * @throws ClassNotFoundException Si impossible de dÃ©serialiser.
+	 * @throws IOException Si impossible de sÃ©rialiser.
 	 */
 	public void importFile() throws ClassNotFoundException, IOException {
 		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
@@ -164,7 +164,7 @@ public final class B4D{
 	}
 
 	/** Permet d'exporter une configuration ou une team.
-	 * @throws IOException Si impossible de sérialiser.
+	 * @throws IOException Si impossible de sÃ©rialiser.
 	 */
 	public void exportFile() throws IOException {
 		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
@@ -196,8 +196,8 @@ public final class B4D{
 	/*********/
 
 	/** Permet de lancer un programme avec une configuration et un personnage particulier.
-	 * @param program - Programme à éxecuter.
-	 * @param person - Personnage qui éxecute le programme.
+	 * @param program - Programme Ã  Ã©xecuter.
+	 * @param person - Personnage qui Ã©xecute le programme.
 	 */
 	public void runProgram(Program program, Person person) {
 		if(!socketListener.isAlive())

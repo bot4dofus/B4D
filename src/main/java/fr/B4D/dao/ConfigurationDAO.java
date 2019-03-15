@@ -1,4 +1,4 @@
-package fr.B4D.dao;
+ï»¿package fr.B4D.dao;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,8 +12,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.B4D.bot.Configuration;
 
-/** La classe {@code ConfigurationDAO} permet de gérer la sauvegarde des instances de la classe {@code Configuration}.<br><br>
- * Cette classe étend la classe {@code DAO<Configuration>}.
+/** La classe {@code ConfigurationDAO} permet de gÃ©rer la sauvegarde des instances de la classe {@code Configuration}.<br><br>
+ * Cette classe Ã©tend la classe {@code DAO<Configuration>}.
  */
 public class ConfigurationDAO extends DAO<Configuration> implements Serializable{
 

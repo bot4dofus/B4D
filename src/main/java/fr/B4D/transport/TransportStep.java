@@ -1,4 +1,4 @@
-package fr.B4D.transport;
+ï»¿package fr.B4D.transport;
 
 import java.awt.Point;
 import java.io.Serializable;
@@ -7,8 +7,8 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code TransportStep} représente une étape dans un chemin entre deux point de la carte.<br><br>
- * Une étape est défini par un transport et une destination.
+/** La classe {@code TransportStep} reprÃ©sente une Ã©tape dans un chemin entre deux point de la carte.<br><br>
+ * Une Ã©tape est dÃ©fini par un transport et une destination.
  */
 public class TransportStep implements Serializable{
 
@@ -22,7 +22,7 @@ public class TransportStep implements Serializable{
 	/*************/
 
 	/** Constructeur de la classe {@code TransportStep}. 
-	 * @param transport - Transport utilisé pour l'étape.
+	 * @param transport - Transport utilisÃ© pour l'Ã©tape.
 	 * @param destination - Destination du transport.
 	 */
 	public TransportStep(Transport transport, Point destination) {
@@ -34,29 +34,29 @@ public class TransportStep implements Serializable{
 	 /** GETTERS **/
 	/*************/
 	
-	/** Retourne le transport de l'étape.
-	 * @return Transport de l'étape.
+	/** Retourne le transport de l'Ã©tape.
+	 * @return Transport de l'Ã©tape.
 	 */
 	public Transport getTransport() {
 		return transport;
 	}
 	
-	/** Modifi le transport de l'étape.
-	 * @param transport - Nouveau transport de l'étape.
+	/** Modifi le transport de l'Ã©tape.
+	 * @param transport - Nouveau transport de l'Ã©tape.
 	 */
 	public void setTransport(Transport transport) {
 		this.transport = transport;
 	}
 	
-	/** Retourne la destination de l'étape.
-	 * @return Destination de l'étape.
+	/** Retourne la destination de l'Ã©tape.
+	 * @return Destination de l'Ã©tape.
 	 */
 	public Point getDestination() {
 		return destination;
 	}
 	
-	/** Modifi le destination de l'étape.
-	 * @param destination - Nouvelle destination de l'étape.
+	/** Modifi le destination de l'Ã©tape.
+	 * @param destination - Nouvelle destination de l'Ã©tape.
 	 */
 	public void setDestination(Point destination) {
 		this.destination = destination;
@@ -66,10 +66,10 @@ public class TransportStep implements Serializable{
 	 /** METHODES **/
 	/**************/
 	
-	/** Permet d'utiliser le transport de l'étape.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	/** Permet d'utiliser le transport de l'Ã©tape.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
+	 * @throws B4DException Si une exception de type B4D est levÃ©e.
 	 */
 	public void use() throws StopProgramException, CancelProgramException, B4DException {
 		transport.goTo(destination);

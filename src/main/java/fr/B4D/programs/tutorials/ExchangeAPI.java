@@ -1,4 +1,4 @@
-package fr.B4D.programs.tutorials;
+ï»¿package fr.B4D.programs.tutorials;
 
 import java.awt.Image;
 
@@ -18,16 +18,16 @@ import net.sourceforge.tess4j.TesseractException;
 
 public final class ExchangeAPI {	
 
-	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueur.<br>
+	/** Ce tutoriel Ã  pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des Ã©changes entre joueur.<br>
 	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
-	 *  	<li>Création de l'objet échange avec 100 000 kamas entrants, 0 kamas sortants.</li>
-	 *  	<li>Attente d'une demande d'échange.</li>
-	 *  	<li>Procède à l'échange avec un message de confirmation auquel la personne peut répondre uniquement par "oui" ou "non".</li>
-	 *  	<li>Affiche le nom du joueur qui vient de réaliser l'échange ainsi que la preuve de son consentement.</li>
+	 *  	<li>CrÃ©ation de l'objet Ã©change avec 100 000 kamas entrants, 0 kamas sortants.</li>
+	 *  	<li>Attente d'une demande d'Ã©change.</li>
+	 *  	<li>ProcÃ¨de Ã  l'Ã©change avec un message de confirmation auquel la personne peut rÃ©pondre uniquement par "oui" ou "non".</li>
+	 *  	<li>Affiche le nom du joueur qui vient de rÃ©aliser l'Ã©change ainsi que la preuve de son consentement.</li>
 	 *  </ul>
-	 *  Dans le cas où l'échange est annulé par le joueur, un exception est levée. Un message différent est alors affiché.<br>
+	 *  Dans le cas oÃ¹ l'Ã©change est annulÃ© par le joueur, un exception est levÃ©e. Un message diffÃ©rent est alors affichÃ©.<br>
 	 */
 	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
@@ -37,9 +37,9 @@ public final class ExchangeAPI {
 			String name = exchange.waitForExchange();
 			try {
 				Image proof = exchange.exchange("T'es sur de ce don ?");
-				B4D.logger.popUp("Echange avec " + name + " effectué. Voici la preuve " + proof);
+				B4D.logger.popUp("Echange avec " + name + " effectuÃ©. Voici la preuve " + proof);
 			} catch (ExchangeCanceledException e) {
-				B4D.logger.popUp("L'échange à été annulé");
+				B4D.logger.popUp("L'Ã©change Ã  Ã©tÃ© annulÃ©");
 			}
 		}
 	});

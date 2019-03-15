@@ -1,10 +1,10 @@
-package fr.B4D.bot;
+ï»¿package fr.B4D.bot;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/** La classe {@code Server} représente un serveur de jeu dofus.<br><br>
- * Un serveur est défini par un nom et une ip.
+/** La classe {@code Server} reprÃ©sente un serveur de jeu dofus.<br><br>
+ * Un serveur est dÃ©fini par un nom et une ip.
  */
 public class Server implements Serializable{
 
@@ -16,7 +16,7 @@ public class Server implements Serializable{
 	
 	//French
 	public final static Server FURYE = new Server("Furye", "34.255.26.216");
-	public final static Server MERIANA = new Server("Mériana", "34.243.42.81");
+	public final static Server MERIANA = new Server("MÃ©riana", "34.243.42.81");
 	public final static Server MERKATOR = new Server("Merkator", "34.253.54.78");
 	public final static Server PANDORE = new Server("Pandore", "34.255.15.190");
 	public final static Server BRUMEN = new Server("Brumen", "34.243.167.137");
@@ -100,9 +100,9 @@ public final static ArrayList<Server> getAll(){
       return servers;
   }
 
-  /** Permet de retrouver un serveur à partir de son nom.
+  /** Permet de retrouver un serveur Ã  partir de son nom.
  * @param name - Nom du serveur.
- * @return Serveur correspondant, {@code null} si aucun résultat.
+ * @return Serveur correspondant, {@code null} si aucun rÃ©sultat.
  */
 public final static Server getServer(String name) {
 	  return getAll().stream().filter(s -> s.getName().equals(name)).findFirst().orElse(null);

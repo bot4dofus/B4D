@@ -1,9 +1,9 @@
-package fr.B4D.program;
+ï»¿package fr.B4D.program;
 
 import fr.B4D.bot.B4DException;
 
-/** Signal que le programme a été annulé.
- * La fonction de sortie (outro) ne sera pas exécuté.
+/** Signal que le programme a Ã©tÃ© annulÃ©.
+ * La fonction de sortie (outro) ne sera pas exÃ©cutÃ©.
  */
 public class CancelProgramException extends B4DException{
 
@@ -16,9 +16,9 @@ public class CancelProgramException extends B4DException{
     }
 	
 	/** Constructeur de l'exception {@code CancelProgramException}.
-	 * @param raison - Raison pour laquelle le programme à été annulé.
+	 * @param raison - Raison pour laquelle le programme Ã  Ã©tÃ© annulÃ©.
 	 */
 	public CancelProgramException(String raison) {
-    	super("Le programme a été intérompu pour la raison suivante :\n" + raison);
+    	super("Le programme a Ã©tÃ© intÃ©rompu pour la raison suivante :\n" + raison);
     }
 }

@@ -1,4 +1,4 @@
-package fr.B4D.socket;
+ï»¿package fr.B4D.socket;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -9,9 +9,9 @@ import net.sourceforge.jpcap.capture.PacketCapture;
 import net.sourceforge.jpcap.capture.RawPacketListener;
 import net.sourceforge.jpcap.net.RawPacket;
 
-/** La classe {@code NetworkTester} étend la classe  {@code Thread}.<br><br>
- * Elle permet de tester si un réseau est actif.
- * Un testeur de réseau est identifié par un nom de réseau et un nombre de packet minimum.
+/** La classe {@code NetworkTester} Ã©tend la classe  {@code Thread}.<br><br>
+ * Elle permet de tester si un rÃ©seau est actif.
+ * Un testeur de rÃ©seau est identifiÃ© par un nom de rÃ©seau et un nombre de packet minimum.
  */
 public class NetworkTester extends Thread{
 
@@ -30,8 +30,8 @@ public class NetworkTester extends Thread{
 	/*************/
 	
 	/** Constructeur de la classe {@code NetworkTester}. 
-	 * @param network - Nom du réseau à tester.
-	 * @param socketDetected - Nombre de trames à détecter pour considérer le réseau comme actif.
+	 * @param network - Nom du rÃ©seau Ã  tester.
+	 * @param socketDetected - Nombre de trames Ã  dÃ©tecter pour considÃ©rer le rÃ©seau comme actif.
 	 */
 	public NetworkTester(String network, CountDownLatch socketDetected) {
 		this.m_pcap = new PacketCapture();
@@ -44,15 +44,15 @@ public class NetworkTester extends Thread{
 	 /** GETTERS **/
 	/*************/
 	
-	/** Retourne le nom du réseau.
-	 * @return Nom du réseau.
+	/** Retourne le nom du rÃ©seau.
+	 * @return Nom du rÃ©seau.
 	 */
 	public String getNetwork() {
 		return network;
 	}
 	
-	/** Spécifi si le réseau est actif.
-	 * @return {@code true} si le réseau est actif, {@code false} sinon.
+	/** SpÃ©cifi si le rÃ©seau est actif.
+	 * @return {@code true} si le rÃ©seau est actif, {@code false} sinon.
 	 */
 	public boolean isActif() {
 		return actif;

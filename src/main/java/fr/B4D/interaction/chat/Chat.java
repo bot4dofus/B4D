@@ -1,4 +1,4 @@
-package fr.B4D.interaction.chat;
+ï»¿package fr.B4D.interaction.chat;
 
 import java.awt.AWTException;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -7,8 +7,8 @@ import fr.B4D.bot.B4D;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code Chat} représente le chat de dofus.<br><br>
- * Un chat est défini par une queue de messages, un filtre et une sub-routine.
+/** La classe {@code Chat} reprÃ©sente le chat de dofus.<br><br>
+ * Un chat est dÃ©fini par une queue de messages, un filtre et une sub-routine.
  */
 public class Chat extends Thread{
 
@@ -25,7 +25,7 @@ public class Chat extends Thread{
 	/*************/
 	
 	/** Constructeur de la classe {@code Chat} avec un nombre de messages enregistrables de 100.
-	 * Cela est identique à {@code Chat(100)}.
+	 * Cela est identique Ã  {@code Chat(100)}.
 	 */
 	public Chat() {
 		this(100);
@@ -59,22 +59,22 @@ public class Chat extends Thread{
 	 /** FILTER **/
 	/************/
 	
-	/** Ajoute un filtre de pseudo. Seul les messages provenants de ce joueur seront traités.
+	/** Ajoute un filtre de pseudo. Seul les messages provenants de ce joueur seront traitÃ©s.
 	 * @param pseudo - Pseudo du joueur. {@code null} pour retirer le filtre.
 	 */
 	public void addPseudoFilter(String pseudo) {
 		filter.setPseudo(pseudo);
 	}
 
-	/** Ajoute un filtre de canal. Seul les messages de ce canal seront traités.
+	/** Ajoute un filtre de canal. Seul les messages de ce canal seront traitÃ©s.
 	 * @param channel - Canal du message. {@code null} pour retirer le filtre.
 	 */
 	public void addChannelFilter(Channel channel) {
 		filter.setChannel(channel);
 	}
 
-	/** Ajoute un filtre de texte. Seul les messages contenants une chaine de caractère spécifique seront traités.
-	 * @param regex - Expression régulière que doit contenir le message. {@code null} pour retirer le filtre.
+	/** Ajoute un filtre de texte. Seul les messages contenants une chaine de caractÃ¨re spÃ©cifique seront traitÃ©s.
+	 * @param regex - Expression rÃ©guliÃ¨re que doit contenir le message. {@code null} pour retirer le filtre.
 	 */
 	public void addTextFilter(String regex) {
 		filter.setRegex(regex);
@@ -84,8 +84,8 @@ public class Chat extends Thread{
 	 /** QUEU **/
 	/**********/
 	
-	/** Ajoute un message à la queue du chat. Si celui-ci est plein, le plus vieux message sera supprimé.
-	 * @param message - Message à ajouter â la queu.
+	/** Ajoute un message Ã  la queue du chat. Si celui-ci est plein, le plus vieux message sera supprimÃ©.
+	 * @param message - Message Ã  ajouter Ã¢ la queu.
 	 */
 	public void addMessage(Message message) {
 		synchronized(messages){
@@ -101,19 +101,19 @@ public class Chat extends Thread{
 	 /** LISTENER **/
 	/**************/
 	
-	/** Traite un nombre infini de messages. Cela est identique à {@code read(-1)}.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws AWTException Si un problème d'interface survient.
+	/** Traite un nombre infini de messages. Cela est identique Ã  {@code read(-1)}.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
+	 * @throws AWTException Si un problÃ¨me d'interface survient.
 	 */
 	public void read() throws StopProgramException, CancelProgramException, AWTException {
 		read(-1);
 	}
 	
 	/** Traite un nombre fini de messages.
-	 * @param countTo - Nombre de message à traiter.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @param countTo - Nombre de message Ã  traiter.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
 	 */
 	public void read(int countTo) throws StopProgramException, CancelProgramException {		
 		int count = 0;
@@ -129,14 +129,14 @@ public class Chat extends Thread{
 	 /** WAIT FOR MESSAGE **/
 	/**********************/
 	
-	/** Attend un message pour une durée infinie. Cela est identique à {@code waitForMessage(0)}.
+	/** Attend un message pour une durÃ©e infinie. Cela est identique Ã  {@code waitForMessage(0)}.
 	 * @return Plus vieux message correspondant au filtre.
 	 */
 	public Message waitForMessage() {
 		return waitForMessage(0);
 	}
-	/** Attend un message pour une durée finie.
-	 * @param timeout - Durée d'attente maximale en millisecondes.
+	/** Attend un message pour une durÃ©e finie.
+	 * @param timeout - DurÃ©e d'attente maximale en millisecondes.
 	 * @return Plus vieux message correspondant au filtre et {@code null} si timeout.
 	 */
 	public Message waitForMessage(long timeout) {		
@@ -156,9 +156,9 @@ public class Chat extends Thread{
 			}while(!filter.filter(message));
 			
 			if(message == null)
-				B4D.logger.debug(this, "Aucun message reçu (timeout)");
+				B4D.logger.debug(this, "Aucun message reÃ§u (timeout)");
 			else
-				B4D.logger.debug(this, "Message reçu [" + message + "]");
+				B4D.logger.debug(this, "Message reÃ§u [" + message + "]");
 		}
 		catch(InterruptedException e) {
 			B4D.logger.error(e);

@@ -1,4 +1,4 @@
-package fr.B4D.transport;
+ï»¿package fr.B4D.transport;
 
 import java.awt.Point;
 import java.io.Serializable;
@@ -7,7 +7,7 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** Interface représentant un transport.
+/** Interface reprÃ©sentant un transport.
  */
 public interface TransportInterface extends Serializable {
 	final double zaapCost = 10;
@@ -23,9 +23,9 @@ public interface TransportInterface extends Serializable {
 
 	/** Permet d'utiliser le transport.
 	 * @param destination - Destination du transport.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
+	 * @throws B4DException Si une exception de type B4D est levÃ©e.
 	 */
 	public void goTo(Point destination) throws StopProgramException, CancelProgramException, B4DException;
 }

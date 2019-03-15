@@ -1,4 +1,4 @@
-package fr.B4D.gui;
+ï»¿package fr.B4D.gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -91,14 +91,14 @@ public class JPanel_Reglage extends JPanel {
 		button_GameFrame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				B4D.mouse.getPoints(
-					"Cliquez dans le coin suppérieur gauche",
+					"Cliquez dans le coin suppÃ©rieur gauche",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/ZoneHautGauche.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {
 							topLeft = MouseInfo.getPointerInfo().getLocation();
 						}
 					},
-					"Cliquez dans le coin inférieur droit",
+					"Cliquez dans le coin infÃ©rieur droit",
 					new ImageIcon(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/images/ZoneBasDroite.png"))),
 					new MouseAdapter() {
 						public void mousePressed(MouseEvent e) {

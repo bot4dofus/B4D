@@ -1,4 +1,4 @@
-package fr.B4D.threads;
+ï»¿package fr.B4D.threads;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -6,21 +6,21 @@ import java.awt.Point;
 import fr.B4D.bot.B4D;
 
 /** La classe {@code PixelThread} permet d'attendre qu'un pixel change de couleur.<br><br>
- * Cette classe étend la classe {@code Thread}.
+ * Cette classe Ã©tend la classe {@code Thread}.
  */
 public class PixelThread extends Thread{
 	private Point pixel;
 	private Color color;
 
 	/** Constructeur de la classe {@code PixelThread}.
-	 * @param pixel - Position du pixel en coordonnées simples.
+	 * @param pixel - Position du pixel en coordonnÃ©es simples.
 	 */
 	public PixelThread(Point pixel) {
 		this.pixel = pixel;
 	}
 	
 	/** Retourne la couleur du pixel.
-	 * @return Couleur du pixel. {@code null} si le pixel n'a pas changé.
+	 * @return Couleur du pixel. {@code null} si le pixel n'a pas changÃ©.
 	 */
 	public Color getColor() {
 		return this.color;

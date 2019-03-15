@@ -1,4 +1,4 @@
-package fr.B4D.transport.transports;
+ï»¿package fr.B4D.transport.transports;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -12,8 +12,8 @@ import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Zaap} représente un zaap.<br><br>
- * Cette classe étend la classe {@code Transport}.
+/** La classe {@code Zaap} reprÃ©sente un zaap.<br><br>
+ * Cette classe Ã©tend la classe {@code Transport}.
  */
 public class Zaap extends Transport implements Serializable{
 	
@@ -52,7 +52,7 @@ public class Zaap extends Transport implements Serializable{
     public final static Zaap Cania_Plaines_Rocheuses = new Zaap("Plaine de Cania (Plaines Rocheuses)", new Point(-17, -47), new PointF(0.3234, 0.3337));
     public final static Zaap Cania_Routes_Rocailleuses = new Zaap("Plaine de Cania (Routes Rocailleuses)", new Point(-20, -20), new PointF(0.4302, 0.3537));
     public final static Zaap Saharach = new Zaap("Saharach (Dunes des ossements)", new Point(15, -58), new PointF(0.3595, 0.3076));
-    public final static Zaap Tainela = new Zaap("Tainéla (Berceau)", new Point(1, -32), new PointF(0.4992, 0.3978));    
+    public final static Zaap Tainela = new Zaap("TainÃ©la (Berceau)", new Point(1, -32), new PointF(0.4992, 0.3978));    
     
 	  /******************/
 	 /** CONSTRUCTEUR **/
@@ -109,10 +109,10 @@ public class Zaap extends Transport implements Serializable{
         return zaaps;
     }
     
-    /** Permet de retrouver un zaap à partir de sa position.
+    /** Permet de retrouver un zaap Ã  partir de sa position.
      * @param position - Position du zaap.
      * @return Zaap correspondant.
-     * @throws B4DException Si aucun zaap ne correspond à cette position.
+     * @throws B4DException Si aucun zaap ne correspond Ã  cette position.
      */
     public final static Zaap getZaap(Point position) throws B4DException{
     	for(Transport zaap: getAll()) {
@@ -122,10 +122,10 @@ public class Zaap extends Transport implements Serializable{
 		throw new B4DException("Cannot found the zaap in position [" + position.x + ":" + position.y + "] on the map.");
     }
 	
-    /** Permet de retrouver un zaap à partir de son nom.
+    /** Permet de retrouver un zaap Ã  partir de son nom.
      * @param name - Nom du zaap.
      * @return Zaap correspondant.
-     * @throws B4DException Si aucun zaap ne possède ce nom.
+     * @throws B4DException Si aucun zaap ne possÃ¨de ce nom.
      */
 	public static Zaap getZaap(String name) throws B4DException {
 		for(Transport zaap: getAll()) {

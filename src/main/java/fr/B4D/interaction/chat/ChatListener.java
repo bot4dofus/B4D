@@ -1,4 +1,4 @@
-package fr.B4D.interaction.chat;
+ï»¿package fr.B4D.interaction.chat;
 
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
@@ -7,9 +7,9 @@ import fr.B4D.program.StopProgramException;
  */
 public interface ChatListener {
 	/** Traite les messages traversant le filtre.
-	 * @param message - Message traité.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @param message - Message traitÃ©.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
 	 */
 	public void treatMessage(Message message) throws StopProgramException, CancelProgramException;
 }

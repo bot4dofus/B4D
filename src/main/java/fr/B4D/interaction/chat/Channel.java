@@ -1,4 +1,4 @@
-package fr.B4D.interaction.chat;
+ï»¿package fr.B4D.interaction.chat;
 
 import java.awt.AWTException;
 import java.awt.Color;
@@ -15,8 +15,8 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Channel} représente un canal de diffusion du chat.<br><br>
- * Un canal est défini par un nom, un préfix et un point d'activation.
+/** La classe {@code Channel} reprÃ©sente un canal de diffusion du chat.<br><br>
+ * Un canal est dÃ©fini par un nom, un prÃ©fix et un point d'activation.
  */
 public class Channel implements Serializable{
 	
@@ -56,7 +56,7 @@ public class Channel implements Serializable{
 	
 	/** Constructeur de la classe {@code Channel}.
 	 * @param name - Nom de la classe
-	 * @param prefix - Préfix de la classe
+	 * @param prefix - PrÃ©fix de la classe
 	 * @param relativCheckPosition - Point relatif au menu
 	 */
 	public Channel(String name, String prefix, PointF relativCheckPosition) {
@@ -83,8 +83,8 @@ public class Channel implements Serializable{
 		return this.name;
 	}
 	
-	/** Retourne le préfix du canal.
-	 * @return Préfixe du canal.
+	/** Retourne le prÃ©fix du canal.
+	 * @return PrÃ©fixe du canal.
 	 */
 	public String getPrefix() {
 		return this.prefix;
@@ -94,9 +94,9 @@ public class Channel implements Serializable{
 	 /** PRIVATE **/
 	/*************/
 	
-	/** Retourne l'état du canal.
+	/** Retourne l'Ã©tat du canal.
 	 * @param arrowPosition - Position du menu.
-	 * @return {@code true} si le canal est affiché, {@code false} sinon.
+	 * @return {@code true} si le canal est affichÃ©, {@code false} sinon.
 	 */
 	private boolean isDisplayed(PointF arrowPosition) {
 		PointF checkPosition = new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);
@@ -105,10 +105,10 @@ public class Channel implements Serializable{
 		return (B4D.screen.searchPixel(checkTopLeft, checkBottomRight, new Color(50,50,50), new Color(255,255,255)) != null);
 	}
 	
-	/** Change l'état du canal.
+	/** Change l'Ã©tat du canal.
 	 * @param arrowPosition - Position du menu.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	private void toggle(PointF arrowPosition) throws StopProgramException, CancelProgramException {
 		PointF checkPosition = new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);		
@@ -117,10 +117,10 @@ public class Channel implements Serializable{
 	
 	/** Active/Affiche le canal.
 	 * @param arrowPosition - Position du menu.
-	 * @return {@code true} si l'état du canal a changé, {@code false} sinon.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
+	 * @return {@code true} si l'Ã©tat du canal a changÃ©, {@code false} sinon.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
+	 * @throws AWTException Si un problÃ¨me de souris survient.
 	 */
 	private boolean enable(PointF arrowPosition) throws StopProgramException, CancelProgramException {
 		if(!isDisplayed(arrowPosition)) {
@@ -131,11 +131,11 @@ public class Channel implements Serializable{
 			return false;
 	}
 	
-	/** Désactive/Cache le canal.
+	/** DÃ©sactive/Cache le canal.
 	 * @param arrowPosition - Position du menu.
-	 * @return {@code true} si l'état du canal a changé, {@code false} sinon.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	 * @return {@code true} si l'Ã©tat du canal a changÃ©, {@code false} sinon.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	private boolean disable(PointF arrowPosition) throws StopProgramException, CancelProgramException {
 		if(isDisplayed(arrowPosition)) {
@@ -171,22 +171,22 @@ public class Channel implements Serializable{
 		    return channels;
 		  }
 	
-	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront désactivés.
-	 * @param channel - Liste des canaux à afficher.
-	 * @return Liste des canaux ayant changé d'état.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
+	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront dÃ©sactivÃ©s.
+	 * @param channel - Liste des canaux Ã  afficher.
+	 * @return Liste des canaux ayant changÃ© d'Ã©tat.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
+	 * @throws AWTException Si un problÃ¨me de souris survient.
 	 */
 	public static List<Channel> displayChannels(Channel...channel) throws AWTException, StopProgramException, CancelProgramException {
 		return displayChannels(Arrays.asList(channel));
 	}
 	
-	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront désactivés.
-	 * @param channels - Liste des canaux à afficher.
-	 * @return Liste des canaux ayant changé d'état, {@code null} si impossible d'ouvrir le menu.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront dÃ©sactivÃ©s.
+	 * @param channels - Liste des canaux Ã  afficher.
+	 * @return Liste des canaux ayant changÃ© d'Ã©tat, {@code null} si impossible d'ouvrir le menu.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	public static List<Channel> displayChannels(List<Channel> channels) throws StopProgramException, CancelProgramException {
 		List<Channel> toggles = null;
@@ -196,7 +196,7 @@ public class Channel implements Serializable{
 			B4D.mouse.leftClick(menu, false, 200);		//Ouvre le menu du chat
 			List<PointF> matchs = B4D.screen.searchPixels(new PointF(menu.x + 0.1984, menu.y - 0.2625), new PointF(menu.x + 0.1984, menu.y - 0.006), new Color(100, 100, 100), new Color(255, 255, 255));
 			PointF arrowPosition = matchs.get(matchs.size() - 1);
-			B4D.mouse.place(arrowPosition, 500);		//Affiche les caneaux affichés
+			B4D.mouse.place(arrowPosition, 500);		//Affiche les caneaux affichÃ©s
 			
 			toggles = new ArrayList<Channel>();
 			
@@ -216,10 +216,10 @@ public class Channel implements Serializable{
 		return toggles;
 	}
 	
-	/** Permet de retourner le canal correspondant à un octet.
+	/** Permet de retourner le canal correspondant Ã  un octet.
 	 * @param data - Octet du canal.
 	 * @return Canal correspondant.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	 * @throws B4DException Si une exception de type B4D est levÃ©e.
 	 */
 	public static Channel fromByte(byte data) throws B4DException {
 		switch(Byte.toUnsignedInt(data)) {

@@ -1,22 +1,22 @@
-package fr.B4D.dao;
+ï»¿package fr.B4D.dao;
 
 import java.io.Serializable;
 
-/** La classe {@code DAOFactory} permet de récupérer les objets DAO permettant de gérer la sauvegarde des instances d'une classe.
+/** La classe {@code DAOFactory} permet de rÃ©cupÃ©rer les objets dao permettant de gÃ©rer la sauvegarde des instances d'une classe.
  */
 public class DAOFactory implements Serializable{
 	
-	private static final long serialVersionUID = -704835752059114530L;
+	private static final long serialVersionUID = -5379040750762550000L;
 
 	/** Retourne une instance de la classe {@code ConfigurationDAO}.
-	 * @return Objet de configuration DAO.
+	 * @return Objet de configuration dao.
 	 */
 	public static ConfigurationDAO getConfigurationDAO() {
 		return new ConfigurationDAO();
 	}
 	
 	/** Retourne une instance de la classe {@code TeamDAO}.
-	 * @return Objet de team DAO.
+	 * @return Objet de team dao.
 	 */
 	public static TeamDAO getTeamDAO() {
 		return new TeamDAO();

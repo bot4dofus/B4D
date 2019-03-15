@@ -1,4 +1,4 @@
-package fr.B4D.bot.statics;
+ï»¿package fr.B4D.bot.statics;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 
 import fr.B4D.bot.B4DException;
 
-/** La classe {@code Logger} permet d'accéder à toutes les méthodes liés aux logs et aux erreurs.
+/** La classe {@code Logger} permet d'accÃ©der Ã  toutes les mÃ©thodes liÃ©s aux logs et aux erreurs.
  */
 public class Logger {
 
@@ -43,8 +43,8 @@ public class Logger {
 	/** METHODS **/
 	/*************/
 
-	/** Permet d'afficher un message dans une fenêtre graphique. Celui-ci est aussi affiché dans la console.
-	 * @param log - Message à afficher.
+	/** Permet d'afficher un message dans une fenÃªtre graphique. Celui-ci est aussi affichÃ© dans la console.
+	 * @param log - Message Ã  afficher.
 	 */
 	public void popUp(String log) {
 		debug(this, "Popup showed : " + log);
@@ -52,9 +52,9 @@ public class Logger {
 	}
 
 	/** Permet d'afficher un message dans la console.
-	 * Cette méthode doit être utilisé ainsi {@code B4D.logger.debug(this, "...")}.
+	 * Cette mÃ©thode doit Ãªtre utilisÃ© ainsi {@code B4D.logger.debug(this, "...")}.
 	 * @param c - Classe appelante.
-	 * @param log - Message à afficher.
+	 * @param log - Message Ã  afficher.
 	 */
 	public void debug(Object c, String log) {
 		System.out.println("[" + c.getClass().getName() + "] " + log);
@@ -62,13 +62,13 @@ public class Logger {
 
 	/** Permet d'afficher un message d'alerte dans la console.
 	 * @param c - Classe appelante.
-	 * @param log - Message à afficher.
+	 * @param log - Message Ã  afficher.
 	 */
 	public void warning(Object c, String log) {
 		System.err.println("[" + c.getClass().getName() + "] " + log);
 	}
 
-	/** Permet d'afficher un message d'erreur dans une fenêtre graphique en demandant si l'utilisateur veut envoyer le rapport d'erreur.
+	/** Permet d'afficher un message d'erreur dans une fenÃªtre graphique en demandant si l'utilisateur veut envoyer le rapport d'erreur.
 	 * @param e - Trace de l'erreur.
 	 */
 	public void error(Exception e) {
@@ -85,21 +85,21 @@ public class Logger {
 			if(sendRepport) {
 				String message;
 				if(e.getMessage() == null)
-					message = "Une erreur s'est produite.\nVoulez vous envoyer le rappot d'erreur aux développeurs ?";
+					message = "Une erreur s'est produite.\nVoulez vous envoyer le rappot d'erreur aux dÃ©veloppeurs ?";
 				else
-					message = e.getMessage() + "\nVoulez vous envoyer le rappot d'erreur aux développeurs ?";
+					message = e.getMessage() + "\nVoulez vous envoyer le rappot d'erreur aux dÃ©veloppeurs ?";
 				int answer = JOptionPane.showConfirmDialog(null, message, "Erreur", JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE);
 
 				//			if (answer == JOptionPane.YES_OPTION)
 				//				sendEmail("Repport B4D", null, path);
 			}else
-				JOptionPane.showMessageDialog(null, e.getMessage() + "\n\nLorsque qu'un envoi du rapport d'erreur vous sera proposé, dites \"Oui\" pour signaler cette erreur aux développeurs.", "Erreur", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, e.getMessage() + "\n\nLorsque qu'un envoi du rapport d'erreur vous sera proposÃ©, dites \"Oui\" pour signaler cette erreur aux dÃ©veloppeurs.", "Erreur", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
-	/** Permet d'ajouter la trace d'éxecution de l'erreur dans un fichier texte.
+	/** Permet d'ajouter la trace d'Ã©xecution de l'erreur dans un fichier texte.
 	 * @param e - Exception de l'erreur.
-	 * @return {@code true} si le fichier texte dépasse 100 lignes, {@code false} sinon.
+	 * @return {@code true} si le fichier texte dÃ©passe 100 lignes, {@code false} sinon.
 	 */
 	public boolean addRepport(Exception e) {		
 		try {
@@ -139,18 +139,18 @@ public class Logger {
 	/** EMAIL METHODS **/
 	/*******************/
 
-	/** Permet d'envoyer un commentaire à l'auteur via email.
-	 * Cela est identique à {@code sendEmail("Feedback B4D", message, null)}.
-	 * @param message - Commentaire à destination de l'auteur.
+	/** Permet d'envoyer un commentaire Ã  l'auteur via email.
+	 * Cela est identique Ã  {@code sendEmail("Feedback B4D", message, null)}.
+	 * @param message - Commentaire Ã  destination de l'auteur.
 	 */
 	public void sendFeedback(String message) {
 		sendEmail("Feedback B4D", message, null);
 	}
 
-	/** Permet d'envoyer un email à l'auteur.
+	/** Permet d'envoyer un email Ã  l'auteur.
 	 * @param subject - Objet de l'email.
-	 * @param message - Contenu de l'email. Aucun contenu n'est ajouté à l'email si {@code null}.
-	 * @param path - Chemin vers le fichier à attacher à l'email.  Aucun fichier n'est attaché à l'email si {@code null}.
+	 * @param message - Contenu de l'email. Aucun contenu n'est ajoutÃ© Ã  l'email si {@code null}.
+	 * @param path - Chemin vers le fichier Ã  attacher Ã  l'email.  Aucun fichier n'est attachÃ© Ã  l'email si {@code null}.
 	 */
 	public void sendEmail(String subject, String message, String path) {
 

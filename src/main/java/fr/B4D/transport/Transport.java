@@ -1,12 +1,12 @@
-package fr.B4D.transport;
+ï»¿package fr.B4D.transport;
 
 import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Transport} représente un moyen de transport.<br><br>
- * Un transport est défini par un nom, une position, une position relative et un poid.
+/** La classe {@code Transport} reprÃ©sente un moyen de transport.<br><br>
+ * Un transport est dÃ©fini par un nom, une position, une position relative et un poid.
  */
 public abstract class Transport implements TransportInterface, Serializable{
 	

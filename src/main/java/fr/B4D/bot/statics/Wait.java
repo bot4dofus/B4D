@@ -1,4 +1,4 @@
-package fr.B4D.bot.statics;
+ï»¿package fr.B4D.bot.statics;
 
 import javax.swing.JOptionPane;
 
@@ -6,7 +6,7 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
 /** La classe {@code Wait} permet au bot d'attendre.<br><br>
- * Elle gère la mise en pause et l'arret du programme.
+ * Elle gÃ¨re la mise en pause et l'arret du programme.
  */
 public final class Wait {
 	
@@ -29,8 +29,8 @@ public final class Wait {
 
 	/** Attend pendant un certain temps
 	 * @param time - Temps d'attente en millisecondes.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
 	 */
 	public void wait(int time) throws StopProgramException, CancelProgramException {
 		if(suspended)
@@ -45,8 +45,8 @@ public final class Wait {
 	}
 	
 	/** Affiche un message popUp demandant au joueur si il veut stopper, interrompre ou continuer le programme
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
 	 */
 	public void setPause() throws StopProgramException, CancelProgramException {
 		Object[] options = {"Continuer", "Stopper", "Interrompre"};

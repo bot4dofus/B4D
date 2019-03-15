@@ -1,8 +1,8 @@
-package fr.B4D.interaction;
+ï»¿package fr.B4D.interaction;
 
 import fr.B4D.bot.B4DException;
 
-/** Signal que l'échange en cours à été annulé.
+/** Signal que l'Ã©change en cours Ã  Ã©tÃ© annulÃ©.
  *
  */
 public class ExchangeCanceledException extends B4DException{

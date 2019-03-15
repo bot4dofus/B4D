@@ -1,4 +1,4 @@
-package fr.B4D.transport;
+ï»¿package fr.B4D.transport;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,8 +9,8 @@ import fr.B4D.bot.Person;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code TransportPath} représente un chemin entre deux point de la carte.<br><br>
- * Un chemin est défini par une liste d'étapes.
+/** La classe {@code TransportPath} reprÃ©sente un chemin entre deux point de la carte.<br><br>
+ * Un chemin est dÃ©fini par une liste d'Ã©tapes.
  */
 public class TransportPath implements Serializable{
 	
@@ -23,7 +23,7 @@ public class TransportPath implements Serializable{
 	/******************/
 	
 	/** Constructeur de la classe {@code TransportPath}. 
-	 * @param shortestPath - Liste d'étapes.
+	 * @param shortestPath - Liste d'Ã©tapes.
 	 */
 	public TransportPath(List<TransportStep> shortestPath) {
 		this.transportPath = shortestPath;
@@ -35,9 +35,9 @@ public class TransportPath implements Serializable{
 	
 	/** Permet d'utiliser le chemin en empruntant tous les transports du chemin.
 	 * @param person - Joueur utilisant le chemin.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
+	 * @throws B4DException Si une exception de type B4D est levÃ©e.
 	 */
 	public void use(Person person) throws StopProgramException, CancelProgramException, B4DException {
 		for(TransportStep step:transportPath) {

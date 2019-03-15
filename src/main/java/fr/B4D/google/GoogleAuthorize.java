@@ -1,4 +1,4 @@
-package fr.B4D.google;
+ï»¿package fr.B4D.google;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.common.collect.Lists;
 
-/** La classe {@code GoogleAuthorize} permet de gérer les autorisations de connexion aux API google. 
+/** La classe {@code GoogleAuthorize} permet de gÃ©rer les autorisations de connexion aux API google. 
  */
 public class GoogleAuthorize {
 	
@@ -21,7 +21,7 @@ public class GoogleAuthorize {
     /** 
      * @param credentials - Chemin vers le fichier contenant le certificat d'utilisation des API google.
      * @return Certificat d'utilisation des API google.
-     * @throws IOException Si aucun fichier n'a été trouvé.
+     * @throws IOException Si aucun fichier n'a Ã©tÃ© trouvÃ©.
      */
     public static Credential authorize(String credentials) throws IOException {
     	InputStream in = new FileInputStream(credentials);

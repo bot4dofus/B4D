@@ -1,27 +1,27 @@
-package fr.B4D.threads;
+ï»¿package fr.B4D.threads;
 
 import java.awt.Rectangle;
 
 import fr.B4D.bot.B4D;
 
-/** La classe {@code OCRThread} permet d'attendre qu'une chaine de caractère soit détectée à l'écran.<br><br>
- * Cette classe étend la classe {@code Thread}.
+/** La classe {@code OCRThread} permet d'attendre qu'une chaine de caractÃ¨re soit dÃ©tectÃ©e Ã  l'Ã©cran.<br><br>
+ * Cette classe Ã©tend la classe {@code Thread}.
  */
 public class OCRThread extends Thread{
 	private Rectangle rectangle;
 	private String regex, text;
 
 	/** Constructeur de la classe {@code OCRThread}.
-	 * @param rectangle - Zone de recherche de la chaine de caractère.
-	 * @param regex - Expression régulière attendue.
+	 * @param rectangle - Zone de recherche de la chaine de caractÃ¨re.
+	 * @param regex - Expression rÃ©guliÃ¨re attendue.
 	 */
 	public OCRThread(Rectangle rectangle, String regex) {
 		this.rectangle = rectangle;
 		this.regex = regex;
 	}
 	
-	/** Retourne la chaine de caractère détecté à l'écran.
-	 * @return Chaine de caractère. {@code null} si l'expréssion régulière n'est pas présente dans la chaine.
+	/** Retourne la chaine de caractÃ¨re dÃ©tectÃ© Ã  l'Ã©cran.
+	 * @return Chaine de caractÃ¨re. {@code null} si l'exprÃ©ssion rÃ©guliÃ¨re n'est pas prÃ©sente dans la chaine.
 	 */
 	public String getText() {
 		return text;

@@ -1,6 +1,6 @@
-package fr.B4D.program;
+ï»¿package fr.B4D.program;
 
-/** L'énumération {@code Category} liste les catégories des programmes.
+/** L'Ã©numÃ©ration {@code Category} liste les catÃ©gories des programmes.
  */
 public enum Category {
     Toutes,

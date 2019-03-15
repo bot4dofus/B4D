@@ -1,4 +1,4 @@
-package fr.B4D.gui;
+﻿package fr.B4D.gui;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -115,7 +115,7 @@ public class JPanel_Programme extends JPanel {
 		comboBox_Category.setBounds(10, 90, 150, 25);
 		add(comboBox_Category);
 		
-		JLabel lblType = new JLabel("Sous-cat�gorie :");
+		JLabel lblType = new JLabel("Sous-catégorie :");
 		lblType.setBackground(new Color(46, 139, 87));
 		lblType.setForeground(Color.WHITE);
 		lblType.setOpaque(true);
