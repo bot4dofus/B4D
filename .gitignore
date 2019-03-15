@@ -1,9 +1,6 @@
 #Ecplise
-.settings/
 bin/
 target/
-.project
-.classpath
 
 #Other
 wiki/
