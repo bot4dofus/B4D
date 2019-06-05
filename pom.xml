@@ -112,6 +112,11 @@
 		<artifactId>local</artifactId>
 		<version>0.01.16</version>
 	</dependency>
+	<dependency>
+		<groupId>info.debatty</groupId>
+		<artifactId>java-string-similarity</artifactId>
+		<version>RELEASE</version>
+	</dependency>
   </dependencies>
   <properties>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
