@@ -259,7 +259,7 @@ public final static ArrayList<Program> getAll(){
 			clear.send();
 			
 			if(displayedChannels != null)
-				Channel.displayChannels(displayedChannels);
+				Channel.displayChannels(person.getServer(), displayedChannels);
 			if(status != null)
 				status.setStatus();
 			

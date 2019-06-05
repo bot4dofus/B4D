@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
+import fr.B4D.bot.Server;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
@@ -29,14 +30,14 @@ public class ChannelTest_ {
 	
 	@Test
 	public void set1() throws StopProgramException, CancelProgramException, AWTException, InterruptedException {
-		List<Channel> toggles = Channel.displayChannels(Channel.TEAM, Channel.ALLIES, Channel.GROUP, Channel.GUILD);
+		List<Channel> toggles = Channel.displayChannels(Server.ILYZAELLE, Channel.TEAM, Channel.ALLIES, Channel.GROUP, Channel.GUILD);
 		toggles.stream().forEach(c -> System.out.println(c));
 		Thread.sleep(1000);
 	}
 	
 	@Test
 	public void set2() throws StopProgramException, CancelProgramException, AWTException, InterruptedException {
-		List<Channel> toggles = Channel.displayChannels(Channel.GENERAL, Channel.BUSINESS, Channel.RECRUITMENT, Channel.PRIVATE);
+		List<Channel> toggles = Channel.displayChannels(Server.ILYZAELLE, Channel.GENERAL, Channel.BUSINESS, Channel.RECRUITMENT, Channel.PRIVATE);
 		toggles.stream().forEach(c -> System.out.println(c));
 		Thread.sleep(1000);
 	}
