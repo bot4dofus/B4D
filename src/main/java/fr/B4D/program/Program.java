@@ -252,7 +252,7 @@ public final static ArrayList<Program> getAll(){
 	 * @throws IOException Si un problème de fichier survient.
 	 */
 	private void intro() throws StopProgramException, CancelProgramException, B4DException, IOException {
-		Dofus.chat.clear();
+		Dofus.getInstance().getChat().clear();
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
 			Message clear = new Message("/clear");

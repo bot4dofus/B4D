@@ -189,14 +189,14 @@ public class Message implements Serializable{
 	public Message waitForReply(long timeout) {
 		B4D.logger.debug(this, "Attente d'une réponse");
 		if(pseudo != null)
-			Dofus.chat.addPseudoFilter(pseudo);
+			Dofus.getInstance().getChat().addPseudoFilter(pseudo);
 		else
-			Dofus.chat.addChannelFilter(Channel.PRIVATE);
+			Dofus.getInstance().getChat().addChannelFilter(Channel.PRIVATE);
 		
-		Message message = Dofus.chat.waitForMessage(timeout);
+		Message message = Dofus.getInstance().getChat().waitForMessage(timeout);
 		
-		Dofus.chat.addPseudoFilter(null);
-		Dofus.chat.addChannelFilter(null);
+		Dofus.getInstance().getChat().addPseudoFilter(null);
+		Dofus.getInstance().getChat().addChannelFilter(null);
 		return message;
 	}
 	

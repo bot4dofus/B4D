@@ -206,15 +206,15 @@ public class Person implements Serializable, TransportInterface{
 	 */
 	public void setPosition() throws StopProgramException, CancelProgramException, B4DException {
 		Message message;
-		Dofus.chat.addPseudoFilter(pseudo);
+		Dofus.getInstance().getChat().addPseudoFilter(pseudo);
 		
 		message = new Message(Channel.GENERAL, "%pos%");
 		message.send();
-		message = Dofus.chat.waitForMessage(1000);
+		message = Dofus.getInstance().getChat().waitForMessage(1000);
 		if(message == null)
 			throw new B4DException("Cannot get the current position.");
 
-		Dofus.chat.addPseudoFilter(null);
+		Dofus.getInstance().getChat().addPseudoFilter(null);
 		
 		String text = message.getText();
 		int firstComma = text.indexOf(",");
@@ -264,31 +264,31 @@ public class Person implements Serializable, TransportInterface{
 		//Add potions
 		if(boosterPotion.getTransport().getPositionF() != null) {
 			boosterPotion.getTransport().setPosition(position);
-			Dofus.world.getGraph().addEdge(boosterPotion);
+			Dofus.getInstance().getWorld().getGraph().addEdge(boosterPotion);
 		}
 			
 		if(bontaPotion.getTransport().getPositionF() != null){
 			bontaPotion.getTransport().setPosition(position);
-			Dofus.world.getGraph().addEdge(bontaPotion);
+			Dofus.getInstance().getWorld().getGraph().addEdge(bontaPotion);
 		}
 
 		if(brakmarPotion.getTransport().getPositionF() != null){
 			brakmarPotion.getTransport().setPosition(position);
-			Dofus.world.getGraph().addEdge(brakmarPotion);
+			Dofus.getInstance().getWorld().getGraph().addEdge(brakmarPotion);
 		}
 		
 		//Get the shortest path
-	    List<TransportStep> shortestPath = Dofus.world.getGraph().getPath(position, destination).getEdgeList();
+	    List<TransportStep> shortestPath = Dofus.getInstance().getWorld().getGraph().getPath(position, destination).getEdgeList();
 
 	    //Remove potions
 		if(boosterPotion.getTransport().getPositionF() != null)
-			Dofus.world.getGraph().removeEdge(boosterPotion);
+			Dofus.getInstance().getWorld().getGraph().removeEdge(boosterPotion);
 		
 		if(bontaPotion.getTransport().getPositionF() != null)
-			Dofus.world.getGraph().removeEdge(bontaPotion);
+			Dofus.getInstance().getWorld().getGraph().removeEdge(bontaPotion);
 		
 		if(brakmarPotion.getTransport().getPositionF() != null)
-			Dofus.world.getGraph().removeEdge(brakmarPotion);
+			Dofus.getInstance().getWorld().getGraph().removeEdge(brakmarPotion);
 		
 		if(shortestPath != null)
 			return new TransportPath(shortestPath);

@@ -28,7 +28,7 @@ public final class MessageAPI {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) {
-			Message message = Dofus.chat.waitForMessage(0);
+			Message message = Dofus.getInstance().getChat().waitForMessage(0);
 			B4D.logger.popUp("Message de " + message.getPseudo() + "(" + message.getChannel() + ") : " + message.getText());
 		}
 	});
@@ -72,14 +72,14 @@ public final class MessageAPI {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws StopProgramException, CancelProgramException {
-			Dofus.chat.addChannelFilter(Channel.BUSINESS);
-			Dofus.chat.addTextFilter("moi");
-			Dofus.chat.setChatListener(new ChatListener() {
+			Dofus.getInstance().getChat().addChannelFilter(Channel.BUSINESS);
+			Dofus.getInstance().getChat().addTextFilter("moi");
+			Dofus.getInstance().getChat().setChatListener(new ChatListener() {
 				public void treatMessage(Message message) throws StopProgramException, CancelProgramException {
 					message.reply("C'est qui moi ?");
 				}
 			});
-			Dofus.chat.read(3);
+			Dofus.getInstance().getChat().read(3);
 		}
 	});
 }

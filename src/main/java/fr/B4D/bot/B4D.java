@@ -17,7 +17,6 @@ import fr.B4D.bot.statics.Mouse;
 import fr.B4D.bot.statics.Screen;
 import fr.B4D.bot.statics.Wait;
 import fr.B4D.dao.DAOFactory;
-import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.Program;
@@ -33,8 +32,6 @@ public final class B4D{
 	/**************/
 	/** ATRIBUTS **/
 	/**************/
-	
-	private Dofus dofus;
 	
 	public static Logger logger;
 	public static SocketListener socketListener;
@@ -63,8 +60,6 @@ public final class B4D{
 		
 		/** LOGGER **/
 		logger = new Logger();
-		
-		dofus = new Dofus();
 		
 		/** DYNAMICS **/
 		configuration = DAOFactory.getConfigurationDAO().find();

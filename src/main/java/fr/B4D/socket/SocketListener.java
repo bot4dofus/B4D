@@ -187,7 +187,7 @@ public class SocketListener extends Thread{
 			byte[] pseudo = Arrays.copyOfRange(data, lengthHeaderOne + lengthText + lengthHeaderTwo, lengthHeaderOne + lengthText + lengthHeaderTwo + lengthName);
 			
 			Message message = new Message(new String(pseudo, encoding), channel, new String(text, encoding));
-			Dofus.chat.addMessage(message);
+			Dofus.getInstance().getChat().addMessage(message);
 		} catch (B4DException | UnsupportedEncodingException e) {
 				B4D.logger.warning(this, e.getMessage());
 		}

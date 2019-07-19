@@ -20,24 +20,24 @@ public class GraphTest_ {
 	@Before
 	public void before() {
 		@SuppressWarnings("unused")
-		Dofus dofus = new Dofus();
+		Dofus dofus = Dofus.getInstance();
 	}
 	
 	@Test
 	public void testBonta() throws AWTException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, InvalidFilterException {
-		List<TransportStep> shortestPath = Dofus.world.getGraph().getPath(new Point(-47,16), new Point(-29,-52)).getEdgeList();
+		List<TransportStep> shortestPath = Dofus.getInstance().getWorld().getGraph().getPath(new Point(-47,16), new Point(-29,-52)).getEdgeList();
 		System.out.println(new TransportPath(shortestPath));
 	}
 	
 	@Test
 	public void testBrakmar() throws AWTException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, InvalidFilterException {
-		List<TransportStep> shortestPath = Dofus.world.getGraph().getPath(new Point(0,0), new Point(-20,33)).getEdgeList();
+		List<TransportStep> shortestPath = Dofus.getInstance().getWorld().getGraph().getPath(new Point(0,0), new Point(-20,33)).getEdgeList();
 		System.out.println(new TransportPath(shortestPath));
 	}
 	
 	@Test
 	public void testFrigost() throws AWTException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, InvalidFilterException {
-		List<TransportStep> shortestPath = Dofus.world.getGraph().getPath(new Point(14,-64), new Point(-62,-62)).getEdgeList();
+		List<TransportStep> shortestPath = Dofus.getInstance().getWorld().getGraph().getPath(new Point(14,-64), new Point(-62,-62)).getEdgeList();
 		System.out.println(new TransportPath(shortestPath));
 	}
 }
