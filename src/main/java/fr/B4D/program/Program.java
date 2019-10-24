@@ -42,15 +42,6 @@ public class Program implements Serializable{
 
 	private ProgramInterface program;
 	
-	private int cycles;
-	private int deposits;
-
-	private boolean hdvWhenFull;
-	private boolean bankWhenFull;
-	private boolean stopWhenFull;
-
-	private Person person;
-	
 	  /******************/
 	 /** CONSTRUCTEUR **/
 	/******************/
@@ -77,9 +68,6 @@ public class Program implements Serializable{
 		this.status = status;
 		
 		this.program = program;
-		
-		this.cycles = -1;
-		this.deposits = -1;
 	}
 	
 	  /************************/
@@ -139,78 +127,6 @@ public final static ArrayList<Program> getAll(){
 	public String getProgramName() {
 		return programName;
 	}
-	
-	/** Retourne le nombre de cycles avant la fin du programme.
-	 * @return Nombre de cycles restants.
-	 */
-	public int getCycles() {
-		return cycles;
-	}
-	
-	/** Modifi le nombre de cycles avant la fin du programme.
-	 * @param cycles - Nombre de cycles avant fin du programme.
-	 */
-	public void setCycles(int cycles) {
-		this.cycles = cycles;
-	}
-	
-	/** Retourne le nombre de dépôts avant la fin du programme.
-	 * @return Nombre de dépôts restants.
-	 */
-	public int getDeposits() {
-		return deposits;
-	}
-	
-	/** Modifi le nombre de dépôts avant la fin du programme.
-	 * @param deposits - Nombre de dépôts avant fin du programme.
-	 */
-	public void setDeposits(int deposits) {
-		this.deposits = deposits;
-	}
-	
-	/** Retourne un booléen représentant si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein.
-	 * @return {@code true} si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein, {@code false} sinon.
-	 */
-	public boolean isHdvWhenFull() {
-		return hdvWhenFull;
-	}
-	
-	/** Présice si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein.
-	 * Cela permet par exemple, de vendre automatiquement les ressources que l'on vient de récupérer. 
-	 * @param hdvWhenFull - {@code true} si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein, {@code false} sinon.
-	 */
-	public void setHdvWhenFull(boolean hdvWhenFull) {
-		this.hdvWhenFull = hdvWhenFull;
-	}
-	
-	/** Retourne un booléen représentant si le joueur veut vider son inventaire en banque lorsque celui-ci est plein.
-	 * @return {@code true} si le joueur veut vider son inventaire en banque lorsque celui-ci est plein, {@code false} sinon.
-	 */
-	public boolean isBankWhenFull() {
-		return bankWhenFull;
-	}
-	
-	/** Présice si le joueur veut vider son inventaire en banque lorsque celui-ci est plein.
-	 * Cela permet par exemple, de stocker automatiquement les ressources que l'on vient de récupérer. 
-	 * @param bankWhenFull - {@code true} si le joueur veut vider son inventaire en banque lorsque celui-ci est plein, {@code false} sinon.
-	 */
-	public void setBankWhenFull(boolean bankWhenFull) {
-		this.bankWhenFull = bankWhenFull;
-	}
-	
-	/** Retourne un booléen représentant si le joueur veut stopper le programme lorsque l'inventaire est plein.
-	 * @return {@code true} si le joueur veut stopper le programme lorsque l'inventaire est plein, {@code false} sinon.
-	 */
-	public boolean isStopWhenFull() {
-		return stopWhenFull;
-	}
-	
-	/** Précise si le joueur veut stopper le programme lorsque son inventaire est plein.
-	 * @param stopWhenFull - {@code true} si le joueur veut stopper le programme lorsque l'inventaire est plein, {@code false} sinon.
-	 */
-	public void setStopWhenFull(boolean stopWhenFull) {
-		this.stopWhenFull = stopWhenFull;
-	}
 
 	  /**************/
 	 /** METHODES **/
@@ -218,18 +134,18 @@ public final static ArrayList<Program> getAll(){
 	
 	/** Permet de lancer le programme.
 	 * @param person - Personnage avec lequel lancer le programme.
+	 * @param programOptions - Options de lancement du programme.
 	 */
-	public void start(Person person) {
-		this.person = person;
+	public void start(Person person, ProgramOptions programOptions) {
 		
 		try {
 			try {
-				intro();
-				cycle();
+				intro(person, programOptions);
+				cycle(person, programOptions);
 			} catch (StopProgramException e) {
 				B4D.logger.debug(this, "Program stoped");
 			}
-			outro();
+			outro(person, programOptions);
 		} catch (CancelProgramException e) {
 			if(e.getMessage() != null)
 				B4D.logger.popUp(e.getMessage());
@@ -246,12 +162,14 @@ public final static ArrayList<Program> getAll(){
 	 * <li>Récupérer la position actuelle du joueur.</li>
 	 * <li>Exécuter la sub-routine d'intro du programme.</li>
 	 * </ul>
+	 * @param person - Personnage avec lequel lancer le programme.
+	 * @param programOptions - Options de lancement du programme.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws IOException Si un problème de fichier survient.
 	 */
-	private void intro() throws StopProgramException, CancelProgramException, B4DException, IOException {
+	private void intro(Person person, ProgramOptions programOptions) throws StopProgramException, CancelProgramException, B4DException, IOException {
 		Dofus.getInstance().getChat().clear();
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
@@ -273,26 +191,31 @@ public final static ArrayList<Program> getAll(){
 	 * En fonction des paramètres de lancement du programme, si l'inventaire est plein, les items sont automatiquement mit en HDV ou en banque.
 	 * Le programme peut aussi être stoppé.
 	 * 
+	 * @param person - Personnage avec lequel lancer le programme.
+	 * @param programOptions - Options de lancement du programme.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 * @throws TesseractException Si une exception Tesseract est levée.
 	 * @throws IOException Si un problème de fichier survient.
 	 */
-	private void cycle() throws B4DException, StopProgramException, CancelProgramException, TesseractException, IOException{
+	private void cycle(Person person, ProgramOptions programOptions) throws B4DException, StopProgramException, CancelProgramException, TesseractException, IOException{
+		
+		int cycles = programOptions.getCycles();
+		int deposits = programOptions.getDeposits();
 		
 		while(cycles != 0 && deposits != 0) {
 			try {
 				program.cycle(person);
 			} catch (FullInventoryException e) {
 
-				if(hdvWhenFull) {
+				if(programOptions.isHdvWhenFull()) {
 					//Mettre en HDV
 				}
-				if(bankWhenFull) {
+				if(programOptions.isBankWhenFull()) {
 					//Mettre en banque
 				}
-				if(stopWhenFull)
+				if(programOptions.isStopWhenFull())
 					throw new StopProgramException();
 				
 				deposits--;
@@ -300,7 +223,13 @@ public final static ArrayList<Program> getAll(){
 			cycles--;
 		}
 	}
-	private void outro() throws CancelProgramException {
+	
+	/**Fonction de fin du programme. Celle-ci ne sera éxecutée qu'une seule fois en fin de programme.
+	 * @param person - Personnage avec lequel lancer le programme.
+	 * @param programOptions - Options de lancement du programme.
+	 * @throws CancelProgramException
+	 */
+	private void outro(Person person, ProgramOptions programOptions) throws CancelProgramException {
 		program.outro(person);
 		B4D.logger.popUp("Le bot s'est correctement terminé.");
 	}

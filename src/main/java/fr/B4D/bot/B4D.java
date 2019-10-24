@@ -20,6 +20,7 @@ import fr.B4D.dao.DAOFactory;
 import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.Program;
+import fr.B4D.program.ProgramOptions;
 import fr.B4D.socket.SocketListener;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.InvalidFilterException;
@@ -193,8 +194,9 @@ public final class B4D{
 	/** Permet de lancer un programme avec une configuration et un personnage particulier.
 	 * @param program - Programme à éxecuter.
 	 * @param person - Personnage qui éxecute le programme.
+	 * @param programOptions - Options de lancement du programme.
 	 */
-	public void runProgram(Program program, Person person) {
+	public void runProgram(Program program, Person person, ProgramOptions programOptions) {
 		if(!socketListener.isAlive())
 			socketListener.start();
 		if(!keyboardListener.isAlive())
@@ -202,7 +204,7 @@ public final class B4D{
 		
 		try {
 			socketListener.setFilter(person.getServer());
-			program.start(person);
+			program.start(person, programOptions);
 		} catch (InvalidFilterException e) {
 			B4D.logger.error(e);
 		}

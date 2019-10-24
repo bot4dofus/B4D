@@ -23,6 +23,7 @@ import fr.B4D.bot.B4D;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
+import fr.B4D.program.ProgramOptions;
 
 public class JPanel_Programme extends JPanel {
 
@@ -265,15 +266,9 @@ public class JPanel_Programme extends JPanel {
 					&& p.getSubCategory().equals(comboBox_SubCategory.getSelectedItem())
 					&& p.getProgramName().equals(comboBox_Name.getSelectedItem()))
 				.findFirst().orElse(null);
-				
-				program.setCycles(Integer.valueOf(textField_Turns.getText()));
-				program.setDeposits(Integer.valueOf(textField_Deposits.getText()));
-				
-				program.setBankWhenFull(checkBox_HDV.isSelected());
-				program.setHdvWhenFull(checkBox_Bank.isSelected());
-				program.setStopWhenFull(checkBox_Stop.isSelected());
-				
-				b4d.runProgram(program, b4d.getTeam().get(0));
+
+				ProgramOptions programOptions = new ProgramOptions(Integer.valueOf(textField_Turns.getText()), Integer.valueOf(textField_Deposits.getText()), checkBox_HDV.isSelected(), checkBox_Bank.isSelected(), checkBox_Stop.isSelected());
+				b4d.runProgram(program, b4d.getTeam().get(0), programOptions);
 				getParent().requestFocus();
 			}
 		});
