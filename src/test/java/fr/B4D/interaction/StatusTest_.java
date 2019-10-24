@@ -4,7 +4,7 @@ import java.awt.AWTException;
 import java.io.IOException;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.B4D.bot.B4D;
@@ -16,15 +16,12 @@ import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 
 public class StatusTest_ {
 
-	private static boolean setUpDone = false;
+	@SuppressWarnings("unused")
+	private B4D b4d;
 	
-	@Before
+	@BeforeClass
 	public void before() throws ClassNotFoundException, B4DException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, AWTException {
-		if(!setUpDone) {
-			@SuppressWarnings("unused")
-			B4D b4d = new B4D();
-			setUpDone = true;
-		}
+		b4d = new B4D();
 	}
 	
 	@Test
