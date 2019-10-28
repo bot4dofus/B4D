@@ -76,17 +76,6 @@ public class WinRegistry {
     private WinRegistry() {
     }
 
-    /**
-     * Read a value from key and value name
-     * 
-     * @param hkey
-     * @param key
-     * @param valueName
-     * @return the value
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     */
     public static String readString(int hkey, String key, String valueName)
             throws IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
@@ -99,16 +88,6 @@ public class WinRegistry {
         }
     }
 
-    /**
-     * Read the value name(s) from a given key
-     * 
-     * @param hkey
-     * @param key
-     * @return the value name(s)
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     */
     public static List<String> readStringSubKeys(int hkey, String key)
             throws IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {

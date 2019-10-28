@@ -27,6 +27,7 @@ public class Dofus {
 	}
 	
 	/** Retourne l'instance de la classe {@code Dofus}.
+	 * @return Instance du jeu dofus.
 	 */
 	public static Dofus getInstance() {
 		if(instance == null)
