@@ -18,6 +18,7 @@ import fr.B4D.programs.tutorials.ConverterAPI;
 import fr.B4D.programs.tutorials.ExchangeAPI;
 import fr.B4D.programs.tutorials.LoggerAPI;
 import fr.B4D.programs.tutorials.MessageAPI;
+import fr.B4D.programs.tutorials.MouseAPI;
 import fr.B4D.programs.tutorials.TransportAPI;
 
 /** La classe {@code Program} représente un programme B4D.<br><br>
@@ -97,6 +98,8 @@ public final static ArrayList<Program> getAll(){
   	programs.add(LoggerAPI.TUTORIAL1);
   	
   	programs.add(ConverterAPI.TUTORIAL1);
+  	
+  	programs.add(MouseAPI.TUTORIAL1);
     return programs;
   }
 	
