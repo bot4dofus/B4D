@@ -15,7 +15,7 @@ import fr.B4D.program.StopProgramException;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 
-public class ChannelTest_ {
+public class ChannelTest {
 
 	private static boolean setUpDone = false;
 	

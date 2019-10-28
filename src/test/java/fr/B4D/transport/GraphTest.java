@@ -15,7 +15,7 @@ import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 import net.sourceforge.jpcap.capture.InvalidFilterException;
 ;
-public class GraphTest_ {
+public class GraphTest {
 
 	@Before
 	public void before() {

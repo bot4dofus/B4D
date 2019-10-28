@@ -14,7 +14,7 @@ import fr.B4D.program.StopProgramException;
 import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 
-public class StatusTest_ {
+public class StatusTest {
 
 	@SuppressWarnings("unused")
 	private B4D b4d;

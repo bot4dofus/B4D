@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import fr.B4D.bot.B4DException;
 
-public class LoggerTest_ {
+public class LoggerTest {
 
 	private Logger logger;
 	
