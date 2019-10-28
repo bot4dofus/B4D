@@ -19,5 +19,5 @@ public final class Test {
 			B4D.logger.popUp("Le programme de test marche correctement.");
 		}
 	};
-	public final static Program TEST = new Program(Place.Aucun, Category.Test, "Test", "Test", null, null, test);
+	public final static Program TEST = new Program(Place.Tous, Category.Test, "Test", "Test", null, null, test);
 }

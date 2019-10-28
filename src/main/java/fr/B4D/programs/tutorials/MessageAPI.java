@@ -24,7 +24,7 @@ public final class MessageAPI {
 	 *  	<li>Affiche le message reçu ainsi que l'auteur et le canal.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Message API", "Tutorial 1", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) {
@@ -44,7 +44,7 @@ public final class MessageAPI {
 	 *  </ul>
 	 *  Dans le cas où l'échange est annulé par le joueur, un exception est levée. Un message différent est alors affiché.<br>
 	 */
-	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL2 = new Program(Place.Tous, Category.Tutorial, "Message API", "Tutorial 2", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws StopProgramException, CancelProgramException {
@@ -68,7 +68,7 @@ public final class MessageAPI {
 	 *  	<li>Débute la lecture du chat en précisant à 3 le nombre de messages qui seront traités.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL3 = new Program(Place.Tous, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws StopProgramException, CancelProgramException {

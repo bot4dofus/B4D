@@ -21,7 +21,7 @@ public final class TransportAPI {
 	 *  	<li>Se rend en (3, -19).</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 1", null, null, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Transport API", "Tutorial 1", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws StopProgramException, CancelProgramException, B4DException {
@@ -37,7 +37,7 @@ public final class TransportAPI {
 	 *  	<li>Se rend au zaap enregistré par le joueur.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Transport API", "Tutorial 2", null, null, new ProgramInterface() {
+	public final static Program TUTORIAL2 = new Program(Place.Tous, Category.Tutorial, "Transport API", "Tutorial 2", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws StopProgramException, CancelProgramException, B4DException {

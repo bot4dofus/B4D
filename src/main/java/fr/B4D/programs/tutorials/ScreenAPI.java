@@ -21,7 +21,7 @@ public final class ScreenAPI {
 	 *  	<li>Attend que ce pixel change et affiche la nouvelle couleur.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Screen API", "Tutorial 1", null, null, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Screen API", "Tutorial 1", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws B4DException {
@@ -42,7 +42,7 @@ public final class ScreenAPI {
 	 *  	<li>Attend que "hello world" soit affiché à l'écran.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Screen API", "Tutorial 2", null, null, new ProgramInterface() {
+	public final static Program TUTORIAL2 = new Program(Place.Tous, Category.Tutorial, "Screen API", "Tutorial 2", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws B4DException {

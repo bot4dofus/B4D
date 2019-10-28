@@ -21,7 +21,7 @@ public final class KeyboardAPI {
 	 *  	<li>Affiche le texte.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Clavier API", "Tutorial 1", null, null, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Clavier API", "Tutorial 1", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws B4DException {

@@ -3,8 +3,6 @@ package fr.B4D.programs.tutorials;
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
-import fr.B4D.interaction.Status;
-import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
@@ -22,7 +20,7 @@ public final class LoggerAPI {
 	 *  	<li>Affichage d'une erreur à l'écran.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Logger API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Logger API", "Tutorial 1", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws B4DException {
