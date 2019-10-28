@@ -23,7 +23,7 @@ public final class ConverterAPI {
 	 *  	<li>Affiche les points.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Exchange API", "Tutorial 1", null, null, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Converter API", "Tutorial 1", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) {			
