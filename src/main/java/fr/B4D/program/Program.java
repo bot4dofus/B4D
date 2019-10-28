@@ -16,6 +16,7 @@ import fr.B4D.programs.Loto;
 import fr.B4D.programs.Test;
 import fr.B4D.programs.tutorials.ConverterAPI;
 import fr.B4D.programs.tutorials.ExchangeAPI;
+import fr.B4D.programs.tutorials.KeyboardAPI;
 import fr.B4D.programs.tutorials.LoggerAPI;
 import fr.B4D.programs.tutorials.MessageAPI;
 import fr.B4D.programs.tutorials.MouseAPI;
@@ -100,6 +101,8 @@ public final static ArrayList<Program> getAll(){
   	programs.add(ConverterAPI.TUTORIAL1);
   	
   	programs.add(MouseAPI.TUTORIAL1);
+  	
+  	programs.add(KeyboardAPI.TUTORIAL1);
     return programs;
   }
 	
