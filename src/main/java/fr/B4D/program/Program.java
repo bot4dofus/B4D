@@ -141,7 +141,7 @@ public final static ArrayList<Program> getAll(){
 				intro(person, programOptions);
 				cycle(person, programOptions);
 			} catch (StopProgramException e) {
-				B4D.logger.debug(this, "Program stoped");
+				B4D.logger.debug("Program stoped");
 			}
 			outro(person, programOptions);
 		} catch (CancelProgramException e) {

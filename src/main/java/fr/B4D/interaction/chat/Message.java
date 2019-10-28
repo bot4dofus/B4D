@@ -187,7 +187,7 @@ public class Message implements Serializable{
 	 * @return Message détecté. {@code null} si timeout.
 	 */
 	public Message waitForReply(long timeout) {
-		B4D.logger.debug(this, "Attente d'une réponse");
+		B4D.logger.debug("Attente d'une réponse");
 		if(pseudo != null)
 			Dofus.getInstance().getChat().addPseudoFilter(pseudo);
 		else

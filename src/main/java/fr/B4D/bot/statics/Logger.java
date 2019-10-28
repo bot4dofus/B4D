@@ -20,25 +20,48 @@ public class Logger {
 	 * @param log - Message à afficher.
 	 */
 	public void popUp(String log) {
-		debug(this, "Popup showed : " + log);
+		popUp(new Exception().getStackTrace()[1].getClassName(), log);
+	}
+	
+	/** Permet d'afficher un message dans une fenêtre graphique. Celui-ci est aussi affiché dans la console.
+	 * @param c - Classe appelante.
+	 * @param log - Message à afficher.
+	 */
+	public void popUp(String c, String log) {
+		debug(c, log);
 		JOptionPane.showMessageDialog(null, log, "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/** Permet d'afficher un message dans la console.
 	 * Cette méthode doit être utilisé ainsi {@code B4D.logger.debug(this, "...")}.
+	 * @param log - Message à afficher.
+	 */
+	public void debug(String log) {
+		debug(new Exception().getStackTrace()[1].getClassName(), log);
+	}
+	
+	/** Permet d'afficher un message dans la console.
+	 * Cette méthode doit être utilisé ainsi {@code B4D.logger.debug(this, "...")}.
 	 * @param c - Classe appelante.
 	 * @param log - Message à afficher.
 	 */
-	public void debug(Object c, String log) {
-		System.out.println("[" + c.getClass().getName() + "] " + log);
+	public void debug(String c, String log) {
+		System.out.println("[" + c + "] " + log);
+	}
+	
+	/** Permet d'afficher un message d'alerte dans la console.
+	 * @param log - Message à afficher.
+	 */
+	public void warning(String log) {
+		warning(new Exception().getStackTrace()[1].getClassName(), log);
 	}
 
 	/** Permet d'afficher un message d'alerte dans la console.
 	 * @param c - Classe appelante.
 	 * @param log - Message à afficher.
 	 */
-	public void warning(Object c, String log) {
-		System.err.println("[" + c.getClass().getName() + "] " + log);
+	public void warning(String c, String log) {
+		System.err.println("[" + c + "] " + log);
 	}
 
 	/** Permet d'afficher un message d'erreur dans une fenêtre graphique en demandant si l'utilisateur veut envoyer le signaler aux développeurs.

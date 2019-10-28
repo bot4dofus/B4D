@@ -21,12 +21,12 @@ public class LoggerTest {
 	
 	@Test
 	public void debugTest() {
-		logger.debug(this, "This is a debug test message.");
+		logger.debug("This is a debug test message.");
 	}
 	
 	@Test
 	public void warningTest() {
-		logger.warning(this, "This is a warning test message.");
+		logger.warning("This is a warning test message.");
 	}
 	
 	@Test

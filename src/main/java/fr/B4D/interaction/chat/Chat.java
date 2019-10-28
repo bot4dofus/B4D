@@ -142,7 +142,7 @@ public class Chat extends Thread{
 	public Message waitForMessage(long timeout) {		
 		Message message = null;
 		try {
-			B4D.logger.debug(this, "Attente d'un message");
+			B4D.logger.debug("Attente d'un message");
 			do {
 				message = messages.poll();
 				if(message == null) {
@@ -156,9 +156,9 @@ public class Chat extends Thread{
 			}while(!filter.filter(message));
 			
 			if(message == null)
-				B4D.logger.debug(this, "Aucun message reçu (timeout)");
+				B4D.logger.debug("Aucun message reçu (timeout)");
 			else
-				B4D.logger.debug(this, "Message reçu [" + message + "]");
+				B4D.logger.debug("Message reçu [" + message + "]");
 		}
 		catch(InterruptedException e) {
 			B4D.logger.error(e);

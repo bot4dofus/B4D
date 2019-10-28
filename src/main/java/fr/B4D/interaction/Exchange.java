@@ -101,14 +101,14 @@ public class Exchange implements Serializable{
 		if(!B4D.socketListener.isAlive())
 			B4D.socketListener.start();
 		
-		B4D.logger.debug(this, "Attente d'un échange");
+		B4D.logger.debug("Attente d'un échange");
 		String message = B4D.screen.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout);
 		
 		if(message == null)
-			B4D.logger.debug(this, "Aucun échange demandé (timeout)");
+			B4D.logger.debug("Aucun échange demandé (timeout)");
 		else {
 			pseudo = message.split(" ")[0];
-			B4D.logger.debug(this, "Echange avec [" + pseudo + "]");
+			B4D.logger.debug("Echange avec [" + pseudo + "]");
 			B4D.mouse.leftClick(waitForExchangeYesButton, false);
 		}
 		return pseudo;
@@ -123,7 +123,7 @@ public class Exchange implements Serializable{
 	 * @throws B4DException Si un problème d'OCR survient.
 	 */
 	public BufferedImage exchange(String validationMessage) throws ExchangeCanceledException, StopProgramException, CancelProgramException, B4DException {
-		B4D.logger.debug(this, "Début de l'échange");
+		B4D.logger.debug("Début de l'échange");
 		Message message;
 		
 		if(kamasOut > 0) {
@@ -152,7 +152,7 @@ public class Exchange implements Serializable{
 
 		BufferedImage image = B4D.screen.takeSreenshot();
 		B4D.mouse.leftClick(validationButton, false);
-		B4D.logger.debug(this, "Echange éffectué");
+		B4D.logger.debug("Echange éffectué");
 		return image;
 	}
 	
@@ -175,7 +175,7 @@ public class Exchange implements Serializable{
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
 	public void cancelExchange() throws ExchangeCanceledException, StopProgramException, CancelProgramException {
-		B4D.logger.debug(this, "Echange annulé");
+		B4D.logger.debug("Echange annulé");
 		if(isInProgress())
 			B4D.mouse.leftClick(escapeButton, false);
 		throw new ExchangeCanceledException();

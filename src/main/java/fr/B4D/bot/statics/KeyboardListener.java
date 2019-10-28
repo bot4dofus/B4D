@@ -26,7 +26,7 @@ public class KeyboardListener extends Thread{
 	 * @see java.lang.Thread#run()
 	 */
 	public void run(){
-		B4D.logger.debug(this, "Lancement du thread");
+		B4D.logger.debug("Lancement du thread");
 		boolean fin = false;
 
 		while(!fin) {
@@ -38,7 +38,7 @@ public class KeyboardListener extends Thread{
 				fin = true;
 			}
 		}
-		B4D.logger.debug(this, "Fin du thread");
+		B4D.logger.debug("Fin du thread");
 	}
 	
 	  /*************/

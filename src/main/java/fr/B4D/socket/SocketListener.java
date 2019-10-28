@@ -59,7 +59,7 @@ public class SocketListener extends Thread{
 		
 		m_pcap = new PacketCapture();
 		network = os.findActiveDevice();
-		B4D.logger.debug(this, "Network found : " + network);
+		B4D.logger.debug("Network found : " + network);
 		m_pcap.open(network, 65535, true, 1000);
 		m_pcap.addRawPacketListener(new RawPacketListener() {
 			public void rawPacketArrived(RawPacket data) {
@@ -88,9 +88,9 @@ public class SocketListener extends Thread{
 	 */
 	public void run() {
 		try {
-			B4D.logger.debug(this, "Lancement du thread");
+			B4D.logger.debug("Lancement du thread");
 			m_pcap.capture(INFINITE);
-			B4D.logger.debug(this, "Fin du thread");
+			B4D.logger.debug("Fin du thread");
 		} catch (CapturePacketException e) {
 			B4D.logger.error(e);
 		}
@@ -189,7 +189,7 @@ public class SocketListener extends Thread{
 			Message message = new Message(new String(pseudo, encoding), channel, new String(text, encoding));
 			Dofus.getInstance().getChat().addMessage(message);
 		} catch (B4DException | UnsupportedEncodingException e) {
-				B4D.logger.warning(this, e.getMessage());
+				B4D.logger.warning(e.getMessage());
 		}
 	}
 }
