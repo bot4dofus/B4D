@@ -10,27 +10,21 @@
     <sourceDirectory>src</sourceDirectory>
     <resources>
       <resource>
-        <directory>src</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
+        <directory>src/main/resources</directory>
       </resource>
     </resources>
     <plugins>
    
       <!-- Used to generate the java doc -->
-   	  <plugin>
-   	    <groupId>org.apache.maven.plugins</groupId>
-   	    <artifactId>maven-javadoc-plugin</artifactId>
-   	    <executions>
-   	      <execution>
-   	        <id>attach-javadocs</id>
-   	        <goals>
-   	          <goal>jar</goal>
-   	        </goals>
-   	      </execution>
-   	    </executions>
-   	  </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <reportOutputDirectory>${project.basedir}</reportOutputDirectory>
+          <destDir>docs</destDir>
+        </configuration>
+      </plugin>
     	   
       <!-- Used to skip tests -->
       <plugin>
