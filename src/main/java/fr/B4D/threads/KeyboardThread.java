@@ -1,4 +1,4 @@
-﻿package fr.B4D.threads;
+package fr.B4D.threads;
 
 import com.sun.jna.Library;
 import com.sun.jna.Native;

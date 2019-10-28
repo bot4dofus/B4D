@@ -1,4 +1,4 @@
-﻿package fr.B4D.program;
+package fr.B4D.program;
 
 import java.io.IOException;
 import java.io.Serializable;

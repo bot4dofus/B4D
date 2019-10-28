@@ -1,4 +1,4 @@
-﻿package fr.B4D.gui;
+package fr.B4D.gui;
 
 import java.awt.AWTException;
 import java.awt.Color;

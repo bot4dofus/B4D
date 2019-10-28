@@ -1,4 +1,4 @@
-﻿package fr.B4D.transport.transports;
+package fr.B4D.transport.transports;
 
 import java.awt.Color;
 import java.awt.Point;

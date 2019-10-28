@@ -1,4 +1,4 @@
-﻿package fr.B4D.interaction;
+package fr.B4D.interaction;
 
 import java.awt.Point;
 

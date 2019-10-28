@@ -1,4 +1,4 @@
-﻿package fr.B4D.bot;
+package fr.B4D.bot;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-﻿package fr.B4D.bot;
+package fr.B4D.bot;
 
 import java.awt.AWTException;
 import java.awt.Frame;

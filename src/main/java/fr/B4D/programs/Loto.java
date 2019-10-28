@@ -1,4 +1,4 @@
-﻿package fr.B4D.programs;
+package fr.B4D.programs;
 
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;

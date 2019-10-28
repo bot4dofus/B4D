@@ -1,4 +1,4 @@
-﻿package fr.B4D.farming;
+package fr.B4D.farming;
 
 /** L'énumération {@code Profession} liste les métiers de dofus.
  */

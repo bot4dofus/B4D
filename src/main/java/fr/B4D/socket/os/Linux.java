@@ -1,4 +1,4 @@
-﻿package fr.B4D.socket.os;
+package fr.B4D.socket.os;
 
 import java.util.List;
 

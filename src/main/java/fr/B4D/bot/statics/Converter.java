@@ -1,4 +1,4 @@
-﻿package fr.B4D.bot.statics;
+package fr.B4D.bot.statics;
 
 import java.awt.Point;
 

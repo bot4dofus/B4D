@@ -1,4 +1,4 @@
-﻿package fr.B4D.transport;
+package fr.B4D.transport;
 
 import java.io.Serializable;
 import java.util.List;

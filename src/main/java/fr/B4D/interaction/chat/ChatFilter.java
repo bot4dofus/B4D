@@ -1,4 +1,4 @@
-﻿package fr.B4D.interaction.chat;
+package fr.B4D.interaction.chat;
 
 /** La classe {@code ChatFilter} représente un filtre de chat.<br><br>
  * Un filtre de chat est défini par un pseudo, un canal et une expression régulière.

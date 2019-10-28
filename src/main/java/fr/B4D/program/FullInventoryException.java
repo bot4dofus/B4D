@@ -1,4 +1,4 @@
-﻿package fr.B4D.program;
+package fr.B4D.program;
 
 import fr.B4D.bot.B4DException;
 

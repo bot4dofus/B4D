@@ -1,4 +1,4 @@
-﻿package fr.B4D.dofus;
+package fr.B4D.dofus;
 
 import java.awt.Point;
 import java.io.Serializable;

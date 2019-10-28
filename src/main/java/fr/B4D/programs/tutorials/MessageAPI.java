@@ -1,4 +1,4 @@
-﻿package fr.B4D.programs.tutorials;
+package fr.B4D.programs.tutorials;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;

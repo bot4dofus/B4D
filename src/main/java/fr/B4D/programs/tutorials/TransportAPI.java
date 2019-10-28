@@ -1,4 +1,4 @@
-﻿package fr.B4D.programs.tutorials;
+package fr.B4D.programs.tutorials;
 
 import java.awt.Point;
 

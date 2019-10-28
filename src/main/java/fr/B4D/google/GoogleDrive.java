@@ -1,4 +1,4 @@
-﻿package fr.B4D.google;
+package fr.B4D.google;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

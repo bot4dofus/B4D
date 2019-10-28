@@ -1,4 +1,4 @@
-﻿package fr.B4D.program;
+package fr.B4D.program;
 
 /** L'énumération {@code Category} liste les catégories des programmes.
  */

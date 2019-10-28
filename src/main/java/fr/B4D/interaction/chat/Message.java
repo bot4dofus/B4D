@@ -1,4 +1,4 @@
-﻿package fr.B4D.interaction.chat;
+package fr.B4D.interaction.chat;
 
 import java.awt.event.KeyEvent;
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-﻿package fr.B4D.threads;
+package fr.B4D.threads;
 
 import java.awt.Color;
 import java.awt.Point;

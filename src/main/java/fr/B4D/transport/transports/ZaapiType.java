@@ -1,4 +1,4 @@
-﻿package fr.B4D.transport.transports;
+package fr.B4D.transport.transports;
 
 /** Représente le type d'un zaapi.
  */

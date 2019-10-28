@@ -1,4 +1,4 @@
-﻿package fr.B4D.bot;
+package fr.B4D.bot;
 
 /** Signal qu'une exception de type B4D a eu lieu.
  */

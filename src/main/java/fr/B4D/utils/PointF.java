@@ -1,4 +1,4 @@
-﻿package fr.B4D.utils;
+package fr.B4D.utils;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-﻿package fr.B4D.interaction.chat;
+package fr.B4D.interaction.chat;
 
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
