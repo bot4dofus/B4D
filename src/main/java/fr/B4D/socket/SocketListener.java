@@ -51,11 +51,11 @@ public class SocketListener extends Thread{
 	public SocketListener() throws B4DException, CaptureDeviceOpenException{
 		
 		if(System.getProperty("os.arch").contains("64"))
-			throw new B4DException("Vous exécutez le bot avec une version java 64-bit. Merci d'installer java 32-bit et recommencer.", false);
+			throw new B4DException("Vous exécutez le bot avec une version java 64-bit. Merci d'installer java 32-bit et recommencer.");
 		
 		OperatingSystem os = OperatingSystem.getCurrent();
 		if(!os.libraryExists())
-			throw new B4DException("Impossible de trouver le fichier " + os.getLibrary() + ".", false);
+			throw new B4DException("Impossible de trouver le fichier " + os.getLibrary() + ".");
 		
 		m_pcap = new PacketCapture();
 		network = os.findActiveDevice();
@@ -161,7 +161,7 @@ public class SocketListener extends Thread{
 				break;
 		}
 		if(length == -1)
-			throw new B4DException("Unknow socket type [" + HexHelper.toString(data) + "]", false);
+			throw new B4DException("Unknow socket type [" + HexHelper.toString(data) + "]");
 		
 		return length;
 	}

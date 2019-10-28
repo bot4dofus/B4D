@@ -1,6 +1,5 @@
 package fr.B4D.program;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +17,6 @@ import fr.B4D.programs.Test;
 import fr.B4D.programs.tutorials.ExchangeAPI;
 import fr.B4D.programs.tutorials.MessageAPI;
 import fr.B4D.programs.tutorials.TransportAPI;
-import net.sourceforge.tess4j.TesseractException;
 
 /** La classe {@code Program} représente un programme B4D.<br><br>
  * Un programme est défini par un lieux, une catégorie, une sous catégorie, un nom et une sub-routine implémentant l'interface {@code ProgramInterface}.
@@ -149,7 +147,7 @@ public final static ArrayList<Program> getAll(){
 		} catch (CancelProgramException e) {
 			if(e.getMessage() != null)
 				B4D.logger.popUp(e.getMessage());
-		}catch(Exception e){
+		}catch(B4DException e){
 			B4D.logger.error(e);
 		}
 	}
@@ -167,9 +165,8 @@ public final static ArrayList<Program> getAll(){
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
-	 * @throws IOException Si un problème de fichier survient.
 	 */
-	private void intro(Person person, ProgramOptions programOptions) throws StopProgramException, CancelProgramException, B4DException, IOException {
+	private void intro(Person person, ProgramOptions programOptions) throws StopProgramException, CancelProgramException, B4DException {
 		Dofus.getInstance().getChat().clear();
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
@@ -196,10 +193,8 @@ public final static ArrayList<Program> getAll(){
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
-	 * @throws TesseractException Si une exception Tesseract est levée.
-	 * @throws IOException Si un problème de fichier survient.
 	 */
-	private void cycle(Person person, ProgramOptions programOptions) throws B4DException, StopProgramException, CancelProgramException, TesseractException, IOException{
+	private void cycle(Person person, ProgramOptions programOptions) throws B4DException, StopProgramException, CancelProgramException {
 		
 		int cycles = programOptions.getCycles();
 		int deposits = programOptions.getDeposits();
@@ -227,9 +222,10 @@ public final static ArrayList<Program> getAll(){
 	/**Fonction de fin du programme. Celle-ci ne sera éxecutée qu'une seule fois en fin de programme.
 	 * @param person - Personnage avec lequel lancer le programme.
 	 * @param programOptions - Options de lancement du programme.
-	 * @throws CancelProgramException
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws B4DException Si une exception de type B4D est levée.
 	 */
-	private void outro(Person person, ProgramOptions programOptions) throws CancelProgramException {
+	private void outro(Person person, ProgramOptions programOptions) throws CancelProgramException, B4DException {
 		program.outro(person);
 		B4D.logger.popUp("Le bot s'est correctement terminé.");
 	}

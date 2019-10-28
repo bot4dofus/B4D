@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Configuration;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
@@ -154,23 +155,27 @@ public final class Screen {
 	/** Permet de faire une reconnaissance optique de caractère sur une zone précise de l'écran.
 	 * @param rectangle - Zone de l'écran.
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
-	 * @throws TesseractException Si impossible de réaliser l'OCR.
+	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
-	public String OCR(Rectangle rectangle) throws TesseractException {
-		BufferedImage image = takeSreenshot(rectangle);
-		Tesseract tessInst = new Tesseract();
-		tessInst.setLanguage("fra");
-		String out = tessInst.doOCR(image);
-		return out.replaceAll("\n", " ");
+	public String OCR(Rectangle rectangle) throws B4DException {
+		try {		
+			BufferedImage image = takeSreenshot(rectangle);
+			Tesseract tessInst = new Tesseract();
+			tessInst.setLanguage("fra");
+			String out = tessInst.doOCR(image);
+			return out.replaceAll("\n", " ");
+		} catch (TesseractException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	/** Permet de faire une reconnaissance optique de caractère sur une zone précise de l'écran.
 	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées simples.
 	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées simples.
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
-	 * @throws TesseractException Si impossible de réaliser l'OCR.
+	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
-	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws TesseractException {
+	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws B4DException {
 		return OCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y));
 	}
 	
@@ -178,9 +183,9 @@ public final class Screen {
 	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées relatives.
 	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées relatives.
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
-	 * @throws TesseractException Si impossible de réaliser l'OCR.
+	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
-	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws TesseractException {
+	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws B4DException {
 		return OCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner));
 	}
 	

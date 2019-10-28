@@ -44,7 +44,7 @@ public class Windows extends OperatingSystem{
 			}
 
 			if(currentAddress == null)
-				throw new B4DException("Merci de vérifier votre connection internet.", false);
+				throw new B4DException("Merci de vérifier votre connection internet.");
 
 			for (String jpcapDevice : PacketCapture.lookupDevices()) {
 				NetworkDeviceInfo info = new NetworkDeviceInfo(jpcapDevice);

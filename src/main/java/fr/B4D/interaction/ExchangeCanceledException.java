@@ -14,6 +14,6 @@ public class ExchangeCanceledException extends B4DException{
 	 */
 	public ExchangeCanceledException()
     {
-    	super("The exchange have been canceled.", false);
+    	super("The exchange have been canceled.");
     }
 }

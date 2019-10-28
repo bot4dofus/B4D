@@ -3,6 +3,7 @@ package fr.B4D.programs.tutorials;
 import java.awt.Image;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
 import fr.B4D.interaction.Exchange;
 import fr.B4D.interaction.ExchangeCanceledException;
@@ -14,7 +15,6 @@ import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.program.StopProgramException;
-import net.sourceforge.tess4j.TesseractException;
 
 public final class ExchangeAPI {	
 
@@ -32,7 +32,7 @@ public final class ExchangeAPI {
 	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Exchange API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) throws StopProgramException, CancelProgramException, TesseractException {
+		public void cycle(Person person) throws StopProgramException, CancelProgramException, B4DException {
 			Exchange exchange = new Exchange(100000,0);
 			String name = exchange.waitForExchange();
 			try {

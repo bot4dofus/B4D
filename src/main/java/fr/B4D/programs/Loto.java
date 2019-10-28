@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 
 import com.google.api.services.drive.model.File;
 
+import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
 import fr.B4D.google.GoogleDrive;
 import fr.B4D.google.GoogleSheet;
@@ -33,7 +34,6 @@ import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.ClosestString;
-import net.sourceforge.tess4j.TesseractException;
 
 public final class Loto {
 	private static final String CREDENTIALS = "loto.credentials";
@@ -154,7 +154,7 @@ public final class Loto {
 			}
 		}
 
-		public void cycle(Person person) throws TesseractException, StopProgramException, NumberFormatException, CancelProgramException {			
+		public void cycle(Person person) throws StopProgramException, NumberFormatException, CancelProgramException, B4DException {			
 			try {
 				Exchange exchange = new Exchange(Integer.parseInt(properties.getProperty(ticketPriceFieldName)), 0);
 				String name = exchange.waitForExchange();

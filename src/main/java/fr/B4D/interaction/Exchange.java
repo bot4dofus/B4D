@@ -5,12 +5,12 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 import fr.B4D.utils.Rectangle;
-import net.sourceforge.tess4j.TesseractException;
 
 /** La classe {@code Exchange} représente un échange avec un joueur.<br><br>
  * Un échange est défini par un nombre de kamas entrants et un nombre de kamas sortants.
@@ -120,9 +120,9 @@ public class Exchange implements Serializable{
 	 * @throws ExchangeCanceledException Si l'échange est annulé.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws TesseractException Si un problème d'OCR survient.
+	 * @throws B4DException Si un problème d'OCR survient.
 	 */
-	public BufferedImage exchange(String validationMessage) throws ExchangeCanceledException, TesseractException, StopProgramException, CancelProgramException {
+	public BufferedImage exchange(String validationMessage) throws ExchangeCanceledException, StopProgramException, CancelProgramException, B4DException {
 		B4D.logger.debug(this, "Début de l'échange");
 		Message message;
 		
