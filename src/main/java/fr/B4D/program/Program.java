@@ -15,6 +15,7 @@ import fr.B4D.interaction.chat.Message;
 import fr.B4D.programs.Loto;
 import fr.B4D.programs.Test;
 import fr.B4D.programs.tutorials.ExchangeAPI;
+import fr.B4D.programs.tutorials.LoggerAPI;
 import fr.B4D.programs.tutorials.MessageAPI;
 import fr.B4D.programs.tutorials.TransportAPI;
 
@@ -91,6 +92,8 @@ public final static ArrayList<Program> getAll(){
   	
   	programs.add(TransportAPI.TUTORIAL1);
   	programs.add(TransportAPI.TUTORIAL2);
+  	
+  	programs.add(LoggerAPI.TUTORIAL1);
     return programs;
   }
 	
