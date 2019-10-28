@@ -16,7 +16,23 @@
         </excludes>
       </resource>
     </resources>
-    <plugins>      
+    <plugins>
+   
+      <!-- Used to generate the java doc -->
+   	  <plugin>
+   	    <groupId>org.apache.maven.plugins</groupId>
+   	    <artifactId>maven-javadoc-plugin</artifactId>
+   	    <executions>
+   	      <execution>
+   	        <id>attach-javadocs</id>
+   	        <goals>
+   	          <goal>jar</goal>
+   	        </goals>
+   	      </execution>
+   	    </executions>
+   	  </plugin>
+    	   
+      <!-- Used to skip tests -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -25,6 +41,8 @@
           <skipTests>true</skipTests>
         </configuration>
       </plugin>
+      
+      <!-- Used to compile -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>
@@ -34,6 +52,8 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
+      
+      <!-- Used to include jpcap.jar in the final jar -->
       <plugin>
 	    <artifactId>maven-assembly-plugin</artifactId>
 	    <configuration>
