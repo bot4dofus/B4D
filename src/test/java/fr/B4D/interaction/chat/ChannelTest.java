@@ -20,7 +20,6 @@ import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 
 public class ChannelTest {
 
-	@SuppressWarnings("unused")
 	private static B4D b4d;
 	private static Server server;
 	
