@@ -22,7 +22,6 @@ import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramOptions;
 import fr.B4D.socket.SocketListener;
-import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 
 /** La classe {@code B4D} est la classe principale du bot.<br><br>
  * Elle fournit les méthodes dont à besoin l'interface graphique pour fonctionner.
@@ -53,10 +52,9 @@ public final class B4D{
 	 * @throws B4DException Si une exception B4D est levée.
 	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
 	 * @throws IOException Si impossible de créer les fichiers de configuration.
-	 * @throws CaptureDeviceOpenException Si le réseau de capture ne peut pas être écouté.
 	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation des périphériques
 	 */
-	public B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceOpenException, AWTException {
+	public B4D() throws B4DException, ClassNotFoundException, IOException, AWTException {
 		
 		/** LOGGER **/
 		logger = new Logger();

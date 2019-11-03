@@ -18,9 +18,7 @@ import fr.B4D.bot.Server;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
-import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
-import net.sourceforge.jpcap.capture.InvalidFilterException;
-import net.sourceforge.jpcap.util.HexHelper;
+import fr.B4D.utils.HexHelper;
 
 /** La classe {@code SocketListener} permet d'écouter de sniffer et traiter les trames dofus.<br><br>
  * Cette classe étend la classe {@code Thread}.
