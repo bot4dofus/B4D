@@ -3,19 +3,23 @@ package fr.B4D.socket;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
+import org.pcap4j.core.BpfProgram.BpfCompileMode;
+import org.pcap4j.core.NotOpenException;
+import org.pcap4j.core.PacketListener;
+import org.pcap4j.core.PcapHandle;
+import org.pcap4j.core.PcapNativeException;
+import org.pcap4j.core.PcapNetworkInterface;
+import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
+import org.pcap4j.packet.Packet;
+
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Server;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
-import fr.B4D.socket.os.OperatingSystem;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
-import net.sourceforge.jpcap.capture.CapturePacketException;
 import net.sourceforge.jpcap.capture.InvalidFilterException;
-import net.sourceforge.jpcap.capture.PacketCapture;
-import net.sourceforge.jpcap.capture.RawPacketListener;
-import net.sourceforge.jpcap.net.RawPacket;
 import net.sourceforge.jpcap.util.HexHelper;
 
 /** La classe {@code SocketListener} permet d'écouter de sniffer et traiter les trames dofus.<br><br>
@@ -37,8 +41,8 @@ public class SocketListener extends Thread{
 	 /** ATRIBUTS **/
 	/**************/
 	
-	private PacketCapture m_pcap;
-	private String network;
+	private PcapHandle handle;
+	private PacketListener packetListener;
 
 	  /*************/
 	 /** BUILDER **/
@@ -48,28 +52,26 @@ public class SocketListener extends Thread{
 	 * @throws B4DException Si utilisation d'une jvm 64bit, si aucune librairie jpcap trouvée ou si aucun des réseaux n'est actif.
 	 * @throws CaptureDeviceOpenException Si il est impossible d'ouvrir le réseau.
 	 */
-	public SocketListener() throws B4DException, CaptureDeviceOpenException{
+	public SocketListener() throws B4DException{
 		
-		if(System.getProperty("os.arch").contains("64"))
-			throw new B4DException("Vous exécutez le bot avec une version java 64-bit. Merci d'installer java 32-bit et recommencer.");
-		
-		OperatingSystem os = OperatingSystem.getCurrent();
-		if(!os.libraryExists())
-			throw new B4DException("Impossible de trouver le fichier " + os.getLibrary() + ".");
-		
-		m_pcap = new PacketCapture();
-		network = os.findActiveDevice();
-		B4D.logger.debug("Network found : " + network);
-		m_pcap.open(network, 65535, true, 1000);
-		m_pcap.addRawPacketListener(new RawPacketListener() {
-			public void rawPacketArrived(RawPacket data) {
-				if(data.getData().length > 54) {
-					byte[] dataArray = Arrays.copyOfRange(data.getData(), 54, data.getData().length -1);
-					parseDofus(dataArray);
-				}
-			}
+		try {
+			PcapNetworkInterface nif = PcapsFinder.findActiveDevice();
+			B4D.logger.debug("Device found : " + nif.getName());
+			 handle = nif.openLive(65536, PromiscuousMode.PROMISCUOUS, -1);
 			
-		});
+			packetListener = new PacketListener() {
+				@Override
+				public void gotPacket(Packet packet) {
+					Packet payload = packet.getPayload().getPayload().getPayload();
+					if(payload != null) {
+						parseDofus(payload.getRawData());
+					}
+				}
+			};
+		} catch (PcapNativeException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	  /*********/
@@ -80,7 +82,12 @@ public class SocketListener extends Thread{
 	 * @see java.lang.Thread#interrupt()
 	 */
 	public void interrupt() {
-		m_pcap.endCapture();
+		try {
+			handle.breakLoop();
+		} catch (NotOpenException e) {
+			B4D.logger.error(e);
+		}
+		handle.close();
 	}
 	
 	/* (non-Javadoc)
@@ -89,10 +96,12 @@ public class SocketListener extends Thread{
 	public void run() {
 		try {
 			B4D.logger.debug("Lancement du thread");
-			m_pcap.capture(INFINITE);
+			handle.loop(INFINITE, packetListener);
 			B4D.logger.debug("Fin du thread");
-		} catch (CapturePacketException e) {
+		} catch (PcapNativeException  | NotOpenException e) {
 			B4D.logger.error(e);
+		} catch (InterruptedException e) {
+			//Do nothing
 		}
 	}
 
@@ -104,8 +113,12 @@ public class SocketListener extends Thread{
 	 * @param serveur - Serveur du joueur.
 	 * @throws InvalidFilterException Si le filtre n'est pas valide.
 	 */
-	public void setFilter(Server serveur) throws InvalidFilterException {
-		m_pcap.setFilter("host " + serveur.getIp(), true);
+	public void setFilter(Server serveur) throws B4DException {
+		try {
+			handle.setFilter("host " + serveur.getIp(), BpfCompileMode.OPTIMIZE);
+		} catch (PcapNativeException | NotOpenException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	  /*************/
@@ -144,13 +157,13 @@ public class SocketListener extends Thread{
 	private int getHeaderLength(byte[] data) throws B4DException {
 		int length;
 		switch(Byte.toUnsignedInt(data[1])) {
-			case 197:
-			case 205:
+			case 0xC5:
+			case 0xCD:
 			case 0xC9:
 				length = 6;
 				break;
 			case 0xCE:
-			case 198:
+			case 0xC6:
 				length = 7;
 				break;
 			case 0x75:
@@ -175,9 +188,8 @@ public class SocketListener extends Thread{
 	 * @param data - Trâme entrante.
 	 */
 	private void parseChat(byte[] data) {
-
 		try {
-			int lengthHeaderOne = getHeaderLength(data);			
+			int lengthHeaderOne = getHeaderLength(data);		
 			Channel channel = Channel.fromByte(data[lengthHeaderOne-3]);
 			
 			int lengthText = Byte.toUnsignedInt(data[lengthHeaderOne-2])*256 + Byte.toUnsignedInt(data[lengthHeaderOne-1]);
