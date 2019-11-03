@@ -11,11 +11,15 @@ import org.pcap4j.core.Pcaps;
 
 import fr.B4D.bot.B4DException;
 
+/** Function provider for pcap network interface.
+ * @author Lucas
+ *
+ */
 public final class PcapsFinder {
 
-	/**
-	 * @return
-	 * @throws B4DException
+	/** Find the current active pcap network interface.
+	 * @return The active pcap network interface
+	 * @throws B4DException if no device has been found.
 	 */
 	public static PcapNetworkInterface findActiveDevice() throws B4DException{
 		try {

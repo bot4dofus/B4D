@@ -48,7 +48,7 @@ public class SocketListener extends Thread{
 	
 	/** Constructeur de la classe {@code SocketListener}.
 	 * @throws B4DException Si utilisation d'une jvm 64bit, si aucune librairie jpcap trouvée ou si aucun des réseaux n'est actif.
-	 * @throws CaptureDeviceOpenException Si il est impossible d'ouvrir le réseau.
+	 * @throws B4DException Si il est impossible d'ouvrir le réseau.
 	 */
 	public SocketListener() throws B4DException{
 		
@@ -109,7 +109,7 @@ public class SocketListener extends Thread{
 	
 	/** Modifi le filtre du sniffeur pour traiter uniquement les trâmes vennant du serveur.
 	 * @param serveur - Serveur du joueur.
-	 * @throws InvalidFilterException Si le filtre n'est pas valide.
+	 * @throws B4DException Si le filtre n'est pas valide.
 	 */
 	public void setFilter(Server serveur) throws B4DException {
 		try {
