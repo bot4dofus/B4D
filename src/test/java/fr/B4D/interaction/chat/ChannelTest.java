@@ -4,7 +4,10 @@ import java.awt.AWTException;
 import java.io.IOException;
 import java.util.List;
 
-import org.junit.Before;
+import javax.swing.JOptionPane;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.B4D.bot.B4D;
@@ -17,28 +20,29 @@ import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 
 public class ChannelTest {
 
-	private static boolean setUpDone = false;
+	@SuppressWarnings("unused")
+	private static B4D b4d;
+	private static Server server;
 	
-	@Before
-	public void before() throws ClassNotFoundException, B4DException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, AWTException {
-		if(!setUpDone) {
-			@SuppressWarnings("unused")
-			B4D b4d = new B4D();
-			setUpDone = true;
-		}
+	@BeforeClass
+	public static void before() throws ClassNotFoundException, B4DException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, AWTException {
+		b4d = new B4D();
+		server = b4d.getTeam().get(0).getServer();
 	}
 	
 	@Test
 	public void set1() throws StopProgramException, CancelProgramException, AWTException, InterruptedException {
-		List<Channel> toggles = Channel.displayChannels(Server.ILYZAELLE, Channel.TEAM, Channel.ALLIES, Channel.GROUP, Channel.GUILD);
+		List<Channel> toggles = Channel.displayChannels(server, Channel.TEAM, Channel.ALLIES, Channel.GROUP, Channel.GUILD);
 		toggles.stream().forEach(c -> System.out.println(c));
-		Thread.sleep(1000);
+		int answer = JOptionPane.showConfirmDialog(null, "Has the channels team, allies, group and guild been turned on ?", "Unit test", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		Assert.assertEquals(answer, JOptionPane.YES_OPTION);
 	}
 	
 	@Test
 	public void set2() throws StopProgramException, CancelProgramException, AWTException, InterruptedException {
-		List<Channel> toggles = Channel.displayChannels(Server.ILYZAELLE, Channel.GENERAL, Channel.BUSINESS, Channel.RECRUITMENT, Channel.PRIVATE);
+		List<Channel> toggles = Channel.displayChannels(server, Channel.GENERAL, Channel.BUSINESS, Channel.RECRUITMENT, Channel.PRIVATE);
 		toggles.stream().forEach(c -> System.out.println(c));
-		Thread.sleep(1000);
+		int answer = JOptionPane.showConfirmDialog(null, "Has the channels general, business, recruitment and private been turned on ?", "Unit test", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+		Assert.assertEquals(answer, JOptionPane.YES_OPTION);
 	}
 }
