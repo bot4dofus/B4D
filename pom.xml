@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>B4D</groupId>
   <artifactId>B4D</artifactId>
-  <version>1.1</version>
+  <version>${timestamp}</version>
   <packaging>jar</packaging>
   <name>B4D</name>
   <description>Bot for Dofus</description>
@@ -44,7 +44,7 @@
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
-          <encoding>UTF-8</encoding>
+          <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
       </plugin>
       
@@ -137,5 +137,7 @@
   </dependencies>
   <properties>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<timestamp>${maven.build.timestamp}</timestamp>
+    <maven.build.timestamp.format>yyyy.MM.dd</maven.build.timestamp.format>
   </properties>
 </project>
