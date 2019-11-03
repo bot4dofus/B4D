@@ -216,6 +216,10 @@ public class Channel implements Serializable{
 			B4D.mouse.leftClick(menu, false, 200);		//Ouvre le menu du chat
 			double XArrowPosition = getRelativXArrowPosition(server);
 			List<PointF> matchs = B4D.screen.searchPixels(new PointF(menu.x + XArrowPosition, menu.y - 0.2625), new PointF(menu.x + XArrowPosition, menu.y - 0.006), new Color(100, 100, 100), new Color(255, 255, 255));
+			
+			if(matchs == null)
+				throw new CancelProgramException("No pixel found.");
+			
 			PointF arrowPosition = matchs.get(matchs.size() - 1);//1984
 			B4D.mouse.place(arrowPosition, 500);		//Affiche les caneaux affichés
 			

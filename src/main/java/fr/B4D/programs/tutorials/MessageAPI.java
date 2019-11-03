@@ -68,7 +68,7 @@ public final class MessageAPI {
 	 *  	<li>Débute la lecture du chat en précisant à 3 le nombre de messages qui seront traités.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL3 = new Program(Place.Tous, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL3 = new Program(Place.Tous, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE, Channel.GENERAL}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws StopProgramException, CancelProgramException {

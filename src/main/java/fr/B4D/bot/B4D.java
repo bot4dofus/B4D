@@ -23,7 +23,6 @@ import fr.B4D.program.Program;
 import fr.B4D.program.ProgramOptions;
 import fr.B4D.socket.SocketListener;
 import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
-import net.sourceforge.jpcap.capture.InvalidFilterException;
 
 /** La classe {@code B4D} est la classe principale du bot.<br><br>
  * Elle fournit les méthodes dont à besoin l'interface graphique pour fonctionner.
@@ -205,7 +204,7 @@ public final class B4D{
 		try {
 			socketListener.setFilter(person.getServer());
 			program.start(person, programOptions);
-		} catch (InvalidFilterException e) {
+		} catch (B4DException e) {
 			B4D.logger.error(e);
 		}
 	}
