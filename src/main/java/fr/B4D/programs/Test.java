@@ -13,11 +13,16 @@ import fr.B4D.program.StopProgramException;
 
 public final class Test {
 	public static ProgramInterface test = new ProgramInterface() {
-		public void intro(Person person) {}
-		public void outro(Person person) {}
+		private int iteration = 1;
+		
+		public void intro(Person person) {
+			B4D.logger.popUp("Début du programme de test");
+		}
 		public void cycle(Person person) throws FullInventoryException, StopProgramException, CancelProgramException, B4DException {
-			B4D.wait.waitMillis(10000);
-			B4D.logger.popUp("Le programme de test marche correctement.");
+			B4D.logger.popUp("Iteration " + iteration++);
+		}
+		public void outro(Person person) {
+			B4D.logger.popUp("Fin du programme de test");
 		}
 	};
 	public final static Program TEST = new Program(Place.Tous, Category.Test, "Test", "Test", null, null, test);
