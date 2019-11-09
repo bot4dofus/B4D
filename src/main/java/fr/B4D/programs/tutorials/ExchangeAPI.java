@@ -29,7 +29,7 @@ public final class ExchangeAPI {
 	 *  </ul>
 	 *  Dans le cas où l'échange est annulé par le joueur, un exception est levée. Un message différent est alors affiché.<br>
 	 */
-	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Exchange API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Exchange API", "Tutorial 1", new Channel[] {Channel.GENERAL, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws StopProgramException, CancelProgramException, B4DException {
