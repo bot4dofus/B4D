@@ -46,7 +46,7 @@ public final class Keyboard{
 	public void sendKey(int keyEvent, int time) throws StopProgramException, CancelProgramException {
 		robot.keyPress(keyEvent);
 		robot.keyRelease(keyEvent);
-		B4D.wait.wait(time);
+		B4D.wait.waitMillis(time);
 	}
 	
 	/** Permet de simuler l'appui sur une touche du clavier avec un temps d'attente par défaut de 100ms.
@@ -76,7 +76,7 @@ public final class Keyboard{
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4D.wait.wait(time);
+		B4D.wait.waitMillis(time);
 	}
 	
 	/** Permet d'écrire un texte au clavier avec un temps d'attente par défaut de 500ms.

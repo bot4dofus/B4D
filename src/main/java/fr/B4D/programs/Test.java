@@ -16,6 +16,7 @@ public final class Test {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws FullInventoryException, StopProgramException, CancelProgramException, B4DException {
+			B4D.wait.waitMillis(10000);
 			B4D.logger.popUp("Le programme de test marche correctement.");
 		}
 	};

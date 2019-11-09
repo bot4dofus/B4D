@@ -1,5 +1,8 @@
 package fr.B4D.bot.statics;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import javax.swing.JOptionPane;
 
 import fr.B4D.program.CancelProgramException;
@@ -10,7 +13,7 @@ import fr.B4D.program.StopProgramException;
  */
 public final class Wait {
 	
-	private boolean suspended = false;
+	private Thread current;
 	
 	  /*************/
 	 /** SETTERS **/
@@ -20,7 +23,7 @@ public final class Wait {
 	 * 
 	 */
 	public void suspend() {
-		suspended = true;
+		current.interrupt();
 	}
 
 	  /*************/
@@ -32,15 +35,20 @@ public final class Wait {
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public void wait(int time) throws StopProgramException, CancelProgramException {
-		if(suspended)
+	public void waitMillis(long time) throws StopProgramException, CancelProgramException {
+
+		if(current == null)
+			current = Thread.currentThread();
+		
+		Instant startTime = Instant.now();
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException e) {
 			setPause();
-		else {
-			try {
-				Thread.sleep(time);
-			} catch (InterruptedException e) {
-				//Do nothing
-			}
+			Instant currentTime = Instant.now();
+			long remainingTime = time-Duration.between(startTime, currentTime).toMillis();
+			if(remainingTime > 0)
+				waitMillis(remainingTime);
 		}
 	}
 	
@@ -51,7 +59,6 @@ public final class Wait {
 	public void setPause() throws StopProgramException, CancelProgramException {
 		Object[] options = {"Continuer", "Stopper", "Interrompre"};
 		int response = JOptionPane.showOptionDialog(null, "Le bot est sur pause. Appuyez sur \"Continuer\" pour reprendre le programme, sur \"Stop\" pour arreter le programme et sur \"Interrompre\" pour forcer l'arret.", "Pause", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);						
-		suspended = false;
 		if(response == JOptionPane.NO_OPTION)
 			throw new StopProgramException();
 		else if(response == JOptionPane.CANCEL_OPTION)

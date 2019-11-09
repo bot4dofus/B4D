@@ -205,7 +205,7 @@ public final class Screen {
 		robot.keyPress(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4D.wait.wait(1000);
+		B4D.wait.waitMillis(1000);
 		return B4D.keyboard.getClipboard();
 	}
 	
