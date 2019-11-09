@@ -62,7 +62,7 @@ public final class Loto {
 	
 	private static final String[] PROPERTY_FIELDS = {privateFolderIdFieldName, sharedFolderIdFieldName, modelSheetIdFieldName, ticketPriceFieldName, timeoutFieldName,	welcomeMessageFieldName, questionMessageFieldName, exchangeMessageFieldName, validationMessageFieldName, thanksMessageFieldName, rangeTitleFieldName, rangeDateFieldName, rangeHourFieldName, rangePositionFieldName, rangePriceFieldName, rangeOrganiserFieldName, rangeDataFieldName};
 
-	public final static Program LOTO = new Program(Place.Astrub, Category.Jeux, "Argent", "Loto", new Channel[] {Channel.GENERAL, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program LOTO = new Program(Place.Tous, Category.Jeux, "Argent", "Loto", new Channel[] {Channel.GENERAL, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 
 		private Properties properties;
 		private GoogleDrive drive;
