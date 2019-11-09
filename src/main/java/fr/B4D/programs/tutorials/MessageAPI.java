@@ -30,7 +30,7 @@ public final class MessageAPI {
 	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Message API", "Tutorial 1", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) {
+		public void cycle(Person person) throws StopProgramException, CancelProgramException {
 			Message message = Dofus.getInstance().getChat().waitForMessage(0);
 			B4D.logger.popUp("Message de " + message.getPseudo() + "(" + message.getChannel() + ") : " + message.getText());
 		}

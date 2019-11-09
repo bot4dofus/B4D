@@ -112,7 +112,7 @@ public final class Mouse {
 	 */
 	public void place(Point position, int millis) throws StopProgramException, CancelProgramException {
 		robot.mouseMove((int)position.getX(),(int)position.getY());
-		B4D.wait.waitMillis(millis);
+		B4D.wait.sleep(millis);
 	}
 	
 	/** Permet de placer la souris à une certaine position avec un temps d'attente par défaut de 0ms.
@@ -186,7 +186,7 @@ public final class Mouse {
 		if(maj)	
 			robot.keyRelease(KeyEvent.VK_SHIFT);
 
-		B4D.wait.waitMillis(millis);		
+		B4D.wait.sleep(millis);		
 	}
 	
 	/** Permet de simuler un clique droit avec un temps d'attente par défaut de 1 secondes.
@@ -265,7 +265,7 @@ public final class Mouse {
 		if(maj)	
 			robot.keyRelease(KeyEvent.VK_SHIFT);
 
-		B4D.wait.waitMillis(millis);
+		B4D.wait.sleep(millis);
 	}
 	
 	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.

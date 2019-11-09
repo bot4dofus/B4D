@@ -13,7 +13,6 @@ import java.io.IOException;
 import fr.B4D.bot.B4D;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.threads.KeyboardThread;
 
 /** La classe {@code Keyboard} permet d'accéder à toutes les méthodes liés au clavier.
  */
@@ -46,7 +45,7 @@ public final class Keyboard{
 	public void sendKey(int keyEvent, int time) throws StopProgramException, CancelProgramException {
 		robot.keyPress(keyEvent);
 		robot.keyRelease(keyEvent);
-		B4D.wait.waitMillis(time);
+		B4D.wait.sleep(time);
 	}
 	
 	/** Permet de simuler l'appui sur une touche du clavier avec un temps d'attente par défaut de 100ms.
@@ -76,7 +75,7 @@ public final class Keyboard{
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4D.wait.waitMillis(time);
+		B4D.wait.sleep(time);
 	}
 	
 	/** Permet d'écrire un texte au clavier avec un temps d'attente par défaut de 500ms.
@@ -122,16 +121,7 @@ public final class Keyboard{
 	 * @return Entier représentant la touche enfoncée. {@code -1} si timeout.
 	 */
 	public int waitForKeyboard(int timeOut) {
-		KeyboardThread keyboardThread = new KeyboardThread();
-		keyboardThread.start();
-		try {
-			keyboardThread.join(timeOut);
-		} catch (InterruptedException e) {
-			B4D.logger.error(e);
-		}
-		
-		if(keyboardThread.isAlive()) 
-			keyboardThread.interrupt();
-		return keyboardThread.getKey();
+		//To be implemented using KeyboardListener and keys queue just like Chat and messages works
+		return -1;
 	}
 }

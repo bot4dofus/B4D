@@ -63,21 +63,27 @@ public class Chat extends Thread{
 	 * @param pseudo - Pseudo du joueur. {@code null} pour retirer le filtre.
 	 */
 	public void addPseudoFilter(String pseudo) {
-		filter.setPseudo(pseudo);
+		synchronized(filter) {
+			filter.setPseudo(pseudo);
+		}
 	}
 
 	/** Ajoute un filtre de canal. Seul les messages de ce canal seront traités.
 	 * @param channel - Canal du message. {@code null} pour retirer le filtre.
 	 */
-	public void addChannelFilter(Channel channel) {
-		filter.setChannel(channel);
+	public void addChannelFilter(Channel channel) {		
+		synchronized(filter) {
+			filter.setChannel(channel);
+		}
 	}
 
 	/** Ajoute un filtre de texte. Seul les messages contenants une chaine de caractère spécifique seront traités.
 	 * @param regex - Expression régulière que doit contenir le message. {@code null} pour retirer le filtre.
 	 */
 	public void addTextFilter(String regex) {
-		filter.setRegex(regex);
+		synchronized(filter) {
+			filter.setRegex(regex);
+		}
 	}
 	
 	  /**********/
@@ -88,12 +94,18 @@ public class Chat extends Thread{
 	 * @param message - Message à ajouter â la queu.
 	 */
 	public void addMessage(Message message) {
-		synchronized(messages){
-			if(!messages.offer(message)) {
-				messages.poll();
-				messages.offer(message);
+		boolean pass;
+		synchronized(filter) {
+			pass = filter.filter(message);
+		}
+		if(pass) {
+			synchronized(messages){
+				if(!messages.offer(message)) {
+					messages.poll();
+					messages.offer(message);
+				}
+				messages.notifyAll();
 			}
-			messages.notifyAll();
 		}
 	}
 
@@ -131,38 +143,34 @@ public class Chat extends Thread{
 	
 	/** Attend un message pour une durée infinie. Cela est identique à {@code waitForMessage(0)}.
 	 * @return Plus vieux message correspondant au filtre.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public Message waitForMessage() {
+	public Message waitForMessage() throws StopProgramException, CancelProgramException {
 		return waitForMessage(0);
 	}
 	/** Attend un message pour une durée finie.
 	 * @param timeout - Durée d'attente maximale en millisecondes.
 	 * @return Plus vieux message correspondant au filtre et {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public Message waitForMessage(long timeout) {		
+	public Message waitForMessage(long timeout) throws StopProgramException, CancelProgramException {		
 		Message message = null;
-		try {
-			B4D.logger.debug("Attente d'un message");
-			do {
+
+		B4D.logger.debug("Attente d'un message");
+		message = messages.poll();
+		if(message == null) {
+			synchronized(messages){
+				B4D.wait.waitOnObject(messages, timeout);
 				message = messages.poll();
-				if(message == null) {
-					synchronized(messages){
-						messages.wait(timeout);
-						message = messages.poll();
-						if(message == null) 
-							break;
-					}
-				}
-			}while(!filter.filter(message));
-			
-			if(message == null)
-				B4D.logger.debug("Aucun message reçu (timeout)");
-			else
-				B4D.logger.debug("Message reçu [" + message + "]");
+			}
 		}
-		catch(InterruptedException e) {
-			B4D.logger.error(e);
-		}
+		if(message == null)
+			B4D.logger.debug("Aucun message reçu (timeout)");
+		else
+			B4D.logger.debug("Message reçu [" + message + "]");
+
 		return message;
 	}
 

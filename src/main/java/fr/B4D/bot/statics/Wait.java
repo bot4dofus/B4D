@@ -35,7 +35,7 @@ public final class Wait {
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public void waitMillis(long time) throws StopProgramException, CancelProgramException {
+	public void sleep(long time) throws StopProgramException, CancelProgramException {
 
 		if(current == null)
 			current = Thread.currentThread();
@@ -48,7 +48,30 @@ public final class Wait {
 			Instant currentTime = Instant.now();
 			long remainingTime = time-Duration.between(startTime, currentTime).toMillis();
 			if(remainingTime > 0)
-				waitMillis(remainingTime);
+				sleep(remainingTime);
+		}
+	}
+	
+	/** Attend pendant un certain temps sur un objet.
+	 * @param object - Objet sur lequel attendre.
+	 * @param time - Temps d'attente en millisecondes.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 */
+	public void waitOnObject(Object object, long time) throws StopProgramException, CancelProgramException {
+		
+		if(current == null)
+			current = Thread.currentThread();
+		
+		Instant startTime = Instant.now();
+		try {
+			object.wait(time);
+		} catch (InterruptedException e) {
+			setPause();
+			Instant currentTime = Instant.now();
+			long remainingTime = time-Duration.between(startTime, currentTime).toMillis();
+			if(remainingTime > 0)
+				waitOnObject(object, remainingTime);
 		}
 	}
 	

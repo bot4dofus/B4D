@@ -207,12 +207,12 @@ public class Person implements Serializable, TransportInterface{
 	public void setPosition() throws StopProgramException, CancelProgramException, B4DException {
 		Message message;
 		Dofus.getInstance().getChat().addPseudoFilter(pseudo);
-		
+		Dofus.getInstance().getChat().clear();
 		message = new Message(Channel.GENERAL, "%pos%");
 		message.send();
 		message = Dofus.getInstance().getChat().waitForMessage(1000);
 		if(message == null)
-			throw new B4DException("Cannot get the current position.");
+			throw new CancelProgramException("Cannot get the current position. Make sure that the general channel is on and that the message was not the same as the previous one.");
 
 		Dofus.getInstance().getChat().addPseudoFilter(null);
 		
@@ -221,7 +221,7 @@ public class Person implements Serializable, TransportInterface{
 		int secondComma = text.indexOf(",", firstComma+1);
 		int thirdComma = text.indexOf(",", secondComma+1);
 		int end = text.indexOf("}");
-		
+
 		int x = Integer.parseInt(text.substring(firstComma+1, secondComma));
 		int y = Integer.parseInt(text.substring(secondComma+1, thirdComma));
 		int z = Integer.parseInt(text.substring(thirdComma+1, end));

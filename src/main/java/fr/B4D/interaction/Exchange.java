@@ -86,18 +86,20 @@ public class Exchange implements Serializable{
 	 * @return Pseudo du joueur ayant proposé l'échange et {@code null} si timeout.
 	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
-	public String waitForExchange() throws StopProgramException, CancelProgramException {
+	public String waitForExchange() throws B4DException {
 		return waitForExchange(0);
 	}
 
 	/** Permet d'attendre un échange provoqué par un joueur en présisant une durée maximal d'attente
 	 * @param timeout - Durée d'attente maximale en millisecondes.
 	 * @return Pseudo du joueur ayant proposé l'échange et {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé .
+	 * @throws StopProgramException Si le programme est stoppé.
 	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
-	public String waitForExchange(int timeout) throws StopProgramException, CancelProgramException {
+	public String waitForExchange(int timeout) throws StopProgramException, CancelProgramException, B4DException {
 		if(!B4D.socketListener.isAlive())
 			B4D.socketListener.start();
 		

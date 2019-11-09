@@ -14,9 +14,6 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Configuration;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.threads.ColorThread;
-import fr.B4D.threads.OCRThread;
-import fr.B4D.threads.PixelThread;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.Tesseract;
@@ -205,7 +202,7 @@ public final class Screen {
 		robot.keyPress(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4D.wait.waitMillis(1000);
+		B4D.wait.sleep(1000);
 		return B4D.keyboard.getClipboard();
 	}
 	
@@ -277,19 +274,17 @@ public final class Screen {
 	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
-	public String waitForOCR(Rectangle rectangle, String regex, int timeOut) {
-		OCRThread ocrThread = new OCRThread(rectangle, regex);
-		ocrThread.start();
-		try {
-			ocrThread.join(timeOut);
-		} catch (InterruptedException e) {
-			B4D.logger.error(e);
-		}
-		
-		if(ocrThread.isAlive())
-			ocrThread.interrupt();
-		return ocrThread.getText();
+	public String waitForOCR(Rectangle rectangle, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
+		String text;
+		do {
+			text = B4D.screen.OCR(rectangle);
+			B4D.wait.sleep(100);
+		}while(!text.contains(regex));
+		return text;
 	}
 
 	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
@@ -298,8 +293,11 @@ public final class Screen {
 	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
-	public String waitForOCR(Point topLeftHandCorner, Point bottomRightHandCorner, String regex, int timeOut) {
+	public String waitForOCR(Point topLeftHandCorner, Point bottomRightHandCorner, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForOCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y), regex, timeOut);
 	}
 	
@@ -309,8 +307,11 @@ public final class Screen {
 	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
+	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
-	public String waitForOCR(PointF topLeftHandCorner, PointF bottomRightHandCorner, String regex, int timeOut) {
+	public String waitForOCR(PointF topLeftHandCorner, PointF bottomRightHandCorner, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForOCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner), regex, timeOut);
 	}
 	
@@ -322,27 +323,26 @@ public final class Screen {
 	 * @param point - Position du pixel en coordonnées simples.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return Nouvelle couleur du pixel, {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public Color waitForChangingPixel(Point point, int timeOut) {
-		PixelThread pixelThread = new PixelThread(point);
-		pixelThread.start();
-		try {
-			pixelThread.join(timeOut);
-		} catch (InterruptedException e) {
-			B4D.logger.error(e);
-		}
-		
-		if(pixelThread.isAlive())
-			pixelThread.interrupt();
-		return pixelThread.getColor();
+	public Color waitForChangingPixel(Point point, int timeOut) throws StopProgramException, CancelProgramException {
+		Color newColor, color = B4D.screen.getPixelColor(point);
+		do {
+			newColor = B4D.screen.getPixelColor(point);
+			B4D.wait.sleep(100);
+		}while(color.equals(newColor));		
+		return newColor;
 	}
 	
 	/** Permet d'attendre qu'un pixel change de couleur.
 	 * @param point - Position du pixel en coordonnées relatives.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return Nouvelle couleur du pixel, {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public Color waitForChangingPixel(PointF point, int timeOut) {
+	public Color waitForChangingPixel(PointF point, int timeOut) throws StopProgramException, CancelProgramException {
 		return waitForChangingPixel(B4D.converter.toPoint(point), timeOut);
 	}
 	
@@ -356,19 +356,16 @@ public final class Screen {
 	 * @param max - Couleur maximale.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return Couleur du pixel, {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public Color waitForColor(Point point, Color min, Color max, int timeOut) {
-		ColorThread colorThread = new ColorThread(point, min, max);
-		colorThread.start();
-		try {
-			colorThread.join(timeOut);
-		} catch (InterruptedException e) {
-			B4D.logger.error(e);
-		}
-		
-		if(colorThread.isAlive())
-			colorThread.interrupt();
-		return colorThread.getColor();
+	public Color waitForColor(Point point, Color min, Color max, int timeOut) throws StopProgramException, CancelProgramException {
+		Color color;
+		do {
+			color = B4D.screen.getPixelColor(point);
+			B4D.wait.sleep(100);
+		}while(!B4D.screen.isBetween(color, min, max));
+		return color;
 	}
 	
 	/** Permet d'attendre qu'un pixel soit compris dans un intervale de couleur.
@@ -377,8 +374,10 @@ public final class Screen {
 	 * @param max - Couleur maximale.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return Couleur du pixel, {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public Color waitForColor(PointF point, Color min, Color max, int timeOut) {
+	public Color waitForColor(PointF point, Color min, Color max, int timeOut) throws StopProgramException, CancelProgramException {
 		return waitForColor(B4D.converter.toPoint(point), min, max, timeOut);
 	}
 }

@@ -175,8 +175,10 @@ public class Message implements Serializable{
 	 * Sinon, seul le canal privé sera accepté.
 	 * Cela est identique à {@code waitForReply(0)}.
 	 * @return Message détecté. {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public Message waitForReply() {
+	public Message waitForReply() throws StopProgramException, CancelProgramException {
 		return waitForReply(0);
 	}
 	
@@ -185,8 +187,10 @@ public class Message implements Serializable{
 	 * Sinon, seul le canal privé sera accepté.
 	 * @param timeout - Durée d'attente maximale en millisecondes.
 	 * @return Message détecté. {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le bot programme est annulé.
 	 */
-	public Message waitForReply(long timeout) {
+	public Message waitForReply(long timeout) throws StopProgramException, CancelProgramException {
 		B4D.logger.debug("Attente d'une réponse");
 		if(pseudo != null)
 			Dofus.getInstance().getChat().addPseudoFilter(pseudo);
