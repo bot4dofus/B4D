@@ -81,7 +81,7 @@ public class Logger {
 		if (answer == JOptionPane.YES_OPTION) {
 			try {
 				Desktop desktop = java.awt.Desktop.getDesktop();
-				URI url = new URI("https://github.com/LucBerge/B4D/issues");
+				URI url = new URI("https://github.com/LucBerge/B4D/issues/new?assignees=LucBerge&labels=bug&template=bug_report.md&title=");
 				desktop.browse(url);
 			} catch (Exception ex) {
 				ex.printStackTrace();
