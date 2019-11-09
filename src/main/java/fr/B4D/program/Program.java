@@ -13,7 +13,6 @@ import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.programs.Loto;
-import fr.B4D.programs.Test;
 import fr.B4D.programs.tutorials.ConverterAPI;
 import fr.B4D.programs.tutorials.ExchangeAPI;
 import fr.B4D.programs.tutorials.KeyboardAPI;
@@ -83,7 +82,6 @@ public class Program implements Serializable{
 public final static ArrayList<Program> getAll(){
   	ArrayList<Program> programs = new ArrayList<Program>();
   	
-  	programs.add(Test.TEST);
   	programs.add(Loto.LOTO);
 
 	/** TUTORIALS **/
@@ -243,6 +241,6 @@ public final static ArrayList<Program> getAll(){
 	 */
 	private void outro(Person person, ProgramOptions programOptions) throws CancelProgramException, B4DException {
 		program.outro(person);
-		B4D.logger.popUp("Le bot s'est correctement terminé.");
+		B4D.logger.popUp("Le programme s'est correctement terminé.");
 	}
 }
