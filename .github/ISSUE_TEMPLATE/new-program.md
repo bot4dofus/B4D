@@ -1,6 +1,6 @@
 ---
 name: New program
-about: Describe the new program here.
+about: Suggest a new program
 title: ''
 labels: new program
 assignees: LucBerge
