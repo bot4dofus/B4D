@@ -9,9 +9,9 @@ import org.jgrapht.graph.DirectedWeightedPseudograph;
 
 import fr.B4D.transport.transports.Walk;
 
-/** La classe {@code Graph} représente la carte du monde de dofus.<br><br>
- * Un graph est représenté par des noeuds (vertex) et des arêtes (edges).
- * Les différents moyens de transport sont modélisés par les arêtes.
+/** La classe {@code Graph} reprÃ©sente la carte du monde de dofus.<br><br>
+ * Un graph est reprÃ©sentÃ© par des noeuds (vertex) et des arÃªtes (edges).
+ * Les diffÃ©rents moyens de transport sont modÃ©lisÃ©s par les arÃªtes.
  */
 public class Graph implements Serializable{
 
@@ -34,8 +34,8 @@ public class Graph implements Serializable{
 	/************/
 	
 	/** Permet d'ajouter un noeud au graph.
-	 * @param vertex - Coordonnée du noeud.
-	 * @param autoConnect - {@code true} pour connecter automatiquement le noeud à ces voisins, {@code false} sinon.  
+	 * @param vertex - CoordonnÃ©e du noeud.
+	 * @param autoConnect - {@code true} pour connecter automatiquement le noeud Ã  ces voisins, {@code false} sinon.  
 	 */
 	public void addVertex(Point vertex, Boolean autoConnect) {
 		this.graph.addVertex(vertex);
@@ -65,9 +65,9 @@ public class Graph implements Serializable{
 		}
 	}
 	
-	/** Permet de retirer un noeud du graph ainsi que toutes les arêtes le reliant.
+	/** Permet de retirer un noeud du graph ainsi que toutes les arÃªtes le reliant.
 	 * Ne fait rien si le noeud n'existe pas.
-	 * @param vertex - Coordonnées du noeud.
+	 * @param vertex - CoordonnÃ©es du noeud.
 	 */
 	public void removeVertex(Point vertex) {
 		graph.removeVertex(vertex);
@@ -77,26 +77,26 @@ public class Graph implements Serializable{
 	 /** METHODES EDGE **/
 	/*******************/
 	
-	/** Permet d'ajouter une arête au graph.
-	 * Les arêtes sont représentées par la classe {@code TransportStep}.
-	 * @param transportStep - Arête reliant deux vertex.
+	/** Permet d'ajouter une arÃªte au graph.
+	 * Les arÃªtes sont reprÃ©sentÃ©es par la classe {@code TransportStep}.
+	 * @param transportStep - ArÃªte reliant deux vertex.
 	 */
 	public void addEdge(TransportStep transportStep) {
 		graph.addEdge(transportStep.getTransport().getPosition(), transportStep.getDestination(), transportStep);
 		graph.setEdgeWeight(transportStep, transportStep.getTransport().getWeight());
 	}
 	
-	/** Permet de retirer une arête du graph. Cette fonction n'est pas symetrique : A vers B sera supprimé mais pas B vers A.
-	 * @param transportStep - Arête reliant deux vertex.
+	/** Permet de retirer une arÃªte du graph. Cette fonction n'est pas symetrique : A vers B sera supprimÃ© mais pas B vers A.
+	 * @param transportStep - ArÃªte reliant deux vertex.
 	 */
 	public void removeEdge(TransportStep transportStep) {
 		removeEdge(transportStep.getTransport().getPosition(), transportStep.getDestination(), false);
 	}
 	
-	/** Permet de retirer une arête du graph.
-	 * @param origin - Point de départ de l'arête.
-	 * @param destination - Point d'arrivée de l'arête.
-	 * @param symetric - {@code true} pour relier symétriquement (A vers B et B vers A), {@code false} sinon.  
+	/** Permet de retirer une arÃªte du graph.
+	 * @param origin - Point de dÃ©part de l'arÃªte.
+	 * @param destination - Point d'arrivÃ©e de l'arÃªte.
+	 * @param symetric - {@code true} pour relier symÃ©triquement (A vers B et B vers A), {@code false} sinon.  
 	 */
 	public void removeEdge(Point origin, Point destination, boolean symetric) {
 		graph.removeEdge(origin, destination);
@@ -110,9 +110,9 @@ public class Graph implements Serializable{
 	/**************/
 	
 	/** Permet de trouver le plus court chemin entre deux points de la map en utilisant tous les moyens de transport possible.
-	 * @param source - Point de départ.
-	 * @param target - Point d'arrivé.
-	 * @return Chemin le plus court entre le point de départ et le point d'arrivé.
+	 * @param source - Point de dÃ©part.
+	 * @param target - Point d'arrivÃ©.
+	 * @return Chemin le plus court entre le point de dÃ©part et le point d'arrivÃ©.
 	 */
 	public GraphPath<Point, TransportStep> getPath(Point source, Point target) {
 		return new DijkstraShortestPath<Point, TransportStep>(graph).getPath(source, target);

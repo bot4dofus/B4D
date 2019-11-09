@@ -23,6 +23,7 @@ import fr.B4D.bot.B4D;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
+import fr.B4D.program.ProgramOptions;
 
 public class JPanel_Programme extends JPanel {
 
@@ -115,7 +116,7 @@ public class JPanel_Programme extends JPanel {
 		comboBox_Category.setBounds(10, 90, 150, 25);
 		add(comboBox_Category);
 		
-		JLabel lblType = new JLabel("Sous-catégorie :");
+		JLabel lblType = new JLabel("Sous-catÃ©gorie :");
 		lblType.setBackground(new Color(46, 139, 87));
 		lblType.setForeground(Color.WHITE);
 		lblType.setOpaque(true);
@@ -238,23 +239,14 @@ public class JPanel_Programme extends JPanel {
 		checkBox_Stop.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(checkBox_Stop);
 		
-		JLabel lblDpartEn = new JLabel("D\u00E9part en :");
-		lblDpartEn.setBackground(new Color(46, 139, 87));
-		lblDpartEn.setForeground(Color.WHITE);
-		lblDpartEn.setOpaque(true);
-		lblDpartEn.setBounds(475, 10, 150, 25);
-		lblDpartEn.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDpartEn.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		add(lblDpartEn);
-		
-		JLabel label_Pos = new JLabel("X:Y");
-		label_Pos.setBackground(Color.LIGHT_GRAY);
-		label_Pos.setOpaque(true);
-		label_Pos.setForeground(Color.DARK_GRAY);
-		label_Pos.setBounds(475, 35, 150, 40);
-		label_Pos.setHorizontalAlignment(SwingConstants.CENTER);
-		label_Pos.setFont(new Font("Tahoma", Font.BOLD, 25));
-		add(label_Pos);
+		JLabel lblProgram = new JLabel("Programme :");
+		lblProgram.setBackground(new Color(46, 139, 87));
+		lblProgram.setForeground(Color.WHITE);
+		lblProgram.setOpaque(true);
+		lblProgram.setBounds(475, 10, 150, 25);
+		lblProgram.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProgram.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(lblProgram);
 		
 		button_Start = new JButton("Commencer");
 		button_Start.addActionListener(new ActionListener() {
@@ -265,19 +257,13 @@ public class JPanel_Programme extends JPanel {
 					&& p.getSubCategory().equals(comboBox_SubCategory.getSelectedItem())
 					&& p.getProgramName().equals(comboBox_Name.getSelectedItem()))
 				.findFirst().orElse(null);
-				
-				program.setCycles(Integer.valueOf(textField_Turns.getText()));
-				program.setDeposits(Integer.valueOf(textField_Deposits.getText()));
-				
-				program.setBankWhenFull(checkBox_HDV.isSelected());
-				program.setHdvWhenFull(checkBox_Bank.isSelected());
-				program.setStopWhenFull(checkBox_Stop.isSelected());
-				
-				b4d.runProgram(program, b4d.getTeam().get(0));
+
+				ProgramOptions programOptions = new ProgramOptions(Integer.valueOf(textField_Turns.getText()), Integer.valueOf(textField_Deposits.getText()), checkBox_HDV.isSelected(), checkBox_Bank.isSelected(), checkBox_Stop.isSelected());
+				b4d.runProgram(program, b4d.getTeam().get(0), programOptions);
 				getParent().requestFocus();
 			}
 		});
-		button_Start.setBounds(475, 75, 150, 45);
+		button_Start.setBounds(475, 35, 150, 40);
 		button_Start.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
 		add(button_Start);
 	}

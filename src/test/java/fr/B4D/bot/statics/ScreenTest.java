@@ -7,10 +7,10 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Configuration;
 import fr.B4D.dao.DAOFactory;
 import fr.B4D.utils.Rectangle;
-import net.sourceforge.tess4j.TesseractException;
 
 public class ScreenTest {
 
@@ -23,7 +23,7 @@ public class ScreenTest {
 	}
 	
 	@Test
-	public void test() throws AWTException, IOException, TesseractException {
+	public void test() throws B4DException {
 		String out = screen.OCR(new Rectangle(new Point(0,0), new Point(500,300)));
 		System.out.println(out);
 	}

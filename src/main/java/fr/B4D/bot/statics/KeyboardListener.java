@@ -13,8 +13,8 @@ interface User32 extends Library {
     short GetKeyState(int key);
 }
 
-/** La classe {@code KeyboardListener} permet d'écouter les touches enfoncées par l'utilisateur.<br><br>
- * Cette classe étend la classe {@code Thread}.
+/** La classe {@code KeyboardListener} permet d'Ã©couter les touches enfoncÃ©es par l'utilisateur.<br><br>
+ * Cette classe Ã©tend la classe {@code Thread}.
  */
 public class KeyboardListener extends Thread{
 	
@@ -26,7 +26,7 @@ public class KeyboardListener extends Thread{
 	 * @see java.lang.Thread#run()
 	 */
 	public void run(){
-		B4D.logger.debug(this, "Lancement du thread");
+		B4D.logger.debug("Lancement du thread");
 		boolean fin = false;
 
 		while(!fin) {
@@ -38,22 +38,22 @@ public class KeyboardListener extends Thread{
 				fin = true;
 			}
 		}
-		B4D.logger.debug(this, "Fin du thread");
+		B4D.logger.debug("Fin du thread");
 	}
 	
 	  /*************/
 	 /** METHODS **/
 	/*************/
 	
-	/** Permet de savoir si la touche S est enfoncée.
-	 * @return {@code true} si la touche est enfoncée, {@code false} sinon.
+	/** Permet de savoir si la touche S est enfoncÃ©e.
+	 * @return {@code true} si la touche est enfoncÃ©e, {@code false} sinon.
 	 */
 	private boolean isSPressed() {
 		return User32.INSTANCE.GetAsyncKeyState(KeyEvent.VK_S) != 0;
 	}
 	
-	/** Permet de savoir si la touche Shift (Maj) est enfoncée.
-	 * @return {@code true} si la touche est enfoncée, {@code false} sinon.
+	/** Permet de savoir si la touche Shift (Maj) est enfoncÃ©e.
+	 * @return {@code true} si la touche est enfoncÃ©e, {@code false} sinon.
 	 */
 	private boolean isShiftPressed() {
 		return (User32.INSTANCE.GetKeyState(KeyEvent.VK_SHIFT) & 0x80) == 0x80;

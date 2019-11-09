@@ -7,8 +7,8 @@ import fr.B4D.bot.B4D;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code Chat} reprÈsente le chat de dofus.<br><br>
- * Un chat est dÈfini par une queue de messages, un filtre et une sub-routine.
+/** La classe {@code Chat} repr√©sente le chat de dofus.<br><br>
+ * Un chat est d√©fini par une queue de messages, un filtre et une sub-routine.
  */
 public class Chat extends Thread{
 
@@ -25,7 +25,7 @@ public class Chat extends Thread{
 	/*************/
 	
 	/** Constructeur de la classe {@code Chat} avec un nombre de messages enregistrables de 100.
-	 * Cela est identique ‡ {@code Chat(100)}.
+	 * Cela est identique √† {@code Chat(100)}.
 	 */
 	public Chat() {
 		this(100);
@@ -59,41 +59,53 @@ public class Chat extends Thread{
 	 /** FILTER **/
 	/************/
 	
-	/** Ajoute un filtre de pseudo. Seul les messages provenants de ce joueur seront traitÈs.
+	/** Ajoute un filtre de pseudo. Seul les messages provenants de ce joueur seront trait√©s.
 	 * @param pseudo - Pseudo du joueur. {@code null} pour retirer le filtre.
 	 */
 	public void addPseudoFilter(String pseudo) {
-		filter.setPseudo(pseudo);
+		synchronized(filter) {
+			filter.setPseudo(pseudo);
+		}
 	}
 
-	/** Ajoute un filtre de canal. Seul les messages de ce canal seront traitÈs.
+	/** Ajoute un filtre de canal. Seul les messages de ce canal seront trait√©s.
 	 * @param channel - Canal du message. {@code null} pour retirer le filtre.
 	 */
-	public void addChannelFilter(Channel channel) {
-		filter.setChannel(channel);
+	public void addChannelFilter(Channel channel) {		
+		synchronized(filter) {
+			filter.setChannel(channel);
+		}
 	}
 
-	/** Ajoute un filtre de texte. Seul les messages contenants une chaine de caractËre spÈcifique seront traitÈs.
-	 * @param regex - Expression rÈguliËre que doit contenir le message. {@code null} pour retirer le filtre.
+	/** Ajoute un filtre de texte. Seul les messages contenants une chaine de caract√®re sp√©cifique seront trait√©s.
+	 * @param regex - Expression r√©guli√®re que doit contenir le message. {@code null} pour retirer le filtre.
 	 */
 	public void addTextFilter(String regex) {
-		filter.setRegex(regex);
+		synchronized(filter) {
+			filter.setRegex(regex);
+		}
 	}
 	
 	  /**********/
 	 /** QUEU **/
 	/**********/
 	
-	/** Ajoute un message ‡ la queue du chat. Si celui-ci est plein, le plus vieux message sera supprimÈ.
-	 * @param message - Message ‡ ajouter ‚ la queu.
+	/** Ajoute un message √† la queue du chat. Si celui-ci est plein, le plus vieux message sera supprim√©.
+	 * @param message - Message √† ajouter √¢ la queu.
 	 */
 	public void addMessage(Message message) {
-		synchronized(messages){
-			if(!messages.offer(message)) {
-				messages.poll();
-				messages.offer(message);
+		boolean pass;
+		synchronized(filter) {
+			pass = filter.filter(message);
+		}
+		if(pass) {
+			synchronized(messages){
+				if(!messages.offer(message)) {
+					messages.poll();
+					messages.offer(message);
+				}
+				messages.notifyAll();
 			}
-			messages.notifyAll();
 		}
 	}
 
@@ -101,19 +113,19 @@ public class Chat extends Thread{
 	 /** LISTENER **/
 	/**************/
 	
-	/** Traite un nombre infini de messages. Cela est identique ‡ {@code read(-1)}.
-	 * @throws StopProgramException Si le programme est stoppÈ.
-	 * @throws CancelProgramException Si le bot programme est annulÈ.
-	 * @throws AWTException Si un problËme d'interface survient.
+	/** Traite un nombre infini de messages. Cela est identique √† {@code read(-1)}.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
+	 * @throws AWTException Si un probl√®me d'interface survient.
 	 */
 	public void read() throws StopProgramException, CancelProgramException, AWTException {
 		read(-1);
 	}
 	
 	/** Traite un nombre fini de messages.
-	 * @param countTo - Nombre de message ‡ traiter.
-	 * @throws StopProgramException Si le programme est stoppÈ.
-	 * @throws CancelProgramException Si le bot programme est annulÈ.
+	 * @param countTo - Nombre de message √† traiter.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
 	public void read(int countTo) throws StopProgramException, CancelProgramException {		
 		int count = 0;
@@ -129,40 +141,36 @@ public class Chat extends Thread{
 	 /** WAIT FOR MESSAGE **/
 	/**********************/
 	
-	/** Attend un message pour une durÈe infinie. Cela est identique ‡ {@code waitForMessage(0)}.
+	/** Attend un message pour une dur√©e infinie. Cela est identique √† {@code waitForMessage(0)}.
 	 * @return Plus vieux message correspondant au filtre.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
-	public Message waitForMessage() {
+	public Message waitForMessage() throws StopProgramException, CancelProgramException {
 		return waitForMessage(0);
 	}
-	/** Attend un message pour une durÈe finie.
-	 * @param timeout - DurÈe d'attente maximale en millisecondes.
+	/** Attend un message pour une dur√©e finie.
+	 * @param timeout - Dur√©e d'attente maximale en millisecondes.
 	 * @return Plus vieux message correspondant au filtre et {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
-	public Message waitForMessage(long timeout) {		
+	public Message waitForMessage(long timeout) throws StopProgramException, CancelProgramException {		
 		Message message = null;
-		try {
-			B4D.logger.debug(this, "Attente d'un message");
-			do {
+
+		B4D.logger.debug("Attente d'un message");
+		message = messages.poll();
+		if(message == null) {
+			synchronized(messages){
+				B4D.wait.waitOnObject(messages, timeout);
 				message = messages.poll();
-				if(message == null) {
-					synchronized(messages){
-						messages.wait(timeout);
-						message = messages.poll();
-						if(message == null) 
-							break;
-					}
-				}
-			}while(!filter.filter(message));
-			
-			if(message == null)
-				B4D.logger.debug(this, "Aucun message reÁu (timeout)");
-			else
-				B4D.logger.debug(this, "Message reÁu [" + message + "]");
+			}
 		}
-		catch(InterruptedException e) {
-			B4D.logger.error(e);
-		}
+		if(message == null)
+			B4D.logger.debug("Aucun message re√ßu (timeout)");
+		else
+			B4D.logger.debug("Message re√ßu [" + message + "]");
+
 		return message;
 	}
 

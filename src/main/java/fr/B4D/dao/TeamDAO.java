@@ -12,8 +12,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import fr.B4D.bot.Team;
 
-/** La classe {@code TeamDAO} permet de gérer la sauvegarde des instances de la classe {@code Team}.<br><br>
- * Cette classe étend la classe {@code DAO<Team>}.
+/** La classe {@code TeamDAO} permet de gÃ©rer la sauvegarde des instances de la classe {@code Team}.<br><br>
+ * Cette classe Ã©tend la classe {@code DAO<Team>}.
  */
 public class TeamDAO extends DAO<Team> implements Serializable{
 

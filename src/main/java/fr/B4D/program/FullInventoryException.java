@@ -13,6 +13,6 @@ public class FullInventoryException extends B4DException{
 	 */
 	public FullInventoryException()
     {
-    	super("Your inventory is full.", false);
+    	super("Your inventory is full.");
     }
 }

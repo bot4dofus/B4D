@@ -2,7 +2,7 @@ package fr.B4D.dofus;
 
 import fr.B4D.interaction.chat.Chat;
 
-/** La classe {@code Dofus} permet d'accéder au monde est au chat de dofus.
+/** La classe {@code Dofus} permet d'accÃ©der au monde est au chat de dofus.
  */
 public class Dofus {
 	
@@ -10,8 +10,10 @@ public class Dofus {
 	 /** ATRIBUTS **/
 	/**************/
 	
-	public static Chat chat;
-	public static World world;
+	private static Dofus instance;
+	
+	private Chat chat;
+	private static World world;
 	
 	  /*************/
 	 /** BUILDER **/
@@ -19,8 +21,35 @@ public class Dofus {
 
 	/** Constructeur de la classe {@code Dofus}.
 	 */
-	public Dofus() {
+	private Dofus() {
 		chat = new Chat(100);
 		world = new World();
+	}
+	
+	/** Retourne l'instance de la classe {@code Dofus}.
+	 * @return Instance du jeu dofus.
+	 */
+	public static Dofus getInstance() {
+		if(instance == null)
+			instance = new Dofus();
+		return instance;
+	}
+	
+	/***********************/
+	/** GETTERS & SETTERS **/
+	/***********************/
+
+	/** Retourne le chat du jeu.
+	 * @return Chat du jeu.
+	 */
+	public Chat getChat() {
+		return chat;
+	}
+
+	/** Retourne le monde du jeu.
+	 * @return Monde du jeu.
+	 */
+	public World getWorld() {
+		return world;
 	}
 }

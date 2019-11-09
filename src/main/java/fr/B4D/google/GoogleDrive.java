@@ -16,7 +16,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.File;
 
-/** La classe {@code GoogleDrive} permet de gérer un drive grace à l'API drive de google.
+/** La classe {@code GoogleDrive} permet de gÃ©rer un drive grace Ã  l'API drive de google.
  */
 public class GoogleDrive {
 	
@@ -38,10 +38,10 @@ public class GoogleDrive {
 	/*************/
 
 	/** Constructeur de la classe {@code GoogleDrive}. 
-     * @param id - Id du répertoire parent.
+     * @param id - Id du rÃ©pertoire parent.
      * @param credentials - Chemin vers le fichier contenant le certificat d'utilisation des API google.
-     * @throws IOException Si aucun fichier n'a été trouvé.
-     * @throws GeneralSecurityException Si problèmes de sécurité survient.
+     * @throws IOException Si aucun fichier n'a Ã©tÃ© trouvÃ©.
+     * @throws GeneralSecurityException Si problÃ¨mes de sÃ©curitÃ© survient.
      */
     public GoogleDrive(String id, String credentials) throws IOException, GeneralSecurityException {
     	if (id == null)
@@ -61,27 +61,27 @@ public class GoogleDrive {
 	 /** LIST **/
 	/**********/
     
-    /** Liste les fichiers et dossiers du répertoire courant.
+    /** Liste les fichiers et dossiers du rÃ©pertoire courant.
      * @return Liste des fichiers et dossiers.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
      */
     public List<File> listAll() throws IOException{
     	String query = "'" + getCurrentId() + "' in parents";
     	return drive.files().list().setQ(query).setPageSize(100).execute().getFiles();
     }
     
-    /** Liste les fichiers du répertoire courant.
+    /** Liste les fichiers du rÃ©pertoire courant.
      * @return Liste des fichiers.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
      */
     public List<File> listFiles() throws IOException{
     	String query = " mimeType != 'application/vnd.google-apps.folder' and '" + getCurrentId() + "' in parents";
     	return drive.files().list().setQ(query).setPageSize(100).execute().getFiles();
     }
     
-    /** Liste les dossiers du répertoire courant.
+    /** Liste les dossiers du rÃ©pertoire courant.
      * @return Liste des dossiers.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
      */
     public List<File> listFolders() throws IOException{
     	String query = " mimeType = 'application/vnd.google-apps.folder' and '" + getCurrentId() + "' in parents";
@@ -92,11 +92,11 @@ public class GoogleDrive {
 	 /** CREATE/REMOVE FILE **/
 	/************************/
     
-    /** Créer un fichier.
+    /** CrÃ©er un fichier.
      * @param type - Type du fichier.
      * @param name - Nom du fichier.
-     * @return Fichier créé.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+     * @return Fichier crÃ©Ã©.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
      */
     public File createFile(String type, String name) throws IOException {
     	File file = new File();
@@ -122,10 +122,10 @@ public class GoogleDrive {
 	/*******************/
     
     /** Permet de copier un fichier.
-     * @param fileId - Id du fichier à copier.
+     * @param fileId - Id du fichier Ã  copier.
      * @param name - Nom de la copie.
-     * @return Fichier copié.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+     * @return Fichier copiÃ©.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
      */
     public File copyFile(String fileId, String name) throws IOException {
     	File file = new File();
@@ -134,11 +134,11 @@ public class GoogleDrive {
         return drive.files().copy(fileId, file).execute();
     }
     
-    /** Permet de déplacer un fichier.
-     * @param fileId - Id du fichier à déplacer.
-     * @param folderId - Id du répertoire vers lequel déplacer le fichier.
-     * @return Fichier déplacé.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+    /** Permet de dÃ©placer un fichier.
+     * @param fileId - Id du fichier Ã  dÃ©placer.
+     * @param folderId - Id du rÃ©pertoire vers lequel dÃ©placer le fichier.
+     * @return Fichier dÃ©placÃ©.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
      */
     public File moveFile(String fileId, String folderId) throws IOException {
     	File file = drive.files().get(fileId).execute();
@@ -151,10 +151,10 @@ public class GoogleDrive {
     }
     
     /** Permet de renommer un fichier.
-     * @param fileId - Id du fichier à renommer.
+     * @param fileId - Id du fichier Ã  renommer.
      * @param name - Nouveau nom du fichier.
-     * @return Fichier renommé.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+     * @return Fichier renommÃ©.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
      */
     public File renameFile(String fileId, String name) throws IOException {
     	File file = copyFile(fileId, name);
@@ -169,9 +169,9 @@ public class GoogleDrive {
     /** Permet d'uploader un fichier vers le drive.
      * @param type - Type du fichier.
      * @param name - Nom du fichier sur le drive.
-     * @param _file - Fichier à uploader sur le drive.
-     * @return Fichier uploadé sur le drive.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+     * @param _file - Fichier Ã  uploader sur le drive.
+     * @return Fichier uploadÃ© sur le drive.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
      */
     public File uploadFile(String type, String name, java.io.File _file) throws IOException {
         AbstractInputStreamContent uploadStreamContent = new FileContent(type, _file);
@@ -182,11 +182,11 @@ public class GoogleDrive {
         return drive.files().create(file, uploadStreamContent).execute();
     }
     
-    /** Permet de télécharger un fichier depuis le drive.
-     * @param fileId - Id du fichier à télécharger.
-     * @param name - Nom du fichier une fois téléchargé.
-     * @return Fichier téléchargé.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+    /** Permet de tÃ©lÃ©charger un fichier depuis le drive.
+     * @param fileId - Id du fichier Ã  tÃ©lÃ©charger.
+     * @param name - Nom du fichier une fois tÃ©lÃ©chargÃ©.
+     * @return Fichier tÃ©lÃ©chargÃ©.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
      */
     public java.io.File downloadFile(String fileId, String name) throws IOException{  	
     	OutputStream outputStream = new ByteArrayOutputStream();
@@ -198,17 +198,17 @@ public class GoogleDrive {
 	 /** FOLDER **/
 	/************/
     	
-	/** Permet de créer un dossier.
+	/** Permet de crÃ©er un dossier.
 	 * @param name - Nom du dossier.
-	 * @return Dossier créé.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	 * @return Dossier crÃ©Ã©.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
 	 */
 	public File createFolder(String name) throws IOException {
 		return createFile("application/vnd.google-apps.folder",  name);
 	}
 	
 	/** Permet de supprimer un dossier.
-	 * @param fileId - Id du dossier à supprimer.
+	 * @param fileId - Id du dossier Ã  supprimer.
 	 */
 	public void removeFolder(String fileId) {
 		removeFile(fileId);
@@ -218,9 +218,9 @@ public class GoogleDrive {
 	 /** NAVIGATION **/
 	/****************/
 	
-	/** Permet de se déplacer dans un dossier.
-	 * @param folderId - Id du dossier dans lequel se déplacer.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	/** Permet de se dÃ©placer dans un dossier.
+	 * @param folderId - Id du dossier dans lequel se dÃ©placer.
+     * @throws IOException Si impossible d'Ã©xecuter l'opÃ©ration.
 	 */
 	public void stepInto(String folderId) throws IOException {
 		File folder = drive.files().get(folderId).execute();
@@ -228,7 +228,7 @@ public class GoogleDrive {
 			this.idS.add(folder.getId());
 	}
 	
-	/** Permet de revenir un dossier en arrière.
+	/** Permet de revenir un dossier en arriÃ¨re.
 	 */
 	public void stepBack() {
 		if(this.idS.size() > 1)
@@ -239,7 +239,7 @@ public class GoogleDrive {
 	 /** STATIC **/
 	/************/
 	
-    /** Permet de récupérer l'id d'un répertoire à partir de l'url.
+    /** Permet de rÃ©cupÃ©rer l'id d'un rÃ©pertoire Ã  partir de l'url.
      * @param url - Url du drive.
      * @return Id du dossier parent du drive.
      */
@@ -253,7 +253,7 @@ public class GoogleDrive {
      /** PRIVATE **/
     /*************/
 
-    /** Permet de récupérer l'id du dossier courant.
+    /** Permet de rÃ©cupÃ©rer l'id du dossier courant.
      * @return Id du dossier courant.
      */
     private String getCurrentId() {

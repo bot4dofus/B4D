@@ -2,8 +2,8 @@ package fr.B4D.program;
 
 import fr.B4D.bot.B4DException;
 
-/** Signal que le programme a été stoppé.
- * La fonction de sortie (outro) sera exécuté.
+/** Signal que le programme a Ã©tÃ© stoppÃ©.
+ * La fonction de sortie (outro) sera exÃ©cutÃ©.
  */
 public class StopProgramException extends B4DException{
 
@@ -13,6 +13,6 @@ public class StopProgramException extends B4DException{
 	 */
 	public StopProgramException()
     {
-    	super("Program stoped", false);
+    	super("Program stoped");
     }
 }

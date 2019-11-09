@@ -8,8 +8,8 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code Message} reprÈsente un message, gÈnÈralement un message du chat.<br><br>
- * Un message est dÈfini par un pseudo, un canal et un texte.
+/** La classe {@code Message} repr√©sente un message, g√©n√©ralement un message du chat.<br><br>
+ * Un message est d√©fini par un pseudo, un canal et un texte.
  */
 public class Message implements Serializable{
 	
@@ -27,8 +27,8 @@ public class Message implements Serializable{
 	/*************/
 	
 	/** Constructeur de la classe {@code Message}. 
-	 * Cela est identique ‡ {@code Message(null, null, text)}.
-	 * Ce constructeur est utilisÈ pour envoyer un message sans destinataire particulier et sans canal particulier.
+	 * Cela est identique √† {@code Message(null, null, text)}.
+	 * Ce constructeur est utilis√© pour envoyer un message sans destinataire particulier et sans canal particulier.
 	 * @param text - Texte du message.
 	 */
 	public Message(String text) {
@@ -36,8 +36,8 @@ public class Message implements Serializable{
 	}
 	
 	/** Constructeur de la classe {@code Message}. 
-	 * Cela est identique ‡ {@code Message(null, channel, text)}.
-	 * Ce constructeur est utilisÈ pour envoyer un message sans destinataire particulier.
+	 * Cela est identique √† {@code Message(null, channel, text)}.
+	 * Ce constructeur est utilis√© pour envoyer un message sans destinataire particulier.
 	 * @param channel - Canal du message.
 	 * @param text - Texte du message.
 	 */
@@ -46,8 +46,8 @@ public class Message implements Serializable{
 	}
 	
 	/** Constructeur de la classe {@code Message}. 
-	 * Cela est identique ‡ {@code Message(pseudo, Channel.PRIVATE, text)}.
-	 * Ce constructeur est utilisÈ pour envoyer un message privÈ.
+	 * Cela est identique √† {@code Message(pseudo, Channel.PRIVATE, text)}.
+	 * Ce constructeur est utilis√© pour envoyer un message priv√©.
 	 * @param pseudo - Pseudo du destinataire.
 	 * @param text - Texte du message.
 	 */
@@ -56,7 +56,7 @@ public class Message implements Serializable{
 	}
 	
 	/** Constructeur de la classe {@code Message}. 
-	 * Cela est identique ‡ {@code Message(pseudo, channel, text)}.
+	 * Cela est identique √† {@code Message(pseudo, channel, text)}.
 	 * @param pseudo - Pseudo du destinataire.
 	 * @param channel - Canal du message.
 	 * @param text - Texte du message.
@@ -96,19 +96,19 @@ public class Message implements Serializable{
 	 /** SEND **/
 	/**********/
 	
-	/** Envoi du message avec un temps d'attente par dÈfaut de 500ms.
-	 * Cela est identique ‡ {@code send(500)}.
-	 * @throws StopProgramException Si le programme est stoppÈ.
-	 * @throws CancelProgramException Si le bot programme est annulÈ.
+	/** Envoi du message avec un temps d'attente par d√©faut de 500ms.
+	 * Cela est identique √† {@code send(500)}.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
 	public void send() throws StopProgramException, CancelProgramException {
 		send(500);
 	}
 	
 	/** Envoi du message avec un temps d'attente.
-	 * @param millis - Temps d'attente aprËs envoi.
-	 * @throws StopProgramException Si le programme est stoppÈ.
-	 * @throws CancelProgramException Si le bot programme est annulÈ.
+	 * @param millis - Temps d'attente apr√®s envoi.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
 	public void send(int millis) throws StopProgramException, CancelProgramException {
 		if (channel == null) {
@@ -129,9 +129,9 @@ public class Message implements Serializable{
 	
 	/** Envoi un message sur le chat.
 	 * @param text - Texte du message.
-	 * @param millis - Temps d'attente aprËs l'envoi.
-	 * @throws StopProgramException Si le programme est stoppÈ.
-	 * @throws CancelProgramException Si le bot programme est annulÈ.
+	 * @param millis - Temps d'attente apr√®s l'envoi.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
 	private void send(String text, int millis) throws StopProgramException, CancelProgramException {
 		B4D.mouse.chatClick();
@@ -143,23 +143,23 @@ public class Message implements Serializable{
 	 /** REPLY **/
 	/***********/
 	
-	/** Renpond au joueur avec un temps d'attente par dÈfaut de 500ms.
-	 * Cela est identique ‡ {@code reply(text, 500)}.
-	 * Si le pseudo du joueur est {@code null}, la mÈthode n'a aucun effet.
-	 * @param text - RÈponse au joueur.
-	 * @throws StopProgramException Si le programme est stoppÈ.
-	 * @throws CancelProgramException Si le bot programme est annulÈ.
+	/** Renpond au joueur avec un temps d'attente par d√©faut de 500ms.
+	 * Cela est identique √† {@code reply(text, 500)}.
+	 * Si le pseudo du joueur est {@code null}, la m√©thode n'a aucun effet.
+	 * @param text - R√©ponse au joueur.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
 	public void reply(String text) throws StopProgramException, CancelProgramException {
 		reply(text, 500);
 	}
 
 	/** Renpond au joueur avec un temps d'attente.
-	 * Si le pseudo du joueur est {@code null}, la mÈthode n'a aucun effet.
-	 * @param text - RÈponse au joueur.
-	 * @param millis - Temps d'attente aprËs l'envoi.
-	 * @throws StopProgramException Si le programme est stoppÈ.
-	 * @throws CancelProgramException Si le bot programme est annulÈ.
+	 * Si le pseudo du joueur est {@code null}, la m√©thode n'a aucun effet.
+	 * @param text - R√©ponse au joueur.
+	 * @param millis - Temps d'attente apr√®s l'envoi.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
 	public void reply(String text, int millis) throws StopProgramException, CancelProgramException {
 		if(pseudo != null) {
@@ -170,33 +170,37 @@ public class Message implements Serializable{
 		}
 	}
 	
-	/** Permet d'attendre la rÈponse du joueur sans limite de temps.
-	 * Si le pseudo est connu, la rÈponse sera dÈtectÈe sur tous les canaux possible.
-	 * Sinon, seul le canal privÈ sera acceptÈ.
-	 * Cela est identique ‡ {@code waitForReply(0)}.
-	 * @return Message dÈtectÈ. {@code null} si timeout.
+	/** Permet d'attendre la r√©ponse du joueur sans limite de temps.
+	 * Si le pseudo est connu, la r√©ponse sera d√©tect√©e sur tous les canaux possible.
+	 * Sinon, seul le canal priv√© sera accept√©.
+	 * Cela est identique √† {@code waitForReply(0)}.
+	 * @return Message d√©tect√©. {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
-	public Message waitForReply() {
+	public Message waitForReply() throws StopProgramException, CancelProgramException {
 		return waitForReply(0);
 	}
 	
-	/** Permet d'attendre la rÈponse du joueur avec limite de temps.
-	 * Si le pseudo est connu, la rÈponse sera dÈtectÈe sur tous les canaux possible.
-	 * Sinon, seul le canal privÈ sera acceptÈ.
-	 * @param timeout - DurÈe d'attente maximale en millisecondes.
-	 * @return Message dÈtectÈ. {@code null} si timeout.
+	/** Permet d'attendre la r√©ponse du joueur avec limite de temps.
+	 * Si le pseudo est connu, la r√©ponse sera d√©tect√©e sur tous les canaux possible.
+	 * Sinon, seul le canal priv√© sera accept√©.
+	 * @param timeout - Dur√©e d'attente maximale en millisecondes.
+	 * @return Message d√©tect√©. {@code null} si timeout.
+	 * @throws StopProgramException Si le programme est stopp√©.
+	 * @throws CancelProgramException Si le bot programme est annul√©.
 	 */
-	public Message waitForReply(long timeout) {
-		B4D.logger.debug(this, "Attente d'une rÈponse");
+	public Message waitForReply(long timeout) throws StopProgramException, CancelProgramException {
+		B4D.logger.debug("Attente d'une r√©ponse");
 		if(pseudo != null)
-			Dofus.chat.addPseudoFilter(pseudo);
+			Dofus.getInstance().getChat().addPseudoFilter(pseudo);
 		else
-			Dofus.chat.addChannelFilter(Channel.PRIVATE);
+			Dofus.getInstance().getChat().addChannelFilter(Channel.PRIVATE);
 		
-		Message message = Dofus.chat.waitForMessage(timeout);
+		Message message = Dofus.getInstance().getChat().waitForMessage(timeout);
 		
-		Dofus.chat.addPseudoFilter(null);
-		Dofus.chat.addChannelFilter(null);
+		Dofus.getInstance().getChat().addPseudoFilter(null);
+		Dofus.getInstance().getChat().addChannelFilter(null);
 		return message;
 	}
 	

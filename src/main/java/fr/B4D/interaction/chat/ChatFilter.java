@@ -1,7 +1,7 @@
 package fr.B4D.interaction.chat;
 
-/** La classe {@code ChatFilter} représente un filtre de chat.<br><br>
- * Un filtre de chat est défini par un pseudo, un canal et une expression régulière.
+/** La classe {@code ChatFilter} reprÃ©sente un filtre de chat.<br><br>
+ * Un filtre de chat est dÃ©fini par un pseudo, un canal et une expression rÃ©guliÃ¨re.
  */
 public class ChatFilter {
 
@@ -52,15 +52,15 @@ public class ChatFilter {
 		this.channel = channel;
 	}
 	
-	/** Retourne l'expression régulière du filtre.
-	 * @return Expression régulière du filtre.
+	/** Retourne l'expression rÃ©guliÃ¨re du filtre.
+	 * @return Expression rÃ©guliÃ¨re du filtre.
 	 */
 	public String getRegex() {
 		return regex;
 	}
 
-	/** Modifie le canal du filtre. Seul les messages contenants cette chaine de caratère traverseront le filtre.
-	 * @param regex - Nouvelle expression régulière du filtre. {@code null} pour retirer le filtre.
+	/** Modifie le canal du filtre. Seul les messages contenants cette chaine de caratÃ¨re traverseront le filtre.
+	 * @param regex - Nouvelle expression rÃ©guliÃ¨re du filtre. {@code null} pour retirer le filtre.
 	 */
 	public void setRegex(String regex) {
 		this.regex = regex;
@@ -70,9 +70,9 @@ public class ChatFilter {
 	 /** METHODS **/
 	/*************/
 	
-	/** Permet de savoir si un message passe à travers le filtre.
+	/** Permet de savoir si un message passe Ã  travers le filtre.
 	 * @param message - Message a tester.
-	 * @return {@code true} si le message passe à travers le filtre et {@code false} sinon.
+	 * @return {@code true} si le message passe Ã  travers le filtre et {@code false} sinon.
 	 */
 	public boolean filter(Message message) {
 		if(pseudo != null) {

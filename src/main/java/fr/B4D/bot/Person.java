@@ -16,8 +16,8 @@ import fr.B4D.transport.transports.Potion;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Person} représente un joueur.<br><br>
- * Un joueur est défini par un nom de compte, un mot de passe, un serveur et un pseudo
+/** La classe {@code Person} reprÃ©sente un joueur.<br><br>
+ * Un joueur est dÃ©fini par un nom de compte, un mot de passe, un serveur et un pseudo
  */
 public class Person implements Serializable, TransportInterface{
 
@@ -45,8 +45,8 @@ public class Person implements Serializable, TransportInterface{
 	 /** BUILDER **/
 	/*************/
 	
-	/** Constructeur de la classe {@code Person} utilisant les champs par défaut.
-	 * Cela est identique à {@code new Person("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo")}.
+	/** Constructeur de la classe {@code Person} utilisant les champs par dÃ©faut.
+	 * Cela est identique Ã  {@code new Person("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo")}.
 	 */
 	public Person() {
 		this("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo");
@@ -199,29 +199,29 @@ public class Person implements Serializable, TransportInterface{
 		this.position = position;
 	}
 
-	/** Met à jour la position actuelle du joueur à tapant %pos% dans le chat.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	/** Met Ã  jour la position actuelle du joueur Ã  tapant %pos% dans le chat.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le bot programme est annulÃ©.
+	 * @throws B4DException Si une exception de type B4D est levÃ©e.
 	 */
 	public void setPosition() throws StopProgramException, CancelProgramException, B4DException {
 		Message message;
-		Dofus.chat.addPseudoFilter(pseudo);
-		
+		Dofus.getInstance().getChat().addPseudoFilter(pseudo);
+		Dofus.getInstance().getChat().clear();
 		message = new Message(Channel.GENERAL, "%pos%");
 		message.send();
-		message = Dofus.chat.waitForMessage(1000);
+		message = Dofus.getInstance().getChat().waitForMessage(1000);
 		if(message == null)
-			throw new B4DException("Cannot get the current position.");
+			throw new CancelProgramException("Cannot get the current position. Make sure that the general channel is on and that the message was not the same as the previous one.");
 
-		Dofus.chat.addPseudoFilter(null);
+		Dofus.getInstance().getChat().addPseudoFilter(null);
 		
 		String text = message.getText();
 		int firstComma = text.indexOf(",");
 		int secondComma = text.indexOf(",", firstComma+1);
 		int thirdComma = text.indexOf(",", secondComma+1);
 		int end = text.indexOf("}");
-		
+
 		int x = Integer.parseInt(text.substring(firstComma+1, secondComma));
 		int y = Integer.parseInt(text.substring(secondComma+1, thirdComma));
 		int z = Integer.parseInt(text.substring(thirdComma+1, end));
@@ -229,14 +229,14 @@ public class Person implements Serializable, TransportInterface{
 		setPosition(new Point(x, y));
 	}
 	
-	/** Retourne un booléen représentant l'inventaire du joueur.
+	/** Retourne un boolÃ©en reprÃ©sentant l'inventaire du joueur.
 	 * @return {@code true} si l'inventaire est plein et {@code false} sinon.
 	 */
 	public boolean isInventoryFull() {
 		return inventoryFull;
 	}
 
-	/** Modifie l'état du l'inventaire du joueur.
+	/** Modifie l'Ã©tat du l'inventaire du joueur.
 	 * @param inventoryFull - {@code true} si l'inventaire est plein et {@code false} sinon.
 	 */
 	public void setInventoryFull(boolean inventoryFull) {
@@ -256,39 +256,39 @@ public class Person implements Serializable, TransportInterface{
 	}
 	
 	/** Retourne le chemin le plus court entre la position actuelle du joueur et la destination.
-	 * @param destination - Destination à atteindre. Vous pouver utiliser {@code new Point(X, Y)} pour définir un nouveau point.
-	 * @return Chemin à suivre pour atteindre la destination. {@code null} si la destination n'est pas atteignable.
+	 * @param destination - Destination Ã  atteindre. Vous pouver utiliser {@code new Point(X, Y)} pour dÃ©finir un nouveau point.
+	 * @return Chemin Ã  suivre pour atteindre la destination. {@code null} si la destination n'est pas atteignable.
 	 */
 	public TransportPath getTransportPathTo(Point destination) {		
 		
 		//Add potions
 		if(boosterPotion.getTransport().getPositionF() != null) {
 			boosterPotion.getTransport().setPosition(position);
-			Dofus.world.getGraph().addEdge(boosterPotion);
+			Dofus.getInstance().getWorld().getGraph().addEdge(boosterPotion);
 		}
 			
 		if(bontaPotion.getTransport().getPositionF() != null){
 			bontaPotion.getTransport().setPosition(position);
-			Dofus.world.getGraph().addEdge(bontaPotion);
+			Dofus.getInstance().getWorld().getGraph().addEdge(bontaPotion);
 		}
 
 		if(brakmarPotion.getTransport().getPositionF() != null){
 			brakmarPotion.getTransport().setPosition(position);
-			Dofus.world.getGraph().addEdge(brakmarPotion);
+			Dofus.getInstance().getWorld().getGraph().addEdge(brakmarPotion);
 		}
 		
 		//Get the shortest path
-	    List<TransportStep> shortestPath = Dofus.world.getGraph().getPath(position, destination).getEdgeList();
+	    List<TransportStep> shortestPath = Dofus.getInstance().getWorld().getGraph().getPath(position, destination).getEdgeList();
 
 	    //Remove potions
 		if(boosterPotion.getTransport().getPositionF() != null)
-			Dofus.world.getGraph().removeEdge(boosterPotion);
+			Dofus.getInstance().getWorld().getGraph().removeEdge(boosterPotion);
 		
 		if(bontaPotion.getTransport().getPositionF() != null)
-			Dofus.world.getGraph().removeEdge(bontaPotion);
+			Dofus.getInstance().getWorld().getGraph().removeEdge(bontaPotion);
 		
 		if(brakmarPotion.getTransport().getPositionF() != null)
-			Dofus.world.getGraph().removeEdge(brakmarPotion);
+			Dofus.getInstance().getWorld().getGraph().removeEdge(brakmarPotion);
 		
 		if(shortestPath != null)
 			return new TransportPath(shortestPath);

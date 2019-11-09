@@ -1,5 +1,8 @@
 package fr.B4D.programs.tutorials;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
 import fr.B4D.dofus.Dofus;
@@ -16,70 +19,79 @@ import fr.B4D.program.StopProgramException;
 
 public final class MessageAPI {	
 	
-	/** Ce tutoriel ‡ pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des messages entre joueurs.<br>
+	/** Ce tutoriel √† pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des messages entre joueurs.<br>
 	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
 	 *  	<li>Attente d'un message quelconque dans le chat.</li>
-	 *  	<li>Affiche le message reÁu ainsi que l'auteur et le canal.</li>
+	 *  	<li>Affiche le message re√ßu ainsi que l'auteur et le canal.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL1 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 1", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL1 = new Program(Place.Tous, Category.Tutorial, "Message API", "Tutorial 1", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
-		public void cycle(Person person) {
-			Message message = Dofus.chat.waitForMessage(0);
+		public void cycle(Person person) throws StopProgramException, CancelProgramException {
+			Message message = Dofus.getInstance().getChat().waitForMessage(0);
 			B4D.logger.popUp("Message de " + message.getPseudo() + "(" + message.getChannel() + ") : " + message.getText());
 		}
 	});
 
-	/** Ce tutoriel ‡ pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des Èchanges entre joueurs.<br>
+	/** Ce tutoriel √† pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des √©changes entre joueurs.<br>
 	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
-	 *  	<li>Envoi d'un message privÈ ‡ "Solwy".</li>
+	 *  	<li>Envoi d'un message priv√© √† "Solwy".</li>
 	 *  	<li>Envoi du message.</li>
-	 *  	<li>Attente de la rÈponse du joueur.</li>
-	 *  	<li>RÈpond "Áa va ?" si le joueur ‡ rÈpondu. Affiche un message si il n'a pas rÈpondu aprËs 1 min = 60000 ms.</li>
+	 *  	<li>Attente de la r√©ponse du joueur.</li>
+	 *  	<li>R√©pond "√ßa va ?" si le joueur √† r√©pondu. Affiche un message si il n'a pas r√©pondu apr√®s 1 min = 60000 ms.</li>
 	 *  </ul>
-	 *  Dans le cas o˘ l'Èchange est annulÈ par le joueur, un exception est levÈe. Un message diffÈrent est alors affichÈ.<br>
+	 *  Dans le cas o√π l'√©change est annul√© par le joueur, un exception est lev√©e. Un message diff√©rent est alors affich√©.<br>
 	 */
-	public final static Program TUTORIAL2 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 2", new Channel[] {Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL2 = new Program(Place.Tous, Category.Tutorial, "Message API", "Tutorial 2", new Channel[] {Channel.PRIVATE, Channel.GENERAL}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws StopProgramException, CancelProgramException {
-			Message message = new Message("Solwy", "Salut !");
+			JTextField nameField = new JTextField();
+			Object[] field = {
+					"Destinataire :", nameField,
+			};
+			int option = JOptionPane.showConfirmDialog(null, field, "Envoi d'un message priv√© :", JOptionPane.OK_CANCEL_OPTION);
+			if (option == JOptionPane.CANCEL_OPTION)
+				throw new CancelProgramException("Vous avez annul√© le programme.");
+			
+			String name = nameField.getText();
+			Message message = new Message(name, "Salut !");
 			message.send();
 			message = message.waitForReply(60000);
 			if(message != null)
-				message.reply("Áa va ?");
+				message.reply("√ßa va ?");
 			else	
-				B4D.logger.popUp("Le temps d'attente de 1 min est dÈpassÈ.");				
+				B4D.logger.popUp("Le temps d'attente de 1 min est d√©pass√©.");				
 		}
 	});
 
-	/** Ce tutoriel ‡ pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des Èchanges entre joueurs.<br>
+	/** Ce tutoriel √† pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des √©changes entre joueurs.<br>
 	 *  <br>
 	 *  Fonctionnement :
 	 *  <ul>
-	 *  	<li>Ajout d'un filtre canal : Seul les messages du canal commerce seront traitÈs.</li>
-	 *  	<li>Ajout d'un filtre texte : Seul les messages contenant "moi" seront traitÈs.</li>
-	 *  	<li>Ajout d'une opÈration ‡ Èffectuer pour chaque message correspondant au filtre.</li>
-	 *  	<li>DÈbute la lecture du chat en prÈcisant ‡ 3 le nombre de messages qui seront traitÈs.</li>
+	 *  	<li>Ajout d'un filtre canal : Seul les messages du canal commerce seront trait√©s.</li>
+	 *  	<li>Ajout d'un filtre texte : Seul les messages contenant "moi" seront trait√©s.</li>
+	 *  	<li>Ajout d'une op√©ration √† √©ffectuer pour chaque message correspondant au filtre.</li>
+	 *  	<li>D√©bute la lecture du chat en pr√©cisant √† 3 le nombre de messages qui seront trait√©s.</li>
 	 *  </ul>
 	 */
-	public final static Program TUTORIAL3 = new Program(Place.Aucun, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
+	public final static Program TUTORIAL3 = new Program(Place.Tous, Category.Tutorial, "Message API", "Tutorial 3", new Channel[] {Channel.BUSINESS, Channel.PRIVATE, Channel.GENERAL}, Status.AVAILABLE, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws StopProgramException, CancelProgramException {
-			Dofus.chat.addChannelFilter(Channel.BUSINESS);
-			Dofus.chat.addTextFilter("moi");
-			Dofus.chat.setChatListener(new ChatListener() {
+			Dofus.getInstance().getChat().addChannelFilter(Channel.BUSINESS);
+			Dofus.getInstance().getChat().addTextFilter("moi");
+			Dofus.getInstance().getChat().setChatListener(new ChatListener() {
 				public void treatMessage(Message message) throws StopProgramException, CancelProgramException {
 					message.reply("C'est qui moi ?");
 				}
 			});
-			Dofus.chat.read(3);
+			Dofus.getInstance().getChat().read(3);
 		}
 	});
 }

@@ -12,9 +12,9 @@ import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Zaapi} représente un zaapi.<br><br>
- * Cette classe étend la classe {@code Transport}.
- * Un zaapi est représenté par un type de zaapi.
+/** La classe {@code Zaapi} reprÃ©sente un zaapi.<br><br>
+ * Cette classe Ã©tend la classe {@code Transport}.
+ * Un zaapi est reprÃ©sentÃ© par un type de zaapi.
  */
 public class Zaapi extends Transport implements Serializable{
 
@@ -39,25 +39,25 @@ public class Zaapi extends Transport implements Serializable{
     public final static Zaapi Atelier_Pecheurs_Bonta = new Zaapi("Atelier des pecheurs", new Point(-36, -52), new PointF(0.7729816, 0.244511), ZaapiType.Atelier);
     public final static Zaapi Atelier_Sculpteurs_Bonta = new Zaapi("Atelier des sculpteurs", new Point(-28, -61), new PointF(0.6083133, 0.1007984), ZaapiType.Atelier);
     public final static Zaapi Atelier_Tailleurs_Bonta = new Zaapi("Atelier des tailleurs", new Point(-29, -56), new PointF(0.8832934, 0.1756487), ZaapiType.Atelier);
-    public final static Zaapi HDV_Animaux_Bonta = new Zaapi("Hôtel de vente des animaux", new Point(-36, -56), new PointF(0.2965628, 0.1616766), ZaapiType.HDV);
-    public final static Zaapi HDV_Alchimistes_Bonta = new Zaapi("Hôtel de vente des alchimistes", new Point(-30, -53), new PointF(0.7034373, 0.1926148), ZaapiType.HDV);
-    public final static Zaapi HDV_Ames_Bonta = new Zaapi("Hôtel de vente des âmes", new Point(-32, -57), new PointF(0.4060751, 0.2355289), ZaapiType.HDV);
-    public final static Zaapi HDV_Bijoutiers_Bonta = new Zaapi("Hôtel de vente des bijoutiers", new Point(-33, -59), new PointF(0.9104716, 0.2045908), ZaapiType.HDV);
-    public final static Zaapi HDV_Bricoleurs_Bonta = new Zaapi("Hôtel de vente des bricoleurs", new Point(-26, -60), new PointF(0.7034373, 0.7205589), ZaapiType.HDV);
-    public final static Zaapi HDV_Bucherons_Bonta = new Zaapi("Hôtel de vente des bûcherons", new Point(-30, -60), new PointF(0.2589928, 0.1666667), ZaapiType.HDV);
-    public final static Zaapi HDV_Chasseurs_Bonta = new Zaapi("Hôtel de vente des chasseurs", new Point(-32, -51), new PointF(0.4980016, 0.6477046), ZaapiType.HDV);
-    public final static Zaapi HDV_Cordonniers_Bonta = new Zaapi("Hôtel de vente des cordonniers", new Point(-30, -58), new PointF(0.7122302, 0.250499), ZaapiType.HDV);
-    public final static Zaapi HDV_Documents_Bonta = new Zaapi("Hôtel de vente des documents", new Point(-33, -58), new PointF(0.41247, 0.7015968), ZaapiType.HDV);
-    public final static Zaapi HDV_Faconneurs_Bonta = new Zaapi("Hôtel de vente des façonneurs", new Point(-27, -51), new PointF(0.1231015, 0.3622755), ZaapiType.HDV);
-    public final static Zaapi HDV_Forgerons_Bonta = new Zaapi("Hôtel de vente des forgerons", new Point(-28, -55), new PointF(0.4796163, 0.6986028), ZaapiType.HDV);
-    public final static Zaapi HDV_Mineurs_Bonta = new Zaapi("Hôtel de vente des mineurs", new Point(-26, -55), new PointF(0.3653077, 0.3542914), ZaapiType.HDV);
-    public final static Zaapi HDV_Parchemins_Bonta = new Zaapi("Hôtel de vente des parchemins lies", new Point(-33, -56), new PointF(0.8776978, 0.4730539), ZaapiType.HDV);
-    public final static Zaapi HDV_Paysans_Bonta = new Zaapi("Hôtel de vente des paysans", new Point(-28, -52), new PointF(0.3900879, 0.5089821), ZaapiType.HDV);
-    public final static Zaapi HDV_Pecheurs_Bonta = new Zaapi("Hôtel de vente des pêcheurs", new Point(-36, -53), new PointF(0.4388489, 0.6297405), ZaapiType.HDV);
-    public final static Zaapi HDV_Ressources_Bonta = new Zaapi("Hôtel de vente des ressources", new Point(-33, -54), new PointF(0.2486011, 0.2774451), ZaapiType.HDV);
-    public final static Zaapi HDV_Runes_Bonta = new Zaapi("Hôtel de vente des runes", new Point(-32, -55), new PointF(0.4300559, 0.2694611), ZaapiType.HDV);
-    public final static Zaapi HDV_Sculpteurs_Bonta = new Zaapi("Hôtel de vente des sculpteurs", new Point(-29, -59), new PointF(0.3828937, 0.1057884), ZaapiType.HDV);
-    public final static Zaapi HDV_Tailleurs_Bonta = new Zaapi("Hôtel de vente des tailleurs", new Point(-30, -56), new PointF(0.4204636, 0.506986), ZaapiType.HDV);
+    public final static Zaapi HDV_Animaux_Bonta = new Zaapi("HÃ´tel de vente des animaux", new Point(-36, -56), new PointF(0.2965628, 0.1616766), ZaapiType.HDV);
+    public final static Zaapi HDV_Alchimistes_Bonta = new Zaapi("HÃ´tel de vente des alchimistes", new Point(-30, -53), new PointF(0.7034373, 0.1926148), ZaapiType.HDV);
+    public final static Zaapi HDV_Ames_Bonta = new Zaapi("HÃ´tel de vente des Ã¢mes", new Point(-32, -57), new PointF(0.4060751, 0.2355289), ZaapiType.HDV);
+    public final static Zaapi HDV_Bijoutiers_Bonta = new Zaapi("HÃ´tel de vente des bijoutiers", new Point(-33, -59), new PointF(0.9104716, 0.2045908), ZaapiType.HDV);
+    public final static Zaapi HDV_Bricoleurs_Bonta = new Zaapi("HÃ´tel de vente des bricoleurs", new Point(-26, -60), new PointF(0.7034373, 0.7205589), ZaapiType.HDV);
+    public final static Zaapi HDV_Bucherons_Bonta = new Zaapi("HÃ´tel de vente des bÃ»cherons", new Point(-30, -60), new PointF(0.2589928, 0.1666667), ZaapiType.HDV);
+    public final static Zaapi HDV_Chasseurs_Bonta = new Zaapi("HÃ´tel de vente des chasseurs", new Point(-32, -51), new PointF(0.4980016, 0.6477046), ZaapiType.HDV);
+    public final static Zaapi HDV_Cordonniers_Bonta = new Zaapi("HÃ´tel de vente des cordonniers", new Point(-30, -58), new PointF(0.7122302, 0.250499), ZaapiType.HDV);
+    public final static Zaapi HDV_Documents_Bonta = new Zaapi("HÃ´tel de vente des documents", new Point(-33, -58), new PointF(0.41247, 0.7015968), ZaapiType.HDV);
+    public final static Zaapi HDV_Faconneurs_Bonta = new Zaapi("HÃ´tel de vente des faÃ§onneurs", new Point(-27, -51), new PointF(0.1231015, 0.3622755), ZaapiType.HDV);
+    public final static Zaapi HDV_Forgerons_Bonta = new Zaapi("HÃ´tel de vente des forgerons", new Point(-28, -55), new PointF(0.4796163, 0.6986028), ZaapiType.HDV);
+    public final static Zaapi HDV_Mineurs_Bonta = new Zaapi("HÃ´tel de vente des mineurs", new Point(-26, -55), new PointF(0.3653077, 0.3542914), ZaapiType.HDV);
+    public final static Zaapi HDV_Parchemins_Bonta = new Zaapi("HÃ´tel de vente des parchemins lies", new Point(-33, -56), new PointF(0.8776978, 0.4730539), ZaapiType.HDV);
+    public final static Zaapi HDV_Paysans_Bonta = new Zaapi("HÃ´tel de vente des paysans", new Point(-28, -52), new PointF(0.3900879, 0.5089821), ZaapiType.HDV);
+    public final static Zaapi HDV_Pecheurs_Bonta = new Zaapi("HÃ´tel de vente des pÃªcheurs", new Point(-36, -53), new PointF(0.4388489, 0.6297405), ZaapiType.HDV);
+    public final static Zaapi HDV_Ressources_Bonta = new Zaapi("HÃ´tel de vente des ressources", new Point(-33, -54), new PointF(0.2486011, 0.2774451), ZaapiType.HDV);
+    public final static Zaapi HDV_Runes_Bonta = new Zaapi("HÃ´tel de vente des runes", new Point(-32, -55), new PointF(0.4300559, 0.2694611), ZaapiType.HDV);
+    public final static Zaapi HDV_Sculpteurs_Bonta = new Zaapi("HÃ´tel de vente des sculpteurs", new Point(-29, -59), new PointF(0.3828937, 0.1057884), ZaapiType.HDV);
+    public final static Zaapi HDV_Tailleurs_Bonta = new Zaapi("HÃ´tel de vente des tailleurs", new Point(-30, -56), new PointF(0.4204636, 0.506986), ZaapiType.HDV);
     public final static Zaapi Arene_Bonta = new Zaapi("Arene", new Point(-32, -57), new PointF(0.3956835, 0.2265469), ZaapiType.Divers);
     public final static Zaapi Banque_Bonta = new Zaapi("Banque", new Point(-31, -54), new PointF(0.8073541, 0.5688623), ZaapiType.Divers);
     public final static Zaapi Bibliotheque_Bonta = new Zaapi("Bibliotheque", new Point(-33, -58), new PointF(0.4068745, 0.7095808), ZaapiType.Divers);
@@ -88,25 +88,25 @@ public class Zaapi extends Transport implements Serializable{
     public final static Zaapi Atelier_Pecheurs_Brakmar = new Zaapi("Atelier des pecheurs", new Point(-20, 39), new PointF(0.5955, 0.1934), ZaapiType.Atelier);
     public final static Zaapi Atelier_Sculpteurs_Brakmar = new Zaapi("Atelier des sculpteurs", new Point(-21, 40), new PointF(0.5698, 0.488), ZaapiType.Atelier);
     public final static Zaapi Atelier_Tailleurs_Brakmar = new Zaapi("Atelier des tailleurs", new Point(-24, 36), new PointF(0.2937, 0.1252), ZaapiType.Atelier);
-    public final static Zaapi HDV_Animaux_Brakmar = new Zaapi("Hôtel de vente des animaux", new Point(-32, 37), new PointF(0.7632, 0.1593), ZaapiType.HDV);
-    public final static Zaapi HDV_Alchimistes_Brakmar = new Zaapi("Hôtel de vente des alchimistes", new Point(-24, 40), new PointF(0.768, 0.4028), ZaapiType.HDV);
-    public final static Zaapi HDV_Ames_Brakmar = new Zaapi("Hôtel de vente des ames", new Point(-27, 38), new PointF(0.1934, 0.1303), ZaapiType.HDV);
-    public final static Zaapi HDV_Bijoutiers_Brakmar = new Zaapi("Hôtel de vente des bijoutiers", new Point(-27, 39), new PointF(0.6228, 0.3577), ZaapiType.HDV);
-    public final static Zaapi HDV_Bricoleurs_Brakmar = new Zaapi("Hôtel de vente des bricoleurs", new Point(-29, 34), new PointF(0.7656, 0.5811), ZaapiType.HDV);
-    public final static Zaapi HDV_Bucherons_Brakmar = new Zaapi("Hôtel de vente des bucherons", new Point(-22, 40), new PointF(0.3748, 0.1543), ZaapiType.HDV);
-    public final static Zaapi HDV_Chasseurs_Brakmar = new Zaapi("Hôtel de vente des chasseurs", new Point(-27, 32), new PointF(0.9061, 0.3126), ZaapiType.HDV);
-    public final static Zaapi HDV_Cordonniers_Brakmar = new Zaapi("Hôtel de vente des cordonniers", new Point(-23, 37), new PointF(0.9374, 0.1553), ZaapiType.HDV);
-    public final static Zaapi HDV_Documents_Brakmar = new Zaapi("Hôtel de vente des documents", new Point(-28, 37), new PointF(0.9053, 0.6152), ZaapiType.HDV);
-    public final static Zaapi HDV_Faconneurs_Brakmar = new Zaapi("Hôtel de vente des faconneurs", new Point(-22, 32), new PointF(0.5506, 0.5311), ZaapiType.HDV);
-    public final static Zaapi HDV_Forgerons_Brakmar = new Zaapi("Hôtel de vente des forgerons", new Point(-21, 35), new PointF(0.577, 0.0401), ZaapiType.HDV);
-    public final static Zaapi HDV_Milice_Brakmar = new Zaapi("Hôtel de vente des mineurs", new Point(-20, 35), new PointF(0.7327, 0.1743), ZaapiType.HDV);
-    public final static Zaapi HDV_Parchemins_Lies_Brakmar = new Zaapi("Hôtel de vente des parchemins lies", new Point(-26, 36), new PointF(0.9029, 0.2745), ZaapiType.HDV);
-    public final static Zaapi HDV_Paysans_Brakmar = new Zaapi("Hôtel de vente des paysans", new Point(-24, 32), new PointF(0.2103, 0.2274), ZaapiType.HDV);
-    public final static Zaapi HDV_Pecheurs_Brakmar = new Zaapi("Hôtel de vente des pecheurs", new Point(-19, 39), new PointF(0.455, 0.513), ZaapiType.HDV);
-    public final static Zaapi HDV_Ressources_Brakmar = new Zaapi("Hôtel de vente des ressources", new Point(-25, 34), new PointF(0.3323, 0.3657), ZaapiType.HDV);
-    public final static Zaapi HDV_Runes_Brakmar = new Zaapi("Hôtel de vente des runes", new Point(-28, 36), new PointF(0.9229, 0.2134), ZaapiType.HDV);
-    public final static Zaapi HDV_Sculpteurs_Brakmar = new Zaapi("Hôtel de vente des sculptures", new Point(-21, 39), new PointF(0.1035, 0.1603), ZaapiType.HDV);
-    public final static Zaapi HDV_Taileurs_Brakmar = new Zaapi("Hôtel de vente des tailleurs", new Point(-24, 37), new PointF(0.1918, 0.3327), ZaapiType.HDV);
+    public final static Zaapi HDV_Animaux_Brakmar = new Zaapi("HÃ´tel de vente des animaux", new Point(-32, 37), new PointF(0.7632, 0.1593), ZaapiType.HDV);
+    public final static Zaapi HDV_Alchimistes_Brakmar = new Zaapi("HÃ´tel de vente des alchimistes", new Point(-24, 40), new PointF(0.768, 0.4028), ZaapiType.HDV);
+    public final static Zaapi HDV_Ames_Brakmar = new Zaapi("HÃ´tel de vente des ames", new Point(-27, 38), new PointF(0.1934, 0.1303), ZaapiType.HDV);
+    public final static Zaapi HDV_Bijoutiers_Brakmar = new Zaapi("HÃ´tel de vente des bijoutiers", new Point(-27, 39), new PointF(0.6228, 0.3577), ZaapiType.HDV);
+    public final static Zaapi HDV_Bricoleurs_Brakmar = new Zaapi("HÃ´tel de vente des bricoleurs", new Point(-29, 34), new PointF(0.7656, 0.5811), ZaapiType.HDV);
+    public final static Zaapi HDV_Bucherons_Brakmar = new Zaapi("HÃ´tel de vente des bucherons", new Point(-22, 40), new PointF(0.3748, 0.1543), ZaapiType.HDV);
+    public final static Zaapi HDV_Chasseurs_Brakmar = new Zaapi("HÃ´tel de vente des chasseurs", new Point(-27, 32), new PointF(0.9061, 0.3126), ZaapiType.HDV);
+    public final static Zaapi HDV_Cordonniers_Brakmar = new Zaapi("HÃ´tel de vente des cordonniers", new Point(-23, 37), new PointF(0.9374, 0.1553), ZaapiType.HDV);
+    public final static Zaapi HDV_Documents_Brakmar = new Zaapi("HÃ´tel de vente des documents", new Point(-28, 37), new PointF(0.9053, 0.6152), ZaapiType.HDV);
+    public final static Zaapi HDV_Faconneurs_Brakmar = new Zaapi("HÃ´tel de vente des faconneurs", new Point(-22, 32), new PointF(0.5506, 0.5311), ZaapiType.HDV);
+    public final static Zaapi HDV_Forgerons_Brakmar = new Zaapi("HÃ´tel de vente des forgerons", new Point(-21, 35), new PointF(0.577, 0.0401), ZaapiType.HDV);
+    public final static Zaapi HDV_Milice_Brakmar = new Zaapi("HÃ´tel de vente des mineurs", new Point(-20, 35), new PointF(0.7327, 0.1743), ZaapiType.HDV);
+    public final static Zaapi HDV_Parchemins_Lies_Brakmar = new Zaapi("HÃ´tel de vente des parchemins lies", new Point(-26, 36), new PointF(0.9029, 0.2745), ZaapiType.HDV);
+    public final static Zaapi HDV_Paysans_Brakmar = new Zaapi("HÃ´tel de vente des paysans", new Point(-24, 32), new PointF(0.2103, 0.2274), ZaapiType.HDV);
+    public final static Zaapi HDV_Pecheurs_Brakmar = new Zaapi("HÃ´tel de vente des pecheurs", new Point(-19, 39), new PointF(0.455, 0.513), ZaapiType.HDV);
+    public final static Zaapi HDV_Ressources_Brakmar = new Zaapi("HÃ´tel de vente des ressources", new Point(-25, 34), new PointF(0.3323, 0.3657), ZaapiType.HDV);
+    public final static Zaapi HDV_Runes_Brakmar = new Zaapi("HÃ´tel de vente des runes", new Point(-28, 36), new PointF(0.9229, 0.2134), ZaapiType.HDV);
+    public final static Zaapi HDV_Sculpteurs_Brakmar = new Zaapi("HÃ´tel de vente des sculptures", new Point(-21, 39), new PointF(0.1035, 0.1603), ZaapiType.HDV);
+    public final static Zaapi HDV_Taileurs_Brakmar = new Zaapi("HÃ´tel de vente des tailleurs", new Point(-24, 37), new PointF(0.1918, 0.3327), ZaapiType.HDV);
     public final static Zaapi Arene_Brakmar = new Zaapi("Arene", new Point(-27, 38), new PointF(0.4582, 0.3417), ZaapiType.Divers);
     public final static Zaapi Banque_Brakmar = new Zaapi("Banque", new Point(-27, 35), new PointF(0.2632, 0.1052), ZaapiType.Divers);
     public final static Zaapi Bibliotheque_Brakmar = new Zaapi("Bibliotheque", new Point(-28, 37), new PointF(0.9101, 0.6292), ZaapiType.Divers);
@@ -261,10 +261,10 @@ public class Zaapi extends Transport implements Serializable{
 		return zaapis;
     }
     
-    /** Permet de retrouver un zaapi à partir de sa position.
+    /** Permet de retrouver un zaapi Ã  partir de sa position.
      * @param position - Position du zaapi.
      * @return Zaapi correspondant.
-     * @throws B4DException Si aucun zaapi ne correspond à cette position.
+     * @throws B4DException Si aucun zaapi ne correspond Ã  cette position.
      */
     public final static Zaapi getZaapi(Point position) throws B4DException{
 		for(Transport zaapi: getAll()) {
@@ -274,10 +274,10 @@ public class Zaapi extends Transport implements Serializable{
 		throw new B4DException("Cannot found the zaapi in position [" + position.x + ":" + position.y + "] on the map.");
     }
 	
-    /** Permet de retrouver un zaapi à partir de son nom.
+    /** Permet de retrouver un zaapi Ã  partir de son nom.
      * @param name - Nom du zaapi.
      * @return Zaapi correspondant.
-     * @throws B4DException Si aucun zaapi ne possède ce nom.
+     * @throws B4DException Si aucun zaapi ne possÃ¨de ce nom.
      */
 	public static Zaapi getZaapi(String name) throws B4DException {
 		for(Transport zaapi: getAll()) {

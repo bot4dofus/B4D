@@ -1,9 +1,6 @@
 #Ecplise
-.settings/
 bin/
 target/
-.project
-.classpath
 
 #Other
 wiki/
@@ -12,3 +9,5 @@ world_creation/
 **/*.txt
 **/*.b4d
 **/*.json
+**/*.properties
+**/*.credentials

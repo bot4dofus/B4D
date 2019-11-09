@@ -9,8 +9,8 @@ import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Potion} représente une potion de transport.<br><br>
- * Cette classe étend la classe {@code Transport}.
+/** La classe {@code Potion} reprÃ©sente une potion de transport.<br><br>
+ * Cette classe Ã©tend la classe {@code Transport}.
  */
 public class Potion extends Transport implements Serializable{
 	

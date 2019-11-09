@@ -9,8 +9,8 @@ import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Walk} représente une marche.<br><br>
- * Cette classe étend la classe {@code Transport}.
+/** La classe {@code Walk} reprÃ©sente une marche.<br><br>
+ * Cette classe Ã©tend la classe {@code Transport}.
  */
 public class Walk extends Transport implements Serializable{
 	
@@ -35,7 +35,7 @@ public class Walk extends Transport implements Serializable{
 	/******************/
 	
 	/** Constructeur de la classe {@code Walk}.
-	 * @param position - Position de la marche sur l'écran.
+	 * @param position - Position de la marche sur l'Ã©cran.
 	 */
 	public Walk(Point position) {
 		super("Walking", position, null, walkCost);

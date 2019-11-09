@@ -2,28 +2,75 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>B4D</groupId>
   <artifactId>B4D</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${timestamp}</version>
+  <packaging>jar</packaging>
   <name>B4D</name>
   <description>Bot for Dofus</description>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
       <resource>
-        <directory>src</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
+        <directory>src/main/resources</directory>
       </resource>
     </resources>
     <plugins>
+   
+      <!-- Used to generate the java doc -->
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <reportOutputDirectory>${project.basedir}</reportOutputDirectory>
+          <destDir>docs</destDir>
+        </configuration>
+      </plugin>
+    	   
+      <!-- Used to skip tests -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M3</version>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
+      </plugin>
+      
+      <!-- Used to compile -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.7.0</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
         </configuration>
       </plugin>
+      
+      <!-- Used to include jpcap.jar in the final jar -->
+      <plugin>
+	    <artifactId>maven-assembly-plugin</artifactId>
+	    <configuration>
+	        <archive>
+	            <manifest>
+	                <mainClass>fr.B4D.gui.JFrame_B4D</mainClass>
+	            </manifest>
+	        </archive>
+	        <descriptorRefs>
+	            <descriptorRef>jar-with-dependencies</descriptorRef>
+	        </descriptorRefs>
+	    </configuration>
+	    <executions>
+		    <execution>
+		      <id>make-assembly</id> <!-- this is used for inheritance merges -->
+		      <phase>package</phase> <!-- bind to the packaging phase -->
+		      <goals>
+		        <goal>single</goal>
+		      </goals>
+		  	</execution>
+		  </executions>
+	</plugin>
     </plugins>
   </build>
   <dependencies>
@@ -68,20 +115,29 @@
 		<version>v1beta4-rev66-1.25.0</version>
 	</dependency>
 	<dependency>
-		<groupId>javax.mail</groupId>
-		<artifactId>mail</artifactId>
-		<version>1.4</version>
-	</dependency>
-	<dependency>
 		<groupId>com.google.apis</groupId>
 		<artifactId>google-api-services-drive</artifactId>
 		<version>v3-rev136-1.25.0</version>
 	</dependency>
 	<dependency>
-		<groupId>com.github.kirviq</groupId>
-		<artifactId>dumbster</artifactId>
-		<version>1.7.1</version>
-		<scope>test</scope>
+		<groupId>info.debatty</groupId>
+		<artifactId>java-string-similarity</artifactId>
+		<version>1.2.1</version>
 	</dependency>
+	<dependency>
+      <groupId>org.pcap4j</groupId>
+      <artifactId>pcap4j-core</artifactId>
+      <version>1.8.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.pcap4j</groupId>
+      <artifactId>pcap4j-packetfactory-static</artifactId>
+      <version>1.8.2</version>
+    </dependency>
   </dependencies>
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<timestamp>${maven.build.timestamp}</timestamp>
+    <maven.build.timestamp.format>yyyy.MM.dd</maven.build.timestamp.format>
+  </properties>
 </project>

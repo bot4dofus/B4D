@@ -13,9 +13,8 @@ import java.io.IOException;
 import fr.B4D.bot.B4D;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.threads.KeyboardThread;
 
-/** La classe {@code Keyboard} permet d'accéder à toutes les méthodes liés au clavier.
+/** La classe {@code Keyboard} permet d'accÃ©der Ã  toutes les mÃ©thodes liÃ©s au clavier.
  */
 public final class Keyboard{
 	
@@ -38,22 +37,22 @@ public final class Keyboard{
 	/****************/
 	
 	/** Permet de simuler l'appui sur une touche du clavier. 
-	 * @param keyEvent - Entier représentant le touche du clavier.
-	 * @param time - Temps d'attente après l'appui sur la touche.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	 * @param keyEvent - Entier reprÃ©sentant le touche du clavier.
+	 * @param time - Temps d'attente aprÃ¨s l'appui sur la touche.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	public void sendKey(int keyEvent, int time) throws StopProgramException, CancelProgramException {
 		robot.keyPress(keyEvent);
 		robot.keyRelease(keyEvent);
-		B4D.wait.wait(time);
+		B4D.wait.sleep(time);
 	}
 	
-	/** Permet de simuler l'appui sur une touche du clavier avec un temps d'attente par défaut de 100ms.
-	 * Cela est identique à {@code sendKey(keyEvent, 100)}.
-	 * @param keyEvent - Entier représentant le touche du clavier.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/** Permet de simuler l'appui sur une touche du clavier avec un temps d'attente par dÃ©faut de 100ms.
+	 * Cela est identique Ã  {@code sendKey(keyEvent, 100)}.
+	 * @param keyEvent - Entier reprÃ©sentant le touche du clavier.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	public void sendKey(int keyEvent) throws StopProgramException, CancelProgramException {
 		sendKey(keyEvent, 100);
@@ -63,12 +62,12 @@ public final class Keyboard{
 	 /** WRITE KEYBOARD **/
 	/********************/
 	
-	/** Permet d'écrire un texte au clavier.
-	 * Cette méthode copy en réalité la chaine de caractère dans le presse papier puis fait un Ctrl+V.
-	 * @param text - Texte à écrire.
-	 * @param time - Temps d'attente après écriture du texte.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/** Permet d'Ã©crire un texte au clavier.
+	 * Cette mÃ©thode copy en rÃ©alitÃ© la chaine de caractÃ¨re dans le presse papier puis fait un Ctrl+V.
+	 * @param text - Texte Ã  Ã©crire.
+	 * @param time - Temps d'attente aprÃ¨s Ã©criture du texte.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	public void writeKeyboard(String text, int time) throws StopProgramException, CancelProgramException {
 		setClipboard(text);		
@@ -76,15 +75,15 @@ public final class Keyboard{
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4D.wait.wait(time);
+		B4D.wait.sleep(time);
 	}
 	
-	/** Permet d'écrire un texte au clavier avec un temps d'attente par défaut de 500ms.
-	 * Cela est identique à {@code writeKeyboard(text, 500)}.
-	 * Cette méthode copy en réalité la chaine de caractère dans le presse papier puis fait un Ctrl+V
-	 * @param text - Texte à écrire.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/** Permet d'Ã©crire un texte au clavier avec un temps d'attente par dÃ©faut de 500ms.
+	 * Cela est identique Ã  {@code writeKeyboard(text, 500)}.
+	 * Cette mÃ©thode copy en rÃ©alitÃ© la chaine de caractÃ¨re dans le presse papier puis fait un Ctrl+V
+	 * @param text - Texte Ã  Ã©crire.
+	 * @throws StopProgramException Si le programme est stoppÃ©.
+	 * @throws CancelProgramException Si le programme est annulÃ©.
 	 */
 	public void writeKeyboard(String text) throws StopProgramException, CancelProgramException {
 		writeKeyboard(text, 500);
@@ -94,16 +93,16 @@ public final class Keyboard{
 	 /** CLIPBOARD **/
 	/***************/
 	
-	/** Permet de copier une chaine de caractère dans le presse papier.
-	 * @param text - Texte à copier.
+	/** Permet de copier une chaine de caractÃ¨re dans le presse papier.
+	 * @param text - Texte Ã  copier.
 	 */
 	public void setClipboard(String text) {
 		clipboard.setContents(new StringSelection(text), null);
 	}
 	
-	/** Permet de retourner une chaine de caractère
-	 * @return Chaine de caractère présente dans le presse papier.
-	 * {@code null} si la donnée du presse papier n'est pas une chaine de caractère ou si le presse papier est vide.
+	/** Permet de retourner une chaine de caractÃ¨re
+	 * @return Chaine de caractÃ¨re prÃ©sente dans le presse papier.
+	 * {@code null} si la donnÃ©e du presse papier n'est pas une chaine de caractÃ¨re ou si le presse papier est vide.
 	 */
 	public String getClipboard(){
         try {
@@ -119,19 +118,10 @@ public final class Keyboard{
 	
 	/** Permet d'attendre l'appui sur une touche.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Entier représentant la touche enfoncée. {@code -1} si timeout.
+	 * @return Entier reprÃ©sentant la touche enfoncÃ©e. {@code -1} si timeout.
 	 */
 	public int waitForKeyboard(int timeOut) {
-		KeyboardThread keyboardThread = new KeyboardThread();
-		keyboardThread.start();
-		try {
-			keyboardThread.join(timeOut);
-		} catch (InterruptedException e) {
-			B4D.logger.error(e);
-		}
-		
-		if(keyboardThread.isAlive()) 
-			keyboardThread.interrupt();
-		return keyboardThread.getKey();
+		//To be implemented using KeyboardListener and keys queue just like Chat and messages works
+		return -1;
 	}
 }

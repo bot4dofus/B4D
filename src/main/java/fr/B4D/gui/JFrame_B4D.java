@@ -25,8 +25,6 @@ import javax.swing.UIManager;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
-import net.sourceforge.jpcap.capture.CaptureDeviceLookupException;
-import net.sourceforge.jpcap.capture.CaptureDeviceOpenException;
 
 public class JFrame_B4D extends JFrame{
 
@@ -60,7 +58,7 @@ public class JFrame_B4D extends JFrame{
 		}
 	}
 	
-	public JFrame_B4D() throws B4DException, ClassNotFoundException, IOException, CaptureDeviceLookupException, CaptureDeviceOpenException, AWTException{
+	public JFrame_B4D() throws B4DException, ClassNotFoundException, IOException, AWTException{
 		b4d = new B4D();
 		programPanel = new JPanel_Programme(b4d);
 		personPanel = new JPanel_Personnage(b4d);
