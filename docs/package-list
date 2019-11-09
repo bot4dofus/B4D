@@ -1,6 +1,7 @@
 fr.B4D.bot
 fr.B4D.bot.statics
 fr.B4D.breeding
+fr.B4D.capture
 fr.B4D.dao
 fr.B4D.dofus
 fr.B4D.farming
@@ -12,8 +13,6 @@ fr.B4D.program
 fr.B4D.programs
 fr.B4D.programs.tutorials
 fr.B4D.socket
-fr.B4D.socket.os
-fr.B4D.threads
 fr.B4D.transport
 fr.B4D.transport.transports
 fr.B4D.utils

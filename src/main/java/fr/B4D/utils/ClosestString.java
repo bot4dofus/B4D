@@ -49,7 +49,7 @@ public class ClosestString {
 	}
 	
 	/** Permet d'ajouter un nouveau mot.
-	 * @param matchs - Nouveau mot.
+	 * @param match - Nouveau mot.
 	 */
 	public void add(String match) {
 		if(!words.contains(match))
