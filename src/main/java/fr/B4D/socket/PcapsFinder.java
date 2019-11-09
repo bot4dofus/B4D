@@ -40,11 +40,11 @@ public final class PcapsFinder {
 			}
 			
 			if(currentAddress == null)
-				throw new B4DException("No active device found.");
+				throw new B4DException("No active address found. Make sure you have an internet connection.");
 			
 			PcapNetworkInterface nif = Pcaps.getDevByAddress(currentAddress);
 			if(nif == null)
-				throw new B4DException("No active device found.");
+				throw new B4DException("No active device found. Make sure WinPcap or libpcap is installed.");
 			
 			return nif;
 		}catch(SocketException | PcapNativeException e) {
