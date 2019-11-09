@@ -1,14 +1,14 @@
 package fr.B4D.gui;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.MouseInfo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URI;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -25,9 +25,6 @@ public class JPanel_Admin extends JPanel {
 	
 	public final int width = 635;
 	public final int height = 70;
-
-	private JButton btnStart;
-	private JButton btnRecord;
 	
 	/**
 	 * Create the panel.
@@ -35,31 +32,20 @@ public class JPanel_Admin extends JPanel {
 	 */
 	public JPanel_Admin(B4D b4d) {
 				
-		addComponentListener(new ComponentAdapter() {
-			public void componentShown(ComponentEvent e) {
-				if(b4d.getConfiguration().getGameFrame() != null && b4d.getConfiguration().getChatMenu() != null && b4d.getConfiguration().getChatBar() != null && b4d.getConfiguration().getMinimap() != null) {
-					btnStart.setEnabled(true);
-					btnRecord.setEnabled(true);
-				}else {
-					btnStart.setEnabled(false);		
-					btnRecord.setEnabled(false);					
-				}
-			}
-		});
 		setBackground(new Color(33,43,53));
 		setLayout(null);
 		
-		JLabel lblStart = new JLabel("Programme de test :");
-		lblStart.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblStart.setOpaque(true);
-		lblStart.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStart.setForeground(Color.WHITE);
-		lblStart.setBackground(new Color(46, 139, 87));
-		lblStart.setBounds(10, 10, 150, 25);
-		add(lblStart);
+		JLabel lblTestProgram = new JLabel("Programme de test :");
+		lblTestProgram.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTestProgram.setOpaque(true);
+		lblTestProgram.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTestProgram.setForeground(Color.WHITE);
+		lblTestProgram.setBackground(new Color(46, 139, 87));
+		lblTestProgram.setBounds(10, 10, 150, 25);
+		add(lblTestProgram);
 		
-		btnStart = new JButton("Commencer");
-		btnStart.addActionListener(new ActionListener() {
+		JButton btnTestProgram = new JButton("Commencer");
+		btnTestProgram.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Test.test.cycle(b4d.getTeam().get(0));
@@ -68,9 +54,9 @@ public class JPanel_Admin extends JPanel {
 				}
 			}
 		});
-		btnStart.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnStart.setBounds(10, 35, 150, 25);
-		add(btnStart);
+		btnTestProgram.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnTestProgram.setBounds(10, 35, 150, 25);
+		add(btnTestProgram);
 		
 		JLabel lblRecord = new JLabel("Enregistrement :");
 		lblRecord.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -81,7 +67,7 @@ public class JPanel_Admin extends JPanel {
 		lblRecord.setBounds(165, 10, 150, 25);
 		add(lblRecord);
 		
-		btnRecord = new JButton("Commencer");
+		JButton btnRecord = new JButton("Commencer");
 		btnRecord.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				B4D.mouse.getPoint(
@@ -102,6 +88,32 @@ public class JPanel_Admin extends JPanel {
 		btnRecord.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnRecord.setBounds(165, 35, 150, 25);
 		add(btnRecord);
+		
+		JLabel lblPropose = new JLabel("Nouveau programme / Amélioration / Question :");
+		lblPropose.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblPropose.setOpaque(true);
+		lblPropose.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPropose.setForeground(Color.WHITE);
+		lblPropose.setBackground(new Color(46, 139, 87));
+		lblPropose.setBounds(320, 10, 305, 25);
+		add(lblPropose);
+		
+		JButton btnPropose = new JButton("Proposer");
+		btnPropose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop desktop = java.awt.Desktop.getDesktop();
+					URI url = new URI("https://github.com/LucBerge/B4D/issues/new/choose");
+					desktop.browse(url);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+		btnPropose.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnPropose.setBounds(320, 35, 305, 25);
+		add(btnPropose);
+		
 		setVisible(true);
 	}
 
