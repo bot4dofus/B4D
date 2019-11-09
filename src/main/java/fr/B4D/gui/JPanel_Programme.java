@@ -239,23 +239,14 @@ public class JPanel_Programme extends JPanel {
 		checkBox_Stop.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(checkBox_Stop);
 		
-		JLabel lblDpartEn = new JLabel("D\u00E9part en :");
-		lblDpartEn.setBackground(new Color(46, 139, 87));
-		lblDpartEn.setForeground(Color.WHITE);
-		lblDpartEn.setOpaque(true);
-		lblDpartEn.setBounds(475, 10, 150, 25);
-		lblDpartEn.setHorizontalAlignment(SwingConstants.CENTER);
-		lblDpartEn.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		add(lblDpartEn);
-		
-		JLabel label_Pos = new JLabel("X:Y");
-		label_Pos.setBackground(Color.LIGHT_GRAY);
-		label_Pos.setOpaque(true);
-		label_Pos.setForeground(Color.DARK_GRAY);
-		label_Pos.setBounds(475, 35, 150, 40);
-		label_Pos.setHorizontalAlignment(SwingConstants.CENTER);
-		label_Pos.setFont(new Font("Tahoma", Font.BOLD, 25));
-		add(label_Pos);
+		JLabel lblProgram = new JLabel("Programme :");
+		lblProgram.setBackground(new Color(46, 139, 87));
+		lblProgram.setForeground(Color.WHITE);
+		lblProgram.setOpaque(true);
+		lblProgram.setBounds(475, 10, 150, 25);
+		lblProgram.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProgram.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(lblProgram);
 		
 		button_Start = new JButton("Commencer");
 		button_Start.addActionListener(new ActionListener() {
@@ -272,7 +263,7 @@ public class JPanel_Programme extends JPanel {
 				getParent().requestFocus();
 			}
 		});
-		button_Start.setBounds(475, 75, 150, 45);
+		button_Start.setBounds(475, 35, 150, 40);
 		button_Start.setFont(new Font("Microsoft Sans Serif", Font.PLAIN, 15));
 		add(button_Start);
 	}
