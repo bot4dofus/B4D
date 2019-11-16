@@ -32,7 +32,7 @@ public class DofusDatabaseTest {
 
 	@Test
 	public void testFindItems() throws B4DException {
-		List<Item> itemsByName = dofusDatabase.findItemsByName("Peau de Ramane d'Égoutant");
+		List<Item> itemsByName = dofusDatabase.findItemsByName("Dagob mineure");
 		List<Item> itemsById = dofusDatabase.findItemsById("12");
 		
 		for (Item item:itemsByName)
