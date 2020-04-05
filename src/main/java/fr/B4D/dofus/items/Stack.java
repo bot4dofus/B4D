@@ -22,6 +22,10 @@ public class Stack {
 	 */
 	public Stack(Item item, int amount) {
 		super();
+		
+		if(item == null)
+			throw new IllegalArgumentException("The stack item cannot be null.");
+		
 		this.item = item;
 		this.amount = amount;
 	}
