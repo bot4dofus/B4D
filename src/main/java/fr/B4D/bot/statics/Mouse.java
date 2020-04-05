@@ -466,6 +466,81 @@ public final class Mouse {
 		tripleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 
+	  /*********************/
+	 /** GLISSER DEPOSER **/
+	/*********************/
+	
+	/** Permet de simuler un glisser/déposer.
+	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées simples.
+	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées simples.
+	 * @param millis - Temps d'attente entre l'appui et le relarchement et après le relachement.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 */
+	public void dragDrop(Point pressedPosition, Point releasedPosition, int millis) throws StopProgramException, CancelProgramException {
+		robot.mouseMove((int)pressedPosition.getX(),(int)pressedPosition.getY());
+		robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+
+		B4D.wait.sleep(millis);
+		
+		robot.mouseMove((int)releasedPosition.getX(),(int)releasedPosition.getY());
+		robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+
+		B4D.wait.sleep(millis);
+	}
+
+	/** Permet de simuler un glisser/déposer avec un temps d'attente par défaut de 1 secondes.
+	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées simples.
+	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées simples.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 */
+	public void dragDrop(Point pressedPosition, Point releasedPosition) throws StopProgramException, CancelProgramException{
+		dragDrop(pressedPosition, releasedPosition, 1000);
+	}
+
+	/** Permet de simuler un glisser/déposer.
+	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées relatives.
+	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées relatives.
+	 * @param millis - Temps d'attente entre l'appui et le relarchement et après le relachement.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 */
+	public void dragDrop(PointF pressedPosition, PointF releasedPosition, int millis) throws StopProgramException, CancelProgramException{
+		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), millis);
+	}
+
+	/** Permet de simuler un glisser/déposer avec un temps d'attente par défaut de 1 secondes.
+	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées relatives.
+	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées relatives.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 */
+	public void dragDrop(PointF pressedPosition, PointF releasedPosition) throws StopProgramException, CancelProgramException{
+		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), 1000);
+	}
+
+	/** Permet de simuler un glisser/déposer.
+	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées du damier de dofus.
+	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées du damier de dofus.
+	 * @param millis - Temps d'attente entre l'appui et le relarchement et après le relachement.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 */
+	public void dragDrop(PointD pressedPosition, PointD releasedPosition, int millis) throws StopProgramException, CancelProgramException{
+		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), millis);
+	}
+
+	/** Permet de simuler un glisser/déposer avec un temps d'attente par défaut de 1 secondes.
+	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées du damier de dofus.
+	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées du damier de dofus.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 */
+	public void dragDrop(PointD pressedPosition, PointD releasedPosition) throws StopProgramException, CancelProgramException{
+		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), 1000);
+	}
+	
 	  /**********/
 	 /** CHAT **/
 	/**********/
