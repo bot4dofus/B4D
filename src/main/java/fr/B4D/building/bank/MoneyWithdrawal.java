@@ -7,6 +7,8 @@ import fr.B4D.utils.PointF;
 
 public class MoneyWithdrawal extends BankAction{
 
+	public static final  MoneyWithdrawal ALL = new MoneyWithdrawal(-1);
+	
 	private Integer amount;
 
 	/** Constructs a {@code MoneyWithdrawal} with a specific amount.

@@ -7,6 +7,8 @@ import fr.B4D.utils.PointF;
 
 public class MoneyDeposit extends BankAction{
 
+	public static final  MoneyDeposit ALL = new MoneyDeposit(-1);
+	
 	private Integer amount;
 	
 	/** Constructs a {@code MoneyDeposit} with a specific amount.
