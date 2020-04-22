@@ -13,6 +13,7 @@ import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.programs.Loto;
+import fr.B4D.programs.tutorials.BankAPI;
 import fr.B4D.programs.tutorials.ConverterAPI;
 import fr.B4D.programs.tutorials.ExchangeAPI;
 import fr.B4D.programs.tutorials.KeyboardAPI;
@@ -105,6 +106,10 @@ public final static ArrayList<Program> getAll(){
   	
   	programs.add(ScreenAPI.TUTORIAL1);
   	programs.add(ScreenAPI.TUTORIAL2);
+  	
+  	programs.add(BankAPI.TUTORIAL1);
+  	programs.add(BankAPI.TUTORIAL2);
+  	
     return programs;
   }
 	
