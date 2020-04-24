@@ -1,17 +1,24 @@
 package fr.B4D.building.bank;
 
 import fr.B4D.bot.B4D;
+
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
+/**
+ * The class {@code MoneyDeposit} represents a money deposit action on a bank.<br><br>
+ * This class extends {@code BankAction}.
+ * A money deposit has an amount.
+ */
 public class MoneyDeposit extends BankAction{
 
 	public static final  MoneyDeposit ALL = new MoneyDeposit(-1);
 	
 	private Integer amount;
 	
-	/** Constructs a {@code MoneyDeposit} with a specific amount.
+	/**
+	 * Constructs a {@code MoneyDeposit} with a specific amount.
 	 * @param amount - Number of kamas to add to the account, -1 to add all.
 	 */
 	public MoneyDeposit(Integer amount) {
@@ -23,7 +30,8 @@ public class MoneyDeposit extends BankAction{
 		this.amount = amount;
 	}
 
-	/** Returns the amount of the deposit.
+	/**
+	 * Returns the amount of the deposit.
 	 * @return Integer representing the amount.
 	 */
 	public Integer getAmount() {

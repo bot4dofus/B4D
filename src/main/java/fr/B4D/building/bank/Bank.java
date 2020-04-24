@@ -12,7 +12,8 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
-/** The class {@code Bank} represents a bank on the map.<br><br>
+/**
+ * The class {@code Bank} represents a bank on the map.<br><br>
  * This class extends {@code IndoorBuilding}.
  * A bank has a banker position.
  */
@@ -26,7 +27,8 @@ public class Bank extends IndoorBuilding{
 	 /** BUILDER **/
 	/*************/
 	
-	/** Builder of the {@code Bank} class.
+	/**
+	 * Builder of the {@code Bank} class.
 	 * @param position - Position of the bank on the map.
 	 * @param inPoints - List of points to get into the building.
 	 * @param outPoints - List of points to get out of the building.
@@ -41,7 +43,8 @@ public class Bank extends IndoorBuilding{
 	 /** GET & SET **/
 	/***************/
 	
-	/** Returns the position of the banker on the screen.
+	/**
+	 * Returns the position of the banker on the screen.
 	 * @return Position of the banker.
 	 */
 	public PointF getBankerPosition() {
@@ -52,8 +55,9 @@ public class Bank extends IndoorBuilding{
 	 /** PUBLIC METHODS **/
 	/********************/
 
-	/** Performs actions on the bank.
-	 * @param person Person which go to the building.
+	/**
+	 * Performs actions on the bank.
+	 * @param person - Person which go to the building.
 	 * @param bankActions - Array of actions to realize.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
@@ -63,8 +67,9 @@ public class Bank extends IndoorBuilding{
 		doActions(person, Arrays.asList(bankActions));
 	}
 	
-	/** Performs actions on the bank.
-	 * @param person Person which go to the building.
+	/**
+	 * Performs actions on the bank.
+	 * @param person - Person which go to the building.
 	 * @param bankActions - List of actions to realize.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.

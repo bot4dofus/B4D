@@ -8,18 +8,28 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
+/**
+ * The class {@code StackDeposit} represents a stack deposit action on a bank.<br><br>
+ * This class extends {@code BankAction}.
+ * A stack deposit has an stack.
+ */
 public class StackDeposit extends BankAction{
 
 	public static final StackDeposit ALL = new StackDeposit(null);
 	
 	private Stack stack;
-	
+
+	/**
+	 * Constructs a {@code StackDeposit} with a specific stack.
+	 * @param amount - Stack to store, {@code null} if all the inventory has to bee stored.
+	 */
 	public StackDeposit(Stack stack) {
 		super();
 		this.stack = stack;
 	}
 	
-	/** Returns the stacks to drop off.
+	/**
+	 * Returns the stacks to drop off.
 	 * @return List of stacks to drop off.
 	 */
 	public Stack getStack() {

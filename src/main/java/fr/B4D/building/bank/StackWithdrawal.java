@@ -8,18 +8,28 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
+/**
+ * The class {@code StackWithdrawal} represents a stack withdrawal action on a bank.<br><br>
+ * This class extends {@code BankAction}.
+ * A stack withdrawal has an stack.
+ */
 public class StackWithdrawal extends BankAction{
 
 	public static final StackWithdrawal ALL = new StackWithdrawal(null);
 	
 	private Stack stack;
-	
+
+	/**
+	 * Constructs a {@code StackWithdrawal} with a specific stack.
+	 * @param amount - Stack to store, {@code null} if all the inventory has to bee retrieved.
+	 */
 	public StackWithdrawal(Stack stack) {
 		super();
 		this.stack = stack;
 	}
 	
-	/** Returns the stacks to withdraw.
+	/**
+	 * Returns the stacks to withdraw.
 	 * @return List of stacks to withdraw.
 	 */
 	public Stack getStack() {

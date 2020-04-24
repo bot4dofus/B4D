@@ -5,13 +5,19 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
+/**
+ * The class {@code MoneyWithdrawal} represents a money withdrawal action on a bank.<br><br>
+ * This class extends {@code BankAction}.
+ * A money withdrawal has an amount.
+ */
 public class MoneyWithdrawal extends BankAction{
 
 	public static final  MoneyWithdrawal ALL = new MoneyWithdrawal(-1);
 	
 	private Integer amount;
 
-	/** Constructs a {@code MoneyWithdrawal} with a specific amount.
+	/**
+	 * Constructs a {@code MoneyWithdrawal} with a specific amount.
 	 * @param amount - Number of kamas to retrieve from the account, -1 to retrieve all.
 	 */
 	public MoneyWithdrawal(Integer amount) {
@@ -23,7 +29,8 @@ public class MoneyWithdrawal extends BankAction{
 		this.amount = amount;
 	}
 
-	/** Returns the amount of the withdrawal.
+	/**
+	 * Returns the amount of the withdrawal.
 	 * @return Integer representing the amount.
 	 */
 	public Integer getAmount() {
