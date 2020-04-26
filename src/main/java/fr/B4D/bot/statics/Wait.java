@@ -65,7 +65,9 @@ public final class Wait {
 		
 		Instant startTime = Instant.now();
 		try {
-			object.wait(time);
+			synchronized(object){
+				object.wait(time);
+			}
 		} catch (InterruptedException e) {
 			setPause();
 			Instant currentTime = Instant.now();
