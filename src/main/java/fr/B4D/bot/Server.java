@@ -18,7 +18,7 @@ public class Server implements Serializable{
 
 	//French
 	public final static Server FURYE = new Server("Furye", "34.255.129.242 || 63.34.101.111", false); //precedement 34.255.26.216
-	public final static Server MERIANA = new Server("Mériana", "34.243.42.81", false);
+	public final static Server MERIANA = new Server("Mériana", "34.243.42.81 || 172.65.198.58", false);
 	public final static Server MERKATOR = new Server("Merkator", "34.253.54.78", false);
 	public final static Server PANDORE = new Server("Pandore", "34.255.15.190", false);
 	public final static Server BRUMEN = new Server("Brumen", "34.243.167.137", false);
