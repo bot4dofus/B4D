@@ -260,16 +260,16 @@ public class Channel implements Serializable{
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 */
 	public static Channel fromByte(byte data) throws B4DException {
-		switch(Byte.toUnsignedInt(data)) {
+		switch(data) {
 			case(0):
 				return GENERAL;
-			case(4):
+			case(0x04):
 				return TEAM;
 			case(0x09):
 				return PRIVATE;
-			case(5):
+			case(0x05):
 				return BUSINESS;
-			case(6):
+			case(0x06):
 				return RECRUITMENT;
 			default:
 				throw new B4DException("Unknow channel " + Byte.toUnsignedInt(data));
