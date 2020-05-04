@@ -7,6 +7,7 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.socket.DofusSocket;
+import fr.B4D.socket.DofusSocketIterator;
 import fr.B4D.socket.SocketElement;
 
 public class ChatMessageSocketParser extends SocketParser<Message>{
@@ -19,18 +20,25 @@ public class ChatMessageSocketParser extends SocketParser<Message>{
 	}
 
 	public Message parse(DofusSocket dofusSocket) throws B4DException {
-		Channel channel = Channel.fromByte(dofusSocket.getPayload()[0]);
+		DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket.getPayload());
 		
-		Integer textLenght = new SocketElement(Arrays.copyOfRange(dofusSocket.getPayload(), 1, 3)).asSmallEndian();
-		String text = new SocketElement(Arrays.copyOfRange(dofusSocket.getPayload(), 3, 3+textLenght)).asString();
+		Channel channel = Channel.fromByte(iterator.getNextByte());
 		
-		Integer lengthSomething = new SocketElement(Arrays.copyOfRange(dofusSocket.getPayload(), 3+textLenght+4, 3+textLenght+4+2)).asSmallEndian();
+		Integer textLenght = iterator.getNextSocketElement(2).asSmallEndian();
+		String text = iterator.getNextSocketElement(textLenght).asString();
 		
-		Integer pseudoLenght = new SocketElement(Arrays.copyOfRange(dofusSocket.getPayload(), 3+textLenght+6+lengthSomething+8, 3+textLenght+6+lengthSomething+8+2)).asSmallEndian();
-		String pseudo = new SocketElement(Arrays.copyOfRange(dofusSocket.getPayload(), 3+textLenght+6+lengthSomething+8+2, 3+textLenght+6+lengthSomething+8+2+pseudoLenght)).asString();
+		iterator.skip(4);
+		
+		Integer lengthSomething = iterator.getNextSocketElement(2).asSmallEndian();
+		iterator.skip(lengthSomething);
+		iterator.skip(8);
+		
+		Integer pseudoLenght = iterator.getNextSocketElement(2).asSmallEndian();
+		String pseudo = iterator.getNextSocketElement(pseudoLenght).asString();
 		
 		Message message = new Message(pseudo, channel, text);
-		Dofus.getInstance().getChat().addMessage(message);
+		
+		System.out.println(message);
 		return message;
 	}
 }
