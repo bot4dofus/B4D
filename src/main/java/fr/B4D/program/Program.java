@@ -12,10 +12,12 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
+import fr.B4D.programs.Breaking;
 import fr.B4D.programs.Loto;
 import fr.B4D.programs.tutorials.BankAPI;
 import fr.B4D.programs.tutorials.ConverterAPI;
 import fr.B4D.programs.tutorials.ExchangeAPI;
+import fr.B4D.programs.tutorials.HdvAPI;
 import fr.B4D.programs.tutorials.KeyboardAPI;
 import fr.B4D.programs.tutorials.LoggerAPI;
 import fr.B4D.programs.tutorials.MessageAPI;
@@ -109,6 +111,10 @@ public final static ArrayList<Program> getAll(){
   	
   	programs.add(BankAPI.TUTORIAL1);
   	programs.add(BankAPI.TUTORIAL2);
+  	
+  	programs.add(HdvAPI.TUTORIAL1);
+  	
+  	programs.add(Breaking.BRISAGE);
   	
     return programs;
   }
