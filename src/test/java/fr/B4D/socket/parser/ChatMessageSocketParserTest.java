@@ -1,4 +1,4 @@
-package fr.B4D.socket;
+package fr.B4D.socket.parser;
 
 import org.junit.Assert;
 import org.junit.Test;
