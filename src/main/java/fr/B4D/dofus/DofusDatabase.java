@@ -141,7 +141,7 @@ public class DofusDatabase {
 	 /** PRIVATE **/
 	/*************/
 	
-	private JSONObject loadDatabase() throws B4DException {
+	public JSONObject loadDatabase() throws B4DException {
 		try {
 			JSONParser jsonParser = new JSONParser();
 			InputStream is;
@@ -160,67 +160,70 @@ public class DofusDatabase {
 		}
 	}
 	
-	private Item findItemByKey(String category, String key, String value, JSONObject database) {
+	public Item fromJSONObject(JSONObject item_object) {
+		Item item = new Item((String) item_object.get("url"), (String)item_object.get("id"), (String)item_object.get("name"), (String)item_object.get("img"), (String)item_object.get("type"));
+		
+		if(item_object.containsKey("level"))
+			item.setLevel((String) item_object.get("level"));
+		
+		if(item_object.containsKey("description"))
+			item.setDescription((String) item_object.get("description"));
+		
+		if(item_object.containsKey("effects"))
+			item.setEffects(getStringListFromJSONArray((JSONArray) item_object.get("effects")));
+		
+		if(item_object.containsKey("conditions"))
+			item.setConditions(getStringListFromJSONArray((JSONArray) item_object.get("conditions")));
+		
+		if(item_object.containsKey("characteristics"))
+			item.setCharacteristics(getStringListFromJSONArray((JSONArray) item_object.get("characteristics")));
+		
+		if(item_object.containsKey("resistances"))
+			item.setResistances(getStringListFromJSONArray((JSONArray) item_object.get("resistances")));
+
+		if(item_object.containsKey("craft")){
+			Map<String, Integer> craft = new HashMap<String, Integer>();
+			
+			JSONArray craft_array = (JSONArray) item_object.get("craft");
+			for(int j=0; j < craft_array.size(); j++) {
+				JSONObject craft_object = (JSONObject) craft_array.get(j);
+				craft.put((String) craft_object.get("url"), Integer.valueOf((String) craft_object.get("quantity")));
+			}
+			item.setCraft(craft);
+		}
+		
+		if(item_object.containsKey("set_bonuses"))
+			item.setSetBonuses(getStringListFromJSONArray((JSONArray) item_object.get("set_bonuses")));
+		
+		if(item_object.containsKey("set_total_bonuses"))
+			item.setSetTotalBonuses(getStringListFromJSONArray((JSONArray) item_object.get("set_total_bonuses")));
+		
+		if(item_object.containsKey("evolutionary_effects"))
+			item.setEvolutionaryEffects(getStringListFromJSONArray((JSONArray) item_object.get("evolutionary_effects")));
+		
+		if(item_object.containsKey("bonuses"))
+			item.setBonuses(getStringListFromJSONArray((JSONArray) item_object.get("bonuses")));
+		
+		if(item_object.containsKey("spells"))
+			item.setSpells((String) item_object.get("spells"));
+		
+		return item;
+	}
+	
+	public Item findItemByKey(String category, String key, String value, JSONObject database) {
 		
 		JSONArray item_array = (JSONArray) database.get(category);
 		
 		for(int i=0; i < item_array.size(); i++) {
 			JSONObject item_object = (JSONObject) item_array.get(i);
 			if(value.equals((String) item_object.get(key))) {
-				
-				Item item = new Item((String) item_object.get("url"), (String)item_object.get("id"), (String)item_object.get("name"), (String)item_object.get("img"), (String)item_object.get("type"));
-				
-				if(item_object.containsKey("level"))
-					item.setLevel((String) item_object.get("level"));
-				
-				if(item_object.containsKey("description"))
-					item.setDescription((String) item_object.get("description"));
-				
-				if(item_object.containsKey("effects"))
-					item.setEffects(getStringListFromJSONArray((JSONArray) item_object.get("effects")));
-				
-				if(item_object.containsKey("conditions"))
-					item.setConditions(getStringListFromJSONArray((JSONArray) item_object.get("conditions")));
-				
-				if(item_object.containsKey("characteristics"))
-					item.setCharacteristics(getStringListFromJSONArray((JSONArray) item_object.get("characteristics")));
-				
-				if(item_object.containsKey("resistances"))
-					item.setResistances(getStringListFromJSONArray((JSONArray) item_object.get("resistances")));
-
-				if(item_object.containsKey("craft")){
-					Map<String, Integer> craft = new HashMap<String, Integer>();
-					
-					JSONArray craft_array = (JSONArray) item_object.get("craft");
-					for(int j=0; j < craft_array.size(); j++) {
-						JSONObject craft_object = (JSONObject) craft_array.get(j);
-						craft.put((String) craft_object.get("url"), Integer.valueOf((String) craft_object.get("quantity")));
-					}
-					item.setCraft(craft);
-				}
-				
-				if(item_object.containsKey("set_bonuses"))
-					item.setSetBonuses(getStringListFromJSONArray((JSONArray) item_object.get("set_bonuses")));
-				
-				if(item_object.containsKey("set_total_bonuses"))
-					item.setSetTotalBonuses(getStringListFromJSONArray((JSONArray) item_object.get("set_total_bonuses")));
-				
-				if(item_object.containsKey("evolutionary_effects"))
-					item.setEvolutionaryEffects(getStringListFromJSONArray((JSONArray) item_object.get("evolutionary_effects")));
-				
-				if(item_object.containsKey("bonuses"))
-					item.setBonuses(getStringListFromJSONArray((JSONArray) item_object.get("bonuses")));
-				
-				if(item_object.containsKey("spells"))
-					item.setSpells((String) item_object.get("spells"));
-				
-				return item;
+				return fromJSONObject(item_object);
 			}
 		}
 		return null;
 	}
 	
-	private List<Item> findItemsByKey(String key, String value, JSONObject database) throws B4DException{
+	public List<Item> findItemsByKey(String key, String value, JSONObject database) throws B4DException{
 		String[] categories = {"monsters", "weapons", "equipments", "sets", "pets", "mounts", "consumables", "resources", "ceremonial_items", "idols", "harnesses", "sidekicks"};
 		Item item = null;
 		List<Item> items = new ArrayList<Item>();
@@ -230,6 +233,19 @@ public class DofusDatabase {
 			if(item != null)
 				items.add(item);
 		}
+		return items;
+	}
+	
+	public List<Item> findItemsByCategory(String category, JSONObject database) throws B4DException{
+
+		List<Item> items = new ArrayList<Item>();
+		JSONArray item_array = (JSONArray) database.get(category);
+		
+		for(int i=0; i < item_array.size(); i++) {
+			JSONObject item_object = (JSONObject) item_array.get(i);
+			items.add(fromJSONObject(item_object));
+		}
+		
 		return items;
 	}
 	
@@ -278,6 +294,10 @@ public class DofusDatabase {
 	}
 	
 	//MONSTERS
+	public List<Monster> findMonsters() throws B4DException{
+		return (List<Monster>)(Object)findItemsByCategory("monsters", loadDatabase());
+	}
+	
 	public Monster findMonsterByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isMonster(url))
 			return null;
@@ -293,6 +313,10 @@ public class DofusDatabase {
 	}
 
 	//WEAPONS
+	public List<Weapon> findWeapons() throws B4DException{
+		return (List<Weapon>)(Object)findItemsByCategory("weapons", loadDatabase());
+	}
+	
 	public Weapon findWeaponByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isWeapon(url))
 			return null;
@@ -308,6 +332,10 @@ public class DofusDatabase {
 	}
 
 	//EQUIPMENTS
+	public List<Equipment> findEquipments() throws B4DException{
+		return (List<Equipment>)(Object)findItemsByCategory("equipments", loadDatabase());
+	}
+	
 	public Equipment findEquipmentByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isEquipment(url))
 			return null;
@@ -323,6 +351,10 @@ public class DofusDatabase {
 	}
 
 	//SETS
+	public List<Set> findSets() throws B4DException{
+		return (List<Set>)(Object)findItemsByCategory("sets", loadDatabase());
+	}
+	
 	public Set findSetByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isSet(url))
 			return null;
@@ -338,6 +370,10 @@ public class DofusDatabase {
 	}
 
 	//PETS
+	public List<Pet> findPets() throws B4DException{
+		return (List<Pet>)(Object)findItemsByCategory("pets", loadDatabase());
+	}
+	
 	public Pet findPetByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isPet(url))
 			return null;
@@ -353,6 +389,10 @@ public class DofusDatabase {
 	}
 
 	//MOUNTS
+	public List<Mount> findMounts() throws B4DException{
+		return (List<Mount>)(Object)findItemsByCategory("mounts", loadDatabase());
+	}
+	
 	public Mount findMountByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isMount(url))
 			return null;
@@ -368,6 +408,10 @@ public class DofusDatabase {
 	}
 
 	//CONSUMABLES
+	public List<Consumable> findConsumables() throws B4DException{
+		return (List<Consumable>)(Object)findItemsByCategory("consumables", loadDatabase());
+	}
+	
 	public Consumable findConsumableByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isConsumable(url))
 			return null;
@@ -383,6 +427,10 @@ public class DofusDatabase {
 	}
 
 	//RESOURCES
+	public List<Resource> findResources() throws B4DException{
+		return (List<Resource>)(Object)findItemsByCategory("resources", loadDatabase());
+	}
+	
 	public Resource findResourceByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isResource(url))
 			return null;
@@ -398,6 +446,10 @@ public class DofusDatabase {
 	}
 
 	//CEREMONIAL ITEMS
+	public List<CeremonialItem> findCeremonialItems() throws B4DException{
+		return (List<CeremonialItem>)(Object)findItemsByCategory("ceremonial_items", loadDatabase());
+	}
+	
 	public CeremonialItem findCeremonialItemByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isCeremonialItem(url))
 			return null;
@@ -413,6 +465,10 @@ public class DofusDatabase {
 	}
 
 	//SIDEKICKS
+	public List<Sidekick> findSidekicks() throws B4DException{
+		return (List<Sidekick>)(Object)findItemsByCategory("sidekicks", loadDatabase());
+	}
+	
 	public Sidekick findSidekickByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isSidekick(url))
 			return null;
@@ -428,6 +484,10 @@ public class DofusDatabase {
 	}
 
 	//IDOLS
+	public List<Idol> findIdols() throws B4DException{
+		return (List<Idol>)(Object)findItemsByCategory("idols", loadDatabase());
+	}
+	
 	public Idol findIdolByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isIdol(url))
 			return null;
@@ -443,6 +503,10 @@ public class DofusDatabase {
 	}
 
 	//HARNESSES
+	public List<Harness> findHarnesss() throws B4DException{
+		return (List<Harness>)(Object)findItemsByCategory("harnesses", loadDatabase());
+	}
+	
 	public Harness findHarnessByUrl(String url) throws B4DException {
 		if(!DofusDatabase.isHarness(url))
 			return null;
