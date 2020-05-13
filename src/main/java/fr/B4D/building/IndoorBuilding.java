@@ -16,6 +16,7 @@ import fr.B4D.utils.PointF;
  */
 public abstract class IndoorBuilding extends Building{
 
+	private Boolean entered;
 	private List<PointF> inPoints;
 	private List<PointF> outPoints;
 
@@ -32,6 +33,7 @@ public abstract class IndoorBuilding extends Building{
 		super(position);
 		this.inPoints = inPoints;
 		this.outPoints = outPoints;
+		this.entered = Boolean.FALSE;
 	}
 
 	  /***************/
@@ -56,7 +58,7 @@ public abstract class IndoorBuilding extends Building{
 	 /** PUBLIC METHODS **/
 	/********************/
 
-	/** Enters the bank.
+	/** Enters the building if not entered yet.
 	 * @param person Person which enter the building.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
@@ -64,19 +66,21 @@ public abstract class IndoorBuilding extends Building{
 	 */
 	public void enter(Person person) throws StopProgramException, CancelProgramException, B4DException {
 		super.goTo(person);
-		if(inPoints != null) {
+		
+		if(inPoints != null && !this.entered) {
 			for(PointF point:inPoints)
 				B4D.mouse.leftClick(point, true, 10000);
 		}
+		this.entered = Boolean.TRUE;
 	}
 	
-	/** Exits the bank.
+	/** Exits the building if the player has entered.
 	 * @param person Person which enter the building.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
 	 */
 	public void exit(Person person) throws StopProgramException, CancelProgramException {
-		if(outPoints != null) {
+		if(outPoints != null && this.entered) {
 			for(PointF point:outPoints)
 				B4D.mouse.leftClick(point, true, 10000);
 		}
