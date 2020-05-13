@@ -24,7 +24,7 @@ public class HDVItemViewSocketParser extends SocketParser<HDVItemViewSocketResul
 
 	public HDVItemViewSocketResult parse(DofusSocket dofusSocket) {		
 		try {
-			DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket.getPayload());
+			DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket);
 			Integer index = iterator.moveAfterPattern(DELIMITER);
 			List<Integer> numbers = iterator.getNextSocketElement(dofusSocket.getPayload().length-index).asBigEndians();
 			

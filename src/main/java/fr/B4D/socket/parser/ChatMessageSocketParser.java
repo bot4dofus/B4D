@@ -20,7 +20,7 @@ public class ChatMessageSocketParser extends SocketParser<Message>{
 	}
 
 	public Message parse(DofusSocket dofusSocket) throws B4DException {
-		DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket.getPayload());
+		DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket);
 		
 		Channel channel = Channel.fromByte(iterator.getNextByte());
 		
@@ -37,8 +37,7 @@ public class ChatMessageSocketParser extends SocketParser<Message>{
 		String pseudo = iterator.getNextSocketElement(pseudoLenght).asString();
 		
 		Message message = new Message(pseudo, channel, text);
-		
-		System.out.println(message);
+		Dofus.getInstance().getChat().addMessage(message);		
 		return message;
 	}
 }

@@ -7,8 +7,8 @@ public class DofusSocketIterator {
 	private byte[] socket;
 	private Integer cursor = 0;
 	
-	public DofusSocketIterator(byte[] socket) {
-		this.socket = socket;
+	public DofusSocketIterator(DofusSocket dofusSocket) {
+		this.socket = dofusSocket.getPayload();
 	}
 	
 	public Integer skip(Integer length) {
