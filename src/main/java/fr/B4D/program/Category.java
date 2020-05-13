@@ -12,4 +12,5 @@ public enum Category {
     Jeux,
     Test,
     Tutorial,
+    Autre;
 }
