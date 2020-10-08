@@ -1,4 +1,7 @@
-Ce bot à été conçu par [@LucBerge](https://github.com/LucBerge) et est sous [Licence MIT](https://github.com/LucBerge/B4D/blob/master/LICENSE).
+
+[![Join B4D on Slack!](https://img.shields.io/badge/Slack-Join%20B4D%20on%20Slack!-orange.svg?style=for-the-badge&logo=slack)](https://invite.playplay.io/invite?team_id=TQBUQQC4C)
+
+This bot has been make by [@LucBerge](https://github.com/LucBerge) and is under [MIT license](https://github.com/LucBerge/B4D/blob/master/LICENSE).
 
 ## Liens utiles
 
