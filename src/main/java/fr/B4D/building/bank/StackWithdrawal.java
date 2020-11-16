@@ -15,13 +15,16 @@ import fr.B4D.utils.PointF;
  */
 public class StackWithdrawal extends BankAction{
 
+	/**
+	 * Full inventory stack withdrawal.
+	 */
 	public static final StackWithdrawal ALL = new StackWithdrawal(null);
 	
 	private Stack stack;
 
 	/**
 	 * Constructs a {@code StackWithdrawal} with a specific stack.
-	 * @param amount - Stack to store, {@code null} if all the inventory has to bee retrieved.
+	 * @param stack - Stack to store, {@code null} if all the inventory has to bee retrieved.
 	 */
 	public StackWithdrawal(Stack stack) {
 		super();

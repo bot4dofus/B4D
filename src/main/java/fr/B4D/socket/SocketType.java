@@ -1,55 +1,74 @@
 package fr.B4D.socket;
 
-import java.util.Arrays;
-
 import fr.B4D.socket.parser.ChatMessageSocketParser;
 import fr.B4D.socket.parser.HDVItemViewSocketParser;
 import fr.B4D.socket.parser.HDVResearchSocketParser;
 
+/**
+ * The class {@code SocketType} defines all the known sockets and map it with the corresponding socket parser.
+ * @author Lucas
+ *
+ */
 public enum SocketType {
 	
-	HDV_ITEM_VIEW_SOCKET(new byte[]{0x59, (byte) 0xe1}, 1, HDVItemViewSocketParser.class),
-	HDV_RESEARCH_15_SOCKET(new byte[]{0x5a, 0x15}, 1, HDVResearchSocketParser.class),
-	HDV_RESEARCH_16_SOCKET(new byte[]{0x5a, 0x16}, 2, HDVResearchSocketParser.class),
-
-	CHAT_MESSAGE_C5_SOCKET(new byte[]{0x0d, (byte) 0xc5}, 1, ChatMessageSocketParser.class),
-	CHAT_MESSAGE_CD_SOCKET(new byte[]{0x0d, (byte) 0xcd}, 1, ChatMessageSocketParser.class),
-	CHAT_MESSAGE_C9_SOCKET(new byte[]{0x0d, (byte) 0xc9}, 1, ChatMessageSocketParser.class),
-	CHAT_MESSAGE_C6_SOCKET(new byte[]{0x0d, (byte) 0xc6}, 2, ChatMessageSocketParser.class),
-	CHAT_MESSAGE_CE_SOCKET(new byte[]{0x0d, (byte) 0xce}, 2, ChatMessageSocketParser.class),
-
-	DD_ENCLOSE_OPEN_9D_SOCKET(new byte[]{0x5d, (byte) 0x9d}, 1, null),
-	DD_ENCLOSE_OPEN_9E_SOCKET(new byte[]{0x5d, (byte) 0x9e}, 2, null),
-	DD_ENCLOSE_OPEN_6E_SOCKET(new byte[]{0x5d, (byte) 0x6e}, 2, null);
+	/**
+	 * Socket representing an item view in HDV.
+	 */
+	HDV_ITEM_VIEW_SOCKET((byte) 0x59, HDVItemViewSocketParser.class),
 	
-	public static SocketType fromSocket(byte[] socket) {
-		byte[] id = Arrays.copyOfRange(socket, 0, 2);
-		
+	/**
+	 * Socket representing the result of an HDV research.
+	 */
+	HDV_RESEARCH_SOCKET((byte) 0x5a, HDVResearchSocketParser.class),
+
+	/**
+	 * Socket representing a message in the chat.
+	 */
+	CHAT_MESSAGE_SOCKET((byte) 0x0d, ChatMessageSocketParser.class),
+
+	/**
+	 * Socket representing an opened enclose.
+	 */
+	DD_ENCLOSE_OPEN_9D_SOCKET((byte) 0x5d, null);
+	
+	/**
+	 * Returns the socket type corresponding to the received socket.
+	 * @param socket Byte array representing the content of the socket.
+	 * @return The corresponding socket type, {@code null} if none found.
+	 */
+	public static SocketType fromSocket(byte[] socket) {		
 		for(SocketType socketType:SocketType.values()) {
-			if(Arrays.equals(id, socketType.getId()))
+			if(socket[0] == socketType.getId())
 				return socketType;
 		}
 		return null;
 	}
 	
-	private byte[] id;
-	private Integer bytesSocketLength;
+	private byte id;
 	private Class<?> parser;
 	
-	SocketType(byte[] id, Integer bytesSocketLength, Class<?> parser) {
+	/**
+	 * Constructor of a socket type.
+	 * @param id Byte id of the socket.
+	 * @param parser Corresponding parser.
+	 */
+	SocketType(byte id, Class<?> parser) {
 		this.id = id;
-		this.bytesSocketLength = bytesSocketLength;
 		this.parser = parser;
 	}
 	
-	public byte[] getId() {
+	/**
+	 * Returns the id of the socket type.
+	 * @return Id of the socket.
+	 */
+	public byte getId() {
 		return id;
 	}
-
-	public Integer getBytesSocketLength() {
-		return bytesSocketLength;
-	}
 	
+	/**
+	 * Returns the parser of the socket type.
+	 * @return The parser to use.
+	 */
 	public Class<?> getParser() {
 		return parser;
 	}

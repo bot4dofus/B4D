@@ -15,13 +15,16 @@ import fr.B4D.utils.PointF;
  */
 public class StackDeposit extends BankAction{
 
+	/**
+	 * Full inventory stack deposit.
+	 */
 	public static final StackDeposit ALL = new StackDeposit(null);
 	
 	private Stack stack;
 
 	/**
 	 * Constructs a {@code StackDeposit} with a specific stack.
-	 * @param amount - Stack to store, {@code null} if all the inventory has to bee stored.
+	 * @param stack - Stack to store, {@code null} if all the inventory has to bee stored.
 	 */
 	public StackDeposit(Stack stack) {
 		super();

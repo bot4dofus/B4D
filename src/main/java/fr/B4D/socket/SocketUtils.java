@@ -1,7 +1,18 @@
 package fr.B4D.socket;
 
+/**
+ * The {@code SocketUtils} class is used to define useful methods relative to sockets.
+ * @author Lucas
+ *
+ */
 public class SocketUtils {
 
+	/**
+	 * Finds a subarray in an array.
+	 * @param subArray Subarray to look for.
+	 * @param array Array in which search for the subarray.
+	 * @return THe index of subarray beginning, {@code null} if not found.
+	 */
 	public static Integer findArray(byte[] subArray, byte[] array) {
 		if(subArray == null)
 			throw new IllegalArgumentException("Cannot be null.");

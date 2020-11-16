@@ -6,10 +6,20 @@ import fr.B4D.bot.B4D;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
+/**
+ * The {@code SocketStore} class is an abstract class storing all the socket results.
+ * @author Lucas
+ *
+ * @param <T> Type of the socket result.
+ */
 public class SocketStore<T> {
 	
 	private ArrayBlockingQueue<T> socketResults;
 
+	/**
+	 * Constructor of a socket store.
+	 * @param capacity Number of results, the store is able to save.
+	 */
 	public SocketStore(int capacity) {
 		socketResults = new ArrayBlockingQueue<T>(capacity);
 	}

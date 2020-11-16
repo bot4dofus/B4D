@@ -7,12 +7,24 @@ import java.util.List;
 
 import fr.B4D.bot.B4DException;
 
+/**
+ * The {@code SocketElement} class represent an element in a socket.
+ * @author Lucas
+ *
+ */
 public class SocketElement {
 
+	/**
+	 * Socket encoding.
+	 */
 	public static final String ENCODING = "UTF-8";
 	
 	private byte[] payload;
 	
+	/**
+	 * Constructor of the {@code SocketElement} class.
+	 * @param payload - Payload of the element as byte array.
+	 */
 	public SocketElement(byte[] payload) {
 		if(payload == null)
 			throw new IllegalArgumentException("Cannot be null.");
@@ -22,10 +34,19 @@ public class SocketElement {
 		this.payload = payload;
 	}
 	
+	/**
+	 * Returns the payload of the element.
+	 * @return Byte array payload.
+	 */
 	public byte[] getPayload() {
 		return payload;
 	}
 	
+	/**
+	 * Returns the element as a string.
+	 * @return String representing the element payload.
+	 * @throws B4DException if the encoding is unsupported.
+	 */
 	public String asString() throws B4DException {
 		try {
 			return new String(payload, ENCODING);
@@ -34,6 +55,10 @@ public class SocketElement {
 		}
 	}
 	
+	/**
+	 * Returns the element as a small endian integer.
+	 * @return Integer representing the element.
+	 */
 	public Integer asSmallEndian() {
 		Integer value = 0;
 		for(int i=0; i<payload.length;i++) {
@@ -42,6 +67,10 @@ public class SocketElement {
 		return value;
 	}
 	
+	/**
+	 * Returns the element as a big endian integer.
+	 * @return Integer representing the element.
+	 */
 	public Integer asBigEndian() {
 		Integer value = 1;
 		for(int i=0; i<payload.length;i++) {
@@ -50,6 +79,10 @@ public class SocketElement {
 		return value;
 	}
 	
+	/**
+	 * Returns the element as a list of big endian integers.
+	 * @return List of integers.
+	 */
 	public List<Integer> asBigEndians(){
 		List<Integer> values = new ArrayList<Integer>();
 		

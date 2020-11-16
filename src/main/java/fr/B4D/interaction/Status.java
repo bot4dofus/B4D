@@ -12,13 +12,24 @@ import fr.B4D.utils.PointF;
  */
 public class Status {
 	
-	  /****************/
-	 /** COLLECTION **/
-	/****************/
-	
+	/**
+	 * Status available. You can talk, exchange and fight.
+	 */
 	public final static Status AVAILABLE = new Status("Disponible", new PointF(0.0131, -0.1008 + 0*0.0216));
+	
+	/**
+	 * Status absent. You are away from keyboard.
+	 */
 	public final static Status ABSENT = new Status("Absent", new PointF(0.0131, -0.1008 + 1*0.0216));
+	
+	/**
+	 * Status private. Friends only.
+	 */
 	public final static Status PRIVATE = new Status("Privé", new PointF(0.0131, -0.1008 + 3*0.0216));
+	
+	/**
+	 * Status solo. Do not disturb.
+	 */
 	public final static Status SOLO = new Status("Solo", new PointF(0.0131, -0.1008 + 4*0.0216));
 	
 	  /**************/
