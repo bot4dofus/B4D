@@ -125,7 +125,7 @@ public class SocketListener extends Thread{
 				socketParser.parse(dofusSocket);
 			}
 		}
-		catch(InstantiationException | IllegalAccessException | B4DException e) {
+		catch(B4DException e) {
 			B4D.logger.error(e);
 		}catch(IllegalArgumentException e) {
 			//Nothing to do.
