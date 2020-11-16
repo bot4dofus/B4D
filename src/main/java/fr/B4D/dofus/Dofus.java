@@ -1,15 +1,12 @@
 package fr.B4D.dofus;
 
 import fr.B4D.dofus.world.World;
+import fr.B4D.dofus.world.WorldFactory;
 import fr.B4D.interaction.chat.Chat;
 
 /** La classe {@code Dofus} permet d'accéder au monde est au chat de dofus.
  */
 public class Dofus {
-	
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
 	
 	private static Dofus instance;
 	
@@ -25,7 +22,7 @@ public class Dofus {
 	 */
 	private Dofus() {
 		chat = new Chat(100);
-		world = new World();
+		world = WorldFactory.getMainWorld();
 		database = new DofusDatabase("/fr/B4D/data/dofus.fr.json", true);
 	}
 	
@@ -37,10 +34,6 @@ public class Dofus {
 			instance = new Dofus();
 		return instance;
 	}
-	
-	/***********************/
-	/** GETTERS & SETTERS **/
-	/***********************/
 
 	/** Retourne le chat du jeu.
 	 * @return Chat du jeu.
