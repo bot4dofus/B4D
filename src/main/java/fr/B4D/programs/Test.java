@@ -11,7 +11,15 @@ import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.program.StopProgramException;
 
+/**
+ * 
+ * @author Lucas
+ *
+ */
 public final class Test {
+	/**
+	 * Test program interface.
+	 */
 	public static ProgramInterface test = new ProgramInterface() {
 		private int iteration = 1;
 		
@@ -25,5 +33,8 @@ public final class Test {
 			B4D.logger.popUp("Fin du programme de test");
 		}
 	};
+	/**
+	 * Test program.
+	 */
 	public final static Program TEST = new Program(Place.Tous, Category.Test, "Test", "Test", null, null, test);
 }
