@@ -1,6 +1,7 @@
 package fr.B4D.building.hdv;
 
 import java.awt.Point;
+import java.util.Arrays;
 import java.util.List;
 
 import fr.B4D.bot.B4D;
@@ -18,7 +19,10 @@ import fr.B4D.utils.PointF;
  */
 public class HDV extends IndoorBuilding{
 
-	//public static final HDV ASTRUB = new HDV(new Point(4,-18), Arrays.asList(new PointF(0.6552, 0.3683)), Arrays.asList(new PointF(0.3048, 0.6776)), new PointF(0.632, 0.4162));
+	/**
+	 * The Astrub HDV.
+	 */
+	public static final HDV ASTRUB = new HDV(new Point(4,-18), Arrays.asList(new PointF(0.6552, 0.3683)), Arrays.asList(new PointF(0.3048, 0.6776)), new PointF(0.632, 0.4162));
 	
 	/**
 	 * Specify whether the HDV is opened or not.
@@ -28,7 +32,7 @@ public class HDV extends IndoorBuilding{
 	/**
 	 * Specify whether the HDV is in buy mode.
 	 */
-	private Boolean BuyMode;
+	private Boolean buyMode;
 	
 	/**
 	 * Location of the table in relative coordinates.
@@ -49,7 +53,7 @@ public class HDV extends IndoorBuilding{
 			super( position, inPoints, outPoints);
 			this.tablePosition = tablePosition;
 			this.opened = Boolean.FALSE;
-			this.BuyMode = true;
+			this.buyMode = true;
 	}
 
 	  /***************/
@@ -103,7 +107,7 @@ public class HDV extends IndoorBuilding{
 	 */
 	public void setBuyMode() throws StopProgramException, CancelProgramException{
 		B4D.mouse.leftClick(new PointF(0.2856, 0.1058), false);
-		BuyMode = Boolean.TRUE;
+		buyMode = Boolean.TRUE;
 	}
 	
 	/**
@@ -113,7 +117,7 @@ public class HDV extends IndoorBuilding{
 	 */
 	public void setSaleMode() throws StopProgramException, CancelProgramException{
 		B4D.mouse.leftClick(new PointF(0.436, 0.1038), false);
-		BuyMode = Boolean.FALSE;
+		buyMode = Boolean.FALSE;
 	}
 	
 	/**
