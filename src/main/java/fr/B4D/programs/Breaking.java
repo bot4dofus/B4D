@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONObject;
 
 import fr.B4D.bot.B4DException;
@@ -77,18 +79,23 @@ public final class Breaking {
 				if(!forSaleItemNames.contains(item.getName())) {
 					notForSaleItems.add(item);
 				}
-			}
-			
-			for(Item item:notForSaleItems) {
-				Integer level = Integer.valueOf(item.getLevel());
-				if(100 <= level && level <= 200)
-					System.out.println(item);
-			}
+			}			
 
-			System.out.println("knownItems = " + knownItems.size());
-			System.out.println("forSaleItems = " + forSaleItems.size());
-			System.out.println("notForSaleItems = " + notForSaleItems.size());
+			JOptionPane.showMessageDialog(null, "Ce programme n'étant pas 100% fiable, nous vous invitons à vérifier les résultats en allant vérifier par vous même dans l'HDV.\nPensez à décocher la case \"Afficher uniquement les équipements en vente actuellement\".", "Avertissement", JOptionPane.WARNING_MESSAGE);
+
+			notForSaleItems = notForSaleItems.stream().filter(i -> {
+					Integer level = Integer.valueOf(i.getLevel());
+					return (100 <= level && level <= 200);
+				}
+			).sorted((i1, i2) -> i2.getLevel().compareTo(i1.getLevel())).collect(Collectors.toList());
+
+			String message = "";
+
+			for(Item item:notForSaleItems) {
+				message += item.getLevel() + " : " + item.getName() + "\n";
+			}
 			
+			JOptionPane.showMessageDialog(null, message, "Résultats", JOptionPane.INFORMATION_MESSAGE);
 		}
 	});
 }
