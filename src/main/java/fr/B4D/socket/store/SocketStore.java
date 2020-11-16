@@ -1,5 +1,7 @@
 package fr.B4D.socket.store;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import fr.B4D.bot.B4D;
@@ -15,6 +17,7 @@ import fr.B4D.program.StopProgramException;
 public class SocketStore<T> {
 	
 	private ArrayBlockingQueue<T> socketResults;
+	private List<EventHandler<T>> eventHandlers;
 
 	/**
 	 * Constructor of a socket store.
@@ -22,6 +25,7 @@ public class SocketStore<T> {
 	 */
 	public SocketStore(int capacity) {
 		socketResults = new ArrayBlockingQueue<T>(capacity);
+		eventHandlers = new ArrayList<EventHandler<T>>();
 	}
 	
 	/** 
@@ -35,6 +39,9 @@ public class SocketStore<T> {
 				socketResults.offer(socketResult);
 			}
 			socketResults.notifyAll();
+			
+			for(EventHandler<T> eventHandler:eventHandlers)
+				eventHandler.onEventReceived(socketResult);
 		}
 	}
 
@@ -76,5 +83,22 @@ public class SocketStore<T> {
 		synchronized(socketResults){
 			socketResults.clear();
 		}
+	}
+	
+	/**
+	 * Add an event handler to the list. The handler will be called every time the event occurs.
+	 * @param eventHandler - Event handler to add.
+	 */
+	public synchronized void addEventHandeler(EventHandler<T> eventHandler) {
+		eventHandlers.add(eventHandler);
+	}
+	
+	/**
+	 * Removes the event handler from the list. The handler will not be called anymore.
+	 * @param eventHandler - Event handler to remove.
+	 * @return {@code true} if it has been removed, {@code false} otherwise.
+	 */
+	public synchronized boolean removeEventHandler(EventHandler<T> eventHandler) {
+		return eventHandlers.remove(eventHandler);
 	}
 }
