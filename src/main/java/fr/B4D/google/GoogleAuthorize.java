@@ -13,11 +13,26 @@ import com.google.common.collect.Lists;
  */
 public class GoogleAuthorize {
 	
-	  public static final String CLOUD_PLATFORM = "https://www.googleapis.com/auth/cloud-platform";
-	  public static final String SQLSERVICE_ADMIN = "https://www.googleapis.com/auth/sqlservice.admin";
-	  public static final String SPREADSHEET = "https://www.googleapis.com/auth/spreadsheets";
-	  public static final String DRIVE = "https://www.googleapis.com/auth/drive";
-	
+	/**
+	 * Cloud platform api url.
+	 */
+	public static final String CLOUD_PLATFORM = "https://www.googleapis.com/auth/cloud-platform";
+
+	/**
+	 * Sql service admin api url.
+	 */
+	public static final String SQLSERVICE_ADMIN = "https://www.googleapis.com/auth/sqlservice.admin";
+
+	/**
+	 * Spreadsheet api url.
+	 */
+	public static final String SPREADSHEET = "https://www.googleapis.com/auth/spreadsheets";
+
+	/**
+	 * Drive api url.
+	 */
+	public static final String DRIVE = "https://www.googleapis.com/auth/drive";
+
     /** 
      * @param credentials - Chemin vers le fichier contenant le certificat d'utilisation des API google.
      * @return Certificat d'utilisation des API google.

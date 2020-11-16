@@ -1,7 +1,6 @@
 package fr.B4D.socket.parser;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -10,26 +9,23 @@ import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.dofus.items.Item;
-import fr.B4D.dofus.items.Resource;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
-import fr.B4D.socket.PatternNotFoundException;
-import fr.B4D.socket.SocketElement;
-import fr.B4D.socket.SocketUtils;
-import fr.B4D.socket.result.HDVItemViewSocketResult;
 import fr.B4D.socket.result.HDVResearchSocketResult;
-import fr.B4D.socket.store.HDVItemViewSocketStore;
 import fr.B4D.socket.store.HDVResearchSocketStore;
 
+/**
+ * The {@code HDVResearchSocketParser} class is used to parse a socket relative to an HDV research.
+ * 
+ * @author Lucas
+ *
+ */
 public class HDVResearchSocketParser extends SocketParser<HDVResearchSocketResult>{
 
 	//		... | ??? | Numberer of items | Id item 1 | Id Item 2 | ... | Id Item n | 0x02 0xc0 |
 	//		    |  4  |         2         |     2     |     2     | ... |     2     |     2     |
-	
-	public HDVResearchSocketParser() {
-		super();
-	}
 
+	@Override
 	public HDVResearchSocketResult parse(DofusSocket dofusSocket) {	
 		DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket);
 

@@ -28,18 +28,69 @@ public class Channel implements Serializable{
 	 /** COLLECTION **/
 	/****************/
 	
+	/**
+	 * General channel.
+	 */
 	public final static Channel GENERAL = new Channel("General", "/s", new PointF(0.024, -0.266 + 0*spaceBetweenChannels));
+	
+	/**
+	 * Team channel.
+	 */
 	public final static Channel TEAM = new Channel("Team", "/t", new PointF(0.024, -0.266 + 1*spaceBetweenChannels));
+	
+	/**
+	 * Guild channel.
+	 */
 	public final static Channel GUILD = new Channel("Guild", "/g", new PointF(0.024, -0.266 + 2*spaceBetweenChannels));
+	
+	/**
+	 * Allies channel.
+	 */
 	public final static Channel ALLIES = new Channel("Allies", "/a", new PointF(0.024, -0.266 + 3*spaceBetweenChannels));
+	
+	/**
+	 * Group channel.
+	 */
 	public final static Channel GROUP = new Channel("Group", "/p", new PointF(0.024, -0.266 + 4*spaceBetweenChannels));
+	
+	/**
+	 * Business channel.
+	 */
 	public final static Channel BUSINESS = new Channel("Business", "/b", new PointF(0.024, -0.266 + 5*spaceBetweenChannels));
+	
+	/**
+	 * Recruitment channel.
+	 */
 	public final static Channel RECRUITMENT = new Channel("Recruitment", "/r", new PointF(0.024, -0.266 + 6*spaceBetweenChannels));
+	
+	/**
+	 * Private channel.
+	 */
 	public final static Channel PRIVATE = new Channel("Private", "/w", new PointF(0.024, -0.266 + 7*spaceBetweenChannels));
+	
+	/**
+	 * Information channel.
+	 */
 	public final static Channel INFORMATION = new Channel("Information", null, new PointF(0.024, -0.266 + 8*spaceBetweenChannels));
+	
+	/**
+	 * Fight channel.
+	 */
 	public final static Channel FIGHT = new Channel("Fight", null, new PointF(0.024, -0.266 + 9*spaceBetweenChannels));
+	
+	/**
+	 * Promotion channel.
+	 */
 	public final static Channel PROMOTION = new Channel("Promotion", null, new PointF(0.024, -0.266 + 10*spaceBetweenChannels));
+	
+	/**
+	 * Kolizeum channel.
+	 */
 	public final static Channel KOLIZEUM = new Channel("Kolizeum", "/k", new PointF(0.024, -0.266 + 11*spaceBetweenChannels));
+	
+	/**
+	 * Community channel.
+	 */
 	public final static Channel COMMUNITY = new Channel("Community", "/c", new PointF(0.024, -0.266 + 12*spaceBetweenChannels));
 	
 	  /**************/

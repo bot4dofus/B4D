@@ -8,6 +8,12 @@ import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 
+/**
+ * The {@code KeyboardAPI} class contains all the tutorials relative to the keyboard API.
+ * 
+ * @author Lucas
+ *
+ */
 public final class KeyboardAPI {	
 
 	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API du clavier.<br>

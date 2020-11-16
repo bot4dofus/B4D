@@ -12,6 +12,7 @@ import fr.B4D.socket.PcapsFinder;
 
 // From https://github.com/kaitoy/pcap4j/blob/v1/pcap4j-sample/src/main/java/org/pcap4j/sample/Loop.java
 
+@SuppressWarnings("javadoc")
 public class Pcap4jTest {
 
 	private static final int COUNT = -1;	// [number of packets to capture]

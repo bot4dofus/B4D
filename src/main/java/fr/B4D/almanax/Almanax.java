@@ -28,25 +28,78 @@ public class Almanax {
 	 /** CONSTANTS **/
 	/***************/
 	
+	/**
+	 * French language.
+	 */
 	public static final String FRENCH_LANGUAGE = "fr";
+	
+	/**
+	 * English language.
+	 */
 	public static final String ENGLISH_LANGUAGE = "en";
+	
+	/**
+	 * German language.
+	 */
 	public static final String GERMAN_LANGUAGE = "de";
+	
+	/**
+	 * Spanish language.
+	 */
 	public static final String SPANISH_LANGUAGE = "es";
+	
+	/**
+	 * Italian language.
+	 */
 	public static final String ITALIAN_LANGUAGE = "it";
+	
+	/**
+	 * Portuguese language.
+	 */
 	//public static final String PORTUGUESE_LANGUAGE = "pt";
 	
+	/**
+	 * French regex to find the item and the amount.
+	 */
 	private static final String FRENCH_REGEX = ".* Récupérer ([0-9]*) (.*) et rapporter l'offrande à .*";
+	
+	/**
+	 * English regex to find the item and the amount.
+	 */
 	private static final String ENGLISH_REGEX = ".* Find ([0-9]*) (.*) and take the offering to .*";
+	
+	/**
+	 * German regex to find the item and the amount.
+	 */
 	private static final String GERMAN_REGEX = ".* Sich ([0-9]*) (.*) beschaffen und als Opfergabe bei .*";
+	
+	/**
+	 * Spanish regex to find the item and the amount.
+	 */
 	private static final String SPANISH_REGEX = ".* Recolectar ([0-9]*) (.*) y llevárselo a .*";
+	
+	/**
+	 * Italian regex to find the item and the amount.
+	 */
 	private static final String ITALIAN_REGEX = ".* Ottieni ([0-9]*) (.*) e porta l'offerta a .*";
+	
+	/**
+	 * Portuguese regex to find the item and the amount.
+	 */
 	//private static final String PORTUGUESE_REGEX = ".* Find ([0-9]*) (.*) and take the offering to .*";	The portuguese webpage is in english...
 
 	  /**************/
 	 /** ATRIBUTS **/
 	/**************/
 	
+	/**
+	 * Language of the database
+	 */
 	private String language;
+	
+	/**
+	 * Regex to find the item and the amount. 
+	 */
 	private String regex;
 
 	  /*************/

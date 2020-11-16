@@ -7,7 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.B4D.dofus.Dofus;
-;
+
+@SuppressWarnings("javadoc")
 public class GraphTest {
 
 	@Before

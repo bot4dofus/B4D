@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import fr.B4D.bot.B4DException;
 
+@SuppressWarnings("javadoc")
 public class LoggerTest {
 
 	private Logger logger;

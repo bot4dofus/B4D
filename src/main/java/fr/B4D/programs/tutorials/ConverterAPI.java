@@ -11,6 +11,12 @@ import fr.B4D.program.ProgramInterface;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 
+/**
+ * The {@code ConverterAPI} class contains all the tutorials relative to the converter API.
+ * 
+ * @author Lucas
+ *
+ */
 public final class ConverterAPI {	
 
 	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des converssions.<br>

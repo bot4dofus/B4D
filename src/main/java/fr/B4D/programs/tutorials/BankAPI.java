@@ -22,6 +22,12 @@ import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 
+/**
+ * The {@code BankAPI} class contains all the tutorials relative to the bank API.
+ * 
+ * @author Lucas
+ *
+ */
 public final class BankAPI {	
 
 	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des banques.<br>

@@ -21,6 +21,7 @@ import fr.B4D.dofus.items.Set;
 import fr.B4D.dofus.items.Sidekick;
 import fr.B4D.dofus.items.Weapon;
 
+@SuppressWarnings("javadoc")
 public class DofusDatabaseTest {
 	
 	private static DofusDatabase dofusDatabase;

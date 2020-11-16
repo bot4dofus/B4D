@@ -16,6 +16,7 @@ import fr.B4D.bot.Server;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
+@SuppressWarnings("javadoc")
 public class ChannelTest {
 
 	private static B4D b4d;

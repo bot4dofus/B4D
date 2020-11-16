@@ -11,6 +11,12 @@ import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.program.StopProgramException;
 
+/**
+ * The {@code TransportAPI} class contains all the tutorials relative to the transport API.
+ * 
+ * @author Lucas
+ *
+ */
 public final class TransportAPI {
 	
 	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des transports.<br>

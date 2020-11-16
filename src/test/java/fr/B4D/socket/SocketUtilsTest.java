@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import fr.B4D.socket.SocketUtils;
 
+@SuppressWarnings("javadoc")
 public class SocketUtilsTest {
 	
 	@Test

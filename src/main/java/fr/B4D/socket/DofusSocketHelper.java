@@ -3,27 +3,58 @@ package fr.B4D.socket;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import fr.B4D.utils.HexHelper;
 
+/**
+ * The {@code DofusSocketHelper} class is used to find values within a socket.
+ * 
+ * @author Lucas
+ *
+ */
 public class DofusSocketHelper {
 
+	/**
+	 * Minimum number of bytes on which the values can be stored.
+	 */
 	public Integer MIN_NUMBER_BYTES = 1;
+	
+	/**
+	 * Maximum number of bytes on which the values can be stored.
+	 */
 	public Integer MAX_NUMBER_BYTES = 5;
 	
+	/**
+	 * Socket in which look for a value.
+	 */
 	private byte[] socket;
+	
+	/**
+	 * Result of the research.
+	 */
 	private Map<Integer,String> results;
 	
+	/**
+	 * Constructs a {@code DofusSocketHelper} with a socket.
+	 * @param dofusSocket - Socket in which look for a value.
+	 */
 	public DofusSocketHelper(DofusSocket dofusSocket) {
 		this.socket = dofusSocket.getPayload();
 		this.results = new HashMap<Integer,String>();
 	}
 	
+	/**
+	 * Returns the result of a research.
+	 * @return Result of the research.
+	 */
 	public Map<Integer,String> getResults(){
 		return results;
 	}
 	
+	/**
+	 * Find for a given value if the socket.
+	 * @param value - Value to find in the socket.
+	 */
 	public void find(Integer value) {
 		for(int length=MIN_NUMBER_BYTES; length <= MAX_NUMBER_BYTES; length++) {	//For each length
 			
@@ -56,7 +87,13 @@ public class DofusSocketHelper {
 		}
 	}
 	
+	/**
+	 * Prints the results of a research sorted by position.
+	 */
 	public void printResults() {
+		if(results == null)
+			throw new IllegalArgumentException("Do a research first");
+		
 		results
 		.entrySet()
 		.stream()

@@ -3,6 +3,13 @@ package fr.B4D.socket.parser;
 import fr.B4D.bot.B4DException;
 import fr.B4D.socket.DofusSocket;
 
+/**
+ * The {@code SocketParser} class is the super class of the parsers.
+ * 
+ * @author Lucas
+ * @param <T> The type of the parser result.
+ *
+ */
 public abstract class SocketParser<T> {
 	
 	/**

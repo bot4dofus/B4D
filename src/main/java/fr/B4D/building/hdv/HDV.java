@@ -7,7 +7,7 @@ import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
 import fr.B4D.building.IndoorBuilding;
-import fr.B4D.dofus.items.Stack;
+import fr.B4D.dofus.items.Item;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
@@ -20,8 +20,19 @@ public class HDV extends IndoorBuilding{
 
 	//public static final HDV ASTRUB = new HDV(new Point(4,-18), Arrays.asList(new PointF(0.6552, 0.3683)), Arrays.asList(new PointF(0.3048, 0.6776)), new PointF(0.632, 0.4162));
 	
+	/**
+	 * Specify whether the HDV is opened or not.
+	 */
 	private Boolean opened;
+	
+	/**
+	 * Specify whether the HDV is in buy mode.
+	 */
 	private Boolean BuyMode;
+	
+	/**
+	 * Location of the table in relative coordinates.
+	 */
 	private PointF tablePosition;
 
 	  /*************/
@@ -55,7 +66,6 @@ public class HDV extends IndoorBuilding{
 	/**
 	 * Opens the HDV.
 	 * @param person - Person which open the bank.
-	 * @return List of stacks in the bank, {@code null} if not opened.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
 	 * @throws B4DException If a B4D exception has been raised.
@@ -86,17 +96,32 @@ public class HDV extends IndoorBuilding{
 		}
 	}
 	
+	/**
+	 * Set the mode to buy items.
+	 * @throws StopProgramException If the program has been stopped.
+	 * @throws CancelProgramException If the program has been canceled.
+	 */
 	public void setBuyMode() throws StopProgramException, CancelProgramException{
 		B4D.mouse.leftClick(new PointF(0.2856, 0.1058), false);
 		BuyMode = Boolean.TRUE;
 	}
 	
+	/**
+	 * Set the mode to sale items.
+	 * @throws StopProgramException If the program has been stopped.
+	 * @throws CancelProgramException If the program has been canceled.
+	 */
 	public void setSaleMode() throws StopProgramException, CancelProgramException{
 		B4D.mouse.leftClick(new PointF(0.436, 0.1038), false);
 		BuyMode = Boolean.FALSE;
 	}
 	
-	public List<Stack> research(String name){
+	/**
+	 * Research for items in the HDV.
+	 * @param name - Name of the item to find.
+	 * @return - Found items.
+	 */
+	public List<Item> research(String name){
 		//Clear the field
 		//Type the name
 		//Wait for the response

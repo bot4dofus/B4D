@@ -16,6 +16,12 @@ import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.program.StopProgramException;
 
+/**
+ * The {@code ExchangeAPI} class contains all the tutorials relative to the exchange API.
+ * 
+ * @author Lucas
+ *
+ */
 public final class ExchangeAPI {	
 
 	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueur.<br>

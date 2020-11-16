@@ -9,6 +9,12 @@ import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.utils.PointF;
 
+/**
+ * The {@code MouseAPI} class contains all the tutorials relative to the mouse API.
+ * 
+ * @author Lucas
+ *
+ */
 public final class MouseAPI {	
 
 	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API de la souris.<br>

@@ -17,6 +17,12 @@ import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.program.StopProgramException;
 
+/**
+ * The {@code MessageAPI} class contains all the tutorials relative to the message API.
+ * 
+ * @author Lucas
+ *
+ */
 public final class MessageAPI {	
 	
 	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des messages entre joueurs.<br>

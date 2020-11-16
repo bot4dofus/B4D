@@ -1,24 +1,24 @@
 package fr.B4D.socket.parser;
 
-import java.util.Arrays;
-
 import fr.B4D.bot.B4DException;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
-import fr.B4D.socket.SocketElement;
 
+/**
+ * The {@code ChatMessageSocketParser} class is used to parse a socket relative to the chat.
+ * 
+ * @author Lucas
+ *
+ */
 public class ChatMessageSocketParser extends SocketParser<Message>{
 	
 	//		| Channel | Message length | Message | 0x5e | Id something | Length something | Something | Something else | Pseudo length | Pseudo | ...
 	//		|    1    |        2       |    x    |   1  |       3      |         2        |     x     |        8       |        2      |    x   |
-	
-	public ChatMessageSocketParser() {
-		super();
-	}
 
+	@Override
 	public Message parse(DofusSocket dofusSocket) throws B4DException {
 		DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket);
 		

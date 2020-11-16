@@ -10,6 +10,7 @@ import fr.B4D.dofus.items.Item;
 import fr.B4D.dofus.items.Resource;
 import fr.B4D.dofus.items.Stack;
 
+@SuppressWarnings("javadoc")
 public class AlmanaxTest {
 	
 	private static Almanax almanax;

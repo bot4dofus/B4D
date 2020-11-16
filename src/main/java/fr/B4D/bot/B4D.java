@@ -32,16 +32,54 @@ public final class B4D{
 	/** ATRIBUTS **/
 	/**************/
 	
+	/**
+	 * Logger to display messages in the console.
+	 */
 	public static Logger logger;
+	
+	/**
+	 * Socket listener. Listening for the incoming sockets.
+	 */
 	public static SocketListener socketListener;
+	
+	/**
+	 * Keyboard listener. Listening for the keys pressed.
+	 */
 	public static KeyboardListener keyboardListener;
+	
+	/**
+	 * Converter to convert between mouse coordinates.
+	 */
 	public static Converter converter;
+	
+	/**
+	 * Screen of the user to perform analysis on it.
+	 */
 	public static Screen screen;
+	
+	/**
+	 * Mouse of the user to perform actions on it.
+	 */
 	public static Mouse mouse;
+	
+	/**
+	 * Keyboard of the user to perform actions on it.
+	 */
 	public static Keyboard keyboard;
+	
+	/**
+	 * Object to wait on.
+	 */
 	public static Wait wait;
 	
+	/**
+	 * Configuration of the bot.
+	 */
 	private Configuration configuration;
+	
+	/**
+	 * User team.
+	 */
 	private Team team;
 	
 	  /*************/

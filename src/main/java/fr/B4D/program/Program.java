@@ -114,7 +114,7 @@ public final static ArrayList<Program> getAll(){
   	
   	programs.add(HdvAPI.TUTORIAL1);
   	
-  	programs.add(Breaking.BRISAGE);
+  	programs.add(Breaking.BREAKING);
   	
     return programs;
   }

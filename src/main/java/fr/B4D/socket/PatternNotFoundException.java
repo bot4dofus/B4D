@@ -1,15 +1,30 @@
 package fr.B4D.socket;
 
 import fr.B4D.bot.B4DException;
-import fr.B4D.utils.HexHelper;
 
+/**
+ * The class {@code PatternNotFoundException} occurs when a pattern is not found.
+ * 
+ * @author Lucas
+ *
+ */
 public class PatternNotFoundException extends B4DException{
 
+	private static final long serialVersionUID = -1639313215176284377L;
+
+	/**
+	 * Constructs a {@code PatternNotFoundException}.
+	 */
 	public PatternNotFoundException() {
 		super("Could find the pattern.");
 	}
-
-	public PatternNotFoundException(byte[] socket, byte[] pattern) {
-		super("Could find the pattern [" + HexHelper.toString(pattern) + "] in  [" + HexHelper.toString(socket) + "]");
-	}
+	
+	/** 
+	 * Constructs a {@code PatternNotFoundException}.
+     * @param cause - Cause of the exception.
+	 */
+	public PatternNotFoundException(String cause)
+    {
+    	super(cause);
+    }
 }

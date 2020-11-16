@@ -16,15 +16,19 @@ import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
-import fr.B4D.socket.result.HDVItemViewSocketResult;
-import fr.B4D.socket.store.HDVItemViewSocketStore;
 
+/**
+ * The {@code Breaking} class contains the breaking program.
+ * 
+ * @author Lucas
+ *
+ */
 public final class Breaking {	
 
 	/** 
-	 * 
+	 * Breaking program.
 	 */
-	public final static Program BRISAGE = new Program(Place.Tous, Category.Autre, "Brisage", "Identificateur d'équipement rare", null, null, new ProgramInterface() {
+	public final static Program BREAKING = new Program(Place.Tous, Category.Autre, "Brisage", "Identificateur d'équipement rare", null, null, new ProgramInterface() {
 		public void intro(Person person) {}
 		public void outro(Person person) {}
 		public void cycle(Person person) throws B4DException {

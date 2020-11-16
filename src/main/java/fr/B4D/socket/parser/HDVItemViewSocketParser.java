@@ -1,27 +1,30 @@
 package fr.B4D.socket.parser;
 
-import java.util.Arrays;
 import java.util.List;
 
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
 import fr.B4D.socket.PatternNotFoundException;
-import fr.B4D.socket.SocketElement;
-import fr.B4D.socket.SocketUtils;
 import fr.B4D.socket.result.HDVItemViewSocketResult;
 import fr.B4D.socket.store.HDVItemViewSocketStore;
 
+/**
+ * The {@code HDVItemViewSocketParser} class is used to parse a socket relative to an item view in an HDV.
+ * 
+ * @author Lucas
+ *
+ */
 public class HDVItemViewSocketParser extends SocketParser<HDVItemViewSocketResult>{
 
+	/**
+	 * Delimiter before the useful data.
+	 */
 	public static final byte[] DELIMITER = {0x00, 0x00, 0x00, 0x03};
 
 	//		... | 0x00 0x00 0x00 0x03 | Price 1 (Big endian) | Price 10 (Big endian) | Price 100 (Big endian) | ...
 	//		    |          4          |           x          |            x          |             x          |
-	
-	public HDVItemViewSocketParser() {
-		super();
-	}
 
+	@Override
 	public HDVItemViewSocketResult parse(DofusSocket dofusSocket) {		
 		try {
 			DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket);

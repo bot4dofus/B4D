@@ -14,6 +14,7 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
+@SuppressWarnings("javadoc")
 public class StatusTest {
 
 	@SuppressWarnings("unused")

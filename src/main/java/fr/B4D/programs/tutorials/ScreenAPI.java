@@ -11,6 +11,12 @@ import fr.B4D.program.Program;
 import fr.B4D.program.ProgramInterface;
 import fr.B4D.utils.PointF;
 
+/**
+ * The {@code ScreenAPI} class contains all the tutorials relative to the screen API.
+ * 
+ * @author Lucas
+ *
+ */
 public final class ScreenAPI {	
 
 	/** Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API de l'écran.<br>

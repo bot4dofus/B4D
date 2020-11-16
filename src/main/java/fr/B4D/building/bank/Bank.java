@@ -20,9 +20,19 @@ import fr.B4D.utils.PointF;
  */
 public class Bank extends IndoorBuilding{
 
+	/**
+	 * Bank of Astrub
+	 */
 	public static final Bank ASTRUB = new Bank(new Point(4,-18), Arrays.asList(new PointF(0.6552, 0.3683)), Arrays.asList(new PointF(0.3048, 0.6776)), new PointF(0.632, 0.4162));
 	
+	/**
+	 * Specify whether the bank has been opened.
+	 */
 	private Boolean opened;
+	
+	/**
+	 * Position of the banker in relative coordinates.
+	 */
 	private PointF bankerPosition;
 
 	  /*************/

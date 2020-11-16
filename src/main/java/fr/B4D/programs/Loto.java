@@ -35,6 +35,12 @@ import fr.B4D.program.ProgramInterface;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.ClosestString;
 
+/**
+ * The {@code Loto} class contains the loto program.
+ * 
+ * @author Lucas
+ *
+ */
 public final class Loto {
 	private static final String CREDENTIALS = "loto.credentials";
 	private static final String PROPERTIES = "loto.properties";
@@ -62,6 +68,9 @@ public final class Loto {
 	
 	private static final String[] PROPERTY_FIELDS = {privateFolderIdFieldName, sharedFolderIdFieldName, modelSheetIdFieldName, ticketPriceFieldName, timeoutFieldName,	welcomeMessageFieldName, questionMessageFieldName, exchangeMessageFieldName, validationMessageFieldName, thanksMessageFieldName, rangeTitleFieldName, rangeDateFieldName, rangeHourFieldName, rangePositionFieldName, rangePriceFieldName, rangeOrganiserFieldName, rangeDataFieldName};
 
+	/**
+	 * Loto program.
+	 */
 	public final static Program LOTO = new Program(Place.Tous, Category.Jeux, "Argent", "Loto", new Channel[] {Channel.GENERAL, Channel.PRIVATE}, Status.AVAILABLE, new ProgramInterface() {
 
 		private Properties properties;

@@ -13,6 +13,9 @@ import fr.B4D.utils.PointF;
  */
 public class MoneyDeposit extends BankAction{
 
+	/**
+	 * Put all the money the player has in the bank.
+	 */
 	public static final  MoneyDeposit ALL = new MoneyDeposit(-1);
 	
 	private Integer amount;

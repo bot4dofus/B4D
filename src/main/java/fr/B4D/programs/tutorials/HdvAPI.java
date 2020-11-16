@@ -11,6 +11,12 @@ import fr.B4D.program.ProgramInterface;
 import fr.B4D.socket.result.HDVItemViewSocketResult;
 import fr.B4D.socket.store.HDVItemViewSocketStore;
 
+/**
+ * The {@code HdvAPI} class contains all the tutorials relative to the HDV API.
+ * 
+ * @author Lucas
+ *
+ */
 public final class HdvAPI {	
 
 	/** 

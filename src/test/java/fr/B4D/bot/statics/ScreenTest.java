@@ -12,6 +12,7 @@ import fr.B4D.bot.Configuration;
 import fr.B4D.dao.DAOFactory;
 import fr.B4D.utils.Rectangle;
 
+@SuppressWarnings("javadoc")
 public class ScreenTest {
 
 	private Screen screen;

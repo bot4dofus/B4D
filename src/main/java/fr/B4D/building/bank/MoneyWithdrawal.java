@@ -12,7 +12,10 @@ import fr.B4D.utils.PointF;
  */
 public class MoneyWithdrawal extends BankAction{
 
-	public static final  MoneyWithdrawal ALL = new MoneyWithdrawal(-1);
+	/**
+	 * Withdraw all the money the player has in the bank.
+	 */
+	public static final MoneyWithdrawal ALL = new MoneyWithdrawal(-1);
 	
 	private Integer amount;
 

@@ -2,10 +2,20 @@ package fr.B4D.socket.store;
 
 import fr.B4D.socket.result.HDVResearchSocketResult;
 
+/**
+ * The {@code HDVResearchSocketStore} is used to store {@code HDVResearchSocketResult} . This class extends {@code SocketStore}.
+ * 
+ * @author Lucas
+ *
+ */
 public class HDVResearchSocketStore extends SocketStore<HDVResearchSocketResult> {
 	
 	private static HDVResearchSocketStore instance;
 
+	/**
+	 * Returns the instance of the store.
+	 * @return Instance of the store.
+	 */
 	public static HDVResearchSocketStore getInstance() {
 		if(instance == null)
 			instance = new HDVResearchSocketStore();

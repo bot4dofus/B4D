@@ -14,6 +14,7 @@ import fr.B4D.google.GoogleDrive;
 
 // https://o7planning.org/en/11889/manipulating-files-and-folders-on-google-drive-using-java
 
+@SuppressWarnings("javadoc")
 public class GoogleDriveTest {
 
 	private static final String CREDENTIALS = "b4d_service.json";
