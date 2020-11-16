@@ -29,13 +29,7 @@ import fr.B4D.programs.tutorials.TransportAPI;
  * Un programme est défini par un lieux, une catégorie, une sous catégorie, un nom et une sub-routine implémentant l'interface {@code ProgramInterface}.
  * Il est possible de spécifier les canaux affichées dans le chat et le status du joueur.
  */
-public class Program implements Serializable{
-
-	private static final long serialVersionUID = -4725926340583319625L;	
-	
-	  /***************/
-	 /** ATTRIBUTS **/
-	/***************/
+public class Program {
 	
 	private Place place;
 	private Category category;
@@ -46,10 +40,6 @@ public class Program implements Serializable{
 	private Status status;
 
 	private ProgramInterface program;
-	
-	  /******************/
-	 /** CONSTRUCTEUR **/
-	/******************/
 
 	/** Constructeur de la classe {@code Program}. 
 	 * @param place - Lieu d'éxecution du programme.
@@ -74,10 +64,6 @@ public class Program implements Serializable{
 		
 		this.program = program;
 	}
-	
-	  /************************/
-	 /** METHODES STATIQUES **/
-	/************************/
 	
   /** Retourne la liste de tous les programmes disponibles.
  * @return Liste de tous les programmes.
@@ -119,10 +105,6 @@ public final static ArrayList<Program> getAll(){
     return programs;
   }
 	
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/
-	
 	/** Retourne le lieu d'éxecution du programme.
 	 * @return Lieux d'éxecution du programme.
 	 */
@@ -150,10 +132,6 @@ public final static ArrayList<Program> getAll(){
 	public String getProgramName() {
 		return programName;
 	}
-
-	  /**************/
-	 /** METHODES **/
-	/**************/
 	
 	/** Permet de lancer le programme.
 	 * @param person - Personnage avec lequel lancer le programme.
