@@ -7,6 +7,11 @@ package fr.B4D.socket.result;
  *
  */
 public class HDVItemViewSocketResult extends SocketResult{
+
+	/**
+	 * The item id.
+	 */
+	private Integer id;
 	
 	/**
 	 * Price of the item per stack of 1.
@@ -25,14 +30,24 @@ public class HDVItemViewSocketResult extends SocketResult{
 	
 	/**
 	 * Constructs a {@code HDVItemViewSocketResult}.
+	 * @param id - Id of the item.
 	 * @param price1 - Price of the item per stack of 1.
 	 * @param price10 - Price of the item per stack of 10.
 	 * @param price100 - Price of the item per stack of 100.
 	 */
-	public HDVItemViewSocketResult(Integer price1, Integer price10, Integer price100) {
+	public HDVItemViewSocketResult(Integer id, Integer price1, Integer price10, Integer price100) {
+		this.id = id;
 		this.price1 = price1;
 		this.price10 = price10;
 		this.price100 = price100;
+	}
+	
+	/**
+	 * Returns the id of the item.
+	 * @return Id of the item.
+	 */
+	public Integer getId() {
+		return id;
 	}
 	
 	/**

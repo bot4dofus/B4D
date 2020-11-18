@@ -14,7 +14,7 @@ public enum SocketType {
 	/**
 	 * Socket representing an item view in HDV.
 	 */
-	HDV_ITEM_VIEW_SOCKET((byte) 0x59, HDVItemViewSocketParser.class),
+	HDV_ITEM_VIEW_SOCKET((byte) 0x8b, HDVItemViewSocketParser.class),
 	
 	/**
 	 * Socket representing the result of an HDV research.

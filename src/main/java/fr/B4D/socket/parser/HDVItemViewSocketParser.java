@@ -28,6 +28,10 @@ public class HDVItemViewSocketParser extends SocketParser<HDVItemViewSocketResul
 	public HDVItemViewSocketResult parse(DofusSocket dofusSocket) {		
 		try {
 			DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket);
+			
+			iterator.skip(9);
+			Integer id = iterator.getNextSocketElement(2).asBigEndian();
+			
 			Integer index = iterator.moveAfterPattern(DELIMITER);
 			List<Integer> numbers = iterator.getNextSocketElement(dofusSocket.getPayload().length-index).asBigEndians();
 			
@@ -35,7 +39,7 @@ public class HDVItemViewSocketParser extends SocketParser<HDVItemViewSocketResul
 			Integer price10 = numbers.size() >= 2 ? numbers.get(1) : 0;
 			Integer price100 = numbers.size() >= 3 ? numbers.get(2) : 0;
 			
-			HDVItemViewSocketResult result = new HDVItemViewSocketResult(price1, price10, price100);
+			HDVItemViewSocketResult result = new HDVItemViewSocketResult(id, price1, price10, price100);
 			HDVItemViewSocketStore.getInstance().addSocketResult(result);
 			
 			return result;
