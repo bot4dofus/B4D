@@ -99,6 +99,10 @@ public class JPanel_Admin extends JPanel {
 		});
 		btnRecord.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnRecord.setBounds(165, 35, 150, 25);
+		
+		if(b4d.getConfiguration().getGameFrame() == null)
+			btnRecord.setEnabled(false);
+		
 		add(btnRecord);
 		
 		JLabel lblPropose = new JLabel("Nouveau programme / Amélioration / Question :");
