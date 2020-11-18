@@ -82,10 +82,10 @@ public class JPanel_Personnage extends JPanel {
 		setLayout(null);
 		setVisible(false);
 		
-		JComboBox<String> comboBox_server = new JComboBox<String>();
+		JComboBox<Server> comboBox_server = new JComboBox<Server>();
 		
 		for(Server server:Server.values())
-			comboBox_server.addItem(server.getName());
+			comboBox_server.addItem(server);
 		
 		dataTable = new Vector<Vector<String>>();
 		Vector<String> colonnes = new Vector<String>(Arrays.asList(new String[] {"Nom de compte","Mot de passe","Serveur","Pseudo"}));
@@ -102,7 +102,7 @@ public class JPanel_Personnage extends JPanel {
 						b4d.getTeam().get(evt.getFirstRow()).setPassword(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());
 						break;
 					case 2:
-						b4d.getTeam().get(evt.getFirstRow()).setServer(Server.valueOf(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString()));
+						b4d.getTeam().get(evt.getFirstRow()).setServer((Server) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()));
 						break;
 					case 3:
 						b4d.getTeam().get(evt.getFirstRow()).setPseudo(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());

@@ -129,6 +129,6 @@ public enum Server {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return name + " (" + ip + ")";
+		return name;
 	}
 }
