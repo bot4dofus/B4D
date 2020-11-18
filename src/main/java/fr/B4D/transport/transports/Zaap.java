@@ -23,35 +23,154 @@ public class Zaap extends Transport implements Serializable{
 	 /** COLLECTION **/
 	/****************/
 	
+	/**
+	 * The zaap of the evil Amakna forest.
+	 */
 	public final static Zaap Amakna_Foret_Malefique = new Zaap("Amakna (Bord de la foret malefique)", new Point(-1, 13), new PointF(0.4052, 0.4068));
+	
+	/**
+	 * The zaap of the Amakna castle.
+	 */
     public final static Zaap Amakna_Chateau = new Zaap("Amakna (Chateau d'Amakna)", new Point(3, -5), new PointF(0.5024, 0.3426));
+    
+	/**
+	 * The zaap of the Amakna Bouftous corner.
+	 */
     public final static Zaap Amakna_Coin_Bouftous = new Zaap("Amakna (Coin des Bouftous)", new Point(5, 7), new PointF(0.6806, 0.3437));
+    
+	/**
+	 * The zaap of the Amakna Craqueleurs montain.
+	 */
     public final static Zaap Amakna_Montagne_Craqueleurs = new Zaap("Amakna (Montagne des Craqueleurs)", new Point(-5, -8), new PointF(0.7167, 0.1663));
+    
+	/**
+	 * The zaap of the Amakna Scarafeuilles prairie.
+	 */
     public final static Zaap Amakna_Plaines_Scarafeuilles = new Zaap("Amakna (Plaine des Scarafeuilles)", new Point(-1, 24), new PointF(0.2576, 0.509));
+    
+	/**
+	 * The zaap of the Amakna Madrestam harbor.
+	 */
     public final static Zaap Amakna_Port_Madrestam = new Zaap("Amakna (Port de Madrestam)", new Point(7, -4), new PointF(0.6027, 0.2234));
+    
+	/**
+	 * The zaap of the Amakna village.
+	 */
     public final static Zaap Amakna_Village = new Zaap("Amakna (Village d'Amakna)", new Point(-2, 0), new PointF(0.6798, 0.2325));
+    
+	/**
+	 * The zaap of Astrub.
+	 */
     public final static Zaap Astrub = new Zaap("Astrub (Cite d'astrub)", new Point(5, -18), new PointF(0.6056, 0.3104));
+    
+	/**
+	 * The zaap of the Sufokia shore.
+	 */
     public final static Zaap Sufokia_Rivage = new Zaap("Baie de Sufokia (Rivage sufokien)", new Point(10, 22), new PointF(0.5401, 0.3377));
+    
+	/**
+	 * The zaap of the Sufokia village.
+	 */
     public final static Zaap Sufokia_Village = new Zaap("Baie de Sufokia (Sufokia)", new Point(13, 26), new PointF(0.7376, 0.2896));
+    
+	/**
+	 * The zaap of the Sufokia alliance temple.
+	 */
     public final static Zaap Sufokia_Temple_Alliances = new Zaap("Baie de Sufokia (Temple des alliances)", new Point(13, 35), new PointF(0.8122, 0.1162));
+    
+	/**
+	 * The zaap of Bonta.
+	 */
     public final static Zaap Bonta = new Zaap("Bonta (Centre-ville)", new Point(-32, -56), new PointF(0.4406, 0.3257));
+    
+	/**
+	 * The zaap of Brakmar.
+	 */
     public final static Zaap Brakmar = new Zaap("Brakmar (Centre-ville)", new Point(-26, 35), new PointF(0.5323741, 0.260479));
+    
+	/**
+	 * The zaap of the Otomai shore village.
+	 */
     public final static Zaap Otomai_Village_Cotier = new Zaap("Ile d'Otomai (Village cotier)", new Point(-46, 18), new PointF(0.4647, 0.3437));
+    
+	/**
+	 * The zaap of the Otomai canopee village.
+	 */
     public final static Zaap Otomai_Village_Canopee = new Zaap("Ile d'Otomai (Village de la Canopee)", new Point(-54, 16), new PointF(0.496, 0.4228));
+    
+	/**
+	 * The zaap of the Frigost village.
+	 */
     public final static Zaap Frigost_Bourgade = new Zaap("Ile de Frigost (La Bourgade)", new Point(-78, -41), new PointF(0.4848, 0.3367));
+    
+	/**
+	 * The zaap of the Frigost bury village.
+	 */
     public final static Zaap Frigost_Village_Enseveli = new Zaap("Ile de Frigost (Village enseveli)", new Point(-77, -73), new PointF(0.3636, 0.5771));
+    
+	/**
+	 * The zaap of the Moon turtle beach.
+	 */
     public final static Zaap Moon_Plage_Tortue = new Zaap("Ile de Moon (Plage de la Tortue)", new Point(35, 12), new PointF(0.1549, 0.1222));
+    
+	/**
+	 * The zaap of the Frigost buty village.
+	 */
     public final static Zaap Wabbits_Cawotte = new Zaap("Ile des Wabbits (Ile de la Cawotte)", new Point(25, -4), new PointF(0.626, 0.4509));
+    
+	/**
+	 * The zaap of the Sidimote Landres.
+	 */
     public final static Zaap Landres_Sidimote = new Zaap("Landres de Sidimote (Route des Roulottes)", new Point(-25, 12), new PointF(0.175, 0.497));
+    
+	/**
+	 * The zaap of the Koalaks montain.
+	 */
     public final static Zaap Montagne_Koalaks = new Zaap("Montagne des Koalaks (Village des Eleveurs)", new Point(-16, 1), new PointF(0.4888, 0.3667));
+    
+	/**
+	 * The zaap of Pandala.
+	 */
     public final static Zaap Pandala = new Zaap("Pandala Neutre (Faubourgs de Pandala)", new Point(26, -37), new PointF(0.2006, 0.2455));
+    
+	/**
+	 * The zaap of the Cania fields.
+	 */
     public final static Zaap Cania_Champs_Cania = new Zaap("Plaine de Cania (Champs de Cania)", new Point(-27, -36), new PointF(0.3949, 0.4089));
+    
+	/**
+	 * The zaap of the Cania lac.
+	 */
     public final static Zaap Cania_Lac_Cania = new Zaap("Plaine de Cania (Lac de Cania)", new Point(-3, -42), new PointF(0.7504, 0.2234));
+    
+	/**
+	 * The zaap of the Cania montain.
+	 */
     public final static Zaap Cania_Massif_Cania = new Zaap("Plaine de Cania (Massif de Cania)", new Point(-13, -28), new PointF(0.6404, 0.3988));
+    
+	/**
+	 * The zaap of the Cania Porkass prairie.
+	 */
     public final static Zaap Cania_Plaine_Porkass = new Zaap("Plaine de Cania (Plaine des Porkass)", new Point(-5, -23), new PointF(0.3258, 0.3266));
+    
+	/**
+	 * The zaap of the Cania rocky prairie.
+	 */
     public final static Zaap Cania_Plaines_Rocheuses = new Zaap("Plaine de Cania (Plaines Rocheuses)", new Point(-17, -47), new PointF(0.3234, 0.3337));
+    
+	/**
+	 * The zaap of the Cania rocky prairie.
+	 */
     public final static Zaap Cania_Routes_Rocailleuses = new Zaap("Plaine de Cania (Routes Rocailleuses)", new Point(-20, -20), new PointF(0.4302, 0.3537));
+    
+	/**
+	 * The zaap of Saharach.
+	 */
     public final static Zaap Saharach = new Zaap("Saharach (Dunes des ossements)", new Point(15, -58), new PointF(0.3595, 0.3076));
+    
+	/**
+	 * The zaap of the Tainela.
+	 */
     public final static Zaap Tainela = new Zaap("Tainéla (Berceau)", new Point(1, -32), new PointF(0.4992, 0.3978));    
     
 	  /******************/
@@ -64,7 +183,7 @@ public class Zaap extends Transport implements Serializable{
 	 * @param positionF - Position relative du zaap.
 	 */
 	public Zaap(String name, Point position, PointF positionF) {
-		super(name, position, positionF, zaapCost);
+		super(name, position, positionF, ZAAP_COST);
 	}
 	
 	  /************************/

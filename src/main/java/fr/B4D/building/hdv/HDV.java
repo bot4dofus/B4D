@@ -60,11 +60,28 @@ public class HDV extends IndoorBuilding{
 	 /** GET & SET **/
 	/***************/
 	
-	/** Returns the position of the table on the screen.
+	/** 
+	 * Returns the position of the table on the screen.
 	 * @return Position of the table.
 	 */
 	public PointF getCharacterPosition() {
 		return tablePosition;
+	}
+	
+	/** 
+	 * Checks whether the HDV is opened or not.
+	 * @return {@code true} if the HDV is opened, {@code false} otherwise.
+	 */
+	public boolean isOpened() {
+		return opened;
+	}
+	
+	/** 
+	 * Checks whether the HDV is in buy mode.
+	 * @return {@code true} if the HDV is in buy mode, {@code false} otherwise.
+	 */
+	public boolean isBuyMode() {
+		return buyMode;
 	}
 	
 	/**

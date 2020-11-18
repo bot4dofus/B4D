@@ -38,7 +38,7 @@ public class Walk extends Transport implements Serializable{
 	 * @param position - Position de la marche sur l'écran.
 	 */
 	public Walk(Point position) {
-		super("Walking", position, null, walkCost);
+		super("Walking", position, null, WALK_COST);
 	}
 
 	  /**************/

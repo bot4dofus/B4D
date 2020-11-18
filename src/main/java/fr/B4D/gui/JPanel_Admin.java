@@ -19,12 +19,24 @@ import fr.B4D.bot.B4D;
 import fr.B4D.programs.Test;
 import fr.B4D.utils.PointF;
 
+/**
+ * The class {@code JPanel_Admin} is a GUI used by admins and users for test purposes, program recording and bug report.
+ * @author Lucas
+ *
+ */
 public class JPanel_Admin extends JPanel {
 
 	private static final long serialVersionUID = -7603368625926813641L;
-	
-	public final int width = 635;
-	public final int height = 70;
+
+	/**
+	 * Width of the panel.
+	 */
+	public static final int WIDTH = 635;
+
+	/**
+	 * Height of the panel.
+	 */
+	public static final int HEIGHT = 70;
 	
 	/**
 	 * Create the panel.

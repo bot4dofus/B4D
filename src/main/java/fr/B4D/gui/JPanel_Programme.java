@@ -25,12 +25,24 @@ import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramOptions;
 
+/**
+ * The class {@code JPanel_Programme} is a GUI allowing program selection.
+ * @author Lucas
+ *
+ */
 public class JPanel_Programme extends JPanel {
 
 	private static final long serialVersionUID = -1975429297614634621L;
-	
-	public final int width = 635;
-	public final int height = 235;
+
+	/**
+	 * Width of the panel.
+	 */
+	public static final int WIDTH = 635;
+
+	/**
+	 * Height of the panel.
+	 */
+	public static final int HEIGHT = 235;
 	
 	private JComboBox<Place> comboBox_Place;
 	private JComboBox<Category> comboBox_Category;

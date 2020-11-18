@@ -17,6 +17,12 @@ import java.awt.geom.Ellipse2D;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * The class {@code JFrame_GetPoint} is a GUI used to get a location of an element on the screen.<br>
+ * This interface displays a gray circle around the arrow with instructions in it.
+ * @author Lucas
+ *
+ */
 public class JFrame_GetPoint {
 	
 	public JFrame frame;

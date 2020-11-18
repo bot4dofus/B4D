@@ -26,12 +26,24 @@ import javax.swing.UIManager;
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
 
+/**
+ * The class {@code JFrame_B4D} is the main GUI of B4D.
+ * @author Lucas
+ *
+ */
 public class JFrame_B4D extends JFrame{
 
 	private static final long serialVersionUID = -7925109992438988807L;
 	
-	public final static Color selectedTab = new Color(33,43,53);
-	public final static Color unSelectedTab = new Color(52,63,73);
+	/**
+	 * Color of a selected tab.
+	 */
+	public final static Color SELECTED_TAB_COLOR = new Color(33,43,53);
+
+	/**
+	 * Color of an unselected tab.
+	 */
+	public final static Color UNSELECTED_TAB_COLOR = new Color(52,63,73);
 
 	private Point offset;
 	private final int offset_x_Form = 20, offset_y_Form = 70;	
@@ -48,6 +60,10 @@ public class JFrame_B4D extends JFrame{
 
 	private B4D b4d;
 	
+	/**
+	 * Entry point of B4D.
+	 * @param args - Optional arguments. Could be used to launch a program on startup.
+	 */
 	public static void main(String[] args) {
 		try {
 			JFrame_B4D windowB4D = new JFrame_B4D();
@@ -58,6 +74,13 @@ public class JFrame_B4D extends JFrame{
 		}
 	}
 	
+	/**
+	 * Constructor of the B4D main GUI.
+	 * @throws B4DException if a B4D Exception occurs.
+	 * @throws ClassNotFoundException if a deserialization problem occurs.
+	 * @throws IOException if not possible to create the configuration files.
+	 * @throws AWTException if the computer configuration doesn't allow process automation.
+	 */
 	public JFrame_B4D() throws B4DException, ClassNotFoundException, IOException, AWTException{
 		b4d = new B4D();
 		programPanel = new JPanel_Programme(b4d);
@@ -74,20 +97,20 @@ public class JFrame_B4D extends JFrame{
 		setUndecorated(true);
 		setResizable(false);
 		setBackground(Color.GRAY);
-		getContentPane().setBackground(unSelectedTab);
+		getContentPane().setBackground(UNSELECTED_TAB_COLOR);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JFrame_B4D.class.getResource("/fr/B4D/icones/Dofus_Rouge.png")));	//Defini l'icone
 		setTitle("B4D");									//Defini le nom de la fenetre
 		setBounds(100, 100, 807, 541);					//Defini les coordonnees
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Defini l'action lors de l'appui sur la cloix
 		getContentPane().setLayout(null);
 
-		programPanel.setBounds(10, 60, 635, 235);
+		programPanel.setBounds(10, 60, JPanel_Programme.WIDTH, JPanel_Programme.HEIGHT);
 		getContentPane().add(programPanel);
-		personPanel.setBounds(10, 60, personPanel.width, personPanel.height);
+		personPanel.setBounds(10, 60, JPanel_Personnage.WIDTH, JPanel_Personnage.HEIGHT);
 		getContentPane().add(personPanel);
-		settingPanel.setBounds(10, 60, settingPanel.width, settingPanel.height);
+		settingPanel.setBounds(10, 60, JPanel_Reglage.WIDTH, JPanel_Reglage.HEIGHT);
 		getContentPane().add(settingPanel);
-		adminPanel.setBounds(10, 60, adminPanel.width, adminPanel.height);
+		adminPanel.setBounds(10, 60, JPanel_Admin.WIDTH, JPanel_Admin.HEIGHT);
 		getContentPane().add(adminPanel);
 		
 		JLabel lblReduce = new JLabel("-");
@@ -173,16 +196,16 @@ public class JFrame_B4D extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(!programPanel.isVisible())
-					lblProgrammes.setBackground(selectedTab);
+					lblProgrammes.setBackground(SELECTED_TAB_COLOR);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if(!programPanel.isVisible())
-					lblProgrammes.setBackground(unSelectedTab);
+					lblProgrammes.setBackground(UNSELECTED_TAB_COLOR);
 			}
 		});
 		lblProgrammes.setOpaque(true);
-		lblProgrammes.setBackground(selectedTab);
+		lblProgrammes.setBackground(SELECTED_TAB_COLOR);
 		lblProgrammes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProgrammes.setForeground(Color.WHITE);
 		lblProgrammes.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -198,16 +221,16 @@ public class JFrame_B4D extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(!personPanel.isVisible())
-					lblPersonnages.setBackground(selectedTab);
+					lblPersonnages.setBackground(SELECTED_TAB_COLOR);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if(!personPanel.isVisible())
-					lblPersonnages.setBackground(unSelectedTab);
+					lblPersonnages.setBackground(UNSELECTED_TAB_COLOR);
 			}
 		});		
 		lblPersonnages.setOpaque(true);
-		lblPersonnages.setBackground(unSelectedTab);
+		lblPersonnages.setBackground(UNSELECTED_TAB_COLOR);
 		lblPersonnages.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPersonnages.setForeground(Color.WHITE);
 		lblPersonnages.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -223,16 +246,16 @@ public class JFrame_B4D extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(!settingPanel.isVisible())
-					lblReglages.setBackground(selectedTab);
+					lblReglages.setBackground(SELECTED_TAB_COLOR);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if(!settingPanel.isVisible())
-					lblReglages.setBackground(unSelectedTab);
+					lblReglages.setBackground(UNSELECTED_TAB_COLOR);
 			}
 		});		
 		lblReglages.setOpaque(true);
-		lblReglages.setBackground(unSelectedTab);
+		lblReglages.setBackground(UNSELECTED_TAB_COLOR);
 		lblReglages.setHorizontalAlignment(SwingConstants.CENTER);
 		lblReglages.setForeground(Color.WHITE);
 		lblReglages.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -248,16 +271,16 @@ public class JFrame_B4D extends JFrame{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				if(!adminPanel.isVisible())
-					lblAdmin.setBackground(selectedTab);
+					lblAdmin.setBackground(SELECTED_TAB_COLOR);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				if(!adminPanel.isVisible())
-					lblAdmin.setBackground(unSelectedTab);
+					lblAdmin.setBackground(UNSELECTED_TAB_COLOR);
 			}
 		});
 		lblAdmin.setOpaque(true);
-		lblAdmin.setBackground(unSelectedTab);
+		lblAdmin.setBackground(UNSELECTED_TAB_COLOR);
 		lblAdmin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAdmin.setForeground(Color.WHITE);
 		lblAdmin.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -320,10 +343,10 @@ public class JFrame_B4D extends JFrame{
 	/**************/
 	
 	private void changerPanel(int index) {
-		lblProgrammes.setBackground(unSelectedTab);
-		lblPersonnages.setBackground(unSelectedTab);
-		lblReglages.setBackground(unSelectedTab);
-		lblAdmin.setBackground(unSelectedTab);		
+		lblProgrammes.setBackground(UNSELECTED_TAB_COLOR);
+		lblPersonnages.setBackground(UNSELECTED_TAB_COLOR);
+		lblReglages.setBackground(UNSELECTED_TAB_COLOR);
+		lblAdmin.setBackground(UNSELECTED_TAB_COLOR);		
 		programPanel.setVisible(false);
 		personPanel.setVisible(false);
 		settingPanel.setVisible(false);
@@ -331,23 +354,23 @@ public class JFrame_B4D extends JFrame{
 		
 		switch(index) {
 		case 0:
-			lblProgrammes.setBackground(selectedTab);
-			setSize(programPanel.width + offset_x_Form, programPanel.height + offset_y_Form);
+			lblProgrammes.setBackground(SELECTED_TAB_COLOR);
+			setSize(JPanel_Programme.WIDTH + offset_x_Form, JPanel_Programme.HEIGHT + offset_y_Form);
 			programPanel.setVisible(true);
 			break;
 		case 1:
-			lblPersonnages.setBackground(selectedTab);
-			setSize(personPanel.width + offset_x_Form, personPanel.height + offset_y_Form);
+			lblPersonnages.setBackground(SELECTED_TAB_COLOR);
+			setSize(JPanel_Personnage.WIDTH + offset_x_Form, JPanel_Personnage.HEIGHT + offset_y_Form);
 			personPanel.setVisible(true);
 			break;
 		case 2:
-			lblReglages.setBackground(selectedTab);
-			setSize(settingPanel.width + offset_x_Form, settingPanel.height + offset_y_Form);
+			lblReglages.setBackground(SELECTED_TAB_COLOR);
+			setSize(JPanel_Reglage.WIDTH + offset_x_Form, JPanel_Reglage.HEIGHT + offset_y_Form);
 			settingPanel.setVisible(true);
 			break;
 		case 3:
-			lblAdmin.setBackground(selectedTab);
-			setSize(adminPanel.width + offset_x_Form, adminPanel.height + offset_y_Form);
+			lblAdmin.setBackground(SELECTED_TAB_COLOR);
+			setSize(JPanel_Admin.WIDTH + offset_x_Form, JPanel_Admin.HEIGHT + offset_y_Form);
 			adminPanel.setVisible(true);
 			break;
 		}
