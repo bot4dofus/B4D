@@ -141,11 +141,14 @@ public class HDV extends IndoorBuilding{
 	 * Research for items in the HDV.
 	 * @param name - Name of the item to find.
 	 * @return - Found items.
+	 * @throws CancelProgramException if the program is canceled.
+	 * @throws StopProgramException if the program is stopped.
 	 */
-	public List<Item> research(String name){
-		//Clear the field
-		//Type the name
-		//Wait for the response
+	public List<Item> research(String name) throws StopProgramException, CancelProgramException{
+		B4D.mouse.leftClick(new PointF(0.1924, 0.1732), false);		//Clear the field
+		B4D.mouse.leftClick(new PointF(0.127, 0.1752), false);		//Click on the field
+		B4D.keyboard.writeKeyboard(name); 							//Type the name
+		//Wait for the response, no socket on research result !!! How do they do this ?
 		return null;
 	}
 }
