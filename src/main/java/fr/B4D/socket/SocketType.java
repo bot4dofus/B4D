@@ -19,7 +19,7 @@ public enum SocketType {
 	/**
 	 * Socket representing the result of an HDV research.
 	 */
-	HDV_RESEARCH_SOCKET((byte) 0x5a, HDVResearchSocketParser.class),
+	HDV_FILTER_RESULT_SOCKET((byte) 0x95, HDVResearchSocketParser.class),
 
 	/**
 	 * Socket representing a message in the chat.
