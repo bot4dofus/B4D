@@ -8,10 +8,8 @@ import javax.swing.JOptionPane;
 
 import org.json.simple.JSONObject;
 
-import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
-import fr.B4D.bot.Server;
 import fr.B4D.building.hdv.HDVEquipmentCategoryFilter;
 import fr.B4D.building.hdv.HDVEquipments;
 import fr.B4D.dofus.Dofus;
@@ -42,11 +40,7 @@ public final class Breaking extends Program{
 	public void outro(Person person) {}
 
 	@Override
-	public void cycle(Person person) throws B4DException {
-
-		B4D.socketListener.setFilter(Server.FURYE);
-		B4D.socketListener.start();
-		
+	public void cycle(Person person) throws B4DException {	
 		HDVEquipments.BONTA.open(person);
 		
 		JSONObject database = Dofus.getInstance().getDatabase().loadDatabase();
