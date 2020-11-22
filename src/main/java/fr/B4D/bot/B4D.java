@@ -22,6 +22,7 @@ import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramOptions;
 import fr.B4D.socket.SocketListener;
+import fr.B4D.utils.os.Os;
 
 /** La classe {@code B4D} est la classe principale du bot.<br><br>
  * Elle fournit les méthodes dont à besoin l'interface graphique pour fonctionner.
@@ -238,7 +239,9 @@ public final class B4D{
 			keyboardListener.start();
 		
 		try {
-			socketListener.setFilter(person.getServer());
+			Os os = Os.findOs();
+			String serverIp = os.findServerIp();
+			socketListener.setFilter(serverIp);
 			program.start(person, programOptions);
 		} catch (B4DException e) {
 			B4D.logger.error(e);
