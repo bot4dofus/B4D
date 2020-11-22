@@ -24,7 +24,7 @@ public enum SocketType {
 	/**
 	 * Socket representing a message in the chat.
 	 */
-	CHAT_MESSAGE_SOCKET((byte) 0x0d, ChatMessageSocketParser.class),
+	CHAT_MESSAGE_SOCKET((byte) 0x59, ChatMessageSocketParser.class),
 
 	/**
 	 * Socket representing an opened enclose.
