@@ -11,6 +11,7 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.AddSheetRequest;
+import com.google.api.services.sheets.v4.model.AppendValuesResponse;
 import com.google.api.services.sheets.v4.model.BatchUpdateSpreadsheetRequest;
 import com.google.api.services.sheets.v4.model.BatchUpdateSpreadsheetResponse;
 import com.google.api.services.sheets.v4.model.ClearValuesRequest;
@@ -65,7 +66,8 @@ public class GoogleSheet {
 	 /** METHODS **/
 	/*************/
     
-	/** Permet d'écrire dans une ou plusieurs cellules.
+	/** 
+	 * Permet d'écrire dans une ou plusieurs cellules.
 	 * @param content - Liste de liste d'objets à écrire. 
 	 * @param range - Cellule dans laquelle écrire.
 	 * @return Résultat de l'éxecution.
@@ -75,6 +77,21 @@ public class GoogleSheet {
 		ValueRange body = new ValueRange().setValues(content);
 		return sheets.spreadsheets().values()
 				.update(id, range, body)
+				.setValueInputOption("RAW")
+				.execute();
+	}
+    
+	/** 
+	 * Permet d'écrire dans une ou plusieurs cellules un insérant des lignes.
+	 * @param content - Liste de liste d'objets à écrire. 
+	 * @param range - Cellule dans laquelle écrire.
+	 * @return Résultat de l'éxecution.
+     * @throws IOException Si impossible d'éxecuter l'opération.
+	 */
+	public AppendValuesResponse append(List<List<Object>> content, String range) throws IOException {
+		ValueRange body = new ValueRange().setValues(content);
+		return sheets.spreadsheets().values()
+				.append(id, range, body)
 				.setValueInputOption("RAW")
 				.execute();
 	}
