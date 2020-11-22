@@ -11,7 +11,6 @@ import org.pcap4j.packet.Packet;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
-import fr.B4D.bot.Server;
 import fr.B4D.socket.parser.SocketParser;
 
 /** La classe {@code SocketListener} permet d'écouter de sniffer et traiter les trames dofus.<br><br>
@@ -19,22 +18,10 @@ import fr.B4D.socket.parser.SocketParser;
  */
 public class SocketListener extends Thread{
 	
-	  /***************/
-	 /** CONSTANTS **/
-	/***************/
-	
 	private static final int INFINITE = -1;
-
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
 	
 	private PcapHandle handle;
 	private PacketListener packetListener;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
 	
 	/** Constructeur de la classe {@code SocketListener}.
 	 * @throws B4DException Si utilisation d'une jvm 64bit, si aucune librairie jpcap trouvée ou si aucun des réseaux n'est actif.
@@ -50,9 +37,15 @@ public class SocketListener extends Thread{
 			packetListener = new PacketListener() {
 				@Override
 				public void gotPacket(Packet packet) {
-					Packet payload = packet.getPayload().getPayload().getPayload();
-					if(payload != null) {
-						parseDofus(payload.getRawData());
+					Packet ethernetPacket = packet.getPayload();
+					if(ethernetPacket != null) {
+						Packet tcpPacket = ethernetPacket.getPayload();
+						if(tcpPacket != null) {
+							Packet dofusPacket = tcpPacket.getPayload();
+							if(dofusPacket != null) {
+								parseDofus(dofusPacket.getRawData());
+							}
+						}
 					}
 				}
 			};
@@ -61,10 +54,6 @@ public class SocketListener extends Thread{
 		}
 		
 	}
-	
-	  /*********/
-	 /** RUN **/
-	/*********/
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Thread#interrupt()
@@ -92,18 +81,15 @@ public class SocketListener extends Thread{
 			//Do nothing
 		}
 	}
-
-	  /*************/
-	 /** METHODS **/
-	/*************/
 	
-	/** Modifi le filtre du sniffeur pour traiter uniquement les trâmes vennant du serveur.
-	 * @param serveur - Serveur du joueur.
-	 * @throws B4DException Si le filtre n'est pas valide.
+	/** 
+	 * Defines the socket listener filter to only process sockets coming from the following server ip.
+	 * @param ip - Ip of the server.
+	 * @throws B4DException if the filter is not valid.
 	 */
-	public void setFilter(Server serveur) throws B4DException {
+	public void setFilter(String ip) throws B4DException {
 		try {
-			handle.setFilter("host " + serveur.getIp(), BpfCompileMode.OPTIMIZE);
+			handle.setFilter("host " + ip, BpfCompileMode.OPTIMIZE);
 		} catch (PcapNativeException | NotOpenException e) {
 			throw new B4DException(e);
 		}
