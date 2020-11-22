@@ -241,7 +241,7 @@ public class DofusDatabase {
 	public List<String> getStringListFromJSONArray(JSONArray array){
 		List<String> list = new ArrayList<String>();
 		for(int j=0; j < array.size(); j++) {
-			list.add((String) array.get(j));
+			list.add(array.get(j).toString());
 		}
 		return list;
 	}
@@ -252,13 +252,13 @@ public class DofusDatabase {
 	 * @return Item corresponding to the JSONObject
 	 */
 	public Item fromJSONObject(JSONObject itemObject) {
-		Item item = new Item((String) itemObject.get("url"), (String)itemObject.get("id"), (String)itemObject.get("name"), (String)itemObject.get("img"), (String)itemObject.get("type"));
+		Item item = new Item(itemObject.get("url").toString(), itemObject.get("id").toString(), itemObject.get("name").toString(), itemObject.get("img").toString(), itemObject.get("type").toString());
 		
 		if(itemObject.containsKey("level"))
-			item.setLevel((String) itemObject.get("level"));
+			item.setLevel(itemObject.get("level").toString());
 		
 		if(itemObject.containsKey("description"))
-			item.setDescription((String) itemObject.get("description"));
+			item.setDescription(itemObject.get("description").toString());
 		
 		if(itemObject.containsKey("effects"))
 			item.setEffects(getStringListFromJSONArray((JSONArray) itemObject.get("effects")));
@@ -278,7 +278,7 @@ public class DofusDatabase {
 			JSONArray craft_array = (JSONArray) itemObject.get("craft");
 			for(int j=0; j < craft_array.size(); j++) {
 				JSONObject craft_object = (JSONObject) craft_array.get(j);
-				craft.put((String) craft_object.get("url"), Integer.valueOf((String) craft_object.get("quantity")));
+				craft.put(craft_object.get("url").toString(), Integer.valueOf(craft_object.get("quantity").toString()));
 			}
 			item.setCraft(craft);
 		}
@@ -296,7 +296,7 @@ public class DofusDatabase {
 			item.setBonuses(getStringListFromJSONArray((JSONArray) itemObject.get("bonuses")));
 		
 		if(itemObject.containsKey("spells"))
-			item.setSpells((String) itemObject.get("spells"));
+			item.setSpells(itemObject.get("spells").toString());
 		
 		return item;
 	}
@@ -315,7 +315,7 @@ public class DofusDatabase {
 		
 		for(int i=0; i < item_array.size(); i++) {
 			JSONObject item_object = (JSONObject) item_array.get(i);
-			if(value.equals((String) item_object.get(key))) {
+			if(value.equals(item_object.get(key).toString())) {
 				return fromJSONObject(item_object);
 			}
 		}
