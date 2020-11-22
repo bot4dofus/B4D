@@ -1,9 +1,13 @@
 package fr.B4D.program;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -159,10 +163,13 @@ public final static ArrayList<Program> getAll(){
 		String name = PROGRAM_FILE_PATH + programName.toLowerCase().replace(" ", "_").replace("-", "_").toLowerCase();
 		ResourceBundle bundle;
 		try {
-			bundle = ResourceBundle.getBundle(name);
+			File file = new File(".");
+			URL[] urls = {file.toURI().toURL()};
+			ClassLoader loader = new URLClassLoader(urls);
+			bundle = ResourceBundle.getBundle(name, Locale.getDefault(), loader);
 		}
-		catch(MissingResourceException  e) {
-			throw new CancelProgramException("The file \"" + name + "\" is missing.");
+		catch(MissingResourceException | MalformedURLException  e) {
+			throw new CancelProgramException("The file \"" + name + ".properties\" is missing.");
 		}
 		return bundle;
 	}
