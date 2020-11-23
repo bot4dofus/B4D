@@ -177,23 +177,17 @@ public final static ArrayList<Program> getAll(){
 	/** Permet de lancer le programme.
 	 * @param person - Personnage avec lequel lancer le programme.
 	 * @param programOptions - Options de lancement du programme.
+	 * @throws B4DException if a B4DException occurs.
+	 * @throws CancelProgramException if the program has been canceled.
 	 */
-	public void start(Person person, ProgramOptions programOptions) {
-		
+	public void start(Person person, ProgramOptions programOptions) throws B4DException, CancelProgramException {
 		try {
-			try {
-				pre_intro(person, programOptions);
-				loop(person, programOptions);
-			} catch (StopProgramException e) {
-				B4D.logger.debug("Program stoped");
-			}
-			pre_outro(person, programOptions);
-		} catch (CancelProgramException e) {
-			if(e.getMessage() != null)
-				B4D.logger.popUp(e.getMessage());
-		}catch(B4DException e){
-			B4D.logger.error(e);
+			pre_intro(person, programOptions);
+			loop(person, programOptions);
+		} catch (StopProgramException e) {
+			B4D.logger.debug("Program stoped");
 		}
+		pre_outro(person, programOptions);
 	}
 
 	/** Fonction d'introduction du programme. Celle-ci ne sera éxecutée qu'une seule fois et permet de :<br/>

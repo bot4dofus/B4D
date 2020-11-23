@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.B4D.bot.B4DException;
+import fr.B4D.program.CancelProgramException;
 
 /**
  * The {@code Os} class gives access to useful methods relative to the Operating System.
@@ -66,7 +67,8 @@ public abstract class Os {
 	/**
 	 * Finds the Dofus server ip.
 	 * @return Server ip.
-	 * @throws B4DException if couldn't find the server ip.
+	 * @throws B4DException if a B4DException occurs.
+	 * @throws CancelProgramException if couldn't find the server ip. Probably no Dofus session has been launched.
 	 */
-	public abstract String findServerIp() throws B4DException;
+	public abstract String findServerIp() throws B4DException, CancelProgramException;
 }

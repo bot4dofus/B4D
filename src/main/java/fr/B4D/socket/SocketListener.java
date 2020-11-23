@@ -24,7 +24,6 @@ public class SocketListener extends Thread{
 	private PacketListener packetListener;
 	
 	/** Constructeur de la classe {@code SocketListener}.
-	 * @throws B4DException Si utilisation d'une jvm 64bit, si aucune librairie jpcap trouvée ou si aucun des réseaux n'est actif.
 	 * @throws B4DException Si il est impossible d'ouvrir le réseau.
 	 */
 	public SocketListener() throws B4DException{

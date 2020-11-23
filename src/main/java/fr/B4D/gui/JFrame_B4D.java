@@ -142,8 +142,7 @@ public class JFrame_B4D extends JFrame{
 				try {
 					b4d.saveConfiguration();
 					b4d.saveTeam();
-					B4D.socketListener.interrupt();
-					B4D.keyboardListener.interrupt();
+					b4d.interruptListeners();
 					dispose();
 				} catch (IOException e1) {
 					B4D.logger.error(e1);
