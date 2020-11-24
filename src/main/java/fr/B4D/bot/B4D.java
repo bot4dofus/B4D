@@ -224,9 +224,6 @@ public final class B4D{
 			String serverIp = os.findServerIp();
 			socketListener.setFilter(serverIp);
 			program.start(person, programOptions);
-			
-			socketListener.interrupt();
-			keyboardListener.interrupt();
 		}catch (CancelProgramException e) {
 			if(e.getMessage() != null)
 				B4D.logger.popUp(e.getMessage());
@@ -234,8 +231,10 @@ public final class B4D{
 			B4D.logger.error(e);
 		}
 		finally {
-			socketListener.interrupt();
-			keyboardListener.interrupt();
+			if(socketListener != null && socketListener.isAlive())
+				socketListener.interrupt();
+			if(keyboardListener != null && keyboardListener.isAlive())
+				keyboardListener.interrupt();
 		}
 	}
 	
