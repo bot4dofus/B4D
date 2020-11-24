@@ -1,7 +1,6 @@
 package fr.B4D.building.hdv;
 
 import java.awt.Point;
-import java.util.Arrays;
 import java.util.List;
 
 import fr.B4D.bot.B4D;
@@ -22,7 +21,7 @@ public class HDV extends IndoorBuilding{
 	/**
 	 * The Astrub HDV.
 	 */
-	public static final HDV ASTRUB = new HDV(new Point(4,-17), Arrays.asList(), Arrays.asList(), new PointF(0.3809, 0.436));
+	public static final HDV ASTRUB = new HDV(new Point(4,-17), null, null, new PointF(0.3809, 0.436));
 	
 	/**
 	 * Specify whether the HDV is opened or not.
@@ -50,7 +49,11 @@ public class HDV extends IndoorBuilding{
 	 * @param tablePosition - Position of the table on the screen.
 	 */
 	public HDV(Point position, List<PointF> inPoints, List<PointF> outPoints, PointF tablePosition) {
-			super( position, inPoints, outPoints);
+			super(position, inPoints, outPoints);
+			
+			if(tablePosition == null)
+				throw new IllegalArgumentException("The HDV table position cannot be null.");
+			
 			this.tablePosition = tablePosition;
 			this.opened = Boolean.FALSE;
 			this.buyMode = true;

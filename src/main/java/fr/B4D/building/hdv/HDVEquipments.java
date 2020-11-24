@@ -23,7 +23,7 @@ public class HDVEquipments extends HDV{
 	/**
 	 * Equipment HDV of Bonta.
 	 */
-	public static HDVEquipments BONTA = new HDVEquipments(new Point(-27, -51), new ArrayList<PointF>(), new ArrayList<PointF>(), new PointF(0.1816, 0.3892));
+	public static HDVEquipments BONTA = new HDVEquipments(new Point(-27, -51), null, null, new PointF(0.1816, 0.3892));
 	
 	/**
 	 * List of active Filters.

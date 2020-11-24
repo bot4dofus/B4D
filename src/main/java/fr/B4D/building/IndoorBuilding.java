@@ -1,6 +1,7 @@
 package fr.B4D.building;
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.B4D.bot.B4D;
@@ -31,6 +32,12 @@ public abstract class IndoorBuilding extends Building{
 	 */
 	public IndoorBuilding(Point position, List<PointF> inPoints, List<PointF> outPoints) {
 		super(position);
+		
+		if(inPoints == null)
+			inPoints = new ArrayList<PointF>();
+		if(outPoints == null)
+			outPoints = new ArrayList<PointF>();
+		
 		this.inPoints = inPoints;
 		this.outPoints = outPoints;
 		this.entered = Boolean.FALSE;
