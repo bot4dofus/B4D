@@ -72,15 +72,15 @@ public final class PricesEvolution extends Program{
 		List<HDVItemViewEvent> results = new LinkedList<HDVItemViewEvent>();
 		while((result = HDVItemViewEventStore.getInstance().waitForResult(1000)) != null) {
 			if(result.getId().equals(previousId)) {
-				B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 1000);
+				B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 200);
 				break;
 			}
-			B4D.wait.sleep(1000);
+			B4D.wait.sleep(200);
 			results.add(result);
 			previousId = result.getId();
-			B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 1000);
-			B4D.keyboard.sendKey(KeyEvent.VK_DOWN, 1000);
-			B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 1000);
+			B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 400);
+			B4D.keyboard.sendKey(KeyEvent.VK_DOWN, 200);
+			B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 400);
 		}
 
 		
