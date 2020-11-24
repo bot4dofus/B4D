@@ -7,14 +7,14 @@ import java.time.LocalDateTime;
  * @author Lucas
  *
  */
-public class SocketResult {
+public class SocketEvent {
 
 	private LocalDateTime dateTime;
 	
 	/**
 	 * Constructor of the socket result class.
 	 */
-	public SocketResult() {
+	public SocketEvent() {
 		super();
 		dateTime = LocalDateTime.now();
 	}

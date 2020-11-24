@@ -14,7 +14,7 @@ import fr.B4D.program.StopProgramException;
  *
  * @param <T> Type of the socket result.
  */
-public class SocketStore<T> {
+public class EventStore<T> {
 	
 	private ArrayBlockingQueue<T> socketResults;
 	private List<EventHandler<T>> eventHandlers;
@@ -23,7 +23,7 @@ public class SocketStore<T> {
 	 * Constructor of a socket store.
 	 * @param capacity Number of results, the store is able to save.
 	 */
-	public SocketStore(int capacity) {
+	public EventStore(int capacity) {
 		socketResults = new ArrayBlockingQueue<T>(capacity);
 		eventHandlers = new ArrayList<EventHandler<T>>();
 	}

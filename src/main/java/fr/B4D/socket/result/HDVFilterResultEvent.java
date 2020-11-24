@@ -10,7 +10,7 @@ import fr.B4D.dofus.items.Item;
  * @author Lucas
  *
  */
-public class HDVResearchSocketResult extends SocketResult{
+public class HDVFilterResultEvent extends SocketEvent{
 	
 	/**
 	 * List of items in the result.
@@ -21,7 +21,7 @@ public class HDVResearchSocketResult extends SocketResult{
 	 * Items in the result.
 	 * @param items - List of items in the result.
 	 */
-	public HDVResearchSocketResult(List<Item> items) {
+	public HDVFilterResultEvent(List<Item> items) {
 		this.items = items;
 	}
 	

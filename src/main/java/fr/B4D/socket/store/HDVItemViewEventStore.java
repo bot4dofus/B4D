@@ -1,6 +1,6 @@
 package fr.B4D.socket.store;
 
-import fr.B4D.socket.result.HDVItemViewSocketResult;
+import fr.B4D.socket.result.HDVItemViewEvent;
 
 /**
  * The {@code HDVItemViewSocketStore} is used to store {@code HDVItemViewSocketResult} . This class extends {@code SocketStore}.
@@ -8,21 +8,21 @@ import fr.B4D.socket.result.HDVItemViewSocketResult;
  * @author Lucas
  *
  */
-public class HDVItemViewSocketStore extends SocketStore<HDVItemViewSocketResult> {
+public class HDVItemViewEventStore extends EventStore<HDVItemViewEvent> {
 	
-	private static HDVItemViewSocketStore instance;
+	private static HDVItemViewEventStore instance;
 
 	/**
 	 * Returns the instance of the store.
 	 * @return Instance of the store.
 	 */
-	public static HDVItemViewSocketStore getInstance() {
+	public static HDVItemViewEventStore getInstance() {
 		if(instance == null)
-			instance = new HDVItemViewSocketStore();
+			instance = new HDVItemViewEventStore();
 		return instance;
 	}
 	
-	private HDVItemViewSocketStore() {
+	private HDVItemViewEventStore() {
 		super(1);
 	}
 }

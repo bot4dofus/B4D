@@ -8,7 +8,7 @@ import fr.B4D.bot.B4D;
 import fr.B4D.dofus.items.Item;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.socket.result.HDVResearchSocketResult;
+import fr.B4D.socket.result.HDVFilterResultEvent;
 import fr.B4D.socket.store.HDVResearchSocketStore;
 import fr.B4D.utils.PointF;
 
@@ -56,7 +56,7 @@ public class HDVEquipments extends HDV{
 			activeCategoryFilters.add(categoryFilter);
 			B4D.mouse.leftClick(categoryFilter.getFilterPosition(), false);
 
-			HDVResearchSocketResult result = HDVResearchSocketStore.getInstance().waitForResult(5000);
+			HDVFilterResultEvent result = HDVResearchSocketStore.getInstance().waitForResult(5000);
 			
 			if(result != null) {
 				items.addAll(result.getItems());

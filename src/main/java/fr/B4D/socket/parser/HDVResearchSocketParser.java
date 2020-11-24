@@ -11,7 +11,7 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.dofus.items.Item;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
-import fr.B4D.socket.result.HDVResearchSocketResult;
+import fr.B4D.socket.result.HDVFilterResultEvent;
 import fr.B4D.socket.store.HDVResearchSocketStore;
 
 /**
@@ -20,13 +20,13 @@ import fr.B4D.socket.store.HDVResearchSocketStore;
  * @author Lucas
  *
  */
-public class HDVResearchSocketParser extends SocketParser<HDVResearchSocketResult>{
+public class HDVResearchSocketParser extends SocketParser<HDVFilterResultEvent>{
 
 	//		... | ??? | Numberer of items | Id item 1 | Id Item 2 | ... | Id Item n | 0x02 0xc0 |
 	//		    |  4  |         2         |     2     |     2     | ... |     2     |     2     |
 
 	@Override
-	public HDVResearchSocketResult parse(DofusSocket dofusSocket) {	
+	public HDVFilterResultEvent parse(DofusSocket dofusSocket) {	
 		DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket);
 
 		iterator.skip(4);
@@ -67,7 +67,7 @@ public class HDVResearchSocketParser extends SocketParser<HDVResearchSocketResul
 					B4D.logger.warning("Couldn't find any item with id " + id);
 			}
 			
-			HDVResearchSocketResult result = new HDVResearchSocketResult(items);
+			HDVFilterResultEvent result = new HDVFilterResultEvent(items);
 			HDVResearchSocketStore.getInstance().addSocketResult(result);
 			return result;
 		} catch (B4DException e) {

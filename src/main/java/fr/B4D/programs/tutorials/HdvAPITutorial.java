@@ -7,8 +7,8 @@ import fr.B4D.bot.Person;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
-import fr.B4D.socket.result.HDVItemViewSocketResult;
-import fr.B4D.socket.store.HDVItemViewSocketStore;
+import fr.B4D.socket.result.HDVItemViewEvent;
+import fr.B4D.socket.store.HDVItemViewEventStore;
 
 /**
  * The {@code HdvAPI} class contains all the tutorials relative to the HDV API.
@@ -35,7 +35,7 @@ public final class HdvAPITutorial extends Program {
 
 	@Override
 	public void cycle(Person person) throws B4DException {
-		HDVItemViewSocketResult result = HDVItemViewSocketStore.getInstance().waitForResult(10000);
+		HDVItemViewEvent result = HDVItemViewEventStore.getInstance().waitForResult(10000);
 		if(result != null)
 			JOptionPane.showMessageDialog(null, "Voici le prix de l'item affiché :\n- Lot de 1 : " + result.getPrice1() + " k\n- Lot de 10 : " + result.getPrice10() + " k\n- Lot de 100 : " + result.getPrice100() + " k", "Prix", JOptionPane.INFORMATION_MESSAGE);
 		else

@@ -1,6 +1,6 @@
 package fr.B4D.socket.store;
 
-import fr.B4D.socket.result.HDVResearchSocketResult;
+import fr.B4D.socket.result.HDVFilterResultEvent;
 
 /**
  * The {@code HDVResearchSocketStore} is used to store {@code HDVResearchSocketResult} . This class extends {@code SocketStore}.
@@ -8,7 +8,7 @@ import fr.B4D.socket.result.HDVResearchSocketResult;
  * @author Lucas
  *
  */
-public class HDVResearchSocketStore extends SocketStore<HDVResearchSocketResult> {
+public class HDVResearchSocketStore extends EventStore<HDVFilterResultEvent> {
 	
 	private static HDVResearchSocketStore instance;
 

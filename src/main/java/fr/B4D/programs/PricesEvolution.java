@@ -22,8 +22,8 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
-import fr.B4D.socket.result.HDVItemViewSocketResult;
-import fr.B4D.socket.store.HDVItemViewSocketStore;
+import fr.B4D.socket.result.HDVItemViewEvent;
+import fr.B4D.socket.store.HDVItemViewEventStore;
 import fr.B4D.utils.PointF;
 
 /**
@@ -67,10 +67,10 @@ public final class PricesEvolution extends Program{
 
 		B4D.mouse.leftClick(new PointF(0.3289, 0.1959), false); //Select the first item
 
-		HDVItemViewSocketResult result;
+		HDVItemViewEvent result;
 		Integer previousId = null;
-		List<HDVItemViewSocketResult> results = new LinkedList<HDVItemViewSocketResult>();
-		while((result = HDVItemViewSocketStore.getInstance().waitForResult(1000)) != null) {
+		List<HDVItemViewEvent> results = new LinkedList<HDVItemViewEvent>();
+		while((result = HDVItemViewEventStore.getInstance().waitForResult(1000)) != null) {
 			if(result.getId().equals(previousId)) {
 				B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 1000);
 				break;
@@ -86,7 +86,7 @@ public final class PricesEvolution extends Program{
 		
 		JSONObject database = Dofus.getInstance().getDatabase().loadDatabase();
 		List<List<Object>> values = new ArrayList<List<Object>>();
-		for(HDVItemViewSocketResult r:results) {
+		for(HDVItemViewEvent r:results) {
 			Resource resource = Dofus.getInstance().getDatabase().findItemByKey("resources", "id", r.getId().toString(), database);
 			if(resource != null) {
 				String formatedDate = r.getDateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));

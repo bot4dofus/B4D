@@ -6,7 +6,7 @@ import org.junit.Test;
 import fr.B4D.bot.B4DException;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.SocketType;
-import fr.B4D.socket.result.HDVItemViewSocketResult;
+import fr.B4D.socket.result.HDVItemViewEvent;
 
 @SuppressWarnings("javadoc")
 public class HDVItemViewSocketParserTest {
@@ -23,7 +23,7 @@ public class HDVItemViewSocketParserTest {
 
 		Assert.assertEquals(HDVItemViewSocketParser.class, parser.getClass());
 		
-		HDVItemViewSocketResult result = new HDVItemViewSocketParser().parse(dofusSocket);
+		HDVItemViewEvent result = new HDVItemViewSocketParser().parse(dofusSocket);
 		Assert.assertEquals(new Integer(2297), result.getId());
 		Assert.assertEquals(new Integer(1), result.getPrice1());
 		Assert.assertEquals(new Integer(9), result.getPrice10());
@@ -42,7 +42,7 @@ public class HDVItemViewSocketParserTest {
 		
 		Assert.assertEquals(HDVItemViewSocketParser.class, parser.getClass());
 		
-		HDVItemViewSocketResult result = new HDVItemViewSocketParser().parse(dofusSocket);
+		HDVItemViewEvent result = new HDVItemViewSocketParser().parse(dofusSocket);
 		Assert.assertEquals(new Integer(648), result.getId());
 		Assert.assertEquals(new Integer(19), result.getPrice1());
 		Assert.assertEquals(new Integer(995), result.getPrice10());
