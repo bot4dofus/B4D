@@ -3,6 +3,7 @@ package fr.B4D.socket;
 import fr.B4D.socket.parser.ChatMessageSocketParser;
 import fr.B4D.socket.parser.HDVItemViewSocketParser;
 import fr.B4D.socket.parser.HDVResearchSocketParser;
+import fr.B4D.socket.parser.ChangeMapEventParser;
 
 /**
  * The class {@code SocketType} defines all the known sockets and map it with the corresponding socket parser.
@@ -29,7 +30,12 @@ public enum SocketType {
 	/**
 	 * Socket representing an opened enclose.
 	 */
-	DD_ENCLOSE_OPEN_9D_SOCKET((byte) 0x5d, null);
+	DD_ENCLOSE_OPEN_9D_SOCKET((byte) 0x5d, null),
+
+	/**
+	 * Socket representing an opened enclose.
+	 */
+	CHANGE_MAP_SOCKET((byte) 0x73, ChangeMapEventParser.class);
 	
 	/**
 	 * Returns the socket type corresponding to the received socket.

@@ -14,6 +14,8 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Configuration;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
+import fr.B4D.socket.result.ChangeMapEvent;
+import fr.B4D.socket.store.ChangeMapEventStore;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.Tesseract;
@@ -240,11 +242,6 @@ public final class Screen {
 	 /** ATTENTE SUR MAP **/
 	/*********************/
 	
-	/** Permet d'attendre l'appui sur une touche.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Entier représentant la touche enfoncée. {@code -1} si timeout.
-	 */
-	
 	/** Permet d'attendre un changement de map.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return {@code true} si le joueur à changé de map, {@code false} si timeout.
@@ -252,7 +249,10 @@ public final class Screen {
 	 * @throws CancelProgramException Si le programme est annulé.
 	 */
 	public boolean waitForMap(int timeOut) throws StopProgramException, CancelProgramException {
-		return waitForChangingPixel(B4D.converter.toPointF(configuration.getMinimap()), timeOut) != null;
+		//return waitForChangingPixel(B4D.converter.toPointF(configuration.getMinimap()), timeOut) != null;
+		ChangeMapEvent event = ChangeMapEventStore.getInstance().waitForResult(timeOut);
+		B4D.wait.sleep(1000);
+		return event != null;
 	}
 	
 	/** Permet d'attendre un changement de map sans limite de temps. 
