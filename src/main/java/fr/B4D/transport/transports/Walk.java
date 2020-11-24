@@ -58,6 +58,5 @@ public class Walk extends Transport implements Serializable{
 			B4D.mouse.leftClick(goLeft, false);
 		else if(move.equals(right))
 			B4D.mouse.leftClick(goRight, false);
-	    B4D.screen.waitForMap(20000);
 	}
 }
