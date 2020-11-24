@@ -19,9 +19,13 @@ import javax.swing.SwingConstants;
  * @author Lucas
  *
  */
-public class JFrame_GetPointImage{
+public class JFrame_GetPointImage extends JFrame{
 	
-	public JFrame frame;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6872332734366298081L;
+	
 	private MouseListener mouseListener;
 	private ImageIcon image;
 	private String text;
@@ -43,35 +47,34 @@ public class JFrame_GetPointImage{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.addMouseListener(mouseListener);
-		frame.addMouseListener(new MouseAdapter() {
+		addMouseListener(mouseListener);
+		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				frame.dispose();
+				dispose();
 			}
 		});
-		frame.setUndecorated(true);
-		frame.getContentPane().setBackground(Color.GRAY);		
-		frame.setOpacity(0.50f);
+		setUndecorated(true);
+		getContentPane().setBackground(Color.GRAY);		
+		setOpacity(0.50f);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setBounds(0, 0, (int)screenSize.getWidth(), (int)screenSize.getHeight());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		setBounds(0, 0, (int)screenSize.getWidth(), (int)screenSize.getHeight());
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 		
 		if(image != null) {
 			JLabel label = new JLabel("");
 			label.setBounds((int)(screenSize.getWidth() - image.getIconWidth())/2, (int)(screenSize.getHeight() - image.getIconHeight())/2, image.getIconWidth(), image.getIconHeight());
 			label.setIcon(image);
-			frame.add(label);
+			add(label);
 			
 			JLabel text = new JLabel(this.text);
 			text.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			text.setBounds(0, label.getY()-100, frame.getWidth(), 100);
+			text.setBounds(0, label.getY()-100, getWidth(), 100);
 			text.setForeground(Color.WHITE);
 			text.setHorizontalAlignment(SwingConstants.CENTER);
 			text.setVerticalAlignment(SwingConstants.BOTTOM);
-			frame.add(text);
+			add(text);
 		}    
 	}
 

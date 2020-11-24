@@ -23,9 +23,13 @@ import java.awt.event.ComponentEvent;
  * @author Lucas
  *
  */
-public class JFrame_GetPoint {
+public class JFrame_GetPoint extends JFrame{
 	
-	public JFrame frame;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7361371118059302380L;
+	
 	private MouseListener mouseListener;
 	private String text;
 
@@ -44,42 +48,41 @@ public class JFrame_GetPoint {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.addComponentListener(new ComponentAdapter() {
+		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent arg0) {
-				frame.setShape(new Ellipse2D.Double(0,0,frame.getWidth(),frame.getHeight()));
+				setShape(new Ellipse2D.Double(0,0,getWidth(),getHeight()));
 			}
 		});
-		frame.addMouseMotionListener(new MouseMotionAdapter() {
+		addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
 				Point point = MouseInfo.getPointerInfo().getLocation();
-				frame.setLocation(point.x - frame.getWidth()/2, point.y - frame.getHeight()/2);
+				setLocation(point.x - getWidth()/2, point.y - getHeight()/2);
 			}
 		});
-		frame.addMouseListener(mouseListener);
-		frame.addMouseListener(new MouseAdapter() {
+		addMouseListener(mouseListener);
+		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				frame.dispose();
+				dispose();
 			}
 		});
-		frame.setUndecorated(true);
-		frame.getContentPane().setBackground(Color.GRAY);
-		frame.setOpacity(0.50f);
-		frame.setBounds(200, 200, 400, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setUndecorated(true);
+		getContentPane().setBackground(Color.GRAY);
+		setOpacity(0.50f);
+		setBounds(200, 200, 400, 400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		Point point = MouseInfo.getPointerInfo().getLocation();
-		frame.setLocation(point.x - frame.getWidth()/2, point.y - frame.getHeight()/2);
+		setLocation(point.x - getWidth()/2, point.y - getHeight()/2);
 		
 		JLabel text = new JLabel(this.text);
 		text.setFont(new Font("Tahoma", Font.BOLD, 15));
-		text.setBounds(0, 0, frame.getWidth(), frame.getHeight());
+		text.setBounds(0, 0, getWidth(), getHeight());
 		text.setForeground(Color.WHITE);
 		text.setHorizontalAlignment(SwingConstants.CENTER);
 		text.setVerticalAlignment(SwingConstants.CENTER);
-		frame.add(text);
+		add(text);
 	}
 }

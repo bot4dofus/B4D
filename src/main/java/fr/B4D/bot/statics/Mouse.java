@@ -49,7 +49,7 @@ public final class Mouse {
 	 */
 	public void getPoint(String text, MouseAdapter mouseAdapter) {
 		JFrame_GetPoint window = new JFrame_GetPoint(text, mouseAdapter);
-		window.frame.setVisible(true);
+		window.setVisible(true);
 	}
 	
 	/** Permet de récupérer la position d'un élément en coordonnées simples.
@@ -59,7 +59,7 @@ public final class Mouse {
 	 */
 	public void getPoint(String text, ImageIcon image, MouseAdapter mouseAdapter) {
 		JFrame_GetPointImage window = new JFrame_GetPointImage(text, image, mouseAdapter);
-		window.frame.setVisible(true);
+		window.setVisible(true);
 	}
 	
 	/** Permet de récupérer la position de deux éléments en coordonnées simples.
@@ -71,13 +71,13 @@ public final class Mouse {
 	public void getPoints(String text1, MouseAdapter mouseAdapter1, String text2, MouseAdapter mouseAdapter2) {
 		JFrame_GetPoint window1 = new JFrame_GetPoint(text1, mouseAdapter1);
 		JFrame_GetPoint window2 = new JFrame_GetPoint(text2, mouseAdapter2);
-		window1.frame.addMouseListener(new MouseAdapter() {
+		window1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				window2.frame.setVisible(true);
+				window2.setVisible(true);
 			}
 		});
-		window1.frame.setVisible(true);
+		window1.setVisible(true);
 	}
 	
 	/** Permet de récupérer la position de deux éléments en coordonnées simples.
@@ -91,13 +91,13 @@ public final class Mouse {
 	public void getPoints(String text1, ImageIcon image1, MouseAdapter mouseAdapter1, String text2, ImageIcon image2, MouseAdapter mouseAdapter2) {
 		JFrame_GetPointImage window1 = new JFrame_GetPointImage(text1, image1, mouseAdapter1);
 		JFrame_GetPointImage window2 = new JFrame_GetPointImage(text2, image2, mouseAdapter2);
-		window1.frame.addMouseListener(new MouseAdapter() {
+		window1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				window2.frame.setVisible(true);
+				window2.setVisible(true);
 			}
 		});
-		window1.frame.setVisible(true);
+		window1.setVisible(true);
 	}
 	
 	  /************/
