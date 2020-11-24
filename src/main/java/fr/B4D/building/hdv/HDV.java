@@ -22,7 +22,7 @@ public class HDV extends IndoorBuilding{
 	/**
 	 * The Astrub HDV.
 	 */
-	public static final HDV ASTRUB = new HDV(new Point(4,-18), Arrays.asList(new PointF(0.6552, 0.3683)), Arrays.asList(new PointF(0.3048, 0.6776)), new PointF(0.632, 0.4162));
+	public static final HDV ASTRUB = new HDV(new Point(4,-17), Arrays.asList(), Arrays.asList(), new PointF(0.3809, 0.436));
 	
 	/**
 	 * Specify whether the HDV is opened or not.
@@ -111,7 +111,7 @@ public class HDV extends IndoorBuilding{
 	 */
 	public void close(Person person) throws StopProgramException, CancelProgramException, B4DException {
 		if(opened) {
-			B4D.mouse.leftClick(new PointF(0.9832, 0.0828), false, 2000);
+			B4D.mouse.leftClick(new PointF(0.9732, 0.063), false, 2000);
 			//Wait for the HDV socket to be received
 			opened = Boolean.FALSE;
 		}
