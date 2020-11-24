@@ -25,7 +25,7 @@ public class Windows extends Os{
 			String ipAndPort = null;
 			
 			for(String word:worlds) {
-				if(!word.isEmpty() && word.contains(":5555 ") && !word.contains("127.0.0.1"))
+				if(!word.isEmpty() && word.contains(":5555") && !word.contains("127.0.0.1"))
 					ipAndPort = word;
 			}
 			
