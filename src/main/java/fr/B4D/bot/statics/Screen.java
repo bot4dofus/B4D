@@ -251,7 +251,7 @@ public final class Screen {
 	public boolean waitForMap(int timeOut) throws StopProgramException, CancelProgramException {
 		//return waitForChangingPixel(B4D.converter.toPointF(configuration.getMinimap()), timeOut) != null;
 		ChangeMapEvent event = ChangeMapEventStore.getInstance().waitForResult(timeOut);
-		B4D.wait.sleep(1000);
+		B4D.wait.sleep(2000);
 		return event != null;
 	}
 	
