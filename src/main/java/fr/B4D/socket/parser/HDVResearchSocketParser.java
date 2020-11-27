@@ -26,7 +26,7 @@ public class HDVResearchSocketParser extends SocketParser<HDVFilterResultEvent>{
 	//		    |  4  |         2         |     2     |     2     | ... |     2     |     2     |
 
 	@Override
-	public HDVFilterResultEvent parse(DofusSocket dofusSocket) {	
+	public HDVFilterResultEvent parse(DofusSocket dofusSocket) throws B4DException {	
 		DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket);
 
 		iterator.skip(4);
@@ -35,44 +35,39 @@ public class HDVResearchSocketParser extends SocketParser<HDVFilterResultEvent>{
 		List<Item> items = new ArrayList<Item>();
 		List<Integer> itemIds = iterator.getNextSocketElement(dofusSocket.getPayload().length-8).asBigEndians();
 
-		try {
-			JSONObject database = Dofus.getInstance().getDatabase().loadDatabase();
-			for(Integer id:itemIds) {
-				Item item = Dofus.getInstance().getDatabase().findItemByKey("resources", "id", id.toString(), database);
-				
-				if(item == null)
-					item = Dofus.getInstance().getDatabase().findItemByKey("consumables", "id", id.toString(), database);
+		JSONObject database = Dofus.getInstance().getDatabase().loadDatabase();
+		for(Integer id:itemIds) {
+			Item item = Dofus.getInstance().getDatabase().findItemByKey("resources", "id", id.toString(), database);
 
-				if(item == null)
-					item = Dofus.getInstance().getDatabase().findItemByKey("equipments", "id", id.toString(), database);
+			if(item == null)
+				item = Dofus.getInstance().getDatabase().findItemByKey("consumables", "id", id.toString(), database);
 
-				if(item == null)
-					item = Dofus.getInstance().getDatabase().findItemByKey("weapons", "id", id.toString(), database);
+			if(item == null)
+				item = Dofus.getInstance().getDatabase().findItemByKey("equipments", "id", id.toString(), database);
 
-				if(item == null)
-					item = Dofus.getInstance().getDatabase().findItemByKey("idols", "id", id.toString(), database);
+			if(item == null)
+				item = Dofus.getInstance().getDatabase().findItemByKey("weapons", "id", id.toString(), database);
 
-				if(item == null)
-					item = Dofus.getInstance().getDatabase().findItemByKey("ceremonial_items", "id", id.toString(), database);
+			if(item == null)
+				item = Dofus.getInstance().getDatabase().findItemByKey("idols", "id", id.toString(), database);
 
-				if(item == null)
-					item = Dofus.getInstance().getDatabase().findItemByKey("sidekicks", "id", id.toString(), database);
+			if(item == null)
+				item = Dofus.getInstance().getDatabase().findItemByKey("ceremonial_items", "id", id.toString(), database);
 
-				if(item == null)
-					item = Dofus.getInstance().getDatabase().findItemByKey("harnesses", "id", id.toString(), database);
+			if(item == null)
+				item = Dofus.getInstance().getDatabase().findItemByKey("sidekicks", "id", id.toString(), database);
 
-				if(item != null)
-					items.add(item);
-				else
-					B4D.logger.warning("Couldn't find any item with id " + id);
-			}
-			
-			HDVFilterResultEvent result = new HDVFilterResultEvent(items);
-			HDVResearchSocketStore.getInstance().addSocketResult(result);
-			return result;
-		} catch (B4DException e) {
-			B4D.logger.error(e);
-			return null;
+			if(item == null)
+				item = Dofus.getInstance().getDatabase().findItemByKey("harnesses", "id", id.toString(), database);
+
+			if(item != null)
+				items.add(item);
+			else
+				B4D.logger.warning("Couldn't find any item with id " + id);
 		}
+
+		HDVFilterResultEvent result = new HDVFilterResultEvent(items);
+		HDVResearchSocketStore.getInstance().addSocketResult(result);
+		return result;
 	}
 }

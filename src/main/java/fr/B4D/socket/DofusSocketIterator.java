@@ -2,6 +2,7 @@ package fr.B4D.socket;
 
 import java.util.Arrays;
 
+import fr.B4D.bot.B4DException;
 import fr.B4D.utils.HexHelper;
 
 /**
@@ -36,9 +37,9 @@ public class DofusSocketIterator {
 	 * Move at the beginning of a pattern located after the cursor.
 	 * @param pattern - Pattern to find.
 	 * @return Current index of the cursor.
-	 * @throws PatternNotFoundException If pattern not found.
+	 * @throws B4DException if couldn't find the pattern.
 	 */
-	public Integer moveToPattern(byte[] pattern) throws PatternNotFoundException {
+	public Integer moveToPattern(byte[] pattern) throws B4DException {
 		if(pattern == null)
 			throw new IllegalArgumentException("Cannot be null.");
 		if(pattern.length == 0)
@@ -61,16 +62,16 @@ public class DofusSocketIterator {
 			}
 			
 		}
-		throw new PatternNotFoundException("Could find the pattern [" + HexHelper.toString(pattern) + "] in  [" + HexHelper.toString(socket) + "]");
+		throw new B4DException("Could find the pattern [" + HexHelper.toString(pattern) + "] in  [" + HexHelper.toString(socket) + "]");
 	}
 
 	/**
 	 * Move after a pattern located after the cursor.
 	 * @param pattern - Pattern to find.
 	 * @return Current index of the cursor.
-	 * @throws PatternNotFoundException If pattern not found.
+	 * @throws B4DException if couldn't find the pattern.
 	 */
-	public Integer moveAfterPattern(byte[] pattern) throws PatternNotFoundException {
+	public Integer moveAfterPattern(byte[] pattern) throws B4DException {
 		moveToPattern(pattern);
 		cursor += pattern.length;
 		return cursor;
@@ -90,8 +91,12 @@ public class DofusSocketIterator {
 	/** Returns the next socket element of a given length.
 	 * @param length - Length of the next socket element.
 	 * @return Next socket element.
+	 * @throws B4DException 
 	 */
-	public SocketElement getNextSocketElement(Integer length) {
+	public SocketElement getNextSocketElement(Integer length) throws B4DException {
+		if(cursor+length >= socket.length)
+			throw new B4DException("End of the socket reached.");
+		
 		SocketElement element = new SocketElement(Arrays.copyOfRange(socket, cursor, cursor+length));
 		cursor += length;
 		return element;

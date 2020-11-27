@@ -70,15 +70,15 @@ public class SocketListener extends Thread{
 	 * @see java.lang.Thread#run()
 	 */
 	public void run() {
+		B4D.logger.debug("Lancement du thread");
 		try {
-			B4D.logger.debug("Lancement du thread");
 			handle.loop(INFINITE, packetListener);
-			B4D.logger.debug("Fin du thread");
 		} catch (PcapNativeException  | NotOpenException e) {
 			B4D.logger.error(e);
 		} catch (InterruptedException e) {
 			//Do nothing
 		}
+		B4D.logger.debug("Fin du thread");
 	}
 	
 	/** 
@@ -109,10 +109,7 @@ public class SocketListener extends Thread{
 			if(socketParser != null) {
 				socketParser.parse(dofusSocket);
 			}
-		}
-		catch(B4DException e) {
-			B4D.logger.error(e);
-		}catch(IllegalArgumentException e) {
+		}catch(B4DException | IllegalArgumentException e) {
 			//Nothing to do.
 		}
 	}
