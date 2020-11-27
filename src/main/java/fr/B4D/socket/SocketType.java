@@ -4,6 +4,8 @@ import fr.B4D.socket.parser.ChatMessageSocketParser;
 import fr.B4D.socket.parser.HDVItemViewSocketParser;
 import fr.B4D.socket.parser.HDVResearchSocketParser;
 import fr.B4D.socket.parser.ChangeMapEventParser;
+import fr.B4D.socket.parser.PlayerEnterMapEventParser;
+
 
 /**
  * The class {@code SocketType} defines all the known sockets and map it with the corresponding socket parser.
@@ -35,7 +37,12 @@ public enum SocketType {
 	/**
 	 * Socket representing an opened enclose.
 	 */
-	CHANGE_MAP_SOCKET((byte) 0x73, ChangeMapEventParser.class);
+	CHANGE_MAP_SOCKET((byte) 0x73, ChangeMapEventParser.class),
+
+	/**
+	 * Socket representing a player entering a map.
+	 */
+	PLAYER_ENTER_MAP_SOCKET((byte) 0x91, PlayerEnterMapEventParser.class);
 	
 	/**
 	 * Returns the socket type corresponding to the received socket.
