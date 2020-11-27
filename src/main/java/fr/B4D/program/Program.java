@@ -235,9 +235,9 @@ public final static ArrayList<Program> getAll(){
 	private void loop(Person person, ProgramOptions programOptions) throws B4DException, StopProgramException, CancelProgramException {
 		
 		int cycles = programOptions.getCycles();
-		int deposits = programOptions.getDeposits();
+		long delay = programOptions.getDelay();
 		
-		while(cycles != 0 && deposits != 0) {
+		while(cycles != 0) {
 			try {
 				cycle(person);
 			} catch (FullInventoryException e) {
@@ -250,10 +250,9 @@ public final static ArrayList<Program> getAll(){
 				}
 				if(programOptions.isStopWhenFull())
 					throw new StopProgramException();
-				
-				deposits--;
 			}
 			cycles--;
+			B4D.wait.sleep(delay);
 		}
 	}
 	
