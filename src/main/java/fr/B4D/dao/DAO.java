@@ -1,4 +1,4 @@
-﻿package fr.B4D.dao;
+package fr.B4D.dao;
 
 import java.io.File;
 import java.io.IOException;
