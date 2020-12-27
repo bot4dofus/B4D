@@ -91,13 +91,15 @@ public class DofusSocketHelper {
 	 * Prints the results of a research sorted by position.
 	 */
 	public void printResults() {
-		if(results == null)
-			throw new IllegalArgumentException("Do a research first");
-		
-		results
-		.entrySet()
-		.stream()
-		.sorted(Map.Entry.<Integer, String>comparingByKey())
-		.forEach(r -> System.out.println(r.getValue()));
+		if(results.isEmpty()) {
+			System.out.println("No result found.");
+		}
+		else {
+			results
+			.entrySet()
+			.stream()
+			.sorted(Map.Entry.<Integer, String>comparingByKey())
+			.forEach(r -> System.out.println(r.getValue()));
+		}
 	}
 }
