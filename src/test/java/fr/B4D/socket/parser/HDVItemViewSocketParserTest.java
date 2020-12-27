@@ -48,4 +48,23 @@ public class HDVItemViewSocketParserTest {
 		Assert.assertEquals(new Integer(995), result.getPrice10());
 		Assert.assertEquals(new Integer(14995), result.getPrice100());
 	}
+	
+	//Aile de Bourdard (xxx, 0, 0, 0)
+	@Test
+	public void test3() throws B4DException {
+		byte[] socket = {(byte) 0x8b, (byte) 0xd5, 0x06, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x11, 0x5c};
+
+		Assert.assertEquals(SocketType.HDV_ITEM_VIEW_SOCKET, SocketType.fromSocket(socket));
+		
+		DofusSocket dofusSocket = new DofusSocket(socket);
+		SocketParser<?> parser = dofusSocket.getParser();
+		
+		Assert.assertEquals(HDVItemViewSocketParser.class, parser.getClass());
+		
+		HDVItemViewEvent result = new HDVItemViewSocketParser().parse(dofusSocket);
+		Assert.assertEquals(new Integer(648), result.getId());
+		Assert.assertEquals(new Integer(0), result.getPrice1());
+		Assert.assertEquals(new Integer(0), result.getPrice10());
+		Assert.assertEquals(new Integer(0), result.getPrice100());
+	}
 }
