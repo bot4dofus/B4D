@@ -1,12 +1,16 @@
 #Ecplise
+
 bin/
 target/
+dependency-reduced-pom.xml
 
 #Other
+
 wiki/
 world_creation/
+programs/
+
 **/*.GridCreator
-**/*.txt
 **/*.b4d
 **/*.json
 **/*.properties
