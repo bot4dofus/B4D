@@ -1,4 +1,4 @@
-﻿package fr.B4D.dao;
+package fr.B4D.dao;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /** La classe {@code DAO<T>} est une classe abstraite.<br><br>
  * Elle permet pas de gérer la sauvegarde des instances de la classe générique.
+ * @author Lucas
+ *
+ * @param <T> Type of DAO object.
  */
 public abstract class DAO<T> implements Serializable{	
 
@@ -20,7 +23,7 @@ public abstract class DAO<T> implements Serializable{
 	
 	/** permet de récupérer la dernière instance de la classe.
 	 * @return instance de la classe 
-	 * @throws ioexception si impossible de sérialiser.
+	 * @throws IOException si impossible de sérialiser.
 	 * @throws ClassNotFoundException si impossible de déserialiser.
 	 */
 	public abstract T find() throws IOException, ClassNotFoundException;
