@@ -26,7 +26,7 @@ public interface CeremonialItem extends ItemInterface{
 	/** Return the ceremonial item's conditions.
 	 * @return Ceremonial item's conditions. {@code null} if there is no conditions.
 	 */
-	public List<String> getConditions();
+	public String getConditions();
 	
 	/** Return the ceremonial item's characteristics.
 	 * @return Ceremonial item's characteristics. {@code null} if there is no characteristics.

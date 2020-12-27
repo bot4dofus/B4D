@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.io.IOException;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.B4D.bot.B4DException;
@@ -13,6 +14,7 @@ import fr.B4D.dao.DAOFactory;
 import fr.B4D.utils.Rectangle;
 
 @SuppressWarnings("javadoc")
+@Ignore
 public class ScreenTest {
 
 	private Screen screen;

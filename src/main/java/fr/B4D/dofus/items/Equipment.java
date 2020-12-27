@@ -26,7 +26,7 @@ public interface Equipment extends ItemInterface{
 	/** Return the equipment's conditions.
 	 * @return Equipment's conditions. {@code null} if there is no conditions.
 	 */
-	public List<String> getConditions();
+	public String getConditions();
 
 	/** Return the equipment's craft.
 	 * @return Equipment's craft. {@code null} if you cannot craft it.

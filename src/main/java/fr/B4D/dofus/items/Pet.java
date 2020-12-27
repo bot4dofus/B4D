@@ -20,7 +20,7 @@ public interface Pet extends ItemInterface{
 	/** Return the pet's conditions.
 	 * @return Pet's conditions. {@code null} if there is no evolutionary effects.
 	 */
-	public List<String> getConditions();
+	public String getConditions();
 
 	/** Return the pet's evolutionary effects.
 	 * @return Pet's evolutionary effects. {@code null} if there is no evolutionary effects.

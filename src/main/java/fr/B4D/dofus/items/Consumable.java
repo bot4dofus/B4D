@@ -26,7 +26,7 @@ public interface Consumable extends ItemInterface{
 	/** Return the consumable's conditions.
 	 * @return Consumable's conditions. {@code null} if there is no conditions.
 	 */
-	public List<String> getConditions();
+	public String getConditions();
 	
 	/** Return the consumable's craft.
 	 * @return Consumable's craft. {@code null} if you cannot craft it.

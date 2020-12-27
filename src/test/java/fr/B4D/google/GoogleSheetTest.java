@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.api.services.sheets.v4.model.BatchUpdateSpreadsheetResponse;
@@ -20,6 +21,7 @@ import fr.B4D.google.GoogleSheet;
 // https://www.baeldung.com/google-sheets-java-client
 
 @SuppressWarnings("javadoc")
+@Ignore
 public class GoogleSheetTest {
 	private static final String CREDENTIALS = "b4d_service.json";
 	private static final String SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1g9SQS-HXscoK9jv-2hdiA38adiv5n5BJ38a_E-QnNiw/edit#gid=987770465";

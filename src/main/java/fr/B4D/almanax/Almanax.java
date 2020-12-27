@@ -15,6 +15,7 @@ import org.jsoup.select.Elements;
 
 import fr.B4D.bot.B4DException;
 import fr.B4D.dofus.Dofus;
+import fr.B4D.dofus.DofusDatabase;
 import fr.B4D.dofus.items.Item;
 import fr.B4D.dofus.items.Stack;
 
@@ -101,12 +102,18 @@ public class Almanax {
 	 * Regex to find the item and the amount. 
 	 */
 	private String regex;
+	
+	/**
+	 * Dofus database from which get the items.
+	 */
+	private DofusDatabase database;
 
 	  /*************/
 	 /** BUILDER **/
 	/*************/
-	
-	/** Constructs an {@code Almanax} object with a specific language.
+
+	/**
+	 * Constructs an {@code Almanax} object with a specific language.
 	 * @param language - The language you want to use.<br><br>
 	 * To construct a french alamanax object use:
 	 * <blockquote><pre>
@@ -115,6 +122,19 @@ public class Almanax {
 	 * @throws B4DException
 	 */
 	public Almanax(String language) throws B4DException {
+		this(language, Dofus.getInstance().getDatabase());
+	}
+	
+	/** Constructs an {@code Almanax} object with a specific language.
+	 * @param language - The language you want to use.
+	 * @param database - The dofus database from which retrieve the items.<br><br>
+	 * To construct a french alamanax object use:
+	 * <blockquote><pre>
+	 * Almanax almanax = new Almanax(Almanax.FRENCH_LANGUAGE);
+	 * </pre></blockquote>
+	 * @throws B4DException
+	 */
+	public Almanax(String language, DofusDatabase database) throws B4DException {
 		
 		Map<String, String> regexMap = new HashMap<String, String>();
 		regexMap.put(FRENCH_LANGUAGE, FRENCH_REGEX);
@@ -129,6 +149,7 @@ public class Almanax {
 		
 		this.language = language;
 		this.regex = regexMap.get(language);
+		this.database = database;
 	}
 
 	  /************/
@@ -179,7 +200,7 @@ public class Almanax {
 			int amount = Integer.parseInt(matcher.group(1));
 			String name = matcher.group(2);
 			
-			List<Item> items = Dofus.getInstance().getDatabase().findItemsByName(name);
+			List<Item> items = database.findItemsByName(name);
 			
 			if(items.size() == 0)
 				throw new B4DException("Couldn't find the item in the database.");
