@@ -9,7 +9,7 @@ import fr.B4D.program.StopProgramException;
 public class HDVSocketHelperTest {
 
 	@Test
-	public void HDVItemView() throws StopProgramException, CancelProgramException, InstantiationException, IllegalAccessException {
+	public void HDVItemView1() throws StopProgramException, CancelProgramException, InstantiationException, IllegalAccessException {
 		byte[] socket = {0x59, (byte) 0xe1, 0x17, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x01, (byte) 0x9b, (byte) 0xf6, 0x19, (byte) 0xf9, 0x11, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x03, 0x01, 0x09, (byte) 0xe9, 0x03, 0x02, (byte) 0xc0};
 
 		DofusSocket dofusSocket = new DofusSocket(socket);
@@ -18,6 +18,8 @@ public class HDVSocketHelperTest {
 		helper.find(1);
 		helper.find(9);
 		helper.find(489);
+		
+		helper.printResults();
 	}
 	
 	@Test
