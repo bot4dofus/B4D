@@ -156,6 +156,7 @@ public final class Screen {
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String OCR(Rectangle rectangle) throws B4DException {
 		try {		
 			BufferedImage image = takeSreenshot(rectangle);
@@ -174,6 +175,7 @@ public final class Screen {
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws B4DException {
 		return OCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y));
 	}
@@ -184,6 +186,7 @@ public final class Screen {
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws B4DException {
 		return OCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner));
 	}
@@ -278,6 +281,7 @@ public final class Screen {
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String waitForOCR(Rectangle rectangle, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		String text;
 		do {
@@ -297,6 +301,7 @@ public final class Screen {
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String waitForOCR(Point topLeftHandCorner, Point bottomRightHandCorner, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForOCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y), regex, timeOut);
 	}
@@ -311,6 +316,7 @@ public final class Screen {
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String waitForOCR(PointF topLeftHandCorner, PointF bottomRightHandCorner, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForOCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner), regex, timeOut);
 	}
