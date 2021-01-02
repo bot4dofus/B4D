@@ -1,9 +1,15 @@
 package fr.B4D.program;
 
-import java.io.Serializable;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
@@ -12,27 +18,36 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
+import fr.B4D.programs.Breaking;
 import fr.B4D.programs.Loto;
-import fr.B4D.programs.tutorials.ConverterAPI;
-import fr.B4D.programs.tutorials.ExchangeAPI;
-import fr.B4D.programs.tutorials.KeyboardAPI;
-import fr.B4D.programs.tutorials.LoggerAPI;
-import fr.B4D.programs.tutorials.MessageAPI;
-import fr.B4D.programs.tutorials.MouseAPI;
-import fr.B4D.programs.tutorials.ScreenAPI;
-import fr.B4D.programs.tutorials.TransportAPI;
+import fr.B4D.programs.PricesEvolution;
+import fr.B4D.programs.Spam;
+import fr.B4D.programs.tutorials.BankAPITutorial1;
+import fr.B4D.programs.tutorials.BankAPITutorial2;
+import fr.B4D.programs.tutorials.ConverterAPITutorial;
+import fr.B4D.programs.tutorials.ExchangeAPITutorial;
+import fr.B4D.programs.tutorials.HdvAPITutorial;
+import fr.B4D.programs.tutorials.KeyboardAPITutorial;
+import fr.B4D.programs.tutorials.LoggerAPITutorial;
+import fr.B4D.programs.tutorials.MessageAPITutorial1;
+import fr.B4D.programs.tutorials.MessageAPITutorial2;
+import fr.B4D.programs.tutorials.MessageAPITutorial3;
+import fr.B4D.programs.tutorials.MouseAPITutorial;
+import fr.B4D.programs.tutorials.ScreenAPITutorial1;
+import fr.B4D.programs.tutorials.ScreenAPITutorial2;
+import fr.B4D.programs.tutorials.TransportAPITutorial1;
+import fr.B4D.programs.tutorials.TransportAPITutorial2;
 
 /** La classe {@code Program} représente un programme B4D.<br><br>
  * Un programme est défini par un lieux, une catégorie, une sous catégorie, un nom et une sub-routine implémentant l'interface {@code ProgramInterface}.
  * Il est possible de spécifier les canaux affichées dans le chat et le status du joueur.
  */
-public class Program implements Serializable{
-
-	private static final long serialVersionUID = -4725926340583319625L;	
+public abstract class Program {
 	
-	  /***************/
-	 /** ATTRIBUTS **/
-	/***************/
+	/**
+	 * Path of the programs files such as google credentials and bundles.
+	 */
+	public static final String PROGRAM_FILE_PATH = "programs/";
 	
 	private Place place;
 	private Category category;
@@ -42,12 +57,6 @@ public class Program implements Serializable{
 	private List<Channel> displayedChannels;
 	private Status status;
 
-	private ProgramInterface program;
-	
-	  /******************/
-	 /** CONSTRUCTEUR **/
-	/******************/
-
 	/** Constructeur de la classe {@code Program}. 
 	 * @param place - Lieu d'éxecution du programme.
 	 * @param category - Catégorie du programme.
@@ -55,26 +64,16 @@ public class Program implements Serializable{
 	 * @param programName - Nom du programme.
 	 * @param displayedChannels - Canaux affichés pendant le programme. Si {@code null}, les canaux seront laissés par défaut.
 	 * @param status - Status du joueur pendant le programme. Si {@code null}, le status sera laissé par défaut.
-	 * @param program - Sub-routine du programme.
 	 */
-	public Program(Place place, Category category, String subCategory, String programName, Channel[] displayedChannels, Status status, ProgramInterface program) {
+	public Program(Place place, Category category, String subCategory, String programName, Channel[] displayedChannels, Status status) {
 		this.place = place;
 		this.category = category;
 		this.subCategory = subCategory;
 		this.programName = programName;
 		
-		if(displayedChannels == null)
-			this.displayedChannels = null;
-		else
-			this.displayedChannels = Arrays.asList(displayedChannels);
+		this.displayedChannels = (displayedChannels == null) ? null : Arrays.asList(displayedChannels);
 		this.status = status;
-		
-		this.program = program;
 	}
-	
-	  /************************/
-	 /** METHODES STATIQUES **/
-	/************************/
 	
   /** Retourne la liste de tous les programmes disponibles.
  * @return Liste de tous les programmes.
@@ -82,35 +81,40 @@ public class Program implements Serializable{
 public final static ArrayList<Program> getAll(){
   	ArrayList<Program> programs = new ArrayList<Program>();
   	
-  	programs.add(Loto.LOTO);
+  	programs.add(new Loto());
+  	programs.add(new Breaking());
+  	programs.add(new PricesEvolution());
+  	programs.add(new Spam());
 
 	/** TUTORIALS **/
   	
-  	programs.add(MessageAPI.TUTORIAL1);
-  	programs.add(MessageAPI.TUTORIAL2);
-  	programs.add(MessageAPI.TUTORIAL3);
+  	programs.add(new MessageAPITutorial1());
+  	programs.add(new MessageAPITutorial2());
+  	programs.add(new MessageAPITutorial3());
   	
-  	programs.add(ExchangeAPI.TUTORIAL1);
+  	programs.add(new ExchangeAPITutorial());
   	
-  	programs.add(TransportAPI.TUTORIAL1);
-  	programs.add(TransportAPI.TUTORIAL2);
+  	programs.add(new TransportAPITutorial1());
+  	programs.add(new TransportAPITutorial2());
   	
-  	programs.add(LoggerAPI.TUTORIAL1);
+  	programs.add(new LoggerAPITutorial());
   	
-  	programs.add(ConverterAPI.TUTORIAL1);
+  	programs.add(new ConverterAPITutorial());
   	
-  	programs.add(MouseAPI.TUTORIAL1);
+  	programs.add(new MouseAPITutorial());
   	
-  	programs.add(KeyboardAPI.TUTORIAL1);
+  	programs.add(new KeyboardAPITutorial());
   	
-  	programs.add(ScreenAPI.TUTORIAL1);
-  	programs.add(ScreenAPI.TUTORIAL2);
+  	programs.add(new ScreenAPITutorial1());
+  	programs.add(new ScreenAPITutorial2());
+  	
+  	programs.add(new BankAPITutorial1());
+  	programs.add(new BankAPITutorial2());
+  	
+  	programs.add(new HdvAPITutorial());
+  	
     return programs;
   }
-	
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/
 	
 	/** Retourne le lieu d'éxecution du programme.
 	 * @return Lieux d'éxecution du programme.
@@ -139,31 +143,53 @@ public final static ArrayList<Program> getAll(){
 	public String getProgramName() {
 		return programName;
 	}
-
-	  /**************/
-	 /** METHODES **/
-	/**************/
+	
+	/**
+	 * Returns the google credentials associated with this program.
+	 * @return Google credential file.
+	 * @throws CancelProgramException if the credential file is missing
+	 */
+	public String getGoogleCredentials() throws CancelProgramException {
+		String name = PROGRAM_FILE_PATH + programName.toLowerCase().replace(" ", "_").replace("-", "_").toLowerCase() + ".credentials";
+		if(!new File(name).exists())
+			throw new CancelProgramException("The file \"" + name + "\" is missing.");
+		return name;
+	}
+	
+	/**
+	 * Returns the bundle file associated with this program.
+	 * @return The bundle file of this program.
+	 * @throws CancelProgramException if the bundle file is missing.
+	 */
+	public ResourceBundle getBundleFile() throws CancelProgramException {
+		String name = PROGRAM_FILE_PATH + programName.toLowerCase().replace(" ", "_").replace("-", "_").toLowerCase();
+		ResourceBundle bundle;
+		try {
+			File file = new File(".");
+			URL[] urls = {file.toURI().toURL()};
+			ClassLoader loader = new URLClassLoader(urls);
+			bundle = ResourceBundle.getBundle(name, Locale.getDefault(), loader);
+		}
+		catch(MissingResourceException | MalformedURLException  e) {
+			throw new CancelProgramException("The file \"" + name + ".properties\" is missing.");
+		}
+		return bundle;
+	}
 	
 	/** Permet de lancer le programme.
 	 * @param person - Personnage avec lequel lancer le programme.
 	 * @param programOptions - Options de lancement du programme.
+	 * @throws B4DException if a B4DException occurs.
+	 * @throws CancelProgramException if the program has been canceled.
 	 */
-	public void start(Person person, ProgramOptions programOptions) {
-		
+	public void start(Person person, ProgramOptions programOptions) throws B4DException, CancelProgramException {
 		try {
-			try {
-				intro(person, programOptions);
-				cycle(person, programOptions);
-			} catch (StopProgramException e) {
-				B4D.logger.debug("Program stoped");
-			}
-			outro(person, programOptions);
-		} catch (CancelProgramException e) {
-			if(e.getMessage() != null)
-				B4D.logger.popUp(e.getMessage());
-		}catch(B4DException e){
-			B4D.logger.error(e);
+			pre_intro(person, programOptions);
+			loop(person, programOptions);
+		} catch (StopProgramException e) {
+			B4D.logger.debug("Program stoped");
 		}
+		pre_outro(person, programOptions);
 	}
 
 	/** Fonction d'introduction du programme. Celle-ci ne sera éxecutée qu'une seule fois et permet de :<br/>
@@ -180,7 +206,7 @@ public final static ArrayList<Program> getAll(){
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 */
-	private void intro(Person person, ProgramOptions programOptions) throws StopProgramException, CancelProgramException, B4DException {
+	private void pre_intro(Person person, ProgramOptions programOptions) throws StopProgramException, CancelProgramException, B4DException {
 		Dofus.getInstance().getChat().clear();
 		if(this.category != Category.Test) {
 			B4D.screen.focusDofus();
@@ -194,7 +220,7 @@ public final static ArrayList<Program> getAll(){
 			
 			person.setPosition();	//Récupère la position actuelle
 		}
-		program.intro(person);
+		intro(person);
 	}
 	
 	/** Fonction principale du programme. Celle-ci ne sera éxecutée qu'une seule fois et permet d'exécuter la sub-routine cycle du programme.
@@ -208,14 +234,14 @@ public final static ArrayList<Program> getAll(){
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 */
-	private void cycle(Person person, ProgramOptions programOptions) throws B4DException, StopProgramException, CancelProgramException {
+	private void loop(Person person, ProgramOptions programOptions) throws B4DException, StopProgramException, CancelProgramException {
 		
 		int cycles = programOptions.getCycles();
-		int deposits = programOptions.getDeposits();
+		long delay = programOptions.getDelay();
 		
-		while(cycles != 0 && deposits != 0) {
+		while(cycles != 0) {
 			try {
-				program.cycle(person);
+				cycle(person);
 			} catch (FullInventoryException e) {
 
 				if(programOptions.isHdvWhenFull()) {
@@ -226,10 +252,9 @@ public final static ArrayList<Program> getAll(){
 				}
 				if(programOptions.isStopWhenFull())
 					throw new StopProgramException();
-				
-				deposits--;
 			}
 			cycles--;
+			B4D.wait.sleep(delay);
 		}
 	}
 	
@@ -239,8 +264,31 @@ public final static ArrayList<Program> getAll(){
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si une exception de type B4D est levée.
 	 */
-	private void outro(Person person, ProgramOptions programOptions) throws CancelProgramException, B4DException {
-		program.outro(person);
+	private void pre_outro(Person person, ProgramOptions programOptions) throws CancelProgramException, B4DException {
+		outro(person);
 		B4D.logger.popUp("Le programme s'est correctement terminé.");
 	}
+	
+	/** Fonction d'introduction du programme. Celle-ci ne sera éxecutée qu'une seule fois en début de programme.
+	 * @param person - Personnage avec lequel lancer l'introduction.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 * @throws B4DException Si une exception de type B4D est levée.
+	 */
+	public abstract void intro(Person person) throws StopProgramException, CancelProgramException, B4DException;
+	
+	/** Fonction principale du programme. Celle-ci sera éxecutée plusieurs fois.
+	 * @param person - Personnage avec lequel lancer le programme.
+	 * @throws StopProgramException Si le programme est stoppé.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 * @throws B4DException Si une exception de type B4D est levée.
+	 * @throws FullInventoryException Si l'inventaire est plein.
+	 */
+	public abstract void cycle(Person person) throws StopProgramException, CancelProgramException, FullInventoryException, B4DException;
+	
+	/** Fonction de fin du programme. Celle-ci ne sera éxecutée qu'une seule fois en fin de programme.
+	 * @param person - Personnage avec lequel lancer la fonction de fin.
+	 * @throws CancelProgramException Si le programme est annulé.
+	 */
+	public abstract void outro(Person person) throws CancelProgramException;
 }

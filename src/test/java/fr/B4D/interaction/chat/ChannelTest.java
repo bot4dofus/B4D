@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.B4D.bot.B4D;
@@ -16,6 +17,8 @@ import fr.B4D.bot.Server;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
+@SuppressWarnings("javadoc")
+@Ignore
 public class ChannelTest {
 
 	private static B4D b4d;

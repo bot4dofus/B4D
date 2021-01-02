@@ -3,12 +3,8 @@ package fr.B4D.utils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fr.B4D.bot.B4D;
-
+@SuppressWarnings("javadoc")
 public class ClosestStringTest {
-
-	@SuppressWarnings("unused")
-	private static B4D b4d;
 	
 	@Test
 	public void testOui1() {

@@ -1,10 +1,13 @@
 package fr.B4D.bot.statics;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.B4D.bot.B4DException;
 
+@SuppressWarnings("javadoc")
+@Ignore
 public class LoggerTest {
 
 	private Logger logger;

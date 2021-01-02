@@ -14,6 +14,8 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Configuration;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
+import fr.B4D.socket.result.ChangeMapEvent;
+import fr.B4D.socket.store.ChangeMapEventStore;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.Tesseract;
@@ -154,6 +156,7 @@ public final class Screen {
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String OCR(Rectangle rectangle) throws B4DException {
 		try {		
 			BufferedImage image = takeSreenshot(rectangle);
@@ -172,6 +175,7 @@ public final class Screen {
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws B4DException {
 		return OCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y));
 	}
@@ -182,6 +186,7 @@ public final class Screen {
 	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws B4DException {
 		return OCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner));
 	}
@@ -240,11 +245,6 @@ public final class Screen {
 	 /** ATTENTE SUR MAP **/
 	/*********************/
 	
-	/** Permet d'attendre l'appui sur une touche.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Entier représentant la touche enfoncée. {@code -1} si timeout.
-	 */
-	
 	/** Permet d'attendre un changement de map.
 	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
 	 * @return {@code true} si le joueur à changé de map, {@code false} si timeout.
@@ -252,7 +252,10 @@ public final class Screen {
 	 * @throws CancelProgramException Si le programme est annulé.
 	 */
 	public boolean waitForMap(int timeOut) throws StopProgramException, CancelProgramException {
-		return waitForChangingPixel(B4D.converter.toPointF(configuration.getMinimap()), timeOut) != null;
+		//return waitForChangingPixel(B4D.converter.toPointF(configuration.getMinimap()), timeOut) != null;
+		ChangeMapEvent event = ChangeMapEventStore.getInstance().waitForResult(timeOut);
+		B4D.wait.sleep(2000);
+		return event != null;
 	}
 	
 	/** Permet d'attendre un changement de map sans limite de temps. 
@@ -278,6 +281,7 @@ public final class Screen {
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String waitForOCR(Rectangle rectangle, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		String text;
 		do {
@@ -297,6 +301,7 @@ public final class Screen {
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String waitForOCR(Point topLeftHandCorner, Point bottomRightHandCorner, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForOCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y), regex, timeOut);
 	}
@@ -311,6 +316,7 @@ public final class Screen {
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
+	@Deprecated
 	public String waitForOCR(PointF topLeftHandCorner, PointF bottomRightHandCorner, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForOCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner), regex, timeOut);
 	}

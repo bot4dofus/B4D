@@ -14,7 +14,7 @@ public class ProgramOptions implements Serializable{
 	/***************/
 	
 	private int cycles;
-	private int deposits;
+	private long delay;
 
 	private boolean hdvWhenFull;
 	private boolean bankWhenFull;
@@ -26,14 +26,14 @@ public class ProgramOptions implements Serializable{
 
 	/** Constructeur de la classe {@code ProgramOptions}. 
 	 * @param cycles - Nombre de cycles avant fin du programme.
-	 * @param deposits - Nombre de dépôts avant fin du programme.
+	 * @param delay - Delay between each cycle in ms.
 	 * @param hdvWhenFull - {@code true} si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein, {@code false} sinon.
 	 * @param bankWhenFull - {@code true} si le joueur veut vider son inventaire en banque lorsque celui-ci est plein, {@code false} sinon.
 	 * @param stopWhenFull - {@code true} si le joueur veut stopper le programme lorsque l'inventaire est plein, {@code false} sinon.
 	 */
-	public ProgramOptions(int cycles, int deposits, boolean hdvWhenFull, boolean bankWhenFull, boolean stopWhenFull) {
+	public ProgramOptions(int cycles, long delay, boolean hdvWhenFull, boolean bankWhenFull, boolean stopWhenFull) {
 		this.cycles = cycles;
-		this.deposits = deposits;
+		this.delay = delay;
 		this.hdvWhenFull = hdvWhenFull;
 		this.bankWhenFull = bankWhenFull;
 		this.stopWhenFull = stopWhenFull;
@@ -50,11 +50,11 @@ public class ProgramOptions implements Serializable{
 		return cycles;
 	}
 	
-	/** Retourne le nombre de dépôts avant la fin du programme.
-	 * @return Nombre de dépôts restants.
+	/** Returns the delay between each cycle.
+	 * @return Delay between each cycle in ms.
 	 */
-	public int getDeposits() {
-		return deposits;
+	public long getDelay() {
+		return delay;
 	}
 	
 	/** Retourne un booléen représentant si le joueur veut vider son inventaire en HDV lorsque celui-ci est plein.

@@ -25,19 +25,31 @@ import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramOptions;
 
+/**
+ * The class {@code JPanel_Programme} is a GUI allowing program selection.
+ * @author Lucas
+ *
+ */
 public class JPanel_Programme extends JPanel {
 
 	private static final long serialVersionUID = -1975429297614634621L;
-	
-	public final int width = 635;
-	public final int height = 235;
+
+	/**
+	 * Width of the panel.
+	 */
+	public static final int WIDTH = 635;
+
+	/**
+	 * Height of the panel.
+	 */
+	public static final int HEIGHT = 235;
 	
 	private JComboBox<Place> comboBox_Place;
 	private JComboBox<Category> comboBox_Category;
 	private JComboBox<String> comboBox_SubCategory;
 	private JComboBox<String> comboBox_Name;
 	
-	private JFormattedTextField textField_Turns, textField_Deposits;
+	private JFormattedTextField textField_Turns, textField_Delay;
 
 	private JCheckBox checkBox_HDV;
 	private JCheckBox checkBox_Bank;
@@ -182,23 +194,23 @@ public class JPanel_Programme extends JPanel {
 		label_Tours0.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(label_Tours0);
 		
-		JLabel lblNombreDeDpts = new JLabel("Nombre de d\u00E9p\u00F4ts :");
-		lblNombreDeDpts.setBackground(new Color(46, 139, 87));
-		lblNombreDeDpts.setForeground(Color.WHITE);
-		lblNombreDeDpts.setOpaque(true);
-		lblNombreDeDpts.setBounds(165, 90, 150, 25);
-		lblNombreDeDpts.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNombreDeDpts.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		add(lblNombreDeDpts);
+		JLabel labelDelay = new JLabel("Délais inter-cycle (ms) :");
+		labelDelay.setBackground(new Color(46, 139, 87));
+		labelDelay.setForeground(Color.WHITE);
+		labelDelay.setOpaque(true);
+		labelDelay.setBounds(165, 90, 150, 25);
+		labelDelay.setHorizontalAlignment(SwingConstants.CENTER);
+		labelDelay.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(labelDelay);
 		
-		textField_Deposits = new JFormattedTextField(NumberFormat.getNumberInstance());
-		textField_Deposits.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_Deposits.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
-		textField_Deposits.setText("-1");
-		textField_Deposits.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		textField_Deposits.setBounds(165, 115, 150, 25);
-		textField_Deposits.setColumns(10);
-		add(textField_Deposits);
+		textField_Delay = new JFormattedTextField(NumberFormat.getNumberInstance());
+		textField_Delay.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_Delay.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192), new Color(192, 192, 192)));
+		textField_Delay.setText("0");
+		textField_Delay.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textField_Delay.setBounds(165, 115, 150, 25);
+		textField_Delay.setColumns(10);
+		add(textField_Delay);
 		
 		JLabel label_Depots0 = new JLabel("(-1 = infini)");
 		label_Depots0.setBackground(Color.LIGHT_GRAY);
@@ -258,7 +270,7 @@ public class JPanel_Programme extends JPanel {
 					&& p.getProgramName().equals(comboBox_Name.getSelectedItem()))
 				.findFirst().orElse(null);
 
-				ProgramOptions programOptions = new ProgramOptions(Integer.valueOf(textField_Turns.getText()), Integer.valueOf(textField_Deposits.getText()), checkBox_HDV.isSelected(), checkBox_Bank.isSelected(), checkBox_Stop.isSelected());
+				ProgramOptions programOptions = new ProgramOptions(Integer.valueOf(textField_Turns.getText()), Long.valueOf(textField_Delay.getText()), checkBox_HDV.isSelected(), checkBox_Bank.isSelected(), checkBox_Stop.isSelected());
 				b4d.runProgram(program, b4d.getTeam().get(0), programOptions);
 				getParent().requestFocus();
 			}

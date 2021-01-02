@@ -19,9 +19,11 @@ import fr.B4D.bot.statics.Wait;
 import fr.B4D.dao.DAOFactory;
 import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
+import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramOptions;
 import fr.B4D.socket.SocketListener;
+import fr.B4D.utils.os.Os;
 
 /** La classe {@code B4D} est la classe principale du bot.<br><br>
  * Elle fournit les méthodes dont à besoin l'interface graphique pour fonctionner.
@@ -32,21 +34,56 @@ public final class B4D{
 	/** ATRIBUTS **/
 	/**************/
 	
+	/**
+	 * Logger to display messages in the console.
+	 */
 	public static Logger logger;
-	public static SocketListener socketListener;
-	public static KeyboardListener keyboardListener;
+	
+	/**
+	 * Converter to convert between mouse coordinates.
+	 */
 	public static Converter converter;
+	
+	/**
+	 * Screen of the user to perform analysis on it.
+	 */
 	public static Screen screen;
+	
+	/**
+	 * Mouse of the user to perform actions on it.
+	 */
 	public static Mouse mouse;
+	
+	/**
+	 * Keyboard of the user to perform actions on it.
+	 */
 	public static Keyboard keyboard;
+	
+	/**
+	 * Object to wait on.
+	 */
 	public static Wait wait;
 	
+	/**
+	 * Configuration of the bot.
+	 */
 	private Configuration configuration;
+	
+	/**
+	 * User team.
+	 */
 	private Team team;
 	
-	  /*************/
-	 /** BUILDER **/
-	/*************/
+	/**
+	 * Socket listener. Listening for the incoming sockets.
+	 */
+	private SocketListener socketListener;
+	
+	/**
+	 * Keyboard listener. Listening for the keys pressed.
+	 */
+	private KeyboardListener keyboardListener;
+	
 
 	/** Constructeur de la classe {@code B4D} et sauvegarde la nouvelle instance dans un fichier.
 	 * @throws B4DException Si une exception B4D est levée.
@@ -64,8 +101,6 @@ public final class B4D{
 		team = DAOFactory.getTeamDAO().find();
 		
 		/** STATICS **/
-		socketListener = new SocketListener();
-		keyboardListener = new KeyboardListener();
 		converter = new Converter(configuration);
 		screen = new Screen(configuration);
 		mouse = new Mouse(configuration);
@@ -75,10 +110,6 @@ public final class B4D{
 		Channel.setChatMenuPosition(configuration.getChatMenu());
 		Status.setStatusMenuPosition(configuration.getStatus());
 	}
-	
-	/***********************/
-	/** GETTERS & SETTERS **/
-	/***********************/
 	
 	/** Retourne la configuration actuelle de la fenêtre de jeu.
 	 * @return Configuration de la fenêtre de jeu.
@@ -112,10 +143,6 @@ public final class B4D{
 		saveTeam();
 	}
 	
-	/**********/
-	/** SAVE **/
-	/**********/
-	
 	/** Sauvegarde l'instance actuelle de la configuration dans un fichier.
 	 * @throws IOException Si impossible de sérialiser la configuration.
 	 */
@@ -129,10 +156,6 @@ public final class B4D{
 	public void saveTeam() throws IOException {
 		DAOFactory.getTeamDAO().update(team);
 	}
-	
-	  /*************/
-	 /** METHODS **/
-	/*************/
 
 	/** Permet d'importer une configuration ou une team.
 	 * @throws ClassNotFoundException Si impossible de déserialiser.
@@ -184,26 +207,44 @@ public final class B4D{
 		return Program.getAll();
 	}
 
-	/*********/
-	/** RUN **/
-	/*********/
-
 	/** Permet de lancer un programme avec une configuration et un personnage particulier.
 	 * @param program - Programme à éxecuter.
 	 * @param person - Personnage qui éxecute le programme.
 	 * @param programOptions - Options de lancement du programme.
 	 */
 	public void runProgram(Program program, Person person, ProgramOptions programOptions) {
-		if(!socketListener.isAlive())
+		try {
+			socketListener = new SocketListener();
 			socketListener.start();
-		if(!keyboardListener.isAlive())
+			
+			keyboardListener = new KeyboardListener();
 			keyboardListener.start();
 		
-		try {
-			socketListener.setFilter(person.getServer());
+			Os os = Os.findOs();
+			String serverIp = os.findServerIp();
+			socketListener.setFilter(serverIp);
 			program.start(person, programOptions);
+		}catch (CancelProgramException e) {
+			if(e.getMessage() != null)
+				B4D.logger.popUp(e.getMessage());
 		} catch (B4DException e) {
 			B4D.logger.error(e);
 		}
+		finally {
+			if(socketListener != null && socketListener.isAlive())
+				socketListener.interrupt();
+			if(keyboardListener != null && keyboardListener.isAlive())
+				keyboardListener.interrupt();
+		}
+	}
+	
+	/**
+	 * Interrupt the socket listener and the keyboard listener. 
+	 */
+	public void interruptListeners() {
+		if(socketListener != null && socketListener.isAlive())
+			socketListener.interrupt();
+		if(keyboardListener != null && keyboardListener.isAlive())
+			keyboardListener.interrupt();
 	}
 }

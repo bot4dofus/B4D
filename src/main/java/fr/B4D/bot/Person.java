@@ -64,9 +64,9 @@ public class Person implements Serializable, TransportInterface{
 		this.server = serveur;
 		this.pseudo = pseudo;
 		
-		this.boosterPotion = new TransportStep(new Potion("Booster potion", null, null, boosterPotionCost), Zaap.Astrub.getPosition());
-		this.bontaPotion = new TransportStep(new Potion("Bonta potion", null, null, bontaPotionCost), bontaPotionDestination);
-		this.brakmarPotion = new TransportStep(new Potion("Brakmar potion", null, null, brakmarPotionCost), brakmarPotionDestination);
+		this.boosterPotion = new TransportStep(new Potion("Booster potion", null, null, BOOSTER_POTION_COST), Zaap.Astrub.getPosition());
+		this.bontaPotion = new TransportStep(new Potion("Bonta potion", null, null, BONTA_POTION_COST), BONTA_POTION_DESTINATION);
+		this.brakmarPotion = new TransportStep(new Potion("Brakmar potion", null, null, BRAKMAR_POTION_COST), BRAKMAR_POTION_DESTINATION);
 	}
 	
 	  /***********************/

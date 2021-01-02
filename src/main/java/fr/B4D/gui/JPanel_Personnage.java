@@ -35,12 +35,24 @@ import fr.B4D.bot.Person;
 import fr.B4D.bot.Server;
 import fr.B4D.transport.transports.Zaap;
 
+/**
+ * The class {@code JPanel_Personnage} is a GUI allowing persons configurations.
+ * @author Lucas
+ *
+ */
 public class JPanel_Personnage extends JPanel {
 
 	private static final long serialVersionUID = 8907893091716626123L;
 	
-	public final int width = 635;
-	public final int height = 310;
+	/**
+	 * Width of the panel.
+	 */
+	public static final int WIDTH = 635;
+	
+	/**
+	 * Height of the panel.
+	 */
+	public static final int HEIGHT = 310;
 	
 	private Vector<Vector<String>> dataTable;
 	private JTable table;
@@ -70,8 +82,10 @@ public class JPanel_Personnage extends JPanel {
 		setLayout(null);
 		setVisible(false);
 		
-		JComboBox<String> comboBox_server = new JComboBox<String>();
-		Server.getAll().stream().forEach(s -> comboBox_server.addItem(s.getName()));
+		JComboBox<Server> comboBox_server = new JComboBox<Server>();
+		
+		for(Server server:Server.values())
+			comboBox_server.addItem(server);
 		
 		dataTable = new Vector<Vector<String>>();
 		Vector<String> colonnes = new Vector<String>(Arrays.asList(new String[] {"Nom de compte","Mot de passe","Serveur","Pseudo"}));
@@ -88,7 +102,7 @@ public class JPanel_Personnage extends JPanel {
 						b4d.getTeam().get(evt.getFirstRow()).setPassword(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());
 						break;
 					case 2:
-						b4d.getTeam().get(evt.getFirstRow()).setServer(Server.getServer(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString()));
+						b4d.getTeam().get(evt.getFirstRow()).setServer((Server) table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()));
 						break;
 					case 3:
 						b4d.getTeam().get(evt.getFirstRow()).setPseudo(table.getModel().getValueAt(evt.getFirstRow(), evt.getColumn()).toString());

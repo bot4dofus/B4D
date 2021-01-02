@@ -38,7 +38,7 @@ public class Walk extends Transport implements Serializable{
 	 * @param position - Position de la marche sur l'écran.
 	 */
 	public Walk(Point position) {
-		super("Walking", position, null, walkCost);
+		super("Walking", position, null, WALK_COST);
 	}
 
 	  /**************/
@@ -58,6 +58,5 @@ public class Walk extends Transport implements Serializable{
 			B4D.mouse.leftClick(goLeft, false);
 		else if(move.equals(right))
 			B4D.mouse.leftClick(goRight, false);
-	    B4D.screen.waitForMap(20000);
 	}
 }

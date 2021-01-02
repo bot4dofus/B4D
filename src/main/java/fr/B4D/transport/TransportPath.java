@@ -44,7 +44,7 @@ public class TransportPath implements Serializable{
 			if (!person.getPosition().equals(step.getTransport().getPosition()))
 				throw new B4DException("Wrong position.");
 			step.use();
-			B4D.screen.waitForMap();
+			B4D.screen.waitForMap(20000);
 			person.setPosition(step.getDestination());
 		}
 	}

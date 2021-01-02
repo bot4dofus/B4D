@@ -22,12 +22,24 @@ import javax.swing.border.LineBorder;
 import fr.B4D.bot.B4D;
 import java.awt.SystemColor;
 
+/**
+ * The class {@code JPanel_Reglage} is a GUI allowing screen configuration and other settings.
+ * @author Lucas
+ *
+ */
 public class JPanel_Reglage extends JPanel {
 
 	private static final long serialVersionUID = -4135111440537713705L;
-	
-	public final int width = 635;
-	public final int height = 215;
+
+	/**
+	 * Width of the panel.
+	 */
+	public static final int WIDTH = 635;
+
+	/**
+	 * Height of the panel.
+	 */
+	public static final int HEIGHT = 215;
 
 	private Point topLeft, bottomRight;
 	

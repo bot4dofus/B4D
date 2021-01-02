@@ -19,12 +19,24 @@ import fr.B4D.bot.B4D;
 import fr.B4D.programs.Test;
 import fr.B4D.utils.PointF;
 
+/**
+ * The class {@code JPanel_Admin} is a GUI used by admins and users for test purposes, program recording and bug report.
+ * @author Lucas
+ *
+ */
 public class JPanel_Admin extends JPanel {
 
 	private static final long serialVersionUID = -7603368625926813641L;
-	
-	public final int width = 635;
-	public final int height = 70;
+
+	/**
+	 * Width of the panel.
+	 */
+	public static final int WIDTH = 635;
+
+	/**
+	 * Height of the panel.
+	 */
+	public static final int HEIGHT = 70;
 	
 	/**
 	 * Create the panel.
@@ -48,7 +60,7 @@ public class JPanel_Admin extends JPanel {
 		btnTestProgram.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					Test.test.cycle(b4d.getTeam().get(0));
+					new Test().cycle(b4d.getTeam().get(0));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -87,6 +99,10 @@ public class JPanel_Admin extends JPanel {
 		});
 		btnRecord.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnRecord.setBounds(165, 35, 150, 25);
+		
+		if(b4d.getConfiguration().getGameFrame() == null)
+			btnRecord.setEnabled(false);
+		
 		add(btnRecord);
 		
 		JLabel lblPropose = new JLabel("Nouveau programme / Amélioration / Question :");

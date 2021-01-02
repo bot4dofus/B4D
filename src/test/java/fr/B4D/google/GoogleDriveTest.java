@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.api.services.drive.model.File;
@@ -14,6 +15,8 @@ import fr.B4D.google.GoogleDrive;
 
 // https://o7planning.org/en/11889/manipulating-files-and-folders-on-google-drive-using-java
 
+@SuppressWarnings("javadoc")
+@Ignore
 public class GoogleDriveTest {
 
 	private static final String CREDENTIALS = "b4d_service.json";

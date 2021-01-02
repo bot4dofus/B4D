@@ -99,10 +99,7 @@ public class Exchange implements Serializable{
 	 * @throws CancelProgramException Si le bot programme est annulé.
 	 * @throws B4DException Si impossible de réaliser l'OCR.
 	 */
-	public String waitForExchange(int timeout) throws StopProgramException, CancelProgramException, B4DException {
-		if(!B4D.socketListener.isAlive())
-			B4D.socketListener.start();
-		
+	public String waitForExchange(int timeout) throws StopProgramException, CancelProgramException, B4DException {	
 		B4D.logger.debug("Attente d'un échange");
 		String message = B4D.screen.waitForOCR(waitForExchangeRectangle, waitForExchangeKey, timeout);
 		
