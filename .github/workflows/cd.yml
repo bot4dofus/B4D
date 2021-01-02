@@ -26,9 +26,7 @@ jobs:
       run: chmod +x ./devscripts/latest-dofus-version.sh
       
     - name: Get latest Dofus version
-      run: |
-        echo $(sh ./devscripts/latest-dofus-version.sh)
-        $dofus_version="latest"
+      run:  sh ./devscripts/latest-dofus-version.sh >> $dofus_version
       
     - name: Package with Maven
       run: mvn -B package --file pom.xml
