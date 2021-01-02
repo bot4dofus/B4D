@@ -26,6 +26,8 @@ jobs:
       run: |
         export DOFUS_VERSION=$(devscripts/latest-dofus-version.sh)
         echo "::set-env name=PACKAGE_VERSION::$DOFUS_VERSION"
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       
     - name: Package with Maven
       run: mvn -B package --file pom.xml
