@@ -26,7 +26,7 @@ public interface Resource extends ItemInterface{
 	/** Return the resource's conditions.
 	 * @return Resource's conditions. {@code null} if there is no conditions.
 	 */
-	public List<String> getConditions();
+	public String getConditions();
 
 	/** Return the resource's craft.
 	 * @return Resource's craft. {@code null} if you cannot craft it.

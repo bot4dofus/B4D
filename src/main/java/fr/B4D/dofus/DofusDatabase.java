@@ -264,7 +264,7 @@ public class DofusDatabase {
 			item.setEffects(getStringListFromJSONArray((JSONArray) itemObject.get("effects")));
 		
 		if(itemObject.containsKey("conditions"))
-			item.setConditions(getStringListFromJSONArray((JSONArray) itemObject.get("conditions")));
+			item.setConditions(itemObject.get("conditions").toString());
 		
 		if(itemObject.containsKey("characteristics"))
 			item.setCharacteristics(getStringListFromJSONArray((JSONArray) itemObject.get("characteristics")));

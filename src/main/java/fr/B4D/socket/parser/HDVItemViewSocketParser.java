@@ -29,14 +29,27 @@ public class HDVItemViewSocketParser extends SocketParser<HDVItemViewEvent>{
 		DofusSocketIterator iterator = new DofusSocketIterator(dofusSocket);
 
 		iterator.skip(9);
-		Integer id = iterator.getNextSocketElement(2).asBigEndian();
 
-		Integer index = iterator.moveAfterPattern(DELIMITER);
-		List<Integer> numbers = iterator.getNextSocketElement(dofusSocket.getPayload().length-index).asBigEndians();
-
-		Integer price1 = numbers.size() >= 1 ? numbers.get(0) : 0;
-		Integer price10 = numbers.size() >= 2 ? numbers.get(1) : 0;
-		Integer price100 = numbers.size() >= 3 ? numbers.get(2) : 0;
+		Integer id;
+		Integer price1;
+		Integer price10;
+		Integer price100;
+		
+		try {
+			id = iterator.getNextSocketElement(2).asBigEndian();
+	
+			Integer index = iterator.moveAfterPattern(DELIMITER);
+			List<Integer> numbers = iterator.getNextSocketElement(dofusSocket.getPayload().length-index).asBigEndians();
+	
+			price1 = numbers.size() >= 1 ? numbers.get(0) : 0;
+			price10 = numbers.size() >= 2 ? numbers.get(1) : 0;
+			price100 = numbers.size() >= 3 ? numbers.get(2) : 0;
+		}catch(B4DException e) {	//If the item is not in sale
+			id = 0;
+			price1 = 0;
+			price10 = 0;
+			price100 = 0;
+		}
 
 		HDVItemViewEvent result = new HDVItemViewEvent(id, price1, price10, price100);
 		HDVItemViewEventStore.getInstance().addSocketResult(result);

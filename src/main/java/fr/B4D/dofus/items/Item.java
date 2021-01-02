@@ -24,7 +24,7 @@ public class Item implements Monster, Weapon, Equipment, Set, Pet, Mount, Consum
 	private String level;
 	private String description;
 	private List<String> effects;
-	private List<String> conditions;
+	private String conditions;
 	private List<String> characteristics;
 	private List<String> resistances;
 	private Map<String, Integer> craft;
@@ -143,14 +143,14 @@ public class Item implements Monster, Weapon, Equipment, Set, Pet, Mount, Consum
 	/** Returns the item's conditions.
 	 * @return Item's conditions.
 	 */
-	public List<String> getConditions() {
+	public String getConditions() {
 		return conditions;
 	}
 
 	/** Sets the item's conditions.
 	 * @param conditions - The item's conditions.
 	 */
-	public void setConditions(List<String> conditions) {
+	public void setConditions(String conditions) {
 		this.conditions = conditions;
 	}
 

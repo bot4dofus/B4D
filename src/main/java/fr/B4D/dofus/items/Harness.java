@@ -1,6 +1,5 @@
 package fr.B4D.dofus.items;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,7 +20,7 @@ public interface Harness extends ItemInterface{
 	/** Return the harness's conditions.
 	 * @return Harness's conditions. {@code null} if there is no conditions.
 	 */
-	public List<String> getConditions();
+	public String getConditions();
 
 	
 	/** Return the harness's craft.

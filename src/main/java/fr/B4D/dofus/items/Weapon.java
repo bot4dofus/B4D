@@ -27,7 +27,7 @@ public interface Weapon extends ItemInterface{
 	/** Return the weapon's conditions.
 	 * @return Weapon's conditions. {@code null} if there is no conditions.
 	 */
-	public List<String> getConditions();
+	public String getConditions();
 
 	/** Return the weapon's characteristics.
 	 * @return Weapon's characteristics.
