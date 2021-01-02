@@ -23,7 +23,9 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
       
     - name: Get latest Dofus version
-      run:  export DOFUS_VERSION=$(devscripts/latest-dofus-version.sh)
+      run: |
+        export DOFUS_VERSION=$(devscripts/latest-dofus-version.sh)
+        echo "::set-env name=PACKAGE_VERSION::$DOFUS_VERSION"
       
     - name: Package with Maven
       run: mvn -B package --file pom.xml
@@ -35,9 +37,9 @@ jobs:
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: ${{ DOFUS_VERSION }}
+        automatic_release_tag: ${{ env.PACKAGE_VERSION }}
         prerelease: false
-        title: B4D-${{ DOFUS_VERSION }}
+        title: B4D-${{ env.PACKAGE_VERSION }}
         files: |
           ./LICENSE
           ./target/B4D-*.*.*.jar
