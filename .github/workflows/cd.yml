@@ -35,9 +35,9 @@ jobs:
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: ${DOFUS_VERSION}
+        automatic_release_tag: ${{ DOFUS_VERSION }}
         prerelease: false
-        title: B4D-${DOFUS_VERSION}
+        title: B4D-${{ DOFUS_VERSION }}
         files: |
           ./LICENSE
           ./target/B4D-*.*.*.jar
