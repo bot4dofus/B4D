@@ -32,9 +32,9 @@ jobs:
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: ${{ dofus_version }}
+        automatic_release_tag: ${dofus_version}
         prerelease: false
-        title: B4D-${{ dofus_version }}
+        title: B4D-${dofus_version}
         files: |
           ./LICENSE
           ./target/B4D-*.*.*.jar
