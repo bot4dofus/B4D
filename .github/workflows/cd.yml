@@ -22,11 +22,14 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+    - name: Get latest Dofus version
+      run: $dofus_version=$(sh ./devscripts/latest-dofus-version.sh)
+      
     - name: Package with Maven
       run: mvn -B package --file pom.xml
-
-    - name: Get latest Dofus version
-      run: dofus_version=$(sh ./devscripts/latest-dofus-version.sh)
+      
+    - name: Publish test report to Codecov
+      uses: codecov/codecov-action@v1
   
     - name: Publish release
       uses: "marvinpinto/action-automatic-releases@latest"
