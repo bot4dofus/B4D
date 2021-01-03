@@ -1,6 +1,6 @@
 
 [![Join B4D on Discord!](https://img.shields.io/badge/Discord-Join%20B4D%20on%20Discord!-7289DA.svg?style=flat&logo=discord)](https://discord.gg/kNHsFcbUGp)
-[![Release](https://img.shields.io/github/release/LucBerge/B4D.svg)](https://github.com/LucBerge/B4D/releases)
+[![Release](https://img.shields.io/github/v/release/LucBerge/B4D)](https://github.com/LucBerge/B4D/releases)
 
 ## Project status
 
