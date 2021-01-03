@@ -9,12 +9,6 @@
 	<name>B4D</name>
 	<description>Bot for Dofus</description>
 	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
 		<plugins>
 
 			<!-- Used to generate the java doc -->
