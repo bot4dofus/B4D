@@ -33,7 +33,7 @@ jobs:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       
     - name: Package with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package --file pom.xml -Dversion=${{ env.PACKAGE_VERSION }}
       
     - name: Publish test report to Codecov
       uses: codecov/codecov-action@v1
