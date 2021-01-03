@@ -8,6 +8,10 @@
 	<packaging>jar</packaging>
 	<name>B4D</name>
 	<description>Bot for Dofus</description>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<version>2.58.1-SNAPSHOT</version>
+	</properties>
 	<build>
 		<plugins>
 
@@ -149,9 +153,4 @@
 			<version>1.12.1</version>
 		</dependency>
 	</dependencies>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<version>${maven.build.timestamp}</version>
-		<maven.build.timestamp.format>yyyy.MM.dd</maven.build.timestamp.format>
-	</properties>
 </project>
