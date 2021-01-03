@@ -28,7 +28,7 @@ jobs:
     - name: Get latest Dofus version
       run: |
         export DOFUS_VERSION=$(./devscripts/latest-dofus-version.sh)
-        echo $DOFUS_VERSION
+        echo The current Dofus version is $DOFUS_VERSION
         echo "::set-env name=PACKAGE_VERSION::$DOFUS_VERSION"
       env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
