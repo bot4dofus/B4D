@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>B4D</groupId>
 	<artifactId>B4D</artifactId>
-	<version>${timestamp}</version>
+	<version>${version}</version>
 	<packaging>jar</packaging>
 	<name>B4D</name>
 	<description>Bot for Dofus</description>
@@ -151,7 +151,7 @@
 	</dependencies>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<timestamp>${maven.build.timestamp}</timestamp>
+		<version>${maven.build.timestamp}</version>
 		<maven.build.timestamp.format>yyyy.MM.dd</maven.build.timestamp.format>
 	</properties>
 </project>
