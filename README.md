@@ -13,8 +13,9 @@ This bot has been make by [@LucBerge](https://github.com/LucBerge) and is under 
 
 ## Useful links
 
-- [WIKI](https://github.com/LucBerge/B4D/wiki) : Everything you need to know about the bot.
-- [INSTALLATION](https://github.com/LucBerge/B4D/wiki/Install) : How to install the bot.
-- [JAVA DOC](https://lucberge.github.io/B4D/) : For developers.
-- [BUGS](https://github.com/LucBerge/B4D/issues) : For bug reports.
-- [CONTRIBUTION](https://github.com/LucBerge/B4D/wiki/Prerequisits) : You want to contribute ?
+  - [WIKI](https://github.com/LucBerge/B4D/wiki) : Everything you need to know about the bot.
+  - [INSTALLATION](https://github.com/LucBerge/B4D/wiki/Install) : How to install the bot.
+  - [JAVA DOC](https://lucberge.github.io/B4D/) : For developers.
+  - [BUGS](https://github.com/LucBerge/B4D/issues) : For bug reports.
+  - [CONTRIBUTION](https://github.com/LucBerge/B4D/wiki/Prerequisits) : You want to contribute ?
+  
