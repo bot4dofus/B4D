@@ -1,4 +1,5 @@
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/62c1170ef1534793a4bcc480f538d3b5)](https://app.codacy.com/gh/LucBerge/B4D?utm_source=github.com&utm_medium=referral&utm_content=LucBerge/B4D&utm_campaign=Badge_Grade)
 [![Join B4D on Discord!](https://img.shields.io/badge/Discord-Join%20B4D%20on%20Discord!-7289DA.svg?style=flat&logo=discord)](https://discord.gg/kNHsFcbUGp)
 ![Test](https://github.com/LucBerge/B4D/workflows/Test/badge.svg?branch=master)
 [![Coverage](https://codecov.io/gh/LucBerge/B4D/branch/master/graph/badge.svg?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D)
