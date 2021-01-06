@@ -25,7 +25,7 @@ import fr.B4D.program.ProgramOptions;
 import fr.B4D.socket.SocketListener;
 import fr.B4D.utils.os.Os;
 
-/** La classe {@code B4D} est la classe principale du bot.ok<br><br>
+/** La classe {@code B4D} est la classe principale du bot.<br><br>
  * Elle fournit les méthodes dont à besoin l'interface graphique pour fonctionner.
  */
 public final class B4D{
