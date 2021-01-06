@@ -1,0 +1,31 @@
+# This workflow will build the javadoc and deploy it to GitHub Pages
+
+name: Javadoc
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  Javadoc:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+        settings-path: ${{ github.workspace }} # location for the settings.xml file
+      
+    - name: Build Javadoc
+      run: mvn javadoc:javadoc
+  
+    - name: Deploy Javadoc
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
