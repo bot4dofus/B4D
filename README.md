@@ -6,7 +6,7 @@
 
 Branch | Workflow | Coverage | Quality | Licence | Javadoc |
 -------|----------|----------|---------|---------|---------|
-Master | ![Release](https://img.shields.io/github/workflow/status/LucBerge/B4D/Release/master?label=release) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/master?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) | [![Quality](https://img.shields.io/codacy/grade/c70a48f22c0c488195c6c39cfd7bcfa3/master)](https://app.codacy.com/gh/LucBerge/B4D/dashboard) | $ | $ |
+Master | ![Release](https://img.shields.io/github/workflow/status/LucBerge/B4D/Release/master?label=release) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/master?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) | [![Quality](https://img.shields.io/codacy/grade/c70a48f22c0c488195c6c39cfd7bcfa3/master)](https://app.codacy.com/gh/LucBerge/B4D/dashboard) | $ | [![Javadoc](https://img.shields.io/github/workflow/status/LucBerge/B4D/Javadoc/master?label=javadoc)](https://lucberge.github.io/B4D/) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/master?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) |
 Dev    | ![Test](https://img.shields.io/github/workflow/status/LucBerge/B4D/Test/master?label=test) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/dev?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) | [![Quality](https://img.shields.io/codacy/grade/c70a48f22c0c488195c6c39cfd7bcfa3/dev)](https://app.codacy.com/gh/LucBerge/B4D/dashboard) | $ |
 
 This bot has been make by [@LucBerge](https://github.com/LucBerge) and is under [MIT license](https://github.com/LucBerge/B4D/blob/master/LICENSE).
