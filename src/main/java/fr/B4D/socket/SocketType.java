@@ -35,7 +35,7 @@ public enum SocketType {
 	DD_ENCLOSE_OPEN_9D_SOCKET((byte) 0x5d, null),
 
 	/**
-	 * Socket representing an opened enclose.
+	 * Socket representing a move from a map to another.
 	 */
 	CHANGE_MAP_SOCKET((byte) 0x73, ChangeMapEventParser.class),
 
