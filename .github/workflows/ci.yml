@@ -6,8 +6,6 @@ name: Test
 on:
   push:
     branches: [dev]
-  pull_request:
-    branches: [dev]
 
 jobs:
   Test:
@@ -27,6 +25,9 @@ jobs:
     
     - name: Publish test report to Codecov
       uses: codecov/codecov-action@v1
-
-  #License scan
-  #Static code analysis
+      
+    - name: Publish test report to Codacy
+      uses: codacy/codacy-coverage-reporter-action@master
+      with:
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        coverage-reports: ./target/site/jacoco/jacoco.xml
