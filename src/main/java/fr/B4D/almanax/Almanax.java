@@ -184,7 +184,20 @@ public class Almanax {
 		try {
 			String stringDate = date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			String url = "http://www.krosmoz.com/" + this.language + "/almanax/" + stringDate + "?game=dofus";
-			Document doc = Jsoup.connect(url).get();
+			
+			Document doc = Jsoup.connect(url)
+					.header("Content-Type","application/x-www-form-urlencoded")
+			        .cookie("TALanguage", "ALL")
+			        .data("mode", "filterReviews")
+			        .data("filterRating", "")
+			        .data("filterSegment", "")
+			        .data("filterSeasons", "")
+			        .data("filterLang", "ALL")
+			        .referrer(url)         
+			        .header("X-Requested-With", "XMLHttpRequest")
+			        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6") 
+			        .get();
+			
 			Elements elements = doc.getElementsByClass("more-infos-content");
 			
 			if(elements.size() == 0)
