@@ -6,8 +6,8 @@
 
 Branch | Workflow | Coverage | Quality | Licence | Javadoc |
 -------|----------|----------|---------|---------|---------|
-Master | ![Release](https://img.shields.io/github/workflow/status/LucBerge/B4D/Release/master?label=release) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/master?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) | [![Quality](https://img.shields.io/codacy/grade/c70a48f22c0c488195c6c39cfd7bcfa3/master)](https://app.codacy.com/gh/LucBerge/B4D/dashboard) | $ | [![Javadoc](https://img.shields.io/github/workflow/status/LucBerge/B4D/Javadoc/master?label=javadoc)](https://lucberge.github.io/B4D/) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/master?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) |
-Dev    | ![Test](https://img.shields.io/github/workflow/status/LucBerge/B4D/Test/master?label=test) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/dev?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) | [![Quality](https://img.shields.io/codacy/grade/c70a48f22c0c488195c6c39cfd7bcfa3/dev)](https://app.codacy.com/gh/LucBerge/B4D/dashboard) | $ |
+Master | ![Release](https://img.shields.io/github/workflow/status/LucBerge/B4D/Release/master?label=release) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/master?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) | [![Quality](https://img.shields.io/codacy/grade/c70a48f22c0c488195c6c39cfd7bcfa3/master)](https://app.codacy.com/gh/LucBerge/B4D/dashboard) | [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B22575%2Fgithub.com%2FLucBerge%2FB4D.svg?type=shield)](https://app.fossa.com/projects/custom%2B22575%2Fgithub.com%2FLucBerge%2FB4D?ref=badge_shield) | [![Javadoc](https://img.shields.io/github/workflow/status/LucBerge/B4D/Javadoc/master?label=javadoc)](https://lucberge.github.io/B4D/) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/master?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) |
+Dev    | ![Test](https://img.shields.io/github/workflow/status/LucBerge/B4D/Test/master?label=test) | [![Coverage](https://img.shields.io/codecov/c/github/LucBerge/B4D/dev?token=lv2Q224e7E)](https://codecov.io/gh/LucBerge/B4D) | [![Quality](https://img.shields.io/codacy/grade/c70a48f22c0c488195c6c39cfd7bcfa3/dev)](https://app.codacy.com/gh/LucBerge/B4D/dashboard) | [![FOSSA Status](https://app.fossa.com/api/projects/custom%2B22575%2Fgithub.com%2FLucBerge%2FB4D.svg?type=shield)](https://app.fossa.com/projects/custom%2B22575%2Fgithub.com%2FLucBerge%2FB4D?ref=badge_shield) |
 
 ## Tell us why you are looking for a Dofus bot
 
@@ -20,9 +20,6 @@ Dev    | ![Test](https://img.shields.io/github/workflow/status/LucBerge/B4D/Test
 -   Transporting on long distances [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/transport)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/transport)
 -   Doing quests [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/quest)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/quest)
 
-
-This bot has been make by [@LucBerge](https://github.com/LucBerge) and is under [MIT license](https://github.com/LucBerge/B4D/blob/master/LICENSE).
-
 ## Useful links
 
 -   [WIKI](https://github.com/LucBerge/B4D/wiki) : Everything you need to know about the bot.
@@ -30,3 +27,5 @@ This bot has been make by [@LucBerge](https://github.com/LucBerge) and is under 
 -   [JAVA DOC](https://lucberge.github.io/B4D/) : For developers.
 -   [BUGS](https://github.com/LucBerge/B4D/issues) : For bug reports.
 -   [CONTRIBUTION](https://github.com/LucBerge/B4D/wiki/Prerequisits) : You want to contribute ?
+
+This bot has been made by [@LucBerge](https://github.com/LucBerge) and is under [MIT license](https://github.com/LucBerge/B4D/blob/master/LICENSE).
