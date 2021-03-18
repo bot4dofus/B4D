@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
@@ -90,6 +91,7 @@ public class JPanel_Personnage extends JPanel {
 		dataTable = new Vector<Vector<String>>();
 		Vector<String> colonnes = new Vector<String>(Arrays.asList(new String[] {"Nom de compte","Mot de passe","Serveur","Pseudo"}));
 		table = new JTable(dataTable, colonnes);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		TableColumn serverColumn = table.getColumnModel().getColumn(2);
 		serverColumn.setCellEditor(new DefaultCellEditor(comboBox_server));
 		table.getModel().addTableModelListener(new TableModelListener(){
