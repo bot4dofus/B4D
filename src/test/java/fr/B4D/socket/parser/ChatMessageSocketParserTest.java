@@ -8,8 +8,6 @@ import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.SocketType;
-import fr.B4D.socket.parser.ChatMessageSocketParser;
-import fr.B4D.socket.parser.SocketParser;
 
 @SuppressWarnings("javadoc")
 public class ChatMessageSocketParserTest {

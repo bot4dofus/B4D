@@ -16,8 +16,6 @@ import com.google.api.services.sheets.v4.model.Sheet;
 import com.google.api.services.sheets.v4.model.SheetProperties;
 import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
 
-import fr.B4D.google.GoogleSheet;
-
 // https://www.baeldung.com/google-sheets-java-client
 
 @SuppressWarnings("javadoc")

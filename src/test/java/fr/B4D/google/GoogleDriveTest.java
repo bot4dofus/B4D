@@ -11,8 +11,6 @@ import org.junit.Test;
 
 import com.google.api.services.drive.model.File;
 
-import fr.B4D.google.GoogleDrive;
-
 // https://o7planning.org/en/11889/manipulating-files-and-folders-on-google-drive-using-java
 
 @SuppressWarnings("javadoc")

@@ -3,8 +3,6 @@ package fr.B4D.socket;
 import org.junit.Assert;
 import org.junit.Test;
 
-import fr.B4D.socket.SocketUtils;
-
 @SuppressWarnings("javadoc")
 public class SocketUtilsTest {
 	
