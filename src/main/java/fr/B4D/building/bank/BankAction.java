@@ -5,6 +5,9 @@ import fr.B4D.program.StopProgramException;
 
 /**
  * The class {@code BankAction} represents an action to do on a bank.
+ * 
+ * @author Lucas
+ *
  */
 public abstract class BankAction {
 	

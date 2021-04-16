@@ -1,66 +1,67 @@
 package fr.B4D.interaction.chat;
 
-import java.awt.AWTException;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code Chat} représente le chat de dofus.<br><br>
- * Un chat est défini par une queue de messages, un filtre et une sub-routine.
+/**
+ * The {@code Chat} class represents the Dofus chat.<br><br>
+ * A chat is defined by message queue, a filter and a listener.
+ * 
+ * @author Lucas
+ *
  */
-public class Chat extends Thread{
-
-	  /***************/
-	 /** ATTRIBUTS **/
-	/***************/
+public class Chat{
 	
+	/**
+	 * Queue of messages in the chat.
+	 */
 	private ArrayBlockingQueue<Message> messages;
-	private ChatFilter filter;
-	private ChatListener chatListener;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
 	
-	/** Constructeur de la classe {@code Chat} avec un nombre de messages enregistrables de 100.
-	 * Cela est identique à {@code Chat(100)}.
+	/**
+	 * Filter of the chat. It is used to ignore useless messages.
+	 */
+	private ChatFilter filter;
+	
+	/**
+	 * Listener specifying what to do when a message, respecting the filter criteria, is received.
+	 */
+	private ChatListener chatListener;
+	
+	/**
+	 * Builder of the {@code Chat} class with a capacity of 100 messages.
+	 * This is the same as {@code Chat(100)}.
 	 */
 	public Chat() {
 		this(100);
 	}
 
-	/** Constructeur de la classe {@code Chat}.
-	 * @param capacity - Nombre maximum de message enregistrables.
+	/** Builder of the {@code Chat} class
+	 * @param capacity - Maximum number of messages saved in the queue.
 	 */
 	public Chat(int capacity) {
 		messages = new ArrayBlockingQueue<Message>(capacity);
 		filter = new ChatFilter();
 		chatListener = new ChatListener() {
-			public void treatMessage(Message message) {
+			public void messageReceived(Message message) {
 				//Do nothing by default
 			}
 		};
 	}
-
-	  /*************/
-	 /** SETTERS **/
-	/*************/
 	
-	/** Modifie la sub-routine de traitement des messages.
-	 * @param chatListener - Nouvelle sub-routine.
+	/**
+	 * Defines the listener.
+	 * @param chatListener - Listener specifying what to do when a message is received.
 	 */
 	public void setChatListener(ChatListener chatListener) {
 		this.chatListener = chatListener;
 	}
 	
-	  /************/
-	 /** FILTER **/
-	/************/
-	
-	/** Ajoute un filtre de pseudo. Seul les messages provenants de ce joueur seront traités.
-	 * @param pseudo - Pseudo du joueur. {@code null} pour retirer le filtre.
+	/**
+	 * Add pseudo filter. Only the messages coming from this player will be processed.
+	 * @param pseudo - Pseudo of the player, {@code null} to remove the old filter.
 	 */
 	public void addPseudoFilter(String pseudo) {
 		synchronized(filter) {
@@ -68,8 +69,9 @@ public class Chat extends Thread{
 		}
 	}
 
-	/** Ajoute un filtre de canal. Seul les messages de ce canal seront traités.
-	 * @param channel - Canal du message. {@code null} pour retirer le filtre.
+	/**
+	 * Add a channel filter. Only the messages on this channel will be processed.
+	 * @param channel - Channel of the message, {@code null} to remove the old filter.
 	 */
 	public void addChannelFilter(Channel channel) {		
 		synchronized(filter) {
@@ -77,8 +79,9 @@ public class Chat extends Thread{
 		}
 	}
 
-	/** Ajoute un filtre de texte. Seul les messages contenants une chaine de caractère spécifique seront traités.
-	 * @param regex - Expression régulière que doit contenir le message. {@code null} pour retirer le filtre.
+	/**
+	 * Add a regex filter. Only the messages containing the substring will be processed.
+	 * @param regex - Regex that the message must contain, {@code null} to remove the old filter.
 	 */
 	public void addTextFilter(String regex) {
 		synchronized(filter) {
@@ -86,12 +89,9 @@ public class Chat extends Thread{
 		}
 	}
 	
-	  /**********/
-	 /** QUEU **/
-	/**********/
-	
-	/** Ajoute un message à la queue du chat. Si celui-ci est plein, le plus vieux message sera supprimé.
-	 * @param message - Message à ajouter â la queu.
+	/**
+	 * Add a message in the queue. If the message doesn't respect the filter criteria, it will dot be added.
+	 * @param message - Message to add in the queue.
 	 */
 	public void addMessage(Message message) {
 		boolean pass;
@@ -108,52 +108,47 @@ public class Chat extends Thread{
 			}
 		}
 	}
-
-	  /**************/
-	 /** LISTENER **/
-	/**************/
 	
-	/** Traite un nombre infini de messages. Cela est identique à {@code read(-1)}.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws AWTException Si un problème d'interface survient.
+	/**
+	 * Process an infinite number of messages. This is the same as {@code read(-1)}.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
-	public void read() throws StopProgramException, CancelProgramException, AWTException {
+	public void read() throws StopProgramException, CancelProgramException {
 		read(-1);
 	}
 	
-	/** Traite un nombre fini de messages.
-	 * @param countTo - Nombre de message à traiter.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Process a finite number of messages.
+	 * @param countTo - Number of messages to process.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void read(int countTo) throws StopProgramException, CancelProgramException {		
 		int count = 0;
 		Message message;
 		while(count != countTo) {
 			message = waitForMessage(0);
-			chatListener.treatMessage(message);
+			chatListener.messageReceived(message);
 			count++;
 		}
 	}
 	
-	  /**********************/
-	 /** WAIT FOR MESSAGE **/
-	/**********************/
-	
-	/** Attend un message pour une durée infinie. Cela est identique à {@code waitForMessage(0)}.
-	 * @return Plus vieux message correspondant au filtre.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Wait for a message with no timeout. This is the same as {@code waitForMessage(0)}.
+	 * @return Oldest messages respecting the filter criteria.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public Message waitForMessage() throws StopProgramException, CancelProgramException {
 		return waitForMessage(0);
 	}
-	/** Attend un message pour une durée finie.
-	 * @param timeout - Durée d'attente maximale en millisecondes.
-	 * @return Plus vieux message correspondant au filtre et {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Wait for a message with a timeout.
+	 * @param timeout - Timeout in ms.
+	 * @return Oldest messages respecting the filter criteria, {@code null} if timeout.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public Message waitForMessage(long timeout) throws StopProgramException, CancelProgramException {		
 		Message message = null;
@@ -173,12 +168,9 @@ public class Chat extends Thread{
 
 		return message;
 	}
-
-	  /***********/
-	 /** OTHER **/
-	/***********/
 	
-	/** Efface les messages contenues dans la queue.
+	/**
+	 * Clears the queue.
 	 */
 	public void clear() {
 		synchronized(messages){

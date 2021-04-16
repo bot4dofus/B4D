@@ -7,8 +7,12 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Status} représente un status de jeu.<br><br>
- * Un status est défini par un nom et une position relative au menu status.
+/**
+ * The {@code Status} represents a status in the game.<br><br>
+ * A status is defined by a name and a relative location in the menu.
+ * 
+ * @author Lucas
+ *
  */
 public class Status {
 	
@@ -32,54 +36,53 @@ public class Status {
 	 */
 	public final static Status SOLO = new Status("Solo", new PointF(0.0131, -0.1008 + 4*0.0216));
 	
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
-	
+	/**
+	 * Location of the status menu button.
+	 */
 	private static Point statusMenuPosition;
 	
+
+	/**
+	 * Sets the status button location.
+	 * @param statusMenuPosition - Location of the status button in simple coordinates.
+	 */
+	public static void setStatusMenuPosition(Point statusMenuPosition) {
+		Status.statusMenuPosition = statusMenuPosition;
+	}
+	
+	/**
+	 * Name of the status.
+	 */
 	private String name;
+	
+	/**
+	 * Relative location of the status in the menu.
+	 */
 	private PointF relativPosition;
 	
-	  /*************/
-	 /** BUILDER **/
-	/*************/
-	
-	/** Constructeur de la classe {@code Message}. 
-	 * @param name - Nom du status.
-	 * @param relativPosition - Position relative du status par rapport au menu status.
+	/** 
+	 * Constructor of the {@code Status} class.
+	 * @param name - Name of the status.
+	 * @param relativPosition - Location of the status in relative to the status button in relative coordinates.
 	 */
 	public Status(String name, PointF relativPosition) {
 		this.name = name;
 		this.relativPosition = relativPosition;
 	}
 	
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/ 
-	
-	/** Retourne le nom du status.
-	 * @return Nom du status.
+	/**
+	 * Returns the name of the status.
+	 * @return Name of the status.
 	 */
 	public String getName() {
 		return this.name;
 	}
 	
-	/** Modifi la position du menu des status.
-	 * @param statusMenuPosition - Nouvelle position du menu des status.
-	 */
-	public static void setStatusMenuPosition(Point statusMenuPosition) {
-		Status.statusMenuPosition = statusMenuPosition;
-	}
-	
-	  /************/
-	 /** STATIC **/
-	/************/
-	
-	/** Active le status pour le joueur en cours.
-	 * @return {@code true} si le status a été activé, {@code false} sinon.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Defines the status for the current payer.
+	 * @return {@code true} if the status is set, {@code false} otherwise.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public boolean setStatus() throws StopProgramException, CancelProgramException {
 		if(statusMenuPosition != null) {
@@ -92,10 +95,6 @@ public class Status {
 		else
 			return false;
 	}
-	
-	  /***************/
-	 /** TO STRING **/
-	/***************/
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

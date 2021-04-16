@@ -7,18 +7,19 @@ import fr.B4D.bot.Person;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** The class {@code Building} represents a building on the map.<br><br>
+/**
+ * The class {@code Building} represents a building on the map.<br><br>
  * A building has a position on the map.
+ * 
+ * @author Lucas
+ *
  */
 public abstract class Building{
 
 	private Point position;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
 	
-	/** Builder of the {@code Building} class.
+	/**
+	 * Builder of the {@code Building} class.
 	 * @param position - Position on the map. Cannot be {@code null}.
 	 */
 	public Building(Point position) {
@@ -27,23 +28,17 @@ public abstract class Building{
 		
 		this.position = position;
 	}
-
-	  /***************/
-	 /** GET & SET **/
-	/***************/
 	
-	/** Returns the position of the building on the map.
+	/**
+	 * Returns the position of the building on the map.
 	 * @return Position on the map.
 	 */
 	public Point getPosition() {
 		return position;
 	}
-
-	  /********************/
-	 /** PUBLIC METHODS **/
-	/********************/
 	
-	/** Go to the building with a specific person. 
+	/**
+	 * Go to the building with a specific person. 
 	 * @param person Person which go to the building.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.

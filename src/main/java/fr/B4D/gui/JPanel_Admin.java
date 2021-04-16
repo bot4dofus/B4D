@@ -21,6 +21,7 @@ import fr.B4D.utils.PointF;
 
 /**
  * The class {@code JPanel_Admin} is a GUI used by admins and users for test purposes, program recording and bug report.
+ * 
  * @author Lucas
  *
  */

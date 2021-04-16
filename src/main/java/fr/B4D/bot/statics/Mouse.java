@@ -19,54 +19,61 @@ import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Mouse} permet d'accéder à toutes les méthodes liés à la souris.
+/**
+ * The {@code Mouse} class is used to access to the mouse methods.
+ * 
+ * @author Lucas
+ *
  */
 public final class Mouse {
 
+	/**
+	 * Configuration of the screen.
+	 */
 	private Configuration configuration;
+	
+	/**
+	 * Robot performing a mouse click.
+	 */
 	private Robot robot;
-    
-	/*************/
-	/** BUILDER **/
-	/*************/
 
-	/** Constructeur de la classe {@code Mouse}. 
-     * @param configuration - Configuration de l'écran de jeu.
-	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation de la souris
+	/**
+	 * Constructor of the {@code Mouse} class.
+     * @param configuration - Configuration of the game.
+	 * @throws AWTException if the platform configuration does not allow low-level input control.
      */
     public Mouse(Configuration configuration) throws AWTException {
     	this.configuration = configuration;
 		this.robot = new Robot();
     }
-    
-	/***************/
-	/** GET POINT **/
-	/***************/
 
-	/** Permet de récupérer la position d'un élément en coordonnées simples.
-	 * @param text - Texte affiché.
-	 * @param mouseAdapter - Action à réaliser l'or de l'appui.
+	/**
+	 * Displays a window to retrieve the coordinates of an element on screen in simple coordinates.
+	 * @param text - Text to display.
+	 * @param mouseAdapter - Action to perform on click.
 	 */
 	public void getPoint(String text, MouseAdapter mouseAdapter) {
 		JFrame_GetPoint window = new JFrame_GetPoint(text, mouseAdapter);
 		window.setVisible(true);
 	}
 	
-	/** Permet de récupérer la position d'un élément en coordonnées simples.
-	 * @param text - Texte affichée.
-	 * @param image - Image affichée.
-	 * @param mouseAdapter - Action à réaliser l'or de l'appui.
+	/**
+	 * Displays a window to retrieve the coordinates of an element on screen in simple coordinates.
+	 * @param text - Text to display
+	 * @param image - Image to display.
+	 * @param mouseAdapter - Action to perform on click.
 	 */
 	public void getPoint(String text, ImageIcon image, MouseAdapter mouseAdapter) {
 		JFrame_GetPointImage window = new JFrame_GetPointImage(text, image, mouseAdapter);
 		window.setVisible(true);
 	}
-	
-	/** Permet de récupérer la position de deux éléments en coordonnées simples.
-	 * @param text1 - Texte affiché pour le premier appui.
-	 * @param mouseAdapter1 - Action à réaliser l'or du premier appui.
-	 * @param text2 - Texte affiché pour le second appui.
-	 * @param mouseAdapter2 - Action à réaliser l'or du second appui.
+
+	/**
+	 * Displays a window to retrieve two coordinates of elements on screen in simple coordinates.
+	 * @param text1 - Text to display for the first click.
+	 * @param mouseAdapter1 - Action to perform on first click.
+	 * @param text2 - Text to display for the second click.
+	 * @param mouseAdapter2 - Action to perform on second click.
 	 */
 	public void getPoints(String text1, MouseAdapter mouseAdapter1, String text2, MouseAdapter mouseAdapter2) {
 		JFrame_GetPoint window1 = new JFrame_GetPoint(text1, mouseAdapter1);
@@ -80,13 +87,14 @@ public final class Mouse {
 		window1.setVisible(true);
 	}
 	
-	/** Permet de récupérer la position de deux éléments en coordonnées simples.
-	 * @param text1 - Texte affiché pour le premier appui
-	 * @param image1 - Image affichée pour le premier appui.
-	 * @param mouseAdapter1 - Action à réaliser l'or du premier appui.
-	 * @param text2 - Texte affiché pour le second appui.
-	 * @param image2 - Image affichée pour le second appui.
-	 * @param mouseAdapter2 - Action à réaliser l'or du second appui.
+	/**
+	 * Displays a window to retrieve two coordinates of elements on screen in simple coordinates.
+	 * @param text1 - Text to display for the first click.
+	 * @param image1 - Image to display for the second click.
+	 * @param mouseAdapter1 - Action to perform on first click.
+	 * @param text2 - Text to display for the second click.
+	 * @param image2 - Image to display for the second click.
+	 * @param mouseAdapter2 - Action to perform on second click.
 	 */
 	public void getPoints(String text1, ImageIcon image1, MouseAdapter mouseAdapter1, String text2, ImageIcon image2, MouseAdapter mouseAdapter2) {
 		JFrame_GetPointImage window1 = new JFrame_GetPointImage(text1, image1, mouseAdapter1);
@@ -100,81 +108,79 @@ public final class Mouse {
 		window1.setVisible(true);
 	}
 	
-	  /************/
-	 /** PLACER **/
-	/************/
-	
-	/** Permet de placer la souris à une certaine position.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @param millis - Temps d'attente après positionnement.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Places the cursor at a given location.
+	 * @param position - Location of the cursor in simple coordinates.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void place(Point position, int millis) throws StopProgramException, CancelProgramException {
 		robot.mouseMove((int)position.getX(),(int)position.getY());
 		B4D.wait.sleep(millis);
 	}
 	
-	/** Permet de placer la souris à une certaine position avec un temps d'attente par défaut de 0ms.
-	 * Cela est identique à {@code place(position, 0)}.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Places the cursor at a given location and wait for 0 ms after it.
+	 * This is the same as {@code place(position, 0)}.
+	 * @param position - Location of the cursor in simple coordinates.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void place(Point position) throws StopProgramException, CancelProgramException {
 		place(position, 0);
 	}
-	
-	/** Permet de placer la souris à une certaine position.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @param millis - Temps d'attente après positionnement.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Places the cursor at a given location.
+	 * @param position - Location of the cursor in relative coordinates.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void place(PointF position, int millis) throws StopProgramException, CancelProgramException {
 		place(B4D.converter.toPoint(position), millis);
 	}
-	
-	/** Permet de placer la souris à une certaine position avec un temps d'attente par défaut de 0ms.
-	 * Cela est identique à {@code place(position, 0)}.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+
+	/**
+	 * Places the cursor at a given location and wait for 0 ms after it.
+	 * This is the same as {@code place(position, 0)}.
+	 * @param position - Location of the cursor in relative coordinates.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void place(PointF position) throws StopProgramException, CancelProgramException {
 		place(B4D.converter.toPoint(position), 0);
 	}
 
-	/** Permet de placer la souris à une certaine position.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @param millis - Temps d'attente après positionnement.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Places the cursor at a given location and wait for 0 ms after it.
+	 * @param position - Location of the cursor in draughtboard coordinates.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void place(PointD position, int millis) throws StopProgramException, CancelProgramException {
 		place(B4D.converter.toPoint(position), millis);
 	}
-	
-	/** Permet de placer la souris à une certaine position avec un temps d'attente par défaut de 0ms.
-	 * Cela est identique à {@code place(position, 0)}.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+
+	/**
+	 * Places the cursor at a given location and wait for 0 ms after it.
+	 * This is the same as {@code place(position, 0)}.
+	 * @param position - Location of the cursor in draughtboard coordinates.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void place(PointD position) throws StopProgramException, CancelProgramException {
 		place(B4D.converter.toPoint(position), 0);
 	}
-	
-	  /******************/
-	 /** CLIQUE DROIT **/
-	/******************/
 
-	/** Permet de simuler un clique droit.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a right click.
+	 * @param position - Location of the mouse on the screen in simple coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void rightClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		robot.mouseMove((int)position.getX(),(int)position.getY());
@@ -189,71 +195,73 @@ public final class Mouse {
 		B4D.wait.sleep(millis);		
 	}
 	
-	/** Permet de simuler un clique droit avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code rightClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a right click and wait for 1000 ms after the click.
+	 * This is the same as {@code rightClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in simple coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void rightClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
 		rightClick(position, maj, 1000);
 	}
 	
-	/** Permet de simuler un clique droit.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a right click.
+	 * @param position - Location of the mouse on the screen in relative coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void rightClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
-	/** Permet de simuler un clique droit avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code rightClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a right click and wait for 1000 ms after the click.
+	 * This is the same as {@code rightClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in relative coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void rightClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
-	/** Permet de simuler un clique droit.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a right click.
+	 * @param position - Location of the mouse on the screen in draughtboard coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void rightClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
-	/** Permet de simuler un clique droit avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code rightClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a right click and wait for 1000 ms after the click.
+	 * This is the same as {@code rightClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in draughtboard coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void rightClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
 		rightClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
-	  /*******************/
-	 /** CLIQUE GAUCHE **/
-	/*******************/
-	
-	/** Permet de simuler un clique gauche.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click.
+	 * @param position - Location of the mouse on the screen in simple coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void leftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException {
 		robot.mouseMove((int)position.getX(),(int)position.getY());
@@ -268,142 +276,146 @@ public final class Mouse {
 		B4D.wait.sleep(millis);
 	}
 	
-	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code leftClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click and wait for 1000 ms after the click.
+	 * This is the same as {@code leftClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in simple coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void leftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
 		leftClick(position, maj, 1000);
 	}
 	
-	/** Permet de simuler un clique gauche.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click.
+	 * @param position - Location of the mouse on the screen in relative coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void leftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
-	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code leftClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click and wait for 1000 ms after the click.
+	 * This is the same as {@code leftClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in relative coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void leftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
-	/** Permet de simuler un clique gauche.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click.
+	 * @param position - Location of the mouse on the screen in draughtboard coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void leftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
-	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code leftClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click and wait for 1000 ms after the click.
+	 * This is the same as {@code leftClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in draughtboard coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void leftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
 		leftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
-	  /**************************/
-	 /** DOUBLE CLIQUE GAUCHE **/
-	/**************************/
-	
-	/** Permet de simuler un double clique gauche.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a double left click.
+	 * @param position - Location of the mouse on the screen in simple coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void doubleLeftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException {
 		leftClick(position, maj, 0);
 		leftClick(position, maj, millis);
 	}
 	
-	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code doubleLeftClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click and wait for 1000 ms after the click.
+	 * This is the same as {@code doubleLeftClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in simple coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void doubleLeftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(position, maj, 1000);
 	}
 	
-	/** Permet de simuler un double clique gauche.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a double left click.
+	 * @param position - Location of the mouse on the screen in relative coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void doubleLeftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
-	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code doubleLeftClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click and wait for 1000 ms after the click.
+	 * This is the same as {@code doubleLeftClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in relative coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void doubleLeftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
-	/** Permet de simuler un double clique gauche.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a double left click.
+	 * @param position - Location of the mouse on the screen in draughtboard coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void doubleLeftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
-	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code doubleLeftClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click and wait for 1000 ms after the click.
+	 * This is the same as {@code doubleLeftClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in draughtboard coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void doubleLeftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
 		doubleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
-	  /**************************/
-	 /** TRIPLE CLIQUE GAUCHE **/
-	/**************************/
-	
-	/** Permet de simuler un triple clique gauche.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a triple left click.
+	 * @param position - Location of the mouse on the screen in simple coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void tripleLeftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException {
 		leftClick(position, maj, 0);
@@ -411,71 +423,73 @@ public final class Mouse {
 		leftClick(position, maj, millis);
 	}
 	
-	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code tripleLeftClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées simples.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click and wait for 1000 ms after the click.
+	 * This is the same as {@code tripleLeftClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in simple coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void tripleLeftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(position, maj, 1000);
 	}
 	
-	/** Permet de simuler un triple clique gauche.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a triple left click.
+	 * @param position - Location of the mouse on the screen in relative coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void tripleLeftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
-	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code tripleLeftClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées relatives.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a left click and wait for 1000 ms after the click.
+	 * This is the same as {@code tripleLeftClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in relative coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void tripleLeftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
-	/** Permet de simuler un triple clique gauche.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a triple left click.
+	 * @param position - Location of the mouse on the screen in draughtboard coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void tripleLeftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
-	/** Permet de simuler un clique gauche avec un temps d'attente par défaut de 1 secondes.
-	 * Cela est identique à {@code tripleLeftClick(position, 1000)}.
-	 * @param position - Position de la souris en coordonnées du damier de dofus.
-	 * @param maj - {@code true} si Shift (Maj) doit être enfoncé en même temps. Cela peut être utiliser pour empiler des actions.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a triple left click and wait for 1000 ms after the click.
+	 * This is the same as {@code tripleLeftClick(position, maj, 1000)}.
+	 * @param position - Location of the mouse on the screen in draughtboard coordinates.
+	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void tripleLeftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
 		tripleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
-
-	  /*********************/
-	 /** GLISSER DEPOSER **/
-	/*********************/
 	
-	/** Permet de simuler un glisser/déposer.
-	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées simples.
-	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées simples.
-	 * @param millis - Temps d'attente entre l'appui et le relarchement et après le relachement.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a drag and drop.
+	 * @param pressedPosition - Location of the mouse on press in simple coordinates.
+	 * @param releasedPosition - Location of the mouse on release in simple coordinates.
+	 * @param millis - Time between the press and release in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void dragDrop(Point pressedPosition, Point releasedPosition, int millis) throws StopProgramException, CancelProgramException {
 		robot.mouseMove((int)pressedPosition.getX(),(int)pressedPosition.getY());
@@ -489,75 +503,78 @@ public final class Mouse {
 		B4D.wait.sleep(millis);
 	}
 
-	/** Permet de simuler un glisser/déposer avec un temps d'attente par défaut de 1 secondes.
-	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées simples.
-	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées simples.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a drag and drop and wait for 1000 ms between the press and release.
+	 * @param pressedPosition - Location of the mouse on press in simple coordinates.
+	 * @param releasedPosition - Location of the mouse on release in simple coordinates.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void dragDrop(Point pressedPosition, Point releasedPosition) throws StopProgramException, CancelProgramException{
 		dragDrop(pressedPosition, releasedPosition, 1000);
 	}
 
-	/** Permet de simuler un glisser/déposer.
-	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées relatives.
-	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées relatives.
-	 * @param millis - Temps d'attente entre l'appui et le relarchement et après le relachement.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a drag and drop.
+	 * @param pressedPosition - Location of the mouse on press in relative coordinates.
+	 * @param releasedPosition - Location of the mouse on release in relative coordinates.
+	 * @param millis - Time between the press and release in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void dragDrop(PointF pressedPosition, PointF releasedPosition, int millis) throws StopProgramException, CancelProgramException{
 		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), millis);
 	}
 
-	/** Permet de simuler un glisser/déposer avec un temps d'attente par défaut de 1 secondes.
-	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées relatives.
-	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées relatives.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a drag and drop and wait for 1000 ms between the press and release.
+	 * @param pressedPosition - Location of the mouse on press in relative coordinates.
+	 * @param releasedPosition - Location of the mouse on release in relative coordinates.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void dragDrop(PointF pressedPosition, PointF releasedPosition) throws StopProgramException, CancelProgramException{
 		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), 1000);
 	}
 
-	/** Permet de simuler un glisser/déposer.
-	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées du damier de dofus.
-	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées du damier de dofus.
-	 * @param millis - Temps d'attente entre l'appui et le relarchement et après le relachement.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a drag and drop.
+	 * @param pressedPosition - Location of the mouse on press in draughtboard coordinates.
+	 * @param releasedPosition - Location of the mouse on release in draughtboard coordinates.
+	 * @param millis - Time between the press and release in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void dragDrop(PointD pressedPosition, PointD releasedPosition, int millis) throws StopProgramException, CancelProgramException{
 		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), millis);
 	}
 
-	/** Permet de simuler un glisser/déposer avec un temps d'attente par défaut de 1 secondes.
-	 * @param pressedPosition - Position de la souris lors de l'appui en coordonnées du damier de dofus.
-	 * @param releasedPosition - Position de la souris lors du relachement en coordonnées du damier de dofus.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a drag and drop and wait for 1000 ms between the press and release.
+	 * @param pressedPosition - Location of the mouse on press in draughtboard coordinates.
+	 * @param releasedPosition - Location of the mouse on release in draughtboard coordinates.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void dragDrop(PointD pressedPosition, PointD releasedPosition) throws StopProgramException, CancelProgramException{
 		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), 1000);
 	}
 	
-	  /**********/
-	 /** CHAT **/
-	/**********/
-	
-	/** Permet de cliquer dans la barre de chat.
-	 * @param millis - Temps d'attente après clique.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Performs a click in the chat bar.
+	 * @param millis - Time to wait after the click in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void chatClick(int millis) throws StopProgramException, CancelProgramException{
 		leftClick(configuration.getChatBar(), false, millis);
 	}
 	
-	/** Permet de cliquer dans la barre de chat avec un temps d'attente par défaut de 500 millisecondes.
-	 * Cela est identique à {@code chatClick(500)}.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Performs a click in the chat bar and wait for 500 ms after the click.
+	 * This is the same as {@code chatClick(500)}.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void chatClick() throws StopProgramException, CancelProgramException{
 		chatClick(500);

@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * The {@code Sidekick} interface used to manipulate items of type Sidekick.
+ * 
  * @author Lucas
  */
 public interface Sidekick extends ItemInterface{

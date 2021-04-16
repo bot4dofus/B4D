@@ -5,7 +5,9 @@ import java.util.Map;
 
 /**
  * The {@code Weapon} interface used to manipulate items of type Weapon.
+ * 
  * @author Lucas
+ * 
  */
 public interface Weapon extends ItemInterface{
 

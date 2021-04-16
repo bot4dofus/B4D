@@ -6,59 +6,46 @@ import java.util.List;
 
 import info.debatty.java.stringsimilarity.Levenshtein;
 
-/** La classe {@code ClosestString} permet de déduire la chaine de caractère la plus proche d'une autre.<br><br>
+/**
+ * The {@code ClosestString} class is used to find the closest string from an other.
+ * 
+ * @author Lucas
+ *
  */
 public class ClosestString {
 	
+	/**
+	 * List of accepted strings.
+	 */
 	private List<String> words;
 	
-	/** Constructeur de la classe {@code ClosestString}. 
+	/**
+	 * Constructor of the {@code ClosestString} with no words. 
 	 */
 	public ClosestString() {
 		this.words = new ArrayList<String>();
 	}
 	
-	/** Constructeur de la classe {@code ClosestString}. 
-	 * @param words - Mots possibles.
+	/**
+	 * Constructor of the {@code ClosestString}. 
+	 * @param words - Possible words.
 	 */
 	public ClosestString(String...words) {
 		this(Arrays.asList(words));
 	}
-	
-	/** Constructeur de la classe {@code ClosestString}. 
-	 * @param words - Mots possibles.
+
+	/**
+	 * Constructor of the {@code ClosestString}. 
+	 * @param words - Possible words.
 	 */
 	public ClosestString(List<String> words) {
 		this.words = words;
 	}
 	
-	/** Permet d'ajouter de nouveaux mots.
-	 * @param matchs - Nouveaux mots.
-	 */
-	public void addAll(String...matchs) {
-		for(int i=0; i<matchs.length; i++)
-			add(matchs[i]);
-	}
-	
-	/** Permet d'ajouter de nouveaux mots.
-	 * @param matchs - Nouveaux mots.
-	 */
-	public void addAll(List<String>matchs) {
-		for(String match:matchs)
-			add(match);
-	}
-	
-	/** Permet d'ajouter un nouveau mot.
-	 * @param match - Nouveau mot.
-	 */
-	public void add(String match) {
-		if(!words.contains(match))
-			words.add(match);
-	}
-	
-	/** Permet de calculer le mot le plus proche de celui passé en paramètre.
-	 * @param word - Mot à comparer.
-	 * @return Mot existant le plus proche.
+	/**
+	 * Returns the closest word from the one passed in argument.
+	 * @param word - Word to compare.
+	 * @return Closest existing word.
 	 */
 	public String getClosest(String word) {
 		Levenshtein l = new Levenshtein();

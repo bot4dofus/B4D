@@ -2,27 +2,32 @@ package fr.B4D.utils;
 
 import java.io.Serializable;
 
-/** La classe {@code PointF} représente un point en coordonnée relative.<br><br>
- * 
+/**
+ * The {@code PointF} class represents a point in relative coordinates.
+ * <br><br>
  *	&nbsp;_______<br>
  *	|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br>
  *	|<br>
  *	|&nbsp;&nbsp;1<br><br>
+ * 
+ * @author Lucas
  *
  */
 public class PointF extends java.awt.geom.Point2D.Double implements Serializable{
 
 	private static final long serialVersionUID = -8987300386100923141L;
 	
-	/** Constructeur de la classe {@code PointF} en (0, 0).
+	/**
+	 * Constructor of the {@code PointF} class in (0, 0).
      */
 	public PointF() {
 		super();
 	}
-	
-	/** Constructeur de la classe {@code PointF} en (x, y)
-	 * @param x - Coordonnée x du point.
-	 * @param y - Coordonnée y du point.
+
+	/**
+	 * Constructor of the {@code PointF} class in (x, y).
+	 * @param x - X coordinate.
+	 * @param y - Y coordinate.
 	 */
 	public PointF(double x, double y) {
 		super(x,y);

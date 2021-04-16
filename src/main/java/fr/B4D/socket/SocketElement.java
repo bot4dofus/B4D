@@ -9,6 +9,7 @@ import fr.B4D.bot.B4DException;
 
 /**
  * The {@code SocketElement} class represent an element in a socket.
+ * 
  * @author Lucas
  *
  */

@@ -2,6 +2,9 @@ package fr.B4D.farming;
 
 /**
  * The {@code Profession} enumeration reference all the professions.
+ * 
+ * @author Lucas
+ *
  */
 public enum Profession {
 	/**

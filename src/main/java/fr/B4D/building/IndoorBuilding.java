@@ -11,21 +11,22 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
-/** The class {@code IndoorBuilding} represents a building on the map which is inside.<br><br>
+/**
+ * The class {@code IndoorBuilding} represents a building on the map which is inside.<br><br>
  * This class extends {@code Building}.
  * An indoor building has a list of points to get into and a list of points to get out.
+ * 
+ * @author Lucas
+ *
  */
 public abstract class IndoorBuilding extends Building{
 
 	private Boolean entered;
 	private List<PointF> inPoints;
 	private List<PointF> outPoints;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
 	
-	/** Builder of the {@code IndoorBuilding} class.
+	/**
+	 * Builder of the {@code IndoorBuilding} class.
 	 * @param position - Position on the map. Cannot be {@code null}.
 	 * @param inPoints - List of points to get into the building.
 	 * @param outPoints - List of points to get out of the building.
@@ -42,30 +43,25 @@ public abstract class IndoorBuilding extends Building{
 		this.outPoints = outPoints;
 		this.entered = Boolean.FALSE;
 	}
-
-	  /***************/
-	 /** GET & SET **/
-	/***************/
 	
-	/** Returns the points to get into the building.
+	/**
+	 * Returns the points to get into the building.
 	 * @return List of points to get into the building.
 	 */
 	public List<PointF> getInPoints() {
 		return inPoints;
 	}
 
-	/** Returns the points to get out of the building.
+	/**
+	 * Returns the points to get out of the building.
 	 * @return List of points to get out of the building.
 	 */
 	public List<PointF> getOutPoints() {
 		return outPoints;
 	}
-	
-	  /********************/
-	 /** PUBLIC METHODS **/
-	/********************/
 
-	/** Enters the building if not entered yet.
+	/**
+	 * Enters the building if not entered yet.
 	 * @param person Person which enter the building.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
@@ -81,7 +77,8 @@ public abstract class IndoorBuilding extends Building{
 		this.entered = Boolean.TRUE;
 	}
 	
-	/** Exits the building if the player has entered.
+	/**
+	 * Exits the building if the player has entered.
 	 * @param person Person which enter the building.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.

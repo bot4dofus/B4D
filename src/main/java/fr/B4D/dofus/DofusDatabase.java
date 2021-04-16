@@ -38,10 +38,6 @@ import fr.B4D.dofus.items.Weapon;
  *
  */
 public class DofusDatabase {
-
-	  /***************/
-	 /** CONSTANTS **/
-	/***************/
 	
 	private final static String ITEM_REGEX = "https://www.dofus.com/(fr|en|de|es|it|pt)/mmorpg/(encyclopedie|encyclopedia|leitfaden|enciclopedia)/%s/([0-9]+)-([a-z-]+)";
 	
@@ -57,17 +53,9 @@ public class DofusDatabase {
 	private final static String SIDEKICK_REGEX = String.format(ITEM_REGEX,"(compagnons|sidekicks|begleiter|companeros|compagni|companheiros)");
 	private final static String IDOL_REGEX = String.format(ITEM_REGEX,"(idoles|idols|idole|idolos|idoli)");
 	private final static String HARNESS_REGEX = String.format(ITEM_REGEX,"(harnachements|harnesses|zaumzeug|arreos|bardature|arreios)");
-
-	  /***************/
-	 /** ATTRIBUTS **/
-	/***************/
 	
 	private String databaseFile;
 	private boolean isResource;
-	
-	  /*************/
-	 /** BUILDER **/
-	/*************/
 	
 	/**
 	 * Constructs a {@code DofusDatabase} from an external database file.
@@ -86,10 +74,6 @@ public class DofusDatabase {
 		this.databaseFile = databaseFile;
 		this.isResource = isResource;
 	}
-	
-	  /*************/
-	 /** STATICS **/
-	/*************/
 	
 	private static boolean matches(String REGEX, String url) {
 		Pattern pattern = Pattern.compile(REGEX);

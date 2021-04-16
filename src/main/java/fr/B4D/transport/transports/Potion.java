@@ -11,11 +11,14 @@ import fr.B4D.utils.PointF;
 
 /** La classe {@code Potion} représente une potion de transport.<br><br>
  * Cette classe étend la classe {@code Transport}.
+ * 
+ * @author Lucas
+ *
  */
 public class Potion extends Transport implements Serializable{
 	
 	private static final long serialVersionUID = -4986470216030169585L;
-
+	
 	  /******************/
 	 /** CONSTRUCTEUR **/
 	/******************/

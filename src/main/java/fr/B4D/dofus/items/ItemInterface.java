@@ -2,6 +2,9 @@ package fr.B4D.dofus.items;
 
 /**
  * Define the accessible methods for an item.
+ * 
+ * @author Lucas
+ *
  */
 public interface ItemInterface {
 	

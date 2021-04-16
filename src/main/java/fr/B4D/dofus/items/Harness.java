@@ -4,6 +4,9 @@ import java.util.Map;
 
 /**
  * The {@code Harness} interface used to manipulate items of type Harness.
+ * 
+ * @author Lucas
+ *
  */
 public interface Harness extends ItemInterface{
 

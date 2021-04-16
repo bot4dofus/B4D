@@ -1,6 +1,5 @@
 package fr.B4D.interaction.chat;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
@@ -16,17 +15,17 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Channel} représente un canal de diffusion du chat.<br><br>
- * Un canal est défini par un nom, un préfix et un point d'activation.
+/**
+ * The {@code Channel} class represents a channel in the chat.<br><br>
+ * A channel is defined by a name, a prefix and an activation point.
+ * 
+ * @author Lucas
+ *
  */
 public class Channel implements Serializable{
 	
 	private static final long serialVersionUID = 4872542387501307482L;
 	private final static double spaceBetweenChannels = 0.0216;
-	
-	  /****************/
-	 /** COLLECTION **/
-	/****************/
 	
 	/**
 	 * General channel.
@@ -93,134 +92,15 @@ public class Channel implements Serializable{
 	 */
 	public final static Channel COMMUNITY = new Channel("Community", "/c", new PointF(0.024, -0.266 + 12*spaceBetweenChannels));
 	
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
-	
+	/**
+	 * Location of the chat menu in simple coordinates.
+	 */
 	private static Point chatMenuPosition;
 	
-	private String name;
-	private String prefix;
-	private PointF relativCheckPosition;
-	
-	  /*************/
-	 /** BUILDER **/
-	/*************/
-	
-	/** Constructeur de la classe {@code Channel}.
-	 * @param name - Nom de la classe
-	 * @param prefix - Préfix de la classe
-	 * @param relativCheckPosition - Point relatif au menu
-	 */
-	public Channel(String name, String prefix, PointF relativCheckPosition) {
-		this.name = name;
-		this.prefix = prefix;
-		this.relativCheckPosition = relativCheckPosition;
-	}
-	
-	  /*************/
-	 /** GETTERS **/
-	/*************/
-	
-	/** Modifi la position du menu du chat.
-	 * @param chatMenuPosition - Nouvelle position du menu du chat.
-	 */
-	public static void setChatMenuPosition(Point chatMenuPosition) {
-		Channel.chatMenuPosition = chatMenuPosition;
-	}
-	
-	/** Retourne le nom du canal.
-	 * @return Nom du canal.
-	 */
-	public String getName() {
-		return this.name;
-	}
-	
-	/** Retourne le préfix du canal.
-	 * @return Préfixe du canal.
-	 */
-	public String getPrefix() {
-		return this.prefix;
-	}
-	
-	  /*************/
-	 /** PRIVATE **/
-	/*************/
 
-	/** Retourne la position de la coche du canal.
-	 * @param server - Server courant.
-	 * @param arrowPosition - Position du menu.
-	 * @return position relative de la coche.
-	 */
-	private PointF getChekPosition(Server server, PointF arrowPosition) {
-		if(server.isInternationnal())
-			return new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);
-		else
-			return new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y + spaceBetweenChannels);
-	}
-	
-	/** Retourne l'état du canal.
-	 * @param server - Server courant.
-	 * @param arrowPosition - Position du menu.
-	 * @return {@code true} si le canal est affiché, {@code false} sinon.
-	 */
-	private boolean isDisplayed(Server server, PointF arrowPosition) {
-		PointF checkPosition = getChekPosition(server, arrowPosition);
-		PointF checkTopLeft = new PointF(checkPosition.x, checkPosition.y - 0.005);
-		PointF checkBottomRight = new PointF(checkPosition.x, checkPosition.y + 0.005);	
-		return (B4D.screen.searchPixel(checkTopLeft, checkBottomRight, new Color(50,50,50), new Color(255,255,255)) != null);
-	}
-	
-	/** Change l'état du canal.
-	 * @param server - Server courant.
-	 * @param arrowPosition - Position du menu.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
-	 */
-	private void toggle(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException {
-		PointF checkPosition = getChekPosition(server, arrowPosition);		
-		B4D.mouse.leftClick(checkPosition, false, 500);
-	}
-	
-	/** Active/Affiche le canal.
-	 * @param server - Server courant.
-	 * @param arrowPosition - Position du menu.
-	 * @return {@code true} si l'état du canal a changé, {@code false} sinon.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
-	 */
-	private boolean enable(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException {
-		if(!isDisplayed(server, arrowPosition)) {
-			toggle(server, arrowPosition);
-			return true;
-		}
-		else
-			return false;
-	}
-	
-	/** Désactive/Cache le canal.
-	 * @param server - Server courant.
-	 * @param arrowPosition - Position du menu.
-	 * @return {@code true} si l'état du canal a changé, {@code false} sinon.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
-	 */
-	private boolean disable(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException {
-		if(isDisplayed(server, arrowPosition)) {
-			toggle(server, arrowPosition);
-			return true;
-		}
-		else
-			return false;
-	}
-	
-	  /************/
-	 /** STATIC **/
-	/************/
-	
-	 /** Retourne une liste de tous les canaux existants.
-	 * @return List des canaux.
+	/**
+	 * Returns a list of all the existing channels.
+	 * @return List of channels.
 	 */
 	public final static List<Channel> getAll(){
 		  	List<Channel> channels = new ArrayList<Channel>();
@@ -240,24 +120,27 @@ public class Channel implements Serializable{
 		    return channels;
 		  }
 	
-	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront désactivés.
-	 * @param server - Server courant.
-	 * @param channel - Liste des canaux à afficher.
-	 * @return Liste des canaux ayant changé d'état.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
-	 * @throws AWTException Si un problème de souris survient.
+	/**
+	 * Displays multiple channels.<br><br>
+	 * If the channel is enabled, it will be disabled. If the channel is disabled, it will be enabled.
+	 * @param server - Current server.
+	 * @param channels - List of channels to display.
+	 * @return List of toggled channels.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
-	public static List<Channel> displayChannels(Server server, Channel...channel) throws AWTException, StopProgramException, CancelProgramException {
-		return displayChannels(server, Arrays.asList(channel));
+	public static List<Channel> displayChannels(Server server, Channel...channels) throws StopProgramException, CancelProgramException {
+		return displayChannels(server, Arrays.asList(channels));
 	}
 	
-	/** Permet d'afficher un ou plusieurs canaux. Les autres canaux seront désactivés.
-	 * @param server - Server courant.
-	 * @param channels - Liste des canaux à afficher.
-	 * @return Liste des canaux ayant changé d'état, {@code null} si impossible d'ouvrir le menu.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Displays multiple channels.<br><br>
+	 * If the channel is enabled, it will be disabled. If the channel is disabled, it will be enabled.
+	 * @param server - Current server.
+	 * @param channels - List of channels to display.
+	 * @return List of toggled channels.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public static List<Channel> displayChannels(Server server, List<Channel> channels) throws StopProgramException, CancelProgramException {
 		List<Channel> toggles = null;
@@ -294,9 +177,11 @@ public class Channel implements Serializable{
 		return toggles;
 	}
 	
-	/** Permet de retourner la distance relative entre le menu du chat et les flêches en fonction du server.
-	 * @param server - Server courant.
-	 * @return Distance relative entre le menu du chat et les flêches.
+	/**
+	 * Returns the relative distance between the chat menu and the arrows depending on the server.<br><br>
+	 * If the server is international, the arrows are not at the same location.
+	 * @param server - Current server.
+	 * @return Relative distance between the chat menu and the arrows.
 	 */
 	private static double getRelativXArrowPosition(Server server) {
 		if(server.isInternationnal())
@@ -305,10 +190,11 @@ public class Channel implements Serializable{
 			return 0.187;
 	}
 	
-	/** Permet de retourner le canal correspondant à un octet.
-	 * @param data - Octet du canal.
-	 * @return Canal correspondant.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	/**
+	 * Returns the channel from a byte.
+	 * @param data - Byte of the channel.
+	 * @return Corresponding channel.
+	 * @throws B4DException if the channel is unknown.
 	 */
 	public static Channel fromByte(byte data) throws B4DException {
 		switch(data) {
@@ -326,10 +212,129 @@ public class Channel implements Serializable{
 				throw new B4DException("Unknow channel " + Byte.toUnsignedInt(data));
 		}
 	}
+
+	/**
+	 * Defines the location of the menu button.
+	 * @param chatMenuPosition - Location of the menu button in simple coordinates.
+	 */
+	public static void setChatMenuPosition(Point chatMenuPosition) {
+		Channel.chatMenuPosition = chatMenuPosition;
+	}
 	
-	  /***************/
-	 /** TO STRING **/
-	/***************/
+	/**
+	 * Name of the channel.
+	 */
+	private String name;
+	
+	/**
+	 * Prefix of the channel. The prefix is used in the chat bar (eg : /s for the General channel).
+	 */
+	private String prefix;
+	
+	/**
+	 * Location of the channel in the menu to toggle it in relative coordinates.
+	 */
+	private PointF relativCheckPosition;
+	
+	/**
+	 * Constructor of the {@code Channel} class.
+	 * @param name - Name of the channel.
+	 * @param prefix - Prefix of the channel.
+	 * @param relativCheckPosition - Relative location in the menu in relative coordinates.
+	 */
+	public Channel(String name, String prefix, PointF relativCheckPosition) {
+		this.name = name;
+		this.prefix = prefix;
+		this.relativCheckPosition = relativCheckPosition;
+	}
+	
+	/**
+	 * Returns the name of the channel.
+	 * @return Name of the channel.
+	 */
+	public String getName() {
+		return this.name;
+	}
+	
+	/**
+	 * Returns the prefix of the channel.
+	 * @return Prefix of the channel.
+	 */
+	public String getPrefix() {
+		return this.prefix;
+	}
+
+	/**
+	 * Returns the location of the channel button depending on the server.
+	 * @param server - Current server.
+	 * @param arrowPosition - Location of the arrow in relative coordinates.
+	 * @return Location of the channel button in relative coordinates.
+	 */
+	private PointF getChekPosition(Server server, PointF arrowPosition) {
+		if(server.isInternationnal())
+			return new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);
+		else
+			return new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y + spaceBetweenChannels);
+	}
+	
+	/**
+	 * Returns the state of the channel.
+	 * @param server - Current server.
+	 * @param arrowPosition - Location of the arrow in relative coordinates.
+	 * @return {@code true} if the channel is enabled, {@code false} otherwise.
+	 */
+	private boolean isDisplayed(Server server, PointF arrowPosition) {
+		PointF checkPosition = getChekPosition(server, arrowPosition);
+		PointF checkTopLeft = new PointF(checkPosition.x, checkPosition.y - 0.005);
+		PointF checkBottomRight = new PointF(checkPosition.x, checkPosition.y + 0.005);	
+		return (B4D.screen.searchPixel(checkTopLeft, checkBottomRight, new Color(50,50,50), new Color(255,255,255)) != null);
+	}
+	
+	/**
+	 * Change the state of the channel.
+	 * @param server - Current server.
+	 * @param arrowPosition - Location of the arrow in relative coordinates.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 */
+	private void toggle(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException {
+		PointF checkPosition = getChekPosition(server, arrowPosition);		
+		B4D.mouse.leftClick(checkPosition, false, 500);
+	}
+	
+	/**
+	 * Enables the channel.
+	 * @param server - Current server.
+	 * @param arrowPosition - Location of the arrow in relative coordinates.
+	 * @return {@code true} if the state has changed, {@code false} otherwise.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 */
+	private boolean enable(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException {
+		if(!isDisplayed(server, arrowPosition)) {
+			toggle(server, arrowPosition);
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	/**
+	 * Disables the channel.
+	 * @param server - Current server.
+	 * @param arrowPosition - Location of the arrow in relative coordinates.
+	 * @return {@code true} if the state has changed, {@code false} otherwise.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 */
+	private boolean disable(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException {
+		if(isDisplayed(server, arrowPosition)) {
+			toggle(server, arrowPosition);
+			return true;
+		}
+		else
+			return false;
+	}
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

@@ -12,19 +12,24 @@ import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Zaapi} représente un zaapi.<br><br>
- * Cette classe étend la classe {@code Transport}.
- * Un zaapi est représenté par un type de zaapi.
+/**
+ * The {@code Zaapi} class represents a zaapi.
+ * Its implementation is almost the same as {@link Zaap}.
+ * <br><br>
+ * This class extends {@link Transport}.
+ * A zaapi is defined by a type.
+ * 
+ * @author Lucas
+ *
  */
 public class Zaapi extends Transport implements Serializable{
 
 	private static final long serialVersionUID = -1579035196209575267L;
-
-	private ZaapiType zaapiType;
 	
-	  /****************/
-	 /** COLLECTION **/
-	/****************/
+	/**
+	 * Type of the zaapi.
+	 */
+	private ZaapiType zaapiType;
 	
 	/** BONTA **/
 	
@@ -394,28 +399,21 @@ public class Zaapi extends Transport implements Serializable{
      */
     public final static Zaapi Zaap_Brakmar = new Zaapi("Zaap", new Point(-26, 35), new PointF(0.7713, 0.3627), ZaapiType.Divers);
 	
-    
-	  /*************/
-	 /** BUILDER **/
-	/*************/
-	
-	/** Constructeur de la classe {@code Zaapi}.
-	 * @param name - Nom du zaapi.
-	 * @param position - Position du zaapi sur la carte.
-	 * @param positionF - Position relative du zaapi.
-	 * @param zaapiType - Type de zaapi.
+	/**
+	 * Constructor of the {@code Zaapi} class.
+	 * @param name - Name of the zaapi.
+	 * @param position - Location of the zaapi on the map.
+	 * @param positionF - Location of the zaapi on the screen in relative coordinates.
+	 * @param zaapiType - Type of the zaapi.
 	 */
 	public Zaapi(String name, Point position, PointF positionF, ZaapiType zaapiType) {
 		super(name, position, positionF, ZAAPI_COST);
 		this.zaapiType = zaapiType;
 	}
 	
-	  /************************/
-	 /** METHODES STATIQUES **/
-	/************************/
-	
-    /** Retourne la liste de tous les zaapis de Bonta.
-     * @return Liste de tous les zaapis de Bonta.
+    /**
+     * Returns the list of all the zaaps in Bonta.
+     * @return List of zaapis.
      */
     public final static ArrayList<Transport> getAllBonta(){
     	ArrayList<Transport> zaapis = new ArrayList<Transport>();
@@ -468,9 +466,10 @@ public class Zaapi extends Transport implements Serializable{
     	zaapis.add(Zaap_Bonta );
         return zaapis;
     }
-    
-    /** Retourne la liste de tous les zaapis de Brakmar.
-     * @return Liste de tous les zaapis de Brakmar.
+
+    /**
+     * Returns the list of all the zaaps in Brakmar.
+     * @return List of zaapis.
      */
     public final static ArrayList<Transport> getAllBrakmar(){
     	ArrayList<Transport> zaapis = new ArrayList<Transport>();
@@ -522,9 +521,10 @@ public class Zaapi extends Transport implements Serializable{
         zaapis.add(Zaap_Brakmar);
         return zaapis;
     }
-    
-    /** Retourne la liste de tous les zaapis.
-     * @return Liste de tous les zaapis.
+
+    /**
+     * Returns the list of all the zaaps in the game.
+     * @return List of zaapis.
      */
     public final static ArrayList<Transport> getAll(){
 		ArrayList<Transport> zaapis = getAllBonta();
@@ -532,35 +532,31 @@ public class Zaapi extends Transport implements Serializable{
 		return zaapis;
     }
     
-    /** Permet de retrouver un zaapi à partir de sa position.
-     * @param position - Position du zaapi.
-     * @return Zaapi correspondant.
-     * @throws B4DException Si aucun zaapi ne correspond à cette position.
+    /**
+     * Finds a zaapi from its location on the map.
+     * @param position - Location of the zaap.
+     * @return Corresponding zaapi, {@code null} if no zaapi exists at this location.
      */
-    public final static Zaapi getZaapi(Point position) throws B4DException{
+    public final static Zaapi getZaapi(Point position){
 		for(Transport zaapi: getAll()) {
 			if(zaapi.getPosition().equals(position))
 				return (Zaapi) zaapi;
 		}
-		throw new B4DException("Cannot found the zaapi in position [" + position.x + ":" + position.y + "] on the map.");
+		return null;
     }
-	
-    /** Permet de retrouver un zaapi à partir de son nom.
-     * @param name - Nom du zaapi.
-     * @return Zaapi correspondant.
-     * @throws B4DException Si aucun zaapi ne possède ce nom.
+
+    /**
+     * Finds a zaapi from its name.
+     * @param name - Name of the zaapi.
+     * @return Corresponding zaapi, {@code null} if no zaapi has this name.
      */
-	public static Zaapi getZaapi(String name) throws B4DException {
+	public static Zaapi getZaapi(String name) {
 		for(Transport zaapi: getAll()) {
 			if(zaapi.getName().equals(name))
 				return (Zaapi) zaapi;
 		}
-		throw new B4DException("Cannot found the zaapi \"" + name + "\" on the map.");
+		return null;
 	}
-	
-	  /**************/
-	 /** METHODES **/
-	/**************/
 	
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)

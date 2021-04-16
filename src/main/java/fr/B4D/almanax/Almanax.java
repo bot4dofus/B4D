@@ -19,15 +19,13 @@ import fr.B4D.dofus.DofusDatabase;
 import fr.B4D.dofus.items.Item;
 import fr.B4D.dofus.items.Stack;
 
-/** The {@code Almanax} is used to get the {@code Stack} corresponding to a given date.
+/**
+ * The {@code Almanax} is used to get the {@code Stack} corresponding to a given date.
+ * 
  * @author Lucas
- *
+ * 
  */
 public class Almanax {
-
-	  /***************/
-	 /** CONSTANTS **/
-	/***************/
 	
 	/**
 	 * French language.
@@ -88,10 +86,6 @@ public class Almanax {
 	 * Portuguese regex to find the item and the amount.
 	 */
 	//private static final String PORTUGUESE_REGEX = ".* Find ([0-9]*) (.*) and take the offering to .*";	The portuguese webpage is in english...
-
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
 	
 	/**
 	 * Language of the database
@@ -108,10 +102,6 @@ public class Almanax {
 	 */
 	private DofusDatabase database;
 
-	  /*************/
-	 /** BUILDER **/
-	/*************/
-
 	/**
 	 * Constructs an {@code Almanax} object with a specific language.
 	 * @param language - The language you want to use.<br><br>
@@ -125,7 +115,8 @@ public class Almanax {
 		this(language, Dofus.getInstance().getDatabase());
 	}
 	
-	/** Constructs an {@code Almanax} object with a specific language.
+	/**
+	 * Constructs an {@code Almanax} object with a specific language.
 	 * @param language - The language you want to use.
 	 * @param database - The dofus database from which retrieve the items.<br><br>
 	 * To construct a french alamanax object use:
@@ -151,12 +142,9 @@ public class Almanax {
 		this.regex = regexMap.get(language);
 		this.database = database;
 	}
-
-	  /************/
-	 /** PUBLIC **/
-	/************/
 	
-	/** Return the today's {@code Stack} offering.
+	/**
+	 * Return the today's {@code Stack} offering.
 	 * @return Stack to offer today.
 	 * @throws B4DException if impossible to get the today's offering.
 	 */
@@ -164,7 +152,8 @@ public class Almanax {
 		return getStack(LocalDate.now());
 	}
 	
-	/** Return the corresponding date {@code Stack} offering.
+	/**
+	 * Return the corresponding date {@code Stack} offering.
 	 * @param year - Year of the offering.
 	 * @param month - Month of the offering.
 	 * @param day - Day of the offering.
@@ -175,7 +164,8 @@ public class Almanax {
 		return this.getStack(LocalDate.of(year, month, day));
 	}
 
-	/** Return the corresponding date {@code Stack} offering.
+	/**
+	 * Return the corresponding date {@code Stack} offering.
 	 * @param date - Date of the offering.
 	 * @return Stack to offer.
 	 * @throws B4DException if impossible to get the offering.

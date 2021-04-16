@@ -17,6 +17,9 @@ import fr.B4D.utils.PointF;
  * The class {@code Bank} represents a bank on the map.<br><br>
  * This class extends {@code IndoorBuilding}.
  * A bank has a banker position.
+ * 
+ * @author Lucas
+ *
  */
 public class Bank extends IndoorBuilding{
 
@@ -34,10 +37,6 @@ public class Bank extends IndoorBuilding{
 	 * Position of the banker in relative coordinates.
 	 */
 	private PointF bankerPosition;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
 	
 	/**
 	 * Builder of the {@code Bank} class.
@@ -51,10 +50,6 @@ public class Bank extends IndoorBuilding{
 			this.bankerPosition = bankerPosition;
 			this.opened = Boolean.FALSE;
 	}
-
-	  /***************/
-	 /** GET & SET **/
-	/***************/
 	
 	/**
 	 * Returns the position of the banker on the screen.
@@ -63,10 +58,6 @@ public class Bank extends IndoorBuilding{
 	public PointF getBankerPosition() {
 		return bankerPosition;
 	}
-	
-	  /********************/
-	 /** PUBLIC METHODS **/
-	/********************/
 
 	/**
 	 * Performs actions on the bank.

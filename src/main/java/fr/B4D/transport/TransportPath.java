@@ -9,35 +9,37 @@ import fr.B4D.bot.Person;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code TransportPath} représente un chemin entre deux point de la carte.<br><br>
- * Un chemin est défini par une liste d'étapes.
+/**
+ * The {@code TransportPath} class represents a path between two locations on the map.
+ * <br><br>
+ * A path is defines by a list of steps.
+ * 
+ * @author Lucas
+ *
  */
 public class TransportPath implements Serializable{
 	
 	private static final long serialVersionUID = 6035526052301664166L;
 	
+	/**
+	 * List of steps in the path.
+	 */
 	private List<TransportStep> transportPath;
 	
-	  /******************/
-	 /** CONSTRUCTEUR **/
-	/******************/
-	
-	/** Constructeur de la classe {@code TransportPath}. 
-	 * @param shortestPath - Liste d'étapes.
+	/**
+	 * Constructor of the {@code TransportPath} class. 
+	 * @param shortestPath - Path between the two locations.
 	 */
 	public TransportPath(List<TransportStep> shortestPath) {
 		this.transportPath = shortestPath;
 	}
 	
-	  /**************/
-	 /** METHODES **/
-	/**************/
-	
-	/** Permet d'utiliser le chemin en empruntant tous les transports du chemin.
-	 * @param person - Joueur utilisant le chemin.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	/**
+	 * Uses the path by using all the transports.
+	 * @param person - Player using the transports.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unknown exception occur.
 	 */
 	public void use(Person person) throws StopProgramException, CancelProgramException, B4DException {
 		for(TransportStep step:transportPath) {
@@ -49,16 +51,13 @@ public class TransportPath implements Serializable{
 		}
 	}
 	
-	/** Retourne le poid total du chemin.
-	 * @return Poid totale du chemin.
+	/**
+	 * Returns the total weight of the path. It is the sum of the transport weights.
+	 * @return Total weight of the path.
 	 */
 	public double getWeigth() {
 		return transportPath.stream().mapToDouble(t -> t.getTransport().getWeight()).sum();
 	}
-	
-	  /**************/
-	 /** TOSTRING **/
-	/**************/
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

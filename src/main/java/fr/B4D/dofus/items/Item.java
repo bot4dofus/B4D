@@ -6,12 +6,11 @@ import java.util.Map;
 /**
  * The {@code Item} class represent an item in the game.<br><br>
  * An item is represented by a url, an id, a name, an image url and a type.
+ * 
+ * @author Lucas
+ *
  */
 public class Item implements Monster, Weapon, Equipment, Set, Pet, Mount, Consumable, Resource, CeremonialItem, Sidekick, Idol, Harness{
-	 
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
 	
 	//For all items
 	private String url;
@@ -39,10 +38,6 @@ public class Item implements Monster, Weapon, Equipment, Set, Pet, Mount, Consum
 	//Idols only
 	private List<String> bonuses;
 	private String spells;
-
-	  /*****************/
-	 /** CONSTRUCTOR **/
-	/*****************/
 	
 	/** Constructor of the class {@code Item}.
 	 * @param url - The item's url.
@@ -58,10 +53,6 @@ public class Item implements Monster, Weapon, Equipment, Set, Pet, Mount, Consum
 		this.img = img;
 		this.type = type;
 	}
-
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/
 	
 	/** Returns the item's url.
 	 * @return Item's url.

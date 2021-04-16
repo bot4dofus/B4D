@@ -21,64 +21,68 @@ import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
-/** La classe {@code Screen} permet d'accéder à toutes les méthodes liés à l'écran.
+/**
+ * The {@code Screen} class is used to access to the screen methods.
+ * 
+ * @author Lucas
+ *
  */
 public final class Screen {
 	
+	/**
+	 * Configuration of the screen.
+	 */
 	private Configuration configuration;
-	private Robot robot;
 	
-	/*************/
-	/** BUILDER **/
-	/*************/
+	/**
+	 * Robot performing a screen actions.
+	 */
+	private Robot robot;
     
-	/** Constructeur de la classe {@code Screen}. 
-     * @param configuration - Configuration de l'écran de jeu.
-	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation de l'écran
+	/**
+	 * Constructor of the {@code Screen} class.
+     * @param configuration - Configuration of the game.
+	 * @throws AWTException if the platform configuration does not allow low-level input control.
      */
     public Screen(Configuration configuration) throws AWTException {
     	this.configuration = configuration;
 		this.robot = new Robot();
     }
 	
-	  /*******************/
-	 /** COULEUR PIXEL **/
-	/*******************/
-	
-	/** Permet de récupérer la couleur d'un pixel.
-	 * @param point - Point en coordonnées simples.
-	 * @return Couleur du pixel.
+	/**
+	 * Returns the color of the pixel at a given location.
+	 * @param point - Location of the pixel on the screen in simple coordinates.
+	 * @return Color of the pixel.
 	 */
 	public Color getPixelColor(Point point) {
 		return robot.getPixelColor(point.x, point.y);
 	}
 	
-	/** Permet de récupérer la couleur d'un pixel.
-	 * @param point - Point en coordonnées relatives.
-	 * @return Couleur du pixel.
+	/**
+	 * Returns the color of the pixel at a given location.
+	 * @param point - Location of the pixel on the screen in relative coordinates.
+	 * @return Color of the pixel.
 	 */
 	public Color getPixelColor(PointF point) {
 		return getPixelColor(B4D.converter.toPoint(point));
 	}
 	
-	/** Permet de récupérer la couleur d'un pixel.
-	 * @param point - Point en coordonnées du damier de dofus.
-	 * @return Couleur du pixel.
+	/**
+	 * Returns the color of the pixel at a given location.
+	 * @param point - Location of the pixel on the screen in draughtboard coordinates.
+	 * @return Color of the pixel.
 	 */
 	public Color getPixelColor(PointD point) {
 		return getPixelColor(B4D.converter.toPoint(point));
 	}
 	
-	  /*********************/
-	 /** RECHERCHE PIXEL **/
-	/*********************/
-	
-	/** Permet de rechercher un pixel correspondant à un certain critère parmis une plage de pixels.
-	 * @param topLeftHandCorner - Point suppérieur gauche du rectangle de recherche en coordonnées relatives.
-	 * @param bottomRightHandCorner - Point inférieur droit du rectangle de recherche en coordonnées relatives.
-	 * @param min - Couleur minimum.
-	 * @param max - Couleur maximum.
-	 * @return Position du pixel en coordonnées relatives. {@code null} si aucun pixel n'a été trouvé.
+	/**
+	 * Performs a pixel research for a given area.
+	 * @param topLeftHandCorner - Top left hand corner of the research area in relative coordinates.
+	 * @param bottomRightHandCorner - Bottom left hand corner of the research area in relative coordinates.
+	 * @param min - Minimum color.
+	 * @param max - Maximum color.
+	 * @return Location of the first pixel matching the color criteria in relative coordinates. {@code null} if no pixel match the research criteria.
 	 */
 	public PointF searchPixel(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) {
 		Point Point1 = B4D.converter.toPoint(topLeftHandCorner);
@@ -105,6 +109,14 @@ public final class Screen {
 	 * @param max - Couleur maximum.
 	 * @return Liste des pixels en coordonnées relatives correspondants au critère de recherche. {@code null} si aucun pixel n'a été trouvé.
 	 */
+	/**
+	 * Performs a pixel research for a given area.
+	 * @param topLeftHandCorner - Top left hand corner of the research area in relative coordinates.
+	 * @param bottomRightHandCorner - Bottom left hand corner of the research area in relative coordinates.
+	 * @param min - Minimum color.
+	 * @param max - Maximum color.
+	 * @return List of pixels matching the color criteria in relative coordinates. {@code null} if no pixel match the research criteria.
+	 */
 	public ArrayList<PointF> searchPixels(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) {
 		
 		Point Point1 = B4D.converter.toPoint(topLeftHandCorner);
@@ -127,36 +139,31 @@ public final class Screen {
 			points = null;
 		return points;
 	}
-
-	  /****************/
-	 /** SCREENSHOT **/
-	/****************/
 	
-	/** Permet de faire une capture d'écrans d'une zone précise.
-	 * @param rectangle - Zone à capturer.
-	 * @return Image de la zone capturée.
+	/**
+	 * Performs a screenshot for a given area.
+	 * @param rectangle - Screenshot area in simple coordinates.
+	 * @return Screenshot of the rectangle area.
 	 */
 	public BufferedImage takeSreenshot(Rectangle rectangle) {
 		return robot.createScreenCapture(rectangle);
 	}
 	
-	/** Permet de faire une capture d'écrans de la zone de jeu.
-	 * @return Image de la zone de jeu.
+	/**
+	 * Performs a screenshot for the game frame area.
+	 * @param rectangle - Screenshot area in simple coordinates.
+	 * @return Screenshot of the game frame area.
 	 */
 	public BufferedImage takeSreenshot() {
 		return robot.createScreenCapture(configuration.getGameFrame());
 	}
 	
-	  /*********/
-	 /** OCR **/
-	/*********/
-	
-	/** Permet de faire une reconnaissance optique de caractère sur une zone précise de l'écran.
-	 * @param rectangle - Zone de l'écran.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
-	 * @throws B4DException Si impossible de réaliser l'OCR.
+	/**
+	 * Performs an Optical Character Recognition on a given area.
+	 * @param rectangle - OCR area in simple coordinates.
+	 * @return String recognized on screen, {@code null} if nothing have been found.
+	 * @throws B4DException if cannot perform the OCR operation.
 	 */
-	@Deprecated
 	public String OCR(Rectangle rectangle) throws B4DException {
 		try {		
 			BufferedImage image = takeSreenshot(rectangle);
@@ -169,40 +176,37 @@ public final class Screen {
 		}
 	}
 	
-	/** Permet de faire une reconnaissance optique de caractère sur une zone précise de l'écran.
-	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées simples.
-	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées simples.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
-	 * @throws B4DException Si impossible de réaliser l'OCR.
+	/**
+	 * Performs an Optical Character Recognition on a given area.
+	 * @param topLeftHandCorner - Top left hand corner of the OCR area in simple coordinates.
+	 * @param bottomRightHandCorner - Bottom left hand corner of the OCR area in simple coordinates.
+	 * @return String recognized on screen, {@code null} if nothing have been found.
+	 * @throws B4DException if cannot perform the OCR operation.
 	 */
-	@Deprecated
 	public String OCR(Point topLeftHandCorner, Point bottomRightHandCorner) throws B4DException {
 		return OCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y));
 	}
-	
-	/** Permet de faire une reconnaissance optique de caractère sur une zone précise de l'écran.
-	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées relatives.
-	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées relatives.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si rien n'a été trouvé.
-	 * @throws B4DException Si impossible de réaliser l'OCR.
+
+	/**
+	 * Performs an Optical Character Recognition on a given area.
+	 * @param topLeftHandCorner - Top left hand corner of the OCR area in relative coordinates.
+	 * @param bottomRightHandCorner - Bottom left hand corner of the OCR area in relative coordinates.
+	 * @return String recognized on screen, {@code null} if nothing have been found.
+	 * @throws B4DException if cannot perform the OCR operation.
 	 */
-	@Deprecated
 	public String OCR(PointF topLeftHandCorner, PointF bottomRightHandCorner) throws B4DException {
 		return OCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner));
 	}
-	
-	  /***************/
-	 /** SELECTION **/
-	/***************/
 
-	/** Permet de récupérer une chaine de caractère séléctionnée en faisant un double clique et Ctrl+C.
-	 * @param point - Position de la sélection en coordonnées simples.
-	 * @return Chaine de caractère représentant la sélection. {@code null} si rien n'a été sélectionnée où si la sélection est vide.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Returns the selected string by doing a double click and doing Ctrl+C.
+	 * @param position - Location of the string in simple coordinates.
+	 * @return Selected string on screen, {@code null} if nothing have been found.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
-	public String getSelection(Point point) throws StopProgramException, CancelProgramException {
-		B4D.mouse.doubleLeftClick(point, false, 100);
+	public String getSelection(Point position) throws StopProgramException, CancelProgramException {
+		B4D.mouse.doubleLeftClick(position, false, 100);
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_C);
 		robot.keyRelease(KeyEvent.VK_C);
@@ -211,45 +215,34 @@ public final class Screen {
 		return B4D.keyboard.getClipboard();
 	}
 	
-	/** Permet de récupérer une chaine de caractère séléctionnée en faisant un double clique et Ctrl+C.
-	 * @param position - Position de la sélection en coordonnées relatives.
-	 * @return Chaine de caractère représentant la sélection. {@code null} si rien n'a été sélectionnée où si la sélection est vide.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Returns the selected string by doing a double click and doing Ctrl+C.
+	 * @param position - Location of the string in relative coordinates.
+	 * @return Selected string on screen, {@code null} if nothing have been found.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public String getSelection(PointF position) throws StopProgramException, CancelProgramException {
 		return getSelection(B4D.converter.toPoint(position));
 	}
 	
-	  /************/
-	 /** OTHERS **/
-	/************/
-	
-	/** Permet de savoir si une couleur se trouve dans un intervale.
-	 * @param couleur - Couleur du pixel.
-	 * @param min - Couleur minimale.
-	 * @param max - Couleur maximale.
-	 * @return {@code true} si la couleur est dans l'intervale, {@code false} sinon.
+	/**
+	 * Checks whether a color is in a given interval.
+	 * @param couleur - Color of the pixel to check.
+	 * @param min - Minimal color.
+	 * @param max - Maximal color.
+	 * @return {@code true} if the color is in the interval, {@code false} otherwise.
 	 */
 	public boolean isBetween(Color couleur, Color min, Color max) {
 		return (min.getRed() <= couleur.getRed() && couleur.getRed() <= max.getRed() && min.getGreen() <= couleur.getGreen() && couleur.getGreen() <= max.getGreen() && min.getBlue() <= couleur.getBlue() && couleur.getBlue() <= max.getBlue());
 	}
-
-	/** Permet donner le focus à la fenêtre de jeu.
-	 */
-	public void focusDofus() {
-		// TODO Auto-generated method stub
-	}
 	
-	  /*********************/
-	 /** ATTENTE SUR MAP **/
-	/*********************/
-	
-	/** Permet d'attendre un changement de map.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return {@code true} si le joueur à changé de map, {@code false} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Waits for the map to change.
+	 * @param timeOut - Time in ms before timeout.
+	 * @return {@code true} true if the map has changed, {@code false} if timeout.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public boolean waitForMap(int timeOut) throws StopProgramException, CancelProgramException {
 		//return waitForChangingPixel(B4D.converter.toPointF(configuration.getMinimap()), timeOut) != null;
@@ -258,30 +251,16 @@ public final class Screen {
 		return event != null;
 	}
 	
-	/** Permet d'attendre un changement de map sans limite de temps. 
-	 * Cela est identique à {@code waitForMap(0)}.
-	 * @return {@code true} si le joueur à changé de map, {@code false} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Wait for a string to be displayed on screen.
+	 * @param rectangle - OCR area in simple coordinates.
+	 * @param regex - Regular expression that the string must contain.
+	 * @param timeOut - Time in ms before timeout.
+	 * @return String recognized on screen, {@code null} if nothing have been found.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if cannot perform the OCR operation.
 	 */
-	public boolean waitForMap() throws StopProgramException, CancelProgramException {
-		return waitForMap(0);
-	}
-	
-	  /*********************/
-	 /** ATTENTE SUR OCR **/
-	/*********************/
-	
-	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
-	 * @param rectangle - Zone de l'écran.
-	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si impossible de réaliser l'OCR.
-	 */
-	@Deprecated
 	public String waitForOCR(Rectangle rectangle, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		String text;
 		do {
@@ -291,46 +270,43 @@ public final class Screen {
 		return text;
 	}
 
-	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
-	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées simples.
-	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées simples.
-	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si impossible de réaliser l'OCR.
+	/**
+	 * Wait for a string to be displayed on screen.
+	 * @param topLeftHandCorner - Top left hand corner of the OCR area in simple coordinates.
+	 * @param bottomRightHandCorner - Bottom left hand corner of the OCR area in simple coordinates.
+	 * @param regex - Regular expression that the string must contain.
+	 * @param timeOut - Time in ms before timeout.
+	 * @return String recognized on screen, {@code null} if nothing have been found.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if cannot perform the OCR operation.
 	 */
-	@Deprecated
 	public String waitForOCR(Point topLeftHandCorner, Point bottomRightHandCorner, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForOCR(new Rectangle(topLeftHandCorner.x,  topLeftHandCorner.y, bottomRightHandCorner.x - topLeftHandCorner.x, bottomRightHandCorner.y - topLeftHandCorner.y), regex, timeOut);
 	}
-	
-	/** Permet d'attendre qu'une chaine de caractère soit détectée à l'écran.
-	 * @param topLeftHandCorner - Point suppérieur gauche de la zone en coordonnées relatives.
-	 * @param bottomRightHandCorner - Point inférieur droit de la zone en coordonnées relatives.
-	 * @param regex - Exprésion régulière que doit contenir la chaine de caractère.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Chaine de caractère identifiée dans la zone, {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si impossible de réaliser l'OCR.
+
+	/**
+	 * Wait for a string to be displayed on screen.
+	 * @param topLeftHandCorner - Top left hand corner of the OCR area in relative coordinates.
+	 * @param bottomRightHandCorner - Bottom left hand corner of the OCR area in relative coordinates.
+	 * @param regex - Regular expression that the string must contain.
+	 * @param timeOut - Time in ms before timeout.
+	 * @return String recognized on screen, {@code null} if nothing have been found.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if cannot perform the OCR operation.
 	 */
-	@Deprecated
 	public String waitForOCR(PointF topLeftHandCorner, PointF bottomRightHandCorner, String regex, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForOCR(B4D.converter.toPoint(topLeftHandCorner), B4D.converter.toPoint(bottomRightHandCorner), regex, timeOut);
 	}
 	
-	  /*************************************/
-	 /** ATTENTE SUR CHANGEMENT DE PIXEL **/
-	/*************************************/
-	
-	/** Permet d'attendre qu'un pixel change de couleur.
-	 * @param point - Position du pixel en coordonnées simples.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Nouvelle couleur du pixel, {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Waits for a pixel to change color.
+	 * @param point - Location of the pixel in simple coordinates.
+	 * @param timeOut - Time in ms before timeout.
+	 * @return New color of the pixel, {@code null} if timeout.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public Color waitForChangingPixel(Point point, int timeOut) throws StopProgramException, CancelProgramException {
 		Color newColor, color = B4D.screen.getPixelColor(point);
@@ -340,30 +316,28 @@ public final class Screen {
 		}while(color.equals(newColor));		
 		return newColor;
 	}
-	
-	/** Permet d'attendre qu'un pixel change de couleur.
-	 * @param point - Position du pixel en coordonnées relatives.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Nouvelle couleur du pixel, {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+
+	/**
+	 * Waits for a pixel to change color.
+	 * @param point - Location of the pixel in relative coordinates.
+	 * @param timeOut - Time in ms before timeout.
+	 * @return New color of the pixel, {@code null} if timeout.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public Color waitForChangingPixel(PointF point, int timeOut) throws StopProgramException, CancelProgramException {
 		return waitForChangingPixel(B4D.converter.toPoint(point), timeOut);
 	}
 	
-	  /**********************************/
-	 /** ATTENTE SUR COULEUR DE PIXEL **/
-	/**********************************/
-	
-	/** Permet d'attendre qu'un pixel soit compris dans un intervale de couleur.
-	 * @param point - Position du pixel en coordonnées simples.
-	 * @param min - Couleur minimale.
-	 * @param max - Couleur maximale.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Couleur du pixel, {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Waits for a pixel to be in a given interval of color.
+	 * @param point - Location of the pixel in simple coordinates.
+	 * @param min - Minimum color.
+	 * @param max - Maximum color.
+	 * @param timeOut - Time in ms before timeout.
+	 * @return New color of the pixel, {@code null} if timeout.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public Color waitForColor(Point point, Color min, Color max, int timeOut) throws StopProgramException, CancelProgramException {
 		Color color;
@@ -374,14 +348,15 @@ public final class Screen {
 		return color;
 	}
 	
-	/** Permet d'attendre qu'un pixel soit compris dans un intervale de couleur.
-	 * @param point - Position du pixel en coordonnées relatives.
-	 * @param min - Couleur minimale.
-	 * @param max - Couleur maximale.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Couleur du pixel, {@code null} si timeout.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Waits for a pixel to be in a given interval of color.
+	 * @param point - Location of the pixel in relative coordinates.
+	 * @param min - Minimum color.
+	 * @param max - Maximum color.
+	 * @param timeOut - Time in ms before timeout.
+	 * @return New color of the pixel, {@code null} if timeout.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public Color waitForColor(PointF point, Color min, Color max, int timeOut) throws StopProgramException, CancelProgramException {
 		return waitForColor(B4D.converter.toPoint(point), min, max, timeOut);

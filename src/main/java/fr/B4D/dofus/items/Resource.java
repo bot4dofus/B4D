@@ -5,6 +5,9 @@ import java.util.Map;
 
 /**
  * The {@code Resource} interface used to manipulate items of type Resource.
+ * 
+ * @author Lucas
+ *
  */
 public interface Resource extends ItemInterface{
 

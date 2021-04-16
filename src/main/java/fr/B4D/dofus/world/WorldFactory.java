@@ -1,7 +1,8 @@
 package fr.B4D.dofus.world;
 
 /**
- * The class {@code WorldFactory} is used to instanciate worlds.
+ * The class {@code WorldFactory} is used to instantiate worlds.
+ * 
  * @author Lucas
  *
  */

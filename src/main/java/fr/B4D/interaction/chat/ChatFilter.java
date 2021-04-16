@@ -1,78 +1,89 @@
 package fr.B4D.interaction.chat;
 
-/** La classe {@code ChatFilter} représente un filtre de chat.<br><br>
- * Un filtre de chat est défini par un pseudo, un canal et une expression régulière.
+/**
+ * The {@code ChatFilter} class represents a chat filter.<br><br>
+ * A filter is defined by a pseudo, a channel and a regex.
+ * 
+ * @author Lucas
+ *
  */
 public class ChatFilter {
 
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
 	
-	private String pseudo, regex;
-	private Channel channel;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
-	
-	/** Constructeur de la classe {@code ChatFilter}.
+	/**
+	 * Pseudo of the player the message must come from.
 	 */
-	public ChatFilter() {}
+	private String pseudo;
 
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/
+	/**
+	 * Channel the message must be sent on.
+	 */
+	private Channel channel;
 	
-	/** Retourne le pseudo du filtre.
-	 * @return Pseudo du filtre.
+	/**
+	 * Substring the message must contain.
+	 */
+	private String regex;
+	
+	/**
+	 * Constructor of the {@code ChatFilter} class.
+	 */
+	public ChatFilter() {
+		super();
+	}
+	
+	/**
+	 * Returns the pseudo of the filter.
+	 * @return Pseudo of the filter.
 	 */
 	public String getPseudo() {
 		return pseudo;
 	}
 
-	/** Modifie le pseudo du filtre. Seul les messages provenant de ce pseudo traverseront le filtre.
-	 * @param pseudo - Nouveau pseudo du filtre. {@code null} pour retirer le filtre.
+	/**
+	 * Defines the pseudo of the filter. Only the messages coming from this player will be processed.
+	 * @param pseudo - Pseudo of the filter. {@code null} to remove the old filter.
 	 */
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
 	
-	/** Retourne le canal du filtre.
-	 * @return Canal du filtre.
+	/**
+	 * Returns the channel of the filter.
+	 * @return Channel of the filter.
 	 */
 	public Channel getChannel() {
 		return channel;
 	}
 
-	/** Modifie le canal du filtre. Seul les messages provenant de ce canal traverseront le filtre.
-	 * @param channel - Nouveau canal du filtre. {@code null} pour retirer le filtre.
+	/**
+	 * Defines the channel of the filter. Only the messages on this channel will be processed.
+	 * @param channel - Channel of the filter. {@code null} to remove the old filter.
 	 */
 	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
 	
-	/** Retourne l'expression régulière du filtre.
-	 * @return Expression régulière du filtre.
+	/**
+	 * Returns the regex of the filter.
+	 * @return Regex of the filter.
 	 */
 	public String getRegex() {
 		return regex;
 	}
-
-	/** Modifie le canal du filtre. Seul les messages contenants cette chaine de caratère traverseront le filtre.
-	 * @param regex - Nouvelle expression régulière du filtre. {@code null} pour retirer le filtre.
+	
+    /**
+	 * Defines the regex of the filter. Only the messages containing the substring will be processed.
+	 * @param regex - Regex that the message must contain, {@code null} to remove the old filter.
 	 */
 	public void setRegex(String regex) {
 		this.regex = regex;
 	}
-
-	  /*************/
-	 /** METHODS **/
-	/*************/
 	
-	/** Permet de savoir si un message passe à travers le filtre.
-	 * @param message - Message a tester.
-	 * @return {@code true} si le message passe à travers le filtre et {@code false} sinon.
+	/**
+	 * Checks whether a message pass the filter.
+	 * @param message - Message to test.
+	 * @return {@code true} if the message respect all the criteria, {@code false} otherwise.
 	 */
 	public boolean filter(Message message) {
 		if(pseudo != null) {

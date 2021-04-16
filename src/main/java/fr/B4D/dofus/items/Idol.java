@@ -5,6 +5,9 @@ import java.util.Map;
 
 /**
  * The {@code Idol} interface used to manipulate items of type Idol.
+ * 
+ * @author Lucas
+ *
  */
 public interface Idol extends ItemInterface{
 	

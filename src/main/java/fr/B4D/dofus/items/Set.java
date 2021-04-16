@@ -4,6 +4,9 @@ import java.util.List;
 
 /**
  * The {@code Set} interface used to manipulate items of type Set.
+ * 
+ * @author Lucas
+ *
  */
 public interface Set extends ItemInterface{
 

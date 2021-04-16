@@ -8,18 +8,16 @@ import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 
 /**
- * The {@code KeyboardAPI} class contains all the tutorials relative to the keyboard API.
- * 
- * Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API du clavier.<br>
- *  <br>
- *  Fonctionnement :
- *  <ul>
- *  	<li>Attend l'appui sur une touche.</li>
- *  	<li>Ecrit le numéro de la touche dans le chat.</li>
- *  	<li>Copie un texte dans le presse-papier.</li>
- *  	<li>Récupère le texte dans le presse-papier.</li>
- *  	<li>Affiche le texte.</li>
- *  </ul>
+ * The {@code KeyboardAPI} program is a tutorial to better understand the keyboard API.
+ * <br><br>
+ * Steps :
+ * <ul>
+ *     <li>Wait for a key press</li>
+ *     <li>Write the id of the key in the chat</li>
+ *     <li>Copy a text in the clipboard</li>
+ *     <li>Retrieve the text from the clipboard</li>
+ *     <li>Displays the text</li>
+ * </ul>
  *
  * @author Lucas
  *
@@ -41,10 +39,15 @@ public final class KeyboardAPITutorial extends Program {
 
 	@Override
 	public void cycle(Person person) throws B4DException {
-		int id = B4D.keyboard.waitForKeyboard(5000);
-		B4D.keyboard.writeKeyboard("Touche " + id + " enfoncée.");
-		B4D.keyboard.setClipboard("Ce texte à été copié.");
-		String texte = B4D.keyboard.getClipboard();
-		B4D.logger.popUp("Texte lu depuis le press papier : " + texte);
+		int id = B4D.keyboard.waitForKeyboard(10000);
+		if(id != -1) {
+			B4D.keyboard.writeKeyboard("Touche " + id + " enfoncée.");
+			B4D.keyboard.setClipboard("Ce texte à été copié.");
+			String texte = B4D.keyboard.getClipboard();
+			B4D.logger.popUp("Texte lu depuis le press papier : " + texte);
+		}
+		else {
+			B4D.logger.popUp("Temps d'attente dépassé.");
+		}
 	}
 }

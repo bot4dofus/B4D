@@ -4,6 +4,9 @@ import java.util.List;
 
 /**
  * The {@code Pet} interface used to manipulate items of type Pet.
+ * 
+ * @author Lucas
+ *
  */
 public interface Pet extends ItemInterface{
 

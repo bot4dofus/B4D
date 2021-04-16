@@ -5,6 +5,9 @@ import java.util.Map;
 
 /**
  * The {@code Consumable} interface used to manipulate items of type Consumable.
+ * 
+ * @author Lucas
+ *
  */
 public interface Consumable extends ItemInterface{
 

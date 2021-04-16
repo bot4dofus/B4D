@@ -9,9 +9,12 @@ import org.jgrapht.graph.DirectedWeightedPseudograph;
 
 import fr.B4D.transport.transports.Walk;
 
-/** La classe {@code Graph} représente la carte du monde de dofus.<br><br>
- * Un graph est représenté par des noeuds (vertex) et des arêtes (edges).
- * Les différents moyens de transport sont modélisés par les arêtes.
+/** 
+ * The {@code Graph} class represents a directed weighted graph<br><br>
+ * A graph is defined with vertexes and weighted edges.
+ * 
+ * @author Lucas
+ *
  */
 public class Graph implements Serializable{
 
@@ -19,23 +22,19 @@ public class Graph implements Serializable{
 	
 	private DirectedWeightedPseudograph<Point, TransportStep> graph;
 	
-	  /*************/
-	 /** BUILDER **/
-	/*************/
-	
-	/** Constructeur de la classe {@code Graph}. 
+	/**
+	 * Constructor of the {@code Graph} class.
 	 */
 	public Graph() {
 		graph = new DirectedWeightedPseudograph<Point, TransportStep>(TransportStep.class);
 	}
 	
-	  /************/
-	 /** VERTEX **/
-	/************/
-	
-	/** Permet d'ajouter un noeud au graph.
-	 * @param vertex - Coordonnée du noeud.
-	 * @param autoConnect - {@code true} pour connecter automatiquement le noeud à ces voisins, {@code false} sinon.  
+	/**
+	 * Adds a vertex to the graph.
+	 * @param vertex - Coordinate of the vertex.
+	 * @param autoConnect - {@code true} to automatically connect the vertex with his neighbours, {@code false} otherwise.
+	 * <br><br>
+	 * Exemple : If the added vertex is (0,0) and {@code autoConnect} is set to true, and will be connected with (-1,0), (1,0), (0,-1) and (0,1) with a weight of 1 (walk).
 	 */
 	public void addVertex(Point vertex, Boolean autoConnect) {
 		this.graph.addVertex(vertex);
@@ -65,38 +64,39 @@ public class Graph implements Serializable{
 		}
 	}
 	
-	/** Permet de retirer un noeud du graph ainsi que toutes les arêtes le reliant.
-	 * Ne fait rien si le noeud n'existe pas.
-	 * @param vertex - Coordonnées du noeud.
+	/**
+	 * Removes the specified vertex from this graph including all its touching edges if present. 
+	 * Don't do anything if the node does not exists.
+	 * @param vertex - Coordinates of the node to remove.
 	 */
 	public void removeVertex(Point vertex) {
 		graph.removeVertex(vertex);
 	}
 	
-	  /*******************/
-	 /** METHODES EDGE **/
-	/*******************/
-	
-	/** Permet d'ajouter une arête au graph.
-	 * Les arêtes sont représentées par la classe {@code TransportStep}.
-	 * @param transportStep - Arête reliant deux vertex.
+	/**
+	 * Adds an edge to the graph.
+	 * An edge is represented by a {@code TransportStep}.
+	 * @param transportStep - Edge linking two vertex.
 	 */
 	public void addEdge(TransportStep transportStep) {
 		graph.addEdge(transportStep.getTransport().getPosition(), transportStep.getDestination(), transportStep);
 		graph.setEdgeWeight(transportStep, transportStep.getTransport().getWeight());
 	}
 	
-	/** Permet de retirer une arête du graph. Cette fonction n'est pas symetrique : A vers B sera supprimé mais pas B vers A.
-	 * @param transportStep - Arête reliant deux vertex.
+	/**
+	 * Removes an edge from the graph.
+	 * This method is not asymmetric. A to B will be removed but not B to A.
+	 * @param transportStep - Edge to remove.
 	 */
 	public void removeEdge(TransportStep transportStep) {
 		removeEdge(transportStep.getTransport().getPosition(), transportStep.getDestination(), false);
 	}
 	
-	/** Permet de retirer une arête du graph.
-	 * @param origin - Point de départ de l'arête.
-	 * @param destination - Point d'arrivée de l'arête.
-	 * @param symetric - {@code true} pour relier symétriquement (A vers B et B vers A), {@code false} sinon.  
+	/**
+	 * Removes an edge from the graph. 
+	 * @param origin - Origin vertex.
+	 * @param destination - Destination vertex.
+	 * @param symetric - {@code true} to also remove the edge from {@code destination} to {@code origin}, {@code false} otherwise.  
 	 */
 	public void removeEdge(Point origin, Point destination, boolean symetric) {
 		graph.removeEdge(origin, destination);
@@ -104,17 +104,13 @@ public class Graph implements Serializable{
 			graph.removeEdge(destination, origin);
 	}
 	
-	
-	  /**************/
-	 /** METHODES **/
-	/**************/
-	
-	/** Permet de trouver le plus court chemin entre deux points de la map en utilisant tous les moyens de transport possible.
-	 * @param source - Point de départ.
-	 * @param target - Point d'arrivé.
-	 * @return Chemin le plus court entre le point de départ et le point d'arrivé.
+	/**
+	 * Finds the fastest path between two vertexes using all the transport methods
+	 * @param origin - Origin vertex.
+	 * @param destination - Destination vertex.
+	 * @return Fastest path between two vertexes.
 	 */
-	public GraphPath<Point, TransportStep> getPath(Point source, Point target) {
-		return new DijkstraShortestPath<Point, TransportStep>(graph).getPath(source, target);
+	public GraphPath<Point, TransportStep> getPath(Point origin, Point destination) {
+		return new DijkstraShortestPath<Point, TransportStep>(graph).getPath(origin, destination);
 	}
 }

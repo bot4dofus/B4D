@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 /**
  * The {@code SocketResult} class represents the result of a socket. This is an abstract class.
+ * 
  * @author Lucas
  *
  */

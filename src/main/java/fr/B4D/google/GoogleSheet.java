@@ -24,32 +24,43 @@ import com.google.api.services.sheets.v4.model.SheetProperties;
 import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
 import com.google.api.services.sheets.v4.model.ValueRange;
 
-/** La classe {@code GoogleSheet} permet de gérer un google spreadSheet grace à l'API sheet de google.
+/**
+ * The {@code GoogleSheet} is used to acces usefull method related to Google Sheet.
+ * 
+ * @author Lucas
+ *
  */
 public class GoogleSheet {
-
-	  /***************/
-	 /** CONSTANTS **/
-	/***************/
 	
     private static final String APPLICATION_NAME = "B4D-program";
+	
+  /**
+   * Returns the id of a sheet from its url.
+   * @param url - Url of the sheet.
+   * @return Id of the sheet.
+   */
+  public static String getIdFromUrl(String url) {
+  	int begin = url.indexOf("/d/");
+  	String subUrl = url.substring(begin+3);
+  	return subUrl.substring(0, subUrl.indexOf("/"));
+  }
     
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
-    
+    /**
+     * Instance of the sheet under modification.
+     */
     private Sheets sheets;
+    
+    /**
+     * Id of the sheet under modification.
+     */
     private String id;
     
-	  /*************/
-	 /** BUILDER **/
-	/*************/
-    
-	/** Constructeur de la classe {@code GoogleDrive}. 
-     * @param id - Id du spreadSheet.
-     * @param credentials - Chemin vers le fichier contenant le certificat d'utilisation des API google.
-     * @throws IOException Si aucun fichier n'a été trouvé.
-     * @throws GeneralSecurityException Si problèmes de sécurité survient.
+	/**
+	 * Constructor of the {@code GoogleDrive} class.
+     * @param id - Id of the sheet to modify.
+     * @param credentials - Path to the Google Sheet API credential file.
+     * @throws IOException if no file has been found.
+     * @throws GeneralSecurityException if a security issue occurs.
      */
     public GoogleSheet(String id, String credentials) throws IOException, GeneralSecurityException {
     	this.id = id;
@@ -61,17 +72,13 @@ public class GoogleSheet {
           .setApplicationName(APPLICATION_NAME)
           .build();
     }
-
-	  /*************/
-	 /** METHODS **/
-	/*************/
     
 	/** 
-	 * Permet d'écrire dans une ou plusieurs cellules.
-	 * @param content - Liste de liste d'objets à écrire. 
-	 * @param range - Cellule dans laquelle écrire.
-	 * @return Résultat de l'éxecution.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	 * Writes in one or multiple cells.
+	 * @param content - List of objects to write in the cells. 
+	 * @param range - Cell in which write the content.
+	 * @return Result of the operation.
+     * @throws IOException if cannot perform the operation.
 	 */
 	public UpdateValuesResponse write(List<List<Object>> content, String range) throws IOException {
 		ValueRange body = new ValueRange().setValues(content);
@@ -82,11 +89,11 @@ public class GoogleSheet {
 	}
     
 	/** 
-	 * Permet d'écrire dans une ou plusieurs cellules un insérant des lignes.
-	 * @param content - Liste de liste d'objets à écrire. 
-	 * @param range - Cellule dans laquelle écrire.
-	 * @return Résultat de l'éxecution.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	 * Writes in one or multiple cells by adding lines.
+	 * @param content - List of objects to write in the cells. 
+	 * @param range - Cell in which write the content.
+	 * @return Result of the operation.
+     * @throws IOException if cannot perform the operation.
 	 */
 	public AppendValuesResponse append(List<List<Object>> content, String range) throws IOException {
 		ValueRange body = new ValueRange().setValues(content);
@@ -96,10 +103,11 @@ public class GoogleSheet {
 				.execute();
 	}
 
-	/** Permet de lire le contenu de une ou plusieurs cellules.
-	 * @param range - Plage de donnée que l'on veut lire.
-	 * @return Liste de liste d'objets luent.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	/**
+	 * Reads the content of one or multiple cells.
+	 * @param range - Range of data to read (e.g: A5:H12).
+	 * @return List of objects in the range.
+     * @throws IOException if cannot perform the operation.
 	 */
 	public List<List<Object>> read(String range) throws IOException {
 		List<String> ranges = Arrays.asList(range);
@@ -112,10 +120,11 @@ public class GoogleSheet {
 				.getValues();
 	}
 	
-	/** Permet d'effacer le contenu d'une ou plusieurs cellules.
-	 * @param range - Plage de donnée à effasser.
-	 * @return Résultat de l'éxecution.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	/**
+	 * Clears the content of one or multiple cells.
+	 * @param range - Range of data to clear (e.g: A5:H12).
+	 * @return Result of the operation.
+     * @throws IOException if cannot perform the operation.
 	 */
 	public ClearValuesResponse clear(String range) throws IOException {
 		return sheets.spreadsheets().values()
@@ -123,18 +132,20 @@ public class GoogleSheet {
 				.execute();
 	}
 	
-	/** Permet de lister les pages du tableur.
-	 * @return List des pages.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	/**
+	 * Lists the pages of the sheet.
+	 * @return List of pages.
+     * @throws IOException if cannot perform the operation.
 	 */
 	public List<Sheet> listSheets() throws IOException {
 		return sheets.spreadsheets().get(id).execute().getSheets();
 	}
 	
-	/** Permet de créer une nouvelle page au tableur.
-	 * @param name - Nom de la page.
-	 * @return Résultat de l'éxecution.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	/**
+	 * Creates a new page on the sheet.
+	 * @param name - Name of the page.
+	 * @return Result of the operation.
+     * @throws IOException if cannot perform the operation.
 	 */
 	public BatchUpdateSpreadsheetResponse createSheet(String name) throws IOException {
 		AddSheetRequest addSheetRequest = new AddSheetRequest().setProperties(new SheetProperties().setTitle(name));
@@ -145,11 +156,12 @@ public class GoogleSheet {
 		return sheets.spreadsheets().batchUpdate(id, requestBody).execute();
 	}
 	
-	/** Permet de copier une page du tableur.
-	 * @param sheetId - Id de la page à copier.
-	 * @param name - Nom de la page.
-	 * @return Résultat de l'éxecution.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	/**
+	 * Copies a page of the sheet.
+	 * @param sheetId - Id of the page to copy.
+	 * @param name - Name of the page after copy.
+	 * @return Result of the operation.
+     * @throws IOException if cannot perform the operation.
 	 */
 	public SheetProperties copySheet(Integer sheetId, String name) throws IOException {
 		CopySheetToAnotherSpreadsheetRequest requestBody = new CopySheetToAnotherSpreadsheetRequest().setDestinationSpreadsheetId(id);
@@ -158,21 +170,23 @@ public class GoogleSheet {
 		return result;
 	}
 	
-	/** Permet de renommer une page.
-	 * @param sheetId - Id de la page.
-	 * @param name - Nouveau nom de la page
-	 * @return Résultat de l'éxecution.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	/**
+	 * Renames a page of the sheet.
+	 * @param sheetId - Id of the page.
+	 * @param name - New name of the page.
+	 * @return Result of the operation.
+     * @throws IOException if cannot perform the operation.
 	 */
 	public BatchUpdateSpreadsheetResponse renameSheet(int sheetId, String name) throws IOException {
 		//TO DO
 		return null;
 	}
 	
-	/** Permet de supprimer une page du tableur.
-	 * @param sheetId - Id de la page à supprimer.
-	 * @return Résultat de l'éxecution.
-     * @throws IOException Si impossible d'éxecuter l'opération.
+	/**
+	 * Removes a page on the sheet.
+	 * @param sheetId - Id of the page to remove.
+	 * @return Result of the operation.
+     * @throws IOException if cannot perform the operation.
 	 */
 	public BatchUpdateSpreadsheetResponse removeSheet(int sheetId) throws IOException {		
 		DeleteSheetRequest deleteSheetRequest = new DeleteSheetRequest().setSheetId(sheetId);
@@ -182,19 +196,4 @@ public class GoogleSheet {
 		BatchUpdateSpreadsheetRequest requestBody = new BatchUpdateSpreadsheetRequest().setRequests(requests);
 		return sheets.spreadsheets().batchUpdate(id, requestBody).execute();
 	}
-    
-
-	  /************/
-	 /** STATIC **/
-	/************/
-	
-    /** Permet de récupérer l'id d'un tableur à partir de l'url.
-     * @param url - Url du tableur.
-     * @return Id du tableur.
-     */
-    public static String getIdFromUrl(String url) {
-    	int begin = url.indexOf("/d/");
-    	String subUrl = url.substring(begin+3);
-    	return subUrl.substring(0, subUrl.indexOf("/"));
-    }
 }

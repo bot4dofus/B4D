@@ -7,28 +7,45 @@ import java.io.Serializable;
 import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 
-/** La classe {@code Configuration} représente la configuration de l'écran de jeu.<br><br>
- * Elle est définit par une zone de jeu, une zone de chat, une barre de chat et une minimap.
+/**
+ * The {@code Configuration} class represents the configuration of the game.
+ * <br><br>
+ * It is defined by areas and locations of components on the screen.
+ * 
+ * @author Lucas
+ *
  */
 public class Configuration implements Serializable{
 
 	private static final long serialVersionUID = -1787414977374798817L;
-	
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
 
+	/**
+	 * Area where the user can click to interact.
+	 */
 	private Rectangle gameFrame;
-	private Point chatMenu;
-	private Point chatBar;
-	private Point status;
-	private Point minimap;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
 	
-	/** Constructeur de la classe {@code Configuration}. 
+	/**
+	 * Location of the chat menu button.
+	 */
+	private Point chatMenu;
+	
+	/**
+	 * Location of the chat bar.
+	 */
+	private Point chatBar;
+	
+	/**
+	 * Location of the status button.
+	 */
+	private Point status;
+	
+	/**
+	 * Location of the minimap.
+	 */
+	private Point minimap;
+	
+	/**
+	 * Constructor of the {@code Configuration} class.
 	 */
 	public Configuration(){
 		this.gameFrame = null;
@@ -36,90 +53,92 @@ public class Configuration implements Serializable{
 		this.chatBar = null;
 		this.minimap = null;
 	}
-	
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/
 
-	/** Retourne la zone de jeu.
-	 * @return Zone de jeu.
+	/**
+	 * Returns the game frame.
+	 * @return Rectangle representing the area where the user can interact.
 	 */
 	public Rectangle getGameFrame() {
 		return gameFrame;
 	}
 
-	/** Modifi la zone de jeu.
-	 * @param gameFrame - Nouvelle zone de jeu.
+	/**
+	 * Defines the new game frame.
+	 * @param gameFrame - Rectangle representing the area where the user can interact.
 	 */
 	public void setGameFrame(Rectangle gameFrame) {
 		this.gameFrame = gameFrame;
 	}
 
-	/** Retourne la position du menu du chat;
-	 * @return Position du menu du chat en coordonnées simples.
+	/**
+	 * Returns the location of the chat menu button on the screen.
+	 * @return Location of the chat menu button on the screen.
 	 */
 	public Point getChatMenu() {
 		return chatMenu;
 	}
 
-	/** Modifi la position du menu du chat.
-	 * @param chatMenu - Nouvelle position du menu du chat en coordonnées simples.
+	/**
+	 * Defines the new location of the chat menu button on the screen.
+	 * @param chatMenu - Location of the chat menu button on the screen
 	 */
 	public void setChatMenu(Point chatMenu) {
 		this.chatMenu = chatMenu;
 		Channel.setChatMenuPosition(chatMenu);
 	}
 
-	/** Retourne la position de la barre de chat.
-	 * @return Position de la barre de chat en coordonnées simples.
+	/**
+	 * Returns the location of the chat bar on the screen.
+	 * @return Location of the chat bar on the screen.
 	 */
 	public Point getChatBar() {
 		return chatBar;
 	}
 
-	/** Modifi la position de la barre de chat.
-	 * @param chatBar - Nouvelle position de la barre de chat en coordonnées simples.
+	/**
+	 * Defines the new location of the chat bar on the screen.
+	 * @param chatBar - Location of the chat bar on the screen
 	 */
 	public void setChatBar(Point chatBar) {
 		this.chatBar = chatBar;
 	}
 
-	/** Retourne la position du status.
-	 * @return Position du status en coordonnées simples.
+	/**
+	 * Returns the location of the status button on the screen.
+	 * @return Location of the status button on the screen.
 	 */
 	public Point getStatus() {
 		return status;
 	}
 
-	/** Modifi la position du status.
-	 * @param status - Nouvelle position du status en coordonnées simples.
+	/**
+	 * Defines the new location of the status button on the screen.
+	 * @param status - Location of the status button on the screen
 	 */
 	public void setStatus(Point status) {
 		this.status = status;
 		Status.setStatusMenuPosition(status);
 	}
-	
-	/** Retourne la position de la minimap.
-	 * @return Position de la minimap en coordonnées simples.
+
+	/**
+	 * Returns the location of the minimap on the screen.
+	 * @return Location of the minimap on the screen.
 	 */
 	public Point getMinimap() {
 		return minimap;
 	}
 
-	/** Modifi la position de la minimap.
-	 * @param minimap - Nouvelle position de la minimap en coordonnées simples.
+	/**
+	 * Defines the new location of the minimap on the screen.
+	 * @param minimap - Location of the minimap on the screen
 	 */
 	public void setMinimap(Point minimap) {
 		this.minimap = minimap;
 	}
 	
-
-	  /*************/
-	 /** METHODS **/
-	/*************/
-	
-	/** Retourne un boolean représentant si la totalité des paramètres ont été configurés.
-	 * @return {@code true} si la configuration est complète, {@code false} sinon.
+	/**
+	 * Checks whether the configuration is completed. All the attributes of the class needs to be defined and non null.
+	 * @return {@code true} if the configuration is completed, {@code false} otherwise.
 	 */
 	public boolean isComplet() {
 		return gameFrame != null && chatMenu != null && chatBar != null && status != null && minimap != null;

@@ -9,6 +9,9 @@ import fr.B4D.utils.PointF;
  * The class {@code MoneyWithdrawal} represents a money withdrawal action on a bank.<br><br>
  * This class extends {@code BankAction}.
  * A money withdrawal has an amount.
+ * 
+ * @author Lucas
+ *
  */
 public class MoneyWithdrawal extends BankAction{
 

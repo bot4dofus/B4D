@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 /**
  * The class {@code JFrame_GetPointImage} is a GUI used to get a location of an element on the screen.<br>
  * This interface displays a gray filter on the entire screen with instructions and a picture.
+ * 
  * @author Lucas
  *
  */

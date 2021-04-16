@@ -6,28 +6,35 @@ import fr.B4D.transport.Graph;
 import fr.B4D.transport.Transport;
 import fr.B4D.transport.TransportStep;
 
-/** La classe {@code World} représente le monde de dofus.<br><br>
- * Un monde est défini par un graph.
+/**
+ * The {@code World} class represents a world in the game.<br><br>
+ * A world is represented by a graph.
+ * 
+ * @author Lucas
+ *
  */
 public class World {
 	
 	private Graph graph;
 
-	/** Constructeur de la classe {@code World}.
+	/**
+	 * Constructor of the {@code World} class.
 	 */
 	protected World() {
 		graph = new Graph();
 	}
 	
-	/** Retourne le graph du monde.
-	 * @return Graph du monde.
+	/**
+	 * Returns the graph of the world.
+	 * @return Graph of the world.
 	 */
 	public Graph getGraph() {
 		return graph;
 	}
 	
-	/** Permet d'ajouter au graph une liste de transport.
-	 * @param transports - Liste de transports.
+	/**
+	 * Adds a list of transports to the graph.
+	 * @param transports - List of transports.
 	 */
 	protected void patchTransport(ArrayList<Transport> transports) {
 		for(Transport t1:transports) {

@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Configuration;
-import fr.B4D.dao.DAOFactory;
+import fr.B4D.filemanager.FileManagerFactory;
 import fr.B4D.utils.Rectangle;
 
 @SuppressWarnings("javadoc")
@@ -20,8 +20,8 @@ public class ScreenTest {
 	private Screen screen;
 	
 	@Before
-	public void before() throws ClassNotFoundException, IOException, AWTException {
-		Configuration configuration = DAOFactory.getConfigurationDAO().find();
+	public void before() throws ClassNotFoundException, IOException, AWTException, B4DException {
+		Configuration configuration = FileManagerFactory.getConfigurationFileManager().read();
 		screen = new Screen(configuration);
 	}
 	

@@ -13,6 +13,7 @@ import fr.B4D.program.CancelProgramException;
  * The {@code Os} class gives access to useful methods relative to the Operating System.
  * 
  * @author Lucas
+ * 
  */
 public abstract class Os {
 	

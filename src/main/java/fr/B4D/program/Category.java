@@ -1,6 +1,10 @@
 package fr.B4D.program;
 
-/** L'énumération {@code Category} liste les catégories des programmes.
+/**
+ * The {@code Category} enumeration reference all the program categories.
+ * 
+ * @author Lucas
+ *
  */
 public enum Category {
     /**

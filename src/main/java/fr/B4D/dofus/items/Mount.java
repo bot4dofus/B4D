@@ -4,6 +4,9 @@ import java.util.List;
 
 /**
  * The {@code Mount} interface used to manipulate items of type Mount.
+ * 
+ * @author Lucas
+ *
  */
 public interface Mount extends ItemInterface{
 

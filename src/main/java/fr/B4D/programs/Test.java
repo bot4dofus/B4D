@@ -12,6 +12,7 @@ import fr.B4D.program.StopProgramException;
 
 /**
  * The {@code Loto} class contains the loto program.
+ * 
  * @author Lucas
  *
  */

@@ -2,6 +2,7 @@ package fr.B4D.socket;
 
 /**
  * The {@code SocketUtils} class is used to define useful methods relative to sockets.
+ * 
  * @author Lucas
  *
  */

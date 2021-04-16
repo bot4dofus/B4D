@@ -12,9 +12,13 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
 
-/** The class {@code HDV} represents an HDV on the map.<br><br>
+/**
+ * The class {@code HDV} represents an HDV on the map.<br><br>
  * This class extends {@code IndoorBuilding}.
  * An HDV has a characterPosition position.
+ * 
+ * @author Lucas
+ *
  */
 public class HDV extends IndoorBuilding{
 
@@ -37,12 +41,9 @@ public class HDV extends IndoorBuilding{
 	 * Location of the table in relative coordinates.
 	 */
 	private PointF tablePosition;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
 	
-	/** Builder of the {@code HDV} class.
+	/**
+	 * Builder of the {@code HDV} class.
 	 * @param position - Position of the HDV on the map.
 	 * @param inPoints - List of points to get into the building.
 	 * @param outPoints - List of points to get out of the building.
@@ -58,12 +59,8 @@ public class HDV extends IndoorBuilding{
 			this.opened = Boolean.FALSE;
 			this.buyMode = true;
 	}
-
-	  /***************/
-	 /** GET & SET **/
-	/***************/
 	
-	/** 
+	/**
 	 * Returns the position of the table on the screen.
 	 * @return Position of the table.
 	 */
@@ -71,7 +68,7 @@ public class HDV extends IndoorBuilding{
 		return tablePosition;
 	}
 	
-	/** 
+	/**
 	 * Checks whether the HDV is opened or not.
 	 * @return {@code true} if the HDV is opened, {@code false} otherwise.
 	 */
@@ -79,7 +76,7 @@ public class HDV extends IndoorBuilding{
 		return opened;
 	}
 	
-	/** 
+	/**
 	 * Checks whether the HDV is in buy mode.
 	 * @return {@code true} if the HDV is in buy mode, {@code false} otherwise.
 	 */

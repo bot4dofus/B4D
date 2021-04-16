@@ -10,6 +10,9 @@ import fr.B4D.utils.PointF;
  * The class {@code MoneyDeposit} represents a money deposit action on a bank.<br><br>
  * This class extends {@code BankAction}.
  * A money deposit has an amount.
+ * 
+ * @author Lucas
+ *
  */
 public class MoneyDeposit extends BankAction{
 

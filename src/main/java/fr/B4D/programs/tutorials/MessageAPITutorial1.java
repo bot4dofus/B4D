@@ -12,13 +12,16 @@ import fr.B4D.program.StopProgramException;
 
 /**
  * The {@code MessageAPI} class contains all the tutorials relative to the message API.
- * Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des messages entre joueurs.<br>
- *  <br>
- *  Fonctionnement :
- *  <ul>
- *  	<li>Attente d'un message quelconque dans le chat.</li>
- *  	<li>Affiche le message reçu ainsi que l'auteur et le canal.</li>
- *  </ul>
+ * <br><br>
+ * This tutorial focus on message reception.
+ * If you want to send private messages, see {@link BankAPITutorial2}.
+ * If you want to use chat filters and a chat listener, see {@link BankAPITutorial3}.
+ * <br><br>
+ * Steps :
+ * <ul>
+ *     <li>Waits for a message in the chat</li>
+ *     <li>Displays the message in a popup window</li>
+ * </ul>
  *
  * @author Lucas
  *

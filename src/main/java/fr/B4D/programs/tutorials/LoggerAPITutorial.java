@@ -9,16 +9,14 @@ import fr.B4D.program.Program;
 
 /**
  * The {@code LoggerAPI} class contains all the tutorials relative to the logger API.
- * 
- * Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des logs.<br>
- *  <br>
- *  Fonctionnement :
- *  <ul>
- *  	<li>Envoi d'un message dans la console.</li>
- *  	<li>Affichage d'un message à l'écran.</li>
- *  	<li>Envoi d'un avertissement dans la console.</li>
- *  	<li>Affichage d'une erreur à l'écran.</li>
- *  </ul>
+ * <br><br>
+ * Steps :
+ * <ul>
+ *     <li>Displays a message in the console</li>
+ *     <li>Displays a popup message</li>
+ *     <li>Displays a warning in the console</li>
+ *     <li>Displays an error in the consol and in a popup</li>
+ * </ul>
  *
  * @author Lucas
  *

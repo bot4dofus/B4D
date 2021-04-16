@@ -12,14 +12,15 @@ import fr.B4D.utils.PointF;
 
 /**
  * The {@code ScreenAPI} class contains all the tutorials relative to the screen API.
- * 
- * Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API de l'écran.<br>
- *  <br>
- *  Fonctionnement :
- *  <ul>
- *  	<li>Récupère la couleur d'un pixel et l'affiche.</li>
- *  	<li>Attend que ce pixel change et affiche la nouvelle couleur.</li>
- *  </ul>
+ * <br><br>
+ * This tutorial focus on pixel analysis.
+ * If you want to perform an OCR, see {@link ScreenAPITutorial2}.
+ * <br><br>
+ * Steps :
+ * <ul>
+ *    <li>Get the color of a pixel and displays it</li>
+ *    <li>Waits for this pixel to change color and displays the new color</li>
+ * </ul>
  *
  * @author Lucas
  *

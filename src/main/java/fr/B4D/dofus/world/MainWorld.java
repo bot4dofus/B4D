@@ -7,6 +7,7 @@ import fr.B4D.transport.transports.Zaapi;
 
 /**
  * The {@code MainWorld} class represents the main world of dofus.
+ * 
  * @author Lucas
  *
  */
@@ -27,7 +28,8 @@ public class MainWorld extends World{
 		patchTransport(Zaapi.getAllBrakmar());
 	}
 	
-	/** Permet d'ajouter les vertex du monde des douzes avec connexion automatique.
+	/**
+	 * Create the vertex of the world.
 	 */
 	private void createWorld() {
 		addWorldPart1();
@@ -35,7 +37,8 @@ public class MainWorld extends World{
 		addWorldPart3();
 	}
 	
-	/** Permet d'ajouter les vertex du monde des douzes avec connexion automatique (partie 1/3).
+	/**
+	 * Create the vertex of the world (1/3)
 	 */
 	private void addWorldPart1() {
 		getGraph().addVertex(new Point(0, 0), true);
@@ -3032,7 +3035,8 @@ public class MainWorld extends World{
 		getGraph().addVertex(new Point(-18, -24), true);
 	}
 
-	/** Permet d'ajouter les vertex du monde des douzes avec connexion automatique (partie 2/3).
+	/**
+	 * Create the vertex of the world (2/3)
 	 */
 	private void addWorldPart2() {
 		getGraph().addVertex(new Point(-19, -24), true);
@@ -6029,7 +6033,8 @@ public class MainWorld extends World{
 		getGraph().addVertex(new Point(-64, -55), true);
 	}
 
-	/** Permet d'ajouter les vertex du monde des douzes avec connexion automatique (partie 3/3).
+	/**
+	 * Create the vertex of the world (3/3)
 	 */
 	private void addWorldPart3() {
 		getGraph().addVertex(new Point(-65, -55), true);
@@ -6310,13 +6315,15 @@ public class MainWorld extends World{
 		getGraph().addVertex(new Point(-1, -66), true);
 	}
 
-	/** Permet d'ajouter les obstacles du monde des douzes tel que les murailes, les lisières de forêt où les falaises
+	/**
+	 * Add the obstacles like walls, borders, rivers...
 	 */
 	private void addObstacles() {
 		astrubWalls();
 	}
 	
-	/** Ajoute les murailles d'astrubs
+	/**
+	 * Add the Astrub walls
 	 */
 	private void astrubWalls() {
 		getGraph().removeEdge(new Point(5,-19), new Point(5,-20), true);

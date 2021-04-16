@@ -13,18 +13,32 @@ import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
 import fr.B4D.socket.parser.SocketParser;
 
-/** La classe {@code SocketListener} permet d'écouter de sniffer et traiter les trames dofus.<br><br>
- * Cette classe étend la classe {@code Thread}.
+/**
+ * The {@code SocketListener} class is used to listen the incoming dofus sockets, parse it and process it.
+ * 
+ * @author Lucas
+ *
  */
 public class SocketListener extends Thread{
 	
+	/**
+	 * Read infinite number of sockets
+	 */
 	private static final int INFINITE = -1;
 	
+	/**
+	 * Packet handler.
+	 */
 	private PcapHandle handle;
+	
+	/**
+	 * Listener defining what to do when a packet is received.
+	 */
 	private PacketListener packetListener;
 	
-	/** Constructeur de la classe {@code SocketListener}.
-	 * @throws B4DException Si il est impossible d'ouvrir le réseau.
+	/**
+	 * Constructor of the {@code SocketListener} class.
+	 * @throws B4DException if cannot open the network.
 	 */
 	public SocketListener() throws B4DException{
 		
@@ -94,19 +108,19 @@ public class SocketListener extends Thread{
 		}
 	}
 	
-	  /*************/
-	 /** PARSING **/
-	/*************/
-	
-	/** Parse les trâmes entrantes.
-	 * @param data - Trâmes entrante.
+	/**
+	 * Parse the incoming dofus packets.
+	 * @param data - Dofus packet as array of byte.
 	 */
 	private void parseDofus(byte[] data) {	
 		
 		try {
+			/* Builds a dofus socket out of bytes */
 			DofusSocket dofusSocket = new DofusSocket(data);
+			/* Get the parser corresponding to this packet type */
 			SocketParser<?> socketParser = dofusSocket.getParser();
 			if(socketParser != null) {
+				/* Parse the socket and perform action */
 				socketParser.parse(dofusSocket);
 			}
 		}catch(B4DException | IllegalArgumentException e) {

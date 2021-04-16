@@ -24,6 +24,7 @@ import java.awt.SystemColor;
 
 /**
  * The class {@code JPanel_Reglage} is a GUI allowing screen configuration and other settings.
+ * 
  * @author Lucas
  *
  */
@@ -323,11 +324,10 @@ public class JPanel_Reglage extends JPanel {
 			
 		ActualiserInfos();
 	}
-	
-	  /**************/
-	 /** METHODES **/
-	/**************/
-	
+
+	/**
+	 * Refresh the informatons displayed on the panel.
+	 */
 	public void ActualiserInfos() {
 		if(b4d.getConfiguration().getGameFrame() != null) {
 			this.lblXY_GameFrame.setText(b4d.getConfiguration().getGameFrame().x + ":" + b4d.getConfiguration().getGameFrame().y);

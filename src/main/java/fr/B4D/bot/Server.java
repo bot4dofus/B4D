@@ -1,7 +1,12 @@
 package fr.B4D.bot;
 
-/** La classe {@code Server} représente un serveur de jeu dofus.<br><br>
- * Un serveur est défini par un nom et une ip.
+/**
+ * The {@code Server} enumeration represents a Dofus server.
+ * <br><br>
+ * A server is defined by a name and an IP address.
+ * 
+ * @author Lucas
+ *
  */
 public enum Server {
 
@@ -77,22 +82,26 @@ public enum Server {
 	 */
 	OMBRE("Ombre", "54.77.55.234", true);
 
-	/**************/
-	/** ATRIBUTS **/
-	/**************/
-
+	/**
+	 * Name of the server.
+	 */
 	private String name;
+	
+	/**
+	 * IP address of the server.
+	 */
 	private String ip;
+	
+	/**
+	 * Specifies whether the server is international.
+	 */
 	private boolean international;
 
-	/*****************/
-	/** CONSTRUCTOR **/
-	/*****************/
-
-	/** Constructeur de la classe {@code Server}.
-	 * @param name - Nom du serveur.
-	 * @param ip - Ip du serveur au format x.x.x.x.
-	 * @param international - {@code true} si le serveur est internationnal, {@code false} sinon.
+	/**
+	 * Constructor of the {@code Server} enumeration.
+	 * @param name - Name of the server.
+	 * @param ip - IP address of the server (format x.x.x.x).
+	 * @param international - {@code true} if the server is international, {@code false} otherwise.
 	 */
 	Server(String name, String ip, boolean international) {
 		this.name = name;
@@ -100,26 +109,25 @@ public enum Server {
 		this.international = international;
 	}
 
-	/***********************/
-	/** GETTERS & SETTERS **/
-	/***********************/
-
-	/** Retourne le nom du serveur.
-	 * @return Nom du serveur.
+	/**
+	 * Returns the name of the server.
+	 * @return Name of the server.
 	 */
 	public String getName() {
 		return name;
 	}
 
-	/** Retourne l'ip du serveur.
-	 * @return Ip du serveur.
+	/**
+	 * Returns the IP address of the server.
+	 * @return IP address of the server.
 	 */
 	public String getIp() {
 		return ip;
 	}
 
-	/** Retourne un booleen représentant si le server est internationnal ou non.
-	 * @return {@code true} si le serveur est internationnal, {@code false} sinon.
+	/** 
+	 * Checks whether the server is international or not.
+	 * @return {@code true} if the server is international, {@code false} otherwise.
 	 */
 	public boolean isInternationnal() {
 		return international;

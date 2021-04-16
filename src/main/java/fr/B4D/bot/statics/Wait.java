@@ -8,32 +8,32 @@ import javax.swing.JOptionPane;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code Wait} permet au bot d'attendre.<br><br>
- * Elle gère la mise en pause et l'arret du programme.
+/**
+ * The {@code Wait} class is used to access to the waiting methods.<br><br>
+ * It manages the cancellation of the program.
+ * 
+ * @author Lucas
+ *
  */
 public final class Wait {
 	
+	/**
+	 * Current thread.
+	 */
 	private Thread current;
 	
-	  /*************/
-	 /** SETTERS **/
-	/*************/
-	
-	/** Permet de mettre le bot sur pause.
-	 * 
+	/**
+	 * Pause the bot.
 	 */
 	public void suspend() {
 		current.interrupt();
 	}
 
-	  /*************/
-	 /** METHODS **/
-	/*************/
-
-	/** Attend pendant un certain temps
-	 * @param time - Temps d'attente en millisecondes.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Wait for a given time in ms.
+	 * @param time - Time to wait iin ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void sleep(long time) throws StopProgramException, CancelProgramException {
 
@@ -52,11 +52,12 @@ public final class Wait {
 		}
 	}
 	
-	/** Attend pendant un certain temps sur un objet.
-	 * @param object - Objet sur lequel attendre.
-	 * @param time - Temps d'attente en millisecondes.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Wait for a given time on an object.
+	 * @param object - Object on which wait.
+	 * @param time - Time to wait in ms.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void waitOnObject(Object object, long time) throws StopProgramException, CancelProgramException {
 		
@@ -77,9 +78,10 @@ public final class Wait {
 		}
 	}
 	
-	/** Affiche un message popUp demandant au joueur si il veut stopper, interrompre ou continuer le programme
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
+	/**
+	 * Displays a popup message asking to the user if he wants to pause, cancel or continue the program.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void setPause() throws StopProgramException, CancelProgramException {
 		Object[] options = {"Continuer", "Stopper", "Interrompre"};

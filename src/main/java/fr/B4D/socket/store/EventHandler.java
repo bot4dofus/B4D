@@ -2,6 +2,7 @@ package fr.B4D.socket.store;
 
 /**
  * Handles an event of generic type T.
+ * 
  * @author Lucas
  *
  * @param <T> Handled event type.

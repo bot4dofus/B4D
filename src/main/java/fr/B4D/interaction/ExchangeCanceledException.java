@@ -2,15 +2,18 @@ package fr.B4D.interaction;
 
 import fr.B4D.bot.B4DException;
 
-/** Signal que l'échange en cours à été annulé.
+/**
+ * Specifies that the exchange has been canceled, whether by the player or by the bot.
+ * 
+ * @author Lucas
  *
  */
 public class ExchangeCanceledException extends B4DException{
 
 	private static final long serialVersionUID = 1721525819432312605L;
 
-	/** Constructeur de l'exception {@code ExchangeCanceled}.
-	 * 
+	/**
+	 * Constructor of the {@code ExchangeCanceledException}.
 	 */
 	public ExchangeCanceledException()
     {

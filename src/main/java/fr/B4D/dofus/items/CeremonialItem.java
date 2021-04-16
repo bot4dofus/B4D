@@ -5,6 +5,9 @@ import java.util.Map;
 
 /**
  * The {@code CeremonialItem} interface used to manipulate items of type CeremonialItem.
+ * 
+ * @author Lucas
+ *
  */
 public interface CeremonialItem extends ItemInterface{
 

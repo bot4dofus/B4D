@@ -3,13 +3,19 @@ package fr.B4D.bot;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/** La classe {@code Team} représente un ensemble de personnage que le joueur peut jouer.<br><br>
- * Une Team est défini par une liste de personnage.
+/**
+ * The {@code Team} class represents a list of persons that the player can use.
+ * <br><br>
+ * A team is a list of persons.
+ * 
+ * @author Lucas
+ *
  */
 public class Team extends ArrayList<Person> implements Serializable{
 	private static final long serialVersionUID = -996256893142354267L;
 
-	/** Constructeur de la classe {@code Team}. 
+	/**
+	 * Constructor of the {@code Team} class. 
 	 */
 	public Team() {
 		super();

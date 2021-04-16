@@ -10,16 +10,14 @@ import fr.B4D.utils.PointF;
 
 /**
  * The {@code MouseAPI} class contains all the tutorials relative to the mouse API.
- * 
- * Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API de la souris.<br>
- *  <br>
- *  Fonctionnement :
- *  <ul>
- *  	<li>Clic sur la barre de chat et attend 500 millisecondes.</li>
- *  	<li>Clic gauche avec appui sur Maj et attend 1 seconde.</li>
- *  	<li>Clic droit sans appui sur Maj et attend 700 millisecondes.</li>
- *  	<li>Place la souris au milieu et attend 1.5 secondes.</li>
- *  </ul>
+ * <br><br>
+ * Steps :
+ * <ul>
+ *     <li>Left clique on the chat bar and waits 500 ms</li>
+ *     <li>Maj + Left click on the game frame and waits 1000 ms</li>
+ *     <li>Right click on the game frame and waits 700 ms</li>
+ *     <li>Move the mouse in the middle of the game frame and waits 1500 ms</li>
+ * </ul>
  *
  * @author Lucas
  *

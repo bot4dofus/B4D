@@ -2,11 +2,16 @@ package fr.B4D.utils;
 
 import java.io.StringWriter;
 
-/** Functions for formatting and printing binary data in hexadecimal.
+/**
+ * The {@code HexHelper} class is used for formatting and printing binary data in hexadecimal.
+ * 
+ * @author Lucas
+ *
  */
 public class HexHelper
 {
-	/** Returns a char representation of a byte into
+	/**
+	 * Returns a char representation of a byte into
 	 * @param x - Byte to convert.
 	 * @return Char containing the equivalent.
 	 */
@@ -15,7 +20,8 @@ public class HexHelper
 		return(c > 9 ? (char)(c - 10 + 'a') : (char)(c + '0')); // int to hex char
 	}
 
-	/** Returns a text representation of a byte.
+	/**
+	 * Returns a text representation of a byte.
 	 * @param b - Byte to convert.
 	 * @return String containing the hex equivalent.
 	 */
@@ -26,7 +32,8 @@ public class HexHelper
 		return sb.toString();
 	}
 
-	/** Returns a text representation of a byte array.
+	/**
+	 * Returns a text representation of a byte array.
 	 * @param bytes - Array of bytes to convert.
 	 * @return String containing the hex equivalent.
 	 */

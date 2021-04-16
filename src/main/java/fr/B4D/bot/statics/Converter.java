@@ -6,29 +6,32 @@ import fr.B4D.bot.Configuration;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Converter} permet de convertir une position entre différents systèmes de coordonnées.<br><br>
+/**
+ * The {@code Converter} class is used to convert a location from a system to another.<br><br>
  * 
- * Coordonnées simples :<br>
+ * Simple coordinates :<br>
  * 
  *	&nbsp;_______<br>
  *	|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Y<br>
  *	|<br>
  *	|&nbsp;&nbsp;X<br><br>
  *
- * Coordonnées relatives :<br>
+ * Relative coordinates :<br>
  * 
  *	&nbsp;_______<br>
  *	|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1<br>
  *	|<br>
  *	|&nbsp;&nbsp;1<br><br>
  * 
- * Coordonnées du damier de dofus :<br>
+ * Draughtboard coordinates :<br>
  * 
  *	&nbsp;&nbsp;/&nbsp;X<br>
  *	/<br>
  *	\<br>
  *  &nbsp;&nbsp;\&nbsp;Y<br><br>
  * 
+ * @author Lucas
+ *
  */
 public final class Converter {
 	
@@ -38,24 +41,18 @@ public final class Converter {
 
     private Configuration configuration;
     
-	/*************/
-	/** BUILDER **/
-	/*************/
-    
-	/** Constructeur de la classe {@code Converter}. 
-     * @param configuration - Configuration actuelle de l'écran de jeu.
+	/**
+	 * Constructor of the {@code Converter} class.
+     * @param configuration - Current configuration of the game.
      */
     public Converter(Configuration configuration) {
     	this.configuration = configuration;
     }
 
-      /********************************/
-     /** CONVERSION > Proportionnel **/
-    /********************************/
-
-    /** Permet de convertir un point en coordonnées relative.
-     * @param point - Point en coordonnées simple.
-     * @return Point en coordonnées relatives.
+    /**
+     * Converts a point from simple coordinates to relative coordinates.
+     * @param point - Point in simple coordinates.
+     * @return Point in relative coordinates.
      */
     public PointF toPointF(Point point){
     	double X = (point.getX() - configuration.getGameFrame().getX()) / configuration.getGameFrame().getWidth();
@@ -63,9 +60,10 @@ public final class Converter {
         return new PointF(Math.round(X*Precision)/Precision, Math.round(Y*Precision)/Precision);
     }
 
-    /** Permet de convertir un point en coordonnées relative.
-     * @param point - Point en coordonnées du damier de dofus.
-     * @return Point en coordonnées relatives.
+    /**
+     * Converts a point from draughtboard coordinates to relative coordinates.
+     * @param point - Point in draughtboard coordinates.
+     * @return Point in relative coordinates.
      */
     public PointF toPointF(PointD point){
     	double X = (point.getX() + point.getY()) * CaseWidthF;
@@ -73,13 +71,10 @@ public final class Converter {
         return new PointF(Math.round(X*Precision)/Precision, Math.round(Y*Precision)/Precision);
     }
 
-      /************************/
-     /** CONVERSION > Ecran **/
-    /************************/
-    
-    /** Permet de convertir un point en coordonnées simples.
-     * @param point - Point en coordonnées relatives.
-     * @return Point en coordonnées simples.
+    /**
+     * Converts a point from relative coordinates to simple coordinates.
+     * @param point - Point in relative coordinates.
+     * @return Point in simple coordinates.
      */
     public Point toPoint(PointF point) {
     	double X = (point.getX() * configuration.getGameFrame().getWidth()) + configuration.getGameFrame().getX();
@@ -87,29 +82,28 @@ public final class Converter {
         return new Point((int)Math.round(X), (int)Math.round(Y));
     }
 
-    /** Permet de convertir un point en coordonnées simples.
-     * @param point - Point en coordonnées du damier de dofus.
-     * @return Point en coordonnées simples.
+    /**
+     * Converts a point from draughtboard coordinates to simple coordinates.
+     * @param point - Point in draughtboard coordinates.
+     * @return Point in simple coordinates.
      */
     public Point toPoint(PointD point) {
     	return toPoint(toPointF(point));
     }
 
-    /************************/
-   /** CONVERSION > Dofus **/
-  /************************/
-
-    /** Permet de convertir un point en coordonnées du damier de dofus.
-     * @param point - Point en coordonnées simples.
-     * @return Point en coordonnées du damier de dofus.
+    /**
+     * Converts a point from simple coordinates to draughtboard coordinates.
+     * @param point - Point in simple coordinates.
+     * @return Point in draughtboard coordinates.
      */
     public PointD toPointD(Point point) {
     	return toPointD(toPointF(point));
     }
 
-    /** Permet de convertir un point en coordonnées du damier de dofus.
-     * @param point - Point en coordonnées relatives.
-     * @return Point en coordonnées du damier de dofus.
+    /**
+     * Converts a point from relative coordinates to draughtboard coordinates.
+     * @param point - Point in relative coordinates.
+     * @return Point in draughtboard coordinates.
      */
     public PointD toPointD(PointF point) {
     	double X = (point.getX() / CaseWidthF - point.getY() / CaseHeightF) / 2;

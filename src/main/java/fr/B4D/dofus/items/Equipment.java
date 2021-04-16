@@ -5,6 +5,9 @@ import java.util.Map;
 
 /**
  * The {@code Equipment} interface used to manipulate items of type Equipment.
+ * 
+ * @author Lucas
+ *
  */
 public interface Equipment extends ItemInterface{
 

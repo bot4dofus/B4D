@@ -14,33 +14,33 @@ import fr.B4D.bot.B4D;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code Keyboard} permet d'accéder à toutes les méthodes liés au clavier.
+/**
+ * The {@code Keyboard} class is used to access to the keyboard methods.
+ * 
+ * @author Lucas
+ *
  */
 public final class Keyboard{
-	
-	private static Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-	private Robot robot;
-	
-	/*************/
-	/** BUILDER **/
-	/*************/
 
-	/** Constructeur de la classe {@code Mouse}. 
-	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation du clavier
+	/**
+	 * Robot performing a key press.
+	 */
+	private Robot robot;
+
+	/**
+	 * Constructor of the {@code Keyboard} class.
+	 * @throws AWTException if the platform configuration does not allow low-level input control.
      */
     public Keyboard() throws AWTException {
 		this.robot = new Robot();
     }
 	
-	  /****************/
-	 /** SINGLE KEY **/
-	/****************/
-	
-	/** Permet de simuler l'appui sur une touche du clavier. 
-	 * @param keyEvent - Entier représentant le touche du clavier.
-	 * @param time - Temps d'attente après l'appui sur la touche.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Simulates a key press on the keyboard.
+	 * @param keyEvent - Integer representing the key to press.
+	 * @param time - Time to wait after the key press.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void sendKey(int keyEvent, int time) throws StopProgramException, CancelProgramException {
 		robot.keyPress(keyEvent);
@@ -48,26 +48,25 @@ public final class Keyboard{
 		B4D.wait.sleep(time);
 	}
 	
-	/** Permet de simuler l'appui sur une touche du clavier avec un temps d'attente par défaut de 100ms.
-	 * Cela est identique à {@code sendKey(keyEvent, 100)}.
-	 * @param keyEvent - Entier représentant le touche du clavier.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Simulates a key press on the keyboard and wait for 100 ms after the key press.
+	 * This is the same as {@code sendKey(keyEvent, 100)}.
+	 * @param keyEvent - Integer representing the key to press.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void sendKey(int keyEvent) throws StopProgramException, CancelProgramException {
 		sendKey(keyEvent, 100);
 	}
 	
-	  /********************/
-	 /** WRITE KEYBOARD **/
-	/********************/
-	
-	/** Permet d'écrire un texte au clavier.
-	 * Cette méthode copy en réalité la chaine de caractère dans le presse papier puis fait un Ctrl+V.
-	 * @param text - Texte à écrire.
-	 * @param time - Temps d'attente après écriture du texte.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Simulates key press on the keyboard.<br><br>
+	 * This method actually copy the string in the clipboard and paste it where the cursor is.
+	 * It is faster than pressing all the letters one by one.
+	 * @param text - Text to write.
+	 * @param time - Time to wait after pasting.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void writeKeyboard(String text, int time) throws StopProgramException, CancelProgramException {
 		setClipboard(text);		
@@ -78,49 +77,47 @@ public final class Keyboard{
 		B4D.wait.sleep(time);
 	}
 	
-	/** Permet d'écrire un texte au clavier avec un temps d'attente par défaut de 500ms.
-	 * Cela est identique à {@code writeKeyboard(text, 500)}.
-	 * Cette méthode copy en réalité la chaine de caractère dans le presse papier puis fait un Ctrl+V
-	 * @param text - Texte à écrire.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	/**
+	 * Simulates key press on the keyboard and wait for 500 ms after pasting.<br><br>
+	 * This is the same as {@code sendKey(keyEvent, 500)}.
+	 * This method actually copy the string in the clipboard and paste it where the cursor is.
+	 * It is faster than pressing all the letters one by one.
+	 * @param text - Text to write.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
 	 */
 	public void writeKeyboard(String text) throws StopProgramException, CancelProgramException {
 		writeKeyboard(text, 500);
 	}
 	
-	  /***************/
-	 /** CLIPBOARD **/
-	/***************/
-	
-	/** Permet de copier une chaine de caractère dans le presse papier.
-	 * @param text - Texte à copier.
+	/**
+	 * Defines the text to copy in the clipboard.
+	 * @param text - Text to copy.
 	 */
 	public void setClipboard(String text) {
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		clipboard.setContents(new StringSelection(text), null);
 	}
 	
-	/** Permet de retourner une chaine de caractère
-	 * @return Chaine de caractère présente dans le presse papier.
-	 * {@code null} si la donnée du presse papier n'est pas une chaine de caractère ou si le presse papier est vide.
+	/**
+	 * Returns the current string in the clipboard.
+	 * @return String contained in the clipboard, {@code null} if the data in clipboard is not a string or if or if the clipboard is empty
 	 */
 	public String getClipboard(){
         try {
+    		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 			return (String) clipboard.getData(DataFlavor.stringFlavor);
 		} catch (IOException | UnsupportedFlavorException e) {
 			return null;
 		}
 	}
 	
-	  /************************/
-	 /** ATTENTE SUR TOUCHE **/
-	/************************/
-	
 	/** Permet d'attendre l'appui sur une touche.
-	 * @param timeOut - Temps d'attente avant timeout en millisecondes.
-	 * @return Entier représentant la touche enfoncée. {@code -1} si timeout.
+	 * Wait for a key to be pressed.
+	 * @param timeout - Timeout in ms.
+	 * @return Integer representing the key pressed, {@code -1} if timeout.
 	 */
-	public int waitForKeyboard(int timeOut) {
+	public int waitForKeyboard(int timeout) {
 		//To be implemented using KeyboardListener and keys queue just like Chat and messages works
 		return -1;
 	}

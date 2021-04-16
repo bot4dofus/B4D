@@ -14,17 +14,18 @@ import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 
 /**
- * The {@code BankAPI} class contains all the tutorials relative to the bank API.
- * 
- * Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des banques.<br>
- *  <br>
- *  Fonctionnement :
- *  <ul>
- *  	<li>Dépose 100 kamas</li>
- *  	<li>Dépose tous les kamas</li>
- *  	<li>Prend 100 kamas</li>
- *  	<li>Prend tous les kamas</li>
- *  </ul>
+ * The {@code BankAPITutorial1} program is a tutorial to better understand the Bank API.
+ * <br><br>
+ * This tutorial focus on money deposits and withdrawals.
+ * If you want to perform item deposits and withdrawals, see {@link BankAPITutorial2}.
+ * <br><br>
+ * Steps :
+ * <ul>
+ *     <li>100 kamas deposit</li>
+ *     <li>Deposit of all the kamas</li>
+ *     <li>100 kamas withdrawal</li>
+ *     <li>Withdrawal of all the kamas</li>
+ * </ul>
  *
  * @author Lucas
  *

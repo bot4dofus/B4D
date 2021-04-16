@@ -12,16 +12,17 @@ import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Zaap} représente un zaap.<br><br>
- * Cette classe étend la classe {@code Transport}.
+/**
+ * The {@code Zaap} class represents a zaap.
+ * <br><br>
+ * This class extends {@code Transport}.
+ * 
+ * @author Lucas
+ *
  */
 public class Zaap extends Transport implements Serializable{
 	
 	private static final long serialVersionUID = -1582072889545306350L;
-	
-	  /****************/
-	 /** COLLECTION **/
-	/****************/
 	
 	/**
 	 * The zaap of the evil Amakna forest.
@@ -172,26 +173,20 @@ public class Zaap extends Transport implements Serializable{
 	 * The zaap of the Tainela.
 	 */
     public final static Zaap Tainela = new Zaap("Tainéla (Berceau)", new Point(1, -32), new PointF(0.4992, 0.3978));    
-    
-	  /******************/
-	 /** CONSTRUCTEUR **/
-	/******************/
 	
-	/** Constructeur de la classe {@code Zaap}.
-	 * @param name - Nom du zaap.
-	 * @param position - Position du zaap sur la carte.
-	 * @param positionF - Position relative du zaap.
+	/**
+	 * Constructor of the {@code Zaap} class.
+	 * @param name - Name of the zaap.
+	 * @param position - Location of the zaap on the map.
+	 * @param positionF - Location of the zaap on the screen in relative coordinates.
 	 */
 	public Zaap(String name, Point position, PointF positionF) {
 		super(name, position, positionF, ZAAP_COST);
 	}
 	
-	  /************************/
-	 /** METHODES STATIQUES **/
-	/************************/
-	
-    /** Retourne la liste de tous les zaaps.
-     * @return Liste de tous les zaaps.
+    /**
+     * Returns the list of all the zaaps in the game.
+     * @return List of zaaps.
      */
     public final static ArrayList<Transport> getAll(){
     	ArrayList<Transport> zaaps = new ArrayList<Transport>();
@@ -228,35 +223,31 @@ public class Zaap extends Transport implements Serializable{
         return zaaps;
     }
     
-    /** Permet de retrouver un zaap à partir de sa position.
-     * @param position - Position du zaap.
-     * @return Zaap correspondant.
-     * @throws B4DException Si aucun zaap ne correspond à cette position.
+    /**
+     * Finds a zaap from its location on the map.
+     * @param position - Location of the zaap.
+     * @return Corresponding zaap, {@code null} if no zaap exists at this location.
      */
-    public final static Zaap getZaap(Point position) throws B4DException{
+    public final static Zaap getZaap(Point position) {
     	for(Transport zaap: getAll()) {
 			if(zaap.getPosition().equals(position))
 				return (Zaap) zaap;
 		}
-		throw new B4DException("Cannot found the zaap in position [" + position.x + ":" + position.y + "] on the map.");
+		return null;
     }
 	
-    /** Permet de retrouver un zaap à partir de son nom.
-     * @param name - Nom du zaap.
-     * @return Zaap correspondant.
-     * @throws B4DException Si aucun zaap ne possède ce nom.
+    /**
+     * Finds a zaap from its name.
+     * @param name - Name of the zaap.
+     * @return Corresponding zaap, {@code null} if no zaap has this name.
      */
-	public static Zaap getZaap(String name) throws B4DException {
+	public static Zaap getZaap(String name) {
 		for(Transport zaap: getAll()) {
 			if(zaap.getName().equals(name))
 				return (Zaap) zaap;
 		}
-		throw new B4DException("Cannot found the zaap \"" + name + "\" on the map.");
+		return null;
 	}
-	
-	  /**************/
-	 /** METHODES **/
-	/**************/
 	
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
@@ -265,7 +256,12 @@ public class Zaap extends Transport implements Serializable{
 		B4D.mouse.leftClick(super.getPositionF(), false);
 		B4D.screen.waitForColor(new PointF(0.4432, 0.7365), new Color(170, 200, 0), new Color(210, 255, 50), 10000);
 		B4D.mouse.leftClick(new PointF(0.6632,0.2006), false, 200);
-		B4D.keyboard.writeKeyboard(getZaap(destination).getName());
+		
+		Zaap zaap = getZaap(destination);
+		if(zaap == null)
+			throw new B4DException("Cannot find the zaap at location [" + destination.x + ":" + destination.y + "] on the map.");
+		
+		B4D.keyboard.writeKeyboard(getZaap(destination).getName());		
 		B4D.mouse.doubleLeftClick(new PointF(0.46,0.2884), false);
 	    B4D.screen.waitForMap(20000);
 	}

@@ -4,21 +4,36 @@ import fr.B4D.dofus.world.World;
 import fr.B4D.dofus.world.WorldFactory;
 import fr.B4D.interaction.chat.Chat;
 
-/** La classe {@code Dofus} permet d'accéder au monde est au chat de dofus.
+/**
+ * The {@code Dofus} class is used to access to the Dofus world, chat and database.
+ * 
+ * @author Lucas
+ *
  */
 public class Dofus {
 	
+	/**
+	 * Instance of the Dofus object.
+	 */
 	private static Dofus instance;
 	
+	/**
+	 * Chat of the game.
+	 */
 	private static Chat chat;
-	private static World world;
-	private static DofusDatabase database;
 	
-	  /*************/
-	 /** BUILDER **/
-	/*************/
+	/**
+	 * Dofus world.
+	 */
+	private static World world;
+	
+	/**
+	 * Database of the game.
+	 */
+	private static DofusDatabase database;
 
-	/** Constructeur de la classe {@code Dofus}.
+	/**
+	 * Constructor of the {@code Dofus} class.
 	 */
 	private Dofus() {
 		chat = new Chat(100);
@@ -26,8 +41,9 @@ public class Dofus {
 		database = new DofusDatabase("/fr/B4D/data/dofus.fr.json", true);
 	}
 	
-	/** Retourne l'instance de la classe {@code Dofus}.
-	 * @return Instance du jeu dofus.
+	/**
+	 * Returns the instance of the {@code Dofus} class
+	 * @return Instance of the game.
 	 */
 	public static Dofus getInstance() {
 		if(instance == null)
@@ -35,22 +51,25 @@ public class Dofus {
 		return instance;
 	}
 
-	/** Retourne le chat du jeu.
-	 * @return Chat du jeu.
+	/**
+	 * Returns the chat of the game.
+	 * @return Chat of the game.
 	 */
 	public Chat getChat() {
 		return chat;
 	}
 
-	/** Retourne le monde du jeu.
-	 * @return Monde du jeu.
+	/**
+	 * Returns the world of the game.
+	 * @return World of the game.
 	 */
 	public World getWorld() {
 		return world;
 	}
 	
-	/** Retourne à la base de donnée du jeu.
-	 * @return Base de donnée du jeu.
+	/**
+	 * Returns the database of the game.
+	 * @return Database of the game.
 	 */
 	public DofusDatabase getDatabase() {
 		return database;

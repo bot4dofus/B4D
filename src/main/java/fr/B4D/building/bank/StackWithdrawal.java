@@ -12,6 +12,9 @@ import fr.B4D.utils.PointF;
  * The class {@code StackWithdrawal} represents a stack withdrawal action on a bank.<br><br>
  * This class extends {@code BankAction}.
  * A stack withdrawal has an stack.
+ * 
+ * @author Lucas
+ *
  */
 public class StackWithdrawal extends BankAction{
 

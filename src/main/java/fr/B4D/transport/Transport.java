@@ -5,27 +5,43 @@ import java.io.Serializable;
 
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Transport} représente un moyen de transport.<br><br>
- * Un transport est défini par un nom, une position, une position relative et un poid.
+/**
+ * The {@code Transport} class represents a transport method.<br><br>
+ * A transport is defined by a name, a starting location, a relative location and a weight.
+ * 
+ * @author Lucas
+ *
  */
 public abstract class Transport implements TransportInterface, Serializable{
 	
 	private static final long serialVersionUID = 6764531654498330943L;
 	
+	/**
+	 * Name of the transport.
+	 */
 	private String name;
+	
+	/**
+	 * Location of the transport on the map.
+	 */
 	private Point position;
+	
+	/**
+	 * Location of the transport on the screen in relative coordinates.
+	 */
 	private PointF positionF;
+	
+	/**
+	 * Weight of the transport.
+	 */
 	private double weight;
 	
-	  /******************/
-	 /** CONSTRUCTEUR **/
-	/******************/
-	
-	/** Constructeur de la classe {@code Transport}.
-	 * @param name - Nom du transport.
-	 * @param position - Position du transport sur la carte.
-	 * @param positionF - Position relative du transport.
-	 * @param weigth - Poid du transport.
+	/**
+	 * Constructor of the {@code Transport} class.
+	 * @param name - Name of the transport.
+	 * @param position - Location of the transport on the map.
+	 * @param positionF - Location of the transport on the screen in relative coordinates.
+	 * @param weigth - Weight of the transport.
 	 */
 	public Transport(String name, Point position, PointF positionF, double weigth) {
 		this.name = name;
@@ -34,63 +50,67 @@ public abstract class Transport implements TransportInterface, Serializable{
 		this.setWeight(weigth);
 	}
 	
-	  /***************/
-	 /** GET & SET **/
-	/***************/
-	
-	/** Retourne le nom du transport.
-	 * @return Nom du transport.
+	/**
+	 * Returns the name of the transport.
+	 * @return Name of the transport.
 	 */
 	public String getName() {
 		return name;
 	}
 
-	/** Modifi le nom du transport.
-	 * @param nom - Nouveau nom du transport.
+	/**
+	 * Defines the name of the transport.
+	 * @param name - Name of the transport.
 	 */
-	public void setName(String nom) {
-		this.name = nom;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	/** Retourne la position du transport sur la carte.
-	 * @return Position du transport sur la carte.
+	/**
+	 * Returns the location of the transport on the map.
+	 * @return Location of the transport on the map.
 	 */
 	public Point getPosition() {
 		return position;
 	}
 
-	/** Modifi la position du transport sur la carte.
-	 * @param position - Nouvelle position du transport.
+	/**
+	 * Defines the location of the transport on the map.
+	 * @param position - Location of the transport on the map.
 	 */
 	public void setPosition(Point position) {
 		this.position = position;
 	}
 
-	/** Retourne la position relative du transport.
-	 * @return Position relative.
+	/**
+	 * Returns the location of the transport on the screen in relative coordinates.
+	 * @return Location of the transport on the screen in relative coordinates.
 	 */
 	public PointF getPositionF() {
 		return positionF;
 	}
 
-	/** Modifi la position relative du transport.
-	 * @param positionF - Nouvelle position relative du transport.
+	/**
+	 * Defines the location of the transport on the screen in relative coordinates.
+	 * @param positionF - Location of the transport on the screen in relative coordinates.
 	 */
 	public void setPositionF(PointF positionF) {
 		this.positionF = positionF;
 	}
 
-	/** Retourne le poid du transport.
-	 * @return Poid du transport.
+	/**
+	 * Returns the weight of the transport.
+	 * @return Weight of the transport
 	 */
 	public double getWeight() {
 		return weight;
 	}
 
-	/** Modifi le poid du transport.
-	 * @param weight - Nouveau poid du transport.
+	/**
+	 * Defines the weight of the transport.
+	 * @param weight - Weight of the transport.
 	 */
 	public void setWeight(double weight) {
 		this.weight = weight;
-	}	
+	}
 }

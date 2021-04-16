@@ -11,17 +11,17 @@ import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 
 /**
- * The {@code ConverterAPI} class contains all the tutorials relative to the converter API.
- * 
- * Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des converssions.<br>
- *  <br>
- *  Fonctionnement :
- *  <ul>
- *  	<li>Créer un point dans le système de cordonnée de la fenêtre de jeu.</li>
- *  	<li>Converti ce point dans le système de coordonnnée de l'écran.</li>
- *  	<li>Converti ce point dans le système de coordonnnée du damier de dofus.</li>
- *  	<li>Affiche les points.</li>
- *  </ul>
+ * The {@code ConverterAPI} program is a tutorial to better understand the converter API.
+ * <br><br>
+ * This tutorial converts a point from relative coordinates to simple and draughtboard coordiantes.
+ * <br><br>
+ * Step :
+ * <ul>
+ *     <li>Creates a point in the middle of the game frame in relative coordinates</li>
+ *     <li>Converts it to simple coordinates</li>
+ *     <li>Converts it to draughtboard coordinates</li>
+ *     <li>Display the points</li>
+ * </ul>
  *
  * @author Lucas
  *

@@ -9,34 +9,39 @@ import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.common.collect.Lists;
 
-/** La classe {@code GoogleAuthorize} permet de gérer les autorisations de connexion aux API google. 
+/**
+ * The {@code GoogleAuthorize} class is used to manage Google API authorizations.
+ * 
+ * @author Lucas
+ *
  */
 public class GoogleAuthorize {
 	
 	/**
-	 * Cloud platform api url.
+	 * Cloud platform API url.
 	 */
 	public static final String CLOUD_PLATFORM = "https://www.googleapis.com/auth/cloud-platform";
 
 	/**
-	 * Sql service admin api url.
+	 * Sql service admin API url.
 	 */
 	public static final String SQLSERVICE_ADMIN = "https://www.googleapis.com/auth/sqlservice.admin";
 
 	/**
-	 * Spreadsheet api url.
+	 * Spreadsheet API url.
 	 */
 	public static final String SPREADSHEET = "https://www.googleapis.com/auth/spreadsheets";
 
 	/**
-	 * Drive api url.
+	 * Drive API url.
 	 */
 	public static final String DRIVE = "https://www.googleapis.com/auth/drive";
 
-    /** 
-     * @param credentials - Chemin vers le fichier contenant le certificat d'utilisation des API google.
-     * @return Certificat d'utilisation des API google.
-     * @throws IOException Si aucun fichier n'a été trouvé.
+    /**
+     * Returns the Google API credentials from a file.
+     * @param credentials - Path to the file containing the Google API credentials.
+     * @return Google credentials.
+     * @throws IOException if no file has been found.
      */
     public static Credential authorize(String credentials) throws IOException {
     	InputStream in = new FileInputStream(credentials);
@@ -44,8 +49,9 @@ public class GoogleAuthorize {
         return credential;
     }
     
-    /** retourne la liste des droits de l'utilisateur.
-     * @return Liste des droits de l'utilisateur.
+    /**
+     * Returns a list of user scopes.
+     * @return Scopes of the user.
      */
     private static ArrayList<String> getAllScopes(){
     	return Lists.newArrayList(CLOUD_PLATFORM,

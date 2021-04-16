@@ -12,6 +12,7 @@ import fr.B4D.program.CancelProgramException;
 
 /**
  * The {@code Windows} class gives access to useful methods relative to the Windows Operating System.
+ * 
  * @author Lucas
  *
  */

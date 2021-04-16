@@ -10,13 +10,14 @@ import fr.B4D.utils.PointF;
 
 /**
  * The {@code ScreenAPI} class contains all the tutorials relative to the screen API.
- * 
- * Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API de l'écran.<br>
- *  <br>
- *  Fonctionnement :
- *  <ul>
- *  	<li>Attend que "hello world" soit affiché à l'écran.</li>
- *  </ul>
+ * <br><br>
+ * This tutorial focus on OCR.
+ * If you want to perform a pixel analysis, see {@link ScreenAPITutorial1}.
+ * <br><br>
+ * Steps :
+ * <ul>
+ *     <li>Waits for "hello world" to be displayed on the screen</li>
+ * </ul>
  *
  * @author Lucas
  *

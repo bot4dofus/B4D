@@ -28,6 +28,7 @@ import fr.B4D.bot.B4DException;
 
 /**
  * The class {@code JFrame_B4D} is the main GUI of B4D.
+ * 
  * @author Lucas
  *
  */
@@ -297,7 +298,7 @@ public class JFrame_B4D extends JFrame{
 					b4d.importFile();
 					personPanel.ActualiserInfos();
 					settingPanel.ActualiserInfos();
-				} catch (ClassNotFoundException | IOException ex) {
+				} catch (ClassNotFoundException | IOException | B4DException ex) {
 					B4D.logger.popUp("Impossible d'importer le fichier, fichier corrompu.");
 				}
 			}

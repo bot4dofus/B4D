@@ -1,20 +1,14 @@
 package fr.B4D.dofus.items;
 
 /** The {@code Stack} represent a stack of items. A {@code Stack} has an item and an amount.
+ * 
  * @author Lucas
+ * 
  */
 public class Stack {
-
-	  /**************/
-	 /** ATRIBUTS **/
-	/**************/
 	
 	private Item item;
 	private int amount;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
 	
 	/** Construct a {@code Stack} with an item and an amount of this item.
 	 * @param item - Item of the stack.
@@ -29,10 +23,6 @@ public class Stack {
 		this.item = item;
 		this.amount = amount;
 	}
-
-	  /*************/
-	 /** GETTERS **/
-	/*************/
 	
 	/** Return the item.
 	 * @return - Item of the {@code Stack}.
@@ -47,10 +37,6 @@ public class Stack {
 	public int getAmount() {
 		return amount;
 	}
-
-	  /***********/
-	 /** OTHER **/
-	/***********/
 	
 	@Override
 	public int hashCode() {

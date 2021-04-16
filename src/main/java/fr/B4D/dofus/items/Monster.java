@@ -4,6 +4,9 @@ import java.util.List;
 
 /**
  * The {@code Monster} interface used to manipulate items of type Monster.
+ * 
+ * @author Lucas
+ *
  */
 public interface Monster extends ItemInterface{
 

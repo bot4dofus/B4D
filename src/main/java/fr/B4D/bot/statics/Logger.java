@@ -8,64 +8,72 @@ import java.net.URI;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
-/** La classe {@code Logger} permet d'accéder à toutes les méthodes liés aux logs et aux erreurs.
+/**
+ * The {@code Logger} class is used to access to the logger methods.
+ * 
+ * @author Lucas
+ *
  */
 public class Logger {
 
-	/*************/
-	/** METHODS **/
-	/*************/
-
-	/** Permet d'afficher un message dans une fenêtre graphique. Celui-ci est aussi affiché dans la console.
-	 * @param log - Message à afficher.
+	/**
+	 * Displays a popup message on screen.
+	 * It is also displayed in the console.
+	 * @param log - Message to display.
 	 */
 	public void popUp(String log) {
 		popUp(new Exception().getStackTrace()[1].getClassName(), log);
 	}
-	
-	/** Permet d'afficher un message dans une fenêtre graphique. Celui-ci est aussi affiché dans la console.
-	 * @param c - Classe appelante.
-	 * @param log - Message à afficher.
+
+	/**
+	 * Displays a popup message on screen.
+	 * It is also displayed in the console.
+	 * @param c - Calling class.
+	 * @param log - Message to display.
 	 */
 	public void popUp(String c, String log) {
 		debug(c, log);
 		JOptionPane.showMessageDialog(null, log, "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	/** Permet d'afficher un message dans la console.
-	 * Cette méthode doit être utilisé ainsi {@code B4D.logger.debug(this, "...")}.
-	 * @param log - Message à afficher.
+	/**
+	 * Displays a message in the console.
+	 * @param log - Message to display.
 	 */
 	public void debug(String log) {
 		debug(new Exception().getStackTrace()[1].getClassName(), log);
 	}
-	
-	/** Permet d'afficher un message dans la console.
-	 * Cette méthode doit être utilisé ainsi {@code B4D.logger.debug(this, "...")}.
-	 * @param c - Classe appelante.
-	 * @param log - Message à afficher.
+
+	/**
+	 * Displays a message in the console.
+	 * @param c - Calling class.
+	 * @param log - Message to display.
 	 */
 	public void debug(String c, String log) {
 		System.out.println("[" + c + "] " + log);
 	}
-	
-	/** Permet d'afficher un message d'alerte dans la console.
-	 * @param log - Message à afficher.
+
+	/**
+	 * Displays a warning in the console.
+	 * @param log - Warning to display.
 	 */
 	public void warning(String log) {
 		warning(new Exception().getStackTrace()[1].getClassName(), log);
 	}
 
-	/** Permet d'afficher un message d'alerte dans la console.
-	 * @param c - Classe appelante.
-	 * @param log - Message à afficher.
+	/**
+	 * Displays a warning in the console.
+	 * @param c - Calling class.
+	 * @param log - Warning to display.
 	 */
 	public void warning(String c, String log) {
 		System.err.println("[" + c + "] " + log);
 	}
 
-	/** Permet d'afficher un message d'erreur dans une fenêtre graphique en demandant si l'utilisateur veut envoyer le signaler aux développeurs.
-	 * @param e - Trace de l'erreur.
+	/**
+	 * Displays an exception on screen.
+	 * It is also displayed in the console.
+	 * @param e - Exception to display.
 	 */
 	public void error(Exception e) {
 		e.printStackTrace();

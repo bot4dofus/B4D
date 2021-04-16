@@ -10,6 +10,7 @@ import fr.B4D.program.StopProgramException;
 
 /**
  * The {@code SocketStore} class is an abstract class storing all the socket results.
+ * 
  * @author Lucas
  *
  * @param <T> Type of the socket result.

@@ -7,6 +7,7 @@ import fr.B4D.socket.DofusSocket;
  * The {@code SocketParser} class is the super class of the parsers.
  * 
  * @author Lucas
+ * 
  * @param <T> The type of the parser result.
  *
  */

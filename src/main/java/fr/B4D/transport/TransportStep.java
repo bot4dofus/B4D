@@ -7,77 +7,79 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** La classe {@code TransportStep} représente une étape dans un chemin entre deux point de la carte.<br><br>
- * Une étape est défini par un transport et une destination.
+/**
+ * The {@code TransportStep} class represents a step in a {@link TransportPath} between two locations.
+ * <br><br>
+ * A step is defines by a transport and a destination location.
+ * 
+ * @author Lucas
+ *
  */
 public class TransportStep implements Serializable{
 
 	private static final long serialVersionUID = 5240292689676673762L;
 	
+	/**
+	 * Trasnport of the step.
+	 */
 	private Transport transport;
+	
+	/**
+	 * Destination of the step.
+	 */
 	private Point destination;
-
-	  /*************/
-	 /** BUILDER **/
-	/*************/
-
-	/** Constructeur de la classe {@code TransportStep}. 
-	 * @param transport - Transport utilisé pour l'étape.
-	 * @param destination - Destination du transport.
+	
+	/**
+	 * Constructor of the {@code TransportStep} class . 
+	 * @param transport - Transport used for the step.
+	 * @param destination - Destination location.
 	 */
 	public TransportStep(Transport transport, Point destination) {
 		this.transport = transport;
 		this.destination = destination;
 	}
-
-	  /*************/
-	 /** GETTERS **/
-	/*************/
 	
-	/** Retourne le transport de l'étape.
-	 * @return Transport de l'étape.
+	/**
+	 * Returns the transport of the step.
+	 * @return Transport of the step.
 	 */
 	public Transport getTransport() {
 		return transport;
 	}
 	
-	/** Modifi le transport de l'étape.
-	 * @param transport - Nouveau transport de l'étape.
+	/**
+	 * Defines the transport of the step.
+	 * @param transport - Transport of the step.
 	 */
 	public void setTransport(Transport transport) {
 		this.transport = transport;
 	}
 	
-	/** Retourne la destination de l'étape.
-	 * @return Destination de l'étape.
+	/**
+	 * Returns the destination of the step.
+	 * @return Destination of the step.
 	 */
 	public Point getDestination() {
 		return destination;
 	}
 	
-	/** Modifi le destination de l'étape.
-	 * @param destination - Nouvelle destination de l'étape.
+	/**
+	 * Defines the destination of the step.
+	 * @param destination - Destination of the step.
 	 */
 	public void setDestination(Point destination) {
 		this.destination = destination;
 	}
 	
-	  /**************/
-	 /** METHODES **/
-	/**************/
-	
-	/** Permet d'utiliser le transport de l'étape.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	/**
+	 * Uses the transport of the step.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unknown exception occur.
 	 */
 	public void use() throws StopProgramException, CancelProgramException, B4DException {
 		transport.goTo(destination);
 	}
-
-	  /**************/
-	 /** TOSTRING **/
-	/**************/
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

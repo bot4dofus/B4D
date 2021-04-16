@@ -3,27 +3,32 @@ package fr.B4D.utils;
 import java.awt.Point;
 import java.io.Serializable;
 
-/** La classe {@code PointD} représente un point en coordonnée du damier de dofus.<br><br>
- * 
+/**
+ * The {@code PointD} class represents a point in draughtboard coordinates.
+ * <br><br>
  *	&nbsp;&nbsp;/&nbsp;X<br>
  *	/<br>
  *	\<br>
  *  &nbsp;&nbsp;\&nbsp;Y<br><br>
+ *
+ * @author Lucas
  *
  */
 public class PointD extends Point implements Serializable{
 
 	private static final long serialVersionUID = -6659200190789389246L;
 	
-	/** Constructeur de la classe {@code PointD} en (0, 0).
+	/**
+	 * Constructor of the {@code PointD} class in (0, 0).
      */
 	public PointD() {
 		super();
 	}
 	
-	/** Constructeur de la classe {@code PointD} en (x, y)
-	 * @param x - Coordonnée x du point.
-	 * @param y - Coordonnée y du point.
+	/**
+	 * Constructor of the {@code PointD} class in (x, y).
+	 * @param x - X coordinate.
+	 * @param y - Y coordinate.
 	 */
 	public PointD(int x, int y) {
 		super(x,y);

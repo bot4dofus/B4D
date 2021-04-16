@@ -14,15 +14,18 @@ import fr.B4D.program.StopProgramException;
 
 /**
  * The {@code MessageAPI} class contains all the tutorials relative to the message API.
- * Ce tutoriel à pour objectif de mieux comprendre le fonctionnement et l'utilisation de l'API des échanges entre joueurs.<br>
- *  <br>
- *  Fonctionnement :
- *  <ul>
- *  	<li>Ajout d'un filtre canal : Seul les messages du canal commerce seront traités.</li>
- *  	<li>Ajout d'un filtre texte : Seul les messages contenant "moi" seront traités.</li>
- *  	<li>Ajout d'une opération à éffectuer pour chaque message correspondant au filtre.</li>
- *  	<li>Débute la lecture du chat en précisant à 3 le nombre de messages qui seront traités.</li>
- *  </ul>
+ * <br><br>
+ * This tutorial focus on message filters and chat listener.
+ * If you want to read messages, see {@link BankAPITutorial1}.
+ * If you want to send private messages, see {@link BankAPITutorial2}.
+ * <br><br>
+ * Steps :
+ * <ul>
+ *     <li>Add a channel filter : Only the commercial messages will be processed</li>
+ *     <li>Add regex filter : Only the messages containing "moi" will be processed</li>
+ *     <li>Add a chat listener : Specify what to do when a message matches the filter criteria</li>
+ *     <li>Wait for 3 messages to be processed</li>
+ * </ul>
  *
  * @author Lucas
  *
@@ -47,7 +50,7 @@ public final class MessageAPITutorial3 extends Program {
 		Dofus.getInstance().getChat().addChannelFilter(Channel.BUSINESS);
 		Dofus.getInstance().getChat().addTextFilter("moi");
 		Dofus.getInstance().getChat().setChatListener(new ChatListener() {
-			public void treatMessage(Message message) throws StopProgramException, CancelProgramException {
+			public void messageReceived(Message message) throws StopProgramException, CancelProgramException {
 				message.reply("C'est qui moi ?");
 			}
 		});

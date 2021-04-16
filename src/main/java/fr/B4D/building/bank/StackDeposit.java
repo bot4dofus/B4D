@@ -12,6 +12,9 @@ import fr.B4D.utils.PointF;
  * The class {@code StackDeposit} represents a stack deposit action on a bank.<br><br>
  * This class extends {@code BankAction}.
  * A stack deposit has an stack.
+ * 
+ * @author Lucas
+ *
  */
 public class StackDeposit extends BankAction{
 

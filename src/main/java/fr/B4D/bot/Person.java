@@ -16,47 +16,85 @@ import fr.B4D.transport.transports.Potion;
 import fr.B4D.transport.transports.Zaap;
 import fr.B4D.utils.PointF;
 
-/** La classe {@code Person} représente un joueur.<br><br>
- * Un joueur est défini par un nom de compte, un mot de passe, un serveur et un pseudo
+/**
+ * The {@code Person} class represents a player in the game.
+ * <br><br>
+ * A player is defined by an acount name, a password, a server and a pseudo.
+ * 
+ * @author Lucas
+ *
  */
 public class Person implements Serializable, TransportInterface{
 
 	private static final long serialVersionUID = -3206212064770380443L;
-
-	  /***************/
-	 /** ATTRIBUTS **/
-	/***************/
 	
+	/**
+	 * Name of the account.
+	 */
 	private String account;
+	
+	/**
+	 * Password of the account.
+	 */
 	private String password;
+	
+	/**
+	 * Server on which the person is registered.
+	 */
 	private Server server;
+	
+	/**
+	 * Pseudo of the person.
+	 */
 	private String pseudo;
 
+	/**
+	 * Booster potion transport.
+	 * When used, the person it teleported to the last saved zaap.
+	 */
 	private TransportStep boosterPotion = null;
+	
+	/**
+	 * Bonta potion transport.
+	 * When used, the person is teleported to Bonta.
+	 */
 	private TransportStep bontaPotion = null;
+
+	/**
+	 * Brakmar potion transport.
+	 * When used, the person is teleported to Brakmar.
+	 */
 	private TransportStep brakmarPotion = null;
 	
+	/**
+	 * Location of the main spell used during fights.
+	 */
 	private PointF spellPosition = null;
 	
+	/**
+	 * Current location of the person on the map.
+	 */
 	private Point position = null;
+	
+	/**
+	 * Specifies whether the inventory is full or non.
+	 */
 	private boolean inventoryFull = false;
 	
-	  /*************/
-	 /** BUILDER **/
-	/*************/
-	
-	/** Constructeur de la classe {@code Person} utilisant les champs par défaut.
-	 * Cela est identique à {@code new Person("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo")}.
+	/**
+	 * Constructor of the {@code Person} class with default fields.<br><br>
+	 * This is identical to {@code new Person("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo")}.
 	 */
 	public Person() {
 		this("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo");
 	}
 	
-	/** Constructeur de la classe {@code Person}.
-	 * @param account - Nom de compte du joueur.
-	 * @param password - Mot de passe du joueur.
-	 * @param serveur - Serveur du joueur.
-	 * @param pseudo - Pseudo du joueur.
+	/**
+	 * Constructor of the {@code Person} class. 
+	 * @param account - Name of the account
+	 * @param password - Password of the account.
+	 * @param serveur - Server of the person.
+	 * @param pseudo - Pseudo of the person.
 	 */
 	public Person(String account, String password, Server serveur, String pseudo) {
 		this.account = account;
@@ -69,140 +107,155 @@ public class Person implements Serializable, TransportInterface{
 		this.brakmarPotion = new TransportStep(new Potion("Brakmar potion", null, null, BRAKMAR_POTION_COST), BRAKMAR_POTION_DESTINATION);
 	}
 	
-	  /***********************/
-	 /** GETTERS & SETTERS **/
-	/***********************/
-	
-	/** Retourne le nom de compte du joueur.
-	 * @return Nom de compte du joueur.
+	/**
+	 * Returns the name of the account.
+	 * @return Name of the account.
 	 */
 	public String getAccount() {
 		return account;
 	}
 	
-	/** Modifie le nom de compte du joueur.
-	 * @param account - Nouveau nom de compte.
+	/**
+	 * Defines the name of the account.
+	 * @param account - Name of the account.
 	 */
 	public void setAccount(String account) {
 		this.account = account;
 	}
 	
-	/** Retourne le mot de passe du joueur.
-	 * @return Mot de passe du joueur.
+	/**
+	 * Returns the password of the account.
+	 * @return Password of the account.
 	 */
 	public String getPassword() {
 		return password;
 	}
 	
-	/** Modifie le mot de passe du joueur.
-	 * @param password - Nouveau mot de passe.
+	/**
+	 * Defines the password of the account.
+	 * @param password - Password of the account.
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
-	/** Retourne le serveur du joueur.
-	 * @return Serveur du joueur.
+	/**
+	 * Returns the server of the person.
+	 * @return Server of the person.
 	 */
 	public Server getServer() {
 		return server;
 	}
 	
-	/** Modifie le serveur du joueur.
-	 * @param server - Nouveau serveur.
+	/**
+	 * Sets the server of the person.
+	 * @param server - Server of the person.
 	 */
 	public void setServer(Server server) {
 		this.server = server;
 	}
 	
-	/** Retourne le pseudo du joueur.
-	 * @return Pseudo du joueur.
+	/**
+	 * Returns the pseudo of the person.
+	 * @return Pseiudo of the person.
 	 */
 	public String getPseudo() {
 		return pseudo;
 	}
-	
-	/** Modifie le pseudo du joueur.
-	 * @param pseudo - Pseudo nouveau pseudo.
+
+	/**
+	 * Sets the pseudo of the person.
+	 * @param pseudo - Pseudo of the person.
 	 */
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
 	
-	/** Retourne la potion de rappel du joueur.
-	 * @return Potion de rappel du joueur.
+	/**
+	 * Returns the booster potion transport.
+	 * @return Booster potion transport.
 	 */
 	public TransportStep getBoosterPotion() {
 		return boosterPotion;
 	}
 
-	/** Modifie la potion de rappel du joueur.
-	 * @param boosterPotion - Nouvelle potion de rappel.
+	/**
+	 * Defines the booster potion transport.
+	 * @param boosterPotion - Booster potion transport.
 	 */
 	public void setBoosterPotion(TransportStep boosterPotion) {
 		this.boosterPotion = boosterPotion;
 	}
 
-	/** Retourne la potion de bonta du joueur.
-	 * @return Potion de bonta du joueur.
+	/**
+	 * Returns the Bonta potion transport.
+	 * @return Bonta potion transport.
 	 */
 	public TransportStep getBontaPotion() {
 		return bontaPotion;
 	}
 
-	/** Modifie la potion de bonta du joueur.
-	 * @param bontaPotion - Nouvelle potion de bonta.
+	/**
+	 * Defines the Bonta potion transport.
+	 * @param bontaPotion - Bonta potion transport.
 	 */
 	public void setBontaPotion(TransportStep bontaPotion) {
 		this.bontaPotion = bontaPotion;
 	}
 
-	/** Retourne la potion de brakmar du joueur.
-	 * @return Potion de brakmar du joueur.
+	/**
+	 * Returns the Brakmar potion transport.
+	 * @return Brakmar potion transport.
 	 */
 	public TransportStep getBrakmarPotion() {
 		return brakmarPotion;
 	}
 
-	/** Modifie la potion de brakmar du joueur.
-	 * @param brakmarPotion - Nouvelle potion de brakmar.
+	/**
+	 * Defines the Brakmar potion transport.
+	 * @param brakmarPotion - Brakmar potion transport.
 	 */
 	public void setBrakmarPotion(TransportStep brakmarPotion) {
 		this.brakmarPotion = brakmarPotion;
 	}
 
-	/** Retourne la position du sort principal du joueur.
-	 * @return position du sort principal.
+	/**
+	 * Returns the location of the main spell.
+	 * @return Main spell used during fights.
 	 */
 	public PointF getSpellPosition() {
 		return spellPosition;
 	}
 
-	/** Modifie la position du sort principal du joueur.
-	 * @param spellPosition - Position du sort principal.
+	/**
+	 * Defines the location of the main spell.
+	 * @param spellPosition - Main spell used during fights.
 	 */
 	public void setSpellPosition(PointF spellPosition) {
 		this.spellPosition = spellPosition;
 	}
 
-	/** Retourne la position actuelle du joueur.
-	 * @return position actuelle du joueur.
+	/**
+	 * Returns the current location of the person.
+	 * @return Current location of the person.
 	 */
 	public Point getPosition() {
 		return position;
 	}
 
-	/** Modifie la position actuelle du joueur.
-	 * @param position - Nouvelle position du joueur.
+	/**
+	 * Defines the current location of the person.
+	 * @param position - Location of the person on the map.
 	 */
 	public void setPosition(Point position) {
 		this.position = position;
 	}
 
-	/** Met à jour la position actuelle du joueur à tapant %pos% dans le chat.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	/**
+	 * Automatically defines the position of the player by detecting it.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unknown error occurs.
 	 */
 	public void setPosition() throws StopProgramException, CancelProgramException, B4DException {
 		Message message;
@@ -229,23 +282,21 @@ public class Person implements Serializable, TransportInterface{
 		setPosition(new Point(x, y));
 	}
 	
-	/** Retourne un booléen représentant l'inventaire du joueur.
-	 * @return {@code true} si l'inventaire est plein et {@code false} sinon.
+	/**
+	 * Checks whether the inventory is full.
+	 * @return {@code true} if the inventory is full, {@code false} otherwise.
 	 */
 	public boolean isInventoryFull() {
 		return inventoryFull;
 	}
 
-	/** Modifie l'état du l'inventaire du joueur.
-	 * @param inventoryFull - {@code true} si l'inventaire est plein et {@code false} sinon.
+	/**
+	 * Defines whether the inventory is full or not.
+	 * @param inventoryFull - {@code true} if the inventory is full, {@code false} otherwise.
 	 */
 	public void setInventoryFull(boolean inventoryFull) {
 		this.inventoryFull = inventoryFull;
 	}
-	
-	  /***********/
-	 /** GO TO **/
-	/***********/
 	
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
@@ -255,9 +306,10 @@ public class Person implements Serializable, TransportInterface{
 		transportPath.use(this);
 	}
 	
-	/** Retourne le chemin le plus court entre la position actuelle du joueur et la destination.
-	 * @param destination - Destination à atteindre. Vous pouver utiliser {@code new Point(X, Y)} pour définir un nouveau point.
-	 * @return Chemin à suivre pour atteindre la destination. {@code null} si la destination n'est pas atteignable.
+	/**
+	 * Finds the transport path from the current location to the destination.
+	 * @param destination - Destination to reach. You can use {@code new Point(X, Y)} to define a new location.
+	 * @return Path to follow to reach the destination. {@code null} is not reachable.
 	 */
 	public TransportPath getTransportPathTo(Point destination) {		
 		

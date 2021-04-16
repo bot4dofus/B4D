@@ -2,6 +2,9 @@ package fr.B4D.program;
 
 /**
  * The {@code Place} enumeration reference all the places where a program can be run.
+ * 
+ * @author Lucas
+ *
  */
 public enum Place {
     /**

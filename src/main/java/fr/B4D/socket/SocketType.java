@@ -9,6 +9,7 @@ import fr.B4D.socket.parser.PlayerEnterMapEventParser;
 
 /**
  * The class {@code SocketType} defines all the known sockets and map it with the corresponding socket parser.
+ * 
  * @author Lucas
  *
  */

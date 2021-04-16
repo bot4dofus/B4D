@@ -7,7 +7,11 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
-/** Interface représentant un transport.
+/**
+ * Interface representing a transport.
+ * 
+ * @author Lucas
+ *
  */
 public interface TransportInterface extends Serializable {
 	
@@ -56,11 +60,12 @@ public interface TransportInterface extends Serializable {
 	 */
 	final Point BRAKMAR_POTION_DESTINATION = new Point(-26,36);
 
-	/** Permet d'utiliser le transport.
-	 * @param destination - Destination du transport.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le bot programme est annulé.
-	 * @throws B4DException Si une exception de type B4D est levée.
+	/**
+	 * Method to implement defining how to use the transport method.
+	 * @param destination - Destination of the transport.
+	 * @throws StopProgramException if the program is stopped.
+	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unknown exception occur.
 	 */
 	public void goTo(Point destination) throws StopProgramException, CancelProgramException, B4DException;
 }
