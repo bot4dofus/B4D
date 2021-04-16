@@ -16,7 +16,9 @@ import fr.B4D.bot.statics.Logger;
 import fr.B4D.bot.statics.Mouse;
 import fr.B4D.bot.statics.Screen;
 import fr.B4D.bot.statics.Wait;
-import fr.B4D.dao.DAOFactory;
+import fr.B4D.filemanager.ConfigurationFileManager;
+import fr.B4D.filemanager.FileManagerFactory;
+import fr.B4D.filemanager.TeamFileManager;
 import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.CancelProgramException;
@@ -25,14 +27,14 @@ import fr.B4D.program.ProgramOptions;
 import fr.B4D.socket.SocketListener;
 import fr.B4D.utils.os.Os;
 
-/** La classe {@code B4D} est la classe principale du bot.<br><br>
- * Elle fournit les méthodes dont à besoin l'interface graphique pour fonctionner.
+/**
+ * The {@code B4D} class is the top level class of the bot.
+ * It provides the methods used by the GUI.
+ * 
+ * @author Lucas
+ *
  */
 public final class B4D{
-
-	/**************/
-	/** ATRIBUTS **/
-	/**************/
 	
 	/**
 	 * Logger to display messages in the console.
@@ -85,11 +87,13 @@ public final class B4D{
 	private KeyboardListener keyboardListener;
 	
 
-	/** Constructeur de la classe {@code B4D} et sauvegarde la nouvelle instance dans un fichier.
-	 * @throws B4DException Si une exception B4D est levée.
-	 * @throws ClassNotFoundException Si un problème de déserialisation survient.
-	 * @throws IOException Si impossible de créer les fichiers de configuration.
-	 * @throws AWTException Si la configuration de l'ordinateur ne permet pas l'automatisation des périphériques
+	/**
+	 * Builder of the {@code B4D} class. <br>
+	 * The configuration and teams info are automatically saved in files.
+	 * @throws B4DException if an unknown operation occurs.
+	 * @throws ClassNotFoundException if a serialization problem occurs.
+	 * @throws IOException if cannot create the configuration files.
+	 * @throws AWTException if the platform configuration does not allow low-level input control.
 	 */
 	public B4D() throws B4DException, ClassNotFoundException, IOException, AWTException {
 		
@@ -97,8 +101,8 @@ public final class B4D{
 		logger = new Logger();
 		
 		/** DYNAMICS **/
-		configuration = DAOFactory.getConfigurationDAO().find();
-		team = DAOFactory.getTeamDAO().find();
+		configuration = FileManagerFactory.getConfigurationFileManager().read();
+		team = FileManagerFactory.getTeamFileManager().read();
 		
 		/** STATICS **/
 		converter = new Converter(configuration);
@@ -111,59 +115,68 @@ public final class B4D{
 		Status.setStatusMenuPosition(configuration.getStatus());
 	}
 	
-	/** Retourne la configuration actuelle de la fenêtre de jeu.
-	 * @return Configuration de la fenêtre de jeu.
+	/**
+	 * Returns the current configuration of the game.
+	 * @return Configuration of the game.
 	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}	
 	
-	/** Modifi la configuration de la fenêtre de jeu.
-	 * @param configuration - Nouvelle configuration de la fenêtre de jeu.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	/**
+	 * Defines the current configuration of the game and save it in a file.
+	 * @param configuration - New configuration of the game..
+	 * @throws IOException if cannot save the files.
 	 */
 	private void setConfiguration(Configuration configuration) throws IOException {
 		this.configuration = configuration;
 		saveConfiguration();
 	}
 	
-	/** Retourne la team du joueur.
-	 * @return Team du joueur.
+	/**
+	 * Returns the team of the game.
+	 * @return Team of the game.
 	 */
 	public Team getTeam() {
 		return team;
 	}
 	
-	/** Modifi la team du joueur et sauvegarde la nouvelle instance dans un fichier.
-	 * @param team - Nouvelle team du joueur.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	/**
+	 * Defines the team configuration and save it in a file.
+	 * @param team - New team configuration.
+	 * @throws IOException if cannot save the file.
 	 */
 	private void setTeam(Team team) throws IOException {
 		this.team = team;
 		saveTeam();
 	}
 	
-	/** Sauvegarde l'instance actuelle de la configuration dans un fichier.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	/**
+	 * Saves the current configuration of the game in a file.
+	 * @throws IOException if cannot save the files.
 	 */
 	public void saveConfiguration() throws IOException {
-		DAOFactory.getConfigurationDAO().update(configuration);
+		FileManagerFactory.getConfigurationFileManager().write(configuration);
 	}
 	
-	/** Sauvegarde l'instance actuelle de la team dans un fichier.
-	 * @throws IOException Si impossible de sérialiser la configuration.
+	/**
+	 * Saves the current team configuration in a file.
+	 * @throws IOException if cannot save the files.
 	 */
 	public void saveTeam() throws IOException {
-		DAOFactory.getTeamDAO().update(team);
+		FileManagerFactory.getTeamFileManager().write(team);
 	}
 
-	/** Permet d'importer une configuration ou une team.
-	 * @throws ClassNotFoundException Si impossible de déserialiser.
-	 * @throws IOException Si impossible de sérialiser.
+	/**
+	 * Imports a configuration from an existing file. <br>
+	 * This method opens the file navigation system.
+	 * @throws ClassNotFoundException if cannot deserialize.
+	 * @throws IOException if cannot serialize.
+	 * @throws B4DException 
 	 */
-	public void importFile() throws ClassNotFoundException, IOException {
-		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
-		FileNameExtensionFilter teamFilter = DAOFactory.getTeamDAO().getFilter();
+	public void importFile() throws ClassNotFoundException, IOException, B4DException {
+		FileNameExtensionFilter configurationFilter = ConfigurationFileManager.FILTER;
+		FileNameExtensionFilter teamFilter = TeamFileManager.FILTER;
 
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));	  
@@ -173,18 +186,19 @@ public final class B4D{
 		if (fileChooser.showOpenDialog(new Frame()) == JFileChooser.APPROVE_OPTION) {			
 			File file = fileChooser.getSelectedFile();
 			if (configurationFilter.accept(file))
-				setConfiguration(DAOFactory.getConfigurationDAO().deserialize(file));
+				setConfiguration(FileManagerFactory.getConfigurationFileManager().read());
 			else if(teamFilter.accept(file))
-				setTeam(DAOFactory.getTeamDAO().deserialize(file));
+				setTeam(FileManagerFactory.getTeamFileManager().read());
 		}
 	}
 
-	/** Permet d'exporter une configuration ou une team.
-	 * @throws IOException Si impossible de sérialiser.
+	/**
+	 * Exports a configuration to a new file.
+	 * @throws IOException if cannot serialize.
 	 */
 	public void exportFile() throws IOException {
-		FileNameExtensionFilter configurationFilter = DAOFactory.getConfigurationDAO().getFilter();
-		FileNameExtensionFilter teamFilter = DAOFactory.getTeamDAO().getFilter();
+		FileNameExtensionFilter configurationFilter = ConfigurationFileManager.FILTER;
+		FileNameExtensionFilter teamFilter = TeamFileManager.FILTER;
 		
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));	
@@ -194,23 +208,25 @@ public final class B4D{
 		if (fileChooser.showSaveDialog(new Frame()) == JFileChooser.APPROVE_OPTION) {
 			File file = fileChooser.getSelectedFile();
 			if (configurationFilter.accept(file))
-				DAOFactory.getConfigurationDAO().serialize(configuration, file);		
+				FileManagerFactory.getConfigurationFileManager().write(configuration);		
 			else if(teamFilter.accept(file))
-				DAOFactory.getTeamDAO().serialize(team, file);
+				FileManagerFactory.getTeamFileManager().write(team);
 		}
 	}
 
-	/** Retourne la liste de tous les programmes.
-	 * @return Liste de tous les programmes.
+	/**
+	 * Returns all the programs.
+	 * @return List containing all the programs.
 	 */
 	public ArrayList<Program> getPrograms(){
 		return Program.getAll();
 	}
 
-	/** Permet de lancer un programme avec une configuration et un personnage particulier.
-	 * @param program - Programme à éxecuter.
-	 * @param person - Personnage qui éxecute le programme.
-	 * @param programOptions - Options de lancement du programme.
+	/**
+	 * Runs a program with specific options.
+	 * @param program - Program to run.
+	 * @param person - Person which execute the program.
+	 * @param programOptions - Program options.
 	 */
 	public void runProgram(Program program, Person person, ProgramOptions programOptions) {
 		try {
@@ -239,7 +255,7 @@ public final class B4D{
 	}
 	
 	/**
-	 * Interrupt the socket listener and the keyboard listener. 
+	 * Interrupts the socket listener and the keyboard listener. 
 	 */
 	public void interruptListeners() {
 		if(socketListener != null && socketListener.isAlive())
