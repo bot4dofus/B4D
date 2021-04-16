@@ -38,6 +38,12 @@ jobs:
       
     - name: Publish test report to Codecov
       uses: codecov/codecov-action@v1
+      
+    - name: Publish test report to Codacy
+      uses: codacy/codacy-coverage-reporter-action@master
+      with:
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        coverage-reports: target/site/jacoco/jacoco.xml
   
     - name: Publish release
       uses: "marvinpinto/action-automatic-releases@latest"
@@ -49,13 +55,6 @@ jobs:
         files: |
           ./LICENSE
           ./target/B4D-*.*.*.jar
-    
-    - name: Create branch
-      uses: peterjgrainger/action-create-branch@v2.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        branch: v${{ env.PACKAGE_VERSION }}
     
     - name: Create branch
       uses: peterjgrainger/action-create-branch@v2.0.1

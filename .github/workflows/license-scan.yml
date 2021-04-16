@@ -1,0 +1,20 @@
+# This workflow will make a license scan using the fossa tool
+
+name: License Scan
+
+on:
+  push:
+    branches: [master, dev]
+
+jobs:
+  fossa-cli:
+    name: License Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@master
+
+      - name: License Scan
+        uses: fossa-contrib/fossa-action@v1
+        with:
+          fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
