@@ -24,15 +24,15 @@ import fr.B4D.programs.PricesEvolution;
 import fr.B4D.programs.Spam;
 import fr.B4D.programs.tutorials.BankAPITutorial1;
 import fr.B4D.programs.tutorials.BankAPITutorial2;
-import fr.B4D.programs.tutorials.ConverterAPITutorial;
+import fr.B4D.programs.tutorials.ConverterAPITutorial1;
 import fr.B4D.programs.tutorials.ExchangeAPITutorial1;
 import fr.B4D.programs.tutorials.HdvAPITutorial1;
-import fr.B4D.programs.tutorials.KeyboardAPITutorial;
-import fr.B4D.programs.tutorials.LoggerAPITutorial;
+import fr.B4D.programs.tutorials.KeyboardAPITutorial1;
+import fr.B4D.programs.tutorials.LoggerAPITutorial1;
 import fr.B4D.programs.tutorials.MessageAPITutorial1;
 import fr.B4D.programs.tutorials.MessageAPITutorial2;
 import fr.B4D.programs.tutorials.MessageAPITutorial3;
-import fr.B4D.programs.tutorials.MouseAPITutorial;
+import fr.B4D.programs.tutorials.MouseAPITutorial1;
 import fr.B4D.programs.tutorials.ScreenAPITutorial1;
 import fr.B4D.programs.tutorials.ScreenAPITutorial2;
 import fr.B4D.programs.tutorials.TransportAPITutorial1;
@@ -102,13 +102,13 @@ public abstract class Program {
 	  	
 	  	programs.add(new TransportAPITutorial1());
 	  	
-	  	programs.add(new LoggerAPITutorial());
+	  	programs.add(new LoggerAPITutorial1());
 	  	
-	  	programs.add(new ConverterAPITutorial());
+	  	programs.add(new ConverterAPITutorial1());
 	  	
-	  	programs.add(new MouseAPITutorial());
+	  	programs.add(new MouseAPITutorial1());
 	  	
-	  	programs.add(new KeyboardAPITutorial());
+	  	programs.add(new KeyboardAPITutorial1());
 	  	
 	  	programs.add(new ScreenAPITutorial1());
 	  	programs.add(new ScreenAPITutorial2());
