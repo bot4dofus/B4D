@@ -1,4 +1,4 @@
-package fr.B4D.socket.result;
+package fr.B4D.socket.event;
 
 /**
  * A {@code PlayerEnterMapEvent} occurs when an other player enter the current map.

@@ -5,7 +5,7 @@ import java.util.List;
 import fr.B4D.bot.B4DException;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
-import fr.B4D.socket.result.HDVItemViewEvent;
+import fr.B4D.socket.event.HDVItemViewEvent;
 import fr.B4D.socket.store.HDVItemViewEventStore;
 
 /**

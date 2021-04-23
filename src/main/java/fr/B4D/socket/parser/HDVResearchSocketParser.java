@@ -11,7 +11,7 @@ import fr.B4D.dofus.Dofus;
 import fr.B4D.dofus.items.Item;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
-import fr.B4D.socket.result.HDVFilterResultEvent;
+import fr.B4D.socket.event.HDVFilterResultEvent;
 import fr.B4D.socket.store.HDVResearchSocketStore;
 
 /**

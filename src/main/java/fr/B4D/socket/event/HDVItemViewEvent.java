@@ -1,4 +1,4 @@
-package fr.B4D.socket.result;
+package fr.B4D.socket.event;
 
 /**
  * The {@code HDVItemViewSocketResult} class represents the result of an {@code HDVItemViewSocketParser}. This class extends {@code SocketResult}.

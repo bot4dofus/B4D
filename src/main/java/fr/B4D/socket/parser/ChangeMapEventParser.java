@@ -1,7 +1,7 @@
 package fr.B4D.socket.parser;
 
 import fr.B4D.socket.DofusSocket;
-import fr.B4D.socket.result.ChangeMapEvent;
+import fr.B4D.socket.event.ChangeMapEvent;
 import fr.B4D.socket.store.ChangeMapEventStore;
 
 /**

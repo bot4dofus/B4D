@@ -11,7 +11,7 @@ import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.socket.result.PlayerEnterMapEvent;
+import fr.B4D.socket.event.PlayerEnterMapEvent;
 import fr.B4D.socket.store.PlayerEnterMapEventStore;
 
 /**

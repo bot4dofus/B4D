@@ -22,7 +22,7 @@ import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
-import fr.B4D.socket.result.HDVItemViewEvent;
+import fr.B4D.socket.event.HDVItemViewEvent;
 import fr.B4D.socket.store.HDVItemViewEventStore;
 import fr.B4D.utils.PointF;
 

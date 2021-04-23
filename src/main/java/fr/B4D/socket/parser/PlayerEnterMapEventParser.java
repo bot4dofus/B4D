@@ -5,7 +5,7 @@ import java.util.Arrays;
 import fr.B4D.bot.B4DException;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
-import fr.B4D.socket.result.PlayerEnterMapEvent;
+import fr.B4D.socket.event.PlayerEnterMapEvent;
 import fr.B4D.socket.store.PlayerEnterMapEventStore;
 
 /**

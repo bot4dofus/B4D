@@ -1,6 +1,6 @@
 package fr.B4D.socket.store;
 
-import fr.B4D.socket.result.HDVItemViewEvent;
+import fr.B4D.socket.event.HDVItemViewEvent;
 
 /**
  * The {@code HDVItemViewSocketStore} is used to store {@code HDVItemViewSocketResult} . This class extends {@code SocketStore}.

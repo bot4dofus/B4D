@@ -1,6 +1,6 @@
 package fr.B4D.socket.store;
 
-import fr.B4D.socket.result.ChangeMapEvent;
+import fr.B4D.socket.event.ChangeMapEvent;
 
 /**
  * The {@code ChangeMapEventStore} is used to store {@code ChangeMapEvent} . This class extends {@code EventStore}.

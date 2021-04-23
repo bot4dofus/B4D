@@ -14,7 +14,7 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Configuration;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.socket.result.ChangeMapEvent;
+import fr.B4D.socket.event.ChangeMapEvent;
 import fr.B4D.socket.store.ChangeMapEventStore;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;

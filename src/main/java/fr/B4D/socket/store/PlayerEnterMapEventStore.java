@@ -1,6 +1,6 @@
 package fr.B4D.socket.store;
 
-import fr.B4D.socket.result.PlayerEnterMapEvent;
+import fr.B4D.socket.event.PlayerEnterMapEvent;
 
 /**
  * The {@code PlayerEnterMapEventStore} is used to store {@code PlayerEnterMapEvent} . This class extends {@code EventStore}.

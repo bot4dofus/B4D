@@ -8,7 +8,7 @@ import fr.B4D.bot.B4D;
 import fr.B4D.dofus.items.Item;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.socket.result.HDVFilterResultEvent;
+import fr.B4D.socket.event.HDVFilterResultEvent;
 import fr.B4D.socket.store.HDVResearchSocketStore;
 import fr.B4D.utils.PointF;
 
