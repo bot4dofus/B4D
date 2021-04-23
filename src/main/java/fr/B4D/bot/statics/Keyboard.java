@@ -112,7 +112,7 @@ public final class Keyboard{
 		}
 	}
 	
-	/** Permet d'attendre l'appui sur une touche.
+	/**
 	 * Wait for a key to be pressed.
 	 * @param timeout - Timeout in ms.
 	 * @return Integer representing the key pressed, {@code -1} if timeout.
