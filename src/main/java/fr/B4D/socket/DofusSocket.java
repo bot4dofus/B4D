@@ -3,6 +3,7 @@ package fr.B4D.socket;
 import java.util.Arrays;
 
 import fr.B4D.bot.B4DException;
+import fr.B4D.socket.event.SocketEvent;
 import fr.B4D.socket.parser.SocketParser;
 import fr.B4D.utils.HexHelper;
 
@@ -78,9 +79,10 @@ public class DofusSocket {
 	 * @return Instance of the parser to use.
 	 * @throws B4DException If could instantiate the parser.
 	 */
-	public SocketParser<?> getParser() throws B4DException {
+	@SuppressWarnings("unchecked")
+	public SocketParser<SocketEvent> getParser() throws B4DException {
 		try {
-			return (SocketParser<?>) socketType.getParser().newInstance();
+			return (SocketParser<SocketEvent>) socketType.getParser().newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			throw new B4DException(e);
 		}

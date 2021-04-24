@@ -55,7 +55,7 @@ public final class Wait {
 	/**
 	 * Wait for a given time on an object.
 	 * @param object - Object on which wait.
-	 * @param time - Time to wait in ms.
+	 * @param time - Time to wait in ms, {@code 0} to wait indefinitely.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
 	 */

@@ -11,7 +11,7 @@ public interface EventHandler<T> {
 	
 	/**
 	 * Called when an event of this type occurs.
-	 * @param socketResult
+	 * @param socketEvent
 	 */
-	public void onEventReceived(T socketResult);
+	public void onEventReceived(T socketEvent);
 }

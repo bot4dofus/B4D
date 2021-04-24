@@ -23,7 +23,7 @@ import fr.B4D.program.Category;
 import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.socket.event.HDVItemViewEvent;
-import fr.B4D.socket.store.HDVItemViewEventStore;
+import fr.B4D.socket.store.EventStore;
 import fr.B4D.utils.PointF;
 
 /**
@@ -70,7 +70,7 @@ public final class PricesEvolution extends Program{
 		HDVItemViewEvent result;
 		Integer previousId = null;
 		List<HDVItemViewEvent> results = new LinkedList<HDVItemViewEvent>();
-		while((result = HDVItemViewEventStore.getInstance().waitForResult(1000)) != null) {
+		while((result = EventStore.getInstance().waitForEvent(HDVItemViewEvent.class, 1000)) != null) {
 			if(result.getId().equals(previousId)) {
 				B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 200);
 				break;

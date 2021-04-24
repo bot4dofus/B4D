@@ -11,7 +11,9 @@ import org.pcap4j.packet.Packet;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
+import fr.B4D.socket.event.SocketEvent;
 import fr.B4D.socket.parser.SocketParser;
+import fr.B4D.socket.store.EventStore;
 
 /**
  * The {@code SocketListener} class is used to listen the incoming dofus sockets, parse it and process it.
@@ -113,15 +115,12 @@ public class SocketListener extends Thread{
 	 * @param data - Dofus packet as array of byte.
 	 */
 	private void parseDofus(byte[] data) {	
-		
 		try {
-			/* Builds a dofus socket out of bytes */
-			DofusSocket dofusSocket = new DofusSocket(data);
-			/* Get the parser corresponding to this packet type */
-			SocketParser<?> socketParser = dofusSocket.getParser();
-			if(socketParser != null) {
-				/* Parse the socket and perform action */
-				socketParser.parse(dofusSocket);
+			DofusSocket dofusSocket = new DofusSocket(data);						// Builds a dofus socket out of bytes
+			SocketParser<SocketEvent> socketParser = dofusSocket.getParser();		// Get the parser corresponding to this packet type
+			if(socketParser != null) {												//If a parser exists
+				SocketEvent socketEvent = socketParser.parse(dofusSocket);				//Parse the socket
+				EventStore.getInstance().addSocketEvent(socketEvent);					//Add the event in the store
 			}
 		}catch(B4DException | IllegalArgumentException e) {
 			//Nothing to do.

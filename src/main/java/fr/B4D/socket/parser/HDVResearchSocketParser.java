@@ -12,7 +12,6 @@ import fr.B4D.dofus.items.Item;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
 import fr.B4D.socket.event.HDVFilterResultEvent;
-import fr.B4D.socket.store.HDVResearchSocketStore;
 
 /**
  * The {@code HDVResearchSocketParser} class is used to parse a socket relative to an HDV research.
@@ -67,7 +66,6 @@ public class HDVResearchSocketParser extends SocketParser<HDVFilterResultEvent>{
 		}
 
 		HDVFilterResultEvent result = new HDVFilterResultEvent(items);
-		HDVResearchSocketStore.getInstance().addSocketResult(result);
 		return result;
 	}
 }

@@ -12,7 +12,7 @@ import fr.B4D.program.Place;
 import fr.B4D.program.Program;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.socket.event.PlayerEnterMapEvent;
-import fr.B4D.socket.store.PlayerEnterMapEventStore;
+import fr.B4D.socket.store.EventStore;
 
 /**
  * The {@code Loto} class contains the loto program.
@@ -50,7 +50,7 @@ public final class Spam extends Program{
 
 	@Override
 	public void cycle(Person person) throws StopProgramException, NumberFormatException, CancelProgramException, B4DException {
-		PlayerEnterMapEvent event = PlayerEnterMapEventStore.getInstance().waitForResult(60000);
+		PlayerEnterMapEvent event = EventStore.getInstance().waitForEvent(PlayerEnterMapEvent.class, 60000);
 		if(event != null) {
 			Message m = new Message(event.getPseudo(), message);
 			m.send();

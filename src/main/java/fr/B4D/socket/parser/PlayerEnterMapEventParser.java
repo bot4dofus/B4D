@@ -6,7 +6,6 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
 import fr.B4D.socket.event.PlayerEnterMapEvent;
-import fr.B4D.socket.store.PlayerEnterMapEventStore;
 
 /**
  * The {@code ChangeMapEventParser} class is used to parse a socket relative to a player moving from a map to another.
@@ -37,8 +36,6 @@ public class PlayerEnterMapEventParser extends SocketParser<PlayerEnterMapEvent>
 		}while(!Arrays.equals(iterator.getNextSocketElement(4).getPayload(), END_DELIMITER));
 
 		PlayerEnterMapEvent event = new PlayerEnterMapEvent(pseudo);
-		PlayerEnterMapEventStore.getInstance().addSocketResult(event);
-
 		return event;
 	}
 }

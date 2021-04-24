@@ -15,7 +15,7 @@ import fr.B4D.bot.Configuration;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.socket.event.ChangeMapEvent;
-import fr.B4D.socket.store.ChangeMapEventStore;
+import fr.B4D.socket.store.EventStore;
 import fr.B4D.utils.PointD;
 import fr.B4D.utils.PointF;
 import net.sourceforge.tess4j.Tesseract;
@@ -246,7 +246,7 @@ public final class Screen {
 	 */
 	public boolean waitForMap(int timeOut) throws StopProgramException, CancelProgramException {
 		//return waitForChangingPixel(B4D.converter.toPointF(configuration.getMinimap()), timeOut) != null;
-		ChangeMapEvent event = ChangeMapEventStore.getInstance().waitForResult(timeOut);
+		ChangeMapEvent event = EventStore.getInstance().getInstance().waitForEvent(ChangeMapEvent.class, timeOut);
 		B4D.wait.sleep(2000);
 		return event != null;
 	}

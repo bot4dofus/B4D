@@ -6,7 +6,6 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.socket.DofusSocket;
 import fr.B4D.socket.DofusSocketIterator;
 import fr.B4D.socket.event.HDVItemViewEvent;
-import fr.B4D.socket.store.HDVItemViewEventStore;
 
 /**
  * The {@code HDVItemViewSocketParser} class is used to parse a socket relative to an item view in an HDV.
@@ -52,8 +51,6 @@ public class HDVItemViewSocketParser extends SocketParser<HDVItemViewEvent>{
 		}
 
 		HDVItemViewEvent result = new HDVItemViewEvent(id, price1, price10, price100);
-		HDVItemViewEventStore.getInstance().addSocketResult(result);
-
 		return result;
 	}
 }
