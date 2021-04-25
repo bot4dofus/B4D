@@ -1,5 +1,6 @@
 package fr.B4D.building.bank;
 
+import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
@@ -13,8 +14,9 @@ public abstract class BankAction {
 	
 	/**
 	 * Do the action.
-	 * @throws StopProgramException Si le programme est stoppé.
-	 * @throws CancelProgramException Si le programme est annulé.
+	 * @throws StopProgramException If the program has been stopped.
+	 * @throws CancelProgramException If the program has been canceled.
+	 * @throws B4DException If an unexpected error occurred.
 	 */
-	public abstract void doAction() throws StopProgramException, CancelProgramException;
+	public abstract void doAction() throws StopProgramException, CancelProgramException, B4DException;
 }

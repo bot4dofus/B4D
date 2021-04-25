@@ -121,8 +121,9 @@ public class HDV extends IndoorBuilding{
 	 * Set the mode to buy items.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void setBuyMode() throws StopProgramException, CancelProgramException{
+	public void setBuyMode() throws StopProgramException, CancelProgramException, B4DException{
 		B4D.mouse.leftClick(new PointF(0.2856, 0.1058), false);
 		buyMode = Boolean.TRUE;
 	}
@@ -131,8 +132,9 @@ public class HDV extends IndoorBuilding{
 	 * Set the mode to sale items.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void setSaleMode() throws StopProgramException, CancelProgramException{
+	public void setSaleMode() throws StopProgramException, CancelProgramException, B4DException{
 		B4D.mouse.leftClick(new PointF(0.436, 0.1038), false);
 		buyMode = Boolean.FALSE;
 	}
@@ -143,8 +145,9 @@ public class HDV extends IndoorBuilding{
 	 * @return - Found items.
 	 * @throws CancelProgramException if the program is canceled.
 	 * @throws StopProgramException if the program is stopped.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public List<Item> research(String name) throws StopProgramException, CancelProgramException{
+	public List<Item> research(String name) throws StopProgramException, CancelProgramException, B4DException{
 		B4D.mouse.leftClick(new PointF(0.1924, 0.1732), false);		//Clear the field
 		B4D.mouse.leftClick(new PointF(0.127, 0.1752), false);		//Click on the field
 		B4D.keyboard.writeKeyboard(name); 							//Type the name

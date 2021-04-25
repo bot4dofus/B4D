@@ -3,6 +3,7 @@ package fr.B4D.interaction.chat;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
@@ -113,8 +114,9 @@ public class Chat{
 	 * Process an infinite number of messages. This is the same as {@code read(-1)}.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void read() throws StopProgramException, CancelProgramException {
+	public void read() throws StopProgramException, CancelProgramException, B4DException {
 		read(-1);
 	}
 	
@@ -123,8 +125,9 @@ public class Chat{
 	 * @param countTo - Number of messages to process.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void read(int countTo) throws StopProgramException, CancelProgramException {		
+	public void read(int countTo) throws StopProgramException, CancelProgramException, B4DException {		
 		int count = 0;
 		Message message;
 		while(count != countTo) {

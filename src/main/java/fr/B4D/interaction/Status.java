@@ -3,6 +3,7 @@ package fr.B4D.interaction;
 import java.awt.Point;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
@@ -83,8 +84,9 @@ public class Status {
 	 * @return {@code true} if the status is set, {@code false} otherwise.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public boolean setStatus() throws StopProgramException, CancelProgramException {
+	public boolean setStatus() throws StopProgramException, CancelProgramException, B4DException {
 		if(statusMenuPosition != null) {
 			PointF menu = B4D.converter.toPointF(statusMenuPosition);
 			B4D.mouse.leftClick(menu, false, 200);		//Ouvre le menu des status

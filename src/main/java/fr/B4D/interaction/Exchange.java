@@ -207,8 +207,9 @@ public class Exchange implements Serializable{
 	 * @throws ExchangeCanceledException if the exchange is canceled.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected operation occurred.
 	 */
-	public void cancelExchange() throws ExchangeCanceledException, StopProgramException, CancelProgramException {
+	public void cancelExchange() throws ExchangeCanceledException, StopProgramException, CancelProgramException, B4DException {
 		B4D.logger.debug("Echange annulé");
 		if(isInProgress())
 			B4D.mouse.leftClick(escapeButton, false);
@@ -218,16 +219,18 @@ public class Exchange implements Serializable{
 	/**
 	 * Checks whether the exchange is still in progress.
 	 * @return {@code true} if the exchange is in progress, {@code false} otherwise.
+	 * @throws B4DException if cannot perform the get pixel operation.
 	 */
-	private boolean isInProgress() {
+	private boolean isInProgress() throws B4DException {
 		return (B4D.screen.getPixelColor(validationButton).getBlue() == 0);
 	}
 	
 	/**
 	 * Checks whether the player has confirmed the exchange.
 	 * @return {@code true} if the player has confirmed, {@code false} otherwise.
+	 * @throws B4DException if cannot perform the search pixel operation.
 	 */
-	private boolean isValided() {
+	private boolean isValided() throws B4DException {
 		return B4D.screen.searchPixel(new PointF(0.3408,0.2804), new PointF(0.3408,0.2914), new Color(100, 100, 0), new Color(255, 255, 50)) != null;
 	}
 }

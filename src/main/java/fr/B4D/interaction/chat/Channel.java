@@ -128,8 +128,9 @@ public class Channel implements Serializable{
 	 * @return List of toggled channels.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected operation occurred.
 	 */
-	public static List<Channel> displayChannels(Server server, Channel...channels) throws StopProgramException, CancelProgramException {
+	public static List<Channel> displayChannels(Server server, Channel...channels) throws StopProgramException, CancelProgramException, B4DException {
 		return displayChannels(server, Arrays.asList(channels));
 	}
 	
@@ -141,8 +142,9 @@ public class Channel implements Serializable{
 	 * @return List of toggled channels.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected operation occurred.
 	 */
-	public static List<Channel> displayChannels(Server server, List<Channel> channels) throws StopProgramException, CancelProgramException {
+	public static List<Channel> displayChannels(Server server, List<Channel> channels) throws StopProgramException, CancelProgramException, B4DException {
 		List<Channel> toggles = null;
 		
 		if(chatMenuPosition != null) {
@@ -282,8 +284,9 @@ public class Channel implements Serializable{
 	 * @param server - Current server.
 	 * @param arrowPosition - Location of the arrow in relative coordinates.
 	 * @return {@code true} if the channel is enabled, {@code false} otherwise.
+	 * @throws B4DException if an unexpected operation occurred.
 	 */
-	private boolean isDisplayed(Server server, PointF arrowPosition) {
+	private boolean isDisplayed(Server server, PointF arrowPosition) throws B4DException {
 		PointF checkPosition = getChekPosition(server, arrowPosition);
 		PointF checkTopLeft = new PointF(checkPosition.x, checkPosition.y - 0.005);
 		PointF checkBottomRight = new PointF(checkPosition.x, checkPosition.y + 0.005);	
@@ -297,7 +300,7 @@ public class Channel implements Serializable{
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
 	 */
-	private void toggle(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException {
+	private void toggle(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException, B4DException {
 		PointF checkPosition = getChekPosition(server, arrowPosition);		
 		B4D.mouse.leftClick(checkPosition, false, 500);
 	}
@@ -309,8 +312,9 @@ public class Channel implements Serializable{
 	 * @return {@code true} if the state has changed, {@code false} otherwise.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected operation occurred.
 	 */
-	private boolean enable(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException {
+	private boolean enable(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException, B4DException {
 		if(!isDisplayed(server, arrowPosition)) {
 			toggle(server, arrowPosition);
 			return true;
@@ -326,8 +330,9 @@ public class Channel implements Serializable{
 	 * @return {@code true} if the state has changed, {@code false} otherwise.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected operation occurred.
 	 */
-	private boolean disable(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException {
+	private boolean disable(Server server, PointF arrowPosition) throws StopProgramException, CancelProgramException, B4DException {
 		if(isDisplayed(server, arrowPosition)) {
 			toggle(server, arrowPosition);
 			return true;

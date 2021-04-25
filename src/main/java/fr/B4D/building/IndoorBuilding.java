@@ -82,8 +82,9 @@ public abstract class IndoorBuilding extends Building{
 	 * @param person Person which enter the building.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void exit(Person person) throws StopProgramException, CancelProgramException {
+	public void exit(Person person) throws StopProgramException, CancelProgramException, B4DException {
 		if(outPoints != null && this.entered) {
 			for(PointF point:outPoints)
 				B4D.mouse.leftClick(point, true, 10000);

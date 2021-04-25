@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
 import fr.B4D.interaction.Status;
 import fr.B4D.interaction.chat.Channel;
@@ -48,7 +49,7 @@ public final class MessageAPITutorial2 extends Program {
 	public void outro(Person person) {}
 
 	@Override
-	public void cycle(Person person) throws StopProgramException, CancelProgramException {
+	public void cycle(Person person) throws StopProgramException, CancelProgramException, B4DException {
 		JTextField nameField = new JTextField();
 		Object[] field = {
 				"Destinataire :", nameField,

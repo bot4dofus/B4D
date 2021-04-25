@@ -33,37 +33,37 @@ public final class Screen {
 	 * Configuration of the screen.
 	 */
 	private Configuration configuration;
-	
-	/**
-	 * Robot performing a screen actions.
-	 */
-	private Robot robot;
     
 	/**
 	 * Constructor of the {@code Screen} class.
      * @param configuration - Configuration of the game.
-	 * @throws AWTException if the platform configuration does not allow low-level input control.
      */
-    public Screen(Configuration configuration) throws AWTException {
+    public Screen(Configuration configuration) {
     	this.configuration = configuration;
-		this.robot = new Robot();
     }
 	
 	/**
 	 * Returns the color of the pixel at a given location.
 	 * @param point - Location of the pixel on the screen in simple coordinates.
 	 * @return Color of the pixel.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public Color getPixelColor(Point point) {
-		return robot.getPixelColor(point.x, point.y);
+	public Color getPixelColor(Point point) throws B4DException {
+		try {
+			Robot robot = new Robot();
+			return robot.getPixelColor(point.x, point.y);
+		} catch(AWTException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	/**
 	 * Returns the color of the pixel at a given location.
 	 * @param point - Location of the pixel on the screen in relative coordinates.
 	 * @return Color of the pixel.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public Color getPixelColor(PointF point) {
+	public Color getPixelColor(PointF point) throws B4DException {
 		return getPixelColor(B4D.converter.toPoint(point));
 	}
 	
@@ -71,8 +71,9 @@ public final class Screen {
 	 * Returns the color of the pixel at a given location.
 	 * @param point - Location of the pixel on the screen in draughtboard coordinates.
 	 * @return Color of the pixel.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public Color getPixelColor(PointD point) {
+	public Color getPixelColor(PointD point) throws B4DException {
 		return getPixelColor(B4D.converter.toPoint(point));
 	}
 	
@@ -83,8 +84,9 @@ public final class Screen {
 	 * @param min - Minimum color.
 	 * @param max - Maximum color.
 	 * @return Location of the first pixel matching the color criteria in relative coordinates. {@code null} if no pixel match the research criteria.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public PointF searchPixel(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) {
+	public PointF searchPixel(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) throws B4DException {
 		Point Point1 = B4D.converter.toPoint(topLeftHandCorner);
 		Point Point2 = B4D.converter.toPoint(bottomRightHandCorner);
 		
@@ -102,13 +104,6 @@ public final class Screen {
 		return null;
 	}
 	
-	/** Permet de rechercher tous les pixels correspondants à un certain critère parmis une plage de pixels.
-	 * @param topLeftHandCorner - Point suppérieur gauche du rectangle de recherche en coordonnées relatives.
-	 * @param bottomRightHandCorner - Point inférieur droit du rectangle de recherche en coordonnées relatives.
-	 * @param min - Couleur minimum.
-	 * @param max - Couleur maximum.
-	 * @return Liste des pixels en coordonnées relatives correspondants au critère de recherche. {@code null} si aucun pixel n'a été trouvé.
-	 */
 	/**
 	 * Performs a pixel research for a given area.
 	 * @param topLeftHandCorner - Top left hand corner of the research area in relative coordinates.
@@ -116,8 +111,9 @@ public final class Screen {
 	 * @param min - Minimum color.
 	 * @param max - Maximum color.
 	 * @return List of pixels matching the color criteria in relative coordinates. {@code null} if no pixel match the research criteria.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public ArrayList<PointF> searchPixels(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) {
+	public ArrayList<PointF> searchPixels(PointF topLeftHandCorner, PointF bottomRightHandCorner, Color min, Color max) throws B4DException {
 		
 		Point Point1 = B4D.converter.toPoint(topLeftHandCorner);
 		Point Point2 = B4D.converter.toPoint(bottomRightHandCorner);
@@ -144,18 +140,25 @@ public final class Screen {
 	 * Performs a screenshot for a given area.
 	 * @param rectangle - Screenshot area in simple coordinates.
 	 * @return Screenshot of the rectangle area.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public BufferedImage takeSreenshot(Rectangle rectangle) {
-		return robot.createScreenCapture(rectangle);
+	public BufferedImage takeSreenshot(Rectangle rectangle) throws B4DException {
+		try {
+			Robot robot = new Robot();
+			return robot.createScreenCapture(rectangle);
+		} catch (AWTException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	/**
 	 * Performs a screenshot for the game frame area.
 	 * @param rectangle - Screenshot area in simple coordinates.
 	 * @return Screenshot of the game frame area.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public BufferedImage takeSreenshot() {
-		return robot.createScreenCapture(configuration.getGameFrame());
+	public BufferedImage takeSreenshot() throws B4DException {
+		return takeSreenshot(configuration.getGameFrame());
 	}
 	
 	/**
@@ -204,15 +207,22 @@ public final class Screen {
 	 * @return Selected string on screen, {@code null} if nothing have been found.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public String getSelection(Point position) throws StopProgramException, CancelProgramException {
-		B4D.mouse.doubleLeftClick(position, false, 100);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_C);
-		robot.keyRelease(KeyEvent.VK_C);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4D.wait.sleep(1000);
-		return B4D.keyboard.getClipboard();
+	public String getSelection(Point position) throws StopProgramException, CancelProgramException, B4DException {
+		try {
+			Robot robot = new Robot();
+			B4D.mouse.doubleLeftClick(position, false, 100);
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_C);
+			robot.keyRelease(KeyEvent.VK_C);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			B4D.wait.sleep(1000);
+			return B4D.keyboard.getClipboard();
+		}
+		catch(AWTException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	/**
@@ -221,8 +231,9 @@ public final class Screen {
 	 * @return Selected string on screen, {@code null} if nothing have been found.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public String getSelection(PointF position) throws StopProgramException, CancelProgramException {
+	public String getSelection(PointF position) throws StopProgramException, CancelProgramException, B4DException {
 		return getSelection(B4D.converter.toPoint(position));
 	}
 	
@@ -307,8 +318,9 @@ public final class Screen {
 	 * @return New color of the pixel, {@code null} if timeout.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public Color waitForChangingPixel(Point point, int timeOut) throws StopProgramException, CancelProgramException {
+	public Color waitForChangingPixel(Point point, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		Color newColor, color = B4D.screen.getPixelColor(point);
 		do {
 			newColor = B4D.screen.getPixelColor(point);
@@ -324,8 +336,9 @@ public final class Screen {
 	 * @return New color of the pixel, {@code null} if timeout.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public Color waitForChangingPixel(PointF point, int timeOut) throws StopProgramException, CancelProgramException {
+	public Color waitForChangingPixel(PointF point, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForChangingPixel(B4D.converter.toPoint(point), timeOut);
 	}
 	
@@ -338,8 +351,9 @@ public final class Screen {
 	 * @return New color of the pixel, {@code null} if timeout.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public Color waitForColor(Point point, Color min, Color max, int timeOut) throws StopProgramException, CancelProgramException {
+	public Color waitForColor(Point point, Color min, Color max, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		Color color;
 		do {
 			color = B4D.screen.getPixelColor(point);
@@ -357,8 +371,9 @@ public final class Screen {
 	 * @return New color of the pixel, {@code null} if timeout.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public Color waitForColor(PointF point, Color min, Color max, int timeOut) throws StopProgramException, CancelProgramException {
+	public Color waitForColor(PointF point, Color min, Color max, int timeOut) throws StopProgramException, CancelProgramException, B4DException {
 		return waitForColor(B4D.converter.toPoint(point), min, max, timeOut);
 	}
 }

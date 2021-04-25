@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.dofus.items.Item;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
@@ -48,8 +49,9 @@ public class HDVEquipments extends HDV{
 	 * @return List of items matching the filter.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public List<Item> enableCategoryFilter(HDVEquipmentCategoryFilter categoryFilter) throws StopProgramException, CancelProgramException{
+	public List<Item> enableCategoryFilter(HDVEquipmentCategoryFilter categoryFilter) throws StopProgramException, CancelProgramException, B4DException{
 		List<Item> items = new ArrayList<Item>();
 		
 		if(!activeCategoryFilters.contains(categoryFilter)) {
@@ -77,8 +79,9 @@ public class HDVEquipments extends HDV{
 	 * @param categoryFilter - Category filter to disable.
 	 * @throws StopProgramException If the program has been stopped.
 	 * @throws CancelProgramException If the program has been canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void disableCategoryFilter(HDVEquipmentCategoryFilter categoryFilter) throws StopProgramException, CancelProgramException {
+	public void disableCategoryFilter(HDVEquipmentCategoryFilter categoryFilter) throws StopProgramException, CancelProgramException, B4DException{
 		if(activeCategoryFilters.contains(categoryFilter)) {
 			B4D.mouse.leftClick(categoryFilter.getFilterPosition(), false);
 		}

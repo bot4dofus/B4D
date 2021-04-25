@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Configuration;
 import fr.B4D.gui.JFrame_GetPoint;
 import fr.B4D.gui.JFrame_GetPointImage;
@@ -33,18 +34,11 @@ public final class Mouse {
 	private Configuration configuration;
 	
 	/**
-	 * Robot performing a mouse click.
-	 */
-	private Robot robot;
-
-	/**
 	 * Constructor of the {@code Mouse} class.
      * @param configuration - Configuration of the game.
-	 * @throws AWTException if the platform configuration does not allow low-level input control.
      */
-    public Mouse(Configuration configuration) throws AWTException {
+    public Mouse(Configuration configuration) {
     	this.configuration = configuration;
-		this.robot = new Robot();
     }
 
 	/**
@@ -114,10 +108,16 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void place(Point position, int millis) throws StopProgramException, CancelProgramException {
-		robot.mouseMove((int)position.getX(),(int)position.getY());
-		B4D.wait.sleep(millis);
+	public void place(Point position, int millis) throws StopProgramException, CancelProgramException, B4DException {
+		try {
+			Robot robot = new Robot();
+			robot.mouseMove((int)position.getX(),(int)position.getY());
+			B4D.wait.sleep(millis);
+		} catch(AWTException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	/**
@@ -126,8 +126,9 @@ public final class Mouse {
 	 * @param position - Location of the cursor in simple coordinates.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void place(Point position) throws StopProgramException, CancelProgramException {
+	public void place(Point position) throws StopProgramException, CancelProgramException, B4DException {
 		place(position, 0);
 	}
 	/**
@@ -136,8 +137,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void place(PointF position, int millis) throws StopProgramException, CancelProgramException {
+	public void place(PointF position, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		place(B4D.converter.toPoint(position), millis);
 	}
 
@@ -147,8 +149,9 @@ public final class Mouse {
 	 * @param position - Location of the cursor in relative coordinates.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void place(PointF position) throws StopProgramException, CancelProgramException {
+	public void place(PointF position) throws StopProgramException, CancelProgramException, B4DException {
 		place(B4D.converter.toPoint(position), 0);
 	}
 
@@ -158,8 +161,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void place(PointD position, int millis) throws StopProgramException, CancelProgramException {
+	public void place(PointD position, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		place(B4D.converter.toPoint(position), millis);
 	}
 
@@ -169,8 +173,9 @@ public final class Mouse {
 	 * @param position - Location of the cursor in draughtboard coordinates.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void place(PointD position) throws StopProgramException, CancelProgramException {
+	public void place(PointD position) throws StopProgramException, CancelProgramException, B4DException {
 		place(B4D.converter.toPoint(position), 0);
 	}
 
@@ -181,18 +186,24 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void rightClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
-		robot.mouseMove((int)position.getX(),(int)position.getY());
-			
-		if(maj)
-			robot.keyPress(KeyEvent.VK_SHIFT);
-		robot.mousePress(KeyEvent.BUTTON3_DOWN_MASK);
-		robot.mouseRelease(KeyEvent.BUTTON3_DOWN_MASK);
-		if(maj)	
-			robot.keyRelease(KeyEvent.VK_SHIFT);
-
-		B4D.wait.sleep(millis);		
+	public void rightClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
+		try {
+			Robot robot = new Robot();
+			robot.mouseMove((int)position.getX(),(int)position.getY());
+				
+			if(maj)
+				robot.keyPress(KeyEvent.VK_SHIFT);
+			robot.mousePress(KeyEvent.BUTTON3_DOWN_MASK);
+			robot.mouseRelease(KeyEvent.BUTTON3_DOWN_MASK);
+			if(maj)	
+				robot.keyRelease(KeyEvent.VK_SHIFT);
+	
+			B4D.wait.sleep(millis);
+		} catch(AWTException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	/**
@@ -202,8 +213,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void rightClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void rightClick(Point position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		rightClick(position, maj, 1000);
 	}
 	
@@ -214,8 +226,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void rightClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
+	public void rightClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		rightClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -226,8 +239,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void rightClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void rightClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		rightClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -238,8 +252,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void rightClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
+	public void rightClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		rightClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -250,8 +265,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void rightClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void rightClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		rightClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -262,18 +278,24 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void leftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException {
-		robot.mouseMove((int)position.getX(),(int)position.getY());
-			
-		if(maj)
-			robot.keyPress(KeyEvent.VK_SHIFT);
-		robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
-		robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
-		if(maj)	
-			robot.keyRelease(KeyEvent.VK_SHIFT);
-
-		B4D.wait.sleep(millis);
+	public void leftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
+		try {
+			Robot robot = new Robot();
+			robot.mouseMove((int)position.getX(),(int)position.getY());
+				
+			if(maj)
+				robot.keyPress(KeyEvent.VK_SHIFT);
+			robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+			robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+			if(maj)	
+				robot.keyRelease(KeyEvent.VK_SHIFT);
+	
+			B4D.wait.sleep(millis);
+		} catch(AWTException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	/**
@@ -283,8 +305,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void leftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void leftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		leftClick(position, maj, 1000);
 	}
 	
@@ -295,8 +318,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void leftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
+	public void leftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		leftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -307,8 +331,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void leftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void leftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		leftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -319,8 +344,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void leftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
+	public void leftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		leftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -331,8 +357,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void leftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void leftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		leftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -343,8 +370,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void doubleLeftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException {
+	public void doubleLeftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		leftClick(position, maj, 0);
 		leftClick(position, maj, millis);
 	}
@@ -356,8 +384,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void doubleLeftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void doubleLeftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		doubleLeftClick(position, maj, 1000);
 	}
 	
@@ -368,8 +397,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void doubleLeftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
+	public void doubleLeftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		doubleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -380,8 +410,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void doubleLeftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void doubleLeftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		doubleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -392,8 +423,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void doubleLeftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
+	public void doubleLeftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		doubleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -404,8 +436,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void doubleLeftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void doubleLeftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		doubleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -416,8 +449,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void tripleLeftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException {
+	public void tripleLeftClick(Point position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		leftClick(position, maj, 0);
 		leftClick(position, maj, 0);
 		leftClick(position, maj, millis);
@@ -430,8 +464,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void tripleLeftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void tripleLeftClick(Point position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		tripleLeftClick(position, maj, 1000);
 	}
 	
@@ -442,8 +477,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void tripleLeftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
+	public void tripleLeftClick(PointF position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		tripleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -454,8 +490,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void tripleLeftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void tripleLeftClick(PointF position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		tripleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -466,8 +503,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void tripleLeftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException{
+	public void tripleLeftClick(PointD position, boolean maj, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		tripleLeftClick(B4D.converter.toPoint(position), maj, millis);
 	}
 	
@@ -478,8 +516,9 @@ public final class Mouse {
 	 * @param maj - {@code true} if Shift must be pressed at the same time. It can be used to stack actions.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void tripleLeftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException{
+	public void tripleLeftClick(PointD position, boolean maj) throws StopProgramException, CancelProgramException, B4DException {
 		tripleLeftClick(B4D.converter.toPoint(position), maj, 1000);
 	}
 	
@@ -490,17 +529,23 @@ public final class Mouse {
 	 * @param millis - Time between the press and release in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void dragDrop(Point pressedPosition, Point releasedPosition, int millis) throws StopProgramException, CancelProgramException {
-		robot.mouseMove((int)pressedPosition.getX(),(int)pressedPosition.getY());
-		robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
-
-		B4D.wait.sleep(millis);
-		
-		robot.mouseMove((int)releasedPosition.getX(),(int)releasedPosition.getY());
-		robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
-
-		B4D.wait.sleep(millis);
+	public void dragDrop(Point pressedPosition, Point releasedPosition, int millis) throws StopProgramException, CancelProgramException, B4DException {
+		try {
+			Robot robot = new Robot();
+			robot.mouseMove((int)pressedPosition.getX(),(int)pressedPosition.getY());
+			robot.mousePress(KeyEvent.BUTTON1_DOWN_MASK);
+	
+			B4D.wait.sleep(millis);
+			
+			robot.mouseMove((int)releasedPosition.getX(),(int)releasedPosition.getY());
+			robot.mouseRelease(KeyEvent.BUTTON1_DOWN_MASK);
+	
+			B4D.wait.sleep(millis);
+		} catch(AWTException e) {
+			throw new B4DException(e);
+		}
 	}
 
 	/**
@@ -509,8 +554,9 @@ public final class Mouse {
 	 * @param releasedPosition - Location of the mouse on release in simple coordinates.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void dragDrop(Point pressedPosition, Point releasedPosition) throws StopProgramException, CancelProgramException{
+	public void dragDrop(Point pressedPosition, Point releasedPosition) throws StopProgramException, CancelProgramException, B4DException {
 		dragDrop(pressedPosition, releasedPosition, 1000);
 	}
 
@@ -521,8 +567,9 @@ public final class Mouse {
 	 * @param millis - Time between the press and release in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void dragDrop(PointF pressedPosition, PointF releasedPosition, int millis) throws StopProgramException, CancelProgramException{
+	public void dragDrop(PointF pressedPosition, PointF releasedPosition, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), millis);
 	}
 
@@ -532,8 +579,9 @@ public final class Mouse {
 	 * @param releasedPosition - Location of the mouse on release in relative coordinates.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void dragDrop(PointF pressedPosition, PointF releasedPosition) throws StopProgramException, CancelProgramException{
+	public void dragDrop(PointF pressedPosition, PointF releasedPosition) throws StopProgramException, CancelProgramException, B4DException {
 		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), 1000);
 	}
 
@@ -544,8 +592,9 @@ public final class Mouse {
 	 * @param millis - Time between the press and release in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void dragDrop(PointD pressedPosition, PointD releasedPosition, int millis) throws StopProgramException, CancelProgramException{
+	public void dragDrop(PointD pressedPosition, PointD releasedPosition, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), millis);
 	}
 
@@ -555,8 +604,9 @@ public final class Mouse {
 	 * @param releasedPosition - Location of the mouse on release in draughtboard coordinates.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void dragDrop(PointD pressedPosition, PointD releasedPosition) throws StopProgramException, CancelProgramException{
+	public void dragDrop(PointD pressedPosition, PointD releasedPosition) throws StopProgramException, CancelProgramException, B4DException {
 		dragDrop(B4D.converter.toPoint(pressedPosition), B4D.converter.toPoint(releasedPosition), 1000);
 	}
 	
@@ -565,8 +615,9 @@ public final class Mouse {
 	 * @param millis - Time to wait after the click in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void chatClick(int millis) throws StopProgramException, CancelProgramException{
+	public void chatClick(int millis) throws StopProgramException, CancelProgramException, B4DException {
 		leftClick(configuration.getChatBar(), false, millis);
 	}
 	
@@ -575,8 +626,9 @@ public final class Mouse {
 	 * This is the same as {@code chatClick(500)}.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void chatClick() throws StopProgramException, CancelProgramException{
+	public void chatClick() throws StopProgramException, CancelProgramException, B4DException {
 		chatClick(500);
 	}
 }

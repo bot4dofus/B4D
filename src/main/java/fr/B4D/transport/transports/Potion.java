@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.io.Serializable;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.transport.Transport;
@@ -40,7 +41,7 @@ public class Potion extends Transport implements Serializable{
 	/* (non-Javadoc)
 	 * @see fr.B4D.transport.TransportInterface#goTo(java.awt.Point)
 	 */
-	public void goTo(Point destination) throws StopProgramException, CancelProgramException {		
+	public void goTo(Point destination) throws StopProgramException, CancelProgramException, B4DException {		
 		B4D.mouse.doubleLeftClick(super.getPositionF(), false);
 	    B4D.screen.waitForMap(20000);
 	}

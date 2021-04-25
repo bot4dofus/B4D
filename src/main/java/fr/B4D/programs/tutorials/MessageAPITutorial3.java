@@ -1,5 +1,6 @@
 package fr.B4D.programs.tutorials;
 
+import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.interaction.Status;
@@ -46,11 +47,11 @@ public final class MessageAPITutorial3 extends Program {
 	public void outro(Person person) {}
 
 	@Override
-	public void cycle(Person person) throws StopProgramException, CancelProgramException {
+	public void cycle(Person person) throws StopProgramException, CancelProgramException, B4DException {
 		Dofus.getInstance().getChat().addChannelFilter(Channel.BUSINESS);
 		Dofus.getInstance().getChat().addTextFilter("moi");
 		Dofus.getInstance().getChat().setChatListener(new ChatListener() {
-			public void messageReceived(Message message) throws StopProgramException, CancelProgramException {
+			public void messageReceived(Message message) throws StopProgramException, CancelProgramException, B4DException {
 				message.reply("C'est qui moi ?");
 			}
 		});

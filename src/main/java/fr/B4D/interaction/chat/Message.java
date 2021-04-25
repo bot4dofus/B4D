@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.annotation.Nonnull;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
@@ -109,8 +110,9 @@ public class Message extends DofusEvent implements Serializable{
 	 * This is the same as {@code send(500)}.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void send() throws StopProgramException, CancelProgramException {
+	public void send() throws StopProgramException, CancelProgramException, B4DException {
 		send(500);
 	}
 	
@@ -119,8 +121,9 @@ public class Message extends DofusEvent implements Serializable{
 	 * @param millis - Time to wait in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void send(int millis) throws StopProgramException, CancelProgramException {
+	public void send(int millis) throws StopProgramException, CancelProgramException, B4DException {
 		if (channel == null) {
 			if (pseudo == null) {
 				send(text, millis);
@@ -143,8 +146,9 @@ public class Message extends DofusEvent implements Serializable{
 	 * @param millis - Time to wait in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	private void send(String text, int millis) throws StopProgramException, CancelProgramException {
+	private void send(String text, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		B4D.mouse.chatClick();
 		B4D.keyboard.writeKeyboard(text, millis);
 		B4D.keyboard.sendKey(KeyEvent.VK_ENTER, 100);
@@ -157,8 +161,9 @@ public class Message extends DofusEvent implements Serializable{
 	 * @param text - Text to reply.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void reply(String text) throws StopProgramException, CancelProgramException {
+	public void reply(String text) throws StopProgramException, CancelProgramException, B4DException {
 		reply(text, 500);
 	}
 
@@ -169,8 +174,9 @@ public class Message extends DofusEvent implements Serializable{
 	 * @param millis - Time to wait in ms.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if an unexpected error occurred.
 	 */
-	public void reply(String text, int millis) throws StopProgramException, CancelProgramException {
+	public void reply(String text, int millis) throws StopProgramException, CancelProgramException, B4DException {
 		if(pseudo != null) {
 			if(channel == Channel.BUSINESS || channel == Channel.RECRUITMENT)
 				channel = Channel.PRIVATE;

@@ -1,6 +1,5 @@
 package fr.B4D.bot;
 
-import java.awt.AWTException;
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
@@ -91,11 +90,8 @@ public final class B4D{
 	 * Builder of the {@code B4D} class. <br>
 	 * The configuration and teams info are automatically saved in files.
 	 * @throws B4DException if an unknown operation occurs.
-	 * @throws ClassNotFoundException if a serialization problem occurs.
-	 * @throws IOException if cannot create the configuration files.
-	 * @throws AWTException if the platform configuration does not allow low-level input control.
 	 */
-	public B4D() throws B4DException, ClassNotFoundException, IOException, AWTException {
+	public B4D() throws B4DException {
 		
 		/** LOGGER **/
 		logger = new Logger();

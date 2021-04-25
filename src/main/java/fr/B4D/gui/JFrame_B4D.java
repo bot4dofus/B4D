@@ -1,6 +1,5 @@
 package fr.B4D.gui;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
@@ -77,12 +76,9 @@ public class JFrame_B4D extends JFrame{
 	
 	/**
 	 * Constructor of the B4D main GUI.
-	 * @throws B4DException if a B4D Exception occurs.
-	 * @throws ClassNotFoundException if a deserialization problem occurs.
-	 * @throws IOException if not possible to create the configuration files.
-	 * @throws AWTException if the computer configuration doesn't allow process automation.
+	 * @throws B4DException if a B4D Exception occurs..
 	 */
-	public JFrame_B4D() throws B4DException, ClassNotFoundException, IOException, AWTException{
+	public JFrame_B4D() throws B4DException{
 		b4d = new B4D();
 		programPanel = new JPanel_Programme(b4d);
 		personPanel = new JPanel_Personnage(b4d);

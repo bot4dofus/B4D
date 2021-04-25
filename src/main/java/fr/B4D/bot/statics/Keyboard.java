@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import fr.B4D.bot.B4D;
+import fr.B4D.bot.B4DException;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 
@@ -21,19 +22,6 @@ import fr.B4D.program.StopProgramException;
  *
  */
 public final class Keyboard{
-
-	/**
-	 * Robot performing a key press.
-	 */
-	private Robot robot;
-
-	/**
-	 * Constructor of the {@code Keyboard} class.
-	 * @throws AWTException if the platform configuration does not allow low-level input control.
-     */
-    public Keyboard() throws AWTException {
-		this.robot = new Robot();
-    }
 	
 	/**
 	 * Simulates a key press on the keyboard.
@@ -41,11 +29,17 @@ public final class Keyboard{
 	 * @param time - Time to wait after the key press.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void sendKey(int keyEvent, int time) throws StopProgramException, CancelProgramException {
-		robot.keyPress(keyEvent);
-		robot.keyRelease(keyEvent);
-		B4D.wait.sleep(time);
+	public void sendKey(int keyEvent, int time) throws StopProgramException, CancelProgramException, B4DException {
+		try {
+			Robot robot = new Robot();
+			robot.keyPress(keyEvent);
+			robot.keyRelease(keyEvent);
+			B4D.wait.sleep(time);
+		} catch(AWTException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	/**
@@ -54,8 +48,9 @@ public final class Keyboard{
 	 * @param keyEvent - Integer representing the key to press.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void sendKey(int keyEvent) throws StopProgramException, CancelProgramException {
+	public void sendKey(int keyEvent) throws StopProgramException, CancelProgramException, B4DException {
 		sendKey(keyEvent, 100);
 	}
 	
@@ -67,14 +62,20 @@ public final class Keyboard{
 	 * @param time - Time to wait after pasting.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void writeKeyboard(String text, int time) throws StopProgramException, CancelProgramException {
-		setClipboard(text);		
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		B4D.wait.sleep(time);
+	public void writeKeyboard(String text, int time) throws StopProgramException, CancelProgramException, B4DException {
+		try {
+			Robot robot = new Robot();
+			setClipboard(text);		
+			robot.keyPress(KeyEvent.VK_CONTROL);
+			robot.keyPress(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_V);
+			robot.keyRelease(KeyEvent.VK_CONTROL);
+			B4D.wait.sleep(time);
+		} catch(AWTException e) {
+			throw new B4DException(e);
+		}
 	}
 	
 	/**
@@ -85,8 +86,9 @@ public final class Keyboard{
 	 * @param text - Text to write.
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
+	 * @throws B4DException if the platform configuration does not allow low-level input control.
 	 */
-	public void writeKeyboard(String text) throws StopProgramException, CancelProgramException {
+	public void writeKeyboard(String text) throws StopProgramException, CancelProgramException, B4DException {
 		writeKeyboard(text, 500);
 	}
 	
