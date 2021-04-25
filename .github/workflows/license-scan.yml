@@ -2,9 +2,9 @@
 
 name: License Scan
 
-on:
-  push:
-    branches: [master, dev]
+on::
+  schedule:
+  - cron: "0 0 * * 0"
 
 jobs:
   fossa-cli:
