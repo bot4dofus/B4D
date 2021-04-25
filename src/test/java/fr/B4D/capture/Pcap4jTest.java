@@ -9,7 +9,7 @@ import org.pcap4j.core.PcapNetworkInterface;
 import org.pcap4j.core.PcapNetworkInterface.PromiscuousMode;
 import org.pcap4j.packet.Packet;
 
-import fr.B4D.socket.PcapsFinder;
+import fr.B4D.socket.DofusSocketUtils;
 
 // From https://github.com/kaitoy/pcap4j/blob/v1/pcap4j-sample/src/main/java/org/pcap4j/sample/Loop.java
 
@@ -28,7 +28,7 @@ public class Pcap4jTest {
 //		if (Platform.isWindows())
 //			System.out.println("This is windows");
 
-		PcapNetworkInterface nif = PcapsFinder.findActiveDevice();
+		PcapNetworkInterface nif = DofusSocketUtils.findActiveDevice();
 
 		System.out.println("Device found : " + nif.getName());
 		PcapHandle handle = nif.openLive(SNAPLEN, PromiscuousMode.PROMISCUOUS, READ_TIMEOUT);

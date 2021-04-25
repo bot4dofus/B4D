@@ -93,11 +93,11 @@ public class DofusSocketIterator {
 	 * @return Next socket element.
 	 * @throws B4DException 
 	 */
-	public SocketElement getNextSocketElement(Integer length) throws B4DException {
+	public DofusSocketElement getNextSocketElement(Integer length) throws B4DException {
 		if(cursor+length > socket.length)
 			throw new B4DException("End of the socket reached.");
 		
-		SocketElement element = new SocketElement(Arrays.copyOfRange(socket, cursor, cursor+length));
+		DofusSocketElement element = new DofusSocketElement(Arrays.copyOfRange(socket, cursor, cursor+length));
 		cursor += length;
 		return element;
 	}

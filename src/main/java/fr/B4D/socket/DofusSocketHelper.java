@@ -61,7 +61,7 @@ public class DofusSocketHelper {
 			for(int index=0; index <= socket.length-length; index++) {
 				
 				byte[] subArray = Arrays.copyOfRange(socket, index, index+length);
-				SocketElement element = new SocketElement(subArray);
+				DofusSocketElement element = new DofusSocketElement(subArray);
 				
 				Integer asBigEndian = element.asBigEndian();
 				Integer asSmallEndian = element.asSmallEndian();

@@ -6,7 +6,7 @@ package fr.B4D.socket.event;
  * @author Lucas
  *
  */
-public class ChangeMapEvent extends SocketEvent{
+public class ChangeMapEvent extends DofusEvent{
 	
 	/**
 	 * Constructs a {@code ChangeMapEvent}.

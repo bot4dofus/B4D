@@ -24,7 +24,7 @@ import fr.B4D.interaction.chat.Channel;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramOptions;
-import fr.B4D.socket.SocketListener;
+import fr.B4D.socket.DofusSocketListener;
 import fr.B4D.utils.os.Os;
 
 /**
@@ -79,7 +79,7 @@ public final class B4D{
 	/**
 	 * Socket listener. Listening for the incoming sockets.
 	 */
-	private SocketListener socketListener;
+	private DofusSocketListener socketListener;
 	
 	/**
 	 * Keyboard listener. Listening for the keys pressed.
@@ -230,7 +230,7 @@ public final class B4D{
 	 */
 	public void runProgram(Program program, Person person, ProgramOptions programOptions) {
 		try {
-			socketListener = new SocketListener();
+			socketListener = new DofusSocketListener();
 			socketListener.start();
 			
 			keyboardListener = new KeyboardListener();

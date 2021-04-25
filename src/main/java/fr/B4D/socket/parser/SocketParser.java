@@ -2,7 +2,7 @@ package fr.B4D.socket.parser;
 
 import fr.B4D.bot.B4DException;
 import fr.B4D.socket.DofusSocket;
-import fr.B4D.socket.event.SocketEvent;
+import fr.B4D.socket.event.DofusEvent;
 
 /**
  * The {@code SocketParser} class is the super class of the parsers.
@@ -12,7 +12,7 @@ import fr.B4D.socket.event.SocketEvent;
  * @param <T> The type of the parser result.
  *
  */
-public abstract class SocketParser<T extends SocketEvent> {
+public abstract class SocketParser<T extends DofusEvent> {
 	
 	/**
 	 * Parse a dofus socket.

@@ -7,10 +7,11 @@ import java.util.concurrent.ArrayBlockingQueue;
 import fr.B4D.bot.B4D;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.socket.event.SocketEvent;
+import fr.B4D.socket.event.DofusEvent;
 
 /**
- * The {@code SocketStore} class is an abstract class storing all the socket events.
+ * The {@code SocketStore} class is an abstract class storing all the dofus events.
+ * A store is made of queues and handlers. 
  * 
  * @author Lucas
  * 
@@ -42,8 +43,8 @@ public class EventStore {
 	 */
 	private int queueSize;
 	
-	private HashMap<Class<? extends SocketEvent>, ArrayBlockingQueue<SocketEvent>> queueMapper;
-	private HashMap<Class<? extends SocketEvent>, ArrayList<EventHandler<SocketEvent>>> handlerMapper;
+	private HashMap<Class<? extends DofusEvent>, ArrayBlockingQueue<DofusEvent>> queueMapper;
+	private HashMap<Class<? extends DofusEvent>, ArrayList<EventHandler<DofusEvent>>> handlerMapper;
 
 	/**
 	 * Constructor of a socket store with the default value of 100.
@@ -62,8 +63,8 @@ public class EventStore {
 			throw new IllegalArgumentException(String.format("The size of a queue in the store must be greater than 1. Current : {}", queueSize));
 		
 		this.queueSize = queueSize; 
-		this.queueMapper = new HashMap<Class<? extends SocketEvent>, ArrayBlockingQueue<SocketEvent>>();
-		this.handlerMapper = new HashMap<Class<? extends SocketEvent>, ArrayList<EventHandler<SocketEvent>>>();
+		this.queueMapper = new HashMap<Class<? extends DofusEvent>, ArrayBlockingQueue<DofusEvent>>();
+		this.handlerMapper = new HashMap<Class<? extends DofusEvent>, ArrayList<EventHandler<DofusEvent>>>();
 	}
 	
 	/**
@@ -78,13 +79,13 @@ public class EventStore {
 	 * Add socket event to the parsed list. Remove the first if no space left.
 	 * @param socketEvent - Socket event to add to the queue.
 	 */
-	public void addSocketEvent(SocketEvent socketEvent) {
-		ArrayBlockingQueue<SocketEvent> eventQueue;
+	public void addSocketEvent(DofusEvent socketEvent) {
+		ArrayBlockingQueue<DofusEvent> eventQueue;
 		
 		synchronized(queueMapper){
 			eventQueue = queueMapper.get(socketEvent.getClass());	//Get the queue corresponding to the event type
 			if(eventQueue == null){																	//If the queue doesn't exist yet
-				eventQueue = new ArrayBlockingQueue<SocketEvent>(this.queueSize);						//Create it
+				eventQueue = new ArrayBlockingQueue<DofusEvent>(this.queueSize);						//Create it
 				queueMapper.put(socketEvent.getClass(), eventQueue);									//Add the queue in the queue mapper
 			}
 		}
@@ -106,7 +107,7 @@ public class EventStore {
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
 	 */
-	public <T extends SocketEvent> T waitForEvent(Class<T> eventClass) throws StopProgramException, CancelProgramException {
+	public <T extends DofusEvent> T waitForEvent(Class<T> eventClass) throws StopProgramException, CancelProgramException {
 		return waitForEvent(eventClass, 0);
 	}
 	
@@ -118,23 +119,23 @@ public class EventStore {
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
 	 */
-	public <T extends SocketEvent> T waitForEvent(Class<T> eventClass, long timeout) throws StopProgramException, CancelProgramException {		
-		SocketEvent socketResult = null;
-		ArrayBlockingQueue<SocketEvent> eventQueue;
+	public <T extends DofusEvent> T waitForEvent(Class<T> eventClass, long timeout) throws StopProgramException, CancelProgramException {		
+		DofusEvent socketEvent = null;
+		ArrayBlockingQueue<DofusEvent> eventQueue;
 		
 		synchronized(queueMapper){
 			 eventQueue = queueMapper.get(eventClass);		//Get the queue corresponding to the event type
 			if(eventQueue == null){															//If the queue doesn't exist yet
-				eventQueue = new ArrayBlockingQueue<SocketEvent>(this.queueSize);				//Create it
+				eventQueue = new ArrayBlockingQueue<DofusEvent>(this.queueSize);				//Create it
 				queueMapper.put(eventClass, eventQueue);										//Add the queue in the queue mapper
 			}
 		}
 
 		synchronized(eventQueue){
-			socketResult = eventQueue.poll();											//Get the latest event on the queue
-			if(socketResult == null) {													//If no event on the queue
+			socketEvent = eventQueue.poll();											//Get the latest event on the queue
+			if(socketEvent == null) {													//If no event on the queue
 				B4D.wait.waitOnObject(eventQueue, timeout);									//Wait for an event on the queue
-				socketResult = eventQueue.poll();											//Get the latest event on the queue
+				socketEvent = eventQueue.poll();											//Get the latest event on the queue
 			}
 		}
 		
@@ -143,7 +144,7 @@ public class EventStore {
 				queueMapper.remove(eventClass);													//Remove it from the store
 		}
 
-		return eventClass.cast(socketResult);												//Return the result
+		return eventClass.cast(socketEvent);												//Return the event
 	}
 
 	/** 
@@ -160,9 +161,9 @@ public class EventStore {
 	 * Don't do anything if the queue doesn't exist.
 	 * @param eventClass - Type of the event to remove.
 	 */
-	public <T extends SocketEvent> void clear(Class<T> eventClass) {
+	public <T extends DofusEvent> void clear(Class<T> eventClass) {
 		synchronized(queueMapper){
-			ArrayBlockingQueue<SocketEvent> eventQueue = queueMapper.get(eventClass);		//Get the queue corresponding to the event class
+			ArrayBlockingQueue<DofusEvent> eventQueue = queueMapper.get(eventClass);		//Get the queue corresponding to the event class
 			if(eventQueue != null){															//If the queue exists
 				eventQueue.clear();																//Clear it
 			}
@@ -175,18 +176,18 @@ public class EventStore {
 	 * @param eventHandler - Event handler to add.
 	 */
 	@SuppressWarnings("unchecked")
-	public synchronized <T extends SocketEvent> void addEventHandler(Class<T> eventClass, EventHandler<T> eventHandler) {		
+	public synchronized <T extends DofusEvent> void addEventHandler(Class<T> eventClass, EventHandler<T> eventHandler) {		
 		synchronized(handlerMapper){
-			ArrayList<EventHandler<SocketEvent>> eventHandlers = handlerMapper.get(eventClass);		//Get the handlers corresponding to the event type
+			ArrayList<EventHandler<DofusEvent>> eventHandlers = handlerMapper.get(eventClass);		//Get the handlers corresponding to the event type
 			if(eventHandlers == null){																//If the handlers doesn't exist yet
-				eventHandlers = new ArrayList<EventHandler<SocketEvent>>();								//Create it
+				eventHandlers = new ArrayList<EventHandler<DofusEvent>>();								//Create it
 				handlerMapper.put(eventClass, eventHandlers);											//Add the handlers in the handler mapper
 			}
 			
 			synchronized(eventHandlers){
 				//TODO find a way to remove the cast !
 				//Because of it, removing handlers fail in fr.B4D.socket.store.EventStoreTest.java:L214
-				eventHandlers.add((EventHandler<SocketEvent>) eventHandler); 						//Add the handler to the list
+				eventHandlers.add((EventHandler<DofusEvent>) eventHandler); 						//Add the handler to the list
 			}
 		}
 	}
@@ -197,10 +198,10 @@ public class EventStore {
 	 * @param eventHandler - Event handler to remove.
 	 * @return {@code true} if it has been removed, {@code false} otherwise.
 	 */
-	public synchronized <T extends SocketEvent> boolean removeEventHandler(Class<T> eventClass, EventHandler<T> eventHandler) {
+	public synchronized <T extends DofusEvent> boolean removeEventHandler(Class<T> eventClass, EventHandler<T> eventHandler) {
 		boolean removed = false;		
 		synchronized(handlerMapper){
-			ArrayList<EventHandler<SocketEvent>> eventHandlers = handlerMapper.get(eventClass);		//Get the handlers corresponding to the event type
+			ArrayList<EventHandler<DofusEvent>> eventHandlers = handlerMapper.get(eventClass);		//Get the handlers corresponding to the event type
 			if(eventHandlers != null){																//If the handlers exists
 				removed = eventHandlers.remove(eventHandler);											//Remove it
 			}
@@ -216,7 +217,7 @@ public class EventStore {
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
 	 */
-	public <T extends SocketEvent> long read(Class<T> eventClass) throws StopProgramException, CancelProgramException {
+	public <T extends DofusEvent> long read(Class<T> eventClass) throws StopProgramException, CancelProgramException {
 		return read(eventClass, -1, 0);
 	}
 
@@ -229,7 +230,7 @@ public class EventStore {
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
 	 */
-	public <T extends SocketEvent> long read(Class<T> eventClass, int countTo) throws StopProgramException, CancelProgramException {
+	public <T extends DofusEvent> long read(Class<T> eventClass, int countTo) throws StopProgramException, CancelProgramException {
 		return read(eventClass, countTo, 0);
 	}
 	
@@ -242,7 +243,7 @@ public class EventStore {
 	 * @throws StopProgramException if the program is stopped.
 	 * @throws CancelProgramException if the program is canceled.
 	 */
-	public <T extends SocketEvent> long read(Class<T> eventClass, int countTo, long timeout) throws StopProgramException, CancelProgramException {		
+	public <T extends DofusEvent> long read(Class<T> eventClass, int countTo, long timeout) throws StopProgramException, CancelProgramException {		
 		int count = 0;
 		T socketEvent ;
 		while(count != countTo) {																	//While not finished
@@ -250,9 +251,9 @@ public class EventStore {
 			if(socketEvent == null)																		//If timeout
 				break;																						//Exit loop
 			synchronized(handlerMapper){
-				ArrayList<EventHandler<SocketEvent>> eventHandlers = handlerMapper.get(eventClass);		//Get the handlers corresponding to the event type
+				ArrayList<EventHandler<DofusEvent>> eventHandlers = handlerMapper.get(eventClass);		//Get the handlers corresponding to the event type
 				if(eventHandlers != null){																//If the handlers exist
-					for(EventHandler<SocketEvent> eventHandler:eventHandlers) {								//For every registered handlers
+					for(EventHandler<DofusEvent> eventHandler:eventHandlers) {								//For every registered handlers
 						if(!eventHandler.onEventReceived(socketEvent))											//Call the handler, if must stop receiving events
 							break;																					//Exit loop
 					}

@@ -3,7 +3,7 @@ package fr.B4D.socket;
 import java.util.Arrays;
 
 import fr.B4D.bot.B4DException;
-import fr.B4D.socket.event.SocketEvent;
+import fr.B4D.socket.event.DofusEvent;
 import fr.B4D.socket.parser.SocketParser;
 import fr.B4D.utils.HexHelper;
 
@@ -23,7 +23,7 @@ public class DofusSocket {
 	//		| Socket Id | Flags ? | Socket length | payload | ...
 	//		|     1     |    1    |       x       |    x    |
 	
-	private SocketType socketType;
+	private DofusSocketType socketType;
 	private int socketLengthSize;
 	private int length;
 	private byte[] payload;
@@ -40,13 +40,13 @@ public class DofusSocket {
 		if(socket.length < 4)
 			throw new IllegalArgumentException("Cannot be less than 4.");			
 
-		this.socketType = SocketType.fromSocket(socket);
+		this.socketType = DofusSocketType.fromSocket(socket);
 		if(this.socketType == null)
 			throw new IllegalArgumentException("Unknown socket : [" + HexHelper.toString(socket) + "]");
 		
 		
 		this.socketLengthSize = socket[1] & SOCKET_LENGTH_MASK;
-		this.length = new SocketElement(Arrays.copyOfRange(socket, 2, 2+socketLengthSize)).asSmallEndian();
+		this.length = new DofusSocketElement(Arrays.copyOfRange(socket, 2, 2+socketLengthSize)).asSmallEndian();
 		this.payload = Arrays.copyOfRange(socket, 2+socketLengthSize, 2+socketLengthSize+length);
 	}
 
@@ -80,9 +80,9 @@ public class DofusSocket {
 	 * @throws B4DException If could instantiate the parser.
 	 */
 	@SuppressWarnings("unchecked")
-	public SocketParser<SocketEvent> getParser() throws B4DException {
+	public SocketParser<DofusEvent> getParser() throws B4DException {
 		try {
-			return (SocketParser<SocketEvent>) socketType.getParser().newInstance();
+			return (SocketParser<DofusEvent>) socketType.getParser().newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
 			throw new B4DException(e);
 		}

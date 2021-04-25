@@ -8,14 +8,14 @@ import java.time.LocalDateTime;
  * @author Lucas
  *
  */
-public class SocketEvent {
+public abstract class DofusEvent {
 
 	private LocalDateTime dateTime;
 	
 	/**
 	 * Constructor of the socket result class.
 	 */
-	public SocketEvent() {
+	public DofusEvent() {
 		super();
 		dateTime = LocalDateTime.now();
 	}

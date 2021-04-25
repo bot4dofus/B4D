@@ -9,7 +9,7 @@ import fr.B4D.bot.B4D;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
-import fr.B4D.socket.event.SocketEvent;
+import fr.B4D.socket.event.DofusEvent;
 
 /**
  * The {@code Message} class represents a message in the chat.<br><br>
@@ -18,7 +18,7 @@ import fr.B4D.socket.event.SocketEvent;
  * @author Lucas
  *
  */
-public class Message extends SocketEvent implements Serializable{
+public class Message extends DofusEvent implements Serializable{
 	
 	private static final long serialVersionUID = 5508700695491701427L;
 	

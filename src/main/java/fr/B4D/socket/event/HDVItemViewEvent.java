@@ -6,7 +6,7 @@ package fr.B4D.socket.event;
  * @author Lucas
  *
  */
-public class HDVItemViewEvent extends SocketEvent{
+public class HDVItemViewEvent extends DofusEvent{
 
 	/**
 	 * The item id.

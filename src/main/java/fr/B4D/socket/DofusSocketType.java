@@ -13,7 +13,7 @@ import fr.B4D.socket.parser.PlayerEnterMapEventParser;
  * @author Lucas
  *
  */
-public enum SocketType {
+public enum DofusSocketType {
 	
 	/**
 	 * Socket representing an item view in HDV.
@@ -50,8 +50,8 @@ public enum SocketType {
 	 * @param socket Byte array representing the content of the socket.
 	 * @return The corresponding socket type, {@code null} if none found.
 	 */
-	public static SocketType fromSocket(byte[] socket) {		
-		for(SocketType socketType:SocketType.values()) {
+	public static DofusSocketType fromSocket(byte[] socket) {		
+		for(DofusSocketType socketType:DofusSocketType.values()) {
 			if(socket[0] == socketType.getId())
 				return socketType;
 		}
@@ -66,7 +66,7 @@ public enum SocketType {
 	 * @param id Byte id of the socket.
 	 * @param parser Corresponding parser.
 	 */
-	SocketType(byte id, Class<?> parser) {
+	DofusSocketType(byte id, Class<?> parser) {
 		this.id = id;
 		this.parser = parser;
 	}

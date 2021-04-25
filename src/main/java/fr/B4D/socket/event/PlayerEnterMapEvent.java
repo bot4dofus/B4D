@@ -6,7 +6,7 @@ package fr.B4D.socket.event;
  * @author Lucas
  *
  */
-public class PlayerEnterMapEvent extends SocketEvent{
+public class PlayerEnterMapEvent extends DofusEvent{
 	
 	/**
 	 * Pseudo of the player entering the map.
