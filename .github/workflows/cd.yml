@@ -62,3 +62,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         branch: v${{ env.PACKAGE_VERSION }}
+        
+    - name: Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_ANNOUNCMENT }}
+      uses: Ilshidur/action-discord@master
+      with:
+       args: 'The version {{ env.PACKAGE_VERSION }} of B4D is now available!\n\nYou can download it here : https://github.com/LucBerge/B4D/releases/latest.\nDont forget to check the installation guide : https://github.com/LucBerge/B4D/wiki/Install.'
