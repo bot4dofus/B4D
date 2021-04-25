@@ -193,13 +193,12 @@ public class EventStore {
 	
 	/**
 	 * Removes the event handler from the list. The handler will not be called anymore.
+	 * @param eventClass - Type of the event handler.
 	 * @param eventHandler - Event handler to remove.
 	 * @return {@code true} if it has been removed, {@code false} otherwise.
 	 */
-	public synchronized <T extends SocketEvent> boolean removeEventHandler(EventHandler<T> eventHandler) {
-		boolean removed = false;
-		Class<?> eventClass = eventHandler.getClass().getGenericSuperclass().getClass();
-		
+	public synchronized <T extends SocketEvent> boolean removeEventHandler(Class<T> eventClass, EventHandler<T> eventHandler) {
+		boolean removed = false;		
 		synchronized(handlerMapper){
 			ArrayList<EventHandler<SocketEvent>> eventHandlers = handlerMapper.get(eventClass);		//Get the handlers corresponding to the event type
 			if(eventHandlers != null){																//If the handlers exists
@@ -253,8 +252,10 @@ public class EventStore {
 			synchronized(handlerMapper){
 				ArrayList<EventHandler<SocketEvent>> eventHandlers = handlerMapper.get(eventClass);		//Get the handlers corresponding to the event type
 				if(eventHandlers != null){																//If the handlers exist
-					for(EventHandler<SocketEvent> eventHandler:eventHandlers)								//For every registered handlers
-						eventHandler.onEventReceived(socketEvent);												//Call the handler
+					for(EventHandler<SocketEvent> eventHandler:eventHandlers) {								//For every registered handlers
+						if(!eventHandler.onEventReceived(socketEvent))											//Call the handler, if must stop receiving events
+							break;																					//Exit loop
+					}
 				}
 			}
 			count++;

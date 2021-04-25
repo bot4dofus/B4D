@@ -73,20 +73,23 @@ public class EventStoreTest {
 		
 		EventHandler<PlayerEnterMapEvent> eventHandler1 = new EventHandler<PlayerEnterMapEvent>() {
 			@Override
-			public void onEventReceived(PlayerEnterMapEvent socketEvent) {
+			public boolean onEventReceived(PlayerEnterMapEvent socketEvent) {
 				event1counter++;
+				return true;
 			}
 		};
 		EventHandler<PlayerEnterMapEvent> eventHandler2 = new EventHandler<PlayerEnterMapEvent>() {
 			@Override
-			public void onEventReceived(PlayerEnterMapEvent socketEvent) {
+			public boolean onEventReceived(PlayerEnterMapEvent socketEvent) {
 				event2counter++;
+				return true;
 			}
 		};
 		EventHandler<ChangeMapEvent> eventHandler3 = new EventHandler<ChangeMapEvent>() {
 			@Override
-			public void onEventReceived(ChangeMapEvent socketEvent) {
+			public boolean onEventReceived(ChangeMapEvent socketEvent) {
 				event3counter++;
+				return true;
 			}
 		};
 		
@@ -121,8 +124,8 @@ public class EventStoreTest {
 		Assert.assertEquals(0, store.read(ChangeMapEvent.class, 1, 100));
 		
 		/* Remove the event handler 1 and 2 */
-		Assert.assertEquals(true, store.removeEventHandler(eventHandler1));
-		Assert.assertEquals(true, store.removeEventHandler(eventHandler2));
+		Assert.assertEquals(true, store.removeEventHandler(PlayerEnterMapEvent.class, eventHandler1));
+		Assert.assertEquals(true, store.removeEventHandler(PlayerEnterMapEvent.class, eventHandler2));
 
 		/* Create and start a thread that will add events */
 		Thread t2 = new Thread(new Runnable() {

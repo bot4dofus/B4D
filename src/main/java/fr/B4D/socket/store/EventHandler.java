@@ -11,7 +11,8 @@ public interface EventHandler<T> {
 	
 	/**
 	 * Called when an event of this type occurs.
-	 * @param socketEvent
+	 * @param socketEvent - Type the received event.
+	 * @return {@code true} to continue receiving events, {@code false} otherwise.
 	 */
-	public void onEventReceived(T socketEvent);
+	public boolean onEventReceived(T socketEvent);
 }
