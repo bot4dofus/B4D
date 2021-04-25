@@ -16,5 +16,5 @@ Steps to reproduce the bug.
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Screenshots or StackTrace**
+If applicable, add screenshots or the stacktrace to help explain your problem.
