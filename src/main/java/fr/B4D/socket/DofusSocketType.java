@@ -6,44 +6,48 @@ import fr.B4D.socket.parser.HDVResearchSocketParser;
 import fr.B4D.socket.parser.ChangeMapEventParser;
 import fr.B4D.socket.parser.PlayerEnterMapEventParser;
 
-
 /**
  * The class {@code SocketType} defines all the known sockets and map it with the corresponding socket parser.
+ * 
+ *
  * 
  * @author Lucas
  *
  */
 public enum DofusSocketType {
+
+	//TODO The socket ids changes for every update. We need to load the ids from a bundle file in (or next to) the jar file. This file would be updated on startup.
+	//CURRENT IDS FOR VERSION 2.59
 	
 	/**
 	 * Socket representing an item view in HDV.
 	 */
-	HDV_ITEM_VIEW_SOCKET((byte) 0x8b, HDVItemViewSocketParser.class),
+	HDV_ITEM_VIEW_SOCKET((byte) 0x33, HDVItemViewSocketParser.class),
 	
 	/**
-	 * Socket representing the result of an HDV research.
+	 * Socket representing the result of an HDV filter, only for the equipment HDV.
 	 */
-	HDV_FILTER_RESULT_SOCKET((byte) 0x95, HDVResearchSocketParser.class),
+	HDV_FILTER_EQUIPMENT_SOCKET((byte) 0x75, HDVResearchSocketParser.class),
 
 	/**
 	 * Socket representing a message in the chat.
 	 */
-	CHAT_MESSAGE_SOCKET((byte) 0x59, ChatMessageSocketParser.class),
+	CHAT_MESSAGE_SOCKET((byte) 0x03, ChatMessageSocketParser.class),
 
 	/**
 	 * Socket representing an opened enclose.
 	 */
-	DD_ENCLOSE_OPEN_9D_SOCKET((byte) 0x5d, null),
+	//DD_ENCLOSE_OPEN_SOCKET((byte) 0x00, null), //TODO find the id
 
 	/**
 	 * Socket representing a move from a map to another.
 	 */
-	CHANGE_MAP_SOCKET((byte) 0x73, ChangeMapEventParser.class),
+	CHANGE_MAP_SOCKET((byte) 0x01, ChangeMapEventParser.class),
 
 	/**
 	 * Socket representing a player entering a map.
 	 */
-	PLAYER_ENTER_MAP_SOCKET((byte) 0x91, PlayerEnterMapEventParser.class);
+	PLAYER_ENTER_MAP_SOCKET((byte) 0x85, PlayerEnterMapEventParser.class);
 	
 	/**
 	 * Returns the socket type corresponding to the received socket.
