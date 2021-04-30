@@ -17,8 +17,8 @@ import fr.B4D.program.StopProgramException;
  * The {@code MessageAPI} class contains all the tutorials relative to the message API.
  * <br><br>
  * This tutorial focus on message filters and chat listener.
- * If you want to read messages, see {@link BankAPITutorial1}.
- * If you want to send private messages, see {@link BankAPITutorial2}.
+ * If you want to read messages, see {@link MessageAPITutorial1}.
+ * If you want to send private messages, see {@link MessageAPITutorial2}.
  * <br><br>
  * Steps :
  * <ul>
@@ -52,7 +52,7 @@ public final class MessageAPITutorial3 extends Program {
 		Dofus.getInstance().getChat().addTextFilter("moi");
 		Dofus.getInstance().getChat().setChatListener(new ChatListener() {
 			public void messageReceived(Message message) throws StopProgramException, CancelProgramException, B4DException {
-				message.reply("C'est qui moi ?");
+				message.reply("Salut !");
 			}
 		});
 		Dofus.getInstance().getChat().read(3);

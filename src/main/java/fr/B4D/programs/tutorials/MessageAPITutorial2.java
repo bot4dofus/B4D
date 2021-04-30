@@ -19,8 +19,8 @@ import fr.B4D.program.StopProgramException;
  * The {@code MessageAPI} class contains all the tutorials relative to the message API.
  * <br><br>
  * This tutorial focus on message reception.
- * If you want to read messages, see {@link BankAPITutorial1}.
- * If you want to use chat filters and a chat listener, see {@link BankAPITutorial3}.
+ * If you want to read messages, see {@link MessageAPITutorial1}.
+ * If you want to use chat filters and a chat listener, see {@link MessageAPITutorial3}.
  * <br><br>
  * Steps :
  * <ul>
