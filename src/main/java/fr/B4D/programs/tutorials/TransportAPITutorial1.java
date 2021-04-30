@@ -17,7 +17,8 @@ import fr.B4D.program.StopProgramException;
  * <br><br>
  * Steps :
  * <ul>
- *     <li>Goes to (4, -18).</li>
+ *     <li>Goes to (3, -19).</li>
+ *     <li>Goes to (3, -20).</li>
  *     <li>Goes to (3, -19).</li>
  *     <li>Goes to the player's registered zaap</li>
  * </ul>
@@ -42,8 +43,9 @@ public final class TransportAPITutorial1 extends Program {
 
 	@Override
 	public void cycle(Person person) throws StopProgramException, CancelProgramException, B4DException {
-		person.goTo(new Point(4, -18));
-		person.goTo(new Point(3, -19));
-		person.goTo(person.getBontaPotion().getDestination());
+		/*person.goTo(new Point(3, -19));
+		person.goTo(new Point(3, -20));
+		person.goTo(new Point(3, -19));*/
+		person.goTo(person.getBoosterPotion().getDestination());
 	}
 }

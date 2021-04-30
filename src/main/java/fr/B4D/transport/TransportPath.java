@@ -8,6 +8,8 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
+import fr.B4D.socket.event.ChangeMapEvent;
+import fr.B4D.socket.store.EventStore;
 
 /**
  * The {@code TransportPath} class represents a path between two locations on the map.
@@ -46,7 +48,9 @@ public class TransportPath implements Serializable{
 			if (!person.getPosition().equals(step.getTransport().getPosition()))
 				throw new B4DException("Wrong position.");
 			step.use();
-			B4D.screen.waitForMap(20000);
+			if(EventStore.getInstance().waitForEvent(ChangeMapEvent.class, 20000) == null)
+				throw new B4DException("Timeout while waiting for the map to change.");
+			B4D.wait.sleep(1000); 	//Wait one more second for low connections
 			person.setPosition(step.getDestination());
 		}
 	}

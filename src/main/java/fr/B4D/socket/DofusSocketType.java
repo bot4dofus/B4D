@@ -42,7 +42,7 @@ public enum DofusSocketType {
 	/**
 	 * Socket representing a move from a map to another.
 	 */
-	CHANGE_MAP_SOCKET((byte) 0x01, ChangeMapEventParser.class),
+	CHANGE_MAP_SOCKET((byte) 0x4f, ChangeMapEventParser.class),
 
 	/**
 	 * Socket representing a player entering a map.
