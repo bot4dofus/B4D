@@ -11,6 +11,7 @@ import fr.B4D.bot.Person;
 import fr.B4D.building.bank.Bank;
 import fr.B4D.building.bank.BankAction;
 import fr.B4D.building.bank.StackDeposit;
+import fr.B4D.building.bank.StackWithdrawal;
 import fr.B4D.dofus.Dofus;
 import fr.B4D.dofus.items.Item;
 import fr.B4D.dofus.items.Stack;
@@ -31,6 +32,9 @@ import fr.B4D.program.Program;
  *     <li>Deposit one item</li>
  *     <li>Deposit the item stack</li>
  *     <li>Deposit all the items</li>
+ *     <li>Withdraw one item</li>
+ *     <li>Withdraw the item stack</li>
+ *     <li>Withdraw all the items</li>
  * </ul>
  *
  * @author Lucas
@@ -74,6 +78,9 @@ public final class BankAPITutorial2 extends Program{
 		bankAction.add(new StackDeposit(new Stack(item, 1)));
 		bankAction.add(new StackDeposit(new Stack(item, -1)));
 		bankAction.add(StackDeposit.ALL);
+		bankAction.add(new StackWithdrawal(new Stack(item, 1)));
+		bankAction.add(new StackWithdrawal(new Stack(item, -1)));
+		bankAction.add(StackWithdrawal.ALL);
 
 		Bank.ASTRUB.doActions(person, bankAction);
 	}
