@@ -17,10 +17,10 @@ import fr.B4D.socket.DofusSocketUtils;
 @Ignore
 public class Pcap4jTest {
 
-	private static final int COUNT = -1;	// [number of packets to capture]
+	private static final int COUNT = 10;	// [number of packets to capture]
 	private static final int READ_TIMEOUT = -1; // [ms]
 	private static final int SNAPLEN = 65536; // [bytes]
-	private static final String FILTER = "host 34.255.129.242 || 63.34.101.111";
+	private static final String FILTER = "host 172.65.232.71";
 
 	@Test
 	public void receptionTest() throws Exception {
@@ -40,7 +40,7 @@ public class Pcap4jTest {
 		PacketListener listener = new PacketListener() {
 			@Override
 			public void gotPacket(Packet packet) {
-				System.out.println(packet.getPayload().getPayload().getPayload());
+				System.out.println("Socket received");
 			}
 		};
 		handle.loop(COUNT, listener);
