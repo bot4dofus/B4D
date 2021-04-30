@@ -87,7 +87,7 @@ public abstract class IndoorBuilding extends Building{
 			for(PointF point:inPoints) {
 				B4D.mouse.leftClick(point, true, 0);
 				EventStore.getInstance().waitForEvent(ChangeMapEvent.class, 10000);
-				B4D.wait.sleep(1000);
+				B4D.wait.sleep(5000);
 			}
 		}
 		this.entered = Boolean.TRUE;
