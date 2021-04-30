@@ -9,6 +9,8 @@ import fr.B4D.bot.B4DException;
 import fr.B4D.bot.Person;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
+import fr.B4D.socket.event.ChangeMapEvent;
+import fr.B4D.socket.store.EventStore;
 import fr.B4D.utils.PointF;
 
 /**
@@ -21,8 +23,19 @@ import fr.B4D.utils.PointF;
  */
 public abstract class IndoorBuilding extends Building{
 
+	/**
+	 * Specifies whether the player is inside or outside of the building.
+	 */
 	private Boolean entered;
+	
+	/**
+	 * List of points to get into the bank.
+	 */
 	private List<PointF> inPoints;
+
+	/**
+	 * List of points to get out of the bank.
+	 */
 	private List<PointF> outPoints;
 	
 	/**
@@ -71,8 +84,11 @@ public abstract class IndoorBuilding extends Building{
 		super.goTo(person);
 		
 		if(inPoints != null && !this.entered) {
-			for(PointF point:inPoints)
-				B4D.mouse.leftClick(point, true, 10000);
+			for(PointF point:inPoints) {
+				B4D.mouse.leftClick(point, true, 0);
+				EventStore.getInstance().waitForEvent(ChangeMapEvent.class, 10000);
+				B4D.wait.sleep(1000);
+			}
 		}
 		this.entered = Boolean.TRUE;
 	}
@@ -86,8 +102,11 @@ public abstract class IndoorBuilding extends Building{
 	 */
 	public void exit(Person person) throws StopProgramException, CancelProgramException, B4DException {
 		if(outPoints != null && this.entered) {
-			for(PointF point:outPoints)
-				B4D.mouse.leftClick(point, true, 10000);
+			for(PointF point:outPoints) {
+				B4D.mouse.leftClick(point, true, 0);
+				EventStore.getInstance().waitForEvent(ChangeMapEvent.class, 10000);
+				B4D.wait.sleep(1000);
+			}
 		}
 	}
 }
