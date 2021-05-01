@@ -37,7 +37,7 @@ public enum DofusSocketType {
 	/**
 	 * Socket representing an opened enclose.
 	 */
-	//DD_ENCLOSE_OPEN_SOCKET((byte) 0x00, null), //TODO find the id
+	DD_ENCLOSE_OPEN_SOCKET((byte) 0x00, null), //TODO find the id
 
 	/**
 	 * Socket representing a move from a map to another.
