@@ -43,9 +43,9 @@ public final class TransportAPITutorial1 extends Program {
 
 	@Override
 	public void cycle(Person person) throws StopProgramException, CancelProgramException, B4DException {
-		/*person.goTo(new Point(3, -19));
+		person.goTo(new Point(3, -19));
 		person.goTo(new Point(3, -20));
-		person.goTo(new Point(3, -19));*/
+		person.goTo(new Point(3, -19));
 		person.goTo(person.getBoosterPotion().getDestination());
 	}
 }
