@@ -32,7 +32,8 @@ import javax.swing.table.TableColumn;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.Person;
-import fr.B4D.bot.Server;
+import fr.B4D.dofus.server.Server;
+import fr.B4D.dofus.server.ServerEnum;
 import fr.B4D.transport.transports.Zaap;
 
 /**
@@ -85,8 +86,8 @@ public class JPanel_Personnage extends JPanel {
 		
 		JComboBox<Server> comboBox_server = new JComboBox<Server>();
 		
-		for(Server server:Server.values())
-			comboBox_server.addItem(server);
+		for(ServerEnum server:ServerEnum.values())
+			comboBox_server.addItem(server.getValue());
 		
 		dataTable = new Vector<Vector<String>>();
 		Vector<String> colonnes = new Vector<String>(Arrays.asList(new String[] {"Nom de compte","Mot de passe","Serveur","Pseudo"}));

@@ -26,7 +26,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.bot.Server;
+import fr.B4D.dofus.server.Server;
+import fr.B4D.dofus.server.ServerEnum;
 import fr.B4D.program.Program;
 import fr.B4D.program.ProgramOptions;
 
@@ -76,8 +77,8 @@ public class JPanel_Programme extends JPanel {
 
 		JComboBox<Server> comboBox_server = new JComboBox<Server>();
 		
-		for(Server server:Server.values())
-			comboBox_server.addItem(server);
+		for(ServerEnum server:ServerEnum.values())
+			comboBox_server.addItem(server.getValue());
 		
 		Vector<Vector<String>> dataTable = new Vector<Vector<String>>();
 		

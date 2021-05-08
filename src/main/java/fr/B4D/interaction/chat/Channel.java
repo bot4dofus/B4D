@@ -10,7 +10,8 @@ import java.util.List;
 
 import fr.B4D.bot.B4D;
 import fr.B4D.bot.B4DException;
-import fr.B4D.bot.Server;
+import fr.B4D.dofus.server.Server;
+import fr.B4D.dofus.server.ServerType;
 import fr.B4D.program.CancelProgramException;
 import fr.B4D.program.StopProgramException;
 import fr.B4D.utils.PointF;
@@ -162,7 +163,7 @@ public class Channel implements Serializable{
 			toggles = new ArrayList<Channel>();
 			
 			for(Channel channel: getAll()) {
-				if(!(channel == Channel.COMMUNITY && !server.isInternationnal())) {
+				if(!(channel == Channel.COMMUNITY && !server.getType().equals(ServerType.INTERNATIONAL))) {
 					boolean toggled;
 					if(channels.contains(channel))
 						toggled = channel.enable(server, arrowPosition);
@@ -186,7 +187,7 @@ public class Channel implements Serializable{
 	 * @return Relative distance between the chat menu and the arrows.
 	 */
 	private static double getRelativXArrowPosition(Server server) {
-		if(server.isInternationnal())
+		if(server.getType().equals(ServerType.INTERNATIONAL))
 			return 0.1984;
 		else
 			return 0.187;
@@ -273,7 +274,7 @@ public class Channel implements Serializable{
 	 * @return Location of the channel button in relative coordinates.
 	 */
 	private PointF getChekPosition(Server server, PointF arrowPosition) {
-		if(server.isInternationnal())
+		if(server.getType().equals(ServerType.INTERNATIONAL))
 			return new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y);
 		else
 			return new PointF(arrowPosition.x + relativCheckPosition.x, arrowPosition.y + relativCheckPosition.y + spaceBetweenChannels);

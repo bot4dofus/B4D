@@ -13,5 +13,4 @@ programs/
 **/*.GridCreator
 **/*.b4d
 **/*.json
-**/*.properties
 **/*.credentials

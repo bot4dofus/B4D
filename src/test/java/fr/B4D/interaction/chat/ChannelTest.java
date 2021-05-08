@@ -10,7 +10,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import fr.B4D.bot.B4D;
-import fr.B4D.bot.Server;
+import fr.B4D.dofus.server.Server;
 
 @SuppressWarnings("javadoc")
 @Ignore

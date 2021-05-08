@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import fr.B4D.dofus.Dofus;
+import fr.B4D.dofus.server.Server;
+import fr.B4D.dofus.server.ServerEnum;
 import fr.B4D.interaction.chat.Channel;
 import fr.B4D.interaction.chat.Message;
 import fr.B4D.program.CancelProgramException;
@@ -86,7 +88,7 @@ public class Person implements Serializable, TransportInterface{
 	 * This is identical to {@code new Person("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo")}.
 	 */
 	public Person() {
-		this("Nom de compte", "Mot de passe", Server.AGRIDE, "Pseudo");
+		this("Nom de compte", "Mot de passe", ServerEnum.AGRIDE.getValue(), "Pseudo");
 	}
 	
 	/**
