@@ -38,7 +38,7 @@ public class Dofus {
 	private Dofus() {
 		chat = new Chat(100);
 		world = WorldFactory.getMainWorld();
-		database = new DofusDatabase("/fr/B4D/data/dofus.fr.json", true);
+		database = new DofusDatabase("/data/items.fr.json");
 	}
 	
 	/**

@@ -18,7 +18,7 @@ public class AlmanaxTest {
 	
 	@BeforeClass
 	public static void init() throws B4DException {
-		database = new DofusDatabase("/fr/B4D/data/dofus.fr.json", true);
+		database = new DofusDatabase("/data/items.fr.json");
 		almanax = new Almanax(Almanax.FRENCH_LANGUAGE, database);
 	}
 

@@ -1,6 +1,5 @@
 package fr.B4D.dofus;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -55,24 +54,13 @@ public class DofusDatabase {
 	private final static String HARNESS_REGEX = String.format(ITEM_REGEX,"(harnachements|harnesses|zaumzeug|arreos|bardature|arreios)");
 	
 	private String databaseFile;
-	private boolean isResource;
-	
-	/**
-	 * Constructs a {@code DofusDatabase} from an external database file.
-	 * @param databaseFile - Database file in json format.
-	 */
-	public DofusDatabase(String databaseFile) {
-		this(databaseFile, false);
-	}
 
 	/**
-	 * Constructs a {@code DofusDatabase} from an external database file.
-	 * @param databaseFile - Database file in json format.
-	 * @param isResource - {@code true} if the file is an internal resource, {@code false} otherwise.
+	 * Constructs a {@code DofusDatabase} from a database file.
+	 * @param databaseFile - Database file in json format.s
 	 */
-	public DofusDatabase(String databaseFile, boolean isResource) {
+	public DofusDatabase(String databaseFile) {
 		this.databaseFile = databaseFile;
-		this.isResource = isResource;
 	}
 	
 	private static boolean matches(String REGEX, String url) {
@@ -201,12 +189,7 @@ public class DofusDatabase {
 	public JSONObject loadDatabase() throws B4DException {
 		try {
 			JSONParser jsonParser = new JSONParser();
-			InputStream is;
-			if(isResource)
-				is = DofusDatabase.class.getResourceAsStream(databaseFile);
-			else
-				is = new FileInputStream(databaseFile);
-			
+			InputStream is = DofusDatabase.class.getResourceAsStream(databaseFile);			
 			InputStreamReader isr = new InputStreamReader(is);
 			JSONObject database = (JSONObject) jsonParser.parse(isr);
 			isr.close();

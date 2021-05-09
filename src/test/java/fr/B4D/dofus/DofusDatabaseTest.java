@@ -28,7 +28,7 @@ public class DofusDatabaseTest {
 	
 	@BeforeClass
 	public static void init() {
-		dofusDatabase = new DofusDatabase("/fr/B4D/data/dofus.fr.json", true);
+		dofusDatabase = new DofusDatabase("/data/items.fr.json");
 	}
 
 	@Test
