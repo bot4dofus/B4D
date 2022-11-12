@@ -11,14 +11,14 @@ Dev    | ![Test](https://img.shields.io/github/workflow/status/LucBerge/B4D/Test
 
 ## Tell us why you are looking for a Dofus bot
 
--   Farming resources [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/farming)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/farming)
--   Making money [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/money)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/money)
--   Connecting multiple accounts [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/connection)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/connection)
--   Mounts breeding [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/breeding)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/breeding)
--   Player XP [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/player)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/player)
--   Job XP [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/job)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/job)
--   Transporting on long distances [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/transport)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/transport)
--   Doing quests [![Vote](https://voting-badge.herokuapp.com/img?url=https://github.com/LucBerge/B4D/quest)](https://voting-badge.herokuapp.com/vote?url=https://github.com/LucBerge/B4D/quest)
+-   Farming resources [![Custom badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fvote-badge.cyclic.app%2Fcount%2Fb4d-farming&label=Vote&color=blue)](https://vote-badge.cyclic.app/vote/b4d-farming)
+-   Making money [![Custom badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fvote-badge.cyclic.app%2Fcount%2Fb4d-money&label=Vote&color=blue)](https://vote-badge.cyclic.app/vote/b4d-money)
+-   Connecting multiple accounts [![Custom badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fvote-badge.cyclic.app%2Fcount%2Fb4d-accounts&label=Vote&color=blue)](https://vote-badge.cyclic.app/vote/b4d-accounts)
+-   Mounts breeding [![Custom badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fvote-badge.cyclic.app%2Fcount%2Fb4d-breeding&label=Vote&color=blue)](https://vote-badge.cyclic.app/vote/b4d-breeding)
+-   Player XP [![Custom badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fvote-badge.cyclic.app%2Fcount%2Fb4d-player-xp&label=Vote&color=blue)](https://vote-badge.cyclic.app/vote/b4d-player-xp)
+-   Job XP [![Custom badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fvote-badge.cyclic.app%2Fcount%2Fb4d-job-xp&label=Vote&color=blue)](https://vote-badge.cyclic.app/vote/b4d-job-xp)
+-   Transporting on long distances [![Custom badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fvote-badge.cyclic.app%2Fcount%2Fb4d-transporting&label=Vote&color=blue)](https://vote-badge.cyclic.app/vote/b4d-transporting)
+-   Doing quests [![Custom badge](https://img.shields.io/endpoint?url=https%3A%2F%2Fvote-badge.cyclic.app%2Fcount%2Fb4d-quests&label=Vote&color=blue)](https://vote-badge.cyclic.app/vote/b4d-quests)
 
 ## Useful links
 
